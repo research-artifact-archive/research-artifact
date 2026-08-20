@@ -1,0 +1,64 @@
+// Generated from the independent raw-LTS front-end.
+// All transitions are deterministic choices; probabilities are absent.
+smg
+
+player controller
+  [c1], [c2], [c3], [c4], [c5], [c6], [c7], [c8], [c10], [c11], [c12], [c13]
+endplayer
+
+player environment
+  [e0], [e9], [e14], [e15], [e16], [e17], [e18], [e19], [e20], [e21], [e22], [e23], [e24], [e25], [e26]
+endplayer
+
+module fg_ducs_strong_game
+  s : [0..18] init 0;
+  [e0] s=0 -> (s'=1);
+  [c1] s=1 -> (s'=8);
+  [c2] s=1 -> (s'=9);
+  [c3] s=1 -> (s'=10);
+  [c4] s=2 -> (s'=11);
+  [c5] s=2 -> (s'=12);
+  [c6] s=3 -> (s'=13);
+  [c7] s=3 -> (s'=14);
+  [c8] s=4 -> (s'=15);
+  [e9] s=5 -> (s'=5);
+  [c10] s=6 -> (s'=16);
+  [c11] s=6 -> (s'=17);
+  [c12] s=6 -> (s'=18);
+  [c13] s=7 -> (s'=7);
+  [e14] s=8 -> (s'=2);
+  [e15] s=9 -> (s'=1);
+  [e16] s=10 -> (s'=3);
+  [e17] s=10 -> (s'=6);
+  [e18] s=11 -> (s'=2);
+  [e19] s=12 -> (s'=4);
+  [e20] s=12 -> (s'=7);
+  [e21] s=13 -> (s'=4);
+  [e22] s=14 -> (s'=3);
+  [e23] s=15 -> (s'=4);
+  [e24] s=16 -> (s'=7);
+  [e25] s=17 -> (s'=3);
+  [e26] s=18 -> (s'=6);
+endmodule
+
+label "goal" = s=7;
+
+// node 0: all-Q0 environment root
+// node 1: ((False,), ('OLD_COMPONENT',), False, False)
+// node 2: ((False,), ('OLD_COMPONENT',), True, False)
+// node 3: ((True,), ('NEW_BAD',), False, False)
+// node 4: ((True,), ('NEW_BAD',), True, False)
+// node 5: ((True,), ('NEW_BAD',), True, True)
+// node 6: ((True,), ('NEW_GOOD',), False, False)
+// node 7: ((True,), ('NEW_GOOD',), True, False)
+// node 8: choice __start_new_safety__ from ((False,), ('OLD_COMPONENT',), False, False)
+// node 9: choice idle from ((False,), ('OLD_COMPONENT',), False, False)
+// node 10: choice reconfigure_COMPONENT from ((False,), ('OLD_COMPONENT',), False, False)
+// node 11: choice idle from ((False,), ('OLD_COMPONENT',), True, False)
+// node 12: choice reconfigure_COMPONENT from ((False,), ('OLD_COMPONENT',), True, False)
+// node 13: choice __start_new_safety__ from ((True,), ('NEW_BAD',), False, False)
+// node 14: choice idle from ((True,), ('NEW_BAD',), False, False)
+// node 15: choice idle from ((True,), ('NEW_BAD',), True, False)
+// node 16: choice __start_new_safety__ from ((True,), ('NEW_GOOD',), False, False)
+// node 17: choice bad from ((True,), ('NEW_GOOD',), False, False)
+// node 18: choice idle from ((True,), ('NEW_GOOD',), False, False)

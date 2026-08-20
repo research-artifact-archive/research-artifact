@@ -1,0 +1,7594 @@
+{
+  "obstruction_cases": [
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:arm"
+          ],
+          "detail": "controlled cross-block precedence obstruction",
+          "kind": "precedence"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-cross-precedence",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "CROSS_TYPED_DEPENDENCY",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:transfer",
+            "component:guard"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-cross-subjects",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "ACTION_SUBJECTS_CROSS_BLOCK",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-foreign-enabledness",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "ACTION_CONTEXT_DEPENDENCE",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-foreign-outcome-set",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "ACTION_CONTEXT_DEPENDENCE",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-foreign-frame",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "ACTION_FOREIGN_FRAME",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-safe-nonrectangular",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "SAFE_NONRECTANGULAR",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": false,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-state-nonrectangular",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "STATE_NONRECTANGULAR",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        },
+        {
+          "goal": "Q11",
+          "load": "Z1"
+        },
+        {
+          "goal": "Q11",
+          "load": "Z2"
+        }
+      ],
+      "id": "obstruction-handover-nonrectangular",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "id": "Z1",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer-alt",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "id": "Z2",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard-alt",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "id": "Z3",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard-alt",
+            "load:transfer": "image-transfer-alt",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "HANDOVER_NONRECTANGULAR",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-goal-uc-activity",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "GOAL_UNCONTROLLABLE_ACTIVITY",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "migrate",
+          "kind": "update",
+          "pending_atom": "pending:migrate",
+          "subjects": [
+            "component:route",
+            "pending:migrate"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "routeAck",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:route"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "warm",
+          "kind": "update",
+          "pending_atom": "pending:warm",
+          "subjects": [
+            "component:cache",
+            "pending:warm"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:cache",
+          "kind": "component"
+        },
+        {
+          "id": "component:route",
+          "kind": "component"
+        },
+        {
+          "id": "load:cache",
+          "kind": "load"
+        },
+        {
+          "id": "load:route",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:cache",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:route",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:migrate",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:warm",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:cache",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:route",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q0",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q0",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q1",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q2",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q3",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q3",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q4",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q5",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q6",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q9",
+          "targets": [
+            "Q11"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:route",
+            "load:route"
+          ],
+          "detail": "route and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "component:cache",
+            "load:cache"
+          ],
+          "detail": "cache and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "obstruction-root-nonrectangular",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-ready",
+            "load:cache": "image-cache",
+            "load:route": "image-route",
+            "monitor:cache": "c1",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s2"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author controlled obstruction",
+        "expected_decision": "realizable",
+        "obstruction_kind": "ROOT_NONRECTANGULAR",
+        "source_path": "analysis/build_typed_partition_fixtures.py",
+        "source_sha256": "c1222df309aa0e74e00233f3521363cebcf973b7bec44b47120fc3b5e5cfeb94"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s2"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s2"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s2"
+          }
+        }
+      ]
+    }
+  ],
+  "positive_cases": [
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "arm",
+          "kind": "update",
+          "pending_atom": "pending:arm",
+          "subjects": [
+            "component:guard",
+            "pending:arm"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:transfer",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "prepare",
+          "kind": "update",
+          "pending_atom": "pending:prepare",
+          "subjects": [
+            "component:transfer",
+            "pending:prepare"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "ready",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:guard"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:guard",
+          "kind": "component"
+        },
+        {
+          "id": "component:transfer",
+          "kind": "component"
+        },
+        {
+          "id": "load:guard",
+          "kind": "load"
+        },
+        {
+          "id": "load:transfer",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:guard",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:transfer",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:arm",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:prepare",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:guard",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:transfer",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "arm",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q0",
+          "targets": [
+            "Q3",
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q1",
+          "targets": [
+            "Q4",
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "prepare",
+          "source": "Q2",
+          "targets": [
+            "Q5",
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q3",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q4",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q5",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "ready",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "arm",
+          "source": "Q9",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:transfer",
+            "load:transfer"
+          ],
+          "detail": "transfer and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:prepare",
+            "pending:commit"
+          ],
+          "detail": "prepare precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:guard",
+            "load:guard"
+          ],
+          "detail": "guard and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "multistate-winning-nondeterministic-handover",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "image-guard",
+            "load:transfer": "image-transfer",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author fixture flattened from explicit typed local tables",
+        "expected_decision": "realizable",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "mi",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qi",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qa",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "old",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "mi",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": true,
+            "rs:guard": "qd",
+            "rs:transfer": "ri"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-a",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "ma",
+            "pending:arm": true,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "aligned-b",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "ma",
+            "pending:arm": false,
+            "pending:commit": true,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "ra"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "unarmed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gi",
+            "monitor:transfer": "md",
+            "pending:arm": true,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qi",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "armed",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "ga",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qa",
+            "rs:transfer": "rd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:guard": "ready",
+            "component:transfer": "new",
+            "load:guard": "<not-loaded>",
+            "load:transfer": "<not-loaded>",
+            "monitor:guard": "gd",
+            "monitor:transfer": "md",
+            "pending:arm": false,
+            "pending:commit": false,
+            "pending:prepare": false,
+            "rs:guard": "qd",
+            "rs:transfer": "rd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "attempt",
+          "kind": "update",
+          "pending_atom": "pending:attempt",
+          "subjects": [
+            "component:risk",
+            "pending:attempt"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "commit",
+          "kind": "update",
+          "pending_atom": "pending:commit",
+          "subjects": [
+            "component:risk",
+            "pending:commit"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "switch",
+          "kind": "update",
+          "pending_atom": "pending:switch",
+          "subjects": [
+            "component:companion",
+            "pending:switch"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "violate",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:risk"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:companion",
+          "kind": "component"
+        },
+        {
+          "id": "component:risk",
+          "kind": "component"
+        },
+        {
+          "id": "load:companion",
+          "kind": "load"
+        },
+        {
+          "id": "load:risk",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:companion",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:risk",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:attempt",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:commit",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:switch",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:companion",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:risk",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "attempt",
+          "source": "Q0",
+          "targets": [
+            "Q2",
+            "Q4"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "switch",
+          "source": "Q0",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "attempt",
+          "source": "Q1",
+          "targets": [
+            "Q3",
+            "Q5"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q2",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "switch",
+          "source": "Q2",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "commit",
+          "source": "Q3",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "switch",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "violate",
+          "source": "Q4",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "violate",
+          "source": "Q5",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "switch",
+          "source": "Q6",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "switch",
+          "source": "Q8",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:risk",
+            "load:risk"
+          ],
+          "detail": "risk and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "pending:attempt",
+            "pending:commit"
+          ],
+          "detail": "attempt precedes commit",
+          "kind": "precedence"
+        },
+        {
+          "atoms": [
+            "component:companion",
+            "load:companion"
+          ],
+          "detail": "companion and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q9",
+          "load": "Z0"
+        }
+      ],
+      "id": "multistate-losing-monitor-outcome",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "new",
+            "load:companion": "image-companion",
+            "load:risk": "image-risk",
+            "monitor:companion": "cd",
+            "monitor:risk": "md",
+            "pending:attempt": false,
+            "pending:commit": false,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "sd"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author fixture flattened from explicit typed local tables",
+        "expected_decision": "unrealizable",
+        "source_path": "inputs/c2/factored-multistate-games.json",
+        "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:companion": "old",
+            "component:risk": "old",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "ci",
+            "monitor:risk": "m0",
+            "pending:attempt": true,
+            "pending:commit": true,
+            "pending:switch": true,
+            "rs:companion": "ui",
+            "rs:risk": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "old",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "cd",
+            "monitor:risk": "m0",
+            "pending:attempt": true,
+            "pending:commit": true,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "old",
+            "component:risk": "aligned",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "ci",
+            "monitor:risk": "m1",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": true,
+            "rs:companion": "ui",
+            "rs:risk": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "aligned",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "cd",
+            "monitor:risk": "m1",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "old",
+            "component:risk": "misaligned",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "ci",
+            "monitor:risk": "m1",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": true,
+            "rs:companion": "ui",
+            "rs:risk": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "misaligned",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "cd",
+            "monitor:risk": "m1",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": false,
+          "valuation": {
+            "component:companion": "old",
+            "component:risk": "fault",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "ci",
+            "monitor:risk": "me",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": true,
+            "rs:companion": "ui",
+            "rs:risk": "se"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": false,
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "fault",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "cd",
+            "monitor:risk": "me",
+            "pending:attempt": false,
+            "pending:commit": true,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "se"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "old",
+            "component:risk": "new",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "ci",
+            "monitor:risk": "md",
+            "pending:attempt": false,
+            "pending:commit": false,
+            "pending:switch": true,
+            "rs:companion": "ui",
+            "rs:risk": "sd"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:companion": "new",
+            "component:risk": "new",
+            "load:companion": "<not-loaded>",
+            "load:risk": "<not-loaded>",
+            "monitor:companion": "cd",
+            "monitor:risk": "md",
+            "pending:attempt": false,
+            "pending:commit": false,
+            "pending:switch": false,
+            "rs:companion": "ud",
+            "rs:risk": "sd"
+          }
+        }
+      ]
+    },
+    {
+      "actions": [
+        {
+          "controllability": "controllable",
+          "id": "idle",
+          "kind": "shared_stutter",
+          "pending_atom": null,
+          "subjects": []
+        },
+        {
+          "controllability": "controllable",
+          "id": "migrate",
+          "kind": "update",
+          "pending_atom": "pending:migrate",
+          "subjects": [
+            "component:route",
+            "pending:migrate"
+          ]
+        },
+        {
+          "controllability": "uncontrollable",
+          "id": "routeAck",
+          "kind": "normal",
+          "pending_atom": null,
+          "subjects": [
+            "component:route"
+          ]
+        },
+        {
+          "controllability": "controllable",
+          "id": "warm",
+          "kind": "update",
+          "pending_atom": "pending:warm",
+          "subjects": [
+            "component:cache",
+            "pending:warm"
+          ]
+        }
+      ],
+      "atoms": [
+        {
+          "id": "component:cache",
+          "kind": "component"
+        },
+        {
+          "id": "component:route",
+          "kind": "component"
+        },
+        {
+          "id": "load:cache",
+          "kind": "load"
+        },
+        {
+          "id": "load:route",
+          "kind": "load"
+        },
+        {
+          "id": "monitor:cache",
+          "kind": "monitor"
+        },
+        {
+          "id": "monitor:route",
+          "kind": "monitor"
+        },
+        {
+          "id": "pending:migrate",
+          "kind": "pending"
+        },
+        {
+          "id": "pending:warm",
+          "kind": "pending"
+        },
+        {
+          "id": "rs:cache",
+          "kind": "rs"
+        },
+        {
+          "id": "rs:route",
+          "kind": "rs"
+        }
+      ],
+      "buckets": [
+        {
+          "action": "idle",
+          "source": "Q0",
+          "targets": [
+            "Q0"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q0",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q0",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q1",
+          "targets": [
+            "Q1"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q1",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q1",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q10",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q10",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q11",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q2",
+          "targets": [
+            "Q2"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q2",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q3",
+          "targets": [
+            "Q3"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q3",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q3",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q4",
+          "targets": [
+            "Q4"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q4",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q4",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q5",
+          "targets": [
+            "Q5"
+          ]
+        },
+        {
+          "action": "migrate",
+          "source": "Q5",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q6",
+          "targets": [
+            "Q6"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q6",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q6",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q7",
+          "targets": [
+            "Q7"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q7",
+          "targets": [
+            "Q10"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q7",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q8",
+          "targets": [
+            "Q8"
+          ]
+        },
+        {
+          "action": "routeAck",
+          "source": "Q8",
+          "targets": [
+            "Q11"
+          ]
+        },
+        {
+          "action": "idle",
+          "source": "Q9",
+          "targets": [
+            "Q9"
+          ]
+        },
+        {
+          "action": "warm",
+          "source": "Q9",
+          "targets": [
+            "Q11"
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "atoms": [
+            "component:route",
+            "load:route"
+          ],
+          "detail": "route and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        },
+        {
+          "atoms": [
+            "component:cache",
+            "load:cache"
+          ],
+          "detail": "cache and its load coordinate share a typed handover signature",
+          "kind": "handover"
+        }
+      ],
+      "handover_relation": [
+        {
+          "goal": "Q11",
+          "load": "Z0"
+        }
+      ],
+      "id": "multiroot-uncontrollable-progress",
+      "load_states": [
+        {
+          "id": "Z0",
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-ready",
+            "load:cache": "image-cache",
+            "load:route": "image-route",
+            "monitor:cache": "c1",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s2"
+          }
+        }
+      ],
+      "provenance": {
+        "classification": "post-outcome author fixture flattened from explicit typed local tables",
+        "expected_decision": "realizable",
+        "source_path": "analysis/build_typed_partition_fixtures.py",
+        "source_sha256": "c1222df309aa0e74e00233f3521363cebcf973b7bec44b47120fc3b5e5cfeb94"
+      },
+      "schema_version": "fg-ducs-typed-flat-game-v1",
+      "semantics": "complete-explicit-post-including-goal-and-unsafe-v1",
+      "states": [
+        {
+          "goal": false,
+          "id": "Q0",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q1",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q2",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "old-a",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q3",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q4",
+          "initial": true,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q5",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "old-b",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r0",
+            "pending:migrate": true,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s0"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q6",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q7",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q8",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-wait",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r1",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s1"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q9",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-a",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s2"
+          }
+        },
+        {
+          "goal": false,
+          "id": "Q10",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "cold-b",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c0",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": true,
+            "rs:cache": "u0",
+            "rs:route": "s2"
+          }
+        },
+        {
+          "goal": true,
+          "id": "Q11",
+          "initial": false,
+          "safe": true,
+          "valuation": {
+            "component:cache": "warm",
+            "component:route": "new-ready",
+            "load:cache": "<not-loaded>",
+            "load:route": "<not-loaded>",
+            "monitor:cache": "c1",
+            "monitor:route": "r2",
+            "pending:migrate": false,
+            "pending:warm": false,
+            "rs:cache": "u1",
+            "rs:route": "s2"
+          }
+        }
+      ]
+    }
+  ],
+  "schema_version": "fg-ducs-typed-partition-fixtures-v1",
+  "source_sha256": "adaafff229dc6e50aa3375abe8f1d7d63b8ee0ccbe813c4c53b823167225d36b"
+}

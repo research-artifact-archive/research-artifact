@@ -1,0 +1,131 @@
+{
+  "base_config": {
+    "bytes": 23916,
+    "path": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-performance/inputs/performance_base_with_travel.json",
+    "sha256": "d1303e13bbaeaa11fa7d78beaa5bf2fc42c43f05c0fcaf24380a85d7abf6499c"
+  },
+  "construction": {
+    "decision_oracle": "At the initial one-state endpoints, execute each controllable reconfiguration event once, then retain the controllable idle self-loop.",
+    "expected_decision": "realizable",
+    "expected_direct_full_states": "2^K",
+    "expected_otf_states_under_update_first_order": "K+1",
+    "measured_repetitions_per_k": 5,
+    "new_local_states_per_component": 1,
+    "old_local_states_per_component": 1,
+    "ordinary_controllable_actions": [
+      "idle"
+    ],
+    "precedence_constraints": 0,
+    "reconfiguration_outcomes_per_event": 1,
+    "requirements": 0
+  },
+  "family": "independent_one_state_reconfiguration",
+  "generator_id": "independent-one-state-reconfiguration-v1",
+  "models": [
+    {
+      "bytes": 1531,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k02",
+      "k": 2,
+      "path": "inputs/Models/independent_k02.lts",
+      "repetitions": 5,
+      "sha256": "7cd31a6ea0603e6306ca51677521789d315d620fae0fa13c742e510ec48276d0",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 2137,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k04",
+      "k": 4,
+      "path": "inputs/Models/independent_k04.lts",
+      "repetitions": 5,
+      "sha256": "0da1146264f475ece8bedb42cd6a4bd7f493f1843992f555a493dfc9080ed7c4",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 2743,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k06",
+      "k": 6,
+      "path": "inputs/Models/independent_k06.lts",
+      "repetitions": 5,
+      "sha256": "b4376c67b3df27ce92677fc432986a420ca04512e98ebb69119c630206f4e3af",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 3349,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k08",
+      "k": 8,
+      "path": "inputs/Models/independent_k08.lts",
+      "repetitions": 5,
+      "sha256": "589e3a8d0e15f38c60190577a3fed97f4d6db4d4d03aabaa5fb88fa1d51e4d2c",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 3971,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k10",
+      "k": 10,
+      "path": "inputs/Models/independent_k10.lts",
+      "repetitions": 5,
+      "sha256": "1d587cfde23d8e187879af3ef8b6acbd76e19582076dc67da0460b4232c08720",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 4607,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k12",
+      "k": 12,
+      "path": "inputs/Models/independent_k12.lts",
+      "repetitions": 5,
+      "sha256": "e685d0bc2b1467f335a759aadf670b27c9a453a2b8756182beb971866443b6fb",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 5879,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k16",
+      "k": 16,
+      "path": "inputs/Models/independent_k16.lts",
+      "repetitions": 5,
+      "sha256": "26e0708208c110a8cfb64312f73176b26f11e17de9dffd989b061638f572b857",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    },
+    {
+      "bytes": 7151,
+      "decision_oracle": "constructive_initial_update_sequence_then_idle",
+      "expected_decision": "realizable",
+      "id": "independent_k20",
+      "k": 20,
+      "path": "inputs/Models/independent_k20.lts",
+      "repetitions": 5,
+      "sha256": "8b82e433f53fca4f2eeb3fc312d931a497a17d71fd84b0e92b57f1a54fe7518a",
+      "target": "UPDATE_CONTROLLER_OTF_FG"
+    }
+  ],
+  "rq1_boundary_models": [],
+  "runtime_config": {
+    "bytes": 29920,
+    "path": "runtime_config.json",
+    "sha256": "63aa60eca60b60ee64dadf1ff0aa65b44f2a2f8918500ea25f418982c4259c86"
+  },
+  "schema_version": "fse2027-independent-lts-family-v1",
+  "sizes_k": [
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    16,
+    20
+  ]
+}

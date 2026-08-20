@@ -1,0 +1,156 @@
+{
+  "schema_version": "fg-ducs-native-factorization-panel-v1",
+  "registered_at": "2026-08-14T01:50:00+09:00",
+  "registration_kind": "post_outcome_denominator_freeze",
+  "prospective_or_heldout_claim": false,
+  "claim_boundary": "Outcome-complete source-native applicability panel over author-adapted ordinary LTS inputs. The 41 cells are repeated conditions within 10 provenance clusters, not 41 independent systems. Only refined-WIN cells receive a one-way sufficient-win claim; one-block, invalid, resource, or local-nonwin outcomes never imply global loss.",
+  "runtime": {
+    "java": "17",
+    "heap": "16g",
+    "per_case_timeout_seconds": 180,
+    "jar_sha256": "5e09cd39b2c00428d104061590702fdbd48f42cf3c5a15a354a1ac3765d71edf",
+    "factorizer_sha256": "ffb98b479af4192b947fbdfe14c9ec3b37327cd3c856503ea9cf2295ed273f21",
+    "exporter_sha256": "e6e31edcbc5748444caa77916f32e24721e3b182ee2bc150500d23b230f08dfa",
+    "runner_sha256": "b370a390f9604f01d116f873c8290f3bbcc3fbe356aeb71cf8588bf13a09a260"
+  },
+  "denominator": {
+    "source_files": 23,
+    "target_cells": 41,
+    "provenance_clusters": 10,
+    "source_only_hypotheses": {
+      "NONTRIVIAL_REFINED_CANDIDATE": 2,
+      "TRIVIAL_ONE_COMPONENT": 6,
+      "EXPECTED_COUPLED_OR_NONFACTOR": 33
+    }
+  },
+  "sources": [
+    {
+      "path": "Implementation/Experiment/Models/GSM_FG.lts",
+      "sha256": "5f4af5b4eafda24516f0653b194f7296799036fc9fe873ac0ce100e0009ae7f4",
+      "cluster": "gsm",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "TRIVIAL_ONE_COMPONENT"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "TRIVIAL_ONE_COMPONENT"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "TRIVIAL_ONE_COMPONENT"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/Industry_FG.lts",
+      "sha256": "d8bd82a0ad6eeedc4986a688076fe4646f03a665a41a8c6c5f6cbfbd3b2506dd",
+      "cluster": "industry",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/MetaSocket_FG.lts",
+      "sha256": "3b8a500a0d3ab1b19141c226e29fad8c43de4d3e7fb890e7cd94eeaa570c9c5f",
+      "cluster": "metasocket",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/PowerPlant_FG.lts",
+      "sha256": "580c2eeb4589d83a4e8177f5339c43d1186707a8ad3601628cb66bf983f1201e",
+      "cluster": "powerplant",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=1_FG.lts",
+      "sha256": "4134c3c40a8bfbfc5794e0f9cafdfc9ac2a733f7b91a38a0c6cc908c8dc0bdeb",
+      "cluster": "productioncell",
+      "targets": [
+        {"condition": "arms1-base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "TRIVIAL_ONE_COMPONENT"},
+        {"condition": "arms1-r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "TRIVIAL_ONE_COMPONENT"},
+        {"condition": "arms1-r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "TRIVIAL_ONE_COMPONENT"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+      "sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+      "cluster": "productioncell",
+      "targets": [
+        {"condition": "arms2-base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "NONTRIVIAL_REFINED_CANDIDATE", "factor_outcome_was_visible_at_registration": true},
+        {"condition": "arms2-r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR", "factor_outcome_was_visible_at_registration": true},
+        {"condition": "arms2-r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "NONTRIVIAL_REFINED_CANDIDATE", "factor_outcome_was_visible_at_registration": true}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/Railcab_FG.lts",
+      "sha256": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a",
+      "cluster": "railcab",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/Surveillance_FG.lts",
+      "sha256": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8",
+      "cluster": "surveillance",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "Implementation/Experiment/Models/Workflow_FG.lts",
+      "sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1",
+      "cluster": "workflow",
+      "targets": [
+        {"condition": "base", "definition": "UpdCont_OTF_FG", "alias": "UPDATE_CONTROLLER_OTF_FG", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r1", "definition": "UpdCont_OTF_FG_R1", "alias": "UPDATE_CONTROLLER_OTF_FG_R1", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"},
+        {"condition": "r2", "definition": "UpdCont_OTF_FG_R2", "alias": "UPDATE_CONTROLLER_OTF_FG_R2", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path_prefix": "inputs/c2/travel_agency_family/Models/",
+      "cluster": "travel_agency",
+      "definition": "TravelAgencyDerivedUpdate",
+      "alias": "UPDATE_CONTROLLER_OTF_FG",
+      "condition": "base",
+      "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR",
+      "instances": [
+        {"file": "travel_agency_n01_k01.lts", "sha256": "2c284cc76e7987738094dc9a6ba7d6d613327db76f7afce5746238fbabafddcf"},
+        {"file": "travel_agency_n01_k02.lts", "sha256": "7647cbb4c46778bbd57e7ba0c5cb955f0afa5022287bfd164db024fe7e0108af"},
+        {"file": "travel_agency_n01_k04.lts", "sha256": "a382fd3c2ecb0bcb637c7e3ab4bb4b5eeafe74a72d1f151f774c4ae2932e896a"},
+        {"file": "travel_agency_n02_k01.lts", "sha256": "a80f154b66e748530a78d49f7d6559598bdb8e7c8189ab3956d1931ca5fb556d"},
+        {"file": "travel_agency_n02_k02.lts", "sha256": "0f24cb5d048020ff4e5f81b0a83d8a5caa0e4b20556a1a690cae8d026b7bf604"},
+        {"file": "travel_agency_n02_k04.lts", "sha256": "50eb9f5362f914ec025261b52a6a440db38bd720626627d0b48781fb69ddae89"},
+        {"file": "travel_agency_n03_k01.lts", "sha256": "5c329a8e18dd4986eb954585ce6a584ef59d6f50c4f00cb3b8c9da266afc7c61"},
+        {"file": "travel_agency_n03_k02.lts", "sha256": "e1bfc4ec2a0da9fca5083e965eedf4484583e92f35a531ad0d7587454493066e"},
+        {"file": "travel_agency_n03_k04.lts", "sha256": "8b3ba9b3c6cf8fc80213d08f5e2679d11426f23748420e4b47441c354bf85a82"},
+        {"file": "travel_agency_n04_k01.lts", "sha256": "aa77c142e31c981418ea03049014a7fd31d1b0f9826ee8e851963553125fea78"},
+        {"file": "travel_agency_n04_k02.lts", "sha256": "5d5ab397e5064531db207dded7ef3abd2424b92f607906be724c09752be10439"},
+        {"file": "travel_agency_n04_k04.lts", "sha256": "283811428d2fade714988e980ee19a90992f43dd61270301ee297fe4d47732a5"}
+      ]
+    },
+    {
+      "path": "inputs/c3/Models/ardrone_semantic_negative.lts",
+      "sha256": "b9936dbedacebb874da560d0a17cf82928447459adb79b4120fc14fc2ae6bc2f",
+      "cluster": "ardrone",
+      "targets": [
+        {"condition": "semantic_negative", "definition": "ProspectiveARDrone", "alias": "UPDATE_CONTROLLER_OTF_FG_ARDRONE", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    },
+    {
+      "path": "inputs/c3/Models/ardrone_semantic_positive.lts",
+      "sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+      "cluster": "ardrone",
+      "targets": [
+        {"condition": "semantic_positive", "definition": "ProspectiveARDrone", "alias": "UPDATE_CONTROLLER_OTF_FG_ARDRONE", "hypothesis": "EXPECTED_COUPLED_OR_NONFACTOR"}
+      ]
+    }
+  ]
+}

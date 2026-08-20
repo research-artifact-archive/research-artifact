@@ -1,0 +1,282 @@
+{
+  "build_attestation_sha256": "0432fe0c74187ba1a33d99f5d4e04cc3efeaeb80f1588c1b462cfefc602893e9",
+  "build_attestation_validation": {
+    "attestation_schema": "fse2027-runtime-build-verification-v1",
+    "python_protocol_tests": 208,
+    "runtime_jar_sha256": "dd494999ffa1d0f4029b5f07988f408182d8a362a77926da436716a7221c751d",
+    "source_entries": 5509,
+    "source_entries_aggregate_sha256": "33cc3e6aa6d8c717943d9be1ab6b399cef89a45e5ebc7d58496be63c4aeba9b8",
+    "status": "PASS",
+    "targeted_java_test_classes": 17,
+    "targeted_java_tests": 95
+  },
+  "cases": [
+    {
+      "expected_decision": "realizable",
+      "feature_gates": {
+        "action_buckets": {
+          "reconfigure_BATTERY": {
+            "bucket_count": 8,
+            "controllable": true,
+            "fanout": 2
+          },
+          "wind": {
+            "bucket_count": 52,
+            "controllable": false,
+            "fanout": 2
+          }
+        },
+        "activation_requirement_id": "P_NEW_READ_COMPLETION",
+        "distinct_activation_language_classes": [
+          0,
+          1
+        ],
+        "distinct_activation_states": [
+          "0",
+          "1"
+        ],
+        "goal_states": 10,
+        "initial_roots": 5
+      },
+      "id": "ardrone_semantic_positive",
+      "java_decision_consistency_status": "PASS",
+      "java_error": "",
+      "java_feature_gates": {
+        "action_buckets": {
+          "reconfigure_BATTERY": {
+            "bucket_count": 8,
+            "controllable": true,
+            "fanout": 2
+          },
+          "wind": {
+            "bucket_count": 52,
+            "controllable": false,
+            "fanout": 2
+          }
+        },
+        "goal_states": 10,
+        "initial_roots": 5
+      },
+      "java_game_claimed_decision": "realizable",
+      "java_game_fixed_point": {
+        "all_initial_states_winning": true,
+        "decision": "realizable",
+        "layers_after_goal": 6,
+        "losing_states": 57,
+        "winning_states": 81
+      },
+      "java_game_sha256": "a4e4939d07279104696471c477513d51997480b8fe56df4f86cceb3ae23f1d92",
+      "java_observed_decision": "realizable",
+      "java_python_boundary_status": "PASS",
+      "java_status": "PASS",
+      "java_wall_ms": 916.71925,
+      "model_sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+      "prism_encoding": {
+        "action_nodes": 335,
+        "controller_nodes": 71,
+        "edges": 808,
+        "environment_nodes": 403,
+        "nodes": 474
+      },
+      "prism_error": "",
+      "prism_status": "PASS",
+      "prism_value": 1.0,
+      "prism_wall_ms": 1639.169625,
+      "python_fixed_point": {
+        "all_initial_states_winning": true,
+        "decision": "realizable",
+        "layers_after_goal": 6,
+        "losing_states": 57,
+        "winning_states": 81
+      },
+      "python_game_claimed_decision": "realizable",
+      "raw_error": "",
+      "raw_game_sha256": "bbcd2d5c2e4196ba71eb3722c985c819babe6502aa557bc45caff5a3e7a2bc34",
+      "raw_oracle_census": {
+        "activation_language_classes": {
+          "P_NEW_READ_COMPLETION": [
+            0,
+            1
+          ],
+          "P_NO_FAULT": [
+            0
+          ]
+        },
+        "activation_states": {
+          "P_NEW_READ_COMPLETION": [
+            "0",
+            "1"
+          ],
+          "P_NO_FAULT": [
+            "0"
+          ]
+        },
+        "activation_undefined_source_states": {
+          "P_NEW_READ_COMPLETION": 6,
+          "P_NO_FAULT": 12
+        },
+        "components": 2,
+        "direct_precedence_edges": 4,
+        "loadable_goal_signatures": 10,
+        "maximum_transfer_fanout": 2,
+        "new_endpoint_states": 10,
+        "new_requirements": 2,
+        "nondeterministic_transfer_sources": 1,
+        "old_requirements": 1,
+        "q0": 5,
+        "transfer_relation_edges": 5,
+        "transition_requirements": 0,
+        "transitive_precedence_edges": 9
+      },
+      "raw_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "expected_decision": "unrealizable",
+      "feature_gates": {
+        "action_buckets": {
+          "reconfigure_BATTERY": {
+            "bucket_count": 8,
+            "controllable": true,
+            "fanout": 2
+          },
+          "wind": {
+            "bucket_count": 52,
+            "controllable": false,
+            "fanout": 2
+          }
+        },
+        "activation_requirement_id": "P_NEW_READ_COMPLETION",
+        "distinct_activation_language_classes": [
+          0,
+          1
+        ],
+        "distinct_activation_states": [
+          "0",
+          "1"
+        ],
+        "goal_states": 10,
+        "initial_roots": 5
+      },
+      "id": "ardrone_semantic_negative",
+      "java_decision_consistency_status": "PASS",
+      "java_error": "",
+      "java_feature_gates": {
+        "action_buckets": {
+          "reconfigure_BATTERY": {
+            "bucket_count": 8,
+            "controllable": true,
+            "fanout": 2
+          },
+          "wind": {
+            "bucket_count": 52,
+            "controllable": false,
+            "fanout": 2
+          }
+        },
+        "goal_states": 10,
+        "initial_roots": 5
+      },
+      "java_game_claimed_decision": "unrealizable",
+      "java_game_fixed_point": {
+        "all_initial_states_winning": false,
+        "decision": "unrealizable",
+        "layers_after_goal": 4,
+        "losing_states": 78,
+        "winning_states": 60
+      },
+      "java_game_sha256": "59f572328f675e3f7377b0e7367f75529fb12cf7ff8c59db20e1bb2cb22e467b",
+      "java_observed_decision": "unrealizable",
+      "java_python_boundary_status": "PASS",
+      "java_status": "PASS",
+      "java_wall_ms": 918.990916,
+      "model_sha256": "b9936dbedacebb874da560d0a17cf82928447459adb79b4120fc14fc2ae6bc2f",
+      "prism_encoding": {
+        "action_nodes": 335,
+        "controller_nodes": 71,
+        "edges": 808,
+        "environment_nodes": 403,
+        "nodes": 474
+      },
+      "prism_error": "",
+      "prism_status": "PASS",
+      "prism_value": 0.0,
+      "prism_wall_ms": 1629.392667,
+      "python_fixed_point": {
+        "all_initial_states_winning": false,
+        "decision": "unrealizable",
+        "layers_after_goal": 4,
+        "losing_states": 78,
+        "winning_states": 60
+      },
+      "python_game_claimed_decision": "unrealizable",
+      "raw_error": "",
+      "raw_game_sha256": "a62e77823f8276c26246149e0ca463b3a180d90da8c2cff3d7460d35cd374bd8",
+      "raw_oracle_census": {
+        "activation_language_classes": {
+          "P_NEW_READ_COMPLETION": [
+            0,
+            1
+          ],
+          "P_NO_FAULT": [
+            0
+          ]
+        },
+        "activation_states": {
+          "P_NEW_READ_COMPLETION": [
+            "0",
+            "1"
+          ],
+          "P_NO_FAULT": [
+            "0"
+          ]
+        },
+        "activation_undefined_source_states": {
+          "P_NEW_READ_COMPLETION": 6,
+          "P_NO_FAULT": 12
+        },
+        "components": 2,
+        "direct_precedence_edges": 4,
+        "loadable_goal_signatures": 10,
+        "maximum_transfer_fanout": 2,
+        "new_endpoint_states": 10,
+        "new_requirements": 2,
+        "nondeterministic_transfer_sources": 1,
+        "old_requirements": 1,
+        "q0": 5,
+        "transfer_relation_edges": 5,
+        "transition_requirements": 0,
+        "transitive_precedence_edges": 9
+      },
+      "raw_status": "PASS",
+      "status": "PASS"
+    }
+  ],
+  "claim_boundary": "PASS combines two decision-level checks: a Java-exported game checked by a Python fixed point, and a separately reconstructed fixed-subset Python game checked by both Python and PRISM. The two games are not claimed isomorphic; this is not a performance comparison or a general FSP front end.",
+  "environment_gate_status": "PASS",
+  "failed_cases": 0,
+  "host": {
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python": "3.10.9 (main, Jun 16 2026, 22:18:24) [Clang 17.0.0 (clang-1700.0.13.5)]"
+  },
+  "java_executable": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+  "java_executable_sha256": "6dcff7187022c4ad65e5282d8301af01e6a2a15bd81129d0f57c9c9aa821fcf1",
+  "java_version_output": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)\n",
+  "java_version_output_sha256": "67732c1a52f008070b8222ad1b1694a9643188135d8fcb7878cb6c21cda20237",
+  "java_version_probe_error": "",
+  "java_version_probe_status": "PASS",
+  "passed_cases": 2,
+  "prism_archive_sha256": "8d218a22892e3394ac1fe640cd1b041eda3cd848800eabe406953273d10624e5",
+  "prism_bin_sha256": "9e254720ff7de097a04e1e065e7969e2f79138c8807fa237587f971138df5c01",
+  "prism_tree_manifest_sha256": "65f85d1cbc95537323981eed5c5ea80398661c5dffdea7e86ff014d476de22be",
+  "prism_version": "PRISM-games version 3.2.4",
+  "prism_version_probe_error": "",
+  "prism_version_probe_status": "PASS",
+  "property": "<<controller>> Pmax=? [ F \"goal\" ]",
+  "protocol_sha256": "7ccd09cb76b76c33c8ffbf22394d67dab2b54142ec9f083addfb40ebae2a2733",
+  "registered_cases": 2,
+  "runner_sha256": "5c2975c3a137480ec1d851e1cd0be98ec8961ee35418f2528f72dc145ca7da3a",
+  "runtime_jar_sha256": "dd494999ffa1d0f4029b5f07988f408182d8a362a77926da436716a7221c751d",
+  "schema_version": "fse2027-prospective-erased-prism-summary-v1",
+  "status": "PASS"
+}

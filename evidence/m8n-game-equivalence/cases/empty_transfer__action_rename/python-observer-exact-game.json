@@ -1,0 +1,97 @@
+{
+  "buckets": [
+    {
+      "action": "heartbeat",
+      "controllable": true,
+      "source": "R0",
+      "targets": [
+        "R0"
+      ]
+    },
+    {
+      "action": "reconfigure_COMPONENT",
+      "controllable": true,
+      "source": "R0",
+      "targets": [
+        "R3"
+      ]
+    },
+    {
+      "action": "advance",
+      "controllable": true,
+      "source": "R2",
+      "targets": [
+        "R1"
+      ]
+    },
+    {
+      "action": "heartbeat",
+      "controllable": true,
+      "source": "R2",
+      "targets": [
+        "R2"
+      ]
+    }
+  ],
+  "claimed_decision": "unrealizable",
+  "controllable_bucket_count": 4,
+  "goal_state_ids": [
+    "R3"
+  ],
+  "initial_state_ids": [
+    "R0",
+    "R2"
+  ],
+  "observer_exact_terminalization": true,
+  "outcome_edge_count": 4,
+  "policy_restriction": "full_fg",
+  "query_count": 4,
+  "schema_version": "fse2027-independent-strong-game-bundle-v1",
+  "semantics_id": "python-raw-c1-observer-exact-terminal-v5",
+  "state_count": 4,
+  "states": [
+    {
+      "active_testers": {},
+      "goal": false,
+      "id": "R0",
+      "initial": true,
+      "pending_actions": [
+        "reconfigure_COMPONENT"
+      ],
+      "physical": "((False,), ('OLD_ALT',), '')",
+      "safe": true
+    },
+    {
+      "active_testers": {},
+      "goal": false,
+      "id": "R1",
+      "initial": false,
+      "pending_actions": [
+        "reconfigure_COMPONENT"
+      ],
+      "physical": "((False,), ('OLD_ALT',), '')",
+      "safe": false
+    },
+    {
+      "active_testers": {},
+      "goal": false,
+      "id": "R2",
+      "initial": true,
+      "pending_actions": [
+        "reconfigure_COMPONENT"
+      ],
+      "physical": "((False,), ('OLD_READY',), '')",
+      "safe": true
+    },
+    {
+      "active_testers": {},
+      "goal": true,
+      "id": "R3",
+      "initial": false,
+      "pending_actions": [],
+      "physical": "((True,), ('NEW_COMPONENT',), '')",
+      "safe": true
+    }
+  ],
+  "uncontrollable_bucket_count": 0
+}

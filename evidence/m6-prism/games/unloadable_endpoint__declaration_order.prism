@@ -1,0 +1,48 @@
+// Generated from the independent raw-LTS front-end.
+// All transitions are deterministic choices; probabilities are absent.
+smg
+
+player controller
+  [c1], [c2], [c3], [c4], [c5], [c6], [c7], [c8]
+endplayer
+
+player environment
+  [e0], [e9], [e10], [e11], [e12], [e13], [e14], [e15], [e16]
+endplayer
+
+module fg_ducs_strong_game
+  s : [0..12] init 0;
+  [e0] s=0 -> (s'=1);
+  [c1] s=1 -> (s'=5);
+  [c2] s=1 -> (s'=6);
+  [c3] s=1 -> (s'=7);
+  [c4] s=2 -> (s'=8);
+  [c5] s=2 -> (s'=9);
+  [c6] s=3 -> (s'=10);
+  [c7] s=3 -> (s'=11);
+  [c8] s=4 -> (s'=12);
+  [e9] s=5 -> (s'=2);
+  [e10] s=6 -> (s'=1);
+  [e11] s=7 -> (s'=3);
+  [e12] s=8 -> (s'=2);
+  [e13] s=9 -> (s'=4);
+  [e14] s=10 -> (s'=4);
+  [e15] s=11 -> (s'=3);
+  [e16] s=12 -> (s'=4);
+endmodule
+
+label "goal" = false;
+
+// node 0: all-Q0 environment root
+// node 1: ((False,), ('OLD_COMPONENT',), False, False)
+// node 2: ((False,), ('OLD_COMPONENT',), True, False)
+// node 3: ((True,), ('NEW_STRANDED',), False, False)
+// node 4: ((True,), ('NEW_STRANDED',), True, False)
+// node 5: choice __start_new_safety__ from ((False,), ('OLD_COMPONENT',), False, False)
+// node 6: choice idle from ((False,), ('OLD_COMPONENT',), False, False)
+// node 7: choice reconfigure_COMPONENT from ((False,), ('OLD_COMPONENT',), False, False)
+// node 8: choice idle from ((False,), ('OLD_COMPONENT',), True, False)
+// node 9: choice reconfigure_COMPONENT from ((False,), ('OLD_COMPONENT',), True, False)
+// node 10: choice __start_new_safety__ from ((True,), ('NEW_STRANDED',), False, False)
+// node 11: choice idle from ((True,), ('NEW_STRANDED',), False, False)
+// node 12: choice idle from ((True,), ('NEW_STRANDED',), True, False)

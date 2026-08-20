@@ -1,0 +1,160 @@
+{
+  "schema_version": "fg-ducs-productioncell-source-certificate-protocol-v1",
+  "date": "2026-08-14",
+  "campaign_id": "m8t-productioncell-source-contract-certificate-20260814a",
+  "denominator": {
+    "source_files": 1,
+    "target_cells": 2,
+    "provenance_clusters": 1,
+    "unique_controller_pairs": 1,
+    "supplied_certificates": 2
+  },
+  "timeouts_seconds": {
+    "source_checker": 30,
+    "downstream_checker": 180
+  },
+  "registered_files": {
+    "source_checker": {
+      "path": "analysis/check_productioncell_source_contract_certificate.py",
+      "sha256": "ef54180597c0582ea00151c37dd84e9190bbd4b3b26444f988bcf30b65ad9275"
+    },
+    "source_checker_test": {
+      "path": "tests/test_productioncell_source_contract_certificate.py",
+      "sha256": "f550fd2d1120272c4ea225d3437a884f00c009e1954b8d5ea9cc7e6f53e5a4cd"
+    },
+    "downstream_checker": {
+      "path": "analysis/check_post_frontend_contract_certificate.py",
+      "sha256": "cb7432049df13335992bdd6df550fb8ea1749e0aabdc629d556667b70c819c2d"
+    },
+    "downstream_protocol": {
+      "path": "protocols/post_frontend_contract_certificate_v1_20260814.json",
+      "sha256": "8685797d877fb42b8d85ae26de36a4a161e46438589101c625a30c608c4a54c7"
+    },
+    "campaign_runner": {
+      "path": "analysis/run_productioncell_source_contract_certificate.py",
+      "sha256": "b70c63932fa195477534a1b874814c3ad867a15da75ffd9ddfc80aa908cd119e"
+    },
+    "offline_audit": {
+      "path": "analysis/audit_productioncell_source_contract_certificate.py",
+      "sha256": "cdc44fbe0759380b08c8f5eb83f668d729206b685f87f301fa6f434236a8dd5f"
+    },
+    "campaign_test": {
+      "path": "tests/test_productioncell_source_contract_campaign.py",
+      "sha256": "38ad8d19d3014cc9f2340aae4588e8feb0c135054ec9ccc25e9e97ae536673d3"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "productioncell-arms2-base-productioncell-arms-2-fg",
+      "condition": "arms2-base",
+      "definition": "UpdCont_OTF_FG",
+      "cluster": "productioncell",
+      "source": {
+        "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+        "sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43"
+      },
+      "facts": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-base-productioncell-arms-2-fg/facts.json",
+        "sha256": "a585319ee85d1bd4f21b402c2c9c671b8def43f20a1309c92a6b424a9e74dfd8",
+        "bytes": 383579
+      },
+      "historical_bundle": {
+        "path": "evidence/m8q-native-factorization/panel/cases/productioncell-arms2-base-productioncell-arms-2-fg/bundle.json",
+        "sha256": "bc03ee33d1a61ed9b0b476d985842df3aa66d26115d3eca6bd8cbf622cf87fb5"
+      },
+      "m8s_record": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-base-productioncell-arms-2-fg/record.json",
+        "sha256": "e588d9fbbac56d49df96859a7df0ec172ab9dea6794983d17844595065cd7869"
+      },
+      "m8s_report": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-base-productioncell-arms-2-fg/report.json",
+        "sha256": "9446888423f182ab863e8adc88a8fea7ee44b6acd180ee64973ea4ebaf7a52ad"
+      },
+      "expected_source_report": {
+        "sha256": "017f318ca0b8a8978101100f857ab8eeef5354c3fd20689926a82c5892867211",
+        "bytes": 1805,
+        "source_semantic_digest": "3473643ab4c63ab82a9a05a505c6e8ab47428ae2b62166a8f7814398490661b2",
+        "controller_pair_semantic_digest": "d36b6011661ea5dd3496cb0f086a5de99c494cbb8def8eaf1522e3a7e0c9bd73",
+        "census": {
+          "components": 2,
+          "old_controller_states": 81,
+          "old_controller_edges": 216,
+          "new_controller_states": 81,
+          "new_controller_edges": 216,
+          "old_safety_machines": 12,
+          "new_safety_machines": 12,
+          "transition_requirement_machines": 0,
+          "observers": 22,
+          "activation_rows": 152,
+          "activation_error_rows": 82,
+          "progress_actions": 26
+        }
+      }
+    },
+    {
+      "case_id": "productioncell-arms2-r2-productioncell-arms-2-fg",
+      "condition": "arms2-r2",
+      "definition": "UpdCont_OTF_FG_R2",
+      "cluster": "productioncell",
+      "source": {
+        "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+        "sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43"
+      },
+      "facts": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-r2-productioncell-arms-2-fg/facts.json",
+        "sha256": "29d701d7cfac3d5c8458043e6d773aa0df4d7234cea3639578aa43382d4f18f3",
+        "bytes": 394473
+      },
+      "historical_bundle": {
+        "path": "evidence/m8q-native-factorization/panel/cases/productioncell-arms2-r2-productioncell-arms-2-fg/bundle.json",
+        "sha256": "b13cb01d4811915c83203154db60c3f287c8dd4c00de4ddc9f25d993313eff9f"
+      },
+      "m8s_record": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-r2-productioncell-arms-2-fg/record.json",
+        "sha256": "06bd60542d626dff78659235600b4ee35c6b340f98c8b34e5eaeb8a511a0c72a"
+      },
+      "m8s_report": {
+        "path": "evidence/m8s-post-frontend-contract-certificate/cases/productioncell-arms2-r2-productioncell-arms-2-fg/report.json",
+        "sha256": "3572bc0a0f66c51da048620366c2b50960180ac9ace72bdc5625fc720ede874c"
+      },
+      "expected_source_report": {
+        "sha256": "2c0576ca23be2a2d12b2b18d2ec14eb22f4ca16fb2f4e2c2e584b25ed6bbb75e",
+        "bytes": 1809,
+        "source_semantic_digest": "fdfd4033e3c2421e4a3524e9cf5373d87f7aad5b718e7e9880eb57aab4920ac2",
+        "controller_pair_semantic_digest": "d36b6011661ea5dd3496cb0f086a5de99c494cbb8def8eaf1522e3a7e0c9bd73",
+        "census": {
+          "components": 2,
+          "old_controller_states": 81,
+          "old_controller_edges": 216,
+          "new_controller_states": 81,
+          "new_controller_edges": 216,
+          "old_safety_machines": 12,
+          "new_safety_machines": 12,
+          "transition_requirement_machines": 24,
+          "observers": 22,
+          "activation_rows": 152,
+          "activation_error_rows": 82,
+          "progress_actions": 26
+        }
+      }
+    }
+  ],
+  "claim_boundary": {
+    "bounded_registered_mtsa_lts_profile": true,
+    "same_author_independent_python_frontend": true,
+    "independent_old_new_controller_synthesis": true,
+    "post_outcome": true,
+    "supplied_historical_certificate": true,
+    "source_to_supplied_certificate_semantic_verification": true,
+    "general_mtsa_frontend": false,
+    "independent_win_synthesis": false,
+    "source_to_win_replay": false,
+    "held_out_cases": 0,
+    "third_party_cases": 0,
+    "production_cases": 0,
+    "source_files": 1,
+    "provenance_clusters": 1,
+    "source_checker_runtime_frozen": false,
+    "historical_m8s_runtime_reproduced": false
+  }
+}

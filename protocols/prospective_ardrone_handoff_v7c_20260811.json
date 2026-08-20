@@ -1,0 +1,71 @@
+{
+  "schema_version": "fse2027-atomic-handoff-validation-protocol-v1",
+  "protocol_revision": 7,
+  "frozen_before_execution": true,
+  "frozen_utc": "2026-08-10T19:23:25.605537Z",
+  "population_claim": "one post-outcome tooling-correction replay of an unchanged, prospectively frozen source-anchored author adaptation; not a faithful native version pair, held-out or third-party contract, population sample, performance result, or production deployment",
+  "registered_output": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-handoff-replay7-20260811ba",
+  "preexecution_gate": {
+    "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-preexecution-replay7-20260811ax/summary.json",
+    "registration_path": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_registration_v2j_20260811.json"
+  },
+  "runtime_jar": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "runtime_jar_validation": "current_build_attestation",
+  "build_attestation": "Implementation/Source Code/maven-root/mtsa/target/fse2027-runtime-build-verification.json",
+  "build_attestation_validation": "current_source_identity",
+  "runner": "Implementation/Experiment/FSE2027/scripts/run_atomic_handoff_validation.py",
+  "runner_sha256": "6d0c54257771fe9c904e676a44b36a2973001490b413c9b01f088d2640317674",
+  "java_executable": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+  "java_executable_sha256": "6dcff7187022c4ad65e5282d8301af01e6a2a15bd81129d0f57c9c9aa821fcf1",
+  "java_version_output_sha256": "67732c1a52f008070b8222ad1b1694a9643188135d8fcb7878cb6c21cda20237",
+  "target": "UPDATE_CONTROLLER_OTF_FG_ARDRONE",
+  "timeout_seconds_per_case": 900,
+  "java_heap": "12g",
+  "independent_state_limit": 1000000,
+  "independent_query_limit": 10000000,
+  "race_repetitions": 500,
+  "minimum_initial_roots": 5,
+  "minimum_activation_language_classes": 2,
+  "semantic_preflight_summary": {
+    "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-preflight-v5c-20260811d/summary.json",
+    "sha256": "4805a72f3f38bb07e796f6cfd2f6e535a298436fa9b8de3414736d3f13ce6a4b"
+  },
+  "tooling_protocol": {
+    "path": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_tooling_v5m_20260811.json",
+    "sha256": "3a5fb852dda968e0d72c61cdb9be04e7eafc9c9975a131f2a355064008634173"
+  },
+  "decision_precondition": {
+    "campaign": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-corrected-replay7-20260811ay",
+    "job_id": "ardrone_semantic_positive__ardrone__rep01__fg_ducs_otf",
+    "model_id": "ardrone_semantic_positive",
+    "method_id": "fg_ducs_otf",
+    "input_sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+    "config_sha256": "f112b986121b60b7bd1b255a65026ebbad3a74c1fbf0e8a2c7278b1c56f64736",
+    "plan_semantic_sha256": "e64ddb04adb3991a481d9d46503f1c4338bf8a8db2bde71d1204ce18e05f53ca",
+    "required_process_status": "SUCCESS",
+    "required_decision": "realizable",
+    "required_verification": true
+  },
+  "cases": [
+    {
+      "id": "ardrone_semantic_positive",
+      "model": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/Models/ardrone_semantic_positive.lts",
+      "sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+      "expected_q0_roots": 5,
+      "required_actions": [
+        "stopOldSpec_P_OLD_READ_COMPLETION",
+        "reconfigure_DRONE",
+        "reconfigure_BATTERY",
+        "startNewSpec_P_NEW_READ_COMPLETION",
+        "startNewSpec_P_NO_FAULT"
+      ],
+      "required_nondeterministic_action": "reconfigure_BATTERY",
+      "required_nondeterministic_outcomes_per_bucket": 2,
+      "require_q0_outcome_fork_completion": true,
+      "require_actions_exactly_once_per_q0_trace": true,
+      "require_explicit_decision_crosscheck": true,
+      "expected_q0_endpoint_entries": 6
+    }
+  ],
+  "supersedes_executed_failed_protocol": "V7c preserves executed and sealed V6g/al as a failed consumer-contract validation and records the two later unexecuted successor drafts. Al stopped at a post-outcome validator defect: six typed old-endpoint entries legitimately project onto five canonical Q0 roots. V7c binds summary schema v2, registers both exact counts, and changes neither the model, Java exporter, nor expected decision."
+}

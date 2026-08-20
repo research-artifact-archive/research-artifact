@@ -1,0 +1,34 @@
+{
+  "schema_version": "fg-ducs-rs-manifest-v3",
+  "description": "Post-outcome theorem-linked fixtures whose supplied full-Sigma graph starts at the old endpoint initial state and includes old history, hotSwapIn, and the first activation; graph exactness (no missing or spurious concrete prefixes) is an input obligation, not a checker result, and the fixtures are not prospective or third-party evaluation.",
+  "cases": [
+    {
+      "id": "ordinary_event_counterexample",
+      "path": "inputs/rs/ordinary-event-counterexample.json",
+      "bytes": 2058,
+      "sha256": "7ee2f23589adb352f18927f98b0d6532f98f0853e0805a1cf988b401ebb744c3",
+      "expected_decision": "UNSOUND",
+      "expected_counterexample": {
+        "activation_prefix": ["a", "start_r"],
+        "observed_prefix": ["a", "start_r"],
+        "continuation": ["b"]
+      }
+    },
+    {
+      "id": "conservative_initialization",
+      "path": "inputs/rs/conservative-initialization.json",
+      "bytes": 1740,
+      "sha256": "d4b3c9c1b426a14d3c313e0be7373e322749b099a947ad02b9aac3f0c256f71e",
+      "expected_decision": "SOUND",
+      "expected_counterexample": null
+    },
+    {
+      "id": "common_residual_intersection",
+      "path": "inputs/rs/common-residual-intersection.json",
+      "bytes": 2058,
+      "sha256": "27c0c6540a3dd86e2936f0112f3708ad5438f3e4235fa9574426c5102cd327f6",
+      "expected_decision": "SOUND",
+      "expected_counterexample": null
+    }
+  ]
+}

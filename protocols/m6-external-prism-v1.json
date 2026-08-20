@@ -1,0 +1,49 @@
+{
+  "schema_version": "fse2027-m6-validation-protocol-v1",
+  "frozen_before_execution": true,
+  "population_claim": "registered semantic boundaries and executable formal witnesses; not a random or held-out application sample",
+  "external_solver": {
+    "name": "PRISM-games",
+    "version": "3.2.4",
+    "official_download": "https://www.prismmodelchecker.org/dl/prism-games-3.2.4-mac64-arm.tar.gz",
+    "archive_sha256": "8d218a22892e3394ac1fe640cd1b041eda3cd848800eabe406953273d10624e5",
+    "property": "<<controller>> Pmax=? [ F \"goal\" ]",
+    "timeout_seconds_per_model": 60,
+    "semantic_manifest": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/manifest.json",
+    "semantic_manifest_sha256": "60e132141d12eea883bb220108f52ad3cdb94f84e4dcea9bed1011601b304c94",
+    "java_runs": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/raw_runs.csv",
+    "java_runs_sha256": "01442151f8f8343f11d4e0387098374690eae79312d162206cde0e8ea8998443",
+    "expected_models": 41,
+    "expected_java_decisions": 82
+  },
+  "deployment_executor": {
+    "runtime_jar": "Implementation/Experiment/FSE2027/artifacts/runtime-jars/mtsa-1.0-SNAPSHOT-0945e3dba87b.jar",
+    "runtime_jar_sha256": "0945e3dba87bab97e11a4185b2bda7dd4ac518f2bacb70f262b112c8f99fe359",
+    "target": "UPDATE_CONTROLLER_OTF_FG",
+    "race_repetitions": 10000,
+    "timeout_seconds_per_case": 60,
+    "cases": [
+      {
+        "id": "production_cell_local_transfer",
+        "model": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/pc_separation_local_fg.lts",
+        "sha256": "2dcd0dcf5d3aa4aeb9e0150e703d499104f0fc68770f7a29d7fb7a94b52ab8a8",
+        "required_actions": ["reconfigure_A", "reconfigure_B"],
+        "required_nondeterministic_action": ""
+      },
+      {
+        "id": "observation_dependent_branch",
+        "model": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_separation.lts",
+        "sha256": "683fc02199c8e3f54dd20924cdd6e33ba6903f16f2bd6750d0f4716ef7c312ea",
+        "required_actions": ["reconfigure_C"],
+        "required_nondeterministic_action": "u"
+      },
+      {
+        "id": "per_requirement_boundary",
+        "model": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/requirement_boundary_separation.lts",
+        "sha256": "897e41add005963b8ee642a7b51f3b81dbe222e99c939d0d57b18fe453c89fd2",
+        "required_actions": ["reconfigure_A", "reconfigure_B"],
+        "required_nondeterministic_action": ""
+      }
+    ]
+  }
+}

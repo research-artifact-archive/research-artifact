@@ -1,0 +1,36 @@
+{
+  "date": "2026-08-14",
+  "environment": {
+    "java": "OpenJDK 17.0.19",
+    "maven": "Apache Maven 3.9.16",
+    "os": "macOS"
+  },
+  "gates": {
+    "archive_hash_and_size": "PASS",
+    "overlay_hash_and_apply": "PASS",
+    "clean_package": "PASS",
+    "targeted_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 101
+    },
+    "gsm_cli_smoke": "PASS",
+    "native_factorization_smoke": {
+      "factor_status": "NONTRIVIAL_SOURCE_NATIVE",
+      "global_mixed_post_query_count": 0,
+      "global_mixed_state_count": 0,
+      "partition": [
+        [0],
+        [1]
+      ],
+      "solve_status": "PRODUCER_VERIFIED_REFINED_WIN",
+      "structural_checker": "PASS"
+    }
+  },
+  "native_factorization_smoke_sha256": "6025590d60981b33321aa15762bcd3ccb9ab9829426641e4142041fee299d091",
+  "observed_build_jar_sha256": "402cc92a3294a8135789815f79a0287bf59da34f4d584522e5f1e0cf37d4fa35",
+  "smoke_output_sha256": "8e185c68e467cd6eea651012398acee1aab9b8b63c471f10206febe5b30b9875",
+  "smoke_transitions_sha256": "25086279fccac45853249a679b9af8ec388340e720bee8f80bdbf3f1b2503637",
+  "scope": "Products were created in a temporary directory and are not distributed. This validates the public-sanitized current source overlay with 101 scoped tests, the GSM smoke, and the source-native ProductionCell two-block smoke. The smoke constructs the fixed endpoint products but no mixed-version global update game. The M8r exporter stops after shared parsing, safety/LTL compilation, composition, and fixed old/new controller synthesis. The M8s exporter adds conclusion-free controller, observer, activation, and load facts at the same post-frontend boundary; its separate public checker, not this Java rebuild result, verifies two historical certificates. This does not assert byte identity with the historical evaluation JAR, an independent ordinary-LTS frontend, independent controller/WIN synthesis, source-to-WIN replay, third-party use, or production deployment."
+}

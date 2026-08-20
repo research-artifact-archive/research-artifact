@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "experiment_id": "fse2027-prospective-ardrone-v6",
+  "description": "M8m source-anchored ARDrone author adaptation; all six method-role cells are retained independently of their outcomes.",
+  "protocol_template": false,
+  "master_seed": 2027081012,
+  "repetitions": 1,
+  "timeout_seconds": 900,
+  "rss_poll_interval_seconds": 0.05,
+  "java": "/opt/homebrew/opt/openjdk@17/bin/java",
+  "java_heap": "12g",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "results_root": "Implementation/Experiment/FSE2027/results",
+  "registered_run_id": "m8m-prospective-ardrone-final-20260811p",
+  "transition_output_mode": "summary",
+  "preexecution_gate": {
+    "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-preexecution-20260811o/summary.json",
+    "registration_path": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_registration_v2c_20260811.json"
+  },
+  "host_requirements": {
+    "operating_system": "Darwin",
+    "minimum_physical_memory_gib": 20,
+    "expected_installed_memory_gib": 24,
+    "minimum_free_disk_gib": 10,
+    "parallel_trials": 1
+  },
+  "generated_input_manifests": [
+    {
+      "role": "stage0_design",
+      "path": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_design_v2_20260810.json",
+      "sha256": "5e028aa125e843696817d5d36d0ebd185fbb997b07395da784833941a2e079a8"
+    },
+    {
+      "role": "frozen_input_manifest",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/manifest.json",
+      "sha256": "05abe43b22402c919065b5c2888405d8c9d8ee7998819dff106854247d2fe985"
+    },
+    {
+      "role": "frozen_input_checksums",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/SHA256SUMS",
+      "sha256": "cfa0cf1b7efc37d0d50c7134fa64ab0cab4bfa085fd8cd74aea6478e17b28f33"
+    },
+    {
+      "role": "tooling_correction_v5",
+      "path": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_tooling_v5f_20260811.json",
+      "sha256": "c450cb7eda0dd1196cb49b227e770e034eaf15ffc5db34607340ea35e27c115b"
+    },
+    {
+      "role": "passed_structural_preflight_v5",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-preflight-v5c-20260811d/summary.json",
+      "sha256": "4805a72f3f38bb07e796f6cfd2f6e535a298436fa9b8de3414736d3f13ce6a4b"
+    },
+    {
+      "role": "structural_preflight_v5_checksums",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-preflight-v5c-20260811d/SHA256SUMS",
+      "sha256": "f5bf1f33c05d705df63d39d7c7798db153fccec80256ac609ba3a5be128da31c"
+    }
+  ],
+  "targets": [
+    {
+      "id": "ardrone",
+      "suffix": ""
+    }
+  ],
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "analysis_role": "typed_direct_lazy_primary",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG_ARDRONE{suffix}",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.revised.otf.independentQueryLimit": "10000000",
+        "mtsa.revised.otf.independentStateLimit": "1000000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.revised.otf.solver": "otf"
+      }
+    },
+    {
+      "id": "generic_lazy",
+      "analysis_role": "solver_neutral_lazy_baseline",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG_ARDRONE{suffix}",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.revised.otf.independentQueryLimit": "10000000",
+        "mtsa.revised.otf.independentStateLimit": "1000000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.revised.otf.solver": "generic_lazy"
+      }
+    },
+    {
+      "id": "direct_full",
+      "analysis_role": "full_materialization_semantic_comparator",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG_ARDRONE{suffix}",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.revised.otf.independentQueryLimit": "10000000",
+        "mtsa.revised.otf.independentStateLimit": "1000000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.revised.otf.solver": "direct_full"
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "ardrone_semantic_positive",
+      "family": "prospective_ardrone_v6",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/Models/ardrone_semantic_positive.lts",
+      "method_ids": [
+        "fg_ducs_otf",
+        "generic_lazy",
+        "direct_full"
+      ],
+      "target_ids": [
+        "ardrone"
+      ],
+      "repetitions": 1,
+      "factors": {
+        "analysis_class": "prospective_after_model_and_direction_freeze",
+        "expected_decision": "realizable",
+        "input_sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+        "pair_role": "both adversarial BATTERY transfer results are loadable",
+        "protocol_sha256": "5e028aa125e843696817d5d36d0ebd185fbb997b07395da784833941a2e079a8"
+      }
+    },
+    {
+      "id": "ardrone_semantic_negative",
+      "family": "prospective_ardrone_v6",
+      "path": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/Models/ardrone_semantic_negative.lts",
+      "method_ids": [
+        "fg_ducs_otf",
+        "generic_lazy",
+        "direct_full"
+      ],
+      "target_ids": [
+        "ardrone"
+      ],
+      "repetitions": 1,
+      "factors": {
+        "analysis_class": "prospective_after_model_and_direction_freeze",
+        "expected_decision": "unrealizable",
+        "input_sha256": "b9936dbedacebb874da560d0a17cf82928447459adb79b4120fc14fc2ae6bc2f",
+        "pair_role": "the second adversarial BATTERY result is raw-reachable but unloadable",
+        "protocol_sha256": "5e028aa125e843696817d5d36d0ebd185fbb997b07395da784833941a2e079a8"
+      }
+    }
+  ],
+  "protocol_notes": [
+    "M8l remains an immutable INVALID_FROZEN_INPUT and was not solved.",
+    "M8m model bytes and expected directions were frozen before any M8m update-game result was inspected.",
+    "Run all six cells unconditionally and retain every terminal outcome; a timeout is never imputed as a decision.",
+    "This is one source-anchored author adaptation, not a held-out or faithful native ARDrone contract and not a performance study."
+  ]
+}

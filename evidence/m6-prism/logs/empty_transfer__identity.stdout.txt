@@ -1,0 +1,56 @@
+PRISM-games
+===========
+
+Version: 3.2.4 (based on PRISM 4.10.1.dev)
+Date: Fri Aug 07 11:20:01 JST 2026
+Hostname: Mac
+Memory limits: cudd=1g, java(heap)=2g
+Command line: prism-games '<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m6-external-prism-20260807a/games/empty_transfer__identity.prism' -pf '<<controller>> Pmax=? [ F "goal" ]' -explicit -javamaxmem 2g
+
+Parsing PRISM model file "<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m6-external-prism-20260807a/games/empty_transfer__identity.prism"...
+
+Type:        SMG
+Players:     controller environment
+Modules:     fg_ducs_strong_game
+Actions:     [e0] [e1] [c2] [c3] [e4] [c5] [c6] [c7] [e8] [e9] [e10] [e11]
+Variables:   s
+Labels:      "goal"
+
+1 property:
+(1) <<controller>>Pmax=? [ F "goal" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<controller>>Pmax=? [ F "goal" ]
+
+Building model (engine:explicit)...
+
+Computing reachable states... 9 states
+Reachable states exploration and model construction done in 0.005 secs.
+Sorting reachable states list...
+
+Time for model construction: 0.016 seconds.
+
+Type:        SMG
+Players:     2
+States:      9 (1 initial)
+Transitions: 12
+Choices:     12
+Max/avg:     2/1.33
+
+Starting probabilistic reachability...
+Starting Prob0 (maxmin)...
+Prob0 (maxmin) took 4 iterations and 0.001 seconds.
+Starting Prob1 (maxmin)...
+Prob1 (maxmin) took 8 iterations and 0.0 seconds.
+target=1, yes=4, no=5, maybe=0
+Starting value iteration (Gauss-Seidel, maxmin)...
+Value iteration (Gauss-Seidel, maxmin) took 1 iterations and 0.0 seconds.
+Probabilistic reachability took 0.005 seconds.
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.006 seconds.
+
+Result: 0.0 (exact floating point)
+

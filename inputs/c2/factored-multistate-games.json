@@ -1,0 +1,200 @@
+{
+  "schema_version": "fg-ducs-explicit-local-games-v1",
+  "cases": [
+    {
+      "id": "multistate-winning-nondeterministic-handover",
+      "expected_decision": "realizable",
+      "shared_controllable_pure_stutter": ["idle"],
+      "cross_block_precedence": [],
+      "cross_block_requirements": [],
+      "composition": {
+        "state_space": "cartesian_product",
+        "initial_states": "cartesian_product",
+        "safe": "conjunction",
+        "goal": "cartesian_product",
+        "load_states": "cartesian_product",
+        "handover": "cartesian_product",
+        "post": "exact_asynchronous_one_block_frame",
+        "foreign_monitor_actions": "stutter",
+        "foreign_rs_actions": "stutter",
+        "pending_and_precedence": "block_local",
+        "shared_action_post": "global_self_loop"
+      },
+      "blocks": [
+        {
+          "id": "transfer",
+          "states": ["t0", "t1", "t2", "tg"],
+          "state_annotations": {
+            "t0": {"physical": "old", "physical_safe": true, "monitor": "mi", "rs_residual": "ri", "pending_actions": ["prepare", "commit"]},
+            "t1": {"physical": "aligned-a", "physical_safe": true, "monitor": "ma", "rs_residual": "ra", "pending_actions": ["commit"]},
+            "t2": {"physical": "aligned-b", "physical_safe": true, "monitor": "ma", "rs_residual": "ra", "pending_actions": ["commit"]},
+            "tg": {"physical": "new", "physical_safe": true, "monitor": "md", "rs_residual": "rd", "pending_actions": []}
+          },
+          "initial_states": ["t0"],
+          "safe_states": ["t0", "t1", "t2", "tg"],
+          "goal_states": ["tg"],
+          "load_states": ["image-transfer"],
+          "action_annotations": {
+            "prepare": {"controllability": "controllable", "kind": "transfer"},
+            "commit": {"controllability": "controllable", "kind": "handover"}
+          },
+          "transitions": [
+            {"source": "t0", "action": "prepare", "targets": ["t1", "t2"]},
+            {"source": "t1", "action": "commit", "targets": ["tg"]},
+            {"source": "t2", "action": "commit", "targets": ["tg"]}
+          ],
+          "monitor": {
+            "states": ["mi", "ma", "md"], "initial_states": ["mi"], "error_states": [], "default": "stutter",
+            "transitions": [
+              {"source": "mi", "action": "prepare", "target": "ma"},
+              {"source": "ma", "action": "commit", "target": "md"}
+            ]
+          },
+          "rs_observer": {
+            "states": ["ri", "ra", "rd"], "initial_states": ["ri"], "error_states": [], "default": "stutter",
+            "transitions": [
+              {"source": "ri", "action": "prepare", "target": "ra"},
+              {"source": "ra", "action": "commit", "target": "rd"}
+            ]
+          },
+          "precedence_edges": [["prepare", "commit"]],
+          "handover_relation": {"tg": ["image-transfer"]},
+          "foreign_actions_stutter": true
+        },
+        {
+          "id": "guard",
+          "states": ["g0", "g1", "gg"],
+          "state_annotations": {
+            "g0": {"physical": "unarmed", "physical_safe": true, "monitor": "gi", "rs_residual": "qi", "pending_actions": ["arm"]},
+            "g1": {"physical": "armed", "physical_safe": true, "monitor": "ga", "rs_residual": "qa", "pending_actions": []},
+            "gg": {"physical": "ready", "physical_safe": true, "monitor": "gd", "rs_residual": "qd", "pending_actions": []}
+          },
+          "initial_states": ["g0"],
+          "safe_states": ["g0", "g1", "gg"],
+          "goal_states": ["gg"],
+          "load_states": ["image-guard"],
+          "action_annotations": {
+            "arm": {"controllability": "controllable", "kind": "transfer"},
+            "ready": {"controllability": "uncontrollable", "kind": "internal"}
+          },
+          "transitions": [
+            {"source": "g0", "action": "arm", "targets": ["g1"]},
+            {"source": "g1", "action": "ready", "targets": ["gg"]}
+          ],
+          "monitor": {
+            "states": ["gi", "ga", "gd"], "initial_states": ["gi"], "error_states": [], "default": "stutter",
+            "transitions": [
+              {"source": "gi", "action": "arm", "target": "ga"},
+              {"source": "ga", "action": "ready", "target": "gd"}
+            ]
+          },
+          "rs_observer": {
+            "states": ["qi", "qa", "qd"], "initial_states": ["qi"], "error_states": [], "default": "stutter",
+            "transitions": [
+              {"source": "qi", "action": "arm", "target": "qa"},
+              {"source": "qa", "action": "ready", "target": "qd"}
+            ]
+          },
+          "precedence_edges": [],
+          "handover_relation": {"gg": ["image-guard"]},
+          "foreign_actions_stutter": true
+        }
+      ]
+    },
+    {
+      "id": "multistate-losing-monitor-outcome",
+      "expected_decision": "unrealizable",
+      "shared_controllable_pure_stutter": ["idle"],
+      "cross_block_precedence": [],
+      "cross_block_requirements": [],
+      "composition": {
+        "state_space": "cartesian_product",
+        "initial_states": "cartesian_product",
+        "safe": "conjunction",
+        "goal": "cartesian_product",
+        "load_states": "cartesian_product",
+        "handover": "cartesian_product",
+        "post": "exact_asynchronous_one_block_frame",
+        "foreign_monitor_actions": "stutter",
+        "foreign_rs_actions": "stutter",
+        "pending_and_precedence": "block_local",
+        "shared_action_post": "global_self_loop"
+      },
+      "blocks": [
+        {
+          "id": "risk",
+          "states": ["r0", "r1", "r2", "re", "rg"],
+          "state_annotations": {
+            "r0": {"physical": "old", "physical_safe": true, "monitor": "m0", "rs_residual": "s0", "pending_actions": ["attempt", "commit"]},
+            "r1": {"physical": "aligned", "physical_safe": true, "monitor": "m1", "rs_residual": "s1", "pending_actions": ["commit"]},
+            "r2": {"physical": "misaligned", "physical_safe": true, "monitor": "m1", "rs_residual": "s1", "pending_actions": ["commit"]},
+            "re": {"physical": "fault", "physical_safe": true, "monitor": "me", "rs_residual": "se", "pending_actions": ["commit"]},
+            "rg": {"physical": "new", "physical_safe": true, "monitor": "md", "rs_residual": "sd", "pending_actions": []}
+          },
+          "initial_states": ["r0"],
+          "safe_states": ["r0", "r1", "r2", "rg"],
+          "goal_states": ["rg"],
+          "load_states": ["image-risk"],
+          "action_annotations": {
+            "attempt": {"controllability": "controllable", "kind": "transfer"},
+            "commit": {"controllability": "controllable", "kind": "handover"},
+            "violate": {"controllability": "uncontrollable", "kind": "internal"}
+          },
+          "transitions": [
+            {"source": "r0", "action": "attempt", "targets": ["r1", "r2"]},
+            {"source": "r1", "action": "commit", "targets": ["rg"]},
+            {"source": "r2", "action": "violate", "targets": ["re"]}
+          ],
+          "monitor": {
+            "states": ["m0", "m1", "me", "md"], "initial_states": ["m0"], "error_states": ["me"], "default": "stutter",
+            "transitions": [
+              {"source": "m0", "action": "attempt", "target": "m1"},
+              {"source": "m1", "action": "commit", "target": "md"},
+              {"source": "m1", "action": "violate", "target": "me"}
+            ]
+          },
+          "rs_observer": {
+            "states": ["s0", "s1", "se", "sd"], "initial_states": ["s0"], "error_states": ["se"], "default": "stutter",
+            "transitions": [
+              {"source": "s0", "action": "attempt", "target": "s1"},
+              {"source": "s1", "action": "commit", "target": "sd"},
+              {"source": "s1", "action": "violate", "target": "se"}
+            ]
+          },
+          "precedence_edges": [["attempt", "commit"]],
+          "handover_relation": {"rg": ["image-risk"]},
+          "foreign_actions_stutter": true
+        },
+        {
+          "id": "companion",
+          "states": ["c0", "cg"],
+          "state_annotations": {
+            "c0": {"physical": "old", "physical_safe": true, "monitor": "ci", "rs_residual": "ui", "pending_actions": ["switch"]},
+            "cg": {"physical": "new", "physical_safe": true, "monitor": "cd", "rs_residual": "ud", "pending_actions": []}
+          },
+          "initial_states": ["c0"],
+          "safe_states": ["c0", "cg"],
+          "goal_states": ["cg"],
+          "load_states": ["image-companion"],
+          "action_annotations": {
+            "switch": {"controllability": "controllable", "kind": "handover"}
+          },
+          "transitions": [
+            {"source": "c0", "action": "switch", "targets": ["cg"]}
+          ],
+          "monitor": {
+            "states": ["ci", "cd"], "initial_states": ["ci"], "error_states": [], "default": "stutter",
+            "transitions": [{"source": "ci", "action": "switch", "target": "cd"}]
+          },
+          "rs_observer": {
+            "states": ["ui", "ud"], "initial_states": ["ui"], "error_states": [], "default": "stutter",
+            "transitions": [{"source": "ui", "action": "switch", "target": "ud"}]
+          },
+          "precedence_edges": [],
+          "handover_relation": {"cg": ["image-companion"]},
+          "foreign_actions_stutter": true
+        }
+      ]
+    }
+  ]
+}

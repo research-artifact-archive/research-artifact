@@ -1,0 +1,48 @@
+{
+  "schema_version": "fg-ducs-rs-fixture-v3",
+  "sigma_n": ["a", "b"],
+  "sigma_u": ["start_r"],
+  "activation": {
+    "graph_relation": "exact",
+    "requirement_kind": "new",
+    "activation_event": "start_r",
+    "states": ["old_initial", "update_direct", "activated"],
+    "old_endpoint_states": ["old_initial"],
+    "update_phase_states": ["update_direct", "activated"],
+    "initial_states": ["old_initial"],
+    "transitions": [
+      {"source": "old_initial", "event": null, "boundary": "hotSwapIn", "target": "update_direct"},
+      {"source": "update_direct", "event": "start_r", "target": "activated"}
+    ],
+    "accepting": [
+      {"state": "activated", "xi": "X"}
+    ]
+  },
+  "observer": {
+    "states": ["obs"],
+    "initial_state": "obs",
+    "transitions": [
+      {"source": "obs", "event": "a", "target": "obs", "output": ["a"]},
+      {"source": "obs", "event": "b", "target": "obs", "output": ["b"]},
+      {"source": "obs", "event": "start_r", "target": "obs", "output": ["start_r"]}
+    ]
+  },
+  "monitor": {
+    "states": ["m0", "m1", "bad"],
+    "initial_state": "m0",
+    "alphabet": ["a", "b", "start_r"],
+    "error_states": ["bad"],
+    "transitions": [
+      {"source": "m0", "symbol": "a", "target": "m1"},
+      {"source": "m0", "symbol": "b", "target": "m0"},
+      {"source": "m0", "symbol": "start_r", "target": "m0"},
+      {"source": "m1", "symbol": "a", "target": "m1"},
+      {"source": "m1", "symbol": "b", "target": "bad"},
+      {"source": "m1", "symbol": "start_r", "target": "m1"},
+      {"source": "bad", "symbol": "a", "target": "bad"},
+      {"source": "bad", "symbol": "b", "target": "bad"},
+      {"source": "bad", "symbol": "start_r", "target": "bad"}
+    ]
+  },
+  "iota": {"X": "m1"}
+}

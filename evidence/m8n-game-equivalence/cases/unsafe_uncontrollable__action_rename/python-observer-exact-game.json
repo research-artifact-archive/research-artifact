@@ -1,0 +1,77 @@
+{
+  "buckets": [
+    {
+      "action": "hazard",
+      "controllable": false,
+      "source": "R0",
+      "targets": [
+        "R1"
+      ]
+    },
+    {
+      "action": "heartbeat",
+      "controllable": true,
+      "source": "R0",
+      "targets": [
+        "R0"
+      ]
+    },
+    {
+      "action": "reconfigure_COMPONENT",
+      "controllable": true,
+      "source": "R0",
+      "targets": [
+        "R2"
+      ]
+    }
+  ],
+  "claimed_decision": "unrealizable",
+  "controllable_bucket_count": 2,
+  "goal_state_ids": [
+    "R2"
+  ],
+  "initial_state_ids": [
+    "R0"
+  ],
+  "observer_exact_terminalization": true,
+  "outcome_edge_count": 3,
+  "policy_restriction": "full_fg",
+  "query_count": 3,
+  "schema_version": "fse2027-independent-strong-game-bundle-v1",
+  "semantics_id": "python-raw-c1-observer-exact-terminal-v5",
+  "state_count": 3,
+  "states": [
+    {
+      "active_testers": {},
+      "goal": false,
+      "id": "R0",
+      "initial": true,
+      "pending_actions": [
+        "reconfigure_COMPONENT"
+      ],
+      "physical": "((False,), ('OLD_COMPONENT',), '')",
+      "safe": true
+    },
+    {
+      "active_testers": {},
+      "goal": false,
+      "id": "R1",
+      "initial": false,
+      "pending_actions": [
+        "reconfigure_COMPONENT"
+      ],
+      "physical": "((False,), ('OLD_COMPONENT',), '')",
+      "safe": false
+    },
+    {
+      "active_testers": {},
+      "goal": true,
+      "id": "R2",
+      "initial": false,
+      "pending_actions": [],
+      "physical": "((True,), ('NEW_COMPONENT',), '')",
+      "safe": true
+    }
+  ],
+  "uncontrollable_bucket_count": 1
+}

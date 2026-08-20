@@ -1,0 +1,70 @@
+{
+  "schema_version": "fg-ducs-native-source-dependency-replay-protocol-v1",
+  "date": "2026-08-14",
+  "registration_protocol": {
+    "path": "protocols/native_factorization_panel_v1_20260814.json",
+    "sha256": "b55bb131316e4ab8b8619ba8361eac1b080dfdad3541e5c1f3395d39e63fde0b"
+  },
+  "registered_panel_path": "evidence/m8q-native-factorization/panel",
+  "denominator": {
+    "source_files": 23,
+    "target_cells": 41,
+    "provenance_clusters": 10
+  },
+  "registered_files": {
+    "facts_runner_source": {
+      "path": "source-rebuild/added/maven-root/mtsa/src/main/java/ltsa/lts/NativeSourceDependencyFactsRunner.java",
+      "sha256": "cf6b650217d545c4ce16ab89668f606aff733bce69615137705660b071880837"
+    },
+    "independent_post_frontend_consumer": {
+      "path": "analysis/check_native_source_dependencies.py",
+      "sha256": "2f3e6f0f54688b1a83c255c77b4b285836cf6476c9230d515a896d9fed26dc22"
+    },
+    "campaign_runner": {
+      "path": "analysis/run_native_source_dependency_replay.py",
+      "sha256": "7a880c5b49bee3947aceaa6ccc59fe455bf8925baad4a9f3a54fb25eb28cd729"
+    },
+    "offline_audit": {
+      "path": "analysis/audit_native_source_dependencies.py",
+      "sha256": "0c85550e150157ff7dfdef0b6b0bfa433dfef45ff01b5ffe69d70e61fd416241"
+    }
+  },
+  "runtime": {
+    "jar_sha256": "ca162aaad95118c1cb967ac394f4574b2ab8e01d11d4539cbedcdf935cc1c156",
+    "facts_runner_class_sha256": "d25a5dc902f2569316a3345e550a9f79f23185a34e943fe4cba640d30f44e958",
+    "native_loader_class_sha256": "9a8c21128b3ae6c0bfb69f044fd97bf1d002206a79864b03d28ffe69f373380c",
+    "facts_runner_class": "ltsa.lts.NativeSourceDependencyFactsRunner",
+    "heap": "4g",
+    "per_case_timeout_seconds": 120,
+    "historical_m8q_producer_jar_reused": false,
+    "current_source_rebuild_observation_only": true
+  },
+  "required_dependency_outcome_census": {
+    "ONE_BLOCK": 33,
+    "NONTRIVIAL_PARTITION": 2,
+    "OWNERLESS_REJECT": 6
+  },
+  "claim_boundary": {
+    "compiled_facts_replay_cells": 41,
+    "shared_mtsa_frontend_cells": 41,
+    "independent_source_frontend_cells": 0,
+    "ordinary_lts_source_replay_cells": 0,
+    "source_to_witness_replay_cells": 0,
+    "replayed_semantics": [
+      "component nonidentity including partial self-loops",
+      "tester and observer action effects",
+      "update-owner fixed point",
+      "precedence dependencies",
+      "union-find component partition",
+      "ownerless normal-event rejection"
+    ],
+    "producer_tcb": [
+      "ordinary-LTS parsing, safety/LTL compilation, updatingController composition, and fixed old/new controller synthesis",
+      "fixed old/new endpoint construction and validation",
+      "Goal, load, activation, and observer-quotient semantics",
+      "local update-game Post and solver semantics",
+      "refined-WIN certificate and global witness transport"
+    ],
+    "interpretation": "This post-outcome campaign reduces the Java factorizer TCB for compiled-declaration dependency, partition, and the ownerless gate only. The shared compose path synthesizes old/new controllers and remains TCB. It is not an independent source parser, solver-free frontend, source-to-bundle replay, source-to-WIN replay, held-out result, or independently verified refined-WIN claim."
+  }
+}

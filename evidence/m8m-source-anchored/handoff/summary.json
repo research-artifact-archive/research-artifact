@@ -1,0 +1,533 @@
+{
+  "aggregate": {
+    "atomic_handoff_races": 500,
+    "cases": 1,
+    "certificate_states": 29,
+    "covered_strategy_outcome_edges": 28,
+    "explicitly_crosschecked_cases": 1,
+    "goals": 6,
+    "overlap_violations": 0,
+    "partial_load_observations": 0,
+    "passed_cases": 1,
+    "post_events_immediately_after_handoff": 6,
+    "post_outcome_edges": 58,
+    "post_states": 12,
+    "q0_complete_traces": 5,
+    "q0_entries": 6,
+    "q0_required_action_outcome_traces": 10,
+    "q0_roots": 5,
+    "required_action_nondeterministic_buckets": 3,
+    "strategy_buckets": 23,
+    "strategy_outcome_edges": 28
+  },
+  "build_attestation_sha256": "0432fe0c74187ba1a33d99f5d4e04cc3efeaeb80f1588c1b462cfefc602893e9",
+  "build_attestation_validation": {
+    "attestation_schema": "fse2027-runtime-build-verification-v1",
+    "python_protocol_tests": 208,
+    "runtime_jar_sha256": "dd494999ffa1d0f4029b5f07988f408182d8a362a77926da436716a7221c751d",
+    "source_entries": 5509,
+    "source_entries_aggregate_sha256": "33cc3e6aa6d8c717943d9be1ab6b399cef89a45e5ebc7d58496be63c4aeba9b8",
+    "status": "PASS",
+    "targeted_java_test_classes": 17,
+    "targeted_java_tests": 95
+  },
+  "cases": [
+    {
+      "all_q0_execution": {
+        "loaded_controller_states": [
+          1,
+          6,
+          7
+        ],
+        "maximum_mid_steps": 6,
+        "reached_goals": [
+          "M0",
+          "M14",
+          "M7"
+        ],
+        "trace_count": 5,
+        "traces": [
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "root": "M21",
+            "visited_configurations": [
+              "M21",
+              "M23",
+              "M24",
+              "M6",
+              "M2",
+              "M1",
+              "M0"
+            ]
+          },
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "root": "M22",
+            "visited_configurations": [
+              "M22",
+              "M23",
+              "M24",
+              "M6",
+              "M2",
+              "M1",
+              "M0"
+            ]
+          },
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "root": "M23",
+            "visited_configurations": [
+              "M23",
+              "M24",
+              "M6",
+              "M2",
+              "M1",
+              "M0"
+            ]
+          },
+          {
+            "controller_state_loaded": 7,
+            "handoff_post_state": "N11",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N11",
+            "root": "M27",
+            "visited_configurations": [
+              "M27",
+              "M28",
+              "M20",
+              "M16",
+              "M15",
+              "M14"
+            ]
+          },
+          {
+            "controller_state_loaded": 6,
+            "handoff_post_state": "N10",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N10",
+            "root": "M25",
+            "visited_configurations": [
+              "M25",
+              "M26",
+              "M13",
+              "M9",
+              "M8",
+              "M7"
+            ]
+          }
+        ]
+      },
+      "atomic_handoff_race": {
+        "completed_atomic_handoffs": 500,
+        "maximum_critical_occupancy": 1,
+        "overlap_violations": 0,
+        "partial_load_observations": 0,
+        "post_contenders_accepted_after_switch": 500,
+        "post_handoff_snapshots": 500,
+        "repetitions": 500
+      },
+      "bundle_counts": {
+        "certificate_states": 29,
+        "goals": 6,
+        "post_buckets": 54,
+        "post_outcome_edges": 58,
+        "post_states": 12,
+        "q0_endpoint_entries": 6,
+        "q0_roots": 5,
+        "strategy_buckets": 23,
+        "strategy_outcome_edges": 28
+      },
+      "bundle_sha256": "0489591c436ccd0c1a54da80c93eb6166e985042c724c344609a139b0adbd0eb",
+      "case_id": "ardrone_semantic_positive",
+      "claim_boundary": "The source-bound reference executor consumed the typed winning certificate and handoff map for this registered model; this is not evidence that an unrelated production runtime refines the model.",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+        "-Xmx12g",
+        "-Dmtsa.evaluation.enabled=true",
+        "-Dupdating.controller.evaluation.enabled=true",
+        "-Dmtsa.revised.otf.solver=otf",
+        "-Dmtsa.revised.otf.policyRestriction=full_fg",
+        "-Dmtsa.otf.guidedStateLimit=0",
+        "-Dmtsa.otf.guidedQueryLimit=0",
+        "-Dmtsa.otf.lazyControllableBuckets=true",
+        "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+        "-Dmtsa.revised.otf.independentVerification=true",
+        "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+        "-Dmtsa.revised.otf.independentStateLimit=1000000",
+        "-Dmtsa.revised.otf.independentQueryLimit=10000000",
+        "-cp",
+        "<LOCAL_WORKSPACE>/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+        "ltsa.updatingControllers.cli.SingleCompositionRunner",
+        "--lts",
+        "<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/Models/ardrone_semantic_positive.lts",
+        "--target",
+        "UPDATE_CONTROLLER_OTF_FG_ARDRONE",
+        "--output",
+        "<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-handoff-replay7-20260811ba/cases/ardrone_semantic_positive/synthesis-output.txt",
+        "--transitions",
+        "<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-handoff-replay7-20260811ba/cases/ardrone_semantic_positive/linked-controller-summary.txt",
+        "--transition-output",
+        "summary",
+        "--deployment-output",
+        "<LOCAL_WORKSPACE>/Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-handoff-replay7-20260811ba/cases/ardrone_semantic_positive/atomic-handoff-bundle.json"
+      ],
+      "explicit_decision_crosscheck": "passed",
+      "model": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-inputs-20260810a/Models/ardrone_semantic_positive.lts",
+      "model_sha256": "8497353582601b2bff09fc200fa3679c542e8be8cc53540d0c7939bcaecf9164",
+      "negative_controls": {
+        "disabled_mid_event_rejections": 23,
+        "disabled_post_event_rejections": 12,
+        "out_of_bucket_result_rejections": 23,
+        "pre_handoff_post_event_rejections": 23
+      },
+      "nondeterministic_action": "reconfigure_BATTERY",
+      "nondeterministic_result_configurations": [
+        "M12",
+        "M16",
+        "M19",
+        "M2",
+        "M5",
+        "M9"
+      ],
+      "post_edge_coverage": {
+        "covered_post_buckets": 54,
+        "covered_post_outcome_edges": 58
+      },
+      "q0_required_action_outcome_completion": {
+        "expected_trace_count": 10,
+        "fanout_per_root": 2,
+        "maximum_mid_steps": 6,
+        "q0_root_count": 5,
+        "required_action": "reconfigure_BATTERY",
+        "trace_count": 10,
+        "traces": [
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 0,
+            "required_outcome_target": "M2",
+            "root": "M21"
+          },
+          {
+            "controller_state_loaded": 2,
+            "handoff_post_state": "N4",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 1,
+            "required_outcome_target": "M5",
+            "root": "M21"
+          },
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 0,
+            "required_outcome_target": "M2",
+            "root": "M22"
+          },
+          {
+            "controller_state_loaded": 2,
+            "handoff_post_state": "N4",
+            "mid_actions": [
+              "wind",
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 1,
+            "required_outcome_target": "M5",
+            "root": "M22"
+          },
+          {
+            "controller_state_loaded": 1,
+            "handoff_post_state": "N2",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 0,
+            "required_outcome_target": "M2",
+            "root": "M23"
+          },
+          {
+            "controller_state_loaded": 2,
+            "handoff_post_state": "N4",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N2",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 1,
+            "required_outcome_target": "M5",
+            "root": "M23"
+          },
+          {
+            "controller_state_loaded": 7,
+            "handoff_post_state": "N11",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N11",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 0,
+            "required_outcome_target": "M16",
+            "root": "M27"
+          },
+          {
+            "controller_state_loaded": 4,
+            "handoff_post_state": "N8",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N11",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 1,
+            "required_outcome_target": "M19",
+            "root": "M27"
+          },
+          {
+            "controller_state_loaded": 6,
+            "handoff_post_state": "N10",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N10",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 0,
+            "required_outcome_target": "M9",
+            "root": "M25"
+          },
+          {
+            "controller_state_loaded": 5,
+            "handoff_post_state": "N9",
+            "mid_actions": [
+              "stopOldSpec_P_OLD_READ_COMPLETION",
+              "reconfigure_DRONE",
+              "reconfigure_BATTERY",
+              "startNewSpec_P_NEW_READ_COMPLETION",
+              "startNewSpec_P_NO_FAULT"
+            ],
+            "post_action": "batteryUse",
+            "post_target": "N10",
+            "required_action": "reconfigure_BATTERY",
+            "required_outcome_index": 1,
+            "required_outcome_target": "M12",
+            "root": "M25"
+          }
+        ]
+      },
+      "required_action_bucket_validation": {
+        "action": "reconfigure_BATTERY",
+        "action_controllable": true,
+        "bucket_count": 3,
+        "distinct_targets_per_bucket": true,
+        "maximum_fanout": 2,
+        "minimum_fanout": 2,
+        "outcome_edges": 6,
+        "outcome_semantics": "all_bucket_results_adversarial"
+      },
+      "required_actions": [
+        "reconfigure_BATTERY",
+        "reconfigure_DRONE",
+        "startNewSpec_P_NEW_READ_COMPLETION",
+        "startNewSpec_P_NO_FAULT",
+        "stopOldSpec_P_OLD_READ_COMPLETION"
+      ],
+      "required_actions_per_trace": {
+        "canonical_q0": {
+          "each_required_action_exactly_once": true,
+          "required_actions": [
+            "reconfigure_BATTERY",
+            "reconfigure_DRONE",
+            "startNewSpec_P_NEW_READ_COMPLETION",
+            "startNewSpec_P_NO_FAULT",
+            "stopOldSpec_P_OLD_READ_COMPLETION"
+          ],
+          "trace_count": 5
+        },
+        "q0_outcome_forks": {
+          "each_required_action_exactly_once": true,
+          "required_actions": [
+            "reconfigure_BATTERY",
+            "reconfigure_DRONE",
+            "startNewSpec_P_NEW_READ_COMPLETION",
+            "startNewSpec_P_NO_FAULT",
+            "stopOldSpec_P_OLD_READ_COMPLETION"
+          ],
+          "trace_count": 10
+        },
+        "status": "PASS"
+      },
+      "runtime_jar_sha256": "dd494999ffa1d0f4029b5f07988f408182d8a362a77926da436716a7221c751d",
+      "status": "PASS",
+      "strategy_edge_coverage": {
+        "covered_goals": [
+          "M0",
+          "M10",
+          "M14",
+          "M17",
+          "M3",
+          "M7"
+        ],
+        "covered_strategy_outcome_edges": 28,
+        "loaded_controller_states": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "post_events_immediately_after_handoff": 6
+      },
+      "synthesis_metrics": {
+        "certificate_states": 29,
+        "q0": 5,
+        "rank": 6
+      },
+      "synthesis_wall_ms": 978.215
+    }
+  ],
+  "claim_boundary": "PASS establishes executable consumption of the registered typed FG-DUCS certificates through atomic controller-state handoff and POST execution. It is not a production-system validation or a held-out application study.",
+  "decision_precondition": {
+    "campaign": "Implementation/Experiment/FSE2027/results/m8m-prospective-ardrone-corrected-replay7-20260811ay",
+    "controller_sha256": "ef5a7c170e61d5e03e3da19761277a0c488625bccf6c3884f61f8c41e23ce812",
+    "eligible": true,
+    "job_id": "ardrone_semantic_positive__ardrone__rep01__fg_ducs_otf",
+    "observed_decision": "realizable",
+    "observed_process_status": "SUCCESS",
+    "raw_runs_sha256": "a9f98179f9a3c60151631c1c7102796b7789e450bdb9fbf1e9312c6fde68b29b",
+    "status": "PASS",
+    "verified": true
+  },
+  "environment": {
+    "java": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "java_executable_sha256": "6dcff7187022c4ad65e5282d8301af01e6a2a15bd81129d0f57c9c9aa821fcf1",
+    "java_version_output": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)\n",
+    "java_version_output_sha256": "67732c1a52f008070b8222ad1b1694a9643188135d8fcb7878cb6c21cda20237",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python": "3.10.9"
+  },
+  "environment_gate_status": "PASS",
+  "population_claim": "one post-outcome tooling-correction replay of an unchanged, prospectively frozen source-anchored author adaptation; not a faithful native version pair, held-out or third-party contract, population sample, performance result, or production deployment",
+  "protocol": "Implementation/Experiment/FSE2027/protocols/prospective_ardrone_handoff_v7c_20260811.json",
+  "protocol_sha256": "74afec49c778243477a55fed42397d1f2c01e7978ec5ed621ebbf6229add0a6a",
+  "runner_sha256": "6d0c54257771fe9c904e676a44b36a2973001490b413c9b01f088d2640317674",
+  "runtime_jar_sha256": "dd494999ffa1d0f4029b5f07988f408182d8a362a77926da436716a7221c751d",
+  "runtime_parameters": {
+    "independent_query_limit": 10000000,
+    "independent_state_limit": 1000000,
+    "java_heap": "12g",
+    "race_repetitions": 500,
+    "timeout_seconds_per_case": 900.0
+  },
+  "schema_version": "fse2027-atomic-handoff-validation-summary-v2",
+  "status": "PASS"
+}

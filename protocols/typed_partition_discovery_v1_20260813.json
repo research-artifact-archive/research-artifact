@@ -1,0 +1,75 @@
+{
+  "schema_version": "fg-ducs-typed-partition-protocol-v1",
+  "protocol_id": "m8p-typed-partition-discovery-post-outcome-20260813",
+  "registration_class": "post-outcome author-designed strengthening; not prospective or held out",
+  "objective": "From a complete unpartitioned typed flat FG-DUCS table and a total atomization, return a maximum-block partition for the paper's typed composition theorem or independently checkable mandatory-coupling/cut obstructions.",
+  "fixed_claims": {
+    "positive_cases": 3,
+    "positive_expected_factored": 3,
+    "positive_winning": 2,
+    "positive_losing": 1,
+    "positive_transport_witnesses": 3,
+    "positive_direct_flat_agreements": 3,
+    "maximum_blocks_per_positive": 2,
+    "maximum_partitions_per_positive": 1,
+    "controlled_obstruction_cases": 10,
+    "expected_nonfactorable": 9,
+    "expected_ineligible": 1,
+    "v1_coordinate_screen_cases": 43,
+    "v1_coordinate_screen_semantic_families": 10,
+    "v1_typed_positive_claims": 0
+  },
+  "registered_files": {
+    "fixtures": {
+      "path": "inputs/c2/typed-partition-fixtures.json",
+      "sha256": "6c1ba3b8c8d9ab99aadf816576bd5706d26444a1be76140cb3293736e844a291"
+    },
+    "fixture_builder": {
+      "path": "analysis/build_typed_partition_fixtures.py",
+      "sha256": "c1222df309aa0e74e00233f3521363cebcf973b7bec44b47120fc3b5e5cfeb94"
+    },
+    "producer": {
+      "path": "analysis/discover_typed_partition.py",
+      "sha256": "5f646063a3760984640ec1854d8fc1113f09f26a2a490f8e29dc71933baca3f1"
+    },
+    "independent_consumer": {
+      "path": "analysis/check_typed_partition_certificate.py",
+      "sha256": "869b7a7fe3c9b46c2751e4c0ccbcff8e163fa5221fa4913a58c073379f4c0c81"
+    },
+    "transport_producer": {
+      "path": "analysis/synthesize_discovered_witness.py",
+      "sha256": "483dbb2004a016babd932985381eafc4b12709398fb89235184be1e08d50c597"
+    },
+    "independent_transport_consumer": {
+      "path": "analysis/check_discovered_witness.py",
+      "sha256": "a3ef995efe6b29bf0d1eda31add36c2bf673a635311ae578e8fc908005a5cdc6"
+    },
+    "audit_driver": {
+      "path": "analysis/audit_typed_partition_discovery.py",
+      "sha256": "1fdecf18a7867dd1d168ed668ac2420b154509cf31ccb19de33e6f8f63c5b55e"
+    },
+    "coordinate_screen": {
+      "path": "analysis/screen_complete_game_factorability.py",
+      "sha256": "dc4afadf03a3fb76a5110f52eb0036eb7ec690f11ba194f82560307797ba12ac"
+    }
+  },
+  "producer_command": "python3 -I -S -B analysis/audit_typed_partition_discovery.py --artifact-root . --fixtures inputs/c2/typed-partition-fixtures.json --output-dir /tmp/fg-ducs-m8p",
+  "acceptance": [
+    "producer and independently implemented consumer agree on every case",
+    "all three positive cases return the unique maximum two-block partition",
+    "every positive has more units than discovered blocks even after closing dependencies and direct nonshared action subjects, and exercises more than one partition check",
+    "each positive partition is projected to local games and an independently checked rank-sum/kappa or losing-cylinder witness whose decision agrees with direct flat re-solving",
+    "no controlled obstruction is returned as FACTORED",
+    "resource exhaustion is an error/inconclusive result and never NON_FACTORABLE",
+    "the 43-game v1 screen reports instance and ten-family denominators separately and makes zero typed-positive claims"
+  ],
+  "scope_boundary": [
+    "completeness is relative to the supplied finite table and declared atomization",
+    "typed dependency hyperedges and direct action subjects specify mandatory coupling but remain strictly finer than every registered positive partition",
+    "dependency-declaration completeness is an external typed-input obligation and is not inferred or proved by the checker",
+    "the procedure does not infer atoms from arbitrary LTS syntax",
+    "the v1 screen parses an opaque fixed Java serialization and is diagnostic only",
+    "all fixtures and algorithms are post-outcome author work",
+    "there is no native third-party contract, independent actor, held-out panel, or production deployment"
+  ]
+}

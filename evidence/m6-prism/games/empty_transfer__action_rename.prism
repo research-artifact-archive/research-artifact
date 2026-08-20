@@ -1,0 +1,39 @@
+// Generated from the independent raw-LTS front-end.
+// All transitions are deterministic choices; probabilities are absent.
+smg
+
+player controller
+  [c2], [c3], [c5], [c6], [c7]
+endplayer
+
+player environment
+  [e0], [e1], [e4], [e8], [e9], [e10], [e11]
+endplayer
+
+module fg_ducs_strong_game
+  s : [0..8] init 0;
+  [e0] s=0 -> (s'=1);
+  [e1] s=0 -> (s'=3);
+  [c2] s=1 -> (s'=5);
+  [c3] s=1 -> (s'=6);
+  [e4] s=2 -> (s'=2);
+  [c5] s=3 -> (s'=7);
+  [c6] s=3 -> (s'=8);
+  [c7] s=4 -> (s'=4);
+  [e8] s=5 -> (s'=1);
+  [e9] s=6 -> (s'=4);
+  [e10] s=7 -> (s'=2);
+  [e11] s=8 -> (s'=3);
+endmodule
+
+label "goal" = s=4;
+
+// node 0: all-Q0 environment root
+// node 1: ((False,), ('OLD_ALT',), True, False)
+// node 2: ((False,), ('OLD_ALT',), True, True)
+// node 3: ((False,), ('OLD_READY',), True, False)
+// node 4: ((True,), ('NEW_COMPONENT',), True, False)
+// node 5: choice heartbeat from ((False,), ('OLD_ALT',), True, False)
+// node 6: choice reconfigure_COMPONENT from ((False,), ('OLD_ALT',), True, False)
+// node 7: choice advance from ((False,), ('OLD_READY',), True, False)
+// node 8: choice heartbeat from ((False,), ('OLD_READY',), True, False)
