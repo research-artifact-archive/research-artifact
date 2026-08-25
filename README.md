@@ -21,7 +21,7 @@ On Windows PowerShell:
 .\reproduce.ps1
 ```
 
-The default `portable` mode runs integrity, anonymity/secret scanning, 192
+The default `portable` mode runs integrity, anonymity/secret scanning, 200
 regression and mutation tests, and raw-to-claim analysis. It works in a normal
 reviewer clone with an `origin` remote. The modes `integrity` (alias `verify`),
 `scan`, `test`, and `analyze` can be run separately. `handoff` (alias `full`)
@@ -183,6 +183,17 @@ python3 -I -S -B analysis/recompute_claims.py \
   checker runtime is not transitively frozen, and general parsing, independent
   WIN/certificate generation, source-to-WIN replay, held-out, third-party, and
   production counts remain zero.
+- `evidence/ordinary-source-construction-trace/`: a deterministic,
+  manifest-bound consistency replay for the existing ProductionCell Arms=2 R2
+  bytes. It resolves the 16 `SourceIn` values from exact byte/JSON references,
+  records S0--S4 predicates and censuses, reconstructs the ten recorded `Y`
+  fields, and maps the supplied symbolic witness to S1--S7. It also binds the
+  separate complete M8p flat trace for B1--B7. The historical producer and
+  timeout environment are not replayed; the recorded WIN label is not derived,
+  and the large source/certificate path is machine-checkable rather than a
+  human-hand-checkable source example. General parsing, mixed-global-game
+  materialization, independent WIN synthesis, source-to-WIN replay, breadth,
+  and maximum/complete source decomposition remain zero.
 - `evidence/m8u-post-frontend-generated-win-panel/`: three fresh generated
   WIN certificates and separate semantic checks for ProductionCell base/R2
   and Industry, with 54 evidence files and a 53-entry nested checksum. The

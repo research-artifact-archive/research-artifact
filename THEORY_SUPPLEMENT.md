@@ -210,6 +210,47 @@ typed-factorability claims.  It reports 41 C1 variants as ten semantic families,
 plus the two author ARDrone adaptations; these are neither 43 independent
 applications nor evidence of prevalence.
 
+## Manifest-bound ordinary-source construction trace
+
+`analysis/check_ordinary_source_construction_trace.py` gives a field-addressable
+consistency replay for the already recorded ProductionCell Arms=2 R2 source.
+The raw 35,136-byte source (SHA-256
+`117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43`)
+is the `SourceIn.bytes` value; path, byte count, and digest are manifest
+metadata. The other fifteen values are resolved from exact RFC-6901 pointers.
+Typed `IDENTITY`, `ARRAY_PROJECT`, and `OBJECT` constructions are executed by
+the checker before their canonical hashes are accepted. The recorded outer
+bound is 180 seconds; Java, heap, JAR, and elapsed-time fields remain runtime
+provenance and timeout enforcement is not replayed.
+
+The trace records both independently reconstructed 81-state/216-edge endpoint
+controllers, the two components and transfers, 12 old plus 12 new safety
+machines, 24 transition requirements, 22 observers/registry rows, 12
+activation sources, 39 controllable actions, and the load rule. S0--S4 then
+bind the exact 126/137 fixed endpoints, 114 dependency receipts, partition
+`[[0],[1]]`, two supplied proofs, 24 roots, 116 ranked states, 2,560 candidate
+buckets/1,424 outcomes, 124 strategy buckets, 24 full and eight quiet Goals,
+two Goal payloads, 16 quiet-terminal tuples, 1,010 observer pairs, 218
+activation pairs, 137 selector signatures/endpoints, and one checked terminal
+fibre. The historical solver censuses 127,174 states, 831,356 successor
+queries, and 294,632 outcomes are explicitly recorded as producer census, not
+theorem premises.
+
+All ten historical `Y` fields are reconstructed. In particular,
+`s=PRODUCER_VERIFIED_REFINED_WIN` remains a recorded producer label. The
+separate M8t/M8s check validates the semantics of the supplied symbolic
+witness and transport, but does not derive `s`, synthesize WIN, or replay a
+source-to-WIN execution. Accordingly S1--S7 are marked as mappings checked
+within that supplied symbolic contract, not unconditional theorem-premise
+PASS results. The M8p flat fixture and its exact two-partition trace are
+manifest-bound and separately recomputed for B1--B7.
+
+This large trace is machine-checkable rather than human-hand-checkable. It is
+not a new outcome, a materialized mixed global game, general-source support,
+independent/held-out/third-party/production evidence, a maximum or complete
+ordinary-source decomposition, or evidence for global LOSS after local
+failure.
+
 ## Residual-soundness finite product
 
 `analysis/check_residual_soundness.py` implements the paper's finite-product

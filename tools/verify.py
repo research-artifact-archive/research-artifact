@@ -535,6 +535,66 @@ def verify_science() -> None:
     ):
         raise VerificationError("M8t source/certificate census or boundary mismatch")
 
+    flat_trace = subprocess.run(
+        (
+            sys.executable, "-I", "-S", "-B",
+            "analysis/trace_typed_partition_predicate.py",
+            "inputs/c2/typed-partition-predicate-example.json",
+            "--check",
+            "evidence/m8p-partition-discovery/predicate-trace-example.json",
+        ),
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    if flat_trace.returncode != 0:
+        detail = flat_trace.stderr.strip() or flat_trace.stdout.strip()
+        raise VerificationError("M8p complete flat predicate trace failed: " + detail)
+    try:
+        flat_trace_report = json.loads(flat_trace.stdout)
+    except json.JSONDecodeError as error:
+        raise VerificationError("M8p flat trace did not emit JSON") from error
+    if not (
+        flat_trace_report.get("status") == "PASS"
+        and exact_integer(flat_trace_report.get("partition_count"), 2)
+        and exact_integer(flat_trace_report.get("first_accepted_block_count"), 2)
+        and flat_trace_report.get("all_accepted_candidates_transport_ready") is True
+    ):
+        raise VerificationError("M8p complete flat trace census differs")
+
+    construction_trace = subprocess.run(
+        (
+            sys.executable, "-I", "-S", "-B",
+            "analysis/check_ordinary_source_construction_trace.py",
+        ),
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    if construction_trace.returncode != 0:
+        detail = construction_trace.stderr.strip() or construction_trace.stdout.strip()
+        raise VerificationError("ordinary-source construction trace failed: " + detail)
+    try:
+        construction_trace_report = json.loads(construction_trace.stdout)
+    except json.JSONDecodeError as error:
+        raise VerificationError("ordinary-source construction trace did not emit JSON") from error
+    if not (
+        construction_trace_report.get("status") == "PASS"
+        and exact_integer(construction_trace_report.get("source_in_fields"), 16)
+        and exact_integer(construction_trace_report.get("source_stages"), 5)
+        and exact_integer(construction_trace_report.get("output_y_fields"), 10)
+        and exact_integer(construction_trace_report.get("source_theorem_mappings"), 7)
+        and construction_trace_report.get("historical_producer_runtime_replayed") is False
+        and construction_trace_report.get("source_to_win_replay") is False
+        and construction_trace_report.get("one_way_result") ==
+        "RECORDED_PRODUCER_LABEL_WITH_SEPARATE_SUPPLIED_WITNESS_SEMANTIC_CHECK"
+    ):
+        raise VerificationError("ordinary-source construction trace census or boundary differs")
+
     generated_certificate = subprocess.run(
         (
             sys.executable, "-I", "-S", "-B",
@@ -639,8 +699,8 @@ def run_tests() -> None:
     if completed.returncode != 0:
         raise VerificationError("public regression tests failed")
     match = re.search(r"Ran (\d+) tests", completed.stdout + completed.stderr)
-    if match is None or int(match.group(1)) != 192:
-        raise VerificationError("public regression test census differs from 192")
+    if match is None or int(match.group(1)) != 200:
+        raise VerificationError("public regression test census differs from 200")
     native_test_methods = sum(
         len(re.findall(r"^    def test_", (ROOT / relative).read_text(encoding="utf-8"), re.MULTILINE))
         for relative in ("tests/test_native_refined_bundle.py", "tests/test_native_factorization_audit.py")
@@ -676,6 +736,15 @@ def run_tests() -> None:
     )
     if source_certificate_test_methods != 22:
         raise VerificationError("M8t test census differs from 22 methods")
+    construction_trace_test_methods = len(re.findall(
+        r"^    def test_",
+        (ROOT / "tests/test_ordinary_source_construction_trace.py").read_text(
+            encoding="utf-8"
+        ),
+        re.MULTILINE,
+    ))
+    if construction_trace_test_methods != 8:
+        raise VerificationError("ordinary-source construction trace test census differs from 8 methods")
     generated_certificate_test_methods = sum(
         len(re.findall(
             r"^    def test_",
