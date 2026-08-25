@@ -128,41 +128,78 @@ registered positive, closing both those dependencies and the direct nonshared
 action subjects still leaves six units, rather than disclosing the discovered
 two-block partition.
 
-The producer first contracts those mandatory hyperedges into support units.
-It then enumerates every set partition of the units, from the largest block
-count downward.  For each candidate it checks exact Cartesian rectangularity
-of Q, Q0, Safe, Goal, Zload, and handover; action-subject locality; foreign
-frame preservation; enabledness and the full nondeterministic target set in
-every foreign context; controllable global pure stutter; exact pending-action
-updates; and local-Goal uncontrollable quiescence.  It counts all maximum-count
-candidates and serializes the lexicographically first one.  For each canonical
-root cut that exists after mandatory contraction it also returns a checked
-PASS or obstruction record.  Exhausting a configured search
-budget is explicitly inconclusive, never NON_FACTORABLE.
+For a candidate partition `B=(B_1,...,B_m)`, let `pi_j` restrict the supplied
+state valuation to `B_j`, put `Q_j=pi_j[Q]`, and let
+`C_j=product_{ℓ!=j} Q_ℓ`.  Rectangularity of `Q` makes each pair
+`(x,c) in Q_j x C_j` name one actual row.  If action `a` is assigned to block
+`j`, define, for every such row (including rows with an empty bucket),
+`T_j,a(x,c)=pi_j[Post((x,c),a)]`.  The exact implemented predicate
+`Acc_square(B)` is the conjunction of all of the following finite tests:
 
-For a fixed total atomization and exact supplied table, this search is sound
-and complete for the theorem's partition class: every accepted candidate
-satisfies the listed conditions by direct finite-table checks; conversely,
-every admissible partition appears in the finite enumeration.  Thus the
-reported maximum block count is exact relative to that input.  This is not, in
-general, a claim that the maximum partition is unique, nor a claim of general directed-graph factorization or
-automatic recovery of semantic atoms from arbitrary LTS syntax.  With `k`
-support units, enumerating all set partitions is exponential (bounded by the
-Bell number); the shipped implementation reports its explicit bound instead
-of claiming the linear complexity of solving already supplied local tables.
+1. `B` covers the atoms exactly, every externally complete dependency and
+   every nonshared action subject lies in one block, and pending/update typing
+   is local;
+2. `Q`, `Q0`, `Safe`, `Goal`, and `Zload` are the Cartesian products of their
+   block projections;
+3. the supplied Goal--load handover relation `H` is the product of the local
+   relations `H_j={(pi_j(q),pi_j(z)) | (q,z) in H}`;
+4. for every `j,a,x` and **every** `c in C_j`, all targets preserve `c`, and
+   `T_j,a(x,c)`---including its emptiness and its full nondeterministic target
+   set---is identical across all foreign contexts;
+5. every shared action is controllable and has exactly the singleton bucket
+   `{q}` at every global row; and
+6. every local Goal projection has an empty bucket for every local
+   uncontrollable action.
+
+For an accepted partition, `Post_j(x,a)` is this context-independent common
+target set.  The local roots, safe states, goals, load states, residual/monitor
+data, and handover relation are the corresponding projections.  The checks
+therefore imply the exact asynchronous frame product, typed-data locality,
+product safety/Goal/load/handover, shared controllable pure stutters, and local
+Goal uncontrollable quiescence required by the composition theorem.
+
+The `Q0` product check is deliberately stronger than that theorem: the theorem
+also permits a correlated nonempty `Q0` with local roots `pi_j[Q0]`.  M8p v1 is
+therefore sound for evidence transport after local witnesses are checked, but
+complete only for this stricter **root-product acceptance class**.  In
+particular, `ROOT_NONRECTANGULAR` is a procedure-relative obstruction, not a
+proof that no partition allowed by the broader composition theorem exists.
+The reported maximum is the maximum satisfying `Acc_square`, relative to the
+supplied atoms, complete preterminal table, and externally complete dependency
+declarations; no broader correlated-root maximum is claimed.
+
+The producer contracts mandatory hyperedges into units and enumerates every
+set partition in descending block count.  It counts the first accepted layer
+and serializes its lexicographically first member; every canonical two-block
+cut receives a PASS or first-obstruction record.  The one-block candidate is
+checked for table eligibility.  A configured resource bound raises an
+inconclusive outcome and is never converted to NON_FACTORABLE.  With `k` units,
+this exhaustive search is bounded by the Bell number and makes no linear-time
+discovery claim.
+
+`analysis/trace_typed_partition_predicate.py` exposes the predicate without
+short-circuiting for a complete two-unit correctness table.  Its saved trace
+enumerates both unit partitions, every Cartesian source/action context,
+Booleans for all conjuncts, the empty and nonempty local Post buckets, projected
+roots/safety/goals/load/residual data/handover, the first accepted layer, and
+the composition-premise mapping.  Deterministic `--check` recomputes the exact
+JSON, and mutations establish that foreign-context enabledness, foreign-frame
+changes, and correlated roots cannot be silently omitted.  This trace is a
+finite correctness witness, not a new application or performance result.
 
 The independently implemented consumer does not import the producer.  It
 reparses the table, reconstructs mandatory units, exhaustively enumerates the
-same finite search space, and rechecks the maximum count, selected partition,
-action assignment, and root-cut obstruction ledger.  For each positive case a
-second producer projects the discovered blocks into local games and emits a
-rank-sum/priority/kappa witness or a losing cylinder.  A second non-importing
-consumer rebuilds those projections, re-solves every local game and the bounded
-flat game, and checks the complete transported witness.  The public evaluation has
-three non-isomorphic multistate positive tables (two winning, one losing,
-including nondeterminism, an uncontrollable progress step, multiple roots,
-monitor/RS residuals, precedence, and typed handover) and ten controlled
-obstructions.  All are post-outcome author fixtures.
+same root-product search space, and rechecks the maximum count, selected
+partition, action assignment, and root-cut obstruction ledger.  For each
+positive case a second producer projects the discovered blocks into local
+games and emits a rank-sum/priority/kappa witness or a losing cylinder.  A
+second non-importing consumer rebuilds those projections, re-solves every local
+game and the bounded flat game, and checks the complete transported witness.
+The public evaluation has three non-isomorphic multistate positive tables (two
+winning, one losing, including nondeterminism, an uncontrollable progress step,
+multiple roots, monitor/RS residuals, precedence, and typed handover) and ten
+controlled obstructions, including one correlated-root case rejected only by
+the stricter root-product predicate.  All are post-outcome author fixtures.
 
 The 43 earlier game bundles are retained only as a diagnostic boundary.  Their
 physical vector is a fixed Java string, and they omit action owners/kinds,

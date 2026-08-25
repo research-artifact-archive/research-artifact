@@ -639,8 +639,8 @@ def run_tests() -> None:
     if completed.returncode != 0:
         raise VerificationError("public regression tests failed")
     match = re.search(r"Ran (\d+) tests", completed.stdout + completed.stderr)
-    if match is None or int(match.group(1)) != 188:
-        raise VerificationError("public regression test census differs from 188")
+    if match is None or int(match.group(1)) != 192:
+        raise VerificationError("public regression test census differs from 192")
     native_test_methods = sum(
         len(re.findall(r"^    def test_", (ROOT / relative).read_text(encoding="utf-8"), re.MULTILINE))
         for relative in ("tests/test_native_refined_bundle.py", "tests/test_native_factorization_audit.py")

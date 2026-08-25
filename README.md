@@ -21,7 +21,7 @@ On Windows PowerShell:
 .\reproduce.ps1
 ```
 
-The default `portable` mode runs integrity, anonymity/secret scanning, 188
+The default `portable` mode runs integrity, anonymity/secret scanning, 192
 regression and mutation tests, and raw-to-claim analysis. It works in a normal
 reviewer clone with an `origin` remote. The modes `integrity` (alias `verify`),
 `scan`, `test`, and `analyze` can be run separately. `handoff` (alias `full`)
@@ -36,8 +36,11 @@ handoff races at one selected Goal boundary, and reruns the M8o restricted
 typed-game synthesis, independent certificate consumption, nine flat-product
 cross-checks, twenty-one factor mutations, and frozen census audit. It also
 runs M8p from three unpartitioned complete typed tables, independently checks
-their maximum two-block partitions, projected local solves, rank-sum/kappa or
-losing-cylinder witnesses and direct-flat decisions, checks ten controlled obstruction tables,
+their maximum two-block partitions within the implemented root-product class,
+projected local solves, rank-sum/kappa or losing-cylinder witnesses and
+direct-flat decisions, checks ten controlled obstruction tables (including a
+correlated-root case conservatively rejected by that stricter class), exposes
+every predicate conjunct and Cartesian context for a two-unit correctness table,
 and reruns a diagnostic 43-bundle coordinate screen grouped into ten C1
 semantic families. Finally, it audits the post-outcome frozen M8q panel of 23
 ordinary-LTS files, 41 source-definition cells, and ten provenance clusters.
@@ -120,12 +123,15 @@ python3 -I -S -B analysis/recompute_claims.py \
   general partition-discovery algorithm, arbitrary-LTS parser, prospective
   study, native integration, or evidence that the semantic product is linear.
 - `inputs/c2/typed-partition-fixtures.json`,
+  `inputs/c2/typed-partition-predicate-example.json`,
   `evidence/m8p-partition-discovery/`: three post-outcome unpartitioned typed
   flat tables, ten controlled obstruction tables, a maximum-block producer,
   independently implemented exhaustive consumer, projected local-game witness
-  producer/consumer, and the coordinate-relative
-  43-bundle diagnostic. The exact result is relative to supplied atoms and a
-  complete typed table. The diagnostic makes zero typed-factorability claims and
+  producer/consumer, a full-conjunct/full-context correctness trace for the
+  two-unit table, and the coordinate-relative 43-bundle diagnostic. The exact
+  maximum is relative to supplied atoms, a complete typed table, and the
+  implemented root-product predicate; the composition theorem's broader
+  correlated-root class is not searched completely. The diagnostic makes zero typed-factorability claims and
   assumes complete/correct typed dependency declarations; it is not an
   arbitrary-LTS atom inference, prevalence study, native parser, or
   third-party/held-out evidence.
