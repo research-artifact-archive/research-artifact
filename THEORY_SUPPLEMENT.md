@@ -210,7 +210,44 @@ typed-factorability claims.  It reports 41 C1 variants as ten semantic families,
 plus the two author ARDrone adaptations; these are neither 43 independent
 applications nor evidence of prevalence.
 
-## Manifest-bound ordinary-source construction trace
+## Complete hand-checkable ordinary-source construction trace
+
+`analysis/check_hand_checkable_ordinary_source_trace.py` checks the exact
+598-byte `inputs/correctness/r09-hand-k02.lts` proof fixture. A strict,
+fixture-specific grammar consumes all 15 noncomment declarations and rejects
+unconsumed syntax. The source has two one-state old components, two one-state
+new components, and two one-row transfer relations. Its complete `SourceIn`
+therefore has two component records; one-state/one-edge old and new endpoint
+controllers; two transfers; empty old/new/update requirement, observer, and
+activation domains; two update progress actions with no precedence; the exact
+three-action controllable set; and explicit proof invocation parameters
+`Lambda=ALL_REACHABLE` and `b=UNBOUNDED`. Every one of the 16 fields is
+materialized rather than summarized.
+
+S0 checks the exact bytes and all one-state declarations. S1 obtains two
+singleton dependency receipts and partition `[[0],[1]]`; shared `idle` is a
+pure self-loop. S2 has, per block, precisely an all-old root at rank 1 and an
+all-new quiet Goal at rank 0, one complete candidate bucket, one outcome, and
+one strategy bucket. Thus the complete totals are two roots, four ranked
+states, two candidates/outcomes/strategies, and two full/quiet Goals. S3 has
+the complete four-state/12-bucket mathematical game, all four `R_Gamma`
+pairs, all four progress matches, the three fixed-priority policy cases, an
+empty activation domain (so its condition is vacuous), two explicit
+empty-vector observer relations, one load selector, and one terminal fibre.
+S4 derives the one-way WIN conclusion from the checked premise vector and
+serializes the full `Y`: `L` contains both complete games/certificates and
+`Gamma` contains actual relation, match, observer, activation, selector, and
+terminal rows. The maps are Theorem 5.3 B1--B7, Theorem 5.4 P1--P5 with B7 as
+a separate transport gate, and Theorem 5.5 S1--S7.
+
+The stored native bundle is checked field-for-field against this construction
+only as a post-hoc code-path match; no run, JAR, timeout, or execution receipt
+is asserted, and its literal producer tag is not premise authority. This is a
+same-author correctness proof, not a new scientific outcome. The input is
+synthetic and adds no application/cluster/denominator, held-out, third-party,
+production, breadth, independent source-to-WIN, or global-LOSS evidence.
+
+## Manifest-bound large ordinary-source construction trace
 
 `analysis/check_ordinary_source_construction_trace.py` gives a field-addressable
 consistency replay for the already recorded ProductionCell Arms=2 R2 source.
@@ -245,7 +282,8 @@ within that supplied symbolic contract, not unconditional theorem-premise
 PASS results. The M8p flat fixture and its exact two-partition trace are
 manifest-bound and separately recomputed for B1--B7.
 
-This large trace is machine-checkable rather than human-hand-checkable. It is
+This complementary large trace is machine-checkable rather than
+human-hand-checkable. It is
 not a new outcome, a materialized mixed global game, general-source support,
 independent/held-out/third-party/production evidence, a maximum or complete
 ordinary-source decomposition, or evidence for global LOSS after local

@@ -595,6 +595,46 @@ def verify_science() -> None:
     ):
         raise VerificationError("ordinary-source construction trace census or boundary differs")
 
+    hand_source_trace = subprocess.run(
+        (
+            sys.executable, "-I", "-S", "-B",
+            "analysis/check_hand_checkable_ordinary_source_trace.py",
+        ),
+        cwd=ROOT,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=False,
+    )
+    if hand_source_trace.returncode != 0:
+        detail = hand_source_trace.stderr.strip() or hand_source_trace.stdout.strip()
+        raise VerificationError("hand-checkable ordinary-source trace failed: " + detail)
+    try:
+        hand_source_trace_report = json.loads(hand_source_trace.stdout)
+    except json.JSONDecodeError as error:
+        raise VerificationError("hand-checkable ordinary-source trace did not emit JSON") from error
+    if not (
+        hand_source_trace_report.get("status") == "PASS"
+        and exact_integer(hand_source_trace_report.get("source_in_fields"), 16)
+        and exact_integer(hand_source_trace_report.get("source_stages"), 5)
+        and exact_integer(hand_source_trace_report.get("output_y_fields"), 10)
+        and exact_integer(hand_source_trace_report.get("rank_states"), 4)
+        and exact_integer(hand_source_trace_report.get("candidate_buckets"), 2)
+        and exact_integer(hand_source_trace_report.get("global_states"), 4)
+        and exact_integer(hand_source_trace_report.get("global_post_buckets"), 12)
+        and exact_integer(hand_source_trace_report.get("relation_pairs"), 4)
+        and exact_integer(hand_source_trace_report.get("observer_relation_pairs"), 2)
+        and exact_integer(hand_source_trace_report.get("load_selectors"), 1)
+        and exact_integer(hand_source_trace_report.get("terminal_tuples"), 1)
+        and exact_integer(hand_source_trace_report.get("theorem_5_3_premises"), 7)
+        and exact_integer(hand_source_trace_report.get("theorem_5_4_predicates"), 5)
+        and exact_integer(hand_source_trace_report.get("theorem_5_5_premises"), 7)
+        and hand_source_trace_report.get("stored_bundle_is_execution_provenance") is False
+        and hand_source_trace_report.get("independent_source_to_win_replay") is False
+        and exact_integer(hand_source_trace_report.get("scientific_outcome_denominator_delta"), 0)
+    ):
+        raise VerificationError("hand-checkable ordinary-source trace census or boundary differs")
+
     generated_certificate = subprocess.run(
         (
             sys.executable, "-I", "-S", "-B",
@@ -699,8 +739,8 @@ def run_tests() -> None:
     if completed.returncode != 0:
         raise VerificationError("public regression tests failed")
     match = re.search(r"Ran (\d+) tests", completed.stdout + completed.stderr)
-    if match is None or int(match.group(1)) != 200:
-        raise VerificationError("public regression test census differs from 200")
+    if match is None or int(match.group(1)) != 210:
+        raise VerificationError("public regression test census differs from 210")
     native_test_methods = sum(
         len(re.findall(r"^    def test_", (ROOT / relative).read_text(encoding="utf-8"), re.MULTILINE))
         for relative in ("tests/test_native_refined_bundle.py", "tests/test_native_factorization_audit.py")
@@ -745,6 +785,15 @@ def run_tests() -> None:
     ))
     if construction_trace_test_methods != 8:
         raise VerificationError("ordinary-source construction trace test census differs from 8 methods")
+    hand_source_trace_test_methods = len(re.findall(
+        r"^    def test_",
+        (ROOT / "tests/test_hand_checkable_ordinary_source_trace.py").read_text(
+            encoding="utf-8"
+        ),
+        re.MULTILINE,
+    ))
+    if hand_source_trace_test_methods != 10:
+        raise VerificationError("hand-checkable ordinary-source trace test census differs from 10 methods")
     generated_certificate_test_methods = sum(
         len(re.findall(
             r"^    def test_",
