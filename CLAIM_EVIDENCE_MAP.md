@@ -19,7 +19,11 @@
 
 The current paper does not claim a third-party FG-DUCS contract,
 production deployment, A1--A5 runtime validation, independent PRISM front-end,
-or generally linear state space. Those remain explicit limitations.
+or generally linear state space. The current evidence also makes no claim about
+endpoint/platform state--action authorization, robustness to permission
+intersection or controllability reclassification, retained safe choices, or
+policy permissiveness, disruption, or quality. Those remain explicit
+limitations.
 
 Run `./reproduce.sh analyze` for the fail-closed raw-to-claim pass. The root
 `SHA256SUMS` authenticates the public bytes. Historical pre-sanitization
