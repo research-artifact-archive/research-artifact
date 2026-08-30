@@ -31,13 +31,34 @@ their registered SHA-256 values. Compatibility source is retained, but every
 public smoke and experiment workflow selects `UPDATE_CONTROLLER_OTF_FG`; none
 selects a legacy target.
 
+### Inherited O-DUCS route (static inspection only)
+
+The inherited MTSA/DUCS-based implementation retains an `on_the_fly`-only
+route: `LTSCompiler` sets `isOTF`, and `UpdatingControllerSynthesizer` selects
+`DirectedControllerSynthesisDUC` when `fine_grained` and
+`selective_fine_grained` are absent. `revised_on_the_fly` instead dispatches
+to `MtsaRevisedOtfDucsAdapter` before the legacy branch. The legacy solver is
+included under `added/maven-root/mtsa/src/main/java/MTSTools/ac/ic/doc/mtstools/model/operations/DCS/nonblocking/`;
+the parser/dispatcher changes are bound by `OVERLAY_MANIFEST.json`.
+
+The historical target name `UpdCont_OTF` does not itself select an algorithm:
+the declaration must be active and its options determine the route. The
+inspected historical example declaration is commented out, and this package's
+registered workflows select the FG target instead. No O-DUCS synthesis rerun,
+working standalone legacy model, or identity with the 2024 experimental
+binary is asserted. The 145 added/39 changed Java counts are differences from
+MTSA v1.1.0, not a count of this paper's novel contributions or a diff against
+O-DUCS 2024. Primary publications are listed in `../UPSTREAM_CITATIONS.md`.
+
 The upstream project does not expose a project-wide `LICENSE` or `COPYING`
 file and its README does not state redistribution terms. Reviewers therefore
 obtain the pinned upstream code directly from its official server. The authors
-must confirm the right to distribute the paper-specific integration sources
-and one-line-context patch before public push; this gate is recorded in
-`../RIGHTS_REVIEW.md` and does not extend to the complete MTSA source tree,
-binary, or packaged dependencies. Nested third-party license files remain in
+have confirmed permission to modify and publish the inherited MTSA/DUCS-based
+tool, covering these integration sources and the one-line-context patch;
+`../RIGHTS_REVIEW.md` records the author-attested scope. This is not a
+project-wide upstream license or clearance of every derived input. The full
+MTSA source tree, binary, and packaged dependencies remain omitted. Nested
+third-party license files remain in
 the official archive and are never copied into this payload. The official
 repository and primary MTSA paper are cited in `../UPSTREAM_CITATIONS.md`.
 

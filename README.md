@@ -1,10 +1,12 @@
 # FG-DUCS evaluation artifact
 
-This is the local Git handoff directory for the anonymous FG-DUCS paper. It
-contains the public inputs, recorded observations, game bundles, analysis
-code, tests, and current source overlay needed to audit the paper's current
-claims. Publishing, authentication, remote creation, rights approval,
-and release creation are intentionally left to the authors.
+Public audit materials for the anonymous FG-DUCS paper are maintained at
+<https://github.com/research-artifact-archive/research-artifact>.
+They include inputs, recorded observations, game bundles, analysis code,
+tests, and the current source overlay. Availability is not a claim that every
+historical certificate or author-local input is included. See
+`CLAIM_EVIDENCE_MAP.md` for evidence limits and `RIGHTS_REVIEW.md` for the
+author-confirmed MTSA/DUCS tool permission and remaining file-class checks.
 
 ## Quick start
 
@@ -21,7 +23,7 @@ On Windows PowerShell:
 .\reproduce.ps1
 ```
 
-The default `portable` mode runs integrity, anonymity/secret scanning, 200
+The default `portable` mode runs integrity, anonymity/secret scanning, 210
 regression and mutation tests, and raw-to-claim analysis. It works in a normal
 reviewer clone with an `origin` remote. The modes `integrity` (alias `verify`),
 `scan`, `test`, and `analyze` can be run separately. `handoff` (alias `full`)
@@ -263,21 +265,21 @@ The standalone report command above writes outside the checkout. Writing an
 unlisted file inside the checkout intentionally makes the integrity and Git
 handoff gates fail.
 
-## Manual publication checklist
+## Maintaining the public repository
 
-1. Resolve every `PENDING` row in `RIGHTS_REVIEW.md`; review `LICENSE`, `NOTICE`,
-   and `source-rebuild/OVERLAY_MANIFEST.json` against the authors' actual rights.
-2. Replace every `PENDING` rights decision with a neutral resolved status,
-   regenerate `SHA256SUMS`, then run `./reproduce.sh handoff`. The publisher
-   gate intentionally fails while any row remains pending.
-3. Clone once normally and once with `core.autocrlf=true`; run `portable` in both.
-4. Create a new anonymous, non-fork repository with no personal profile links.
-5. Add the remote and push manually. Do not reuse a personal authenticated
-   session during heavy double-anonymous review.
-6. In a logged-out session, clone and rerun `portable` before putting the URL in
-   the paper.
+1. Preserve `LICENSE`, `NOTICE`, upstream attribution, and the explicit scope
+   of each decision in `RIGHTS_REVIEW.md`. Do not infer permission from a
+   successful mechanical check or from the repository already being public.
+2. Use only neutral repository-local Git identity. Review the intended paths,
+   run `python3 tools/prepare_release.py` and `./reproduce.sh portable`, then
+   publish one checked fast-forward commit; do not rewrite public history.
+3. Check the remote revision and clean checkout. At a release freeze, clone
+   normally and with `core.autocrlf=true`, and run `portable` in both.
+4. Check public access without personal authentication and run `portable` in
+   a fresh clone before citing the revision. A clone check is not evidence of
+   complete historical-runtime reproduction or release-wide rights clearance.
 
-Do not replace the neutral root commit with personal author metadata during
-double-anonymous review. If files change before publication, run
-`python3 tools/prepare_release.py`, rerun every gate, and create a reviewed
-anonymous release commit.
+`handoff`/`full` is only for the historical pre-publication one-root/no-remote
+layout. It is not appropriate for this existing public repository. Do not add
+personal profile links, author-identifying provenance records, or private
+credentials during double-anonymous review.
