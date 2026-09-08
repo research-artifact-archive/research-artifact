@@ -14,14 +14,14 @@ cd research-artifact
 
 The command verifies release hashes and the frozen package, then replays small known-input checks of the latest compiler and supporting-line basis. It writes fresh results under `work/`. A quick check is not the full evaluation and does not replace earlier outcomes or increase scientific sample counts. To obtain an immutable version, check out the commit cited in the paper before running it.
 
-- [Paper snapshot](package/paper/main.pdf) and [source](package/paper/main.tex).
+- [Revised paper](paper/main.pdf) and [source/build information](paper/README.md); [frozen pre-publication paper](package/paper/main.pdf) remains preserved.
 - [Compiler usage and complete latest replay](package/README.md).
 - [Evidence index](package/EVIDENCE_INDEX.md) and [paper-to-artifact map](PAPER_ARTIFACT_MAP.md).
 - [Theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
 - [Earlier stages and dependency requirements](package/history/v4/README.md).
 - [Rights and provenance](NOTICE.md).
 
-The `package/` directory is the byte-preserved version-5 snapshot. Its historical README describes its *pre-publication* local status; this repository supplies public access to that same snapshot. The included paper snapshot likewise predates this release and its Data Availability paragraph will be superseded by the revised paper. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
+The `package/` directory is the byte-preserved version-5 snapshot. Its historical README and paper describe their *pre-publication* local status; the revised paper in `paper/` cites the public evidence commit. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
 
 ## Run the compiler
 

@@ -2,7 +2,7 @@
 
 This map refers to the included 20-page paper snapshot, *Compiling Optimal Retry Policies for Dependent Transformations*, SHA-256 `5aca518c2c048a54b4c479f8046a933980ac73aec79e5ea439c6089a81939c94`. It distinguishes replay of recorded semantic outcomes, aggregation of historical results, and original cold-process performance experiments. No command below upgrades an earlier failure or timeout.
 
-The revised paper retains the theorem numbers and numerical results; its surrounding prose and page breaks may differ. The [theorem/checker guide](THEOREM_AND_CHECKER_GUIDE.md) maps inherited results, additional proof obligations, checker pseudocode, and the object returned by each method.
+The [revised paper](paper/main.pdf), SHA-256 `8e042eefb120bab4f08f8861c1b41b01aacc031becc5be33b88d79ef0f68b553`, retains the theorem numbers, statement/proof blocks, and numerical results; its surrounding prose and page breaks differ. It cites the complete evidence commit `e0e011023c0591bbbf422390ad8d29785ad0023f`. The [theorem/checker guide](THEOREM_AND_CHECKER_GUIDE.md) maps inherited results, additional proof obligations, checker pseudocode, and the object returned by each method.
 
 ## Reconstruct the tables and denominators
 
