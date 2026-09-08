@@ -1,0 +1,321 @@
+{
+  "base_cases": [
+    {
+      "cp": [
+        [
+          2,
+          7
+        ]
+      ],
+      "edges": []
+    },
+    {
+      "cp": [
+        [
+          2,
+          7
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          3,
+          11
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "cp": [
+        [
+          2,
+          0
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          4,
+          19
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    }
+  ],
+  "malformed": [
+    {
+      "case": {
+        "cp": [
+          [
+            0,
+            1
+          ]
+        ],
+        "edges": []
+      },
+      "id": "c_zero"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            -1
+          ]
+        ],
+        "edges": []
+      },
+      "id": "p_negative"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1.0,
+            2
+          ]
+        ],
+        "edges": []
+      },
+      "id": "c_float"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            true
+          ]
+        ],
+        "edges": []
+      },
+      "id": "p_bool"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "id": "duplicate_edge"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "id": "cycle"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": []
+      },
+      "id": "branch_without_order"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "id": "backward_order",
+      "order": [
+        1,
+        0
+      ]
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "id": "duplicate_order",
+      "order": [
+        0,
+        0
+      ]
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "id": "out_of_range_edge"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            false,
+            1
+          ]
+        ]
+      },
+      "id": "bool_edge"
+    },
+    {
+      "case": {
+        "cp": [
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "id": "self_edge"
+    }
+  ],
+  "mutations": [
+    "node_cycle",
+    "node_area",
+    "node_height",
+    "node_first",
+    "node_last",
+    "node_runs",
+    "zero_count",
+    "negative_slope",
+    "threshold_late",
+    "threshold_early",
+    "out_of_range_root",
+    "missing_terminal_root",
+    "wrong_unique",
+    "normal_cost",
+    "unreachable_node",
+    "changed_premium",
+    "child_root"
+  ]
+}

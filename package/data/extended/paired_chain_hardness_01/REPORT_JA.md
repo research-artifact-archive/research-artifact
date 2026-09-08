@@ -1,0 +1,11 @@
+# 2処理の独立した列における帰着の有限検査
+
+結果前固定の19,786入力すべてSUCCESS、FAILURE/TIMEOUT/INVALID/NOT_RUN各0。19,530の全ordered小整数vectorと256の固定seed wide-binary vectorを含み、順序替えや元の奇数和を除外していない。PARTITION肯定9,102/否定10,684と、一般B1 Bellman DPの12,259,788状態による判定が全一致した。
+
+全入力の出力policyを独立なno-failure/first-failure scanで検査し、肯定入力では構成した証拠とsolverのfast-leafから回収した部分集合を別に検査した。事前選択171入力は全予算hybridの構築、JSON保存/reload、full Bellman/保存方策検査とB1値でも一致した。残りの入力でこの追加compiler検査を実行したことにはしない。全171artifactを保存。
+
+実行21.88779秒、unit2秒/campaign180秒の上限内。raw SHA256 b0344954af017e14c30763a9553134456ed3091fac47c70f48d278d4801be48b。入力・source closure・runtime・開始記録はINPUTS/MANIFEST/RUN_STARTED。これは限定的な帰着の反証検査であり、NP困難性を有限標本から証明したものではない。
+
+提案した証明は、B1、互いに独立した2処理の列、各対で同じpremium、全体で2種類のfailure costでも、二進価格下でNP完全となることを示す。PARTITIONを用いる弱い困難性で、先のunit-premium/indegree2の強い困難性とは制限が異なる。旧定理・raw・結果は変更しない。
+
+親担当の追加導出では、この構成族の値はPARTITION肯定なら3D、否定なら3D+1となる。全19,786保存行で事後に一致を確認したが、新しいsolve/inputではない。この正確な値と本文への採用は、進行中の著者側proof check後に別記録で判断する。用途の重要性や最終採択は確立しない。

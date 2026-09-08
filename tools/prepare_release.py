@@ -1,45 +1,52 @@
 #!/usr/bin/env python3
-"""Regenerate the root checksum inventory for the public artifact."""
-
-from __future__ import annotations
-
-import hashlib
+"""Create deterministic release hashes without editing the frozen package."""
 from pathlib import Path
-
+import hashlib
+import json
+import os
 
 ROOT = Path(__file__).resolve().parents[1]
-FORBIDDEN_PATH_PARTS = {".git", "backup", "__pycache__", ".DS_Store"}
+EXCLUDED = {"SHA256SUMS", "RELEASE_MANIFEST.json"}
 
 
-def digest(path: Path) -> str:
-    value = hashlib.sha256()
-    with path.open("rb") as source:
-        for block in iter(lambda: source.read(1024 * 1024), b""):
-            value.update(block)
-    return value.hexdigest()
+def digest(path):
+    h = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
 
 
-def main() -> int:
-    files: list[Path] = []
-    for path in sorted(ROOT.rglob("*"), key=lambda item: item.as_posix()):
-        relative = path.relative_to(ROOT)
-        if (
-            any(part in FORBIDDEN_PATH_PARTS for part in relative.parts)
-            or relative.as_posix() == "SHA256SUMS"
-        ):
-            continue
-        if path.is_symlink():
-            raise SystemExit(f"symlink is forbidden: {relative.as_posix()}")
-        if path.is_file():
-            files.append(path)
-    lines = [f"{digest(path)}  {path.relative_to(ROOT).as_posix()}" for path in files]
-    target = ROOT / "SHA256SUMS"
-    temporary = ROOT / "SHA256SUMS.tmp"
-    temporary.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
-    temporary.replace(target)
-    print(f"wrote SHA256SUMS for {len(files)} files")
-    return 0
+def inventory():
+    paths = []
+    for directory, dirs, files in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in {".git", "__pycache__"}
+                   and not (Path(directory) == ROOT and d == "work")]
+        for name in files:
+            path = Path(directory) / name
+            relative = path.relative_to(ROOT).as_posix()
+            if relative in EXCLUDED or name == ".DS_Store" or name.endswith(".pyc"):
+                continue
+            if path.is_symlink():
+                raise RuntimeError("symlinks are not distributed: " + relative)
+            paths.append(path)
+    return sorted(paths)
+
+
+def main():
+    files = [{"path": p.relative_to(ROOT).as_posix(), "bytes": p.stat().st_size,
+              "sha256": digest(p)} for p in inventory()]
+    manifest = {"schema": "anonymous-retry-artifact-release-v1", "files": files,
+                "frozen_package_manifest_sha256": digest(ROOT / "package/MANIFEST.json"),
+                "scientific_sample_increase": False}
+    path = ROOT / "RELEASE_MANIFEST.json"
+    path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    sums = [(r["path"], r["sha256"]) for r in files]
+    sums.append((path.name, digest(path)))
+    (ROOT / "SHA256SUMS").write_text("".join(f"{h}  {p}\n" for p, h in sorted(sums)))
+    print(json.dumps({"release_files": len(files) + 2, "package_manifest":
+                      manifest["frozen_package_manifest_sha256"]}))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

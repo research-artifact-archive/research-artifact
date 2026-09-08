@@ -1,0 +1,9 @@
+# B1制約比較器の意味論検査
+
+8,634/8,634 SUCCESS。既知の意味論入力4,232、既知のCLIQUE還元入力4,306、新たなラベル置換DAG96を、入力・code hash固定後に一度ずつ実行した。全てOR-ToolsのOPTIMAL判定、独立した順序・モード証明書の走査、全available job/両modeを列挙する別B1 DPの値が一致した。FAILURE/TIMEOUT/INVALID/NOT_RUNは0。抽出境界4例は成功、不正証明書4例は拒否。比較器本体は開発結果後に変更していない。
+
+診断run時間13.975810秒。DEV_RAW.jsonl SHA-256 cb92b09a2f58caefa320d9998d5d3ad57d04ddcc372ac800d463e0dd3fcfaf7a。固定入力はDEV_INPUTS.json、exact source/入力/環境依存はDEV_MANIFEST.json。既知入力を含む著者側の開発であり、held-out/final性能比較、実応用サンプルではない。
+
+FORMULATION_PROOF.mdはB1証明書からの双方向対応を記す。別のread-only著者側担当の結果はAUTHOR_PROOF_CHECK_RAW.jsonにそのまま保存した。素のstart時刻sortが誤る反例を保持し、実装は区間内の零時間jobを区間始点へ移す方式を使う。空入力・零premiumの数学的値は0。これらの有限一致は一般定理の機械証明やCP-SAT内部の独立最適性証明ではない。
+
+範囲はB1のみ。全予算曲線の構築を代替したという結論にはしない。汎用solver自体を新規成果とせず、次は新入力を固定した全費用比較で、その実用的な強さと制限を測る。

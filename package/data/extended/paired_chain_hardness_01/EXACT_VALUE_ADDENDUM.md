@@ -1,0 +1,9 @@
+# Exact initial value and adoption decision
+
+SCIENTIFIC route, September 8 08:38 JST. The result-before-check draft, inputs, manifest and raw outputs remain unchanged. A read-only author-side mathematical check agreed with the following strengthening; it did not inspect the numerical output files and is not an independent blind review.
+
+For each constructed initial instance with B=1, V(J,1)=3D if a PARTITION subset exists and 3D+1 otherwise. Any certificate containing a fast root costs at least 3D+1. If all roots are protected and fast leaves have positive total weight W, the no-failure and last-fast-leaf branches give a lower bound max(4D-W,2D+W)>=3D. With no fast leaf the no-failure cost is 4D. All-fast execution costs exactly 3D+1, and all values are integral. The threshold equivalence in PROOF_DRAFT therefore gives the two exact values. This concerns initial instances, not all residual Bellman states. The value gap does not imply strong hardness or constant-factor approximation hardness.
+
+The parent checked this exact-value identity after the initial experiment, using all 19,786 existing successful raw rows; there were no additional inputs or solves. This post hoc consistency check is separate from the pre-result checks. The 19,786 planned runs, including 10,684 negative instances, and 171 preselected compiler checks retain their original roles and denominators.
+
+Adopt a compact corollary/proof into the author draft if it fits without weakening evidence or changing typography. The purpose is to delimit the graph-only tractability claim: bounded components and treewidth alone do not give polynomial time in binary input length, whereas pseudo-polynomial methods are not excluded. Retain the prior CLIQUE reduction with unit premiums and polynomially bounded prices. The new result alone establishes neither application importance nor novel priority over scheduling literature.

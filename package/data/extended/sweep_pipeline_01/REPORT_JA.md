@@ -1,0 +1,11 @@
+# 全48入力での新検査器を含む全工程
+
+旧budget_oracle_01の48入力・各6予算を同一bytes/順序で固定し、sweep_certificate_02へ検査器を変更した版を一回評価した。コンストラクタ・入力・budget・5秒cold/1GiB sampledRSS制限は維持し、旧版の再実行は0。manifestは新結果前に固定した。これは既知入力を使う探索的な版比較で、独立の最終評価標本ではない。
+
+結果はSUCCESS45/TIMEOUT3、FAILURE/INVALID/NOT_RUN各0。旧版のSUCCESS45/TIMEOUT3からの状態変更は0。全成功45入力のserialized artifact hashと270予算値が旧全予算版と一致し、旧指定値版の成功値とも矛盾0。timeoutは32-job fenceの3価格系列すべてで、新artifactの書込み前に終了した。従って新検査器はこの3件の構築段階を解消しない。
+
+全48件のcold時間総和は旧35.68873秒、新26.89113秒。共通成功45件では20.59811対11.80953秒、構築/保存3.54194対3.47205秒、reload/check/query14.65908対5.78762秒。別時点のrunなので記述的な比較であり、ランダム化した同時比較ではない。旧timeoutの3件・旧rawと中間出力は不変保存し、新版でも全て残す。完成範囲が広がったという主張を支持しない。
+
+新checkerは完全Bellman値と保存したprotection-first方策の達成を直接検査する。旧checkerと同じ入力だけでなく保証範囲の変更も明示する。48入力は著者生成の算法probeであり、実用途の頻度、native runtime、elapsed-time効果の証拠ではない。
+
+根拠: run01/MANIFEST.json、run01/RAW.jsonl、run01/SUMMARY.json、COMPARISON_STATS.json。新rawSHA256 08d68dde1a3cabeb6f3f8f46176dc5d73ea1b04e7f7dcc471a3d98b8291696d2。実行26.91852秒、全process終了済み。11時停止条件を変更しない。

@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-07T22:01:57.367467+00:00",
+  "classification": "PORTABLE_HARNESS_INPUT_SHAPE_ERROR",
+  "failed_validation": "ISOLATED_VALIDATION_01",
+  "original_archive_preserved": "retry-policy-extended-v3.tar.gz",
+  "cause": "105 of 4337 frozen development inputs keep expected values only in preserved SESSION_RAW.jsonl, while 4232 additionally embed expected; added harness incorrectly required the optional field after already checking all shared-session values",
+  "change": "Preserve full SESSION_RAW comparison for every input, assert exact 4232/105 input-shape counts, and compare embedded expected only on the 4232 that have it",
+  "scientific_sources_changed": false,
+  "original_results_changed": false,
+  "rerun_scope": "Changed oracle stage only, plus new package manifest/archive verification. Completed controls and 77 saved benchmark checks remain attributable to the previous exact harness.",
+  "science_sample_increase": 0,
+  "previous_validation": {
+    "oracle": {
+      "SUCCESS": 4232,
+      "INVALID": 105
+    },
+    "controls": {
+      "SUCCESS": 30
+    },
+    "saved_benchmark_certificates": {
+      "SUCCESS": 77
+    }
+  },
+  "previous_archive_sha256": "2cc043cd773d97dc6a286ac182912483c1c67cb7be06ba96ed0cc73e530c5b68"
+}

@@ -1,0 +1,264 @@
+[
+  {
+    "id": "valid",
+    "status": "SUCCESS",
+    "expected": "ACCEPT",
+    "actual": "ACCEPT",
+    "stage": "bellman",
+    "detail": {
+      "violations": [],
+      "checked_states": 6,
+      "intervals": 17,
+      "evaluated_integer_points": 29,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION"
+    }
+  },
+  {
+    "id": "missing_root",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "missing_child",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "only_empty_curve",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "extra_unreachable_curve",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "noncanonical_mask_key",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "false_root_metadata",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "false_state_count",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "false_segment_count",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "false_root_segment_count",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "wrong_schema",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "wrong_route",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "missing_action",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "extra_goal_action",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "nonready_available",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "wrong_fast_tie",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "boolean_cost",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "negative_premium",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "duplicate_edge",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "cyclic_edge",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError('cycle')"
+  },
+  {
+    "id": "wrong_zero",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "negative_slope",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "discontinuous_profile",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "wrong_tail_mass",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "shape",
+    "detail": "AssertionError()"
+  },
+  {
+    "id": "shape_valid_wrong_bellman",
+    "status": "SUCCESS",
+    "expected": "REJECT",
+    "actual": "REJECT",
+    "stage": "bellman",
+    "detail": {
+      "violations": [
+        {
+          "s": 7,
+          "b": 1,
+          "value": 1,
+          "bellman": 2,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 2,
+          "value": 2,
+          "bellman": 3,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 2,
+          "value": 2,
+          "bellman": 3,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 3,
+          "value": 3,
+          "bellman": 4,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 3,
+          "value": 3,
+          "bellman": 4,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 4,
+          "value": 4,
+          "bellman": 5,
+          "kind": "identity"
+        },
+        {
+          "s": 7,
+          "b": 5,
+          "value": 5,
+          "bellman": 6,
+          "kind": "identity"
+        }
+      ],
+      "checked_states": 6,
+      "intervals": 18,
+      "evaluated_integer_points": 33,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION"
+    }
+  }
+]

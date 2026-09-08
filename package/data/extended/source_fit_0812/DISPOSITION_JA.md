@@ -1,0 +1,11 @@
+# 第二の具体的source fit確認
+
+親担当はSOURCE_RECEIPT.jsonの8一次sourceをexact commitから取得・hash保存し、RocksDBのGetForUpdate/ValidateSnapshot/CollapseKey/partial merge/lock timeout、libgit2のlast_commit/conditional ref更新/lock失敗を直接確認した。原コードは研究用の一次証拠であり、実行していない。
+
+RocksDB v10.4.2のCollapseKeyは実際のmerge-chain materialization操作だが、各key独立で、依存batch・固定whole work・writer上限・保護premiumの校正を提供しない。partial/background mergeを除いたまま実用途だと主張しない。ValidateSnapshotはcache_only=falseなので、memtable履歴不足をこの経路の固有の失敗根拠へ使わない。
+
+libgit2 v1.9.2 rebaseは前のcommitをimmutable parentとして捕捉するが、個別commitの入力と最後のbranch CASの粒度が異なる。前者は独立したlive keyのinvalidationsを持たず、後者を単一jobにすると内部DAG順序選択を失う。lock取得失敗・semantic merge conflictも現契約と異なる。
+
+著者側補助調査は実caller調査まで完了し、未編集結果をAUTHOR_SOURCE_CHECK_RAW.jsonへ保存した。5公開repositoryのexact revisionに対するin-memory source archive scan、導入PR11815/関連11845/rocksdb-cloud315、GitHub検索の範囲では、実アプリケーションのCollapseKey batchは見つからなかった。個別file数/byte数/検索hitとAPIのreported-total不一致はrawの著者側報告に限定して保持し、親担当の独立な全archive再走査とは呼ばない。検索不能範囲や429を不存在の証拠にしない。
+
+この二候補は実primitiveの動機を与えるが、現在のDAG retryの完全な用途適合性や実測価格、代表的利益を確立しない。用途を実証した原稿・実験として採用しない。既存abstract theoremの反証でもない。より忠実な操作集合へ変える研究には、state-dependent work/partial reuse/semantic failure等に対応する新たな証明が必要である。旧Iceberg/PG否定とともに残し、同じtoyを件数だけ増やして重要性が解消したとは判定しない。

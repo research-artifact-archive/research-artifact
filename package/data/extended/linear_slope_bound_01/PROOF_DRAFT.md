@@ -1,0 +1,15 @@
+# Integer supporting-line basis
+
+SCIENTIFIC, exploratory author derivation, September 8. The discovery and all prior outcomes are retained. This strengthens the earlier loose FPT bound without changing any old source or outcome. No novelty/acceptance judgment or mechanical proof is asserted.
+
+Write C(S)={0} union {c_j:j in S}. The invariant is V(S,b)=min_s(a[S,s]+s*b) for every nonnegative integer b, using a subset of C(S), nonnegative integer intercepts at most P(S)=sum p_j. Parallel lines keep the smaller intercept. Supporting-line slopes differ from slopes of the integer-sampled interpolant.
+
+For an eventually constant concave integer sequence g=min_l(a_l+s_l*b), g(0)=0, and c>0, let A=max over INTEGER t>=0 of g(t)-ct. At the first maximizer t, all earlier differences exceed c and all later ones are at most c. Thus D(b)=sum_{k=1}^b max(c,Delta g(k)) equals g(b) through t and cb+A thereafter. If b<t, every line attaining g(b) has slope>c, otherwise g(b+1)<=g(b)+c, a contradiction. The c-line lies above g there. If b>=t, each retained line l with s_l>c satisfies a_l+s_l*b >=g(t)+s_l*(b-t)>=cb+A. Therefore D=min(cb+A, all old lines with slope>c). This also handles t=0, ties and repeated slopes. A continuous maximizer cannot substitute for the integer maximizer.
+
+The empty curve is the zero line. Protected alternatives shift child intercepts by p_j; unions of these lines form h. D retains child lines and adds slope c_i with intercept A in [0,P(S-i)]. Thus min(h,D) preserves C(S) and intercept bounds, including zero premiums. This uses the established discrete cap lemma, not a new interpretation of the game.
+
+With d distinct positive costs, a continuous envelope of at most d+1 distinct slopes has at most d breakpoints. Integer sampling adds at most one bridging unit interval per noninteger breakpoint (multiple crossings in one unit still add only one bridge). Hence a stored curve has at most 2d positive runs, plus its zero tail. Summing 2|S|+1 over all subsets gives (n+1)*2^n entries. The existing profile operations and checkers are polynomial in n and operand length per ideal, hence single-exponential 2^n*poly(n,input bits) overall. For a supplied width-w chain cover, ideals are prefixes of its chains, giving at most product(length_i+1) ideals; this is polynomial for fixed width, an XP bound, not FPT in width. At width2 the sharper sum is (n+1)(a+1)(b+1).
+
+Tightness already holds on the chain with c_k=3^k and p_k=5*3^(k-1), k=1..n. Reverse insertion leaves all larger suffix slopes untouched and appends c_k and 2*3^(k-1), each once. Thus its 2n positive runs strictly decrease.
+
+Bertsimas--Sim already have an input-slope affine budget envelope for their robust binary-optimization model. Neither a slope basis nor concavity alone establishes a new problem class. The semantic comparison and cost-preserving abstraction remain necessary. NP-hardness with two failure costs is compatible with a constant number of root runs: finding their coefficients remains hard, and this upper bound does not prove that ideal enumeration or exponential space is necessary.

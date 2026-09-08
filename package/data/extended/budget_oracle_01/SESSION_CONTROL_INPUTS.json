@@ -1,0 +1,1226 @@
+[
+  {
+    "artifact": {
+      "budgets": [
+        0,
+        1,
+        2,
+        4,
+        2
+      ],
+      "input": {
+        "cp": [
+          [
+            3,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "nodes": {
+        "10:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 10,
+          "value": 0
+        },
+        "10:1": {
+          "budget": 1,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 3
+        },
+        "10:2": {
+          "budget": 2,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 4
+        },
+        "10:3": {
+          "budget": 3,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "10:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "12:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 5,
+          "value": 5
+        },
+        "12:2": {
+          "budget": 2,
+          "kind": "packed",
+          "mask": 12,
+          "value": 6
+        },
+        "12:3": {
+          "budget": 3,
+          "kind": "packed",
+          "mask": 12,
+          "value": 7
+        },
+        "12:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 0,
+          "value": 8
+        },
+        "14:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 14,
+          "value": 0
+        },
+        "14:1": {
+          "budget": 1,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 5
+        },
+        "14:2": {
+          "budget": 2,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 8
+        },
+        "14:3": {
+          "budget": 3,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 9
+        },
+        "14:4": {
+          "budget": 4,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 10
+        },
+        "15:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 15,
+          "value": 0
+        },
+        "15:1": {
+          "budget": 1,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 1,
+          "value": 5
+        },
+        "15:2": {
+          "budget": 2,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 8
+        },
+        "15:4": {
+          "budget": 4,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 12
+        },
+        "8:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 8,
+          "value": 0
+        },
+        "8:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 1,
+          "value": 1
+        },
+        "8:2": {
+          "budget": 2,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 0,
+          "value": 2
+        }
+      },
+      "packed": {
+        "12": {
+          "completion_state": "cursor",
+          "input": {
+            "cp": [
+              [
+                5,
+                6
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "edges": []
+          },
+          "normal_cost": 6,
+          "order": [
+            1,
+            0
+          ],
+          "protect_at_budget": [
+            4,
+            2
+          ],
+          "route": "ordered",
+          "runtime_synthesis_calls": 0,
+          "schema": "dag-retry-ordered-cursor-v1",
+          "value_slopes": [
+            [
+              5,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        }
+      },
+      "schema": "dag-budget-values-certificate-v1",
+      "values": [
+        0,
+        5,
+        8,
+        12
+      ]
+    },
+    "id": "missing-value"
+  },
+  {
+    "artifact": {
+      "budgets": [
+        0,
+        1,
+        2,
+        4,
+        2
+      ],
+      "input": {
+        "cp": [
+          [
+            3,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "nodes": {
+        "10:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 10,
+          "value": 0
+        },
+        "10:1": {
+          "budget": 1,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 3
+        },
+        "10:2": {
+          "budget": 2,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 4
+        },
+        "10:3": {
+          "budget": 3,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "10:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "12:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 5,
+          "value": 5
+        },
+        "12:2": {
+          "budget": 2,
+          "kind": "packed",
+          "mask": 12,
+          "value": 6
+        },
+        "12:3": {
+          "budget": 3,
+          "kind": "packed",
+          "mask": 12,
+          "value": 7
+        },
+        "12:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 0,
+          "value": 8
+        },
+        "14:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 14,
+          "value": 0
+        },
+        "14:1": {
+          "budget": 1,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 5
+        },
+        "14:2": {
+          "budget": 2,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 8
+        },
+        "14:3": {
+          "budget": 3,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 9
+        },
+        "14:4": {
+          "budget": 4,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 10
+        },
+        "15:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 15,
+          "value": 0
+        },
+        "15:1": {
+          "budget": 1,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 1,
+          "value": 5
+        },
+        "15:2": {
+          "budget": 2,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 8
+        },
+        "15:4": {
+          "budget": 4,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 12
+        },
+        "8:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 8,
+          "value": 0
+        },
+        "8:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 1,
+          "value": 1
+        },
+        "8:2": {
+          "budget": 2,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 0,
+          "value": 2
+        }
+      },
+      "packed": {
+        "12": {
+          "completion_state": "cursor",
+          "input": {
+            "cp": [
+              [
+                5,
+                6
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "edges": []
+          },
+          "normal_cost": 6,
+          "order": [
+            1,
+            0
+          ],
+          "protect_at_budget": [
+            4,
+            2
+          ],
+          "route": "ordered",
+          "runtime_synthesis_calls": 0,
+          "schema": "dag-retry-ordered-cursor-v1",
+          "value_slopes": [
+            [
+              5,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        }
+      },
+      "schema": "dag-budget-values-certificate-v1",
+      "values": [
+        0,
+        5,
+        99,
+        12,
+        8
+      ]
+    },
+    "id": "changed-value"
+  },
+  {
+    "artifact": {
+      "budgets": [
+        999,
+        1,
+        2,
+        4,
+        2
+      ],
+      "input": {
+        "cp": [
+          [
+            3,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "nodes": {
+        "10:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 10,
+          "value": 0
+        },
+        "10:1": {
+          "budget": 1,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 3
+        },
+        "10:2": {
+          "budget": 2,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 4
+        },
+        "10:3": {
+          "budget": 3,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "10:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "12:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 5,
+          "value": 5
+        },
+        "12:2": {
+          "budget": 2,
+          "kind": "packed",
+          "mask": 12,
+          "value": 6
+        },
+        "12:3": {
+          "budget": 3,
+          "kind": "packed",
+          "mask": 12,
+          "value": 7
+        },
+        "12:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 0,
+          "value": 8
+        },
+        "14:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 14,
+          "value": 0
+        },
+        "14:1": {
+          "budget": 1,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 5
+        },
+        "14:2": {
+          "budget": 2,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 8
+        },
+        "14:3": {
+          "budget": 3,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 9
+        },
+        "14:4": {
+          "budget": 4,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 10
+        },
+        "15:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 15,
+          "value": 0
+        },
+        "15:1": {
+          "budget": 1,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 1,
+          "value": 5
+        },
+        "15:2": {
+          "budget": 2,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 8
+        },
+        "15:4": {
+          "budget": 4,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 12
+        },
+        "8:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 8,
+          "value": 0
+        },
+        "8:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 1,
+          "value": 1
+        },
+        "8:2": {
+          "budget": 2,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 0,
+          "value": 2
+        }
+      },
+      "packed": {
+        "12": {
+          "completion_state": "cursor",
+          "input": {
+            "cp": [
+              [
+                5,
+                6
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "edges": []
+          },
+          "normal_cost": 6,
+          "order": [
+            1,
+            0
+          ],
+          "protect_at_budget": [
+            4,
+            2
+          ],
+          "route": "ordered",
+          "runtime_synthesis_calls": 0,
+          "schema": "dag-retry-ordered-cursor-v1",
+          "value_slopes": [
+            [
+              5,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        }
+      },
+      "schema": "dag-budget-values-certificate-v1",
+      "values": [
+        0,
+        5,
+        8,
+        12,
+        8
+      ]
+    },
+    "id": "new-budget"
+  },
+  {
+    "artifact": {
+      "budgets": [
+        0,
+        1,
+        2,
+        4,
+        2
+      ],
+      "input": {
+        "cp": [
+          [
+            3,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "nodes": {
+        "10:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 10,
+          "value": 0
+        },
+        "10:1": {
+          "budget": 1,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 3
+        },
+        "10:2": {
+          "budget": 2,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 4
+        },
+        "10:3": {
+          "budget": 3,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "10:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "12:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 5,
+          "value": 5
+        },
+        "12:2": {
+          "budget": 2,
+          "kind": "packed",
+          "mask": 12,
+          "value": 6
+        },
+        "12:3": {
+          "budget": 3,
+          "kind": "packed",
+          "mask": 12,
+          "value": 7
+        },
+        "12:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 0,
+          "value": 8
+        },
+        "14:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 14,
+          "value": 0
+        },
+        "14:1": {
+          "budget": 1,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 5
+        },
+        "14:2": {
+          "budget": 2,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 8
+        },
+        "14:3": {
+          "budget": 3,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 9
+        },
+        "14:4": {
+          "budget": 4,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 10
+        },
+        "15:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 15,
+          "value": 0
+        },
+        "15:1": {
+          "budget": 1,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 1,
+          "value": 5
+        },
+        "15:2": {
+          "budget": 2,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 8
+        },
+        "15:4": {
+          "budget": 4,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 12
+        },
+        "8:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 8,
+          "value": 0
+        },
+        "8:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 1,
+          "value": 1
+        },
+        "8:2": {
+          "budget": 2,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 0,
+          "value": 2
+        }
+      },
+      "packed": {
+        "12": {
+          "completion_state": "cursor",
+          "input": {
+            "cp": [
+              [
+                5,
+                6
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "edges": []
+          },
+          "normal_cost": 6,
+          "order": [
+            1,
+            0
+          ],
+          "protect_at_budget": [
+            4,
+            2
+          ],
+          "route": "ordered",
+          "runtime_synthesis_calls": 0,
+          "schema": "dag-retry-ordered-cursor-v1",
+          "value_slopes": [
+            [
+              5,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        }
+      },
+      "schema": "dag-budget-values-certificate-v1",
+      "unchecked": true,
+      "values": [
+        0,
+        5,
+        8,
+        12,
+        8
+      ]
+    },
+    "id": "extra-key"
+  },
+  {
+    "artifact": {
+      "budgets": [
+        0,
+        1,
+        2,
+        4,
+        2
+      ],
+      "input": {
+        "cp": [
+          [
+            3,
+            2
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ]
+      },
+      "nodes": {
+        "10:1": {
+          "budget": 1,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 3
+        },
+        "10:2": {
+          "budget": 2,
+          "job": 1,
+          "kind": "peak",
+          "mask": 10,
+          "peak": 0,
+          "value": 4
+        },
+        "10:3": {
+          "budget": 3,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "10:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 10,
+          "threshold": 0,
+          "value": 4
+        },
+        "12:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 5,
+          "value": 5
+        },
+        "12:2": {
+          "budget": 2,
+          "kind": "packed",
+          "mask": 12,
+          "value": 6
+        },
+        "12:3": {
+          "budget": 3,
+          "kind": "packed",
+          "mask": 12,
+          "value": 7
+        },
+        "12:4": {
+          "budget": 4,
+          "kind": "bound",
+          "mask": 12,
+          "threshold": 0,
+          "value": 8
+        },
+        "14:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 14,
+          "value": 0
+        },
+        "14:1": {
+          "budget": 1,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 5
+        },
+        "14:2": {
+          "budget": 2,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 8
+        },
+        "14:3": {
+          "budget": 3,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 9
+        },
+        "14:4": {
+          "budget": 4,
+          "job": 2,
+          "kind": "peak",
+          "mask": 14,
+          "peak": 0,
+          "value": 10
+        },
+        "15:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 15,
+          "value": 0
+        },
+        "15:1": {
+          "budget": 1,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 1,
+          "value": 5
+        },
+        "15:2": {
+          "budget": 2,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 8
+        },
+        "15:4": {
+          "budget": 4,
+          "job": 0,
+          "kind": "peak",
+          "mask": 15,
+          "peak": 2,
+          "value": 12
+        },
+        "8:0": {
+          "budget": 0,
+          "kind": "zero",
+          "mask": 8,
+          "value": 0
+        },
+        "8:1": {
+          "budget": 1,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 1,
+          "value": 1
+        },
+        "8:2": {
+          "budget": 2,
+          "kind": "bound",
+          "mask": 8,
+          "threshold": 0,
+          "value": 2
+        }
+      },
+      "packed": {
+        "12": {
+          "completion_state": "cursor",
+          "input": {
+            "cp": [
+              [
+                5,
+                6
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "edges": []
+          },
+          "normal_cost": 6,
+          "order": [
+            1,
+            0
+          ],
+          "protect_at_budget": [
+            4,
+            2
+          ],
+          "route": "ordered",
+          "runtime_synthesis_calls": 0,
+          "schema": "dag-retry-ordered-cursor-v1",
+          "value_slopes": [
+            [
+              5,
+              1
+            ],
+            [
+              1,
+              3
+            ]
+          ]
+        }
+      },
+      "schema": "dag-budget-values-certificate-v1",
+      "values": [
+        0,
+        5,
+        8,
+        12,
+        8
+      ]
+    },
+    "id": "missing-node"
+  }
+]

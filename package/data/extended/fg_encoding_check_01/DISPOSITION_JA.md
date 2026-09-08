@@ -1,0 +1,15 @@
+# FGの表現能力を理由とする優先変更の再検討
+
+著者側read-only比較を受け、親担当が元FG定義、MetaSocket入力、Amram2022原PDFの定義3.1--3.2/Remark5を確認した。新しい変換実装・科学実行・形式的closureではない。rawはAUTHOR_SOURCE_CHECK_RAW.json。
+
+有限・完全観測・safetyと強制有限到達を目的とする範囲では、成分版/局所状態、active bitとtester状態、pending event、実際の接続先を状態に加えることで、FGの個別切替を一般的な更新ゲームへ明示符号化できる。起動時には新testerを所定の初期状態へresetし、既存global fluent履歴を流用しない。通常イベントの同期/非決定性/不可制御性も保持する。制御選択の後に環境がイベントと結果を選ぶ順序は、入力先行のGR(1)へ二つの強制phaseを用いて運べるという著者構成である。deadlockを環境assumption違反による自明な勝ちへしない義務を残す。
+
+Amram定義3.1はswitchingの一様な有限step boundを要求し、定義3.2は全update-winning stateを計算する。Remark5はsystem変数を加え、environment assumptionの切替時点をcontrollerが選ぶ変更を説明する。従って既存法を固定一入口や一括状態切替だけに弱めて差を主張できない。元FG稿ICSE/ENG/main.tex825--834は最大許容controllerを要求せず、一つのwinning strategyと全uncontrollable successorの保持を要求する。最大許容性を片側だけへ課さない。
+
+MetaSocket_FG.ltsのR2はstop/startが済むまでIO/DES切替を行わないpending-bit safetyとして表せる。個別tester履歴はさらに必要である。原入力はnonblockingという設定を含むが、元稿のCondition5はevery-path finite completionである。今回設定から実装不良を推定せず、二状態のuncontrollable self-loop診断で意味を混同しない必要を記録する。
+
+ProductionCellの製品を持つ二stationをもとにした8状態の著者probeでは、空の側を先に更新、製品を移動、他側を更新できる。これを何も観測しないという理由だけで同時切替にすると、両側同時に空という不可能条件を課せる。これはalphaの一般的意味保存を支持しない例の設計で、元native instanceを実行した反証ではない。
+
+結論は、現段階で「個別切替/個別要求期間を既存法では表せない」をFG優先の根拠へ使わないこと。変換のsuccinctness、初回構築費用、専門化による効率、入力の使いやすさの価値は別に未確立であり、一般的な表現可能性だけでFG領域全体を否定しない。DAG retryにも一般ゲームへの符号化はあるので、比較基準を対称にする。今回FGへ移る積極的な技術差は見つからなかった。
+
+確認した一次資料: `RESTART_20260907/CANDIDATE_SELECTION_02/PRIMARY_SOURCE_CACHE/amram_icse2022.pdf`のPDF4/6頁、`ICSE/ENG/main.tex`のConnectable/FG定義/Permissiveness、`Implementation/Experiment/Models/MetaSocket_FG.lts`。他のprimary locatorsと変換義務は未編集rawに保持する。旧raw/STOP/不利結果を変更しない。

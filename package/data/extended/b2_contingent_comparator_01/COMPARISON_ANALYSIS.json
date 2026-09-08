@@ -1,0 +1,119 @@
+{
+  "methods": {
+    "all_budget": {
+      "cold_success_median": 0.05833485399489291,
+      "cold_total": 23.150796335045015,
+      "counts": {
+        "SUCCESS": 46,
+        "TIMEOUT": 2
+      },
+      "groups": {
+        "composed_disjoint": {
+          "SUCCESS": 6,
+          "TIMEOUT": 2
+        },
+        "composed_serial": {
+          "SUCCESS": 8
+        },
+        "composed_sparse": {
+          "SUCCESS": 8
+        },
+        "fence": {
+          "SUCCESS": 8
+        },
+        "random_forward": {
+          "SUCCESS": 8
+        },
+        "random_layers": {
+          "SUCCESS": 8
+        }
+      },
+      "routes": {
+        "ideal": 42,
+        "ordered": 4
+      },
+      "worker_success_median": 0.014009770500706509
+    },
+    "cp_sat": {
+      "bound_exact": 15,
+      "cold_success_median": 0.5287956254906021,
+      "cold_total": 31.189969002996804,
+      "counts": {
+        "SUCCESS": 48
+      },
+      "groups": {
+        "composed_disjoint": {
+          "SUCCESS": 8
+        },
+        "composed_serial": {
+          "SUCCESS": 8
+        },
+        "composed_sparse": {
+          "SUCCESS": 8
+        },
+        "fence": {
+          "SUCCESS": 8
+        },
+        "random_forward": {
+          "SUCCESS": 8
+        },
+        "random_layers": {
+          "SUCCESS": 8
+        }
+      },
+      "model_constraints_max": 25727,
+      "model_variables_max": 13252,
+      "strict_above_allocation": 27,
+      "strict_below_fixed_mode": 18,
+      "worker_success_median": 0.4624671460042009
+    },
+    "screened_dp": {
+      "cold_success_median": 0.05834383351611905,
+      "cold_total": 2.8409923300496303,
+      "counts": {
+        "SUCCESS": 48
+      },
+      "groups": {
+        "composed_disjoint": {
+          "SUCCESS": 8
+        },
+        "composed_serial": {
+          "SUCCESS": 8
+        },
+        "composed_sparse": {
+          "SUCCESS": 8
+        },
+        "fence": {
+          "SUCCESS": 8
+        },
+        "random_forward": {
+          "SUCCESS": 8
+        },
+        "random_layers": {
+          "SUCCESS": 8
+        }
+      },
+      "max_policy_nodes": 17,
+      "max_states": 701,
+      "root_only": 21,
+      "worker_success_median": 0.0008027079893508926
+    }
+  },
+  "paired": {
+    "cp_sat vs all_budget": {
+      "common": 46,
+      "first_faster": 4,
+      "median_second_over_first": 0.14768509058085794
+    },
+    "cp_sat vs screened_dp": {
+      "common": 48,
+      "first_faster": 0,
+      "median_second_over_first": 0.10775726277514272
+    },
+    "screened_dp vs all_budget": {
+      "common": 46,
+      "first_faster": 31,
+      "median_second_over_first": 1.0025987888869603
+    }
+  }
+}

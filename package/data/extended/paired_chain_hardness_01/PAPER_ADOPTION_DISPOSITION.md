@@ -1,0 +1,3 @@
+# Pair-hardness drafting trial
+
+The build47 source/PDF is preserved as an unadopted content candidate. Its build succeeds with 20 total pages, but Conclusion and Data Availability move to page19. The source therefore returns byte-exactly to fully verified build46 (18 body/20 total pages). No raw, proof, experimental result or old build is changed. The pair-hardness result and complete proof remain in paired_chain_hardness_01 for supplemental dissemination and a later structural revision. A further local compression merely to add another boundary result is deferred while the application/importance question remains open. Build47 is not the current paper and is not being submitted.
