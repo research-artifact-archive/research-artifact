@@ -4,7 +4,7 @@ Anonymous research artifact for the paper of this title. The package contains th
 
 ## Start here
 
-Use Python 3.10 or later with assertions enabled. The standard-library checks need no package installation or network access. The checkout contains approximately 1.2 GB of uncompressed data and more than 100,000 files.
+Use Python 3.10 or later with assertions enabled. The standard-library checks need no package installation or network access. The checkout contains approximately 1.5 GB of uncompressed data and more than 100,000 files.
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git
@@ -17,10 +17,11 @@ The command verifies release hashes and the frozen package, then replays small k
 - [Paper snapshot](package/paper/main.pdf) and [source](package/paper/main.tex).
 - [Compiler usage and complete latest replay](package/README.md).
 - [Evidence index](package/EVIDENCE_INDEX.md) and [paper-to-artifact map](PAPER_ARTIFACT_MAP.md).
+- [Theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
 - [Earlier stages and dependency requirements](package/history/v4/README.md).
 - [Rights and provenance](NOTICE.md).
 
-The `package/` directory is the byte-preserved version-5 snapshot. Its historical README describes its *pre-publication* local status; this repository supplies public access to that same snapshot. The included paper snapshot likewise predates this release and its Data Availability paragraph will be superseded by the revised paper. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance and complete earlier scale histories. The public entry points and this README are an additional distribution layer.
+The `package/` directory is the byte-preserved version-5 snapshot. Its historical README describes its *pre-publication* local status; this repository supplies public access to that same snapshot. The included paper snapshot likewise predates this release and its Data Availability paragraph will be superseded by the revised paper. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
 
 ## Run the compiler
 
@@ -33,6 +34,16 @@ python3 -B package/retry.py query --artifact work/controller.json --budgets 0 1 
 ```
 
 The compiler assumes the mathematical retry contract in the paper. It does not infer costs, a write budget, or contract compliance from arbitrary concurrent code. Exact dispatch uses cost-compatible packing, a persistent unique-order representation, or the general ideal compiler. A supplied serial order on a branching DAG certifies that restricted order only. The general route may require exponentially many residual sets.
+
+## A counted-work cap decision
+
+Replay the four-job example from the introduction through the public compiler:
+
+```sh
+python3 -B tools/work_cap_example.py --out work/work-cap-example
+```
+
+For failure budget two and normal work 16, the checked adaptive policy has worst total work 24. The script enumerates all three legal fixed orders and compiles optimal adaptive modes within each; all three have worst total work 26. Thus the declared counted-work cap 25 can be met by the adaptive policy and by no fixed serial retry order. The primitive theorem rules out an improvement below 24 by retention or batching under its contract. This is a replay of the existing constructed example, not an elapsed-time result. The output directory preserves each controller and exact CLI response.
 
 ## Full retained-result replay
 

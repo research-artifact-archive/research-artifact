@@ -1,0 +1,58 @@
+PRISM-games
+===========
+
+Version: 3.2.4 (based on PRISM 4.10.1.dev)
+Date: Mon Sep 07 22:24:03 JST 2026
+Hostname: Mac
+Memory limits: cudd=256m, java(heap)=494.9m
+Command line: prism-games '${SESSION}/primitive_scale_01/units/equal/n2/B1/prism_mtbdd_phase/model.prism' -pf '<<controller>> R{"work"}min=? [ F "goal" ]' -mtbdd -epsilon 1e-10 -maxiters 100000 -javamaxmem 512m -cuddmaxmem 256m
+
+Parsing PRISM model file "${SESSION}/primitive_scale_01/units/equal/n2/B1/prism_mtbdd_phase/model.prism"...
+
+Type:        SMG
+Players:     controller nature
+Modules:     protocol
+Actions:     [c] [nw] [n0] [nwp]
+Variables:   phase k cnt b x0 s0 x1 s1
+Labels:      "goal"
+Rewards:     "work"
+
+1 property:
+(1) <<controller>>R{"work"}min=? [ F "goal" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<controller>>R{"work"}min=? [ F "goal" ]
+
+Building model (engine:symbolic)...
+
+Computing reachable states...
+
+Reachability (BFS): 13 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.024 seconds.
+
+Type:        SMG
+States:      378 (1 initial)
+Transitions: 682
+
+Transition matrix: 1660 nodes (2 terminal), 682 minterms, vars: 18r/18c/10nd
+
+Starting expected reachability...
+Engine: MTBDD
+Starting Prob1...
+Prob1 took 16 iterations and 0.003 seconds.
+Precomputation took 0.003 seconds.
+target=2, inf=0
+Computing the upper bound where 0.48 is used instead of 0.0.
+Starting value iteration...
+Value iteration converged after 114 iterations and 0.07 seconds.
+Starting value iteration...
+Value iteration converged after 19 iterations and 0.009 seconds.
+
+Value in the initial state: 96.0
+
+Time for model checking: 0.085 seconds.
+
+Result: 96.0
+

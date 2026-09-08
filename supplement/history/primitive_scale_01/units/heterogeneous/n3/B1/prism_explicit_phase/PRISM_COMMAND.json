@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "${RESTART_ROOT}/quantitative_progress/external_tools/prism-games-3.2.4-mac64-arm/bin/prism",
+    "${SESSION}/primitive_scale_01/units/heterogeneous/n3/B1/prism_explicit_phase/model.prism",
+    "-pf",
+    "<<controller>> R{\"work\"}min=? [ F \"goal\" ]",
+    "-explicit",
+    "-epsilon",
+    "1e-10",
+    "-maxiters",
+    "100000",
+    "-javamaxmem",
+    "512m",
+    "-cuddmaxmem",
+    "256m"
+  ],
+  "env_overrides": {
+    "PRISM_JAVA": "/opt/homebrew/opt/openjdk@17/bin/java",
+    "PRISM_JAVA_PARAMS": "-XX:ActiveProcessorCount=1"
+  }
+}

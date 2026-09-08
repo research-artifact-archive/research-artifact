@@ -1,0 +1,7 @@
+# Selected examples: separate scalar validation
+
+2026-09-08 03:42 JST, after the recorded12288-slot search, before this checker executes. This is author-selected proof validation, not new final-population evaluation. No search result is replaced. The checker must import no curve/compiler implementation, use literal finite-budget Bellman recurrence over every residual subset, and independently enumerate topological permutations for fixed-order comparison.
+
+Check each of the24 search chain winners for every integer budget0..max(4,witness+2), comparing both adaptive and best-fixed values to its previously stored piecewise curves. The checker also receives six newly derived homogeneous-family inputs, k in[1,2,3,7,101,2^40]: costs(3k,7k,5k,k),premiums(2k,2k,6k,2k),edges0->1,0->2,1->3. AtB2 the proposed adaptive excess is8k and every best fixed order costs at least10k, giving normal16k,total24k versus26k. Compare budget0,1,2,3,4 and explicitly require those B2 formulas. Both formulations allow mode adaptation and optimize the fixed order for initialB.
+
+Report30 selected units, all scalar roots/order values/argmins, assertion failures as FAILURE, unexpected errors as INVALID, complete status counts and timing. Perunit2s,total30s, remaining unitsNOT_RUN after totalcap. Inputs and checker are hashed before execution. Existing search allSUCCESS is not independent proof; this check must preserve any disagreement and not repair/rerun it silently.

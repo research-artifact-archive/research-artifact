@@ -2,6 +2,8 @@
 
 This map refers to the included 20-page paper snapshot, *Compiling Optimal Retry Policies for Dependent Transformations*, SHA-256 `5aca518c2c048a54b4c479f8046a933980ac73aec79e5ea439c6089a81939c94`. It distinguishes replay of recorded semantic outcomes, aggregation of historical results, and original cold-process performance experiments. No command below upgrades an earlier failure or timeout.
 
+The revised paper retains the theorem numbers and numerical results; its surrounding prose and page breaks may differ. The [theorem/checker guide](THEOREM_AND_CHECKER_GUIDE.md) maps inherited results, additional proof obligations, checker pseudocode, and the object returned by each method.
+
 ## Reconstruct the tables and denominators
 
 Run from the repository root:
@@ -94,3 +96,19 @@ Paths in this table are relative to `package/data/extended/`; executable counter
 Use each historical replay's matched checker. `package/retry.py check` is the current dispatcher interface, not a universal checker for every earlier schema/route; for example, a valid historical ideal certificate may correspond to a case now dispatched to a persistent route. Generated persistent certificates have the stated efficient shared-subtree checking bound; arbitrary valid but differently shared certificates may be slower.
 
 All elapsed-time comparisons retain the stated original limits, initial construction costs, and incomplete units. Across different runs they are descriptive, not a simultaneously randomized timing comparison. None of these counts establishes real-world prevalence or elapsed-time improvement.
+
+## Earlier comparisons, refutations, and selected examples
+
+The following previously omitted histories were added in the publication completion update. They are additional public access to existing observations, not new evaluations. `tools/reproduce_tables.py --json` verifies their complete input/raw ID coverage and partitions without executing old benchmark drivers.
+
+| Paper discussion | Public history | Full retained partition |
+|---|---|---|
+| Independent PRISM/AND-OR comparisons | `supplement/history/primitive_scale_01/` | 130 planned/recorded units: 84 SUCCESS, 37 TIMEOUT, five FAILURE, four INVALID. |
+| Earlier independent screened DP | `supplement/history/native_price_scale_01/` | 432 units: packing 144/0, ordered saturation 132/12, screened order 137/7 SUCCESS/TIMEOUT. |
+| Divisibility-screened extension | `supplement/history/native_price_scale_supplement_01/` | 144 units: 140 SUCCESS, four TIMEOUT. Original comparisons remain separate. |
+| Broader charged-acquisition refutation | `supplement/history/primitive_rmw_02/` | 384 completed inputs, 2,688 budget comparisons, five inputs with lower primitive cost; `fractional-0040` at budget two gives 242 versus 243. All five witnesses and raw state/action records remain. |
+| Four-job family and minimum-size argument | `supplement/history/adaptivity_gap_search_01/` | 12,288 search records and 30 selected scalar checks/365 roots, with `FAMILY_PROOF.md` and the author-side proof disposition. These are exploratory/selected results, not additional final-evaluation roots. |
+
+The complete common-price grids are already in `package/data/extended/critical_exposure_01/` and `package/data/extended/critical_exposure_02/`: 27,105 plus 66,560 successful records, with seven strict-gap inputs. The selected simplified example and its 746 native paths remain in `package/data/extended/critical_exposure_operational_01/`. The main final evaluation's 192-root denominator is unchanged.
+
+Preparation receipts retain their original source hashes, even when public copies project workstation paths. The supplement provenance records both original and public hashes. In particular, the older PRISM scale preparation read an extra guard input registry that its historical manifest did not bind. This is an original limitation, not a provenance claim repaired by publication. Runtime installations and private raw assistant correspondence are excluded; historical source drivers are for inspection and are not promised to execute in the public directory layout.

@@ -1,0 +1,60 @@
+PRISM-games
+===========
+
+Version: 3.2.4 (based on PRISM 4.10.1.dev)
+Date: Mon Sep 07 22:28:07 JST 2026
+Hostname: Mac
+Memory limits: cudd=256m, java(heap)=494.9m
+Command line: prism-games '${SESSION}/primitive_scale_01/units/heterogeneous/n2/B1/prism_explicit_phase/model.prism' -pf '<<controller>> R{"work"}min=? [ F "goal" ]' -explicit -epsilon 1e-10 -maxiters 100000 -javamaxmem 512m -cuddmaxmem 256m
+
+Parsing PRISM model file "${SESSION}/primitive_scale_01/units/heterogeneous/n2/B1/prism_explicit_phase/model.prism"...
+
+Type:        SMG
+Players:     controller nature
+Modules:     protocol
+Actions:     [c] [nw] [n0] [nwp]
+Variables:   phase k cnt b x0 s0 x1 s1
+Labels:      "goal"
+Rewards:     "work"
+
+1 property:
+(1) <<controller>>R{"work"}min=? [ F "goal" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<controller>>R{"work"}min=? [ F "goal" ]
+
+Building model (engine:explicit)...
+
+Computing reachable states... 378 states
+Reachable states exploration and model construction done in 0.019 secs.
+Sorting reachable states list...
+
+Time for model construction: 0.032 seconds.
+
+Type:        SMG
+Players:     2
+States:      378 (1 initial)
+Transitions: 682
+Choices:     682
+Max/avg:     11/1.80
+Building reward structure...
+
+Starting expected reachability...
+Starting Prob1 (maxmin)...
+Prob1 (maxmin) took 15 iterations and 0.011 seconds.
+target=2, inf=0, rest=376
+Computing the upper bound where 1.59 is used instead of 0.0
+Starting value iteration (minmax)...
+Value iteration (minmax) took 112 iterations and 0.027 seconds.
+Computed an over-approximation of the solution (in 0 seconds), this will now be used to get the solution
+Starting value iteration (minmax)...
+Value iteration (minmax) took 23 iterations and 0.004 seconds.
+Expected reachability took 0.045 seconds.
+
+Value in the initial state: 306.0
+
+Time for model checking: 0.05 seconds.
+
+Result: 306.0 (exact floating point)
+

@@ -209,6 +209,72 @@ def earlier_scale():
     return result
 
 
+def historical_comparisons_and_refutations():
+    result = {}
+    configurations = [("primitive_scale_01", 130, {"SUCCESS": 84, "TIMEOUT": 37, "FAILURE": 5, "INVALID": 4}),
+                      ("native_price_scale_01", 432, {"SUCCESS": 413, "TIMEOUT": 19}),
+                      ("native_price_scale_supplement_01", 144, {"SUCCESS": 140, "TIMEOUT": 4})]
+    for study, denominator, expected in configurations:
+        directory = SUPPLEMENT / study
+        plan = read(directory / "INPUTS.json")
+        units = unique(plan["units"], "id")
+        raw = unique(read(directory / "RAW.jsonl", True), "id")
+        require(set(units) == set(raw) and len(raw) == denominator, "historical method-unit coverage")
+        require(Counter(r["status"] for r in raw.values()) == expected, "historical status partition")
+        for identity, row in raw.items():
+            require(row["case"] == units[identity]["case"] and row["method"] == units[identity]["method"],
+                    "historical method/input identity")
+            if row["status"] == "SUCCESS" and "expected" in units[identity]:
+                require(row["value"] == units[identity]["expected"], "historical value disagreement")
+        summary = read(directory / "SUMMARY.json")
+        require(summary["outcomes"] == expected and not summary["disagreements"], "historical summary mismatch")
+        methods = sorted({r["method"] for r in raw.values()})
+        result[study] = {"units": denominator, "status": counts(raw.values()),
+                         "by_method": {m: counts(r for r in raw.values() if r["method"] == m) for m in methods},
+                         "incomplete_units": [{"id": r["id"], "status": r["status"]}
+                                              for r in raw.values() if r["status"] != "SUCCESS"]}
+
+    directory = SUPPLEMENT / "primitive_rmw_02"
+    inputs = unique(read(directory / "INPUTS.json"), "id")
+    rows = read(directory / "RAW.jsonl", True)
+    raw = {r["input"]["id"]: r for r in rows}
+    require(len(raw) == len(rows) == len(inputs) == 384 and set(raw) == set(inputs), "charged-acquisition coverage")
+    gaps = []
+    root_count = 0
+    for identity, row in raw.items():
+        require(row["input"] == inputs[identity] and row["status"] == "SUCCESS", "charged-acquisition identity/status")
+        require(len(row["primitive"]) == len(row["h17"]) == inputs[identity]["budget"] + 1,
+                "charged-acquisition budget coverage")
+        differences = [{"b": b, "primitive": v, "h17": h}
+                       for b, (v, h) in enumerate(zip(row["primitive"], row["h17"])) if v != h]
+        require(differences == row["differences"], "charged-acquisition differences")
+        root_count += len(row["primitive"])
+        if differences:
+            gaps.append({"id": identity, "differences": differences})
+    require(root_count == 2688 and len(gaps) == 5, "charged-acquisition refutation denominator")
+    require(any(d["primitive"] == 242 and d["h17"] == 243 for g in gaps for d in g["differences"]),
+            "reported charged-acquisition witness")
+    result["primitive_rmw_02"] = {"inputs": 384, "roots": root_count, "status": counts(rows),
+                                   "gap_inputs": gaps, "scope": "refuted earlier charged-acquisition contract"}
+
+    directory = SUPPLEMENT / "adaptivity_gap_search_01"
+    inputs = unique(read(directory / "INPUTS.jsonl", True), "id")
+    rows = read(directory / "RAW.jsonl", True)
+    raw = unique(rows, "id")
+    require(set(inputs) == set(raw) and len(raw) == 12288, "constructive-gap search coverage")
+    require(all(r["status"] == "SUCCESS" for r in rows), "constructive-gap search status")
+    selected = unique(read(directory / "SELECTED_INPUTS.json"), "id")
+    checks = unique(read(directory / "SELECTED_RAW.jsonl", True), "id")
+    require(set(selected) == set(checks) and len(checks) == 30, "selected scalar check coverage")
+    require(all(r["status"] == "SUCCESS" for r in checks.values()), "selected scalar check status")
+    require(sum(len(r["adaptive"]) for r in checks.values()) == 365, "selected scalar root count")
+    result["adaptivity_gap_search_01"] = {"search_units": len(rows), "status": counts(rows),
+                                          "selected_units": len(checks), "selected_roots": 365,
+                                          "scope": "exploration and selected checks, not a population frequency"}
+    result["original_benchmarks_or_timeouts_rerun"] = 0
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", action="store_true", help="include every incomplete unit and source hash")
@@ -217,6 +283,7 @@ def main():
     result["native"], result["table1"] = native_and_table1()
     result["table2"] = table2()
     result["earlier_scale"] = earlier_scale()
+    result["historical_comparisons_and_refutations"] = historical_comparisons_and_refutations()
     result.update(success=True, scientific_sample_increase=False,
                   execution_scope="Read-only aggregation and hash checks; no solver or native execution",
                   source_sha256=SOURCES)
@@ -233,6 +300,9 @@ def main():
             for method, c in methods.items():
                 print(f"  {study} {method}: {c['SUCCESS']}/{c['TIMEOUT']}")
         print("Earlier scale: original 78/9 construction; 74/4/9 checking SUCCESS/TIMEOUT/NOT_RUN.")
+        print("Earlier independent comparisons: all 130 PRISM/AND-OR and 432+144 method units retained.")
+        print("Charged-acquisition refutation: 384 inputs / 2,688 roots, including all five gap inputs.")
+        print("Constructive-gap history: 12,288 search units and 30 selected scalar checks / 365 roots.")
         print("Use --json for source hashes, full status partitions, and every incomplete unit.")
     return 0
 

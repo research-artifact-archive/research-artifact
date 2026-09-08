@@ -1,0 +1,9 @@
+# Author mathematical check disposition
+
+The read-only check is saved verbatim in AUTHOR_CHECK_RAW.json; its author context does not make it a blind review or independent certification. The helper is closed.
+
+The parent accepts the n<=3 proof as an author-side mathematical derivation. Its general formula is already the paper's concave child-curve/slope-floor theorem, rather than a separately novel normal-form theorem. Choosing the unbounded-fast branch at a completion boundary permits keeping that minimum-cost available job until it succeeds: as allowance decreases, it remains in the fast branch. The branch's max-convolution is exactly that run-until-success strategy. For two remaining jobs, a precedence edge fixes their order; otherwise the existing independent-order theorem gives a common optimal increasing-cost order for all budgets. With at mostthree jobs, fix the first job selected at the initial budget, then attach that common two-job suffix. It realizes V under one initial fixed order. The initial order need not work for other starting budgets.
+
+The raw proof's A>=g can be justified without circularity by already-established scalar subset monotonicity and the Bellman protected upper bound: g<=V<=A. The discrete-concavity crossing argument agrees with the current paper, and the direct two-job argument is also sound. These existing lemmas are sufficient; no universal upper bound on n>=4 gaps is claimed.
+
+Combined with FAMILY_PROOF.md, positive order adaptivity first becomes possible at four jobs in the reduced retry game. The fixed complete-primitive grid withn<=3 therefore does not itself exercise a positive V<F example. It still checks primitive abstraction/certificate behavior at those sizes. A separately declared selected four-job complete-primitive check will address the new constructed witness. Neither this extension nor the search changes the frozen192-root native frequency.

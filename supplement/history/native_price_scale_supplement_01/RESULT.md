@@ -1,0 +1,5 @@
+# Divisible-aware supplement result
+
+The changed comparator records144/144 known-root units:140 SUCCESS and4 TIMEOUT, with no completed-value discrepancy against the retained packed values, no other error, exclusion or retry. Total50.341s. Raw SHA-256 `90098a4e3a34d330ed0c62cf2cab93a17078e7c50ab5701ccd082cf4cf55465d`. All128 known regression inputs agree; they are not new inputs. All48 alpha1 units take the known divisible shortcut. The4 timeouts are heterogeneous n16384, alpha1/4 or1/2, B4096 or8192; both previous DP variants also timed out on these4 roots. Packed cold times on them range0.054014–0.063951s with195,690–201,491 serialized bytes. Small timings include50ms polling granularity; no production or repeated-distribution claim.
+
+The prior screened comparator's7 timeouts are retained, including its extra alpha1 overhead cases. The strengthened comparator resolves those3. This supplement is a post-diagnosis comparison with an additional method, not a replacement of unfavorable bytes or a new144-case independent population.

@@ -1,0 +1,29 @@
+PRISM-games
+===========
+
+Version: 3.2.4 (based on PRISM 4.10.1.dev)
+Date: Mon Sep 07 22:31:10 JST 2026
+Hostname: Mac
+Memory limits: cudd=256m, java(heap)=494.9m
+Command line: prism-games '${SESSION}/primitive_scale_01/units/heterogeneous/n8/B2/prism_explicit_phase/model.prism' -pf '<<controller>> R{"work"}min=? [ F "goal" ]' -explicit -epsilon 1e-10 -maxiters 100000 -javamaxmem 512m -cuddmaxmem 256m
+
+Parsing PRISM model file "${SESSION}/primitive_scale_01/units/heterogeneous/n8/B2/prism_explicit_phase/model.prism"...
+
+Type:        SMG
+Players:     controller nature
+Modules:     protocol
+Actions:     [c] [nw] [n0] [nwp]
+Variables:   phase k cnt b x0 s0 x1 s1 x2 s2 x3 s3 x4 s4 x5 s5 x6 s6 x7 s7
+Labels:      "goal"
+Rewards:     "work"
+
+1 property:
+(1) <<controller>>R{"work"}min=? [ F "goal" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<controller>>R{"work"}min=? [ F "goal" ]
+
+Building model (engine:explicit)...
+
+Computing reachable states... 277878 366097

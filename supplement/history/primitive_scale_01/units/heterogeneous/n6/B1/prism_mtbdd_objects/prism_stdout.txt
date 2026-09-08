@@ -1,0 +1,50 @@
+PRISM-games
+===========
+
+Version: 3.2.4 (based on PRISM 4.10.1.dev)
+Date: Mon Sep 07 22:30:06 JST 2026
+Hostname: Mac
+Memory limits: cudd=256m, java(heap)=494.9m
+Command line: prism-games '${SESSION}/primitive_scale_01/units/heterogeneous/n6/B1/prism_mtbdd_objects/model.prism' -pf '<<controller>> R{"work"}min=? [ F "goal" ]' -mtbdd -epsilon 1e-10 -maxiters 100000 -javamaxmem 512m -cuddmaxmem 256m
+
+Parsing PRISM model file "${SESSION}/primitive_scale_01/units/heterogeneous/n6/B1/prism_mtbdd_objects/model.prism"...
+
+Type:        SMG
+Players:     controller nature
+Modules:     protocol
+Actions:     [c] [nw] [n0] [nwp]
+Variables:   x0 s0 x1 s1 x2 s2 x3 s3 x4 s4 x5 s5 phase k cnt b
+Labels:      "goal"
+Rewards:     "work"
+
+1 property:
+(1) <<controller>>R{"work"}min=? [ F "goal" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<controller>>R{"work"}min=? [ F "goal" ]
+
+Building model (engine:symbolic)...
+
+CUDD internal error detected, from the following stack trace:
+  jdd.JDD.ptrToNode(JDD.java:1840)
+  jdd.JDD.Apply(JDD.java:604)
+  jdd.JDD.Plus(JDD.java:629)
+  symbolic.build.Modules2MTBDD.combineCommandsNondet(Modules2MTBDD.java:1915)
+  symbolic.build.Modules2MTBDD.translateModule(Modules2MTBDD.java:1548)
+  symbolic.build.Modules2MTBDD.translateSystemModule(Modules2MTBDD.java:1091)
+  symbolic.build.Modules2MTBDD.translateSystemDefnRec(Modules2MTBDD.java:1036)
+  symbolic.build.Modules2MTBDD.translateSystemFullParallel(Modules2MTBDD.java:1111)
+  symbolic.build.Modules2MTBDD.translateSystemDefnRec(Modules2MTBDD.java:1042)
+  symbolic.build.Modules2MTBDD.translateSystemDefn(Modules2MTBDD.java:879)
+  symbolic.build.Modules2MTBDD.translateModules(Modules2MTBDD.java:836)
+  symbolic.build.Modules2MTBDD.translate(Modules2MTBDD.java:286)
+  prism.Prism.doBuildModel(Prism.java:2388)
+  prism.Prism.buildModelIfRequired(Prism.java:2314)
+  prism.Prism.modelCheck(Prism.java:3484)
+  prism.PrismCL.run(PrismCL.java:426)
+  prism.PrismCL.go(PrismCL.java:227)
+  prism.PrismCL.main(PrismCL.java:3014)
+
+Error: Out of memory (or other internal error) in the CUDD library.
+Tip: Try using the -cuddmaxmem switch to increase the memory available to CUDD.
