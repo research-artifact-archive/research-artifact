@@ -23,6 +23,8 @@ The command verifies release hashes and the frozen package, then replays small k
 
 The `package/` directory is the byte-preserved version-5 snapshot. Its historical README and paper describe their *pre-publication* local status; the revised paper in `paper/` cites the public evidence commit. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
 
+READMEs archived under `package/history/` describe their original package roots. Their instructions to run “from this directory” do not refer to those archive subdirectories. In this distribution, use the repository-root commands in the paper-to-artifact map, or run the historical `reproduce*.py` commands from `package/`.
+
 ## Run the compiler
 
 Create an input such as `{"cp":[[3,2],[1,4]],"edges":[[0,1]]}` in `work/case.json`, where each pair gives failure cost and protection premium. Use a new output path:

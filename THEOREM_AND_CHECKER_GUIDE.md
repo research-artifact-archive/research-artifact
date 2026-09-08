@@ -57,7 +57,7 @@ for each adjacent suffix pair (own, child), with price (c,p), threshold t:
 accept
 ```
 
-`ExactEqual` decomposes both requested ranges into shared subtrees and integer run fragments. Identical subtree IDs are skipped after structural validation. Run fragments are compared by their slope values, consuming the shorter length. Otherwise the longer subtree front is expanded. Distinct IDs do not imply distinct values. `Constant` checks run values or a subtree's validated minimum and maximum slopes.
+`ExactEqual` decomposes both requested ranges into shared subtrees and integer run fragments. Identical subtree IDs are skipped after structural validation. Run fragments are compared by their slope values, consuming the shorter length. Otherwise expand a subtree front, choosing the longer one when both fronts are subtrees. Distinct IDs do not imply distinct values. `Constant` checks run values or a subtree's validated minimum and maximum slopes.
 
 The checker accepts different valid sharing layouts. Its soundness for well-formed certificates is separate from the generated-family complexity bound. The [generated-class addendum](package/data/extended/fixed_order_profile_03/GENERATED_CLASS_ADDENDUM.md) supplies the sharing argument for certificates emitted by this constructor. No logarithmic-time guarantee is asserted for every arbitrary valid certificate, and the paper's arithmetic bound is not a unit-cost bit-complexity or elapsed-time guarantee.
 
