@@ -49,6 +49,7 @@ The driver verifies the public provenance, then runs each stage in a separate pr
 | `resource-frontier-native` | 9,314 raw records, 128 finite tables, 1,024 replay groups and all native-study controls |
 | `budget-blind` | 128 cases, 17,714 original native records, 1,280 group maxima, three-state oracle tables and 8/5/4 controls; selector has no B input |
 | `universal-work` | Post-outcome W,L,Q formulas from all17,200existing path records/1,280groups, including160r=0groups; zero new measurements |
+| `universal-order` | All86,662legal orders/2,773,184budget-slack checks on5,519fixed inputs; input-bound greedy constructor, scan checker and7artifact controls |
 
 The 14 CLI controls deliberately retain two erroneous null acceptances by the old 02 CLI. They do not make those acceptances valid in 03. The 19,485-input study is not counted again as an independent 03 experiment: constructor, checker and runtime are unchanged between 02 and 03, with a separate CLI correction.
 

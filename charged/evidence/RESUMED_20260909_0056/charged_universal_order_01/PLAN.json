@@ -1,0 +1,14 @@
+{
+  "scope": "Order construction for the fixed policy that retries its current job until completion, allows r global cheap failures, then freshly cached-completes remaining jobs. Only minimum worst W among fixed topological orders; Q and L envelopes remain order independent.",
+  "old_inputs": "All5421 previously observed weighted-DAG cases from charged_resource_frontier_01/INPUTS.json, unchanged case order and values",
+  "new_inputs": "96 authored seeded DAG cases: sizes5,6,7; densities0,.15,.4,.75;8instances each, seed20260909, works uniformly1..9; all edges sampled in a randomly permuted topological order",
+  "other_inputs": "One empty degenerate case and the already-reasoned independent1,2,3 illustration; neither counted as held-out",
+  "budgets": [0,1,2,3,4,5,6,7],
+  "slacks": [0,1,2,3],
+  "evaluation": "For every fixed input, enumerate every legal topological order before results. Evaluate the policy's direct W recurrence for all32budget/slack pairs; check the closed form and compare the constructed order with all legal orders. Save every order outcome and all minima. This is a new mathematical finite check on mostly observed inputs, zero native measurements.",
+  "controls": "Before outcome recording fix six rejected artifacts: wrong input hash, duplicate job, missing job, boolean job ID, nonready job, nonminimum ready work. Include one accepted alternative equal-weight tie. Keep controls separate from scientific case count.",
+  "failure_policy": "SUCCESS,FAILURE,TIMEOUT,INVALID,UNSTARTED partition for every fixed order unit and case; no exclusion, replacement or retry. Any wrong greedy minimum or formula/direct mismatch falsifies the tested claim. Original studies and outcomes remain immutable.",
+  "cap_seconds": 180,
+  "native_runs": 0,
+  "not_claimed": ["full causal-program W optimality for r>0", "scalar optimality", "full Pareto frontier", "external novelty certification", "timing improvement"]
+}

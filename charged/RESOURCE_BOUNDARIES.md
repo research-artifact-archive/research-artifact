@@ -1,6 +1,6 @@
 # Resource boundaries and independent-job price bound
 
-This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in nine study directories under `evidence/RESUMED_20260909_0056/`: the six price/resource studies below and `charged_budget_blind_native_01`, plus two explicitly post-outcome work analyses. A portable replay checks those records without declaring new evaluation samples.
+This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in ten study directories under `evidence/RESUMED_20260909_0056/`: the six price/resource studies below and `charged_budget_blind_native_01`, plus two explicitly post-outcome work analyses. A portable replay checks those records without declaring new evaluation samples.
 
 ## Protected work under a completion-call cap
 
@@ -56,6 +56,30 @@ Omega + max_i [(r-1)*M_i + w_pi_i + Top_(B-r)(S_i)]
 ```
 
 at r>=1,B>r. These are component maxima of this policy, not all-program W optimality for r>0 or a scalar/Pareto frontier. All 1,280 complete finite path groups and 17,200 already-observed records match the formulas; there are zero new measurements. The earlier r=0 analysis checks its full subset of160groups/1,632records. Both original analysis plans and the subsequent proofs are preserved with their chronology.
+
+## A single work-minimizing order for the fixed policy family
+
+The [order theorem and complete exchange proof](evidence/RESUMED_20260909_0056/charged_universal_order_01/THEORY.md) shows that repeatedly choosing a minimum-work ready job yields one topological order minimizing worst W for every B,r simultaneously, within the policy family that retries its current job until completion. Worst L and Q remain unchanged. This result applies to any finite DAG and positive works, without assuming weights increase along edges. It does not compare adaptive-order or arbitrary causal programs.
+
+The constructor receives only works and edges; it needs no B, r or prices. A min-heap implementation uses O(|E|+n log(n+1)) arithmetic/comparison operations. Its separate scan checker verifies exact input binding, a complete permutation, precedence and minimum ready work at each selection; equal-work ties are accepted. The runtime still receives r. An empty DAG is handled separately with W=L=Q=0. Previous native no-weight selectors and their results remain unchanged.
+
+The fixed finite check reuses all5,421prior weighted-DAG inputs and adds96authored seeded cases at sizes5..7, an empty case and the already-reasoned1,2,3 example. Before results, it fixes all86,662legal orders and32budget/slack pairs per order. All2,773,184order/pair checks agree with direct fixed-policy W equations, and every constructed order attains every minimum. Six invalid artifacts are rejected and one alternative equal-weight tie is accepted. There are no native measurements or held-out application inputs. Increasing/decreasing orders of independent works1,2,3 have W13/14 at r1,B3; this illustration was known before the check.
+
+Use the checked Python interface (from the evidence directory):
+
+```python
+from order import construct, Policy
+from verify import check
+case = {"works": [1, 2, 3], "edges": []}
+artifact = construct(case)
+check(case, artifact)
+policy = Policy(case, artifact, r=1)
+# choose() returns (job, mode), or None when done.
+# Execute the full mode, then advance(completed=True/False).
+# Cached mismatch recomputes and completes; only a failed cheap call uses False.
+```
+
+The original order study checks the constructor, scan checker and all-order work equations. This standalone Python policy wrapper has no new Java/native integration claim. Run `python3 charged/reproduce.py universal-order --out work/universal-order` to repeat the complete fixed mathematical comparison.
 
 ## Sharp scalar ratio for independent jobs
 
