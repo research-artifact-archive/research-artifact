@@ -1,0 +1,3 @@
+# Rational and longer-horizon extension
+
+Fixed before new outcomes; the preceding20,920 comparisons are known. Use weights(1/3,2/5,7/2) and(9/7,1/5,2/3,11/2), three footprint families per vector: all singletons; all singletons plus the complete footprint; and all adjacent pairs on a path. Cross q in1,2,3,4,8,16 with mu in0,1/11,5/3: exactly108 instances. The second family explicitly permits H to decrease at larger exact cover length. Compare compact output and every certificate with a separately implemented full dirty-set Bellman recurrence; report missing/nonmonotone profiles. Preserve all outcomes; internal170second/whole180second cap. New timings are descriptive local verification costs, not a performance comparison.
