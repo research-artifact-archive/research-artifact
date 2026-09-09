@@ -1,0 +1,786 @@
+{
+  "utc": "2026-09-09T21:40:47.443269+00:00",
+  "status": "SUCCESS",
+  "scope": "Author-side local portable26 and fresh pinned-source native replay. Later fresh-public retrieval is recorded separately. Not an independent evaluation population or certification.",
+  "standard_stages": [
+    {
+      "stage": "curves",
+      "status": "SUCCESS",
+      "seconds": 7.318880791000993,
+      "summary": {
+        "retained_inputs": 3183,
+        "replayed": 3183,
+        "controls": 11,
+        "artifact_bytes_match": true,
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 7.268413583999063,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "native",
+      "status": "SUCCESS",
+      "seconds": 3.549456958000519,
+      "summary": {
+        "retained_runs": 3098,
+        "replayed_records": 3098,
+        "record_controls": 12,
+        "sequence_controls": 11,
+        "new_native_runs": 0,
+        "scope": "Existential source-model microevent ordering; shared translation",
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 3.510258292000799,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "deephaven",
+      "status": "SUCCESS",
+      "seconds": 0.30620599999929254,
+      "summary": {
+        "studies": [
+          {
+            "study": "deephaven_prefix_import_02",
+            "retained": 216,
+            "replayed": 216,
+            "controls": 5
+          },
+          {
+            "study": "deephaven_event_graph_01",
+            "retained": 12,
+            "replayed": 12,
+            "controls": 5
+          },
+          {
+            "study": "deephaven_phase_policy_01",
+            "retained": 108,
+            "replayed": 108,
+            "controls": 6
+          },
+          {
+            "study": "deephaven_key_action_01",
+            "retained": 36,
+            "replayed": 36,
+            "controls": 9
+          }
+        ],
+        "strict_key_records": 36,
+        "strict_key_controls": 21,
+        "new_native_runs": 0,
+        "prefix_aborts_observed": 0,
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 0.24395033299879287,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "scale",
+      "status": "SUCCESS",
+      "seconds": 21.71597570800077,
+      "summary": {
+        "campaigns": [
+          {
+            "study": "charged_compiler_scale_01",
+            "retained": 224,
+            "original_status_counts": {
+              "SUCCESS": 197,
+              "TIMEOUT": 27
+            },
+            "certificates_rechecked": 125,
+            "output_scopes": {
+              "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS": 63,
+              "REQUESTED_ROOT_VALUES": 62,
+              "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE": 64,
+              "GENERIC_BELLMAN_AND_SELECTED_POLICY_TERMINATION_CHECKED": 8
+            }
+          },
+          {
+            "study": "charged_compiler_scale_03",
+            "retained": 144,
+            "original_status_counts": {
+              "SUCCESS": 128,
+              "TIMEOUT": 16
+            },
+            "certificates_rechecked": 64,
+            "output_scopes": {
+              "REQUESTED_ROOT_VALUES": 64,
+              "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE": 64
+            }
+          }
+        ],
+        "shared_saved_values": 288,
+        "conformance_inputs": 76,
+        "point_controls": 11,
+        "new_timing_samples": 0,
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 21.659641041000214,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "calibration",
+      "status": "SUCCESS",
+      "seconds": 0.2622309580001456,
+      "summary": {
+        "cells": 72,
+        "samples": 720,
+        "analysis_matches": true,
+        "grid_partition": {
+          "SUCCESS": 72,
+          "OUTSIDE_CALIBRATED_MODEL": 1080
+        },
+        "strict_by_weight": {
+          "0": 0,
+          "1/4": 0,
+          "1": 0,
+          "4": 0
+        },
+        "new_measurements": 0,
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 0.17883787500068138,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "ordering",
+      "status": "SUCCESS",
+      "seconds": 22.64890437500071,
+      "summary": {
+        "retained_order_inputs": 874,
+        "replayed_order_inputs": 874,
+        "retained_common_inputs": 17424,
+        "replayed_common_inputs": 17424,
+        "common_counterexample_inputs": 2,
+        "common_general_ascending_order": "REFUTED",
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 22.590512834000037,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "refutations",
+      "status": "SUCCESS",
+      "seconds": 102.20292370900097,
+      "summary": {
+        "studies": [
+          {
+            "study": "charged_guaranteed_01",
+            "retained": 493,
+            "replayed": 493,
+            "holding_inputs_replayed": 0,
+            "original_statuses": {
+              "SUCCESS": 493
+            }
+          },
+          {
+            "study": "charged_guaranteed_02",
+            "retained": 2114,
+            "replayed": 2114,
+            "holding_inputs_replayed": 2114,
+            "original_statuses": {
+              "SUCCESS": 2114
+            }
+          },
+          {
+            "study": "charged_guard_targeted_03",
+            "retained": 511,
+            "replayed": 511,
+            "holding_inputs_replayed": 0,
+            "original_statuses": {
+              "SUCCESS": 511
+            }
+          }
+        ],
+        "universal_exposed_guard_equality": "UNPROVED",
+        "status": "SUCCESS",
+        "quick": false,
+        "seconds": 102.1130425829997,
+        "replay_only": true,
+        "new_evaluation_population": false
+      }
+    },
+    {
+      "stage": "compact",
+      "status": "SUCCESS",
+      "seconds": 37.57557070900111,
+      "summary": {
+        "retained_inputs": 19485,
+        "replayed": 19485,
+        "routes": {
+          "compatible_reduced": 16770,
+          "charged_all_ideals": 2715
+        },
+        "policy_branches": 527409,
+        "controls": 29,
+        "cli_controls": 14,
+        "prior_null_acceptances_retained": 2,
+        "core_semantic_identity": true,
+        "new_evaluation_samples": 0,
+        "stage": "compact",
+        "replay_seconds": 37.50067858299917,
+        "quick": false,
+        "new_timing_samples": 0
+      }
+    },
+    {
+      "stage": "compact-native",
+      "status": "SUCCESS",
+      "seconds": 0.422677583001132,
+      "summary": {
+        "retained_runs": 610,
+        "retained_primary": 606,
+        "replayed_records": 610,
+        "replay_cells": 208,
+        "record_controls": 8,
+        "sequence_controls": 5,
+        "parser_controls": 9,
+        "parser_native_reexecuted": false,
+        "new_native_replay_records": 0,
+        "new_evaluation_samples": 0,
+        "scope": "Original-price fixed-order policy plus existential ordering under the fixed source model; no original causal certificate is reused for new native records.",
+        "stage": "compact-native",
+        "replay_seconds": 0.3332625000002736,
+        "quick": false,
+        "new_timing_samples": 0
+      }
+    },
+    {
+      "stage": "compact-scale",
+      "status": "SUCCESS",
+      "seconds": 64.7921975420013,
+      "summary": {
+        "campaigns": [
+          {
+            "study": "charged_compact_scale_01",
+            "retained": 420,
+            "original_status_counts": {
+              "SUCCESS": 258,
+              "TIMEOUT": 152,
+              "FAILURE": 10
+            },
+            "failure_reasons": {
+              "TIMEOUT": 152,
+              "MEMORY_LIMIT": 10
+            },
+            "services": {
+              "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY": 84,
+              "REDUCTION_AWARE_ALL_BUDGET_ROOT_VALUE_ONLY_NO_INDEPENDENT_CERTIFICATE": 84,
+              "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY": 22,
+              "REQUESTED_ROOT_VALUES": 34,
+              "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE": 34
+            },
+            "artifacts_rechecked": {
+              "PACK": 84,
+              "ROOT": 84,
+              "ALL": 22,
+              "PEAK": 34,
+              "DP": 34
+            },
+            "shared_saved_values": 504,
+            "independently_certified_requested_values": 504,
+            "closed_form_checked": false,
+            "original_aggregation_failure_retained": false
+          },
+          {
+            "study": "charged_compact_scale_02",
+            "retained": 180,
+            "original_status_counts": {
+              "SUCCESS": 108,
+              "TIMEOUT": 51,
+              "FAILURE": 21
+            },
+            "failure_reasons": {
+              "TIMEOUT": 51,
+              "MEMORY_LIMIT": 21
+            },
+            "services": {
+              "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY": 36,
+              "REDUCTION_AWARE_ALL_BUDGET_ROOT_VALUE_ONLY_NO_INDEPENDENT_CERTIFICATE": 36,
+              "REQUESTED_ROOT_VALUES": 18,
+              "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE": 18
+            },
+            "artifacts_rechecked": {
+              "PACK": 36,
+              "ROOT": 36,
+              "PEAK": 18,
+              "DP": 18
+            },
+            "shared_saved_values": 216,
+            "independently_certified_requested_values": 216,
+            "closed_form_checked": true,
+            "original_aggregation_failure_retained": true
+          }
+        ],
+        "retained_units": 600,
+        "artifacts_rechecked": 366,
+        "new_timing_samples": 0,
+        "scope": "Preserved outcome partitions, policy/point certificates, stored values and analytic stress fixture; ROOT/DP keep their original weaker services.",
+        "stage": "compact-scale",
+        "replay_seconds": 64.70149033399866,
+        "quick": false
+      }
+    },
+    {
+      "stage": "price-bounds",
+      "status": "SUCCESS",
+      "seconds": 34.01554974999999,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "price-bounds",
+        "quick": false,
+        "studies": [
+          {
+            "study": "charged_price_bound_01",
+            "retained_units": 13302,
+            "replayed": 13302,
+            "roots": 172877,
+            "extra_queries": 0,
+            "routes": {
+              "compatible_reduced": 13302
+            }
+          },
+          {
+            "study": "charged_price_bound_02",
+            "retained_units": 1866,
+            "replayed": 1866,
+            "roots": 24378,
+            "extra_queries": 3732,
+            "routes": {
+              "compatible_reduced": 630,
+              "charged_all_ideals": 1236
+            }
+          }
+        ],
+        "proof_by_finite_tests": false,
+        "new_evaluation_samples": 0
+      }
+    },
+    {
+      "stage": "resource-frontier",
+      "status": "SUCCESS",
+      "seconds": 6.639392499999303,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "resource-frontier",
+        "quick": false,
+        "retained_inputs": 5421,
+        "replayed": 5421,
+        "roots": 265629,
+        "scope": "finite original-mode minimax; not an all-program proof",
+        "new_evaluation_samples": 0
+      }
+    },
+    {
+      "stage": "resource-vector",
+      "status": "SUCCESS",
+      "seconds": 1.417491541000345,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "resource-vector",
+        "quick": false,
+        "retained_runs": 2442,
+        "replayed_records": 2442,
+        "tables": 96,
+        "replay_groups": 576,
+        "source_paths_checked": 2056,
+        "record_controls": 8,
+        "sequence_controls": 5,
+        "parser_controls": 4,
+        "new_native_replay_records": 0,
+        "new_evaluation_samples": 0,
+        "scope": "finite source-event counters and causal feasibility; no timing or fee calibration"
+      }
+    },
+    {
+      "stage": "resource-frontier-native",
+      "status": "SUCCESS",
+      "seconds": 5.241465624998455,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "resource-frontier-native",
+        "quick": false,
+        "retained_runs": 9314,
+        "replayed_records": 9314,
+        "tables": 128,
+        "replay_groups": 1024,
+        "source_paths_checked": 8800,
+        "record_controls": 8,
+        "sequence_controls": 5,
+        "parser_controls": 4,
+        "new_native_replay_records": 0,
+        "new_evaluation_samples": 0,
+        "scope": "finite source-event counters and causal feasibility; no timing or fee calibration"
+      }
+    },
+    {
+      "stage": "budget-blind",
+      "status": "SUCCESS",
+      "seconds": 10.61627000000044,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "budget-blind",
+        "quick": false,
+        "retained_runs": 17714,
+        "replayed_records": 17714,
+        "tables": 128,
+        "replay_groups": 1280,
+        "source_paths_checked": 17200,
+        "record_controls": 8,
+        "sequence_controls": 5,
+        "parser_controls": 4,
+        "new_native_replay_records": 0,
+        "new_evaluation_samples": 0,
+        "scope": "finite source-event counters and causal feasibility; no timing or fee calibration"
+      }
+    },
+    {
+      "stage": "universal-work",
+      "status": "SUCCESS",
+      "seconds": 0.437299624998559,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "universal-work",
+        "quick": false,
+        "post_outcome_analysis": true,
+        "raw_replay_records": 17200,
+        "complete_path_groups": 1280,
+        "r_zero_groups": 160,
+        "new_measurements": 0,
+        "scope": "fixed-policy component maxima; all-program W theorem separately restricted to simultaneous L optimality at r=0"
+      }
+    },
+    {
+      "stage": "universal-order",
+      "status": "SUCCESS",
+      "seconds": 8.518460332999894,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "universal-order",
+        "quick": false,
+        "cases": 5519,
+        "orders": 86662,
+        "order_pairs": 2773184,
+        "observed_input_cases": 5421,
+        "new_authored_input_cases": 96,
+        "other_cases": 2,
+        "controls": 7,
+        "native_measurements": 0,
+        "new_evaluation_samples": 0,
+        "scope": "fixed-policy order optimum and direct work equations; no full-program or scalar guarantee"
+      }
+    },
+    {
+      "stage": "adaptive-work",
+      "status": "SUCCESS",
+      "seconds": 2.9525126659991656,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "adaptive-work",
+        "seconds": 2.853236458000538,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "cases": 5519,
+        "roots": 176608,
+        "scope": "Exact finite equations within the global-threshold family; no arbitrary-program optimum or new native measurement"
+      }
+    },
+    {
+      "stage": "probe-blocking",
+      "status": "SUCCESS",
+      "seconds": 11.728917417000048,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "probe-blocking",
+        "seconds": 11.625476291999803,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "measured": 4320,
+        "warmup": 1440,
+        "measured_probes": 17280,
+        "paired_invocations": 2160,
+        "cells": 24,
+        "controls": 12,
+        "scope": "Original validator/reference functions and complete fixed raw/median reconstruction. NumPy bootstrap interval bytes are provenance-verified but not recomputed by this standard-library stage; no timing rerun."
+      }
+    },
+    {
+      "stage": "roslyn-source",
+      "status": "SUCCESS",
+      "seconds": 3.537016999998741,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "roslyn-source",
+        "seconds": 3.4524448749998555,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "native_records": 6453,
+        "groups": 12,
+        "reentry_records": 8,
+        "retained_reentry_timeouts": 1,
+        "authored_measured": 3960,
+        "repository_measured": 990,
+        "scope": "Complete original trace/checker and descriptive-summary replay, with source/public manifest transport binding. SourceText identities are asserted by the native harness; event payloads and arbitrary host/reentrant equivalence are not established. No native execution or new timing samples."
+      }
+    },
+    {
+      "stage": "protected-tail",
+      "status": "SUCCESS",
+      "seconds": 20.091871042001003,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "protected-tail",
+        "seconds": 20.008604167000158,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "equation_roots": 176640,
+        "equation_inputs": 5520,
+        "native_paths": 2552,
+        "groups": 144,
+        "controls": 8,
+        "strict_equation_improvements": 285,
+        "scope": "Fixed equations plus all saved native branches",
+        "general_W_optimality": false
+      }
+    },
+    {
+      "stage": "protected-suffix",
+      "status": "SUCCESS",
+      "seconds": 47.46862187499937,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "protected-suffix",
+        "seconds": 47.399720625000555,
+        "policy_roots": 209408,
+        "feasibility_states": 665500,
+        "native_paths": 20594,
+        "groups": 384,
+        "controls": 8,
+        "relative_to_alltail": {
+          "better": 1,
+          "worse": 3,
+          "tie": 209404
+        },
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "general_W_optimality": false,
+        "scope": "Exact original policy/feasibility equations and all saved native paths"
+      }
+    },
+    {
+      "stage": "roslyn-semantics",
+      "status": "SUCCESS",
+      "seconds": 0.24991229199986265,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "roslyn-semantics",
+        "seconds": 0.1640145000001212,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "units": 592,
+        "groups": 3,
+        "versions": [
+          {
+            "version": "patch03",
+            "units": 178,
+            "counts": {
+              "events": 1645,
+              "publications": 941,
+              "snapshots": 1975
+            },
+            "controls": 10
+          },
+          {
+            "version": "patch04",
+            "units": 178,
+            "counts": {
+              "events": 1645,
+              "publications": 941,
+              "snapshots": 1975
+            },
+            "controls": 10
+          },
+          {
+            "version": "rebase",
+            "units": 236,
+            "counts": {
+              "events": 2190,
+              "publications": 1253,
+              "snapshots": 2653
+            },
+            "controls": 12
+          }
+        ],
+        "scope": "All fixed source event/publication/payload/unchanged-state projections and native assertions, plus raw corruption controls; no arbitrary-host proof or new native timing samples."
+      }
+    },
+    {
+      "stage": "roslyn-reentry",
+      "status": "SUCCESS",
+      "seconds": 0.08277708400055417,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "roslyn-reentry",
+        "seconds": 0.016561832999286707,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "processes": 55,
+        "successes": 51,
+        "retained_timeouts": 4,
+        "controls": 5,
+        "scope": "Original failure receipts are preserved as TIMEOUT; repaired error-hook and same-text executions are checked separately. This is a saved-output replay, not a rerun or general host-reentrancy guarantee."
+      }
+    },
+    {
+      "stage": "roslyn-arrivals",
+      "status": "SUCCESS",
+      "seconds": 6.199324082999738,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "roslyn-arrivals",
+        "seconds": 6.087575416000618,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "units": 5664,
+        "measurement": 4720,
+        "warmup": 944,
+        "studies": [
+          {
+            "label": "initial",
+            "units": 864,
+            "measurement": 720,
+            "warmup": 144,
+            "cells": 24,
+            "controls": 8
+          },
+          {
+            "label": "balanced",
+            "units": 1728,
+            "measurement": 1440,
+            "warmup": 288,
+            "cells": 24,
+            "controls": 8
+          },
+          {
+            "label": "rebase",
+            "units": 3072,
+            "measurement": 2560,
+            "warmup": 512,
+            "cells": 32,
+            "controls": 10
+          }
+        ],
+        "scope": "Every fixed raw unit, publication timeline, resource counter, cell and per-fork descriptive statistic is replayed. Initial order confounding and rebase protected merge work remain explicit. No new timing data or calibrated total-work model."
+      }
+    },
+    {
+      "stage": "partial-repair",
+      "status": "SUCCESS",
+      "seconds": 7.502684250001039,
+      "summary": {
+        "status": "SUCCESS",
+        "stage": "partial-repair",
+        "seconds": 7.383645750000142,
+        "quick": false,
+        "replay_only": true,
+        "new_evaluation_samples": 0,
+        "studies": [
+          {
+            "label": "zero_baseline",
+            "instances": 3495,
+            "rows": 160080,
+            "strict_improvement_rows": null,
+            "source_controls": [
+              {
+                "name": "ceil_instead_of_floor",
+                "detected": true
+              },
+              {
+                "name": "repeated_write_additive_instead_of_union",
+                "detected": true
+              },
+              {
+                "name": "drop_low_budget_zero_constraint",
+                "detected": true
+              },
+              {
+                "name": "do_not_charge_repeated_writes_across_calls",
+                "detected": true
+              },
+              {
+                "name": "false_simultaneous_zero_ignorance",
+                "detected": true
+              }
+            ]
+          },
+          {
+            "label": "common_baseline",
+            "instances": 1046,
+            "rows": 20920,
+            "strict_improvement_rows": 6,
+            "source_controls": [
+              {
+                "name": "mu_zero_threshold_loss_detected",
+                "detected": true
+              },
+              {
+                "name": "positive_common_cost_does_change_optimum",
+                "detected": true
+              },
+              {
+                "name": "omitting_common_cost_detected",
+                "detected": true
+              },
+              {
+                "name": "fixed_retry_optimal_for_positive_mu_false",
+                "detected": true
+              },
+              {
+                "name": "hidden_write_count_not_policy_input",
+                "detected": true
+              }
+            ]
+          }
+        ],
+        "scope": "Exact arithmetic recomputation in two distinct partial-repair interfaces. Original deterministic policies, all ties and counterexamples retained. Some source controls are algebra/schema checks, not independent raw mutation tests. No mechanical proof, native calibration or novelty certification."
+      }
+    }
+  ],
+  "source_native": {
+    "utc": "2026-09-09T21:31:34.748757+00:00",
+    "status": "SUCCESS",
+    "source_summary_sha256": "7629cf3723e6a20d93c61c8d3f98048d6ad9e3b9b9a83f8eba8435a05938db59",
+    "script_sha256": "ad374f33d98ee9476f00b8f2cfa0b18d68a3df726de1061d716e6d93b642c8b9",
+    "semantic_units": 236,
+    "semantic_counts": {
+      "events": 2190,
+      "publications": 1253,
+      "snapshots": 2653
+    },
+    "reentry_processes": 23,
+    "seconds": 95.67575787500027,
+    "source_revision": "6c4a46a31302167b425d5e0a31ea83c9a9aa1d09",
+    "source_archive_sha256": "7b0bfa1c049eeddf3257ad61b28eca11c259296d478edd4cf58767b2ed9184c4",
+    "new_population": false,
+    "timing_campaign_rerun": false
+  },
+  "evidence_mutation": "All prior evidence rows and source bytes retained. Documentation changes after the local replay are covered by final manifest verification; portable workers and evidence did not change."
+}

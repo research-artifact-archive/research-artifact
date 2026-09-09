@@ -1,5 +1,7 @@
 # Bounded calls, protected-tail refinement, and native source studies
 
+This page describes the preceding source-study versions. The [current source-semantics extension](SOURCE_SEMANTICS_AND_PARTIAL_REPAIR.md) adds event/state validation, a further error-path repair, independent arrivals, a stronger guarded-rebase comparator, and four portable stages. Earlier outcomes and their original limitations below remain intact.
+
 The budget-unaware frontier needs no writer budget or calibrated protection premium. Cached completion is an inherited mechanism; the exact call/protection frontier, its normal-form justification and the refinements below are the stated contributions. These are authored fixed-resource results. They do not establish broad application prevalence, editor throughput, WCET or general elapsed-time improvement.
 
 ## Policy refinements and their limits

@@ -1,0 +1,48 @@
+{
+  "utc": "2026-09-09T20:51:39.616080+00:00",
+  "status": "PASS",
+  "instances": 3495,
+  "rows": 160080,
+  "classification_cases": 13980,
+  "classification_counts": {
+    "(0, True, True)": 2190,
+    "(1, True, True)": 2190,
+    "(2, True, True)": 2190,
+    "(3, True, True)": 2190,
+    "(0, False, True)": 1305,
+    "(1, False, False)": 1305,
+    "(2, False, False)": 1305,
+    "(3, False, False)": 1305
+  },
+  "failures": 0,
+  "controls": [
+    {
+      "name": "ceil_instead_of_floor",
+      "detected": true
+    },
+    {
+      "name": "repeated_write_additive_instead_of_union",
+      "detected": true
+    },
+    {
+      "name": "drop_low_budget_zero_constraint",
+      "detected": true
+    },
+    {
+      "name": "do_not_charge_repeated_writes_across_calls",
+      "detected": true
+    },
+    {
+      "name": "false_simultaneous_zero_ignorance",
+      "detected": true
+    }
+  ],
+  "seconds": 2.3542130000005272,
+  "outputs_sha256": {
+    "FAILURES.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "INPUT_RECEIPT.json": "ed4877e26977cf56fd45dec8f4818cf74e542f20c9846a5d4a9b5427b4c6990f",
+    "TWO_COMPONENT_POLICIES.json": "94f56ed36d2fe52b63f56c9112042b2890006351e37542841662f42469e871df",
+    "outcomes.jsonl": "993a967a7ad74fb25f05ec67335eca2995f8657252c4d6770021714ffea3f6c3"
+  },
+  "scope": "finite exact arithmetic checks of a new specified partial-repair interface; not native semantics or a mechanical proof"
+}

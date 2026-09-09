@@ -1,0 +1,11 @@
+# patch03 の missing-document 再入反例
+
+`run01/INPUT_RECEIPT.json` に結果前固定した14ケースは10 SUCCESS、4 TIMEOUT、0 FAILURE、0 INVALIDであった。各ケースは独立process、3秒上限であり、TIMEOUT後はprocess groupを停止した。これは作成したWorkspace派生クラスにおける有界検査で、上流で報告済みの不具合の再現ではない。
+
+対象文書が存在しないエラー経路で呼ばれるprotected virtual `GetDocumentName`をoverrideし、無関係の背景文書を一度だけ同期更新する。元の変換はセマフォ外なので、背景更新が完了した後、元来のArgumentExceptionが返る。patch03ではtwo/r0のmissing_beforeとremoved_between、two/r1のremoved_between、three/r0のremoved_betweenがタイムアウトした。raw traceは、lock_enter → kernel_inside_begin → get_name_enter → 背景更新のbefore_lockで途切れる。非再入のセマフォを同じthreadが再取得しようとする構造と一致する。
+
+patched originalの4ケース、上記以外のtwo/threeの4ケース、無改変baselineのmissing_before/r0,r1の2ケースは、背景更新・一回の通知・一回の名前hook・ArgumentException・対象不在を確認して完了した。baselineには内部hookを追加していないのでremoved_betweenを同等条件で実行したとは扱わない。
+
+この反例は、純粋・終了する保護内kernelを前提とする公開稿105の抽象定理への反例ではない。実装の保護内適格性に追加の義務があることを示す。既存の非再入hostでの330バッチと178意味検査の結果は保持するが、そこで未検査だった例外経路まで意味保持を一般化できない。
+
+修正方針は、取得した不変Solutionで対象文書が不在ならセマフォを解放し、その同じSolutionを引数として元の変換・エラー生成をロック外で行うことである。新しい例外型を導入せず、既存FatalErrorのcatch順序と名前hookの引数を維持する。patch04は別source cloneに実装し、新しい版として同じ14ケースおよび既存意味検査を実施する。一般的なhost callback・任意SourceText実装のlock-safety証明へ昇格させない。

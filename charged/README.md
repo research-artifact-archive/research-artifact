@@ -29,7 +29,7 @@ python3 charged/reproduce.py verify
 python3 charged/reproduce.py all --out work/charged-all --timeout 300
 ```
 
-The driver verifies the public provenance, then runs each stage in a separate process with a fresh output directory. `--quick` is a smoke subset and must not be reported as full reproduction. The full driver retains original measurements and rechecks them; its elapsed times are replay times, not additional benchmark samples. The evidence tree is about 1.3 GB unpacked. Two oversized repeated-input ledgers use lossless gzip; original/decoded/container hashes are recorded, and the reader verifies them.
+The driver verifies the public provenance, then runs each stage in a separate process with a fresh output directory. `--quick` is a smoke subset and must not be reported as full reproduction. The full driver retains original measurements and rechecks them; its elapsed times are replay times, not additional benchmark samples. The evidence tree is about 1.8 GB unpacked. Two oversized repeated-input ledgers use lossless gzip; original/decoded/container hashes are recorded, and the reader verifies them.
 
 | Stage | Full evidence checked |
 |---|---|
@@ -86,3 +86,7 @@ The [bounded-source guide](BOUNDED_SOURCE.md) gives the adaptive-family extensio
 ## Certified suffix choices
 
 The [suffix certificate](SUFFIX_CERTIFICATE.md) gives exact feasibility after the failed-call allowance is exhausted, with all 209,408 policy roots, 665,500 finite states and 20,594 native paths. Greedy fresh choice is sometimes worse than all-tail; all adverse examples remain. The new `protected-suffix` stage brings the standard replay to 22 stages. Optional `protected-suffix-java` re-executes its complete fixed native paths.
+
+## Source semantics and partial-repair boundary
+
+The [new guide](SOURCE_SEMANTICS_AND_PARTIAL_REPAIR.md) documents strengthened source obligations, the four retained error-hook TIMEOUTs and their separate repair, all independent-arrival/rebase outcomes, and exact partial-repair limits. The standard driver now has 26 stages. New stages are `roslyn-semantics` (592 records), `roslyn-reentry` (55 processes), `roslyn-arrivals` (5,664 units), and `partial-repair` (3,495/160,080 and 1,046/20,920 distinct input/row studies). The optional `roslyn_extended_native.py` rebuilds pinned source and executes 236 semantic and 23 reentry controls.

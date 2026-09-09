@@ -1,0 +1,93 @@
+--- patch04
++++ rebase01
+@@ -54,7 +54,8 @@
+         public int OwnerThreadId;
+         public int Mode; // -1 original optimistic; 0 two modes; 1 cached completion
+         public int Remaining;
+-        public long Calls, PreparedOutside, PreparedInside, Mismatches, CheapFailures;
++        public long Calls, PreparedOutside, PreparedInside, Mismatches, CheapFailures, Rebases;
++        public bool AllowPreparedRebase;
+         public Action<string, Solution>? Hook;
+         public void Step(string name, Solution snapshot) => Hook?.Invoke(name, snapshot);
+     }
+@@ -498,7 +499,8 @@
+         Action<Solution, Solution, TData>? onAfterUpdate = null,
+         DocumentRetryStudyState? retryStudy = null,
+         Func<Solution, TData, bool>? isNoOp = null,
+-        Func<Solution, TData, bool>? mayTransformProtected = null)
++        Func<Solution, TData, bool>? mayTransformProtected = null,
++        Func<Solution, Solution, Solution, TData, Solution?>? tryPreparedRebase = null)
+     {
+ #pragma warning disable CA2012 // Use ValueTasks correctly
+         var valueTask = SetCurrentSolutionAsync(
+@@ -511,7 +513,8 @@
+             CancellationToken.None,
+             retryStudy,
+             isNoOp,
+-            mayTransformProtected);
++            mayTransformProtected,
++            tryPreparedRebase);
+ 
+         return valueTask.VerifyCompleted("Task must have completed synchronously as we passed 'useAsync: false' to SetCurrentSolutionAsync");
+ #pragma warning restore CA2012 // Use ValueTasks correctly
+@@ -528,7 +531,8 @@
+         CancellationToken cancellationToken,
+         DocumentRetryStudyState? retryStudy = null,
+         Func<Solution, TData, bool>? isNoOp = null,
+-        Func<Solution, TData, bool>? mayTransformProtected = null)
++        Func<Solution, TData, bool>? mayTransformProtected = null,
++        Func<Solution, Solution, Solution, TData, Solution?>? tryPreparedRebase = null)
+     {
+         Contract.ThrowIfNull(transformation);
+         if (retryStudy is not null && (retryStudy.Mode < -1 || retryStudy.Mode > 1 || retryStudy.Remaining < 0))
+@@ -602,9 +606,19 @@
+                     }
+                     else if (_latestSolution != oldSolution)
+                     {
++                        var preparedFrom = oldSolution;
+                         oldSolution = _latestSolution;
+                         if (retryStudy is not null) retryStudy.Mismatches++;
+-                        if (retryStudy is { Mode: 1, Remaining: 0 })
++                        var rebased = retryStudy is { AllowPreparedRebase: true }
++                            ? tryPreparedRebase?.Invoke(preparedFrom, newSolution, oldSolution, data)
++                            : null;
++                        if (rebased is not null)
++                        {
++                            retryStudy!.Rebases++;
++                            retryStudy.Step("rebase_completed", rebased);
++                            newSolution = rebased;
++                        }
++                        else if (retryStudy is { Mode: 1, Remaining: 0 })
+                         {
+                             if (mayTransformProtected?.Invoke(oldSolution, data) == false)
+                             {
+@@ -1475,7 +1489,28 @@
+             },
+             retryStudy: retryStudy,
+             isNoOp: static (solution, data) => data.isNoOp?.Invoke(solution, data.documentId, data.arg) == true,
+-            mayTransformProtected: static (solution, data) => data.getDocumentInSolution(solution, data.documentId) is not null);
++            mayTransformProtected: static (solution, data) => data.getDocumentInSolution(solution, data.documentId) is not null,
++            tryPreparedRebase: static (preparedFrom, prepared, latest, data) =>
++            {
++                // Stronger comparator outside the whole-kernel interface. Identity guards
++                // conservatively reject changes to any affected project or link relation.
++                if (!data.isCodeDocument || data.updatedDocumentIds.Count == 0 ||
++                    preparedFrom.Id != latest.Id || latest.GetDocument(data.documentId) is null)
++                    return null;
++                var oldRelated = preparedFrom.GetRelatedDocumentIds(data.documentId, includeDifferentLanguages: true);
++                var latestRelated = latest.GetRelatedDocumentIds(data.documentId, includeDifferentLanguages: true);
++                if (!oldRelated.SequenceEqual(latestRelated))
++                    return null;
++                foreach (var id in oldRelated.Append(data.documentId))
++                {
++                    if (!ReferenceEquals(preparedFrom.GetProjectState(id.ProjectId), latest.GetProjectState(id.ProjectId)))
++                        return null;
++                }
++                var merged = latest;
++                foreach (var id in data.updatedDocumentIds)
++                    merged = merged.WithDocumentContentsFrom(id, prepared.GetRequiredDocument(id).DocumentState);
++                return merged;
++            });
+     }
+ 
+     /// <summary>

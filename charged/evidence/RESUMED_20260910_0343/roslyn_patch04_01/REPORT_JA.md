@@ -1,0 +1,7 @@
+# patch04 の修正と再検証
+
+patch03のmissing-document error再入で観測した4 TIMEOUTを保存し、別source cloneのWorkspace.csだけを修正した。保護内変換の直前に、捕捉したSolutionに対象文書があることを確認する。不在ならセマフォを解放し、その同じSolutionに元の変換を適用するため、protected virtual GetDocumentNameの呼出しと元来のArgumentException生成がロック外へ戻る。既存FatalError catch、イベントlistener準備、同一text no-op、attemptごとのscratch clearは保持した。
+
+新ソースのbuildは39.13秒、0 warning、0 error。元と同じnative executableへ修正版DLLを差し替え、同じ14件のerror再入入力は14 SUCCESS、同じ4件の同一テキスト通知再入は4 SUCCESS。元とbyte同一の意味checkerで、178件（patched 174、無改変zero-writer control 4）、イベント1,645、publication 941、保持snapshot 1,975がすべてPASSとなった。10件のraw破損controlも全て拒否した。失敗・timeout・invalid・除外・引き直しはこの新版validationでは0であり、旧版の4 TIMEOUTは変更していない。
+
+`APPLICATIONS.json`は新DLLと変更していない実行harnessを結び、各INPUT_RECEIPTは結果前の全分母を記録する。一般的なhost callbackの非再入性、全Roslyn内部状態の等価性、固定変換費用、productionでの性能をこの結果から認定しない。完了する通常のSourceText更新という評価範囲で、以前の公開イベント・不変snapshot検査を維持しながら、新たに確認した例外経路の反例を修正した。

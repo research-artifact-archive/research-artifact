@@ -1,0 +1,228 @@
+--- a/src/Workspaces/Core/Portable/Workspace/Workspace.cs
++++ b/src/Workspaces/Core/Portable/Workspace/Workspace.cs
+@@ -47,6 +47,23 @@
+     // forces serialization of mutation calls from host (OnXXX methods). Must take this lock before taking stateLock.
+     private readonly SemaphoreSlim _serializationLock = new(initialCount: 1);
+ 
++    // Author research instrumentation. Only explicit SourceText updates on OwnerThreadId opt in.
++    // Other updates retain the original path. This is not an upstream public API.
++    internal sealed class DocumentRetryStudyState
++    {
++        public int OwnerThreadId;
++        public int Mode; // -1 original optimistic; 0 two modes; 1 cached completion
++        public int Remaining;
++        public long Calls, PreparedOutside, PreparedInside, Mismatches, CheapFailures;
++        public Action<string, Solution>? Hook;
++        public void Step(string name, Solution snapshot) => Hook?.Invoke(name, snapshot);
++    }
++
++    internal DocumentRetryStudyState? DocumentRetryStudy;
++
++    private DocumentRetryStudyState? CurrentDocumentRetryStudy
++        => DocumentRetryStudy?.OwnerThreadId == Environment.CurrentManagedThreadId ? DocumentRetryStudy : null;
++
+     // this lock guards all the mutable fields (do not share lock with derived classes)
+     private readonly NonReentrantLock _stateLock = new(useThisInstanceForSynchronization: true);
+ 
+@@ -478,7 +495,10 @@
+         Func<Solution, TData, Solution> transformation,
+         bool mayRaiseEvents = true,
+         Action<Solution, Solution, TData>? onBeforeUpdate = null,
+-        Action<Solution, Solution, TData>? onAfterUpdate = null)
++        Action<Solution, Solution, TData>? onAfterUpdate = null,
++        DocumentRetryStudyState? retryStudy = null,
++        Func<Solution, TData, bool>? isNoOp = null,
++        Func<Solution, TData, bool>? mayTransformProtected = null)
+     {
+ #pragma warning disable CA2012 // Use ValueTasks correctly
+         var valueTask = SetCurrentSolutionAsync(
+@@ -488,13 +508,16 @@
+             mayRaiseEvents,
+             onBeforeUpdate,
+             onAfterUpdate,
+-            CancellationToken.None);
++            CancellationToken.None,
++            retryStudy,
++            isNoOp,
++            mayTransformProtected);
+ 
+         return valueTask.VerifyCompleted("Task must have completed synchronously as we passed 'useAsync: false' to SetCurrentSolutionAsync");
+ #pragma warning restore CA2012 // Use ValueTasks correctly
+     }
+ 
+-    /// <inheritdoc cref="SetCurrentSolution{TData}(TData, Func{Solution, TData, Solution}, bool, Action{Solution, Solution, TData}?, Action{Solution, Solution, TData}?)"/>
++    /// <inheritdoc cref="SetCurrentSolution{TData}"/>
+     private protected async ValueTask<(Solution oldSolution, Solution newSolution)> SetCurrentSolutionAsync<TData>(
+         bool useAsync,
+         TData data,
+@@ -502,9 +525,26 @@
+         bool mayRaiseEvents,
+         Action<Solution, Solution, TData>? onBeforeUpdate,
+         Action<Solution, Solution, TData>? onAfterUpdate,
+-        CancellationToken cancellationToken)
++        CancellationToken cancellationToken,
++        DocumentRetryStudyState? retryStudy = null,
++        Func<Solution, TData, bool>? isNoOp = null,
++        Func<Solution, TData, bool>? mayTransformProtected = null)
+     {
+         Contract.ThrowIfNull(transformation);
++        if (retryStudy is not null && (retryStudy.Mode < -1 || retryStudy.Mode > 1 || retryStudy.Remaining < 0))
++            throw new ArgumentOutOfRangeException(nameof(retryStudy));
++
++        Solution Transform(Solution input, bool inside)
++        {
++            if (retryStudy is not null)
++            {
++                if (inside) retryStudy.PreparedInside++; else retryStudy.PreparedOutside++;
++                retryStudy.Step(inside ? "kernel_inside_begin" : "kernel_outside_begin", input);
++            }
++            var result = transformation(input, data);
++            retryStudy?.Step(inside ? "kernel_inside_end" : "kernel_outside_end", result);
++            return result;
++        }
+ 
+         try
+         {
+@@ -517,23 +557,80 @@
+                 EnsureEventListeners();
+             }
+ 
++            var forceOutside = false;
+             while (true)
+             {
+-                // Run the transformation outside of the lock as it should not be making any state changes to us.
+-                var newSolution = transformation(oldSolution, data);
+-
+-                // if it did nothing, then no need to proceed.
+-                if (oldSolution == newSolution)
++                var freshProtected = !forceOutside && retryStudy is { Mode: 0, Remaining: 0 };
++                forceOutside = false;
++                // Preserve the source's known same-text no-op without reacquiring the
++                // non-reentrant semaphore from a notification callback. This predicate is
++                // supplied only by the SourceText path, after EnsureEventListeners above.
++                if (freshProtected && isNoOp?.Invoke(oldSolution, data) == true)
++                {
++                    retryStudy?.Step("return_noop", oldSolution);
++                    return (oldSolution, oldSolution);
++                }
++                // The ordinary path still transforms outside protection. The scoped two-mode
++                // path defers that transformation until after acquiring the source semaphore.
++                var newSolution = freshProtected ? oldSolution : Transform(oldSolution, inside: false);
++
++                // Preserve the original early no-op behavior.
++                if (!freshProtected && oldSolution == newSolution)
++                {
++                    retryStudy?.Step("return_noop", newSolution);
+                     return (oldSolution, newSolution);
+-
+-                // Now, take the lock and try to update our internal state.
++                }
++
++                retryStudy?.Step("before_lock", oldSolution);
+                 using (useAsync ? await _serializationLock.DisposableWaitAsync(cancellationToken).ConfigureAwait(false) : _serializationLock.DisposableWait(cancellationToken))
+                 {
+-                    if (_latestSolution != oldSolution)
++                    if (retryStudy is not null) retryStudy.Calls++;
++                    retryStudy?.Step("lock_enter", _latestSolution);
++                    if (freshProtected)
+                     {
+-                        // something else snuck in and wrote to _latestSolution. Restart and try again.
+                         oldSolution = _latestSolution;
+-                        continue;
++                        // Missing-document error naming may invoke a virtual host method.
++                        // Release protection, then run the original transformation on this
++                        // same captured snapshot, preserving its exception/catch behavior.
++                        if (mayTransformProtected?.Invoke(oldSolution, data) == false)
++                        {
++                            forceOutside = true;
++                            retryStudy?.Step("defer_error_outside", oldSolution);
++                            continue;
++                        }
++                        newSolution = Transform(oldSolution, inside: true);
++                    }
++                    else if (_latestSolution != oldSolution)
++                    {
++                        oldSolution = _latestSolution;
++                        if (retryStudy is not null) retryStudy.Mismatches++;
++                        if (retryStudy is { Mode: 1, Remaining: 0 })
++                        {
++                            if (mayTransformProtected?.Invoke(oldSolution, data) == false)
++                            {
++                                forceOutside = true;
++                                retryStudy.Step("defer_error_outside", oldSolution);
++                                continue;
++                            }
++                            newSolution = Transform(oldSolution, inside: true);
++                        }
++                        else
++                        {
++                            if (retryStudy is not null)
++                            {
++                                retryStudy.CheapFailures++;
++                                if (retryStudy.Mode >= 0) retryStudy.Remaining--;
++                                retryStudy.Step("cheap_failure", oldSolution);
++                            }
++                            continue;
++                        }
++                    }
++
++                    // Recomputing against the latest snapshot may itself be a no-op.
++                    if (oldSolution == newSolution)
++                    {
++                        retryStudy?.Step("return_noop", newSolution);
++                        return (oldSolution, newSolution);
+                     }
+ 
+                     newSolution = newSolution.WithNewWorkspaceFrom(oldSolution);
+@@ -545,6 +642,7 @@
+ 
+                     // Once we've updated _latestSolution, perform any requested callbacks.
+                     onAfterUpdate?.Invoke(oldSolution, newSolution, data);
++                    retryStudy?.Step("return_changed", newSolution);
+                     return (oldSolution, newSolution);
+                 }
+             }
+@@ -1179,7 +1277,12 @@
+             (solution, docId, newTextAndMode) => solution.WithDocumentText(docId, newTextAndMode.newText, newTextAndMode.mode),
+             WorkspaceChangeKind.DocumentChanged,
+             isCodeDocument: true,
+-            requireDocumentPresent);
++            requireDocumentPresent,
++            retryStudy: CurrentDocumentRetryStudy,
++            isNoOp: static (solution, id, textAndMode) =>
++                (textAndMode.mode == PreservationMode.PreserveIdentity || textAndMode.mode == PreservationMode.PreserveValue) &&
++                solution.GetDocument(id) is { } document && document.TryGetText(out var oldText) &&
++                ReferenceEquals(oldText, textAndMode.newText));
+     }
+ 
+     /// <summary>
+@@ -1284,13 +1387,15 @@
+         Func<Solution, DocumentId, TArg, Solution> updateSolutionWithText,
+         WorkspaceChangeKind changeKind,
+         bool isCodeDocument,
+-        bool requireDocumentPresent)
++        bool requireDocumentPresent,
++        DocumentRetryStudyState? retryStudy = null,
++        Func<Solution, DocumentId, TArg, bool>? isNoOp = null)
+     {
+         // Data that is updated in the transformation, and read in in onAfterUpdate.  Because SetCurrentSolution may
+         // loop, we have to make sure to always clear this each time we enter the loop.
+         var updatedDocumentIds = new List<DocumentId>();
+         SetCurrentSolution(
+-            data: (@this: this, documentId, arg, getDocumentInSolution, updateSolutionWithText, changeKind, isCodeDocument, requireDocumentPresent, updatedDocumentIds),
++            data: (@this: this, documentId, arg, getDocumentInSolution, updateSolutionWithText, changeKind, isCodeDocument, requireDocumentPresent, updatedDocumentIds, isNoOp),
+             static (oldSolution, data) =>
+             {
+                 // Ensure this closure data is always clean if we had to restart the the operation.
+@@ -1367,7 +1472,10 @@
+                         newSolution,
+                         documentId: updatedDocumentInfo);
+                 }
+-            });
++            },
++            retryStudy: retryStudy,
++            isNoOp: static (solution, data) => data.isNoOp?.Invoke(solution, data.documentId, data.arg) == true,
++            mayTransformProtected: static (solution, data) => data.getDocumentInSolution(solution, data.documentId) is not null);
+     }
+ 
+     /// <summary>

@@ -1,0 +1,106 @@
+{"m_complete": 1, "instances": 2, "rows": 40, "strict_improvements": 0, "failures": 0, "seconds": 0.0038857079998706467}
+{"m_complete": 2, "instances": 30, "rows": 600, "strict_improvements": 0, "failures": 0, "seconds": 0.11107183300009638}
+{"m_complete": 3, "instances": 1046, "rows": 20920, "strict_improvements": 6, "failures": 0, "seconds": 4.34333154199885}
+{
+  "utc": "2026-09-09T21:19:44.739408+00:00",
+  "status": "PASS",
+  "instances": 1046,
+  "rows": 20920,
+  "history_tree_rows": 600,
+  "zero_mu_rows": 4184,
+  "strict_improvement_rows": 6,
+  "exhaustive_policy_runs": [
+    {
+      "weights": [
+        1,
+        2
+      ],
+      "footprints": [
+        1,
+        2
+      ],
+      "q": 3,
+      "mu": "1/2",
+      "policies_enumerated": 4096,
+      "best": "7/5",
+      "compiler": "7/5",
+      "best_policy_count": 32,
+      "best_policy_first_bits": [
+        223,
+        255,
+        479,
+        511,
+        735,
+        767,
+        991,
+        1023,
+        1247,
+        1279
+      ],
+      "PASS": true
+    },
+    {
+      "weights": [
+        1,
+        2
+      ],
+      "footprints": [
+        1,
+        2
+      ],
+      "q": 3,
+      "mu": "2",
+      "policies_enumerated": 4096,
+      "best": "5/4",
+      "compiler": "5/4",
+      "best_policy_count": 32,
+      "best_policy_first_bits": [
+        223,
+        255,
+        479,
+        511,
+        735,
+        767,
+        991,
+        1023,
+        1247,
+        1279
+      ],
+      "PASS": true
+    }
+  ],
+  "controls": [
+    {
+      "name": "mu_zero_threshold_loss_detected",
+      "detected": true
+    },
+    {
+      "name": "positive_common_cost_does_change_optimum",
+      "detected": true
+    },
+    {
+      "name": "omitting_common_cost_detected",
+      "detected": true
+    },
+    {
+      "name": "fixed_retry_optimal_for_positive_mu_false",
+      "detected": true
+    },
+    {
+      "name": "hidden_write_count_not_policy_input",
+      "detected": true
+    }
+  ],
+  "failures": 0,
+  "seconds": 4.847224249999272,
+  "outputs_sha256": {
+    "FAILURES.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "INPUT_RECEIPT.json": "6e87c70c1d1daaa5b0cb946c9acd274232597ff7bd3dde2e4d68fd39f01a4d40",
+    "WITNESSES.json": "e484511e210b56d5dee18f987c52b3e5447d3312aa8e478156a1ccb4ea8a5fae",
+    "EXHAUSTIVE_POLICIES.json": "862ddb5c861c2d19084deb08feea50b46c9ea96f95ab9cd5bb415aabb3bda49b",
+    "SINGLETON_EXAMPLES.json": "d8cda91463ab94cae4a57db52f9ce7d25043eb539c722cb30bc10f9ce0c7877f",
+    "outcomes.jsonl": "ba6d035075aa9a77719510b1c905ed5a9d03f5279a8e2bfa1c988283bb0a55fd"
+  },
+  "scope": "finite exact arithmetic exploration, not a native application cost calibration or mechanical proof"
+}
+

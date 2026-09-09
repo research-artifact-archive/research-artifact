@@ -1,0 +1,84 @@
+--- patch03
++++ patch04
+@@ -497,7 +497,8 @@
+         Action<Solution, Solution, TData>? onBeforeUpdate = null,
+         Action<Solution, Solution, TData>? onAfterUpdate = null,
+         DocumentRetryStudyState? retryStudy = null,
+-        Func<Solution, TData, bool>? isNoOp = null)
++        Func<Solution, TData, bool>? isNoOp = null,
++        Func<Solution, TData, bool>? mayTransformProtected = null)
+     {
+ #pragma warning disable CA2012 // Use ValueTasks correctly
+         var valueTask = SetCurrentSolutionAsync(
+@@ -509,7 +510,8 @@
+             onAfterUpdate,
+             CancellationToken.None,
+             retryStudy,
+-            isNoOp);
++            isNoOp,
++            mayTransformProtected);
+ 
+         return valueTask.VerifyCompleted("Task must have completed synchronously as we passed 'useAsync: false' to SetCurrentSolutionAsync");
+ #pragma warning restore CA2012 // Use ValueTasks correctly
+@@ -525,7 +527,8 @@
+         Action<Solution, Solution, TData>? onAfterUpdate,
+         CancellationToken cancellationToken,
+         DocumentRetryStudyState? retryStudy = null,
+-        Func<Solution, TData, bool>? isNoOp = null)
++        Func<Solution, TData, bool>? isNoOp = null,
++        Func<Solution, TData, bool>? mayTransformProtected = null)
+     {
+         Contract.ThrowIfNull(transformation);
+         if (retryStudy is not null && (retryStudy.Mode < -1 || retryStudy.Mode > 1 || retryStudy.Remaining < 0))
+@@ -554,9 +557,11 @@
+                 EnsureEventListeners();
+             }
+ 
++            var forceOutside = false;
+             while (true)
+             {
+-                var freshProtected = retryStudy is { Mode: 0, Remaining: 0 };
++                var freshProtected = !forceOutside && retryStudy is { Mode: 0, Remaining: 0 };
++                forceOutside = false;
+                 // Preserve the source's known same-text no-op without reacquiring the
+                 // non-reentrant semaphore from a notification callback. This predicate is
+                 // supplied only by the SourceText path, after EnsureEventListeners above.
+@@ -584,6 +589,15 @@
+                     if (freshProtected)
+                     {
+                         oldSolution = _latestSolution;
++                        // Missing-document error naming may invoke a virtual host method.
++                        // Release protection, then run the original transformation on this
++                        // same captured snapshot, preserving its exception/catch behavior.
++                        if (mayTransformProtected?.Invoke(oldSolution, data) == false)
++                        {
++                            forceOutside = true;
++                            retryStudy?.Step("defer_error_outside", oldSolution);
++                            continue;
++                        }
+                         newSolution = Transform(oldSolution, inside: true);
+                     }
+                     else if (_latestSolution != oldSolution)
+@@ -592,6 +606,12 @@
+                         if (retryStudy is not null) retryStudy.Mismatches++;
+                         if (retryStudy is { Mode: 1, Remaining: 0 })
+                         {
++                            if (mayTransformProtected?.Invoke(oldSolution, data) == false)
++                            {
++                                forceOutside = true;
++                                retryStudy.Step("defer_error_outside", oldSolution);
++                                continue;
++                            }
+                             newSolution = Transform(oldSolution, inside: true);
+                         }
+                         else
+@@ -1454,7 +1474,8 @@
+                 }
+             },
+             retryStudy: retryStudy,
+-            isNoOp: static (solution, data) => data.isNoOp?.Invoke(solution, data.documentId, data.arg) == true);
++            isNoOp: static (solution, data) => data.isNoOp?.Invoke(solution, data.documentId, data.arg) == true,
++            mayTransformProtected: static (solution, data) => data.getDocumentInSolution(solution, data.documentId) is not null);
+     }
+ 
+     /// <summary>
