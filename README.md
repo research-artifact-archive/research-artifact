@@ -13,7 +13,7 @@ python3 -B tools/verify_release.py
 python3 -B charged/reproduce.py all --out work/charged-full --timeout 300
 ```
 
-Use Python 3.10 or later with assertions enabled. The ten standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 1.2 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. A charged manuscript citing this evidence will be added after public-acquisition replay; the paper currently under `paper/` is the preceding zero-fee revision.
+Use Python 3.10 or later with assertions enabled. The ten standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 1.2 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. The [charged manuscript](paper/main.pdf) cites the immutable evidence commit. A fresh public checkout passed all ten standard stages, both JDK17 native stages and all372 native Deephaven records; see the [reproduction receipt](REPRODUCTION_20260909.json). These are author-side fixed-evidence replays.
 
 ## Preceding zero-fee package
 
@@ -27,14 +27,14 @@ cd research-artifact
 
 The command verifies release hashes and the frozen package, then replays small known-input checks of the latest compiler and supporting-line basis. It writes fresh results under `work/`. A quick check is not the full evaluation and does not replace earlier outcomes or increase scientific sample counts. To obtain an immutable version, check out the commit cited in the paper before running it.
 
-- [Preceding zero-fee paper](paper/main.pdf) and [source/build information](paper/README.md); [frozen pre-publication paper](package/paper/main.pdf) remains preserved.
+- [Current charged paper](paper/main.pdf) and [source/build information](paper/README.md); the [preceding zero-fee paper](package/paper/main.pdf) remains preserved.
 - [Compiler usage and complete latest replay](package/README.md).
 - [Evidence index](package/EVIDENCE_INDEX.md) and [paper-to-artifact map](PAPER_ARTIFACT_MAP.md).
 - [Zero-fee theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
 - [Earlier stages and dependency requirements](package/history/v4/README.md).
 - [Rights and provenance](NOTICE.md).
 
-The `package/` directory is the byte-preserved version-5 snapshot. Its historical README and paper describe their *pre-publication* local status; the revised paper in `paper/` cites the public evidence commit. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
+The `package/` directory is the byte-preserved version-5 snapshot. Its historical README and paper describe their *pre-publication* local status; the current charged paper in `paper/` cites its separate public evidence commit. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
 
 READMEs archived under `package/history/` describe their original package roots. Their instructions to run “from this directory” do not refer to those archive subdirectories. In this distribution, use the repository-root commands in the paper-to-artifact map, or run the historical `reproduce*.py` commands from `package/`.
 
