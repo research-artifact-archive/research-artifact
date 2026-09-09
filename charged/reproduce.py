@@ -5,7 +5,7 @@ from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
 COMPACT_STAGES=['compact','compact-native','compact-scale']
-RESOURCE_STAGES=['price-bounds','resource-frontier','resource-vector','resource-frontier-native']
+RESOURCE_STAGES=['price-bounds','resource-frontier','resource-vector','resource-frontier-native','budget-blind']
 STAGES=['curves','native','deephaven','scale','calibration','ordering','refutations']+COMPACT_STAGES+RESOURCE_STAGES
 
 def save(p,x):
@@ -34,7 +34,7 @@ def verify():
 def main():
     if not __debug__:raise SystemExit('Assertions must be enabled; do not use python -O.')
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('stage',choices=['verify','all','native-java','compact-native-java','resource-vector-java','resource-frontier-java']+STAGES)
+    p.add_argument('stage',choices=['verify','all','native-java','compact-native-java','resource-vector-java','resource-frontier-java','budget-blind-java']+STAGES)
     p.add_argument('--out',type=Path);p.add_argument('--quick',action='store_true');p.add_argument('--timeout',type=int,default=300)
     a=p.parse_args();count=verify()
     if a.stage=='verify':print(json.dumps(dict(status='VERIFIED',files=count)));return
@@ -46,7 +46,7 @@ def main():
     results=[]
     for stage in stages:
         output=a.out/stage;output.mkdir()
-        worker='resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
+        worker='resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java','budget-blind-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
         argv=[sys.executable,'-B',str(HERE/worker),stage,str(output)]
         if a.quick:argv.append('--quick')
         start=time.monotonic()

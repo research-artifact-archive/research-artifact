@@ -2,7 +2,7 @@
 
 The zero-fee package and this charged supplement belong to the same continuing author-side research project. The preceding anonymous publication is an earlier research snapshot, not a separate peer-reviewed prior paper. Its results remain part of the present paper's foundations; they are not evidence that the charged revision newly discovered every theorem below. Priority against external literature is a separate question, addressed through the paper's primary-source comparisons.
 
-The exact preceding source is [package/paper/main.tex](../package/paper/main.tex), published in evidence commit `e0e011023c0591bbbf422390ad8d29785ad0023f`; its source hash is recorded below. The charged column refers to the fixed build73 manuscript and uses result titles so later numbering changes do not disguise reuse.
+The exact preceding source is [package/paper/main.tex](../package/paper/main.tex), published in evidence commit `e0e011023c0591bbbf422390ad8d29785ad0023f`; its source hash is bound by the release manifest. The charged column refers to the charged manuscript and uses result titles so later numbering changes do not disguise reuse.
 
 | Charged-paper result | Already present in the zero-fee snapshot | Added argument or retained scope |
 |---|---|---|
@@ -23,4 +23,4 @@ The retained [older theorem guide](../THEOREM_AND_CHECKER_GUIDE.md) refers to th
 
 ## Resource extension in the same continuing project
 
-The later charged resource extension adds the full-interface Q-versus-worst-L boundary for arbitrary DAGs, including the two-mode lower bound, and the sharp independent-job total-cost ratio for arbitrary charged fees. Neither result occurs in the preceding zero-fee package. They use the charged normal form, established optimistic fallback and top-budget accounting, and the project's retained two-mode packing proof. Their importance is not certified by this lineage comparison. The portable counter studies provide explicit source-event witnesses, not a production workload or validated fee model. See [the resource guide](RESOURCE_BOUNDARIES.md) for proofs, counterexamples, native scopes and precise prior-work attribution.
+The later charged resource extension adds the full-interface Q-versus-worst-L boundary for arbitrary DAGs, including simultaneous minimax attainment by one policy without a writer-budget input and the two-mode B=r lower bound, and the sharp independent-job total-cost ratio for arbitrary charged fees. Neither result occurs in the preceding zero-fee package. They use the charged normal form, established optimistic fallback and top-budget accounting, and the project's retained two-mode packing proof. Their importance is not certified by this lineage comparison. The portable counter studies provide explicit source-event witnesses, not a production workload or validated fee model. See [the resource guide](RESOURCE_BOUNDARIES.md) for proofs, counterexamples, native scopes and precise prior-work attribution.

@@ -1,0 +1,986 @@
+[
+  {
+    "id": "unchanged",
+    "expected_accept": true,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "FEASIBLE",
+      "accepted": true,
+      "static": {
+        "cost": 72,
+        "ceiling": 88,
+        "failures": 1,
+        "writes": 1,
+        "kernel_calls": 3,
+        "exact_completion_outputs_checked": true,
+        "per_key_publication_chains_checked": true,
+        "per_attempt_write_witnesses_checked": true,
+        "foreground_attempts": 2,
+        "scope": "Logged API argument/output bindings; causality uses stated source/API semantics, not absent timestamps"
+      },
+      "sequence_check": {
+        "micro_steps": 31,
+        "all_logs": 8,
+        "allocations": 6,
+        "scope": "existential finite producer/API-model sequentialization; shared canonical model translation"
+      },
+      "search_states": 32
+    }
+  },
+  {
+    "id": "wrong_W",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 31,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 64, in verify_run\n    assert row['work']==work and row['protected_calls']==protect and row['callbacks']==callbacks and row['conditionals']==conditionals\nAssertionError\n"
+    }
+  },
+  {
+    "id": "wrong_L_counter",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        0,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 64, in verify_run\n    assert row['work']==work and row['protected_calls']==protect and row['callbacks']==callbacks and row['conditionals']==conditionals\nAssertionError\n"
+    }
+  },
+  {
+    "id": "wrong_Q_counter",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        0,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 64, in verify_run\n    assert row['work']==work and row['protected_calls']==protect and row['callbacks']==callbacks and row['conditionals']==conditionals\nAssertionError\n"
+    }
+  },
+  {
+    "id": "wrong_inside",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 63, in verify_run\n    assert kernel_count==expected_kernels and protect==expected_protected\nAssertionError\n"
+    }
+  },
+  {
+    "id": "wrong_failure_epoch",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          2
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 44, in verify_run\n    assert len(failures)==len(set(failures)) and set(failures)<=epochs\nAssertionError\n"
+    }
+  },
+  {
+    "id": "wrong_selected_mode",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:P",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 51, in verify_run\n    assert mode==2;callbacks[i]+=1;expected_kernels[i]+=1;expected_protected[i]+=1;mask^=1<<i\nAssertionError\n"
+    }
+  },
+  {
+    "id": "coordinated_counter_cost",
+    "expected_accept": false,
+    "met": true,
+    "row": {
+      "id": "blind-run-000388",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 32,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        0,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 56,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:CS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -2044966718
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 54958,
+      "initialization_ns": 1000
+    },
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py\", line 64, in verify_run\n    assert row['work']==work and row['protected_calls']==protect and row['callbacks']==callbacks and row['conditionals']==conditionals\nAssertionError\n"
+    }
+  }
+]

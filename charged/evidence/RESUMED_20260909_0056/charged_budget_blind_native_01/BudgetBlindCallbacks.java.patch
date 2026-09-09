@@ -1,0 +1,87 @@
+--- prior/FrontierChargedCallbacks.java
++++ new/BudgetBlindCallbacks.java
+@@ -3,7 +3,7 @@
+ import java.util.concurrent.*;
+ import java.util.concurrent.atomic.*;
+ 
+-public final class FrontierChargedCallbacks {
++public final class BudgetBlindCallbacks {
+   static int[] ints(String x){return x.equals("-")?new int[0]:Arrays.stream(x.split(",")).mapToInt(Integer::parseInt).toArray();}
+   static String json(Object x){
+     if(x==null)return "null";
+@@ -21,29 +21,41 @@
+     Input(String line,Path dir)throws Exception{
+       String[] z=line.split("\t",-1);if(z.length!=9)throw new IllegalArgumentException("case fields");
+       id=z[0];w=ints(z[1]);p=ints(z[2]);g=ints(z[3]);v=ints(z[4]);r=ints(z[5]);pred=ints(z[6]);n=w.length;policy=z[8];
+-      if(!Set.of("slack_three-0","slack_three-1","slack_three-2","slack_three-3","slack_two-0","slack_two-1","slack_two-2","slack_two-3").contains(policy))throw new IllegalArgumentException("policy");
+-      threshold=Integer.parseInt(policy.substring(policy.length()-1));three=policy.startsWith("slack_three");
++      if(!Set.of("blind_three-0","blind_three-1","blind_three-2","blind_three-3","blind_two-0","blind_two-1","blind_two-2","blind_two-3").contains(policy))throw new IllegalArgumentException("policy");
++      threshold=Integer.parseInt(policy.substring(policy.length()-1));three=policy.startsWith("blind_three");
+       if(n<2||n>5||p.length!=n||g.length!=n||v.length!=n||r.length!=n||pred.length!=n)throw new IllegalArgumentException("shape");
+       for(int i=0;i<n;i++)if(w[i]<1||w[i]>256||p[i]!=w[i]||g[i]!=0||v[i]!=r[i]||(v[i]!=0&&v[i]!=2)||pred[i]<0||pred[i]>=(1<<n)||(pred[i]&(1<<i))!=0||8*w[i]-Integer.bitCount(pred[i])<=0)throw new IllegalArgumentException("vector prices");
+       for(String row:Files.readAllLines(dir.resolve(z[7]))){
+         String[] x=row.split("\t",-1);if(x.length!=2)throw new IllegalArgumentException("curve fields");
+-        int mask=Integer.parseInt(x[0]);String[] y=x[1].split(";",-1);if(mask<0||mask>=(1<<n)||y.length!=4||curves.containsKey(mask))throw new IllegalArgumentException("curve shape");
+-        long[] values=new long[4];for(int j=0;j<4;j++){values[j]=Long.parseLong(y[j]);if(values[j]<0)throw new IllegalArgumentException("curve data");}curves.put(mask,values);
++        int mask=Integer.parseInt(x[0]);String[] y=x[1].split(";",-1);if(mask<0||mask>=4*(1<<n)||y.length!=5||curves.containsKey(mask))throw new IllegalArgumentException("curve shape");
++        long[] values=new long[5];for(int j=0;j<5;j++){values[j]=Long.parseLong(y[j]);if(values[j]<0)throw new IllegalArgumentException("curve data");}curves.put(mask,values);
+       }
+-      if(curves.size()!=(1<<n))throw new IllegalArgumentException("missing curve");
+-      for(int j=0;j<4;j++)if(value(0,j)!=0)throw new IllegalArgumentException("empty curve");
+-      for(int mask=1;mask<(1<<n);mask++)for(int budget=0;budget<4;budget++)choose(mask,budget);
++      if(curves.size()!=4*(1<<n))throw new IllegalArgumentException("missing curve");
++      for(int a=0;a<4;a++)for(int j=0;j<5;j++)if(value(0,j,a)!=0)throw new IllegalArgumentException("empty curve");
++      for(int mask=1;mask<(1<<n);mask++)for(int budget=0;budget<5;budget++)for(int a=0;a<4;a++)checkTable(mask,budget,a);
+     }
+-    long value(int mask,int b){if(b<0||b>3)throw new IllegalArgumentException("budget");return curves.get(mask)[b];}
+-    int[] choose(int mask,int b){
++    long value(int mask,int b,int a){if(b<0||b>4||a<0||a>3)throw new IllegalArgumentException("budget");return curves.get(4*mask+a)[b];}
++    void checkTable(int mask,int b,int a){
+       int job=-1;for(int i=0;i<n;i++)if((mask&(1<<i))!=0&&(pred[i]&mask)==0){job=i;break;}if(job<0)throw new IllegalArgumentException("readiness");
+-      int mode=(b==0||b>threshold)?1:(three?0:2),child=mask^(1<<job);long q;
+-      if(mode==2)q=p[job]+value(child,b);
+-      else if(mode==1)q=b==0?value(child,b):Math.max(value(child,b),w[job]+v[job]+value(mask,b-1));
+-      else q=Math.max(value(child,b),w[job]+p[job]+value(child,b-1));
+-      if(q!=value(mask,b))throw new IllegalArgumentException("policy table equation");return new int[]{job,mode};
++      int mode=a>0?1:(three?0:2),child=mask^(1<<job);long q;
++      if(mode==2)q=p[job]+value(child,b,a);
++      else if(mode==1)q=b==0?value(child,b,a):Math.max(value(child,b,a),w[job]+v[job]+value(mask,b-1,a-1));
++      else q=b==0?value(child,b,a):Math.max(value(child,b,a),w[job]+p[job]+value(child,b-1,a));
++      if(q!=value(mask,b,a))throw new IllegalArgumentException("policy table equation");
+     }
+-    long ceiling(int b){long a=0;for(int i=0;i<n;i++)a+=w[i]+Math.min(v[i],g[i]+r[i]);return 8*(a+value((1<<n)-1,b));}
++    long ceiling(int b){long a=0;for(int i=0;i<n;i++)a+=w[i]+Math.min(v[i],g[i]+r[i]);return 8*(a+value((1<<n)-1,b,threshold));}
++  }
++  // Selector receives only the DAG, mode family, and a call allowance.
++  // No writer budget, weights, fee table, writer state, or Input reference.
++  static final class Selector {
++    private final int[] pred;private final boolean three;private int allowance;
++    Selector(int[] dependencies,boolean cached,int slack){pred=dependencies.clone();three=cached;allowance=slack;}
++    int[] choose(int mask){
++      int job=-1;for(int i=0;i<pred.length;i++)if((mask&(1<<i))!=0&&(pred[i]&mask)==0){job=i;break;}
++      if(job<0)throw new IllegalArgumentException("readiness");
++      return new int[]{job,allowance>0?1:(three?0:2)};
++    }
++    void failedCheap(){if(allowance<=0)throw new AssertionError("call allowance");allowance--;}
+   }
+   static final class Value {final long id;final int slot,bg,seed;final int[] a;Value(long id,int slot,int bg,int[] a,int seed){this.id=id;this.slot=slot;this.bg=bg;this.a=a;this.seed=seed;}}
+   static final class Run {
+@@ -82,15 +94,15 @@
+     void failure(int i,Value before){failureWitnesses.add(new int[]{i,before.bg+1});}
+     void execute()throws Exception{
+       if(kind.equals("concurrent")){CountDownLatch go=new CountDownLatch(1);concurrent=writer.submit(()->{try{go.await();}catch(InterruptedException e){Thread.currentThread().interrupt();return;}Random rng=new Random(seed);for(int k=0;k<B;k++){for(int z=0;z<rng.nextInt(17);z++)Thread.yield();background(rng.nextInt(in.n));}});go.countDown();}
+-      int mask=(1<<in.n)-1,b=B;
+-      while(mask!=0){int[] choice=in.choose(mask,b);int i=choice[0],mode=choice[1];ready(i);
++      int mask=(1<<in.n)-1,b=B;Selector selector=new Selector(in.pred,in.three,in.threshold);
++      while(mask!=0){int[] choice=selector.choose(mask);int i=choice[0],mode=choice[1];ready(i);
+         if(mode==2){callbacks[i]++;Value v=map.compute(key(i),(key,src)->kernel(src,true));trace.add(i+":P");complete(i,v);mask^=1<<i;continue;}
+         Value before=map.get(key(i)),prepared=kernel(before,false);boolean requested=replayFailure(i);boolean ok;
+         if(mode==0){boolean[] match={false};callbacks[i]++;Value v=map.compute(key(i),(key,src)->{match[0]=src==before;return match[0]?prepared:kernel(src,true);});ok=match[0];trace.add(i+":C"+(ok?"S":"F"));if(!ok){failure(i,before);if(--b<0)throw new AssertionError("failure budget");}complete(i,v);mask^=1<<i;
+         }else{
+           if(in.v[i]<=in.g[i]+in.r[i]){conditionals[i]++;ok=map.replace(key(i),before,prepared);trace.add(i+":V"+(ok?"S":"F"));}
+           else{boolean[] match={false};callbacks[i]++;map.compute(key(i),(key,src)->{match[0]=src==before;return match[0]?prepared:src;});ok=match[0];trace.add(i+":A"+(ok?"S":"F"));}
+-          if(ok){complete(i,prepared);mask^=1<<i;}else{failure(i,before);if(--b<0)throw new AssertionError("failure budget");}
++          if(ok){complete(i,prepared);mask^=1<<i;}else{selector.failedCheap();failure(i,before);if(--b<0)throw new AssertionError("failure budget");}
+         }
+         if(!kind.equals("concurrent")&&ok==requested)throw new AssertionError("replay outcome mismatch");
+       }

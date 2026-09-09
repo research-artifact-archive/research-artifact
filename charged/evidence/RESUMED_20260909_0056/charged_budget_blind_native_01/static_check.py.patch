@@ -1,0 +1,30 @@
+--- prior/static_check.py
++++ new/static_check.py
+@@ -43,9 +43,9 @@
+     failures=[tuple(x) for x in row['failures']]
+     assert len(failures)==len(set(failures)) and set(failures)<=epochs
+     callbacks=[0]*n;conditionals=[0]*n;expected_kernels=[0]*n;expected_protected=[0]*n
+-    mask=(1<<n)-1;b=run['budget'];f,choose,paths=oracle(case)
++    mask=(1<<n)-1;b=run['budget'];allowance=int(case['policy'].split('-')[1]);f,choose,paths=oracle(case)
+     for a in row['trace']:
+-        si,act=a.split(':');i=int(si);q,j,mode=choose(mask,b);assert i==j
++        si,act=a.split(':');i=int(si);j,mode=choose(mask,allowance);assert i==j
+         w,p,g,v,r=case['jobs'][i]
+         if act=='P':
+             assert mode==2;callbacks[i]+=1;expected_kernels[i]+=1;expected_protected[i]+=1;mask^=1<<i
+@@ -57,13 +57,14 @@
+             if outcome=='F':
+                 assert b>0;b-=1
+                 if code=='C':expected_kernels[i]+=1;expected_protected[i]+=1
++                else:allowance-=1;assert allowance>=0
+             if outcome=='S' or code=='C':mask^=1<<i
+     assert mask==0 and len(failures)==run['budget']-b
+     assert kernel_count==expected_kernels and protect==expected_protected
+     assert row['work']==work and row['protected_calls']==protect and row['callbacks']==callbacks and row['conditionals']==conditionals
+     cost=work+8*sum(p*protect[i]+(g+r)*callbacks[i]+v*conditionals[i] for i,(w,p,g,v,r) in enumerate(case['jobs']))
+     assert row['cost']==cost,('fee accounting',row['cost'],cost)
+-    ceiling=8*(sum(w+min(v,g+r) for w,p,g,v,r in case['jobs'])+f((1<<n)-1,run['budget']))
++    ceiling=8*(sum(w+min(v,g+r) for w,p,g,v,r in case['jobs'])+f((1<<n)-1,run['budget'],int(case['policy'].split('-')[1])))
+     assert row['ceiling']==ceiling and cost<=ceiling,('bound',cost,ceiling)
+     if 'expected_trace' in run:assert row['trace']==run['expected_trace'] and cost==run['expected_cost']
+     return {'cost':cost,'ceiling':ceiling,'failures':len(failures),'writes':row['writes'],'kernel_calls':sum(kernel_count)}

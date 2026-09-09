@@ -1,0 +1,22 @@
+"""Independent finite three-state table equations; no constructor import."""
+def check(case,table):
+ jobs=case['jobs'];n=len(jobs);assert type(jobs) is list and 2<=n<=5
+ assert all(type(j) is list and len(j)==5 and all(type(x) is int for x in j) and j[0]>0 and j[1]==j[0] and j[2]==0 and j[3]==j[4] and j[3] in [0,2] for j in jobs),'vector prices'
+ assert len({j[3] for j in jobs})==1 and case['kappa']==jobs[0][3],'common kappa'
+ assert type(case['edges']) is list and all(type(e) is list and len(e)==2 and all(type(x) is int and 0<=x<n for x in e) and e[0]!=e[1] for e in case['edges'])
+ assert len({tuple(e) for e in case['edges']})==len(case['edges'])
+ kind,r=case['policy'].split('-');r=int(r);assert kind in ['blind_three','blind_two'] and r in range(4)
+ assert set(table)==set(range((1<<n)*4)) and all(len(v)==5 and all(type(x) is int and x>=0 for x in v) for v in table.values())
+ for a in range(4):assert table[a]==[0]*5
+ def val(mask,b,a):return table[4*mask+a][b]
+ count=0
+ for b in range(5):
+  for a in range(4):
+   for mask in range(1,1<<n):
+    i=next(i for i in range(n) if mask>>i&1 and not any(v==i and mask>>u&1 for u,v in case['edges']));w,p,g,v,fee=jobs[i];child=mask^(1<<i)
+    mode=1 if a else (0 if kind=='blind_three' else 2)
+    if mode==2:z=p+val(child,b,a)
+    elif mode==1:z=val(child,b,a) if b==0 else max(val(child,b,a),w+v+val(mask,b-1,a-1))
+    else:z=val(child,b,a) if b==0 else max(val(child,b,a),w+p+val(child,b-1,a))
+    assert val(mask,b,a)==z;count+=1
+ return dict(equations=count,domain='mask subsets, budgets0..4 and remaining cheap failures0..3; oracle only',constructor_imported=False)

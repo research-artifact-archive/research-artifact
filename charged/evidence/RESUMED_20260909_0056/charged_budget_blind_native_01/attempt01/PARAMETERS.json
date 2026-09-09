@@ -1,0 +1,225 @@
+{
+  "utc": "2026-09-09T03:06:12.372965+00:00",
+  "parameters": {
+    "budgets": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "layouts": [
+      "distinct",
+      "colliding"
+    ],
+    "kappa": [
+      0,
+      2
+    ],
+    "policies": [
+      "blind_three-0",
+      "blind_three-1",
+      "blind_three-2",
+      "blind_three-3",
+      "blind_two-0",
+      "blind_two-1",
+      "blind_two-2",
+      "blind_two-3"
+    ],
+    "concurrent_budget": 4,
+    "seeds": [
+      11,
+      23
+    ],
+    "shapes": [
+      {
+        "id": "common-two-chain",
+        "w": [
+          1,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "equal-two-independent",
+        "w": [
+          1,
+          1
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-independent",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-chain",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "id": "five-independent",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": []
+      },
+      {
+        "id": "five-chain",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-branch",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-decreasing-chain",
+        "w": [
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ],
+    "record_controls": [
+      "unchanged",
+      "wrong_W",
+      "wrong_L_counter",
+      "wrong_Q_counter",
+      "wrong_inside",
+      "wrong_failure_epoch",
+      "wrong_selected_mode",
+      "coordinated_counter_cost"
+    ],
+    "sequence_controls": [
+      "unchanged",
+      "missing_step",
+      "duplicate_step",
+      "wrong_raw_binding",
+      "wrong_input_binding"
+    ],
+    "parser_controls": [
+      "unchanged",
+      "unknown_policy",
+      "wrong_p",
+      "missing_curve"
+    ]
+  },
+  "sources": {
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/BudgetBlindCallbacks.java": "f58373e1e1ba23c519d0c5e390405f396f207bb20c23206e824d9a79bbf54baf",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/BudgetBlindCallbacks.java.patch": "e63901e1d12a24f4319cd0e9d3fcaa75fd689ce1b8b9783a968f098bde3c7900",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/PLAN.md": "5cea5d83d191de295171af1f4d3e8d9220079550efac29375ac9c2e8eb7a9990",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/SOURCE_DELTA.json": "c7b7b90812cf6793ffeaa775f72b60804a60d707df128b533a0e8ee8e7a9d87b",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/causal.py": "407d12ac4fc4fb90c1f2c490d97f9099728f4f466c2c35b1853cc6b735344180",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/fixed_policy.py": "33ea736db1e5a526ee74cd1ac540c63cc4fc9443f232d703214a8e8ec99b2608",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/fixed_policy.py.patch": "54d485b6b21ad397c6fba2cec23b62711558b02a01df14bacbdc6a914d2a3636",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/model.py": "51086c4c9e6a0a96fe414b0e83da192bf8919238199edcda65618a24dec49c0d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/resource_check.py": "54039e7ba7dc633db4896dc7f0c491ac3036abd7d2f913de50073753c944e59e",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/resource_check.py.patch": "d4e0b232b903e5b8918e88bbae603b437c6e10c65bc64ebacaded1b650a38105",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/search.py": "e9ba4832d9a3a33f6bb69224c7cf9fa81d86ff72c23c74acece65121d9ba9703",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/sequence_checker.py": "c3a1dce63acf051395974bdd582689722e0eb8cb0c129469af6ef2abf81c4efb",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py": "7d8409bdc06ad5a3fd27502b54f48cc6be3c1efb148aa0e129984a3f7c4b98d5",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/static_check.py.patch": "cc731ef1dabb3ec11b98d7cd5c5134c30898afadff6749ab745eef5e3df8516b",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/strong.py": "ff185cd1934227af12dcf3d7c97d83d5228c9a553cc9886b4c165ceda0a81326",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/study.py": "5ab8572ad3ee17a26fcccbb126cdf4d16501dbc0de548138590c945cda835ac0",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/study.py.patch": "51159e93892c182164550a8032af5de1234467cf9a845b8ebfba8364fcee773b",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/table_check.py": "8381746b8e5e7e7dfadaf738433ece37e64b4a59c11969d58f8b5afd604f0c84",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_budget_blind_native_01/table_check.py.patch": "c4823d73e94db7e654a59b4833c417ae5f92242c48b94a4567bf82c0b361e6bb"
+  },
+  "native_executions": 0
+}

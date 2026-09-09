@@ -1,0 +1,101 @@
+Compiled from "BudgetBlindCallbacks.java"
+final class BudgetBlindCallbacks$Selector {
+  private final int[] pred;
+
+  private final boolean three;
+
+  private int allowance;
+
+  BudgetBlindCallbacks$Selector(int[], boolean, int);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #7                  // Method "[I".clone:()Ljava/lang/Object;
+       9: checkcast     #8                  // class "[I"
+      12: putfield      #13                 // Field pred:[I
+      15: aload_0
+      16: iload_2
+      17: putfield      #18                 // Field three:Z
+      20: aload_0
+      21: iload_3
+      22: putfield      #22                 // Field allowance:I
+      25: return
+
+  int[] choose(int);
+    Code:
+       0: iconst_m1
+       1: istore_2
+       2: iconst_0
+       3: istore_3
+       4: iload_3
+       5: aload_0
+       6: getfield      #13                 // Field pred:[I
+       9: arraylength
+      10: if_icmpge     43
+      13: iload_1
+      14: iconst_1
+      15: iload_3
+      16: ishl
+      17: iand
+      18: ifeq          37
+      21: aload_0
+      22: getfield      #13                 // Field pred:[I
+      25: iload_3
+      26: iaload
+      27: iload_1
+      28: iand
+      29: ifne          37
+      32: iload_3
+      33: istore_2
+      34: goto          43
+      37: iinc          3, 1
+      40: goto          4
+      43: iload_2
+      44: ifge          57
+      47: new           #26                 // class java/lang/IllegalArgumentException
+      50: dup
+      51: ldc           #28                 // String readiness
+      53: invokespecial #30                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      56: athrow
+      57: iconst_2
+      58: newarray       int
+      60: dup
+      61: iconst_0
+      62: iload_2
+      63: iastore
+      64: dup
+      65: iconst_1
+      66: aload_0
+      67: getfield      #22                 // Field allowance:I
+      70: ifle          77
+      73: iconst_1
+      74: goto          89
+      77: aload_0
+      78: getfield      #18                 // Field three:Z
+      81: ifeq          88
+      84: iconst_0
+      85: goto          89
+      88: iconst_2
+      89: iastore
+      90: areturn
+
+  void failedCheap();
+    Code:
+       0: aload_0
+       1: getfield      #22                 // Field allowance:I
+       4: ifgt          17
+       7: new           #33                 // class java/lang/AssertionError
+      10: dup
+      11: ldc           #35                 // String call allowance
+      13: invokespecial #37                 // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+      16: athrow
+      17: aload_0
+      18: dup
+      19: getfield      #22                 // Field allowance:I
+      22: iconst_1
+      23: isub
+      24: putfield      #22                 // Field allowance:I
+      27: return
+}

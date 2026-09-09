@@ -1,6 +1,6 @@
 # Resource boundaries and independent-job price bound
 
-This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in the six `evidence/RESUMED_20260909_0056/charged_{price_bound,resource_*}` study directories. A portable replay checks those records without declaring new evaluation samples.
+This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in seven study directories under `evidence/RESUMED_20260909_0056/`: the six price/resource studies below and `charged_budget_blind_native_01`. A portable replay checks those records without declaring new evaluation samples.
 
 ## Protected work under a completion-call cap
 
@@ -19,11 +19,29 @@ Upper bound: when B <= r, fresh cheap attempts suffice. Their disjoint read-to-v
 
 Lower bound for two modes when B>r: reject every cheap call with a fresh own-key write, and stop writing after the (r+1)st rejection. This environment uses at most r+1 <= B writes. A program obeying the call cap cannot reach r+1 noncompleting calls, so all its jobs complete under protection.
 
-For three modes target the k=min(B-r,n) largest jobs. Reject their cheap calls and invalidate preparations for their cached calls with fresh own-key writes just before comparison. A fresh protected callback already incurs the target work inside protection. Stop writing after r+1 target cheap rejections. Before any next write, there can be at most r such rejections and k-1 cached target completions, so that write consumes at most r+k <= B writes. An admissible program cannot incur r+1 noncompleting calls. Thus every target completes with its kernel inside protection. Fresh identities invalidate all retained preparations; inspections and prior callbacks do not retain a guard across this boundary.
+For three modes when B>r, target the k=min(B-r,n) largest jobs; for B<=r the lower bound L>=0 is immediate. Reject their cheap calls and invalidate preparations for their cached calls with fresh own-key writes just before comparison. A fresh protected callback already incurs the target work inside protection. Stop writing after r+1 target cheap rejections. Before any next write, there can be at most r such rejections and k-1 cached target completions, so that write consumes at most r+k <= B writes. An admissible program cannot incur r+1 noncompleting calls. Thus every target completes with its kernel inside protection. Fresh identities invalidate all retained preparations; inspections and prior callbacks do not retain a guard across this boundary.
 
 For equal works and B>r the two-/three-mode ratio is n/min(B-r,n), reaching n when r=B-1. At r=0, all-cached execution additionally has Q=n and W <= Omega+Omega_min(B,n). These statements concern Q versus worst L, not a full three-dimensional Pareto frontier. A scalar-cost-minimizing policy constrained to Q=n need not minimize L: the preserved decreasing five-job chain at kappa=0, B=1 has L=48 for `qn_three`, versus 40 for `cached_all`.
 
 Optimistic retries and starvation fallback are established mechanisms. Kung and Robinson, *On Optimistic Methods for Concurrency Control*, ACM TODS 6(2), 1981, DOI [10.1145/319566.319567](https://doi.org/10.1145/319566.319567), section 3.3 p.220, describes retaining a critical-section semaphore during restart after starvation. This artifact does not claim to invent that mechanism. Likewise, sorting the largest deviations under an integer uncertainty budget is established in budgeted robust optimization. The contribution asserted here is the exact interface-specific all-program boundary and its relation to the charged policy compiler; its broader importance remains a research question.
+
+## One policy for every writer budget
+
+The resource policy need not receive B or any price or work weight. Fix r>=0 and let U_j(r) be the j-mode programs that receive no B and complete all jobs with Q<=n+r in **every finite-write environment**. Define their pointwise worst protected work as
+
+```
+U_j(B,r) = inf_(P in U_j(r)) sup_(E with at most B writes) L(P,E).
+U_3(B,r) = Omega_min(max(B-r,0),n)
+U_2(B,r) = 0 if B<r, otherwise Omega.
+```
+
+One policy in each class attains these values simultaneously for all B and all positive mandatory works on any DAG. Choose any ready job, using a fresh read and cheap attempt; count failed cheap calls globally. After r such failures, use cached completion (three modes) or fresh protected completion (two modes) for every remaining job. Successful cheap attempts do not consume the allowance; for r=0 switch immediately. Every cached completion starts with a fresh own-input read and preparation, including immediately after the rth cheap failure; it does not reuse that failed preparation. The rule has no budget, weight or fee input. Completion consumes n calls and each cheap failure consumes one extra, giving Q<=n+r in all environments. At B<r no protected work is needed. At B=r, cached callbacks after switching cannot mismatch and still have L=0. For B>r the preceding upper bound applies; its three-mode lower bound remains valid on the restricted class of universal policies.
+
+For the two-mode lower bound at B>=r, invalidate every cheap comparison with a fresh own-key write until r cheap rejections have occurred, then stop. Before this, all completing jobs use protection. Write s for completed jobs and f for noncompleting calls. The call allowance remaining is `(n-s)+(r-f)`. At f=r each future call must complete: if the program instead makes a rejectable call, a different finite environment can insert one further write and violate Q<=n+r. That hypothetical additional write rules out a policy choice; **it is not included in the lower-bound execution**, which uses at most r<=B writes. Therefore every job completes under protection. At r=0 even the quiet execution requires all-protected completion in two modes. Retained preparations and free inspections do not prevent a fresh write immediately before comparison; no completed call retains a guard.
+
+This is simultaneous pointwise minimax optimality, not per-execution optimality or a full W,L,Q Pareto frontier. The two-mode class is defined by behavior: failure does not complete a prepared job within the same call. A method that validates and recomputes on mismatch is cached completion even if its API name also permits other modes. All foreground conditional/publication and callback calls count toward Q, including noncompleting calls. Whole mandatory kernels, persistent completion, eventual foreground scheduling/operation completion, no cross-job callbacks, no retained guard, no outside completion and no free certificate of future writer absence remain necessary.
+
+The native selector stores only a cloned dependency array, a mode-family boolean and a remaining cheap-failure allowance. `choose(mask)` and `failedCheap()` are its only policy operations. The writer fixture, assertions and cost-ceiling oracle retain B, but no B, Input, writer, fee table or weights are passed to the selector. All 17,714 original native runs are retained, including 256 exhaustive groups at B=r. These finite tests and the recorded bytecode inspection support the implementation; the universal quantifiers rely on the proof above. Scalar-price minimax compilation elsewhere still uses a supplied B.
 
 ## Sharp scalar ratio for independent jobs
 
@@ -60,6 +78,7 @@ For sharpness take n=M^2 equal independent jobs, w=1, v=k=M, p=floor(alpha*M), a
 | `charged_resource_vector_native_01` | 96 policy/shape/price cases, 2,440 ordinary Java runs plus two native controls, 576 exhaustive replay groups. Counters W,L,Q and scalar cost are checked separately. |
 | `charged_resource_vector_recheck_02` | A later strict input-class check of all 96 tables and aggregation of 2,442 saved verification decisions, with an explicit old-checker counterexample and five aggregation controls. It was not a native rerun. The public worker additionally regenerates causal checks from the raw records. |
 | `charged_resource_frontier_native_01` | 128 cases, 9,312 ordinary Java runs plus two native controls, 1,024 exhaustive replay groups. Every group reaches the formula's L bound while obeying its Q cap. Native budgets are restricted to 0..3; no native constant-tail claim. |
+| `charged_budget_blind_native_01` | 128 cases, 17,200 complete-path replays, 512 concurrent runs and two native controls, 1,280 exhaustive groups; all attain the universal formula. Selector receives no B, price or table. Oracle budgets0..4 and remaining cheap-failure allowance0..3; 256 groups at B=r establish the finite boundary contrast. |
 
 Each native study has eight record-corruption, five sequence-certificate and four parser controls. Source jobs use p=w, common v=k=kappa in {0,2}, g=0, and two to five jobs. The Java kernel performs eight elementary work units per declared w, so the checked linear metric is W+L+8*kappa*Q. Maxima of W,L,Q may occur on different executions: their separately maximized weighted sum must not be mistaken for the maximum scalar cost.
 
@@ -72,8 +91,10 @@ python3 charged/reproduce.py price-bounds --out work/price-bounds
 python3 charged/reproduce.py resource-frontier --out work/resource-frontier
 python3 charged/reproduce.py resource-vector --out work/resource-vector
 python3 charged/reproduce.py resource-frontier-native --out work/resource-frontier-native
+python3 charged/reproduce.py budget-blind --out work/budget-blind
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-vector-java --out work/resource-vector-java
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-frontier-java --out work/resource-frontier-java
+JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py budget-blind-java --out work/budget-blind-java
 ```
 
 The optional Java commands require JDK17, generate new replay records and independently reconstruct their causal certificates. The fixed corruption controls remain tied to the original records. Standard replay checks the complete fixed inputs and original measurements; it does not rerun timing campaigns. `--quick` only checks a subset and is not full reproduction. Private author correspondence and generated classes/caches are omitted and listed in provenance. Historical manifests retain original source hashes and projected paths; the public provenance binds every distributed byte and the portable entrypoints.

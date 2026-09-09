@@ -92,24 +92,24 @@ def resource_frontier():
    assert old[c['id']]['status']=='SUCCESS' and rows==old[c['id']]['roots'];roots+=len(rows)
    out.write(json.dumps(dict(id=c['id'],roots=rows),separators=(',',':'))+'\n')
  return dict(retained_inputs=5421,replayed=len(select(data['cases'])),roots=roots,scope='finite original-mode minimax; not an all-program proof',new_evaluation_samples=0)
-def resource_native(frontier=False,java=False):
- name='charged_resource_frontier_native_01' if frontier else 'charged_resource_vector_native_01';d=DATA/name;attempt=d/'attempt01'
+def resource_native(frontier=False,java=False,blind=False):
+ name='charged_budget_blind_native_01' if blind else 'charged_resource_frontier_native_01' if frontier else 'charged_resource_vector_native_01';d=DATA/name;attempt=d/'attempt01'
  causal=load('causal',d/'causal.py');model=causal.model;sequence=causal.sequence_checker
  resource=load('resource_check',d/'resource_check.py');tablecheck=load('table_check',d/'table_check.py');fixed=load('fixed_policy',d/'fixed_policy.py')
  strict=load('resource_strict',DATA/'charged_resource_vector_recheck_02/strict.py')
  cases=indexed(read(attempt/'CASES.json'));runs=read(attempt/'RUNS.json');runmap=indexed(runs);retained=indexed(lines(attempt/'RAW.jsonl'));raw=retained
- counts=(128,9314,1024) if frontier else (96,2442,576)
+ counts=(128,17714,1280) if blind else (128,9314,1024) if frontier else (96,2442,576)
  assert (len(cases),len(runs))==counts[:2] and set(raw)==set(runmap)
  tables=[];path_groups={}
  for case in cases.values():
   t=read(attempt/('table_'+case['id']+'.json'));assert t['case']==case;values={int(k):v for k,v in t['values'].items()}
-  checked=tablecheck.check(case,values) if frontier else strict.check(case,values,tablecheck)
+  checked=tablecheck.check(case,values) if frontier or blind else strict.check(case,values,tablecheck)
   tables.append(dict(id=case['id'],result=checked));f,choose,paths=fixed.ordinary(case);full=(1<<len(case['jobs']))-1
-  for b in ([0,1,2,3] if frontier else [0,1,2]):
-   possibilities=list(paths(full,b));assert len({p for p,t,c in possibilities})==len(possibilities)
+  for b in ([0,1,2,3,4] if blind else [0,1,2,3] if frontier else [0,1,2]):
+   possibilities=list(paths(full,b,int(case['policy'].split('-')[1]))) if blind else list(paths(full,b));assert len({p for p,t,c in possibilities})==len(possibilities)
    for layout in ['distinct','colliding']:path_groups[case['id'],b,layout]=possibilities
  save('TABLE_CHECKS.json',tables)
- if not frontier:
+ if not frontier and not blind:
   correction=DATA/'charged_resource_vector_recheck_02';toy=read(correction/'LEGACY_TAIL_COUNTEREXAMPLE.json');tab={int(k):v for k,v in toy['table'].items()}
   tablecheck.check(toy['case'],tab);rejected=False
   try:strict.check(toy['case'],tab,tablecheck)
@@ -130,7 +130,7 @@ def resource_native(frontier=False,java=False):
  if java:
   java_bin=os.environ.get('JAVA_BIN','java');javac=os.environ.get('JAVAC_BIN','javac');removed=['JDK_JAVA_OPTIONS','JAVA_TOOL_OPTIONS','_JAVA_OPTIONS','JDK_JAVAC_OPTIONS'];env={k:v for k,v in os.environ.items() if k not in removed}
   version=subprocess.check_output([java_bin,'-version'],stderr=subprocess.STDOUT,text=True,env=env);assert 'version "17.' in version
-  classname='FrontierChargedCallbacks' if frontier else 'VectorChargedCallbacks';source=d/(classname+'.java')
+  classname='BudgetBlindCallbacks' if blind else 'FrontierChargedCallbacks' if frontier else 'VectorChargedCallbacks';source=d/(classname+'.java')
   target=OUT/'java-input';target.mkdir();classes=OUT/'classes';classes.mkdir()
   for p in attempt.glob('*.tsv'):shutil.copy2(p,target/p.name)
   shutil.copy2(source,target/source.name)
@@ -158,7 +158,7 @@ def resource_native(frontier=False,java=False):
   assert len(groups)==counts[2]
   for p in planned:
    g=groups[p['case'],p['budget'],p['layout']];assert g['count']==p['paths'] and g['cost']==p['expected_cost_ceiling'] and all(g[k]==p['expected_maxima'][k] for k in ['W','L','Q'])
-   if frontier:assert g['L']==p['frontier_lbound'] and g['Q']<=len(cases[p['case']]['jobs'])+p['slack']
+   if frontier or blind:assert g['L']==p['frontier_lbound'] and g['Q']<=len(cases[p['case']]['jobs'])+p['slack']
  target=read(attempt/'CONTROL_TARGETS.json')['cached_failure'];r=runmap[target];case=cases[r['case']];controls=[]
  for item in read(attempt/'RECORD_CONTROLS.json'):
   v=causal.verify(case,r,item['row']);prev=item['result']
@@ -190,5 +190,6 @@ if __name__=='__main__':
  elif stage=='resource-frontier':summary=resource_frontier()
  elif stage in ['resource-vector','resource-vector-java']:summary=resource_native(java=stage.endswith('-java'))
  elif stage in ['resource-frontier-native','resource-frontier-java']:summary=resource_native(frontier=True,java=stage.endswith('-java'))
+ elif stage in ['budget-blind','budget-blind-java']:summary=resource_native(blind=True,java=stage.endswith('-java'))
  else:raise SystemExit('unknown stage')
  save('SUMMARY.json',dict(status='SUCCESS',stage=stage,quick=QUICK,**summary));print(json.dumps(summary),flush=True)

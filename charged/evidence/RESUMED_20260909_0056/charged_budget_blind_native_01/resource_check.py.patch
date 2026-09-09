@@ -1,0 +1,14 @@
+--- prior/resource_check.py
++++ new/resource_check.py
+@@ -20,8 +20,8 @@
+  assert L==8*sum(case['jobs'][i][0]*q for i,q in enumerate(row['protected_calls']))
+  k=case['kappa'];assert all(g==0 and v==r==k and p==w for w,p,g,v,r in case['jobs'])
+  assert row['cost']==W+L+8*k*Q,'linear-resource metric disagreement'
+- kind,t=case['policy'].split('-');t=int(t);b=run['budget'];slack=max(b-t,0);n=len(case['jobs']);residual=max(b-slack,0)
+- assert Q<=n+slack,'call slack violated'
+- bound=8*sum(sorted((j[0] for j in case['jobs']),reverse=True)[:min(residual,n)]) if kind=='slack_three' else (8*sum(j[0] for j in case['jobs']) if residual else 0)
++ kind,r=case['policy'].split('-');slack=int(r);b=run['budget'];n=len(case['jobs']);residual=max(b-slack,0)
++ assert Q<=n+slack,'universal call slack violated'
++ bound=8*sum(sorted((j[0] for j in case['jobs']),reverse=True)[:min(residual,n)]) if kind=='blind_three' else (8*sum(j[0] for j in case['jobs']) if b>=slack else 0)
+  assert L<=bound,'protected work frontier cap violated'
+  return dict(**expected,cost=row['cost'],slack=slack,protected_cap=bound,metric='W + L + 8*kappa*Q; Q excludes readonly gets and writer calls')
