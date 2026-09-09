@@ -1,0 +1,9 @@
+# Outcome: additive excess is a different objective
+
+All 4,220 fixed geometry/cap inputs completed in 0.5361 seconds. The minimum-bad-path compiler, independently coded dirty-set Bellman game, and evaluated threshold policy agreed in every case. Seven certificate corruptions were detected, with zero failures. The inputs contain 1,052 distinct geometries drawn from previously observed constructed grids; they are not a new native or held-out population. Complete rows and denominators remain in `run01/`.
+
+The objective is worst additive excess over the known-budget optimum. A common completion cost mu cancels exactly: the terminal loss is w(D)-G(floor(B/q)). The exact optimum can be found by integer threshold search with upper and lower path certificates; `PROOF.md` supplies the model and proof. Ten geometry/cap rows strictly improve on retry-first under this objective.
+
+For three unit singleton repairs and q=3, with mu=0, retry-first and the returned competitive policy have worst ratio 3 and worst excess 2. The returned additive policy has excess 1 but infinite worst ratio. At mu=1 the returned competitive policy has ratio 2/excess 2, while the additive policy has ratio 2/excess 1. This latter example concerns which competitive-optimal policy the compiler returns: it does not assert that every ratio-optimal policy has excess 2. At mu=2 the returned competitive and additive policies both have ratio 3/2 and excess 1; retry-first has ratio 5/3 and excess 2.
+
+These examples show that common-cost regularization affects the relative-ratio objective, while an additive objective avoids that dependence and may accept a different tradeoff. They neither calibrate mu for Roslyn nor demonstrate native gains. No new scale study or claim of literature priority is attached to this extension.

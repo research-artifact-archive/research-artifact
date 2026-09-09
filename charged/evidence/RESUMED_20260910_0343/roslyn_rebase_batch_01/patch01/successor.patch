@@ -1,0 +1,18 @@
+--- sequential-rebase01
++++ batch-rebase01
+@@ -1506,10 +1506,12 @@
+                     if (!ReferenceEquals(preparedFrom.GetProjectState(id.ProjectId), latest.GetProjectState(id.ProjectId)))
+                         return null;
+                 }
+-                var merged = latest;
++                // Same guards and prepared payloads as sequential rebase. Update all
++                // affected documents through the existing multi-document source API.
++                var contents = ImmutableArray.CreateBuilder<(DocumentId documentId, DocumentState documentState)>(data.updatedDocumentIds.Count);
+                 foreach (var id in data.updatedDocumentIds)
+-                    merged = merged.WithDocumentContentsFrom(id, prepared.GetRequiredDocument(id).DocumentState);
+-                return merged;
++                    contents.Add((id, prepared.GetRequiredDocument(id).DocumentState));
++                return latest.WithDocumentContentsFrom(contents.MoveToImmutable());
+             });
+     }
+ 

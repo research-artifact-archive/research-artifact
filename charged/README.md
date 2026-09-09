@@ -94,3 +94,5 @@ The [new guide](SOURCE_SEMANTICS_AND_PARTIAL_REPAIR.md) documents strengthened s
 A separate `roslyn-compilation` stage introduced stage27: all 96 authored compiler-dependency/cache cases, 2,556 project projections and eight raw corruptions. The extended native helper accepts `--compiler-projections` to build and execute these cases after its existing source/semantic/reentry stages. Actual and direct oracle paths share the Roslyn compiler engine.
 
 The [compact partial-repair supplement](PARTIAL_COMPACT.md) adds standard stage28 (`partial-compact`). It preserves both compiler versions, exact regression/certificate checks, the original216 outcomes with6 timeouts and the changed algorithm's168 successes. Read its separate objective and cost assumptions before using the returned competitive policy.
+
+The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30: exact additive/toll recomputation and all saved batch-rebase native/arrival outcomes. Timing improvements are not established.
