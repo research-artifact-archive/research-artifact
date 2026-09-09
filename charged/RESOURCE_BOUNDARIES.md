@@ -146,3 +146,7 @@ Two fixed study documents refer to omitted private author proof-check correspond
 ## Adaptive order and a guarded protected suffix
 
 The [bounded-source guide](BOUNDED_SOURCE.md) extends minimum-ready-work optimality to adaptive choice within the threshold family, then records a four-job refutation of its extension to all universally frontier-optimal programs. The protected-tail certificate weakly improves worst W at unchanged universal Q/L guarantees, with 285 strict/176,355 tied equation roots and 2,552 native paths. General W-optimality remains unproved; the fixed-weight guard is not a Roslyn work guarantee. All earlier claims and adverse data retain their stated scope.
+
+## Exact suffix feasibility
+
+With no remaining failed-call allowance, a state `(S,h,ell)` admits a completing continuation under the universal protection envelope exactly when `ell + Top_t(S) <= Top_(h+t)(J)` for all `t=0..|S|`. This characterizes feasible fresh/cached choices, not a work-minimizing choice. The [complete certificate and proof](SUFFIX_CERTIFICATE.md) state the exact-prefix realization condition and retain the incomparability of greedy fresh and all-tail policies.

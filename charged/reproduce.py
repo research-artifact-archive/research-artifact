@@ -6,7 +6,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 COMPACT_STAGES=['compact','compact-native','compact-scale']
 RESOURCE_STAGES=['price-bounds','resource-frontier','resource-vector','resource-frontier-native','budget-blind']
-STAGES=['curves','native','deephaven','scale','calibration','ordering','refutations']+COMPACT_STAGES+RESOURCE_STAGES+['universal-work','universal-order','adaptive-work','probe-blocking','roslyn-source','protected-tail']
+STAGES=['curves','native','deephaven','scale','calibration','ordering','refutations']+COMPACT_STAGES+RESOURCE_STAGES+['universal-work','universal-order','adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-suffix']
 
 def save(p,x):
     with p.open('x') as f:json.dump(x,f,indent=2);f.write('\n')
@@ -34,7 +34,7 @@ def verify():
 def main():
     if not __debug__:raise SystemExit('Assertions must be enabled; do not use python -O.')
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('stage',choices=['verify','all','protected-tail-java','native-java','compact-native-java','resource-vector-java','resource-frontier-java','budget-blind-java']+STAGES)
+    p.add_argument('stage',choices=['verify','all','protected-suffix-java','protected-tail-java','native-java','compact-native-java','resource-vector-java','resource-frontier-java','budget-blind-java']+STAGES)
     p.add_argument('--out',type=Path);p.add_argument('--quick',action='store_true');p.add_argument('--timeout',type=int,default=300)
     a=p.parse_args();count=verify()
     if a.stage=='verify':print(json.dumps(dict(status='VERIFIED',files=count)));return
@@ -42,11 +42,11 @@ def main():
     if a.timeout<1:p.error('--timeout must be positive')
     a.out.mkdir(parents=True,exist_ok=False)
     stages=STAGES if a.stage=='all' else [a.stage]
-    save(a.out/'REPLAY_INPUT.json',dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),stage=a.stage,quick=a.quick,timeout_per_stage=a.timeout,python=sys.version,executable=sys.executable,source_manifest_sha256=digest(HERE/'PROVENANCE.json'),worker_sha256=digest(HERE/'worker.py'),compact_worker_sha256=digest(HERE/'compact_worker.py'),resource_worker_sha256=digest(HERE/'resource_worker.py'),universal_work_worker_sha256=digest(HERE/'universal_work_worker.py'),universal_order_worker_sha256=digest(HERE/'universal_order_worker.py'),bounded_source_worker_sha256=digest(HERE/'bounded_source_worker.py'),driver_sha256=digest(Path(__file__)),replay_only=True,new_evaluation_population=False))
+    save(a.out/'REPLAY_INPUT.json',dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),stage=a.stage,quick=a.quick,timeout_per_stage=a.timeout,python=sys.version,executable=sys.executable,source_manifest_sha256=digest(HERE/'PROVENANCE.json'),worker_sha256=digest(HERE/'worker.py'),compact_worker_sha256=digest(HERE/'compact_worker.py'),resource_worker_sha256=digest(HERE/'resource_worker.py'),universal_work_worker_sha256=digest(HERE/'universal_work_worker.py'),universal_order_worker_sha256=digest(HERE/'universal_order_worker.py'),bounded_source_worker_sha256=digest(HERE/'bounded_source_worker.py'),suffix_worker_sha256=digest(HERE/'suffix_worker.py'),driver_sha256=digest(Path(__file__)),replay_only=True,new_evaluation_population=False))
     results=[]
     for stage in stages:
         output=a.out/stage;output.mkdir()
-        worker='bounded_source_worker.py' if stage in ['adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-tail-java'] else 'universal_order_worker.py' if stage=='universal-order' else 'universal_work_worker.py' if stage=='universal-work' else 'resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java','budget-blind-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
+        worker='suffix_worker.py' if stage in ['protected-suffix','protected-suffix-java'] else 'bounded_source_worker.py' if stage in ['adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-tail-java'] else 'universal_order_worker.py' if stage=='universal-order' else 'universal_work_worker.py' if stage=='universal-work' else 'resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java','budget-blind-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
         argv=[sys.executable,'-B',str(HERE/worker),stage,str(output)]
         if a.quick:argv.append('--quick')
         start=time.monotonic()

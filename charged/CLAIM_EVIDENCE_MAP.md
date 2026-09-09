@@ -35,3 +35,7 @@ See [RESOURCE_BOUNDARIES.md](RESOURCE_BOUNDARIES.md) for the separate meanings o
 ## Resumed bounded-source extension
 
 See [BOUNDED_SOURCE.md](BOUNDED_SOURCE.md) for precise denominators and limits. Under `evidence/RESUMED_20260909_1413/`: `universal_adaptive_work_01` binds176,608family roots; `protected_tail_01` binds176,640guarded roots and 2,552 native paths; `probe_blocking_01/recheck02` binds4,320 measurements+1,440 warmups and the repaired checker; `roslyn_source_01` retains patch01/02/03, all original/repaired failures,4,950 measurements and their warmups, full source manifests and post-outcome coverage correction. These author-side studies do not establish importance, prevalence, general elapsed-time improvement or submission readiness.
+
+## Suffix feasibility and non-dominating protection rules
+
+[Suffix certificate](SUFFIX_CERTIFICATE.md): proof in `evidence/RESUMED_20260909_1413/protected_suffix_02/THEORY.md`; fixed 209,408 policy roots; separate 665,500-state AND-OR comparison; 20,594 Java paths and 384 checked maxima. `protected-suffix` recomputes all equations and checks original traces; `protected-suffix-java` executes the fixed native paths. Claims stop at exact feasible actions and weak dominance over threshold; one better and three worse roots versus all-tail are retained.

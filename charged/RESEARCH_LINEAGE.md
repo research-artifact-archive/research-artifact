@@ -29,3 +29,7 @@ The later charged resource extension adds the full-interface Q-versus-worst-L bo
 ## Bounded-source extension
 
 The adaptive threshold-family minimum-work result and protected-tail dominance certificate are subsequent author-derived results with their own inputs and proofs. The four-job counterexample prohibits upgrading the family theorem to arbitrary causal W-optimality. The Roslyn and forced-probe studies are new author-directed native studies, with all development failures and negative timing results retained; they do not strengthen the Java pure fixed-work theorem to variable/lazy Roslyn transformations. [Complete boundaries and replays](BOUNDED_SOURCE.md).
+
+## Post-threshold feasible actions
+
+The suffix extension derives the exact Top-sum feasibility inequalities from the existing target-write lower bound and cached-completion upper bound. It supplies a state/action certificate after failure slack is exhausted. It does not replace the inherited general game machinery, establish general worst-work optimality, or certify an application speedup. Greedy one-job and all-tail selection are incomparable on recorded inputs. See [proof, scope and retained results](SUFFIX_CERTIFICATE.md).

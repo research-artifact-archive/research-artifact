@@ -1,0 +1,347 @@
+Compiled from "SuffixProbe.java"
+final class SuffixProbe$Selector {
+  final int[] works;
+
+  final int[] pred;
+
+  final int[] top;
+
+  final java.lang.String policy;
+
+  int remaining;
+
+  int t;
+
+  int h;
+
+  int ell;
+
+  SuffixProbe$Selector(int[], int[], int, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #7                  // Method "[I".clone:()Ljava/lang/Object;
+       9: checkcast     #8                  // class "[I"
+      12: putfield      #13                 // Field works:[I
+      15: aload_0
+      16: aload_2
+      17: invokevirtual #7                  // Method "[I".clone:()Ljava/lang/Object;
+      20: checkcast     #8                  // class "[I"
+      23: putfield      #18                 // Field pred:[I
+      26: aload_0
+      27: aload         4
+      29: putfield      #21                 // Field policy:Ljava/lang/String;
+      32: aload_0
+      33: iconst_1
+      34: aload_1
+      35: arraylength
+      36: ishl
+      37: iconst_1
+      38: isub
+      39: putfield      #25                 // Field remaining:I
+      42: aload_0
+      43: iload_3
+      44: putfield      #29                 // Field t:I
+      47: aload_1
+      48: invokevirtual #7                  // Method "[I".clone:()Ljava/lang/Object;
+      51: checkcast     #8                  // class "[I"
+      54: astore        5
+      56: aload         5
+      58: invokestatic  #32                 // Method java/util/Arrays.sort:([I)V
+      61: aload_0
+      62: aload_1
+      63: arraylength
+      64: iconst_1
+      65: iadd
+      66: newarray       int
+      68: putfield      #38                 // Field top:[I
+      71: iconst_0
+      72: istore        6
+      74: iload         6
+      76: aload_1
+      77: arraylength
+      78: if_icmpge     114
+      81: aload_0
+      82: getfield      #38                 // Field top:[I
+      85: iload         6
+      87: iconst_1
+      88: iadd
+      89: aload_0
+      90: getfield      #38                 // Field top:[I
+      93: iload         6
+      95: iaload
+      96: aload         5
+      98: aload_1
+      99: arraylength
+     100: iload         6
+     102: isub
+     103: iconst_1
+     104: isub
+     105: iaload
+     106: iadd
+     107: iastore
+     108: iinc          6, 1
+     111: goto          74
+     114: return
+
+  int job();
+    Code:
+       0: iconst_m1
+       1: istore_1
+       2: iconst_0
+       3: istore_2
+       4: iload_2
+       5: aload_0
+       6: getfield      #13                 // Field works:[I
+       9: arraylength
+      10: if_icmpge     65
+      13: aload_0
+      14: getfield      #25                 // Field remaining:I
+      17: iconst_1
+      18: iload_2
+      19: ishl
+      20: iand
+      21: ifeq          59
+      24: aload_0
+      25: getfield      #18                 // Field pred:[I
+      28: iload_2
+      29: iaload
+      30: aload_0
+      31: getfield      #25                 // Field remaining:I
+      34: iand
+      35: ifne          59
+      38: iload_1
+      39: iflt          57
+      42: aload_0
+      43: getfield      #13                 // Field works:[I
+      46: iload_2
+      47: iaload
+      48: aload_0
+      49: getfield      #13                 // Field works:[I
+      52: iload_1
+      53: iaload
+      54: if_icmpge     59
+      57: iload_2
+      58: istore_1
+      59: iinc          2, 1
+      62: goto          4
+      65: iload_1
+      66: ireturn
+
+  java.lang.String mode();
+    Code:
+       0: aload_0
+       1: getfield      #29                 // Field t:I
+       4: ifle          10
+       7: ldc           #41                 // String cheap
+       9: areturn
+      10: iconst_0
+      11: istore_1
+      12: iconst_0
+      13: istore_2
+      14: iload_2
+      15: aload_0
+      16: getfield      #13                 // Field works:[I
+      19: arraylength
+      20: if_icmpge     49
+      23: aload_0
+      24: getfield      #25                 // Field remaining:I
+      27: iconst_1
+      28: iload_2
+      29: ishl
+      30: iand
+      31: ifeq          43
+      34: iload_1
+      35: aload_0
+      36: getfield      #13                 // Field works:[I
+      39: iload_2
+      40: iaload
+      41: iadd
+      42: istore_1
+      43: iinc          2, 1
+      46: goto          14
+      49: aload_0
+      50: getfield      #21                 // Field policy:Ljava/lang/String;
+      53: ldc           #43                 // String tail
+      55: invokevirtual #45                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      58: ifeq          95
+      61: aload_0
+      62: getfield      #51                 // Field ell:I
+      65: iload_1
+      66: iadd
+      67: aload_0
+      68: getfield      #38                 // Field top:[I
+      71: aload_0
+      72: getfield      #54                 // Field h:I
+      75: aload_0
+      76: getfield      #13                 // Field works:[I
+      79: arraylength
+      80: invokestatic  #57                 // Method java/lang/Math.min:(II)I
+      83: iaload
+      84: if_icmpgt     92
+      87: ldc           #63                 // String fresh
+      89: goto          94
+      92: ldc           #65                 // String cached
+      94: areturn
+      95: aload_0
+      96: getfield      #21                 // Field policy:Ljava/lang/String;
+      99: ldc           #67                 // String certificate
+     101: invokevirtual #45                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     104: ifne          110
+     107: ldc           #65                 // String cached
+     109: areturn
+     110: aload_0
+     111: invokevirtual #69                 // Method job:()I
+     114: istore_2
+     115: new           #73                 // class java/util/ArrayList
+     118: dup
+     119: invokespecial #75                 // Method java/util/ArrayList."<init>":()V
+     122: astore_3
+     123: iconst_0
+     124: istore        4
+     126: iload         4
+     128: aload_0
+     129: getfield      #13                 // Field works:[I
+     132: arraylength
+     133: if_icmpge     177
+     136: iload         4
+     138: iload_2
+     139: if_icmpeq     171
+     142: aload_0
+     143: getfield      #25                 // Field remaining:I
+     146: iconst_1
+     147: iload         4
+     149: ishl
+     150: iand
+     151: ifeq          171
+     154: aload_3
+     155: aload_0
+     156: getfield      #13                 // Field works:[I
+     159: iload         4
+     161: iaload
+     162: invokestatic  #76                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     165: invokeinterface #82,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     170: pop
+     171: iinc          4, 1
+     174: goto          126
+     177: aload_3
+     178: invokestatic  #87                 // InterfaceMethod java/util/Comparator.reverseOrder:()Ljava/util/Comparator;
+     181: invokeinterface #93,  2           // InterfaceMethod java/util/List.sort:(Ljava/util/Comparator;)V
+     186: aload_0
+     187: getfield      #51                 // Field ell:I
+     190: aload_0
+     191: getfield      #13                 // Field works:[I
+     194: iload_2
+     195: iaload
+     196: iadd
+     197: istore        4
+     199: iload         4
+     201: aload_0
+     202: getfield      #38                 // Field top:[I
+     205: aload_0
+     206: getfield      #54                 // Field h:I
+     209: aload_0
+     210: getfield      #13                 // Field works:[I
+     213: arraylength
+     214: invokestatic  #57                 // Method java/lang/Math.min:(II)I
+     217: iaload
+     218: if_icmple     224
+     221: ldc           #65                 // String cached
+     223: areturn
+     224: iconst_0
+     225: istore        5
+     227: iload         5
+     229: aload_3
+     230: invokeinterface #96,  1           // InterfaceMethod java/util/List.size:()I
+     235: if_icmpge     293
+     238: iload         4
+     240: aload_3
+     241: iload         5
+     243: invokeinterface #99,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     248: checkcast     #77                 // class java/lang/Integer
+     251: invokevirtual #103                // Method java/lang/Integer.intValue:()I
+     254: iadd
+     255: istore        4
+     257: iload         4
+     259: aload_0
+     260: getfield      #38                 // Field top:[I
+     263: aload_0
+     264: getfield      #54                 // Field h:I
+     267: iload         5
+     269: iadd
+     270: iconst_1
+     271: iadd
+     272: aload_0
+     273: getfield      #13                 // Field works:[I
+     276: arraylength
+     277: invokestatic  #57                 // Method java/lang/Math.min:(II)I
+     280: iaload
+     281: if_icmple     287
+     284: ldc           #65                 // String cached
+     286: areturn
+     287: iinc          5, 1
+     290: goto          227
+     293: ldc           #63                 // String fresh
+     295: areturn
+
+  void observe(int, java.lang.String, boolean);
+    Code:
+       0: aload_2
+       1: ldc           #41                 // String cheap
+       3: invokevirtual #45                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       6: ifeq          24
+       9: iload_3
+      10: ifeq          24
+      13: aload_0
+      14: dup
+      15: getfield      #29                 // Field t:I
+      18: iconst_1
+      19: isub
+      20: putfield      #29                 // Field t:I
+      23: return
+      24: aload_2
+      25: ldc           #65                 // String cached
+      27: invokevirtual #45                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      30: ifeq          62
+      33: iload_3
+      34: ifeq          62
+      37: aload_0
+      38: dup
+      39: getfield      #54                 // Field h:I
+      42: iconst_1
+      43: iadd
+      44: putfield      #54                 // Field h:I
+      47: aload_0
+      48: dup
+      49: getfield      #51                 // Field ell:I
+      52: aload_0
+      53: getfield      #13                 // Field works:[I
+      56: iload_1
+      57: iaload
+      58: iadd
+      59: putfield      #51                 // Field ell:I
+      62: aload_2
+      63: ldc           #63                 // String fresh
+      65: invokevirtual #45                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      68: ifeq          86
+      71: aload_0
+      72: dup
+      73: getfield      #51                 // Field ell:I
+      76: aload_0
+      77: getfield      #13                 // Field works:[I
+      80: iload_1
+      81: iaload
+      82: iadd
+      83: putfield      #51                 // Field ell:I
+      86: aload_0
+      87: dup
+      88: getfield      #25                 // Field remaining:I
+      91: iconst_1
+      92: iload_1
+      93: ishl
+      94: ixor
+      95: putfield      #25                 // Field remaining:I
+      98: return
+}

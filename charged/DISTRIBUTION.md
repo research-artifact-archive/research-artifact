@@ -20,3 +20,5 @@ The paper discloses AI assistance in research, code, proofs and writing. Author-
 
 
 Roslyn modifications and included upstream excerpts retain the upstream MIT [License.txt](licenses/roslyn/License.txt) and [third-party notices](licenses/roslyn/THIRD-PARTY-NOTICES.txt). Full source/SDK/package archives and compiled libraries are not distributed. Optional source replay separately authenticates and builds the pinned upstream archive.
+
+The suffix extension adds authored equations, Java/Python sources and complete fixed raw outcomes from `RESUMED_20260909_1413/protected_suffix_02`. Generated classes and private author correspondence/navigation are omitted. Public/original hashes bind any author-local path projections. All unfavorable policy comparisons are included.

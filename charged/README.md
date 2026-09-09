@@ -82,3 +82,7 @@ Original research code/inputs/docs follow the repository MIT license, except cle
 The [resource-boundary guide](RESOURCE_BOUNDARIES.md) gives the exact protected-work/call-cap formulas, the independent-job sharp ratio, native counting conventions, complete new denominators, the old vector-checker defect and its strict recheck, and the relation to established optimistic fallback.
 
 The [bounded-source guide](BOUNDED_SOURCE.md) gives the adaptive-family extension, protected-tail certificate and its non-global-optimality boundary, all blocking/Roslyn outcomes, exact coverage limitations and optional pinned Roslyn rebuilding. The standard driver now has 21 stages; `protected-tail-java` additionally executes the fixed Java tail paths.
+
+## Certified suffix choices
+
+The [suffix certificate](SUFFIX_CERTIFICATE.md) gives exact feasibility after the failed-call allowance is exhausted, with all 209,408 policy roots, 665,500 finite states and 20,594 native paths. Greedy fresh choice is sometimes worse than all-tail; all adverse examples remain. The new `protected-suffix` stage brings the standard replay to 22 stages. Optional `protected-suffix-java` re-executes its complete fixed native paths.
