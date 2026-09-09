@@ -1,97 +1,122 @@
 {
-  "schema": "public-author-reproduction-v2",
-  "utc": "2026-09-09T04:38:57.129649+00:00",
-  "source_commit": "ec02a7a14f47413c0441841f39986e736a29d446",
+  "schema": "public-author-reproduction-v3",
+  "utc": "2026-09-09T08:12:15.497352+00:00",
+  "source_commit": "7a05b6163370f02893e8275fcb3ae2e24609ae63",
   "transport": "Fresh unauthenticated HTTPS clone; credential helpers, authorization headers and global/system Git configuration disabled; exact commit matched",
-  "complete_release_files_verified": 129376,
+  "complete_release_files_verified": 129804,
   "all_standard_stages": [
     {
       "stage": "curves",
       "status": "SUCCESS",
-      "seconds": 7.378970457997639
+      "seconds": 7.359051792009268
     },
     {
       "stage": "native",
       "status": "SUCCESS",
-      "seconds": 3.489387958019506
+      "seconds": 3.6328104579879437
     },
     {
       "stage": "deephaven",
       "status": "SUCCESS",
-      "seconds": 0.3159890840179287
+      "seconds": 0.3233068340050522
     },
     {
       "stage": "scale",
       "status": "SUCCESS",
-      "seconds": 21.782634584000334
+      "seconds": 21.67528241701075
     },
     {
       "stage": "calibration",
       "status": "SUCCESS",
-      "seconds": 0.25919095799326897
+      "seconds": 0.2685578750097193
     },
     {
       "stage": "ordering",
       "status": "SUCCESS",
-      "seconds": 23.222468708001543
+      "seconds": 23.18007362500066
     },
     {
       "stage": "refutations",
       "status": "SUCCESS",
-      "seconds": 106.84865004199673
+      "seconds": 107.49843012500787
     },
     {
       "stage": "compact",
       "status": "SUCCESS",
-      "seconds": 38.21550995900179
+      "seconds": 38.58866924999165
     },
     {
       "stage": "compact-native",
       "status": "SUCCESS",
-      "seconds": 0.4226581250259187
+      "seconds": 0.432667708984809
     },
     {
       "stage": "compact-scale",
       "status": "SUCCESS",
-      "seconds": 65.44235937501071
+      "seconds": 65.4188282499963
     },
     {
       "stage": "price-bounds",
       "status": "SUCCESS",
-      "seconds": 34.53208133301814
+      "seconds": 35.022171583987074
     },
     {
       "stage": "resource-frontier",
       "status": "SUCCESS",
-      "seconds": 6.732727291993797
+      "seconds": 6.811694083997281
     },
     {
       "stage": "resource-vector",
       "status": "SUCCESS",
-      "seconds": 1.433291207998991
+      "seconds": 1.4698837909963913
     },
     {
       "stage": "resource-frontier-native",
       "status": "SUCCESS",
-      "seconds": 5.632318708987441
+      "seconds": 5.48332691701944
     },
     {
       "stage": "budget-blind",
       "status": "SUCCESS",
-      "seconds": 10.97596862501814
+      "seconds": 10.944925249990774
     },
     {
       "stage": "universal-work",
       "status": "SUCCESS",
-      "seconds": 0.47092500000144355
+      "seconds": 0.4862039999861736
     },
     {
       "stage": "universal-order",
       "status": "SUCCESS",
-      "seconds": 8.585882041981677
+      "seconds": 8.712281375017483
+    },
+    {
+      "stage": "adaptive-work",
+      "status": "SUCCESS",
+      "seconds": 3.052054624975426
+    },
+    {
+      "stage": "probe-blocking",
+      "status": "SUCCESS",
+      "seconds": 12.071086916985223
+    },
+    {
+      "stage": "roslyn-source",
+      "status": "SUCCESS",
+      "seconds": 3.6605897909903433
+    },
+    {
+      "stage": "protected-tail",
+      "status": "SUCCESS",
+      "seconds": 20.51798050000798
+    },
+    {
+      "stage": "protected-suffix",
+      "status": "SUCCESS",
+      "seconds": 48.58561183401616
     }
   ],
-  "standard_replay_seconds": 335.741013460065,
+  "standard_replay_seconds": 425.1954890029738,
   "jdk17_reproduction": {
     "source_commit": "0124ba6bcd1dcb075796b0bab8f631b354cd74e4",
     "stages": [
@@ -224,7 +249,171 @@
     "dependency_cache_reused": true,
     "archive_supplied_with_required_hash": true
   },
-  "replay_input_semantics": "Complete fixed inputs and original outcomes; standard stages reconstruct mathematical values and trace/certificate checks. No timing campaign reruns.",
+  "bounded_source_native": {
+    "source_commit": "ec17d37abb6262298dc05d1969b7fef9c2de6283",
+    "protected_tail": {
+      "status": "SUCCESS",
+      "stage": "protected-tail-java",
+      "seconds": 1.2078708750195801,
+      "quick": false,
+      "replay_only": true,
+      "new_evaluation_samples": 0,
+      "equation_roots": 0,
+      "equation_inputs": 0,
+      "native_paths": 2552,
+      "groups": 144,
+      "controls": 8,
+      "strict_equation_improvements": 285,
+      "scope": "New JDK executions of fixed authored branches; no timing-campaign samples or new population",
+      "general_W_optimality": false
+    },
+    "roslyn": {
+      "status": "SUCCESS",
+      "checks": [
+        {
+          "label": "baseline",
+          "records": 4
+        },
+        {
+          "label": "patched",
+          "records": 69
+        }
+      ],
+      "reentry_successes": 4,
+      "source_revision": "6c4a46a31302167b425d5e0a31ea83c9a9aa1d09",
+      "sdk_version": "10.0.100-rc.1.25451.107",
+      "source_archive_sha256": "7b0bfa1c049eeddf3257ad61b28eca11c259296d478edd4cf58767b2ed9184c4",
+      "patch03_sha256": "a09d193ece3b93d93784b64d99f4874808690b5e7641799bb31cbd635abd6ecb",
+      "public_source_manifest_sha256": "36c7da236cd4db60dd0d8f6d1c0fe8d28bd75b235642dd8c68dd0845ba9ecb2f",
+      "whole_seconds": 74.2713264580234,
+      "steps": [
+        {
+          "stage": "sdk-version",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.2570009169867262,
+          "stdout_sha256": "0fb659288e3c74fa903da4ba0d0261c1f7681732c6c8bea22f3fc4754d042d8d",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "build-unmodified",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 36.60062666601152,
+          "stdout_sha256": "6c7da0eccdef2db4cfbccb3d122f0b4197af467ac3ae34dd922f7ad9c5e77ae0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "build-patch03",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 19.475964292010758,
+          "stdout_sha256": "099af396800ef77aede484692c7e887876dbad29e51cdc37f670770fd296c6cd",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "native-baseline",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 1.0077870420063846,
+          "stdout_sha256": "c5b43de97195a739a6fe158eeec0819ad1f432727ea58e9eb7a476db03794425",
+          "stderr_sha256": "6ac26addd0fdb985829142dd8bd21ac186231eadac574cfc5b5d635c99bf2819"
+        },
+        {
+          "stage": "check-baseline",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.0483702500059735,
+          "stdout_sha256": "81e3591f7db1b00f175780b73cd54902d2261f70c7eb91bf1ce0dc4488e53564",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "native-patched",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 3.2700173330085818,
+          "stdout_sha256": "662995f9c53d596593ca859ed02ef2b94e603b5d11c342c7df5b7622fd84204c",
+          "stderr_sha256": "4830451cd2137235b315606513921d9fd6bf2577da9bc431dcbda7bd575753bf"
+        },
+        {
+          "stage": "check-patched",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.08166266602347605,
+          "stdout_sha256": "e406e51a2387c95d8f4d755e4210a3a83c05b7de29d9f341eedaa1619ff6260b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "build-reentry",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 5.991772208973998,
+          "stdout_sha256": "2ec98e9fa1cde59437b34d51b64f564cd3adb7fab7f54f78f815e27991223886",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "reentry-baseline",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.2529777500021737,
+          "stdout_sha256": "605ec2319ae54fac518a6241febb5d6b8587d1c00e9706f40b80a54ef27ed973",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "reentry-original",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.259522916021524,
+          "stdout_sha256": "de4fa254af1fa685e58734bc5b4c06e0dd00d2ce6be344347777c250467724fc",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "reentry-two",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.2537550409906544,
+          "stdout_sha256": "da68d69b1334ffbe5c3e6b4be92c3730ade6750f74bbd0708a93db2031e37072",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "stage": "reentry-three",
+          "status": "SUCCESS",
+          "returncode": 0,
+          "seconds": 0.257134416984627,
+          "stdout_sha256": "1f53ec2d0956847ac93564d1af7a85bb056a64fd2ab58c0e21515991eb809ca2",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "scope": "New executions of fixed semantic inputs, with zero-writer unmodified controls and repaired same-text reentry. No new evaluation population or timing-campaign rerun; does not verify event payloads or arbitrary host safety."
+    },
+    "fresh_upstream_source_extraction": true,
+    "dependency_cache_reused": true,
+    "source_and_workers_unchanged_at_current_commit": true
+  },
+  "suffix_native": {
+    "source_commit": "7a05b6163370f02893e8275fcb3ae2e24609ae63",
+    "status": "SUCCESS",
+    "stage": "protected-suffix-java",
+    "seconds": 5.909117041999707,
+    "policy_roots": 0,
+    "feasibility_states": 0,
+    "native_paths": 20594,
+    "groups": 384,
+    "controls": 8,
+    "relative_to_alltail": {
+      "better": 1,
+      "worse": 3,
+      "tie": 209404
+    },
+    "replay_only": true,
+    "new_evaluation_samples": 0,
+    "general_W_optimality": false,
+    "scope": "New native executions of fixed paths; byte-identical raw",
+    "raw_sha256": "754b07f269d14a9ae4f6073a26be653215431e171cf3415bedc0a3d291dd6877",
+    "raw_byte_identical_to_original": true
+  },
+  "previous_evidence_rows_unchanged": 11865,
+  "replay_input_semantics": "Complete fixed inputs and original outcomes. Standard stages reconstruct equations and trace/certificate checks; native stages execute fixed semantic inputs. No new timing campaign or population.",
   "new_population": false,
   "independent_third_party_evaluation": false,
   "host_relation": "Original author workstation; fresh public checkout"
