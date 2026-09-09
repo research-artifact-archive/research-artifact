@@ -1,0 +1,217 @@
+{
+  "utc": "2026-09-09T02:02:02.359827+00:00",
+  "parameters": {
+    "budgets": [
+      0,
+      1,
+      2
+    ],
+    "layouts": [
+      "distinct",
+      "colliding"
+    ],
+    "kappa": [
+      0,
+      2
+    ],
+    "policies": [
+      "scalar_three",
+      "scalar_two_protect",
+      "scalar_two_fast",
+      "qn_three",
+      "cached_all",
+      "protected_all"
+    ],
+    "concurrent_budget": 2,
+    "seeds": [
+      11,
+      23
+    ],
+    "shapes": [
+      {
+        "id": "common-two-chain",
+        "w": [
+          1,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "equal-two-independent",
+        "w": [
+          1,
+          1
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-independent",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-chain",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "id": "five-independent",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": []
+      },
+      {
+        "id": "five-chain",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-branch",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-decreasing-chain",
+        "w": [
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ],
+    "record_controls": [
+      "unchanged",
+      "wrong_W",
+      "wrong_L_counter",
+      "wrong_Q_counter",
+      "wrong_inside",
+      "wrong_failure_epoch",
+      "wrong_selected_mode",
+      "coordinated_counter_cost"
+    ],
+    "sequence_controls": [
+      "unchanged",
+      "missing_step",
+      "duplicate_step",
+      "wrong_raw_binding",
+      "wrong_input_binding"
+    ],
+    "parser_controls": [
+      "unchanged",
+      "unknown_policy",
+      "wrong_p",
+      "missing_curve"
+    ]
+  },
+  "sources": {
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/CHECKER_SOURCE_BINDING.json": "b26d6570b965454fb3b5df37a3dcc9b88ccb25fe121a41d24270720115b2d8b7",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/NATIVE_ADAPTER.patch": "20d8a2c40d63c301c2ebe6aa6d8220f6c6b489a78606e4b4605cadefbb5bbff0",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/PLAN.md": "b2312d6fdb4206f2dc9f98f61927d9485ad0c7e66a3a529554e2bf6922f45042",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/SOURCE_DELTA.json": "cac339fe29c95184e4cb7b2ffb9c467bce6599b16cb65c41caebc77d2d6733a1",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/VectorChargedCallbacks.java": "90da5150ff7a52c526a8b238bc5bcfab21f9d0bc19163445f049f561be1d1022",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py": "407d12ac4fc4fb90c1f2c490d97f9099728f4f466c2c35b1853cc6b735344180",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/fixed_policy.py": "719f746d24ef8db588658861273ba92e32a3727762b8c79d27d3bdbc37d6f6d0",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/model.py": "51086c4c9e6a0a96fe414b0e83da192bf8919238199edcda65618a24dec49c0d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/resource_check.py": "2b7669c8001266b052ea36bcd636ff6ce736bce04e834def2c8d769b40dbb0a2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/search.py": "e9ba4832d9a3a33f6bb69224c7cf9fa81d86ff72c23c74acece65121d9ba9703",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/sequence_checker.py": "c3a1dce63acf051395974bdd582689722e0eb8cb0c129469af6ef2abf81c4efb",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py": "ac9b567598ac38559996b9ee212717da09ae3687b419708c8ae1ca6e1c4a9af2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py": "ff185cd1934227af12dcf3d7c97d83d5228c9a553cc9886b4c165ceda0a81326",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/study.py": "273b400522f50a54d3395ce5e3ab139ffc0a59bb0f7192f62f19c28c25d6d810",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/table_check.py": "5cfb2913ad6b2cd8ab4a4690a559873b5fb137d70a57b2b9822e5b3c4df5df8e"
+  },
+  "native_executions": 0
+}

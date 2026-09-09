@@ -1,0 +1,220 @@
+{
+  "utc": "2026-09-09T02:15:04.445769+00:00",
+  "parameters": {
+    "budgets": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "layouts": [
+      "distinct",
+      "colliding"
+    ],
+    "kappa": [
+      0,
+      2
+    ],
+    "policies": [
+      "slack_three-0",
+      "slack_three-1",
+      "slack_three-2",
+      "slack_three-3",
+      "slack_two-0",
+      "slack_two-1",
+      "slack_two-2",
+      "slack_two-3"
+    ],
+    "concurrent_budget": 3,
+    "seeds": [
+      11,
+      23
+    ],
+    "shapes": [
+      {
+        "id": "common-two-chain",
+        "w": [
+          1,
+          2
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "equal-two-independent",
+        "w": [
+          1,
+          1
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-independent",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": []
+      },
+      {
+        "id": "three-chain",
+        "w": [
+          1,
+          2,
+          3
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      {
+        "id": "five-independent",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": []
+      },
+      {
+        "id": "five-chain",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-branch",
+        "w": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      {
+        "id": "five-decreasing-chain",
+        "w": [
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      }
+    ],
+    "record_controls": [
+      "unchanged",
+      "wrong_W",
+      "wrong_L_counter",
+      "wrong_Q_counter",
+      "wrong_inside",
+      "wrong_failure_epoch",
+      "wrong_selected_mode",
+      "coordinated_counter_cost"
+    ],
+    "sequence_controls": [
+      "unchanged",
+      "missing_step",
+      "duplicate_step",
+      "wrong_raw_binding",
+      "wrong_input_binding"
+    ],
+    "parser_controls": [
+      "unchanged",
+      "unknown_policy",
+      "wrong_p",
+      "missing_curve"
+    ]
+  },
+  "sources": {
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/CHECKER_SOURCE_BINDING.json": "ac9ec943c18450c734577ece214a674093533b10c0e71ca4de15ecb4c6ff29a0",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/FrontierChargedCallbacks.java": "1667c86842fc21b028b6265d1b15d7c571822ce84b9c659b01856ee87e8d86be",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/NATIVE_ADAPTER.patch": "bff685c4db288a654534454b8a3c9dddc562a994a0afc99a9d37bd066bf2ca36",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/PLAN.md": "451007f0f892bcb541480c4197b915a603b9229003c0151b2daf2c795d5964b8",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/SOURCE_DELTA.json": "22e08425c712d725cb6186752dc7f119437571ce3518645d53376e95207eb449",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/causal.py": "407d12ac4fc4fb90c1f2c490d97f9099728f4f466c2c35b1853cc6b735344180",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/fixed_policy.py": "c7e0dc22078242e923879555bde512b10d0bd2ccc8a9827ee97b48aaa26f72f2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/model.py": "51086c4c9e6a0a96fe414b0e83da192bf8919238199edcda65618a24dec49c0d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/resource_check.py": "a46265d458333ce792c35883e49ffb8c19cc832d385b733537103935c00ee7e6",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/search.py": "e9ba4832d9a3a33f6bb69224c7cf9fa81d86ff72c23c74acece65121d9ba9703",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/sequence_checker.py": "c3a1dce63acf051395974bdd582689722e0eb8cb0c129469af6ef2abf81c4efb",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/static_check.py": "ac9b567598ac38559996b9ee212717da09ae3687b419708c8ae1ca6e1c4a9af2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/strong.py": "ff185cd1934227af12dcf3d7c97d83d5228c9a553cc9886b4c165ceda0a81326",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/study.py": "bf440887f2674d4e6c5561afbfde3de47d2ddaef68692d112622b5de17239b33",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_frontier_native_01/table_check.py": "57c29e169a6d1630729c0b6a39e22a12b9bdaa8ea51e5fbd53bb7eef8977cd82"
+  },
+  "native_executions": 0
+}

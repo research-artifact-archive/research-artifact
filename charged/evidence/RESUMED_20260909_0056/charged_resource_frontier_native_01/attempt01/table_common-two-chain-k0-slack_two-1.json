@@ -1,0 +1,61 @@
+{
+  "case": {
+    "id": "common-two-chain-k0-slack_two-1",
+    "base": "common-two-chain",
+    "kappa": 0,
+    "policy": "slack_two-1",
+    "jobs": [
+      [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "values": {
+    "0": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "1": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "2": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "3": [
+      0,
+      3,
+      4,
+      6
+    ]
+  },
+  "check": {
+    "equations": 12,
+    "domain": "mask subsets and budgets0..3; no tail claim",
+    "constructor_imported": false
+  }
+}

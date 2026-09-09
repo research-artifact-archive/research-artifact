@@ -1,0 +1,98 @@
+{
+  "case": {
+    "id": "three-chain-k0-scalar_two_fast",
+    "base": "three-chain",
+    "kappa": 0,
+    "policy": "scalar_two_fast",
+    "jobs": [
+      [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        0,
+        0,
+        0
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "values": {
+    "0": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "1": [
+      0,
+      1,
+      1,
+      1
+    ],
+    "2": [
+      0,
+      2,
+      2,
+      2
+    ],
+    "3": [
+      0,
+      2,
+      3,
+      3
+    ],
+    "4": [
+      0,
+      3,
+      3,
+      3
+    ],
+    "5": [
+      0,
+      3,
+      4,
+      4
+    ],
+    "6": [
+      0,
+      3,
+      5,
+      5
+    ],
+    "7": [
+      0,
+      3,
+      5,
+      6
+    ]
+  },
+  "check": {
+    "states": 8,
+    "budget_positions": 4,
+    "equations": 28,
+    "tail_basis": "p<=c gives private-budget/protected-all equality by n; cached-all has <=n completing failures; forced protection is constant",
+    "constructor_imported": false
+  }
+}

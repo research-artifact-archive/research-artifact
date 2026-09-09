@@ -1,0 +1,59 @@
+{
+  "case": {
+    "id": "common-two-chain-k2-cached_all",
+    "base": "common-two-chain",
+    "kappa": 2,
+    "policy": "cached_all",
+    "jobs": [
+      [
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        0,
+        2,
+        2
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "values": {
+    "0": [
+      0,
+      0,
+      0
+    ],
+    "1": [
+      0,
+      2,
+      2
+    ],
+    "2": [
+      0,
+      4,
+      4
+    ],
+    "3": [
+      0,
+      4,
+      6
+    ]
+  },
+  "check": {
+    "states": 4,
+    "budget_positions": 3,
+    "equations": 9,
+    "tail_basis": "p<=c gives private-budget/protected-all equality by n; cached-all has <=n completing failures; forced protection is constant",
+    "constructor_imported": false
+  }
+}

@@ -4,7 +4,7 @@ Anonymous research artifact for the paper of this title. The package contains th
 
 ## Charged-call revision
 
-The [charged supplement](charged/README.md) adds the current three-mode compiler, mixed-price cursor reduction, native Java integration, Deephaven source case, and complete retained outcomes. See its [claim map](charged/CLAIM_EVIDENCE_MAP.md), [theory guide](charged/THEORY_AND_IMPLEMENTATION.md), and [theorem-by-theorem research lineage](charged/RESEARCH_LINEAGE.md). The preceding zero-fee package remains unchanged.
+The [charged supplement](charged/README.md) adds the current three-mode compiler, mixed-price cursor reduction, native Java integration, Deephaven source case, and complete retained outcomes. See its [claim map](charged/CLAIM_EVIDENCE_MAP.md), [theory guide](charged/THEORY_AND_IMPLEMENTATION.md), and [theorem-by-theorem research lineage](charged/RESEARCH_LINEAGE.md). The [resource extension](charged/RESOURCE_BOUNDARIES.md) adds exact call-cap/protected-work bounds, a sharp price ratio for independent jobs and two native counter studies. The preceding zero-fee package remains unchanged.
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git
@@ -13,7 +13,7 @@ python3 -B tools/verify_release.py
 python3 -B charged/reproduce.py all --out work/charged-full --timeout 300
 ```
 
-Use Python 3.10 or later with assertions enabled. The ten standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 1.2 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. The [charged manuscript](paper/main.pdf) cites the immutable evidence commit. A fresh public checkout passed all ten standard stages, both JDK17 native stages and all372 native Deephaven records; see the [reproduction receipt](REPRODUCTION_20260909.json). These are author-side fixed-evidence replays.
+Use Python 3.10 or later with assertions enabled. The fourteen standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 1.3 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. The [charged manuscript](paper/main.pdf) cites the immutable evidence commit. The preceding charged release passed its ten standard stages, both JDK17 native stages and all 372 native Deephaven records; see the [reproduction receipt](REPRODUCTION_20260909.json). These are author-side fixed-evidence replays.
 
 ## Preceding zero-fee package
 

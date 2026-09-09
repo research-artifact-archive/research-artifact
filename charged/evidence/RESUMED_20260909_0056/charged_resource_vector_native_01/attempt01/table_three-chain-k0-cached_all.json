@@ -1,0 +1,98 @@
+{
+  "case": {
+    "id": "three-chain-k0-cached_all",
+    "base": "three-chain",
+    "kappa": 0,
+    "policy": "cached_all",
+    "jobs": [
+      [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        3,
+        0,
+        0,
+        0
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "values": {
+    "0": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "1": [
+      0,
+      2,
+      2,
+      2
+    ],
+    "2": [
+      0,
+      4,
+      4,
+      4
+    ],
+    "3": [
+      0,
+      4,
+      6,
+      6
+    ],
+    "4": [
+      0,
+      6,
+      6,
+      6
+    ],
+    "5": [
+      0,
+      6,
+      8,
+      8
+    ],
+    "6": [
+      0,
+      6,
+      10,
+      10
+    ],
+    "7": [
+      0,
+      6,
+      10,
+      12
+    ]
+  },
+  "check": {
+    "states": 8,
+    "budget_positions": 4,
+    "equations": 28,
+    "tail_basis": "p<=c gives private-budget/protected-all equality by n; cached-all has <=n completing failures; forced protection is constant",
+    "constructor_imported": false
+  }
+}

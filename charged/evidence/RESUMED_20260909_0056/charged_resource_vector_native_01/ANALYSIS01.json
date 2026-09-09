@@ -1,0 +1,938 @@
+{
+  "utc": "2026-09-09T02:06:03.126907+00:00",
+  "post_outcome_analysis": true,
+  "cells": 96,
+  "three_cost_lower": 2,
+  "equal": 94,
+  "higher": 0,
+  "ordinary_status": {
+    "utc": "2026-09-09T02:02:55.567630+00:00",
+    "status": "SUCCESS",
+    "native_runs": 2442,
+    "ordinary_runs": 2440,
+    "native_controls": 2,
+    "recorded": 2442,
+    "status_counts": {
+      "SUCCESS": 2442
+    },
+    "replay_groups": 576,
+    "replay_groups_met": 576,
+    "record_controls_met": 8,
+    "sequence_controls_met": 5,
+    "parser_controls_met": 4,
+    "check_seconds": 1.5598298750119284,
+    "raw_sha256": "58166193f6cff5c9530b36d9db560e4583e8fc1e424dd18fe5a19b22a025f956",
+    "interpretation": "bounded native source-counter study; finite source-model feasibility; not latency or fee calibration"
+  },
+  "example": [
+    {
+      "case": "common-two-chain-k2-scalar_three",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "scalar_three",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 2,
+      "expected_maxima": {
+        "W": 32,
+        "L": 16,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 72,
+      "observed": {
+        "count": 2,
+        "W": 32,
+        "L": 16,
+        "Q": 2,
+        "cost": 72
+      },
+      "met": true
+    },
+    {
+      "case": "common-two-chain-k2-scalar_two_protect",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "scalar_two_protect",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 1,
+      "expected_maxima": {
+        "W": 24,
+        "L": 24,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 80,
+      "observed": {
+        "count": 1,
+        "W": 24,
+        "L": 24,
+        "Q": 2,
+        "cost": 80
+      },
+      "met": true
+    },
+    {
+      "case": "common-two-chain-k2-scalar_two_fast",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "scalar_two_fast",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 2,
+      "expected_maxima": {
+        "W": 32,
+        "L": 16,
+        "Q": 3
+      },
+      "expected_cost_ceiling": 80,
+      "observed": {
+        "count": 2,
+        "W": 32,
+        "L": 16,
+        "Q": 3,
+        "cost": 80
+      },
+      "met": true
+    },
+    {
+      "case": "common-two-chain-k2-qn_three",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "qn_three",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 2,
+      "expected_maxima": {
+        "W": 32,
+        "L": 16,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 72,
+      "observed": {
+        "count": 2,
+        "W": 32,
+        "L": 16,
+        "Q": 2,
+        "cost": 72
+      },
+      "met": true
+    },
+    {
+      "case": "common-two-chain-k2-cached_all",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "cached_all",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 3,
+      "expected_maxima": {
+        "W": 40,
+        "L": 16,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 88,
+      "observed": {
+        "count": 3,
+        "W": 40,
+        "L": 16,
+        "Q": 2,
+        "cost": 88
+      },
+      "met": true
+    },
+    {
+      "case": "common-two-chain-k2-protected_all",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "protected_all",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 1,
+      "expected_maxima": {
+        "W": 24,
+        "L": 24,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 80,
+      "observed": {
+        "count": 1,
+        "W": 24,
+        "L": 24,
+        "Q": 2,
+        "cost": 80
+      },
+      "met": true
+    }
+  ],
+  "comparisons": [
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 24,
+      "two": 24
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 24,
+      "two": 24
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 40,
+      "two": 40
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 40,
+      "two": 40
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 56,
+      "two": 56
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 56,
+      "two": 56
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 72,
+      "two": 80
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 72,
+      "two": 80
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 80,
+      "two": 80
+    },
+    {
+      "base": "common-two-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 80,
+      "two": 80
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 16,
+      "two": 16
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 16,
+      "two": 16
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 24,
+      "two": 24
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 24,
+      "two": 24
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 32,
+      "two": 32
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 32,
+      "two": 32
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 64,
+      "two": 64
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 64,
+      "two": 64
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 64,
+      "two": 64
+    },
+    {
+      "base": "equal-two-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 64,
+      "two": 64
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 72,
+      "two": 72
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 72,
+      "two": 72
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 88,
+      "two": 88
+    },
+    {
+      "base": "three-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 88,
+      "two": 88
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 96,
+      "two": 96
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 96,
+      "two": 96
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 128,
+      "two": 128
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 128,
+      "two": 128
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 144,
+      "two": 144
+    },
+    {
+      "base": "three-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 144,
+      "two": 144
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 48,
+      "two": 48
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 72,
+      "two": 72
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 72,
+      "two": 72
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 88,
+      "two": 88
+    },
+    {
+      "base": "three-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 88,
+      "two": 88
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 96,
+      "two": 96
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 96,
+      "two": 96
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 128,
+      "two": 128
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 128,
+      "two": 128
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 144,
+      "two": 144
+    },
+    {
+      "base": "three-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 144,
+      "two": 144
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-independent",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-independent",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-branch",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 192,
+      "two": 192
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 248,
+      "two": 248
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-branch",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 288,
+      "two": 288
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 120,
+      "two": 120
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 160,
+      "two": 160
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 0,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "distinct",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 0,
+      "layout": "colliding",
+      "three": 200,
+      "two": 200
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "distinct",
+      "three": 256,
+      "two": 256
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 1,
+      "layout": "colliding",
+      "three": 256,
+      "two": 256
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "distinct",
+      "three": 312,
+      "two": 312
+    },
+    {
+      "base": "five-decreasing-chain",
+      "kappa": 2,
+      "budget": 2,
+      "layout": "colliding",
+      "three": 312,
+      "two": 312
+    }
+  ],
+  "component_maxima_sum_is_not_max_of_sum": true
+}

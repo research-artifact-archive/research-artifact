@@ -1,0 +1,40 @@
+{
+  "created": "2026-09-09T02:10:12.826992+00:00",
+  "phase": "EXPLORATORY_BEFORE_OUTCOMES",
+  "sizes": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "weights": [
+    1,
+    2,
+    4
+  ],
+  "all_ordered_DAGs": true,
+  "budgets": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "call_slacks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "claims": {
+    "two": "sumw if B>r else0",
+    "three": "sum top min(max(B-r,0),n) w"
+  },
+  "failure_policy": "preserve every case and mismatch; no retry or exclusion",
+  "scope": "finite original-macro L-objective check, not proof over retained preparations"
+}

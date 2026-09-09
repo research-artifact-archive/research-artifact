@@ -1,6 +1,6 @@
 # Charged atomic-call retry policies
 
-This supplement contains the charged-call research revision, including the mixed-price reduction, checked cursor policies, Java integration, source-instrumented Deephaven case, and all retained experimental outcomes. The earlier zero-fee package remains in `../package` and its history. These are authored research inputs and implementations; declared charges do not estimate elapsed time.
+This supplement contains the charged-call research revision, including exact resource bounds, the sharp independent-job price ratio, the mixed-price reduction, checked cursor policies, Java integration, source-instrumented Deephaven case, and all retained experimental outcomes. The earlier zero-fee package remains in `../package` and its history. These are authored research inputs and implementations; declared charges do not estimate elapsed time.
 
 The current portable implementation is `charged_compact_03`. Inputs satisfying the proved price and dependency conditions use a linear-size cursor artifact. Other inputs use the general all-reachable-set compiler. The general fallback can require exponentially many unfinished sets; specifying a large binary budget alone does not enlarge the compact artifact.
 
@@ -29,7 +29,7 @@ python3 charged/reproduce.py verify
 python3 charged/reproduce.py all --out work/charged-all --timeout 300
 ```
 
-The driver verifies the public provenance, then runs each stage in a separate process with a fresh output directory. `--quick` is a smoke subset and must not be reported as full reproduction. The full driver retains original measurements and rechecks them; its elapsed times are replay times, not additional benchmark samples. The evidence tree is about 1.2 GB unpacked. Two oversized repeated-input ledgers use lossless gzip; original/decoded/container hashes are recorded, and the reader verifies them.
+The driver verifies the public provenance, then runs each stage in a separate process with a fresh output directory. `--quick` is a smoke subset and must not be reported as full reproduction. The full driver retains original measurements and rechecks them; its elapsed times are replay times, not additional benchmark samples. The evidence tree is about 1.3 GB unpacked. Two oversized repeated-input ledgers use lossless gzip; original/decoded/container hashes are recorded, and the reader verifies them.
 
 | Stage | Full evidence checked |
 |---|---|
@@ -43,6 +43,10 @@ The driver verifies the public provenance, then runs each stage in a separate pr
 | `compact` | The same 19,485 compact/fallback inputs under the byte-identical 03 semantic core, 527,409 branches, 29 controls and 14 CLI controls |
 | `compact-native` | 606 ordinary and four native-control records, 208 replay maxima, eight record/five sequence/nine saved parser controls |
 | `compact-scale` | All 420 and 180 compact-comparison units, all 366 successful artifacts/value outputs, full failure partitions and the second study's closed form and 36 exact root shapes |
+| `price-bounds` | All 13,302 first-study units and 1,866 second-study units; direct values, saved large/general artifacts and huge-budget tails |
+| `resource-frontier` | 5,421 DAG/weight inputs and all 265,629 budget/slack roots |
+| `resource-vector` | 2,442 raw records, all 96 strictly guarded tables, 576 replay groups, the preserved old-checker counterexample and aggregation controls |
+| `resource-frontier-native` | 9,314 raw records, 128 finite tables, 1,024 replay groups and all native-study controls |
 
 The 14 CLI controls deliberately retain two erroneous null acceptances by the old 02 CLI. They do not make those acceptances valid in 03. The 19,485-input study is not counted again as an independent 03 experiment: constructor, checker and runtime are unchanged between 02 and 03, with a separate CLI correction.
 
@@ -51,6 +55,8 @@ Optional Java replay requires JDK 17:
 ```sh
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py native-java --out work/native-java --timeout 300
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py compact-native-java --out work/compact-native-java --timeout 300
+JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-vector-java --out work/resource-vector-java --timeout 300
+JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-frontier-java --out work/resource-frontier-java --timeout 300
 ```
 
 The compact Java fixture supports at most five jobs and prices at most 1,000,000. It keeps the original callback/kernel/writer bodies while changing the loader and selector. New executions generate fresh raw records and fresh causal certificates; fixed corruption controls remain tied to their original source records. Java launcher-option environment variables are removed for the compact replay so launcher notices cannot masquerade as parser failures. Python handles the large numeric/instance cases.
@@ -64,3 +70,5 @@ Every success, timeout, memory failure, invalid result, unstarted unit and super
 The certificate checkers establish equations of the declared games. They do not verify executable code, infer application prices/budgets, or establish all Java schedules. Native causal checks establish an existential ordering under a shared fixed source translation. The JMH experiment did not establish a positive protection premium or measured third-mode benefit. Deephaven supplies an upper-bound application under stated source and refresh contracts, with no observed prefix abort and no whole-system minimax claim. No human-subject or simulated-human evaluation is included.
 
 Original research code/inputs/docs follow the repository MIT license, except clearly identified upstream material. Modified Deephaven files remain under the full [Deephaven Community License 1.0](licenses/deephaven/LICENSE.md), with its [notice](licenses/deephaven/NOTICE.md); JMH-generated benchmark files retain BSD notices. See [distribution details](DISTRIBUTION.md). Author-local path projections are recorded separately from original hashes and do not alter scientific outcomes.
+
+The [resource-boundary guide](RESOURCE_BOUNDARIES.md) gives the exact protected-work/call-cap formulas, the independent-job sharp ratio, native counting conventions, complete new denominators, the old vector-checker defect and its strict recheck, and the relation to established optimistic fallback.

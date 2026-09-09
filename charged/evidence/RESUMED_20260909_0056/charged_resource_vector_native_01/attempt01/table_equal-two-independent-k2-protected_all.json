@@ -1,0 +1,54 @@
+{
+  "case": {
+    "id": "equal-two-independent-k2-protected_all",
+    "base": "equal-two-independent",
+    "kappa": 2,
+    "policy": "protected_all",
+    "jobs": [
+      [
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        0,
+        2,
+        2
+      ]
+    ],
+    "edges": []
+  },
+  "values": {
+    "0": [
+      0,
+      0,
+      0
+    ],
+    "1": [
+      1,
+      1,
+      1
+    ],
+    "2": [
+      1,
+      1,
+      1
+    ],
+    "3": [
+      2,
+      2,
+      2
+    ]
+  },
+  "check": {
+    "states": 4,
+    "budget_positions": 3,
+    "equations": 9,
+    "tail_basis": "p<=c gives private-budget/protected-all equality by n; cached-all has <=n completing failures; forced protection is constant",
+    "constructor_imported": false
+  }
+}

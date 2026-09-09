@@ -1,0 +1,92 @@
+[
+  {
+    "id": "unchanged",
+    "expected": true,
+    "accepted": true,
+    "met": true,
+    "input": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "('captured parent', 1, 0, 4, 3)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py\", line 31, in verify_run\n    assert parents[j]==done[j],('captured parent',i,j,parents[j],done[j])\nAssertionError: ('captured parent', 1, 0, 4, 3)\n",
+      "id": "vector-run-002441",
+      "expected_accept": false,
+      "control": true,
+      "met": true,
+      "terminal": "SUCCESS"
+    }
+  },
+  {
+    "id": "resource_failure",
+    "expected": false,
+    "accepted": false,
+    "met": true,
+    "input": {
+      "status": "RESOURCE_CHECK_FAILURE",
+      "accepted": false,
+      "layer": null,
+      "reason": "('captured parent', 1, 0, 4, 3)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py\", line 31, in verify_run\n    assert parents[j]==done[j],('captured parent',i,j,parents[j],done[j])\nAssertionError: ('captured parent', 1, 0, 4, 3)\n",
+      "id": "vector-run-002441",
+      "expected_accept": false,
+      "control": true,
+      "met": true,
+      "terminal": "SUCCESS"
+    }
+  },
+  {
+    "id": "wrong_layer",
+    "expected": false,
+    "accepted": false,
+    "met": true,
+    "input": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "resource",
+      "reason": "('captured parent', 1, 0, 4, 3)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py\", line 31, in verify_run\n    assert parents[j]==done[j],('captured parent',i,j,parents[j],done[j])\nAssertionError: ('captured parent', 1, 0, 4, 3)\n",
+      "id": "vector-run-002441",
+      "expected_accept": false,
+      "control": true,
+      "met": true,
+      "terminal": "SUCCESS"
+    }
+  },
+  {
+    "id": "wrong_reason",
+    "expected": false,
+    "accepted": false,
+    "met": true,
+    "input": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "unrelated resource failure",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py\", line 31, in verify_run\n    assert parents[j]==done[j],('captured parent',i,j,parents[j],done[j])\nAssertionError: ('captured parent', 1, 0, 4, 3)\n",
+      "id": "vector-run-002441",
+      "expected_accept": false,
+      "control": true,
+      "met": true,
+      "terminal": "SUCCESS"
+    }
+  },
+  {
+    "id": "timeout",
+    "expected": false,
+    "accepted": false,
+    "met": true,
+    "input": {
+      "status": "TIMEOUT",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "('captured parent', 1, 0, 4, 3)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_resource_vector_native_01/static_check.py\", line 31, in verify_run\n    assert parents[j]==done[j],('captured parent',i,j,parents[j],done[j])\nAssertionError: ('captured parent', 1, 0, 4, 3)\n",
+      "id": "vector-run-002441",
+      "expected_accept": false,
+      "control": true,
+      "met": true,
+      "terminal": "SUCCESS"
+    }
+  }
+]

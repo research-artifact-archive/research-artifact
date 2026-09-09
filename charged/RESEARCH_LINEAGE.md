@@ -20,3 +20,7 @@ The exact preceding source is [package/paper/main.tex](../package/paper/main.tex
 | Deephaven body bound and public-refresh integration | None in the earlier zero-fee publication. | Source-derived bounded-resource application with caller-owned update assumptions, phase-aware countercomparison, live Action capture, and all adverse outcomes. It does not validate positive charged premiums. |
 
 The retained [older theorem guide](../THEOREM_AND_CHECKER_GUIDE.md) refers to the zero-fee paper stored under `package/paper/`. The current [theory guide](THEORY_AND_IMPLEMENTATION.md) and [claim map](CLAIM_EVIDENCE_MAP.md) identify the charged objects, experiments and trust boundaries. Publication and replay do not certify novelty or acceptance.
+
+## Resource extension in the same continuing project
+
+The later charged resource extension adds the full-interface Q-versus-worst-L boundary for arbitrary DAGs, including the two-mode lower bound, and the sharp independent-job total-cost ratio for arbitrary charged fees. Neither result occurs in the preceding zero-fee package. They use the charged normal form, established optimistic fallback and top-budget accounting, and the project's retained two-mode packing proof. Their importance is not certified by this lineage comparison. The portable counter studies provide explicit source-event witnesses, not a production workload or validated fee model. See [the resource guide](RESOURCE_BOUNDARIES.md) for proofs, counterexamples, native scopes and precise prior-work attribution.
