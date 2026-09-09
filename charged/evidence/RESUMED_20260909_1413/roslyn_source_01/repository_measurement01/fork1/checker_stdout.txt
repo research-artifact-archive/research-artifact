@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "expected": 396,
+  "observed": 396,
+  "counts": {
+    "SUCCESS": 396
+  },
+  "issues": [],
+  "controls": [
+    {
+      "name": "call_counter",
+      "rejected": true,
+      "errors": [
+        "counters/trace"
+      ]
+    },
+    {
+      "name": "captured_parent_later_version",
+      "rejected": true,
+      "errors": [
+        "persistent captured output"
+      ]
+    },
+    {
+      "name": "cached_mismatch_input",
+      "rejected": true,
+      "errors": [
+        "wrong snapshot:kernel_inside_begin"
+      ]
+    },
+    {
+      "name": "missing_notification",
+      "rejected": true,
+      "errors": [
+        "notification/event order"
+      ]
+    },
+    {
+      "name": "notification_event_order",
+      "rejected": true,
+      "errors": [
+        "notification/event order"
+      ]
+    },
+    {
+      "name": "writer_old_identity",
+      "rejected": true,
+      "errors": [
+        "writer transition"
+      ]
+    },
+    {
+      "name": "writer_time",
+      "rejected": true,
+      "errors": [
+        "writer chronology"
+      ]
+    },
+    {
+      "name": "negative_setup",
+      "rejected": true,
+      "errors": [
+        "nonnegative integer:setup_ns"
+      ]
+    },
+    {
+      "name": "false_noop",
+      "rejected": true,
+      "errors": [
+        "unexpected trace:return_changed"
+      ]
+    },
+    {
+      "name": "unspent_slack",
+      "rejected": true,
+      "errors": [
+        "remaining slack"
+      ]
+    },
+    {
+      "name": "wrong_actual_writes",
+      "rejected": true,
+      "errors": [
+        "actual writes"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "utc": "2026-09-09T07:14:20.836311+00:00",
+  "kind": "FIXED_NATIVE_TRACE_DENOMINATOR_BEFORE_JVM_OUTCOMES",
+  "units": 2552,
+  "groups": 144,
+  "cases": [
+    {
+      "id": "counter-chain",
+      "works": [
+        2,
+        4,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "counter-independent",
+      "works": [
+        2,
+        4,
+        1,
+        1
+      ],
+      "edges": []
+    },
+    {
+      "id": "counter-diamond",
+      "works": [
+        2,
+        4,
+        1,
+        1
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "increasing-chain",
+      "works": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    }
+  ],
+  "slacks": [
+    0,
+    1,
+    2
+  ],
+  "budget_tags": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "writer": "Separate joined writer thread changes current own-input identity immediately before chosen mismatching compare. Budget/path remain outside selector; first and later failures cost actual new writes.",
+  "observed_input": "Author chain counterexample already known; other variants constructed after equation study. Not held out.",
+  "work": "Selected iterations of deterministic pure kernel; parent mixing/allocation/callback overhead excluded.",
+  "checks": "Every complete branch and native counted W,L,Q maximum, actual versions, pure outputs and captured parent values. No timing claims.",
+  "no_exclusion": true,
+  "no_retry": true,
+  "process_cap_seconds": 180,
+  "scientific_limits": "Bounded authored native scripts, not all host schedules; source/game correlation retained."
+}

@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-09T06:32:19.816506+00:00",
+  "kind": "NATIVE_COUNTEREXAMPLE_FROM_AUTHOR_STATIC_FINDING",
+  "conditions": "One linked source document, r=0, OnDocumentTextChanged callback recursively requests the exact same SourceText once",
+  "expected_from_source": "baseline/original/three return; patch02 two blocks reacquiring its own source semaphore",
+  "scope": "Outside earlier non-reentrant owner contract; retain as an applicability defect, not erase prior normal outcomes",
+  "process_cap_seconds": 3,
+  "units": [
+    "baseline",
+    "original",
+    "two",
+    "three"
+  ],
+  "no_retry": true,
+  "source_patch_sha256": "d2372ada5b8da9b478ae40dd92c4ab73c93a16f4c4ae3e3b7197f0808845bf37",
+  "program_sha256": "db826da6e992ccb806d951dfec5415d0c2d849f431173620355b1c8e60e5fa0a"
+}

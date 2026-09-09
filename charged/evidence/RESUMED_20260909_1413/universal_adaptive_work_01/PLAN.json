@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-09T05:24:04.367235+00:00",
+  "kind": "EXPLORATORY_PRE_RESULT",
+  "question": "Does adaptive job choice improve worst W inside the global-failure-threshold three-mode family, even with B knowledge?",
+  "input_scope": "All5519 previously observed charged_universal_order_01 cases; every B0..7 and r0..3, no exclusions",
+  "input_sha256": "efdfc4adaacd5025d34b9a1c6470ed2c0386b012180452e4183e5af4a7618498",
+  "case_count": 5519,
+  "root_count": 176608,
+  "model": "While remaining slack t>0, choose any ready job and fresh prepare then cheap validate. A cheap failure decrements t and consumes one b. On t=0, use fresh preparation plus cached completion for all remaining jobs. No stored preparation, inspection or other action is modeled.",
+  "reference": "Bellman over (unfinished set S,b,t); failed job may be switched. Optimizing selector is allowed to know b, making it a lower comparator for a B-blind selector within this family.",
+  "candidate": "minimum-work ready job independently of b,t, repeat until it completes, then choose least-ready again",
+  "equation": "X(empty,b,t)=0; X(S,0,t)=0; X(S,b,0)=Top_b(S); X(S,b,t)=min_i_ready max(X(S-i,b,t), w_i+X(S,b-1,t-1)) for b,t>0",
+  "falsifier": "Any lower Bellman excess than the candidate fixed-greedy excess or any inconsistent base/transition becomes FAILURE for the proposed equality; preserve full input and both values.",
+  "status_partition": [
+    "SUCCESS",
+    "FAILURE",
+    "TIMEOUT",
+    "INVALID"
+  ],
+  "timeout_seconds": 90,
+  "retry": false,
+  "all_program_optimality_claim": false,
+  "new_native_measurements": 0,
+  "observed_input_results_not_preregistered": true
+}

@@ -1,0 +1,3308 @@
+{
+  "scope": "Post-outcome descriptive summary of all fixed repetitions; no source reruns, no exclusion, no significance or whole-application claim. Negative paired difference favors three.",
+  "raw_sha256": {
+    "RESEARCH_RESTART_20260905/RESUMED_20260909_1413/roslyn_source_01/repository_measurement01/fork1/stdout.jsonl": "1b2f13e575e59cdc152ec5871451ade8faf8d2c93e687326ccf75e6d4fe5a092",
+    "RESEARCH_RESTART_20260905/RESUMED_20260909_1413/roslyn_source_01/repository_measurement01/fork2/stdout.jsonl": "4925c7ee29eb019c05b7d0802326f9d7176ea7045fa440f4eaeb880bd39cce22",
+    "RESEARCH_RESTART_20260905/RESUMED_20260909_1413/roslyn_source_01/repository_measurement01/fork3/stdout.jsonl": "6c9483f593fb5ad60cb30abb4c544ae410f784f0874b8d4b0d0b1dd75dc6f46d"
+  },
+  "script_sha256": "e706731766a7cad6001b9a0c5bcba091127260a60a3b0eed1c8769ba8acbf4c8",
+  "all_units": 1188,
+  "measured_units": 990,
+  "warmup_units": 198,
+  "counts": {
+    "SUCCESS": 1188
+  },
+  "aggregate": {
+    "original": {
+      "units": 330,
+      "calls": 2040,
+      "inside_transformations": 0,
+      "outside_transformations": 2040,
+      "foreground_ns_sum": 143723838
+    },
+    "two": {
+      "units": 330,
+      "calls": 1590,
+      "inside_transformations": 1080,
+      "outside_transformations": 510,
+      "foreground_ns_sum": 135829249
+    },
+    "three": {
+      "units": 330,
+      "calls": 1590,
+      "inside_transformations": 450,
+      "outside_transformations": 1590,
+      "foreground_ns_sum": 164523002
+    }
+  },
+  "foreground_paired_median_signs": {
+    "original": {
+      "lower": 4,
+      "higher": 7
+    },
+    "two": {
+      "lower": 4,
+      "higher": 7
+    }
+  },
+  "cells": [
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 0,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 48438.0,
+        "min": 36750,
+        "max": 9888500,
+        "fork_medians": [
+          43542.0,
+          48104.5,
+          51250.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 10369729.0,
+        "min": 7433166,
+        "max": 37778000,
+        "fork_medians": [
+          11932063.0,
+          9069500.0,
+          14288375.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 15750166.5,
+        "min": 8435375,
+        "max": 38949000,
+        "fork_medians": [
+          18211353.5,
+          14235604.5,
+          15750166.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 30896.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 0,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 45083.0,
+        "min": 34125,
+        "max": 165541,
+        "fork_medians": [
+          46625.0,
+          43959.0,
+          46937.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13647895.5,
+        "min": 7370084,
+        "max": 35165584,
+        "fork_medians": [
+          14881604.0,
+          13666250.5,
+          11939624.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 15080520.5,
+        "min": 8429875,
+        "max": 36582667,
+        "fork_medians": [
+          17471478.5,
+          14741125.0,
+          12948458.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 29417.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 0,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          0
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 50625.5,
+        "min": 37875,
+        "max": 165875,
+        "fork_medians": [
+          50021.0,
+          49958.5,
+          55041.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14162187.5,
+        "min": 7730459,
+        "max": 26398042,
+        "fork_medians": [
+          12395229.5,
+          14537083.5,
+          15283187.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 16618000.0,
+        "min": 9395583,
+        "max": 30434625,
+        "fork_medians": [
+          14320229.5,
+          16618000.0,
+          19023458.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 30916.0
+      },
+      "transformation_outside_ns": {
+        "median": 0.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 1,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          5
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 208188.0,
+        "min": 143042,
+        "max": 387208,
+        "fork_medians": [
+          239146.0,
+          224542.0,
+          203437.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 129937.0,
+        "min": 98042,
+        "max": 268125,
+        "fork_medians": [
+          161333.0,
+          159354.0,
+          124375.5
+        ]
+      },
+      "setup_ns": {
+        "median": 14048563.0,
+        "min": 7492792,
+        "max": 29332458,
+        "fork_medians": [
+          15213250.0,
+          11569500.0,
+          16445874.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 16727771.0,
+        "min": 9407292,
+        "max": 31539208,
+        "fork_medians": [
+          18126979.5,
+          16009854.0,
+          18881833.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 37000.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 1,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          1
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 202333.0,
+        "min": 153542,
+        "max": 351416,
+        "fork_medians": [
+          236791.5,
+          230125.0,
+          178708.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 135625.5,
+        "min": 104875,
+        "max": 250083,
+        "fork_medians": [
+          148062.0,
+          167000.5,
+          118625.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13861708.5,
+        "min": 7925667,
+        "max": 27193125,
+        "fork_medians": [
+          14323229.0,
+          11091396.0,
+          15323333.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 17347250.0,
+        "min": 9849125,
+        "max": 29153250,
+        "fork_medians": [
+          18295375.0,
+          15207958.5,
+          17530479.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 11395.5
+      },
+      "transformation_outside_ns": {
+        "median": 28707.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 1,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          0
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 217583.0,
+        "min": 136750,
+        "max": 412417,
+        "fork_medians": [
+          239416.5,
+          229062.0,
+          188041.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 161604.0,
+        "min": 101041,
+        "max": 317291,
+        "fork_medians": [
+          192874.5,
+          180104.5,
+          145604.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14207500.0,
+        "min": 7366875,
+        "max": 27423541,
+        "fork_medians": [
+          10603375.0,
+          15520417.0,
+          14510833.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 17132103.5,
+        "min": 9384958,
+        "max": 29896583,
+        "fork_medians": [
+          15977583.5,
+          19494813.0,
+          16589333.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 21459.0
+      },
+      "transformation_outside_ns": {
+        "median": 0.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 4,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          8
+        ],
+        "PreparedOutside": [
+          8
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          4
+        ],
+        "CheapFailures": [
+          4
+        ]
+      },
+      "foreground_ns": {
+        "median": 566062.5,
+        "min": 442000,
+        "max": 3116125,
+        "fork_medians": [
+          678250.0,
+          477562.5,
+          792542.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 467979.0,
+        "min": 365084,
+        "max": 2863542,
+        "fork_medians": [
+          585979.5,
+          388770.5,
+          727333.5
+        ]
+      },
+      "setup_ns": {
+        "median": 20243312.5,
+        "min": 7470625,
+        "max": 32784375,
+        "fork_medians": [
+          17438500.5,
+          20795645.5,
+          19701729.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 30487146.5,
+        "min": 18123250,
+        "max": 55187042,
+        "fork_medians": [
+          29968708.0,
+          30071854.5,
+          32208812.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 58333.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 4,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          4
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 542729.5,
+        "min": 432083,
+        "max": 10669583,
+        "fork_medians": [
+          513625.0,
+          771958.0,
+          562187.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 438125.5,
+        "min": 359666,
+        "max": 10578875,
+        "fork_medians": [
+          411750.5,
+          553292.0,
+          474312.5
+        ]
+      },
+      "setup_ns": {
+        "median": 15048312.5,
+        "min": 8370250,
+        "max": 26108417,
+        "fork_medians": [
+          14964416.5,
+          14196833.5,
+          15536687.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 23667854.5,
+        "min": 13623500,
+        "max": 44807917,
+        "fork_medians": [
+          24287687.5,
+          23963771.0,
+          23041104.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 29688.0
+      },
+      "transformation_outside_ns": {
+        "median": 32208.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 4,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          0
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 543541.5,
+        "min": 404709,
+        "max": 1684916,
+        "fork_medians": [
+          629187.5,
+          517083.5,
+          556687.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 484771.0,
+        "min": 357500,
+        "max": 1217668,
+        "fork_medians": [
+          556833.0,
+          469333.0,
+          497604.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13826520.5,
+        "min": 7522333,
+        "max": 23706916,
+        "fork_medians": [
+          12119562.0,
+          14549312.0,
+          13963521.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 23396395.5,
+        "min": 14146750,
+        "max": 45111375,
+        "fork_medians": [
+          23631500.0,
+          21879604.0,
+          26288041.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 31874.5
+      },
+      "transformation_outside_ns": {
+        "median": 0.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 0,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 47521.0,
+        "min": 38792,
+        "max": 177375,
+        "fork_medians": [
+          47791.5,
+          47417.0,
+          47292.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13821000.0,
+        "min": 7351916,
+        "max": 24327000,
+        "fork_medians": [
+          13863458.5,
+          14553020.5,
+          10525583.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 17309437.0,
+        "min": 8357458,
+        "max": 25281708,
+        "fork_medians": [
+          18957229.0,
+          17890708.0,
+          14596020.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 30104.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 0,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 45833.5,
+        "min": 35458,
+        "max": 110042,
+        "fork_medians": [
+          45062.5,
+          43729.0,
+          48687.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13531270.5,
+        "min": 7343375,
+        "max": 25816625,
+        "fork_medians": [
+          13818625.0,
+          13180291.5,
+          13804583.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 14929833.5,
+        "min": 8383958,
+        "max": 27063209,
+        "fork_medians": [
+          16136375.0,
+          14368208.5,
+          14962479.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 30083.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 0,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 44916.5,
+        "min": 35250,
+        "max": 98833,
+        "fork_medians": [
+          49937.5,
+          42771.0,
+          48291.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 10623354.5,
+        "min": 7378208,
+        "max": 23556000,
+        "fork_medians": [
+          14403395.5,
+          9738479.5,
+          10296354.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 15483541.5,
+        "min": 8440167,
+        "max": 24507958,
+        "fork_medians": [
+          16123312.0,
+          14288437.5,
+          14034875.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 29334.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 1,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          5
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 185417.0,
+        "min": 155667,
+        "max": 335792,
+        "fork_medians": [
+          192021.0,
+          169500.0,
+          190458.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 129792.0,
+        "min": 108291,
+        "max": 236083,
+        "fork_medians": [
+          135854.5,
+          121208.5,
+          128729.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13025354.0,
+        "min": 7289458,
+        "max": 30055625,
+        "fork_medians": [
+          14383042.0,
+          11356228.5,
+          8107020.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 16443146.0,
+        "min": 9372291,
+        "max": 35943125,
+        "fork_medians": [
+          16778166.5,
+          15755687.5,
+          16401146.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 37396.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 1,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          5
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 166624.5,
+        "min": 140625,
+        "max": 329958,
+        "fork_medians": [
+          171520.5,
+          170020.5,
+          166583.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 119229.5,
+        "min": 98834,
+        "max": 196833,
+        "fork_medians": [
+          119416.5,
+          122000.0,
+          118583.5
+        ]
+      },
+      "setup_ns": {
+        "median": 11945000.0,
+        "min": 7209042,
+        "max": 27917250,
+        "fork_medians": [
+          10364583.5,
+          12174375.0,
+          12858583.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 15747333.5,
+        "min": 9123083,
+        "max": 33867875,
+        "fork_medians": [
+          13481271.5,
+          14796125.0,
+          17858687.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 34917.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 1,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          1
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 195208.5,
+        "min": 152250,
+        "max": 415250,
+        "fork_medians": [
+          187333.0,
+          203645.5,
+          211624.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 132604.0,
+        "min": 105166,
+        "max": 269209,
+        "fork_medians": [
+          125521.5,
+          136000.0,
+          136375.5
+        ]
+      },
+      "setup_ns": {
+        "median": 14199333.0,
+        "min": 7521333,
+        "max": 24107625,
+        "fork_medians": [
+          13898125.0,
+          14138000.5,
+          15935125.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 17694125.0,
+        "min": 9477125,
+        "max": 31933458,
+        "fork_medians": [
+          16853062.5,
+          17816541.5,
+          17990770.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 19146.5
+      },
+      "transformation_outside_ns": {
+        "median": 17209.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 2,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          6
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 285291.5,
+        "min": 233250,
+        "max": 615875,
+        "fork_medians": [
+          288291.5,
+          283270.5,
+          286791.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 213083.5,
+        "min": 178916,
+        "max": 445875,
+        "fork_medians": [
+          211083.5,
+          231604.0,
+          212958.5
+        ]
+      },
+      "setup_ns": {
+        "median": 14483458.0,
+        "min": 7402709,
+        "max": 24483709,
+        "fork_medians": [
+          14901666.5,
+          11457958.5,
+          16084145.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 19082166.5,
+        "min": 10805167,
+        "max": 28884084,
+        "fork_medians": [
+          19222229.0,
+          18104167.0,
+          19352895.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 44811.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 2,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          5
+        ],
+        "PreparedInside": [
+          1
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 323354.0,
+        "min": 258125,
+        "max": 528458,
+        "fork_medians": [
+          328249.5,
+          273520.5,
+          412146.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 239375.5,
+        "min": 200291,
+        "max": 457500,
+        "fork_medians": [
+          239521.0,
+          210291.5,
+          350479.0
+        ]
+      },
+      "setup_ns": {
+        "median": 15589000.0,
+        "min": 7614708,
+        "max": 26882125,
+        "fork_medians": [
+          17489125.0,
+          15328104.5,
+          10431875.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 20802708.5,
+        "min": 12232209,
+        "max": 29607917,
+        "fork_medians": [
+          21901854.5,
+          20175542.0,
+          18317312.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 7750.0
+      },
+      "transformation_outside_ns": {
+        "median": 35687.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 2,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          1
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 339854.0,
+        "min": 252583,
+        "max": 777750,
+        "fork_medians": [
+          399646.0,
+          322145.5,
+          323396.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 259146.0,
+        "min": 198042,
+        "max": 479875,
+        "fork_medians": [
+          346562.5,
+          255854.5,
+          244667.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14483395.5,
+        "min": 7491042,
+        "max": 25496708,
+        "fork_medians": [
+          11628645.5,
+          14027833.5,
+          14707854.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 19196291.5,
+        "min": 10665042,
+        "max": 36191041,
+        "fork_medians": [
+          16650166.5,
+          21753084.0,
+          21604583.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 19146.5
+      },
+      "transformation_outside_ns": {
+        "median": 17479.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 5,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          9
+        ],
+        "PreparedOutside": [
+          9
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          5
+        ],
+        "CheapFailures": [
+          5
+        ]
+      },
+      "foreground_ns": {
+        "median": 590937.5,
+        "min": 523250,
+        "max": 8761584,
+        "fork_medians": [
+          629750.0,
+          581396.0,
+          570271.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 498937.0,
+        "min": 438373,
+        "max": 8551542,
+        "fork_medians": [
+          518874.5,
+          483625.5,
+          490250.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14394042.0,
+        "min": 7725875,
+        "max": 40824750,
+        "fork_medians": [
+          11929624.5,
+          14511041.5,
+          14960375.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 26747146.0,
+        "min": 20455708,
+        "max": 63691667,
+        "fork_medians": [
+          25845521.0,
+          25924854.0,
+          30548312.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 65458.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 5,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          5
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          5
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 772145.5,
+        "min": 530583,
+        "max": 11315459,
+        "fork_medians": [
+          799062.0,
+          580916.5,
+          887958.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 634229.5,
+        "min": 449292,
+        "max": 11204542,
+        "fork_medians": [
+          685667.0,
+          492269.5,
+          733604.0
+        ]
+      },
+      "setup_ns": {
+        "median": 12612000.0,
+        "min": 7306417,
+        "max": 27991541,
+        "fork_medians": [
+          10764271.0,
+          14797437.5,
+          11255833.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 23621791.5,
+        "min": 18568333,
+        "max": 52798041,
+        "fork_medians": [
+          23123625.0,
+          23158937.5,
+          29195333.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 27521.0
+      },
+      "transformation_outside_ns": {
+        "median": 41813.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 5,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          5
+        ],
+        "PreparedOutside": [
+          1
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          1
+        ],
+        "CheapFailures": [
+          1
+        ]
+      },
+      "foreground_ns": {
+        "median": 601896.0,
+        "min": 496416,
+        "max": 10932792,
+        "fork_medians": [
+          601896.0,
+          730354.0,
+          545291.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 507750.5,
+        "min": 429043,
+        "max": 1552209,
+        "fork_medians": [
+          507750.5,
+          622874.5,
+          474479.5
+        ]
+      },
+      "setup_ns": {
+        "median": 13587000.0,
+        "min": 7251625,
+        "max": 32160542,
+        "fork_medians": [
+          12790021.0,
+          13128000.0,
+          15072687.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 25431895.5,
+        "min": 17795750,
+        "max": 96835209,
+        "fork_medians": [
+          23714771.0,
+          26094125.0,
+          28286625.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 28083.5
+      },
+      "transformation_outside_ns": {
+        "median": 16833.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 0,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 47333.0,
+        "min": 35958,
+        "max": 127875,
+        "fork_medians": [
+          43542.0,
+          48000.0,
+          53521.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 13792250.0,
+        "min": 7411167,
+        "max": 27068042,
+        "fork_medians": [
+          10957270.5,
+          11832687.5,
+          15796958.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 16116208.5,
+        "min": 8381959,
+        "max": 29108959,
+        "fork_medians": [
+          16519187.5,
+          12871312.5,
+          16867375.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 30770.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 0,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 45312.5,
+        "min": 37417,
+        "max": 126583,
+        "fork_medians": [
+          45083.5,
+          45563.0,
+          56333.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 12078875.0,
+        "min": 7611667,
+        "max": 32151000,
+        "fork_medians": [
+          9443541.5,
+          12943250.0,
+          11723500.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 14501104.0,
+        "min": 8787958,
+        "max": 33293958,
+        "fork_medians": [
+          16567979.0,
+          13986083.5,
+          12960250.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 29332.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 0,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          4
+        ],
+        "PreparedOutside": [
+          4
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          0
+        ],
+        "CheapFailures": [
+          0
+        ]
+      },
+      "foreground_ns": {
+        "median": 43771.0,
+        "min": 34542,
+        "max": 130084,
+        "fork_medians": [
+          45229.0,
+          41666.5,
+          53791.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 0.0,
+        "min": 0,
+        "max": 0,
+        "fork_medians": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "median": 12839395.5,
+        "min": 7403125,
+        "max": 25510750,
+        "fork_medians": [
+          14371208.0,
+          10883416.5,
+          12436250.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 14645624.5,
+        "min": 8342666,
+        "max": 28270875,
+        "fork_medians": [
+          15251833.0,
+          14340187.5,
+          14274916.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 28521.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 2,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          6
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 294458.5,
+        "min": 249333,
+        "max": 626250,
+        "fork_medians": [
+          297875.0,
+          282042.0,
+          274604.0
+        ]
+      },
+      "writer_join_ns": {
+        "median": 218312.5,
+        "min": 192625,
+        "max": 438292,
+        "fork_medians": [
+          233875.0,
+          215250.0,
+          213083.5
+        ]
+      },
+      "setup_ns": {
+        "median": 14535458.0,
+        "min": 7550333,
+        "max": 32899584,
+        "fork_medians": [
+          14591375.0,
+          14535458.0,
+          14649729.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 18200583.0,
+        "min": 10949833,
+        "max": 42842750,
+        "fork_medians": [
+          18465708.0,
+          18297896.0,
+          18171854.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 46666.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 2,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          6
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 302395.5,
+        "min": 227875,
+        "max": 579041,
+        "fork_medians": [
+          311437.5,
+          289145.5,
+          286437.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 218833.0,
+        "min": 181125,
+        "max": 461167,
+        "fork_medians": [
+          238604.0,
+          230812.5,
+          208437.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14351916.5,
+        "min": 7275167,
+        "max": 24773834,
+        "fork_medians": [
+          13288791.5,
+          14153041.5,
+          15791708.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 19360437.5,
+        "min": 11726708,
+        "max": 33219625,
+        "fork_medians": [
+          18941083.0,
+          18178354.0,
+          21151521.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 44104.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 2,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          2
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 283729.5,
+        "min": 236375,
+        "max": 531584,
+        "fork_medians": [
+          276979.5,
+          282708.5,
+          362041.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 214542.0,
+        "min": 185542,
+        "max": 444707,
+        "fork_medians": [
+          211729.5,
+          210771.0,
+          230688.5
+        ]
+      },
+      "setup_ns": {
+        "median": 14324395.5,
+        "min": 7535833,
+        "max": 40186750,
+        "fork_medians": [
+          14324395.5,
+          14653812.5,
+          13143979.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 18230125.5,
+        "min": 11701958,
+        "max": 43294042,
+        "fork_medians": [
+          19934146.0,
+          19803333.5,
+          17241646.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 18625.0
+      },
+      "transformation_outside_ns": {
+        "median": 24167.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 3,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          7
+        ],
+        "PreparedOutside": [
+          7
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          3
+        ],
+        "CheapFailures": [
+          3
+        ]
+      },
+      "foreground_ns": {
+        "median": 423792.0,
+        "min": 311250,
+        "max": 5317083,
+        "fork_medians": [
+          397875.5,
+          363875.0,
+          509625.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 311604.5,
+        "min": 248457,
+        "max": 664209,
+        "fork_medians": [
+          309041.5,
+          299958.5,
+          418395.5
+        ]
+      },
+      "setup_ns": {
+        "median": 16000396.0,
+        "min": 7801292,
+        "max": 30848958,
+        "fork_medians": [
+          17789375.5,
+          15317542.0,
+          15230854.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 25672917.0,
+        "min": 12220042,
+        "max": 50882500,
+        "fork_medians": [
+          26031313.0,
+          23835688.0,
+          27015291.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 51584.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 3,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          6
+        ],
+        "PreparedInside": [
+          1
+        ],
+        "Mismatches": [
+          3
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 477979.5,
+        "min": 300167,
+        "max": 973208,
+        "fork_medians": [
+          399521.0,
+          572958.5,
+          480104.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 364291.0,
+        "min": 245709,
+        "max": 849417,
+        "fork_medians": [
+          310208.0,
+          465437.5,
+          366354.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14614437.0,
+        "min": 7475250,
+        "max": 44170542,
+        "fork_medians": [
+          14350584.0,
+          18237792.0,
+          18221000.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 23621354.5,
+        "min": 12359417,
+        "max": 50954750,
+        "fork_medians": [
+          20289791.5,
+          23893167.0,
+          29565729.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 7729.0
+      },
+      "transformation_outside_ns": {
+        "median": 43832.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 3,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          2
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 416667.0,
+        "min": 341833,
+        "max": 936708,
+        "fork_medians": [
+          459541.5,
+          412124.5,
+          396562.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 320542.0,
+        "min": 281416,
+        "max": 826917,
+        "fork_medians": [
+          344959.5,
+          320229.0,
+          313562.0
+        ]
+      },
+      "setup_ns": {
+        "median": 17370021.0,
+        "min": 8905625,
+        "max": 30400542,
+        "fork_medians": [
+          15680438.0,
+          17806437.5,
+          17699708.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 24584167.0,
+        "min": 13145000,
+        "max": 47554959,
+        "fork_medians": [
+          25220166.5,
+          26607604.0,
+          22497916.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 18666.5
+      },
+      "transformation_outside_ns": {
+        "median": 27479.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 6,
+      "mode": "original",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          10
+        ],
+        "PreparedOutside": [
+          10
+        ],
+        "PreparedInside": [
+          0
+        ],
+        "Mismatches": [
+          6
+        ],
+        "CheapFailures": [
+          6
+        ]
+      },
+      "foreground_ns": {
+        "median": 727937.0,
+        "min": 579125,
+        "max": 1429375,
+        "fork_medians": [
+          758458.0,
+          689187.5,
+          746020.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 614917.0,
+        "min": 474042,
+        "max": 1317916,
+        "fork_medians": [
+          634167.0,
+          601376.0,
+          623917.0
+        ]
+      },
+      "setup_ns": {
+        "median": 11871521.0,
+        "min": 7652917,
+        "max": 22694083,
+        "fork_medians": [
+          13816833.5,
+          9636875.0,
+          12045312.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 27954708.5,
+        "min": 21924833,
+        "max": 37207458,
+        "fork_medians": [
+          28147667.0,
+          24961896.0,
+          28648541.0
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 0.0
+      },
+      "transformation_outside_ns": {
+        "median": 72020.5
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 6,
+      "mode": "three",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          6
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          6
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 814583.0,
+        "min": 616916,
+        "max": 10655000,
+        "fork_medians": [
+          797104.5,
+          754354.5,
+          998291.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 672542.0,
+        "min": 534292,
+        "max": 1707792,
+        "fork_medians": [
+          709022.0,
+          619355.0,
+          745896.0
+        ]
+      },
+      "setup_ns": {
+        "median": 14393208.0,
+        "min": 7291709,
+        "max": 23023583,
+        "fork_medians": [
+          15531333.5,
+          14158666.5,
+          14509583.5
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 27911208.5,
+        "min": 21273250,
+        "max": 38328417,
+        "fork_medians": [
+          27931521.0,
+          26216458.0,
+          29631520.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 26104.0
+      },
+      "transformation_outside_ns": {
+        "median": 46291.0
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 6,
+      "mode": "two",
+      "units": 30,
+      "counts": {
+        "Calls": [
+          6
+        ],
+        "PreparedOutside": [
+          2
+        ],
+        "PreparedInside": [
+          4
+        ],
+        "Mismatches": [
+          2
+        ],
+        "CheapFailures": [
+          2
+        ]
+      },
+      "foreground_ns": {
+        "median": 747291.5,
+        "min": 584958,
+        "max": 1426125,
+        "fork_medians": [
+          672791.5,
+          739958.5,
+          784437.5
+        ]
+      },
+      "writer_join_ns": {
+        "median": 639480.0,
+        "min": 516250,
+        "max": 1360543,
+        "fork_medians": [
+          603709.5,
+          656228.5,
+          636562.0
+        ]
+      },
+      "setup_ns": {
+        "median": 10839624.5,
+        "min": 7235709,
+        "max": 47511041,
+        "fork_medians": [
+          9809812.5,
+          15102062.5,
+          9496146.0
+        ]
+      },
+      "whole_unit_ns": {
+        "median": 25906896.5,
+        "min": 19945416,
+        "max": 58734125,
+        "fork_medians": [
+          24606875.0,
+          27968375.0,
+          25291458.5
+        ]
+      },
+      "transformation_inside_ns": {
+        "median": 26291.5
+      },
+      "transformation_outside_ns": {
+        "median": 24083.0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 0,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -2521.0,
+        "paired_median_ratio": 0.947377207977208,
+        "fork_median_differences": [
+          -1563.0,
+          -2271.0,
+          -4063.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 1544083.5,
+        "paired_median_ratio": 1.0918036059531655,
+        "fork_median_differences": [
+          2051687.5,
+          2877729.5,
+          -2405458.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -542541.5,
+        "paired_median_ratio": 0.9636878575666097,
+        "fork_median_differences": [
+          4266312.5,
+          -1403292.0,
+          -3759625.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 0,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -6250.5,
+        "paired_median_ratio": 0.8903210783005528,
+        "fork_median_differences": [
+          -1542.0,
+          -6250.5,
+          -8833.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -934937.5,
+        "paired_median_ratio": 0.9165358768902674,
+        "fork_median_differences": [
+          2130604.0,
+          -922708.0,
+          -3305124.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -3215916.5,
+        "paired_median_ratio": 0.8431430688052024,
+        "fork_median_differences": [
+          4396937.5,
+          -2586917.0,
+          -4501958.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 1,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 2833.5,
+        "paired_median_ratio": 1.01564218231505,
+        "fork_median_differences": [
+          11708.5,
+          2146.0,
+          5104.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -771.0,
+        "paired_median_ratio": 0.9930867541525334,
+        "fork_median_differences": [
+          291.5,
+          -4062.5,
+          1000.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -2965562.5,
+        "paired_median_ratio": 0.8336204013055488,
+        "fork_median_differences": [
+          -2972666.5,
+          190041.5,
+          -4890354.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -1405687.5,
+        "paired_median_ratio": 0.9275109408269031,
+        "fork_median_differences": [
+          338311.5,
+          -412291.0,
+          -4581895.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 1,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 12709.0,
+        "paired_median_ratio": 1.0527488314256481,
+        "fork_median_differences": [
+          14875.0,
+          4355.0,
+          11500.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -16312.0,
+        "paired_median_ratio": 0.8978854832216614,
+        "fork_median_differences": [
+          -13188.0,
+          -21312.5,
+          -16312.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -194353.5,
+        "paired_median_ratio": 0.9852481361322611,
+        "fork_median_differences": [
+          1445937.5,
+          -3502125.0,
+          -984083.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -1460375.5,
+        "paired_median_ratio": 0.9155323371551417,
+        "fork_median_differences": [
+          -139146.0,
+          -3394167.0,
+          -1371395.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 4,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -45083.5,
+        "paired_median_ratio": 0.9315280525095975,
+        "fork_median_differences": [
+          -45083.5,
+          142729.5,
+          -91187.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -40395.5,
+        "paired_median_ratio": 0.937759748834427,
+        "fork_median_differences": [
+          -37000.0,
+          59833.5,
+          -131229.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -4237875.5,
+        "paired_median_ratio": 0.8008475472879719,
+        "fork_median_differences": [
+          -2206521.5,
+          -6573667.0,
+          -678021.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -6440249.5,
+        "paired_median_ratio": 0.8016073009587152,
+        "fork_median_differences": [
+          -7255062.5,
+          -6440249.5,
+          -4356813.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 0,
+      "B": 4,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 13771.0,
+        "paired_median_ratio": 1.0262564909179108,
+        "fork_median_differences": [
+          23729.5,
+          52416.5,
+          12229.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -9895.5,
+        "paired_median_ratio": 0.9759659060012389,
+        "fork_median_differences": [
+          -6832.5,
+          -999.0,
+          -19853.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 2009980.0,
+        "paired_median_ratio": 1.1388712399514849,
+        "fork_median_differences": [
+          3430188.0,
+          1866396.0,
+          663021.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -214041.5,
+        "paired_median_ratio": 0.9911542482748465,
+        "fork_median_differences": [
+          -530000.0,
+          1664063.0,
+          -2426520.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 0,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -20.5,
+        "paired_median_ratio": 0.9998044943820226,
+        "fork_median_differences": [
+          2105.0,
+          -2104.5,
+          750.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -345020.5,
+        "paired_median_ratio": 0.9604535150046827,
+        "fork_median_differences": [
+          941000.0,
+          -2686187.5,
+          4033396.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -1210499.5,
+        "paired_median_ratio": 0.9266742516429605,
+        "fork_median_differences": [
+          -1124833.0,
+          -3617666.5,
+          3833979.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 0,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 1417.0,
+        "paired_median_ratio": 1.0289145925724803,
+        "fork_median_differences": [
+          42.0,
+          833.0,
+          1916.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 2680916.5,
+        "paired_median_ratio": 1.1585752504487528,
+        "fork_median_differences": [
+          1090187.5,
+          2361667.0,
+          3514875.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 1344709.5,
+        "paired_median_ratio": 1.0853194039861789,
+        "fork_median_differences": [
+          1106000.5,
+          -213458.0,
+          2981083.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 1,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -13354.0,
+        "paired_median_ratio": 0.9372284252738273,
+        "fork_median_differences": [
+          -15021.0,
+          -2520.5,
+          -26583.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -5562.5,
+        "paired_median_ratio": 0.9600736907825552,
+        "fork_median_differences": [
+          -13542.0,
+          1125.0,
+          -6312.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -369645.5,
+        "paired_median_ratio": 0.9759442564763479,
+        "fork_median_differences": [
+          -4141020.5,
+          -196667.0,
+          1053479.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -2870916.5,
+        "paired_median_ratio": 0.8737126275076824,
+        "fork_median_differences": [
+          -4914104.0,
+          818396.0,
+          926084.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 1,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -15479.5,
+        "paired_median_ratio": 0.9090824028389376,
+        "fork_median_differences": [
+          -13104.5,
+          -22646.0,
+          -12937.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -8729.5,
+        "paired_median_ratio": 0.9356925842912571,
+        "fork_median_differences": [
+          -6000.0,
+          -15396.0,
+          -9146.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -2040313.0,
+        "paired_median_ratio": 0.845449083095085,
+        "fork_median_differences": [
+          -1526499.5,
+          -847084.0,
+          -3471291.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -1790624.5,
+        "paired_median_ratio": 0.896698548951814,
+        "fork_median_differences": [
+          -3416063.0,
+          1019938.0,
+          -1152895.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 2,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 10479.5,
+        "paired_median_ratio": 1.039933046719737,
+        "fork_median_differences": [
+          7541.5,
+          -12062.0,
+          120312.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 14145.0,
+        "paired_median_ratio": 1.0692278264630592,
+        "fork_median_differences": [
+          8791.0,
+          -14000.0,
+          118707.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 2123854.0,
+        "paired_median_ratio": 1.1116369007623375,
+        "fork_median_differences": [
+          2780083.0,
+          6213312.0,
+          -6218019.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 2144708.5,
+        "paired_median_ratio": 1.100944234565595,
+        "fork_median_differences": [
+          2144708.5,
+          5291229.0,
+          -2625458.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 2,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -1041.0,
+        "paired_median_ratio": 0.9978329547005831,
+        "fork_median_differences": [
+          -29187.5,
+          -46853.5,
+          66500.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -9708.5,
+        "paired_median_ratio": 0.9574566905127412,
+        "fork_median_differences": [
+          -39249.5,
+          -38605.0,
+          64625.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 2191500.5,
+        "paired_median_ratio": 1.1548577096700248,
+        "fork_median_differences": [
+          6919416.5,
+          3195729.5,
+          -4364354.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 2253458.5,
+        "paired_median_ratio": 1.1068060592923397,
+        "fork_median_differences": [
+          6656000.0,
+          2532666.5,
+          -529500.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 5,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 5062.0,
+        "paired_median_ratio": 1.0093720291190253,
+        "fork_median_differences": [
+          137833.0,
+          -13813.0,
+          -14250.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 1250.0,
+        "paired_median_ratio": 1.002563295777426,
+        "fork_median_differences": [
+          135292.5,
+          -12855.5,
+          -9855.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -1870250.0,
+        "paired_median_ratio": 0.8770522446576702,
+        "fork_median_differences": [
+          -1553208.0,
+          -1309062.5,
+          -5529083.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -2377396.0,
+        "paired_median_ratio": 0.8998060075862251,
+        "fork_median_differences": [
+          -2321354.5,
+          -2179479.0,
+          -2516000.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 1,
+      "B": 5,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 6687.5,
+        "paired_median_ratio": 1.0120953715396928,
+        "fork_median_differences": [
+          79771.5,
+          -149209.0,
+          12771.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -2188.0,
+        "paired_median_ratio": 0.995496966831876,
+        "fork_median_differences": [
+          126624.5,
+          -148499.5,
+          -2188.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -1686417.0,
+        "paired_median_ratio": 0.8776152358845033,
+        "fork_median_differences": [
+          -2036167.5,
+          718417.0,
+          -2259041.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -3287624.5,
+        "paired_median_ratio": 0.870268949674956,
+        "fork_median_differences": [
+          -2901542.0,
+          -3287624.5,
+          -3639292.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 0,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 104.0,
+        "paired_median_ratio": 1.0031071944357237,
+        "fork_median_differences": [
+          2229.0,
+          -1125.0,
+          354.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -148812.5,
+        "paired_median_ratio": 0.9853693704219406,
+        "fork_median_differences": [
+          -356812.5,
+          -1082728.5,
+          -148812.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -214583.0,
+        "paired_median_ratio": 0.9809471958827316,
+        "fork_median_differences": [
+          623333.0,
+          -1425582.5,
+          -214583.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 0,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 833.5,
+        "paired_median_ratio": 1.0197208350105003,
+        "fork_median_differences": [
+          917.0,
+          479.5,
+          1729.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 0.0,
+        "paired_median_ratio": null,
+        "fork_median_differences": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -713978.5,
+        "paired_median_ratio": 0.9279788209829393,
+        "fork_median_differences": [
+          -4500354.5,
+          -713978.5,
+          2297041.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -1210874.5,
+        "paired_median_ratio": 0.9125823597952503,
+        "fork_median_differences": [
+          -759083.0,
+          -1306270.5,
+          -1151208.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 2,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 2542.0,
+        "paired_median_ratio": 1.0096086161795104,
+        "fork_median_differences": [
+          -375.0,
+          10396.5,
+          3313.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -1021.0,
+        "paired_median_ratio": 0.9956156036452775,
+        "fork_median_differences": [
+          -3854.5,
+          10312.0,
+          -3333.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -795292.0,
+        "paired_median_ratio": 0.9497602734780373,
+        "fork_median_differences": [
+          -1749792.0,
+          -2878187.0,
+          1617125.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 1347604.0,
+        "paired_median_ratio": 1.0860876173373848,
+        "fork_median_differences": [
+          1078833.0,
+          -1883708.5,
+          3072771.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 2,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": -958.0,
+        "paired_median_ratio": 0.9964685206739718,
+        "fork_median_differences": [
+          2353.5,
+          -854.0,
+          -958.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -2542.0,
+        "paired_median_ratio": 0.988024502974642,
+        "fork_median_differences": [
+          6895.0,
+          5896.0,
+          -4187.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 258000.5,
+        "paired_median_ratio": 1.0244471935554724,
+        "fork_median_differences": [
+          -1415812.0,
+          -2225979.0,
+          4585396.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -296854.5,
+        "paired_median_ratio": 0.9835482036570258,
+        "fork_median_differences": [
+          -1372229.5,
+          -1032271.0,
+          2936542.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 3,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 2791.5,
+        "paired_median_ratio": 1.006783227599068,
+        "fork_median_differences": [
+          -2291.5,
+          54355.0,
+          -92271.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 4957.0,
+        "paired_median_ratio": 1.0155201340355897,
+        "fork_median_differences": [
+          3687.0,
+          42813.0,
+          -11873.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -2069208.0,
+        "paired_median_ratio": 0.8741717719610931,
+        "fork_median_differences": [
+          -6177813.0,
+          1235353.5,
+          -523833.0
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -2228084.0,
+        "paired_median_ratio": 0.9201375812310377,
+        "fork_median_differences": [
+          -5731896.5,
+          276895.5,
+          5209146.0
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 3,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 12083.5,
+        "paired_median_ratio": 1.0315085806239928,
+        "fork_median_differences": [
+          -26374.5,
+          122541.5,
+          60854.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": -2459.0,
+        "paired_median_ratio": 0.992237540763744,
+        "fork_median_differences": [
+          -30250.5,
+          117750.0,
+          55458.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": -1202917.0,
+        "paired_median_ratio": 0.9279400216226987,
+        "fork_median_differences": [
+          -1202917.0,
+          -3344833.5,
+          -3257062.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": -2098666.5,
+        "paired_median_ratio": 0.9312724134932358,
+        "fork_median_differences": [
+          -4073812.5,
+          -6233354.5,
+          7763749.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 6,
+      "comparison": "three minus original",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 47061.5,
+        "paired_median_ratio": 1.0582160743890654,
+        "fork_median_differences": [
+          -18853.5,
+          88728.0,
+          86978.5
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 20148.0,
+        "paired_median_ratio": 1.016776594516731,
+        "fork_median_differences": [
+          -14395.0,
+          80687.0,
+          13584.5
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 1444395.0,
+        "paired_median_ratio": 1.1192680692851698,
+        "fork_median_differences": [
+          2624958.5,
+          1770416.5,
+          -441375.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 1889104.5,
+        "paired_median_ratio": 1.0654394572213663,
+        "fork_median_differences": [
+          2029687.5,
+          860771.0,
+          1889104.5
+        ]
+      }
+    },
+    {
+      "projects": 4,
+      "r": 2,
+      "B": 6,
+      "comparison": "three minus two",
+      "pairs": 30,
+      "foreground_ns": {
+        "paired_median_difference": 64520.5,
+        "paired_median_ratio": 1.1039031521325713,
+        "fork_median_differences": [
+          140917.0,
+          33125.0,
+          149250.0
+        ]
+      },
+      "writer_join_ns": {
+        "paired_median_difference": 47624.0,
+        "paired_median_ratio": 1.0619899022206358,
+        "fork_median_differences": [
+          118104.0,
+          1667.0,
+          45522.0
+        ]
+      },
+      "setup_ns": {
+        "paired_median_difference": 1915478.5,
+        "paired_median_ratio": 1.2051884818753265,
+        "fork_median_differences": [
+          4307666.0,
+          120896.0,
+          3872165.5
+        ]
+      },
+      "whole_unit_ns": {
+        "paired_median_difference": 635000.5,
+        "paired_median_ratio": 1.0249418355718776,
+        "fork_median_differences": [
+          514020.5,
+          -1916459.0,
+          4364437.5
+        ]
+      }
+    }
+  ]
+}

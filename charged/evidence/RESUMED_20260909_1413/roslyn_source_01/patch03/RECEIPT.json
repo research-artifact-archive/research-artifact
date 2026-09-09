@@ -1,0 +1,11 @@
+{
+  "utc": "2026-09-09T06:37:41.863746+00:00",
+  "before_sha256": "d2372ada5b8da9b478ae40dd92c4ab73c93a16f4c4ae3e3b7197f0808845bf37",
+  "after_sha256": "a09d193ece3b93d93784b64d99f4874808690b5e7641799bb31cbd635abd6ecb",
+  "reason": "Observed patch02 two-mode same-SourceText callback reentry TIMEOUT; baseline/original/three succeeded. Restore a source-derived same-text predicate before two-mode protected acquisition, inside original listener/catch ordering.",
+  "source_basis": "SolutionState.WithDocumentText cached TryGetText/reference equality guard at lines994-999; valid PreservationMode only. Missing/not-cached/invalid inputs fall through.",
+  "old_failure": "reentry_outcomes01/two/RESULT.json",
+  "normal_old_measurements": "measurement01, immutable DLL snapshot measurement01_app",
+  "new_input_to_selector": "None: predicate certifies a semantic no-op, not B/weights/timing/exhaustion",
+  "scope": "Does not establish arbitrary reentrant-host safety; keeps variable/lazy work and VersionStamp side effects outside fixed-work correspondence"
+}

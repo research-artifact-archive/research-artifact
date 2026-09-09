@@ -1,0 +1,76 @@
+{
+  "utc": "2026-09-09T05:51:18.251293+00:00",
+  "status": "PASS",
+  "counts": {
+    "warmup": {
+      "SUCCESS": 1440
+    },
+    "measure": {
+      "SUCCESS": 4320
+    }
+  },
+  "probes": 17280,
+  "pairs": 2160,
+  "raw_hashes": {
+    "fork1/stdout.jsonl": "11279f9e07249c7e814141b718efdd582bb93bcf4358a44eedc7c082c847793f",
+    "fork2/stdout.jsonl": "26b71328b60a5a8a6b22e855df4fbd7fb4f5773f9e4662a8ca49a408db3ff8ce",
+    "fork3/stdout.jsonl": "10e2e7c346273091ca3dcb2fb2b901bc8574ee3312a87330211d96779af47a28"
+  },
+  "errors": [],
+  "controls": [
+    {
+      "name": "wrong_L",
+      "rejected": true,
+      "errors": [
+        "counter:L"
+      ]
+    },
+    {
+      "name": "wrong_Q",
+      "rejected": true,
+      "errors": [
+        "counter:Q"
+      ]
+    },
+    {
+      "name": "wrong_versions",
+      "rejected": true,
+      "errors": [
+        "versions"
+      ]
+    },
+    {
+      "name": "missing_probe",
+      "rejected": true,
+      "errors": [
+        "probe_count",
+        "wait_sum"
+      ]
+    },
+    {
+      "name": "early_entry",
+      "rejected": true,
+      "errors": [
+        "interval:wait_ns",
+        "same_bin_order"
+      ]
+    },
+    {
+      "name": "wrong_interval",
+      "rejected": true,
+      "errors": [
+        "wait_sum"
+      ]
+    },
+    {
+      "name": "hidden_inside_kernel",
+      "rejected": true,
+      "errors": [
+        "cached_kernel_inside"
+      ]
+    }
+  ],
+  "sequential_reference_units": 12,
+  "sequential_reference_compared_invocations": 5760,
+  "seconds": 10.608805249998113
+}

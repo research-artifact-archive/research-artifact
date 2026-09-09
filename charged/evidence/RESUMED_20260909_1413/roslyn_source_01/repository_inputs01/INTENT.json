@@ -1,0 +1,14 @@
+{
+  "utc": "2026-09-09T06:33:57.179825+00:00",
+  "kind": "REPOSITORY_DERIVED_WORKSPACE_INPUT_MATERIALIZATION",
+  "source_revision": "6c4a46a31302167b425d5e0a31ea83c9a9aa1d09",
+  "projects": [
+    "src/Compilers/Core/Portable/Microsoft.CodeAnalysis.csproj",
+    "src/Compilers/CSharp/Portable/Microsoft.CodeAnalysis.CSharp.csproj",
+    "src/Workspaces/Core/Portable/Microsoft.CodeAnalysis.Workspaces.csproj",
+    "src/Workspaces/CSharp/Portable/Microsoft.CodeAnalysis.CSharp.Workspaces.csproj"
+  ],
+  "selection_before_any_workspace_execution": "Use all unique existing .cs Compile items inside source tree, excluding artifacts-generated paths. Record every excluded/missing/external item and reason. Select target with greatest cross-project multiplicity, then largest file bytes, then lexical path. Select a different file appearing in exactly one project by greatest bytes then lexical path as background. Retain all evaluated project references; only references within these four projects are represented in the authored Workspace. This is a source-item projection, not a compiled or editor-loaded solution.",
+  "target_and_background_outcomes_not_observed": true,
+  "no_build_targets": true
+}

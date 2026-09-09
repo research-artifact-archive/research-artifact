@@ -17,3 +17,6 @@ Original research implementations, authored fixtures and documentation follow th
 Authored hooks and test harnesses are identified by their role in source snapshots and patches. Inclusion beside an upstream file does not change the upstream license. Source paths retain scientific provenance without author-machine prefixes. Reproduction logs produced on a user's machine may contain that user's own paths and should be inspected before that user republishes them.
 
 The paper discloses AI assistance in research, code, proofs and writing. Author-side tests and external PDF critique do not establish independent mechanical certification, human-subject evidence, submission readiness or acceptance.
+
+
+Roslyn modifications and included upstream excerpts retain the upstream MIT [License.txt](licenses/roslyn/License.txt) and [third-party notices](licenses/roslyn/THIRD-PARTY-NOTICES.txt). Full source/SDK/package archives and compiled libraries are not distributed. Optional source replay separately authenticates and builds the pinned upstream archive.

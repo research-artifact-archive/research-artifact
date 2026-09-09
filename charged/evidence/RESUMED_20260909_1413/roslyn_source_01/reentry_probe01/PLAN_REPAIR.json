@@ -1,0 +1,16 @@
+{
+  "utc": "2026-09-09T06:40:30.288378+00:00",
+  "kind": "SOURCE_REPAIR_REGRESSION_BEFORE_REEXECUTION",
+  "source_patch_sha256": "a09d193ece3b93d93784b64d99f4874808690b5e7641799bb31cbd635abd6ecb",
+  "predecessor_failure": "reentry_outcomes01/two/RESULT.json",
+  "change": "SourceText same-identity predicate before fresh protected acquisition, after EnsureEventListeners and inside original catch scope",
+  "units": [
+    "baseline",
+    "original",
+    "two",
+    "three"
+  ],
+  "cap_seconds": 3,
+  "expected": "all return once, one notification, requested SourceText identity retained",
+  "not_generic_reentrancy_guarantee": true
+}

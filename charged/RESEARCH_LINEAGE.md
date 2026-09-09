@@ -24,3 +24,8 @@ The retained [older theorem guide](../THEOREM_AND_CHECKER_GUIDE.md) refers to th
 ## Resource extension in the same continuing project
 
 The later charged resource extension adds the full-interface Q-versus-worst-L boundary for arbitrary DAGs, including simultaneous minimax attainment by one policy without a writer-budget input and the two-mode B=r lower bound, and the sharp independent-job total-cost ratio for arbitrary charged fees. Neither result occurs in the preceding zero-fee package. They use the charged normal form, established optimistic fallback and top-budget accounting, and the project's retained two-mode packing proof. Their importance is not certified by this lineage comparison. The portable counter studies provide explicit source-event witnesses, not a production workload or validated fee model. See [the resource guide](RESOURCE_BOUNDARIES.md) for proofs, counterexamples, native scopes and precise prior-work attribution.
+
+
+## Bounded-source extension
+
+The adaptive threshold-family minimum-work result and protected-tail dominance certificate are subsequent author-derived results with their own inputs and proofs. The four-job counterexample prohibits upgrading the family theorem to arbitrary causal W-optimality. The Roslyn and forced-probe studies are new author-directed native studies, with all development failures and negative timing results retained; they do not strengthen the Java pure fixed-work theorem to variable/lazy Roslyn transformations. [Complete boundaries and replays](BOUNDED_SOURCE.md).

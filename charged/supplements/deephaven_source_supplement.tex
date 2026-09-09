@@ -1,0 +1,22 @@
+\section{A Source-Derived Hierarchical Snapshot Case}
+\label{sec:deephaven}
+
+Deephaven retries optimistic hierarchical snapshots and can fall back to shared-lock execution. The inspected server API extracts key directives ($K$), then materializes an ordered viewport and expanded size ($V$). The Web client's static keys do not retry; our two-refreshing-stage configuration uses the supported server API~\cite{deephavenSource}.
+
+\paragraph{A source-derived resource bound.}
+At source commit \texttt{6367313a}, fix a 31-row balanced hierarchy, immutable ID/Parent columns, directive keys 0, 1, 2, a 16-row single-range viewport and four output columns. Selected-operation bounds are $W_K=4$, $W_V=104$: four directive links, four parent lookups, no unlinks, 32 node operations and 64 output-cell operations. Earlier inputs preserve Actions; a later study alternates node 1 between \texttt{Contract} and \texttt{ExpandAll}, keeping the others expanded, and changes payloads.
+
+The bounds include mid-body updates. Fixed keys prevent insertion/rehashing; each compact-range iterator retains its bounds when previous-value references advance. Actions choose a full or contracted subtree, without adding ancestors or removing linked children; payloads preserve traversal lengths. Expansion uses 32 node operations including null leaves; contraction uses 17, totaling 89 selected operations. Inconsistency exits without restart. These pre-outcome source conditions give cap 104, not a trace maximum.
+
+Use unit unprotected weight and protected weight $1+\lambda$, supplying zero call charges and $p_i=\lambda W_i$. Short/aborted bodies charge executed prefixes. Setup, allocation, waiting, API instructions and other operations are excluded; this is selected work, not CPU time. Periodic real-time-tree updates supply no finite bound~\cite{deephavenTree}. Our caller instead owns at most $q$ public \texttt{EventDrivenUpdateGraph.requestRefresh} invocations~\cite{deephavenContext,deephavenSource}, each running a complete native cycle. No free foreground operation certifies that future invocations have ended.
+
+\paragraph{The evaluated update contract.}
+A source latch exposes the interval from START to mutation. Releasing it finishes that refresh through notifications and COMPLETE. Decisions observe synchronized transitions: serial inconsistent bodies charge distinct START or completion boundaries, giving at most $2q$ failures. Shared-lock execution drains an open cycle first. Partially notified interleavings are excluded; native notification state is richer than raw clock parity.
+
+An imported profile for $K\to V$, $B=2q$, bounds bodies by the zero-fee value plus $W_K+W_V$. Inconsistency charges its failed-body cap and consumes allowance; success charges actual selected work. The materialized $K$ directives persist for $V$ even if live Action changes. This gives an upper guarantee; the native graph cannot realize every abstract adversarial choice.
+
+At $\lambda=3,q=2$, the cap is 424. One fast-tie script attains 424 via four full failures over two split cycles. A local rule with the same allowance costs 432: it protects when local failure exposure reaches the premium. Attainability by that policy is not whole-system minimax optimality. A phase-aware mode game drains an open cycle by protection and has value 420, exposing slack in the $2q$ abstraction.
+
+\paragraph{Integration boundary.}
+Source hooks check all normal returns and reject foreign/skipped calls, exceptions and bound violations. The upstream two-attempt replica uses the same harness with elapsed-time fallback disabled. Refreshes use the public API, but the caller must own all of them and supply $q$: periodic rate, thread count and hidden writers do not provide it. Automatic applicability and calibration remain open.
+

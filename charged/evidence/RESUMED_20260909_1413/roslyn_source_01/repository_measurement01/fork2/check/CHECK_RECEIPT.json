@@ -1,0 +1,93 @@
+{
+  "utc": "2026-09-09T06:51:39.375780+00:00",
+  "status": "PASS",
+  "expected": 396,
+  "observed": 396,
+  "counts": {
+    "SUCCESS": 396
+  },
+  "issues": [],
+  "controls": [
+    {
+      "name": "call_counter",
+      "rejected": true,
+      "errors": [
+        "counters/trace"
+      ]
+    },
+    {
+      "name": "captured_parent_later_version",
+      "rejected": true,
+      "errors": [
+        "persistent captured output"
+      ]
+    },
+    {
+      "name": "cached_mismatch_input",
+      "rejected": true,
+      "errors": [
+        "wrong snapshot:kernel_inside_begin"
+      ]
+    },
+    {
+      "name": "missing_notification",
+      "rejected": true,
+      "errors": [
+        "notification/event order"
+      ]
+    },
+    {
+      "name": "notification_event_order",
+      "rejected": true,
+      "errors": [
+        "notification/event order"
+      ]
+    },
+    {
+      "name": "writer_old_identity",
+      "rejected": true,
+      "errors": [
+        "writer transition"
+      ]
+    },
+    {
+      "name": "writer_time",
+      "rejected": true,
+      "errors": [
+        "writer chronology"
+      ]
+    },
+    {
+      "name": "negative_setup",
+      "rejected": true,
+      "errors": [
+        "nonnegative integer:setup_ns"
+      ]
+    },
+    {
+      "name": "false_noop",
+      "rejected": true,
+      "errors": [
+        "unexpected trace:return_changed"
+      ]
+    },
+    {
+      "name": "unspent_slack",
+      "rejected": true,
+      "errors": [
+        "remaining slack"
+      ]
+    },
+    {
+      "name": "wrong_actual_writes",
+      "rejected": true,
+      "errors": [
+        "actual writes"
+      ]
+    }
+  ],
+  "raw_sha256": "4925c7ee29eb019c05b7d0802326f9d7176ea7045fa440f4eaeb880bd39cce22",
+  "runs_sha256": "d69dc79d3c1ab148817a580900ebd785acff2eb35eed0ae002519d2eb5995e19",
+  "checker_sha256": "4ae3864bb8c711b5299d0672ab058429f0054f1f6628fd4e6a765bf1806182c7",
+  "normal_trace_scope": "Source step grammar, current/prepared/write identities, actual writer placement, call and transformation counters, persistent outputs and notification ordering. Conditional on authored source hooks; not arbitrary host safety or complete compiler verification."
+}

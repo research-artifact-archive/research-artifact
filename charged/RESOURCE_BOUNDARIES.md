@@ -55,7 +55,7 @@ The [fixed-policy proof for every r](evidence/RESUMED_20260909_0056/charged_univ
 Omega + max_i [(r-1)*M_i + w_pi_i + Top_(B-r)(S_i)]
 ```
 
-at r>=1,B>r. These are component maxima of this policy, not all-program W optimality for r>0 or a scalar/Pareto frontier. All 1,280 complete finite path groups and 17,200 already-observed records match the formulas; there are zero new measurements. The earlier r=0 analysis checks its full subset of160groups/1,632records. Both original analysis plans and the subsequent proofs are preserved with their chronology.
+at r>=1,B>r. These are component maxima of this policy, not all-program W optimality for r>0 or a scalar/Pareto frontier. All 1,280 complete finite path groups and 17,200 already-observed records match the formulas; there are zero new measurements. The earlier r=0 analysis checks its full subset of 160 groups/1,632 records. Both original analysis plans and the subsequent proofs are preserved with their chronology.
 
 ## A single work-minimizing order for the fixed policy family
 
@@ -63,7 +63,7 @@ The [order theorem and complete exchange proof](evidence/RESUMED_20260909_0056/c
 
 The constructor receives only works and edges; it needs no B, r or prices. A min-heap implementation uses O(|E|+n log(n+1)) arithmetic/comparison operations. Its separate scan checker verifies exact input binding, a complete permutation, precedence and minimum ready work at each selection; equal-work ties are accepted. The runtime still receives r. An empty DAG is handled separately with W=L=Q=0. Previous native no-weight selectors and their results remain unchanged.
 
-The fixed finite check reuses all5,421prior weighted-DAG inputs and adds96authored seeded cases at sizes5..7, an empty case and the already-reasoned1,2,3 example. Before results, it fixes all86,662legal orders and32budget/slack pairs per order. All2,773,184order/pair checks agree with direct fixed-policy W equations, and every constructed order attains every minimum. Six invalid artifacts are rejected and one alternative equal-weight tie is accepted. There are no native measurements or held-out application inputs. Increasing/decreasing orders of independent works1,2,3 have W13/14 at r1,B3; this illustration was known before the check.
+The fixed finite check reuses all 5,421prior weighted-DAG inputs and adds96 authored seeded cases at sizes5..7, an empty case and the already-reasoned1,2,3 example. Before results, it fixes all 86,662legal orders and 32budget/slack pairs per order. All 2,773,184order/pair checks agree with direct fixed-policy W equations, and every constructed order attains every minimum. Six invalid artifacts are rejected and one alternative equal-weight tie is accepted. There are no native measurements or held-out application inputs. Increasing/decreasing orders of independent works1,2,3 have W13/14 at r1,B3; this illustration was known before the check.
 
 Use the checked Python interface (from the evidence directory):
 
@@ -116,8 +116,8 @@ For sharpness take n=M^2 equal independent jobs, w=1, v=k=M, p=floor(alpha*M), a
 | `charged_resource_vector_native_01` | 96 policy/shape/price cases, 2,440 ordinary Java runs plus two native controls, 576 exhaustive replay groups. Counters W,L,Q and scalar cost are checked separately. |
 | `charged_resource_vector_recheck_02` | A later strict input-class check of all 96 tables and aggregation of 2,442 saved verification decisions, with an explicit old-checker counterexample and five aggregation controls. It was not a native rerun. The public worker additionally regenerates causal checks from the raw records. |
 | `charged_resource_frontier_native_01` | 128 cases, 9,312 ordinary Java runs plus two native controls, 1,024 exhaustive replay groups. Every group reaches the formula's L bound while obeying its Q cap. Native budgets are restricted to 0..3; no native constant-tail claim. |
-| `charged_universal_work_01` | Post-outcome r=0 analysis: all160groups/1,632original path records and two retained known-B comparison pairs. No new measurements. |
-| `charged_universal_work_02` | Post-outcome fixed-policy W,L,Q analysis: all1,280groups/17,200original path records. No new measurements. |
+| `charged_universal_work_01` | Post-outcome r=0 analysis: all 160 groups/1,632original path records and two retained known-B comparison pairs. No new measurements. |
+| `charged_universal_work_02` | Post-outcome fixed-policy W,L,Q analysis: all 1,280 groups/17,200original path records. No new measurements. |
 | `charged_budget_blind_native_01` | 128 cases, 17,200 complete-path replays, 512 concurrent runs and two native controls, 1,280 exhaustive groups; all attain the universal formula. Selector receives no B, price or table. Oracle budgets0..4 and remaining cheap-failure allowance0..3; 256 groups at B=r establish the finite boundary contrast. |
 
 Each native study has eight record-corruption, five sequence-certificate and four parser controls. Source jobs use p=w, common v=k=kappa in {0,2}, g=0, and two to five jobs. The Java kernel performs eight elementary work units per declared w, so the checked linear metric is W+L+8*kappa*Q. Maxima of W,L,Q may occur on different executions: their separately maximized weighted sum must not be mistaken for the maximum scalar cost.
@@ -141,3 +141,8 @@ JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py budget-blind-java --o
 The optional Java commands require JDK17, generate new replay records and independently reconstruct their causal certificates. The fixed corruption controls remain tied to the original records. Standard replay checks the complete fixed inputs and original measurements; it does not rerun timing campaigns. `--quick` only checks a subset and is not full reproduction. Private author correspondence and generated classes/caches are omitted and listed in provenance. Historical manifests retain original source hashes and projected paths; the public provenance binds every distributed byte and the portable entrypoints.
 
 Two fixed study documents refer to omitted private author proof-check correspondence. Those historical references are retained as provenance, not as public evidence dependencies; the public proofs are in the manuscript and this guide. Automated author checks are not independent blind review.
+
+
+## Adaptive order and a guarded protected suffix
+
+The [bounded-source guide](BOUNDED_SOURCE.md) extends minimum-ready-work optimality to adaptive choice within the threshold family, then records a four-job refutation of its extension to all universally frontier-optimal programs. The protected-tail certificate weakly improves worst W at unchanged universal Q/L guarantees, with 285 strict/176,355 tied equation roots and 2,552 native paths. General W-optimality remains unproved; the fixed-weight guard is not a Roslyn work guarantee. All earlier claims and adverse data retain their stated scope.

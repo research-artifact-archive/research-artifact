@@ -1,0 +1,26 @@
+\subsection{A Sharp Bound on Independent-Job Savings}
+
+The third mode's scalar benefit is bounded even outside the compact class. Write $F_2,F_3$ for the two- and three-mode excess values and $A=\sum_i c_i$.
+\begin{theorem}[Sharp independent-job ratio]
+\label{thm:ratio}
+For independent jobs with arbitrary charged prices and any integer $B\ge0$,
+\[
+\frac{A+F_2(B)}{A+F_3(B)}\le\frac{1+\sqrt2}{2}.
+\]
+The constant is a supremum, already approached with common $v_i=k_i$ and $p_i=\lambda w_i$.
+\end{theorem}
+\begin{proof}
+Put $X=F_2(B)$ and $Y=F_3(B)$. Equation~\eqref{eq:elementarybounds}'s private-budget argument gives $D(B)=\max_{\sum b_i\le B}\sum_i\min(P_i,b_ic_i)\le Y$, including when $\delta_i>0$.
+
+Pack the two-mode premiums in reverse sorted-$c$ order (Lemma~\ref{lem:twofee}), labelling each contribution by its job. A final unit column containing job $i$'s mass has height $h\le c_i$, since later caps are no larger. If $x_i$ is that job's mass in the first $B$ columns, then $\sum x_i=X$, $0\le x_i\le P_i$, and $\sum x_i/c_i\le B$: each nonzero column contributes at most its mass divided by its height, namely one.
+
+Let $\phi_i$ linearly interpolate $\min(P_i,bc_i)$ at integer $b$. Under $z_i\ge0$ and $\sum z_i\le B$, the maximum of $\sum\phi_i(z_i)$ is $D(B)$: select the $B$ largest nonincreasing unit slopes, preserving tied prefixes. For $z_i=x_i/c_i=\ell_i+\rho_i$, $\ell_i\in\N$, $0\le\rho_i<1$, $z_i\le P_i/c_i$ implies $\phi_i(z_i)\ge c_i(\ell_i+\rho_i^2)$. With $\alpha=\sqrt2-1$,
+\[
+ \ell_i+\rho_i^2-2\alpha(\ell_i+\rho_i)+\alpha^2
+ =\ell_i(1-2\alpha)+(\rho_i-\alpha)^2\ge0.
+\]
+Thus $Y\ge2\alpha X-\alpha^2A$; $1-\alpha^2=2\alpha$ gives the ratio. For sharpness take $n=M^2$ equal jobs with $w=1$, $v=k=M$, $p=\lfloor\alpha M\rfloor$ and $B=\lceil np/(M+1)\rceil$. Packing gives $F_2=\min(np,B(M+1))$ and $F_3=\min(np,B(p+1))$; their total-cost ratio converges to the bound.
+\end{proof}
+
+Hence the supremum relative total-cost saving is $3-2\sqrt2\approx17.16\%$ on independent inputs. The argument uses sorted independent-job packing; it asserts no such bound for arbitrary DAGs.
+

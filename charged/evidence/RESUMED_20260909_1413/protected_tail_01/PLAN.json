@@ -1,0 +1,46 @@
+{
+  "utc": "2026-09-09T07:09:44.394977+00:00",
+  "kind": "EXPLORATORY_NEW_POLICY_AFTER_OBSERVED_COUNTEREXAMPLE",
+  "source_cases": 5519,
+  "additional_observed_counterexamples": 1,
+  "roots": 176640,
+  "budgets": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "slacks": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "policies": [
+    "global-r cheapest-ready threshold",
+    "same policy with protected-tail certificate"
+  ],
+  "tail_rule": "After r cheap failures, with h cached mismatches and protected work ell, if ell+sum remaining works<=Top_h(all jobs), complete every remaining job freshly inside callbacks. Otherwise cached-complete next minimum-ready-work job. No B input.",
+  "outcomes": [
+    "SUCCESS",
+    "FAILURE",
+    "TIMEOUT",
+    "INVALID"
+  ],
+  "falsifiers": [
+    "Q exceeds n+r or exact attainable count differs",
+    "worst L differs from universal Top_min((B-r)+,n)",
+    "tail W exceeds original threshold for any root",
+    "any r0 W differs from mandatory+Top_min(B,n)",
+    "known counterexample curve does not improve18to17 atB4r1"
+  ],
+  "per_campaign_cap_seconds": 240,
+  "no_exclusion": true,
+  "no_retry": true,
+  "full_W_optimality_claim": false,
+  "counterexample_lower_bound_scope": "Only four-job chain; author proof not mechanical certification."
+}

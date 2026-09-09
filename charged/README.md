@@ -48,8 +48,12 @@ The driver verifies the public provenance, then runs each stage in a separate pr
 | `resource-vector` | 2,442 raw records, all 96 strictly guarded tables, 576 replay groups, the preserved old-checker counterexample and aggregation controls |
 | `resource-frontier-native` | 9,314 raw records, 128 finite tables, 1,024 replay groups and all native-study controls |
 | `budget-blind` | 128 cases, 17,714 original native records, 1,280 group maxima, three-state oracle tables and 8/5/4 controls; selector has no B input |
-| `universal-work` | Post-outcome W,L,Q formulas from all17,200existing path records/1,280groups, including160r=0groups; zero new measurements |
-| `universal-order` | All86,662legal orders/2,773,184budget-slack checks on5,519fixed inputs; input-bound greedy constructor, scan checker and7artifact controls |
+| `universal-work` | Post-outcome W,L,Q formulas from all 17,200existing path records/1,280 groups, including160r=0 groups; zero new measurements |
+| `universal-order` | All 86,662legal orders/2,773,184budget-slack checks on5,519fixed inputs; input-bound greedy constructor, scan checker and 7artifact controls |
+| `adaptive-work` | 5,519 observed inputs/176,608 adaptive threshold-family roots |
+| `probe-blocking` | All 4,320 measurements/1,440 warmups,12 integer references,24 medians and 12 controls; bootstrap intervals preserved but not recomputed |
+| `roslyn-source` | All 6,453saved native records and 8 reentry outcomes, including one original TIMEOUT; both full timing summaries |
+| `protected-tail` | All 176,640 equation roots,2,552 native paths/144maxima and 8 controls;285 strict W improvements,176,355ties |
 
 The 14 CLI controls deliberately retain two erroneous null acceptances by the old 02 CLI. They do not make those acceptances valid in 03. The 19,485-input study is not counted again as an independent 03 experiment: constructor, checker and runtime are unchanged between 02 and 03, with a separate CLI correction.
 
@@ -76,3 +80,5 @@ The certificate checkers establish equations of the declared games. They do not 
 Original research code/inputs/docs follow the repository MIT license, except clearly identified upstream material. Modified Deephaven files remain under the full [Deephaven Community License 1.0](licenses/deephaven/LICENSE.md), with its [notice](licenses/deephaven/NOTICE.md); JMH-generated benchmark files retain BSD notices. See [distribution details](DISTRIBUTION.md). Author-local path projections are recorded separately from original hashes and do not alter scientific outcomes.
 
 The [resource-boundary guide](RESOURCE_BOUNDARIES.md) gives the exact protected-work/call-cap formulas, the independent-job sharp ratio, native counting conventions, complete new denominators, the old vector-checker defect and its strict recheck, and the relation to established optimistic fallback.
+
+The [bounded-source guide](BOUNDED_SOURCE.md) gives the adaptive-family extension, protected-tail certificate and its non-global-optimality boundary, all blocking/Roslyn outcomes, exact coverage limitations and optional pinned Roslyn rebuilding. The standard driver now has 21 stages; `protected-tail-java` additionally executes the fixed Java tail paths.

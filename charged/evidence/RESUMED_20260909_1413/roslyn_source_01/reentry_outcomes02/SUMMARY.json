@@ -1,0 +1,106 @@
+{
+  "utc": "2026-09-09T06:40:31.432519+00:00",
+  "results": [
+    {
+      "utc": "2026-09-09T06:40:30.715360+00:00",
+      "mode": "baseline",
+      "status": "SUCCESS",
+      "returncode": 0,
+      "seconds": 0.24092766700778157,
+      "rows": [
+        {
+          "phase": "before_same_text_reentry",
+          "notifications": 1
+        },
+        {
+          "phase": "terminal",
+          "status": "SUCCESS",
+          "mode": "baseline",
+          "notifications": 1,
+          "completed_reentries": 1,
+          "calls": null,
+          "same_text_identity": true,
+          "workspace_assembly": "<AUTHOR_HOME>/Research/roslyn_build_20260909/reentry_baseline_app02/Microsoft.CodeAnalysis.Workspaces.dll"
+        }
+      ],
+      "stdout_sha256": "3a54ffbb7bcba5bdaa29567dec9d214109613ecc511c9c7f0f3862e85881ca06",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "utc": "2026-09-09T06:40:30.953918+00:00",
+      "mode": "original",
+      "status": "SUCCESS",
+      "returncode": 0,
+      "seconds": 0.23802162500214763,
+      "rows": [
+        {
+          "phase": "before_same_text_reentry",
+          "notifications": 1
+        },
+        {
+          "phase": "terminal",
+          "status": "SUCCESS",
+          "mode": "original",
+          "notifications": 1,
+          "completed_reentries": 1,
+          "calls": 1,
+          "same_text_identity": true,
+          "workspace_assembly": "<AUTHOR_HOME>/Research/roslyn_build_20260909/reentry_app_patch03/Microsoft.CodeAnalysis.Workspaces.dll"
+        }
+      ],
+      "stdout_sha256": "703627d8059b45c6645c795b23d700781553af360009df9ea5aca3715143719f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "utc": "2026-09-09T06:40:31.197313+00:00",
+      "mode": "two",
+      "status": "SUCCESS",
+      "returncode": 0,
+      "seconds": 0.24295116699067876,
+      "rows": [
+        {
+          "phase": "before_same_text_reentry",
+          "notifications": 1
+        },
+        {
+          "phase": "terminal",
+          "status": "SUCCESS",
+          "mode": "two",
+          "notifications": 1,
+          "completed_reentries": 1,
+          "calls": 1,
+          "same_text_identity": true,
+          "workspace_assembly": "<AUTHOR_HOME>/Research/roslyn_build_20260909/reentry_app_patch03/Microsoft.CodeAnalysis.Workspaces.dll"
+        }
+      ],
+      "stdout_sha256": "52140415460242af689e1aafbd73b879f562dd35cbb379dc06b67fc861973d05",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "utc": "2026-09-09T06:40:31.432199+00:00",
+      "mode": "three",
+      "status": "SUCCESS",
+      "returncode": 0,
+      "seconds": 0.2344195839832537,
+      "rows": [
+        {
+          "phase": "before_same_text_reentry",
+          "notifications": 1
+        },
+        {
+          "phase": "terminal",
+          "status": "SUCCESS",
+          "mode": "three",
+          "notifications": 1,
+          "completed_reentries": 1,
+          "calls": 1,
+          "same_text_identity": true,
+          "workspace_assembly": "<AUTHOR_HOME>/Research/roslyn_build_20260909/reentry_app_patch03/Microsoft.CodeAnalysis.Workspaces.dll"
+        }
+      ],
+      "stdout_sha256": "8b2a16a51d5b0b0caf52dea2cef342c52ad55f7675355e72d73782e71703e58f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "interpretation": "Patch03 reentry repair validation. Retain patch02 timeout as historical failure; do not generalize to arbitrary reentrant changed updates or other host callbacks."
+}

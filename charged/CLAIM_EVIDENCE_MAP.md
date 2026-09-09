@@ -30,3 +30,8 @@ The compact performance comparisons return different services. PACK returns a ch
 The compact scale second campaign uses last query budgets `2^32-1, 2^32, 2^32+1, 2^64`, unlike the first campaign's `4096, 65536, 2^32, 2^64`. Its maximum root size is 65,536 positive runs at 32,768 jobs; complete PACK cold time is 1.333–1.603 seconds, with a maximum recorded RSS of 152,911,872 bytes. Original phase timings, serialized bytes, method failures and both input universes remain independently inspectable.
 
 See [RESOURCE_BOUNDARIES.md](RESOURCE_BOUNDARIES.md) for the separate meanings of W, L and Q. Their component maxima need not occur on the same execution. `qn_three` minimizes its constrained scalar objective and is not a protected-work optimizer.
+
+
+## Resumed bounded-source extension
+
+See [BOUNDED_SOURCE.md](BOUNDED_SOURCE.md) for precise denominators and limits. Under `evidence/RESUMED_20260909_1413/`: `universal_adaptive_work_01` binds176,608family roots; `protected_tail_01` binds176,640guarded roots and 2,552 native paths; `probe_blocking_01/recheck02` binds4,320 measurements+1,440 warmups and the repaired checker; `roslyn_source_01` retains patch01/02/03, all original/repaired failures,4,950 measurements and their warmups, full source manifests and post-outcome coverage correction. These author-side studies do not establish importance, prevalence, general elapsed-time improvement or submission readiness.
