@@ -1,6 +1,6 @@
 # Source semantics, independent arrivals, and partial-repair boundaries
 
-This extension preserves every earlier source experiment and adds four portable stages, bringing the standard replay to 26. These are author-side checks and authored workloads. They establish neither application prevalence nor a numerical Roslyn service-level requirement.
+This extension preserves every earlier source experiment and adds five portable stages, bringing the standard replay to 27. These are author-side checks and authored workloads. They establish neither application prevalence nor a numerical Roslyn service-level requirement.
 
 ## Source implementation and exact coverage
 
@@ -44,6 +44,14 @@ In the rebase study, 320 measured batches per arm have full-transform counters a
 
 At the 100-microsecond interval and r=2, three-mode/background p95 has median 60.00 microseconds versus 306.1 for two-mode, with improvement in 7/8 block medians. Foreground medians are 693.98 versus666.38 microseconds; across blocks the ordering is mixed. Bursty cases also retain foreground regressions. Rebase performs fewer full transformations, but its foreground/background timing does not consistently beat three-mode. The r=0/r=2 rebase arms have the same eligible-update behavior yet different timing, so these data do not calibrate a merge premium or establish a general speedup. The replay reconstructs all cells and per-fork summaries, including unmodified baseline and the adverse comparisons.
 
+## Compiler dependencies and retained semantic state
+
+A separate study adds 96 fixed processes: six background changes, eight source modes and cold/precompiled caches. Four authored C# projects include two linked Reader.cs documents referencing a Numbers.Value declaration. Changes affect its type, its constant value, an unrelated project, a preprocessor symbol, a project reference or competing linked text. These inputs exercise both eligible and ineligible rebase decisions.
+
+Every process succeeds. The checker rechecks 444 retained Solution snapshots and 195 earlier materialized snapshots, totaling 2,556 project projections. Workspace compilations agree with CSharpCompilation objects constructed directly from the declared strings, parse options and reference graph. Compared features include source contents, project references, diagnostics, emit success, declaration types/constants and SemanticModel symbol/constant bindings. Separate Python rules check expected types, values and C# error classes: changing the referenced constant to string must produce CS0029 in integer-returning readers; removing a reference must produce CS0103. Expected diagnostics are preserved rather than treated as failed experiments.
+
+All eight raw corruptions are rejected, including two that give both actual and oracle outputs the same incorrect symbol type or constant. The three eligible change kinds each retain one-call rebase completion; parse/reference/competing-text changes reject reuse. The same Roslyn compiler engine underlies actual and direct compilations, so this is independence from Workspace cache/update routing, not an independent C# implementation. These small authored graphs and structural-change controls do not establish full source-generator/analyzer behavior, all host executions or native timing gains. [Inputs, complete results and limits](evidence/RESUMED_20260910_0343/roslyn_compilation_01/REPORT_JA.md).
+
 ## What partial repair changes mathematically
 
 These two specified interfaces are distinct from the source experiment. Neither is inferred from the timing data.
@@ -58,13 +66,14 @@ The [closest-work analysis](evidence/RESUMED_20260910_0343/closest_guarantees_01
 
 ## Reproduce
 
-The four portable stages require only Python 3.10+:
+The five portable stages require only Python 3.10+:
 
 ```sh
 python3 -B charged/reproduce.py roslyn-semantics --out work/source-semantics
 python3 -B charged/reproduce.py roslyn-reentry --out work/source-reentry
 python3 -B charged/reproduce.py roslyn-arrivals --out work/source-arrivals
 python3 -B charged/reproduce.py partial-repair --out work/partial-repair
+python3 -B charged/reproduce.py roslyn-compilation --out work/compiler-projections
 ```
 
 `all` includes these and the preceding 22 stages. Every invocation requires a fresh output directory. Original/public hashes bridge only documented author-path projections; no semantic predicate is relaxed. These portable stages recompute saved-output checks and exact equations, not additional timing measurements.
@@ -73,10 +82,11 @@ Optional fresh source execution uses the same separately obtained [SDK and authe
 
 ```sh
 python3 charged/roslyn_extended_native.py \
+  --compiler-projections \
   --sdk /absolute/path/to/pinned-dotnet \
   --source-archive /absolute/path/to/roslyn.tar.gz \
   --packages /absolute/path/to/optional-reused-nuget-cache \
   --out /absolute/path/to/new-extended-native-replay
 ```
 
-The helper verifies all 3,837 pristine source files, builds unmodified and rebase assemblies, and executes the fixed 236 semantic cases plus 18 error-hook and 5 same-text controls. Omitting `--packages` uses a fresh package cache and network restore. Output paths must not contain glob metacharacters. Each child command has a recorded timeout and preserves failure logs. Source/SDK archives and binary package caches are not redistributed.
+The helper verifies all 3,837 pristine source files, builds unmodified and rebase assemblies, and executes the fixed 236 semantic cases plus 18 error-hook and 5 same-text controls. The optional `--compiler-projections` flag additionally builds and executes all 96 compiler-projection cases; omit it to reproduce the preceding native scope. Omitting `--packages` uses a fresh package cache and network restore. Output paths must not contain glob metacharacters. Each child command has a recorded timeout and preserves failure logs. Source/SDK archives and binary package caches are not redistributed.

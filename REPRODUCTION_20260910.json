@@ -782,5 +782,91 @@
     "new_population": false,
     "timing_campaign_rerun": false
   },
-  "evidence_mutation": "All prior evidence rows and source bytes retained. Documentation changes after the local replay are covered by final manifest verification; portable workers and evidence did not change."
+  "evidence_mutation": "All prior evidence rows and source bytes retained. Documentation changes after the local replay are covered by final manifest verification; portable workers and evidence did not change.",
+  "compiler_extension": {
+    "utc": "2026-09-09T22:06:32.231106+00:00",
+    "status": "SUCCESS",
+    "portable_stage": {
+      "status": "SUCCESS",
+      "stage": "roslyn-compilation",
+      "seconds": 0.08933845899991866,
+      "quick": false,
+      "replay_only": true,
+      "new_evaluation_samples": 0,
+      "units": 96,
+      "counts": {
+        "snapshots": 444,
+        "warm_snapshots": 195,
+        "project_projections": 2556
+      },
+      "controls": 8,
+      "scope": "All fixed Workspace/direct-compiler projections and separately specified type/constant/diagnostic expectations. Shared Roslyn compiler engine; not a language implementation proof or new native timing data."
+    },
+    "fresh_source_native": {
+      "utc": "2026-09-09T22:06:32.231106+00:00",
+      "status": "SUCCESS",
+      "source_summary_sha256": "099e795a6e64d5952b1dbce4abdedd4874ae0a1309f5bb680da2435234a1c1f9",
+      "script_sha256": "ff52886571445ac9c74285253ef0bf527e04203366162788bb8a2c4ae354b9b3",
+      "semantic_units": 236,
+      "reentry_processes": 23,
+      "compiler_projection_receipt": {
+        "utc": "2026-09-09T22:03:52.842186+00:00",
+        "status": "PASS",
+        "planned": 96,
+        "native_rows": 96,
+        "native_statuses": {
+          "SUCCESS": 96
+        },
+        "checker_statuses": {
+          "PASS": 96
+        },
+        "counts": {
+          "snapshots": 444,
+          "warm_snapshots": 195,
+          "project_projections": 2556
+        },
+        "controls": [
+          {
+            "name": "final_diagnostics",
+            "detected": true
+          },
+          {
+            "name": "shared_stale_symbol_type",
+            "detected": true
+          },
+          {
+            "name": "shared_stale_constant",
+            "detected": true
+          },
+          {
+            "name": "retained_source",
+            "detected": true
+          },
+          {
+            "name": "write_denominator",
+            "detected": true
+          },
+          {
+            "name": "rebase_eligibility",
+            "detected": true
+          },
+          {
+            "name": "missing_final",
+            "detected": true
+          },
+          {
+            "name": "duplicate_snapshot",
+            "detected": true
+          }
+        ],
+        "scope": "Finite Workspace versus direct compiler state projections plus independently specified expected types/constants/errors. Shared compiler engine, authored inputs, no full-language or arbitrary-host proof."
+      },
+      "seconds": 172.48485516599976,
+      "source_revision": "6c4a46a31302167b425d5e0a31ea83c9a9aa1d09",
+      "source_archive_sha256": "7b0bfa1c049eeddf3257ad61b28eca11c259296d478edd4cf58767b2ed9184c4",
+      "new_population": false,
+      "timing_campaign_rerun": false
+    },
+    "scope": "Additional local stage27 and fresh native compiler projections; the preceding26-stage receipt remains the earlier execution. Full public27 replay is recorded after publication."
+  }
 }

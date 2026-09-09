@@ -6,7 +6,7 @@ from pathlib import Path
 HERE=Path(__file__).resolve().parent
 COMPACT_STAGES=['compact','compact-native','compact-scale']
 RESOURCE_STAGES=['price-bounds','resource-frontier','resource-vector','resource-frontier-native','budget-blind']
-STAGES=['curves','native','deephaven','scale','calibration','ordering','refutations']+COMPACT_STAGES+RESOURCE_STAGES+['universal-work','universal-order','adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-suffix','roslyn-semantics','roslyn-reentry','roslyn-arrivals','partial-repair']
+STAGES=['curves','native','deephaven','scale','calibration','ordering','refutations']+COMPACT_STAGES+RESOURCE_STAGES+['universal-work','universal-order','adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-suffix','roslyn-semantics','roslyn-reentry','roslyn-arrivals','partial-repair','roslyn-compilation']
 
 def save(p,x):
     with p.open('x') as f:json.dump(x,f,indent=2);f.write('\n')
@@ -46,7 +46,7 @@ def main():
     results=[]
     for stage in stages:
         output=a.out/stage;output.mkdir()
-        worker='semantics_partial_worker.py' if stage in ['roslyn-semantics','roslyn-reentry','roslyn-arrivals','partial-repair'] else 'suffix_worker.py' if stage in ['protected-suffix','protected-suffix-java'] else 'bounded_source_worker.py' if stage in ['adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-tail-java'] else 'universal_order_worker.py' if stage=='universal-order' else 'universal_work_worker.py' if stage=='universal-work' else 'resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java','budget-blind-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
+        worker='semantics_partial_worker.py' if stage in ['roslyn-semantics','roslyn-reentry','roslyn-arrivals','partial-repair','roslyn-compilation'] else 'suffix_worker.py' if stage in ['protected-suffix','protected-suffix-java'] else 'bounded_source_worker.py' if stage in ['adaptive-work','probe-blocking','roslyn-source','protected-tail','protected-tail-java'] else 'universal_order_worker.py' if stage=='universal-order' else 'universal_work_worker.py' if stage=='universal-work' else 'resource_worker.py' if stage in RESOURCE_STAGES+['resource-vector-java','resource-frontier-java','budget-blind-java'] else 'compact_worker.py' if stage in COMPACT_STAGES+['compact-native-java'] else 'worker.py'
         argv=[sys.executable,'-B',str(HERE/worker),stage,str(output)]
         if a.quick:argv.append('--quick')
         start=time.monotonic()

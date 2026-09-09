@@ -1,0 +1,1 @@
+The first inline Python setup command had an unmatched dictionary delimiter and was rejected at parse time on2026-09-10 around06:51JST. It created no directories, built no harness and executed no native units. The setup is now a saved build01.py script. This transport/setup error is separate from the planned96-unit scientific denominator; no outcome was retried or omitted.

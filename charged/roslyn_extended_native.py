@@ -14,7 +14,7 @@ def sha(p):
 def read(p):return json.loads(p.read_text())
 def write(p,x):p.write_text(json.dumps(x,indent=2)+'\n')
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--sdk',type=Path,required=True);parser.add_argument('--source-archive',type=Path,required=True);parser.add_argument('--packages',type=Path);parser.add_argument('--out',type=Path,required=True);args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--sdk',type=Path,required=True);parser.add_argument('--source-archive',type=Path,required=True);parser.add_argument('--packages',type=Path);parser.add_argument('--out',type=Path,required=True);parser.add_argument('--compiler-projections',action='store_true');args=parser.parse_args()
  sdk=args.sdk.resolve();archive=args.source_archive.resolve();out=args.out.resolve()
  if any(c in str(out) for c in '*?[]'):raise ValueError('MSBuild requires an output path without glob metacharacters.')
  out.mkdir(parents=True,exist_ok=False);results=[];started=time.monotonic();deadline=started+1200
@@ -78,7 +78,20 @@ def main():
      assert len(rows)==2;x=rows[-1];assert x['phase']=='terminal' and x['status']=='SUCCESS' and x['notifications']==x['completed_reentries']==1 and x['same_text_identity'] is True
     reentry.append({'kind':kind,'args':values,'status':'SUCCESS'})
   assert len(reentry)==23
-  summary={'status':'SUCCESS','source_revision':REV,'source_archive_sha256':expected,'sdk_version':SDK_VERSION,'patch_sha256':sha(workspace),'semantic_units':236,'semantic_counts':receipt['counts'],'semantic_corruption_controls':receipt['corruption_controls'],'reentry':reentry,'whole_seconds':time.monotonic()-started,'steps':results,'scope':'Fresh unmodified/rebase source builds and executions of fixed 236 event/payload/state cases plus 18 error-hook and 5 same-text controls. Does not rerun timing campaigns, remove old TIMEOUTs, prove arbitrary host safety, or generate a new evaluation population.'};write(out/'SUMMARY.json',summary);print(json.dumps({k:v for k,v in summary.items() if k!='steps'},indent=2))
+  compiler_receipt=None
+  if args.compiler_projections:
+   compiler_data=DATA.parent/'roslyn_compilation_01'
+   compiler,compiler_app,compiler_base=harness('compiler',compiler_data,'CompilerStudy.csproj')
+   compiler_check=out/'compiler_check';compiler_check.mkdir();(compiler_check/'run01').mkdir()
+   for name in ['check01.py','UNITS.tsv']:shutil.copyfile(compiler_data/name,compiler_check/name)
+   inputs=[line.split('\t') for line in (compiler_data/'UNITS.tsv').read_text().splitlines()];assert len(inputs)==96
+   for values in inputs:
+    folder=compiler_base if values[1]=='baseline' else compiler_app
+    record=run('compiler-'+values[0],[dotnet,folder/'CompilerStudy.dll',*values],folder,8)
+    target=compiler_check/'run01'/values[0];target.mkdir();shutil.copyfile(record/'stdout.txt',target/'stdout.jsonl')
+   run('check-compiler',[sys.executable,'-B',compiler_check/'check01.py'],out,60)
+   compiler_receipt=read(compiler_check/'run01/check01/RECEIPT.json');assert compiler_receipt['status']=='PASS' and compiler_receipt['planned']==96
+  summary={'status':'SUCCESS','source_revision':REV,'source_archive_sha256':expected,'sdk_version':SDK_VERSION,'patch_sha256':sha(workspace),'semantic_units':236,'semantic_counts':receipt['counts'],'semantic_corruption_controls':receipt['corruption_controls'],'reentry':reentry,'compiler_projection_receipt':compiler_receipt,'helper_sha256':sha(Path(__file__)),'whole_seconds':time.monotonic()-started,'steps':results,'scope':'Fresh unmodified/rebase source builds and executions of fixed 236 event/payload/state cases plus 18 error-hook and 5 same-text controls, with96 compiler projections when explicitly requested. Does not rerun timing campaigns, remove old TIMEOUTs, prove arbitrary host safety, or generate a new evaluation population.'};write(out/'SUMMARY.json',summary);print(json.dumps({k:v for k,v in summary.items() if k!='steps'},indent=2))
  except Exception as e:
   write(out/'FAILURE.json',{'status':'FAILURE','error':repr(e),'steps':results,'seconds':time.monotonic()-started,'retry':False});raise
 if __name__=='__main__':main()

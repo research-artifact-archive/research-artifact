@@ -99,6 +99,21 @@ def partial():
  write(OUT/'CHECKED.json',results)
  return dict(studies=results,scope='Exact arithmetic recomputation in two distinct partial-repair interfaces. Original deterministic policies, all ties and counterexamples retained. Some source controls are algebra/schema checks, not independent raw mutation tests. No mechanical proof, native calibration or novelty certification.')
 
+def compilation():
+ d=BASE/'roslyn_compilation_01';dest=OUT/'fresh';dest.mkdir();(dest/'run01').mkdir()
+ for name in ['check01.py','UNITS.tsv']:shutil.copyfile(d/name,dest/name)
+ planned=[line.split('\t') for line in (d/'UNITS.tsv').read_text().splitlines()];assert len(planned)==96
+ for unit in planned:
+  source=d/'run01'/unit[0];result=read(source/'RESULT.json');assert result['status']==result['native_status']=='SUCCESS'
+  binding(source/'stdout.jsonl',result['stdout_sha256']);binding(source/'stderr.txt',result['stderr_sha256'])
+  target=dest/'run01'/unit[0];target.mkdir();shutil.copyfile(source/'stdout.jsonl',target/'stdout.jsonl')
+ r=run([sys.executable,'-B',str(dest/'check01.py')],120);(dest/'checker_stdout.txt').write_text(r.stdout)
+ new=read(dest/'run01/check01/RECEIPT.json');old=read(d/'run01/check01/RECEIPT.json')
+ for k in old:
+  if k!='utc':assert new[k]==old[k],k
+ assert new['status']=='PASS' and new['planned']==new['native_rows']==96
+ return dict(units=96,counts=new['counts'],controls=8,scope='All fixed Workspace/direct-compiler projections and separately specified type/constant/diagnostic expectations. Shared Roslyn compiler engine; not a language implementation proof or new native timing data.')
+
 if not __debug__:raise SystemExit('Assertions must be enabled.')
-stage=sys.argv[1];start=time.monotonic();result={'roslyn-semantics':semantics,'roslyn-reentry':reentry,'roslyn-arrivals':arrivals,'partial-repair':partial}[stage]()
+stage=sys.argv[1];start=time.monotonic();result={'roslyn-semantics':semantics,'roslyn-reentry':reentry,'roslyn-arrivals':arrivals,'partial-repair':partial,'roslyn-compilation':compilation}[stage]()
 summary=dict(status='SUCCESS',stage=stage,seconds=time.monotonic()-start,quick=False,replay_only=True,new_evaluation_samples=0,**result);write(OUT/'SUMMARY.json',summary);print(json.dumps(summary),flush=True)

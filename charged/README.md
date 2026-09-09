@@ -90,3 +90,5 @@ The [suffix certificate](SUFFIX_CERTIFICATE.md) gives exact feasibility after th
 ## Source semantics and partial-repair boundary
 
 The [new guide](SOURCE_SEMANTICS_AND_PARTIAL_REPAIR.md) documents strengthened source obligations, the four retained error-hook TIMEOUTs and their separate repair, all independent-arrival/rebase outcomes, and exact partial-repair limits. The standard driver now has 26 stages. New stages are `roslyn-semantics` (592 records), `roslyn-reentry` (55 processes), `roslyn-arrivals` (5,664 units), and `partial-repair` (3,495/160,080 and 1,046/20,920 distinct input/row studies). The optional `roslyn_extended_native.py` rebuilds pinned source and executes 236 semantic and 23 reentry controls.
+
+A separate `roslyn-compilation` stage brings the standard total to 27: all 96 authored compiler-dependency/cache cases, 2,556 project projections and eight raw corruptions. The extended native helper accepts `--compiler-projections` to build and execute these cases after its existing source/semantic/reentry stages. Actual and direct oracle paths share the Roslyn compiler engine.
