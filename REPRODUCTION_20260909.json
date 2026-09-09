@@ -1,74 +1,156 @@
 {
-  "schema": "public-author-reproduction-v1",
-  "utc": "2026-09-09T01:27:06.780709+00:00",
-  "source_commit": "610e415b7f7278cd67a7cfd529a7a71d73c4b035",
-  "transport": "Unauthenticated HTTPS clone, exact commit matched, no global/system Git configuration or credential helper",
-  "complete_release_files_verified": 124663,
+  "schema": "public-author-reproduction-v2",
+  "utc": "2026-09-09T04:38:57.129649+00:00",
+  "source_commit": "ec02a7a14f47413c0441841f39986e736a29d446",
+  "transport": "Fresh unauthenticated HTTPS clone; credential helpers, authorization headers and global/system Git configuration disabled; exact commit matched",
+  "complete_release_files_verified": 129376,
   "all_standard_stages": [
     {
       "stage": "curves",
       "status": "SUCCESS",
-      "seconds": 7.494284041022183
+      "seconds": 7.378970457997639
     },
     {
       "stage": "native",
       "status": "SUCCESS",
-      "seconds": 3.5127917919890024
+      "seconds": 3.489387958019506
     },
     {
       "stage": "deephaven",
       "status": "SUCCESS",
-      "seconds": 0.31518687499919906
+      "seconds": 0.3159890840179287
     },
     {
       "stage": "scale",
       "status": "SUCCESS",
-      "seconds": 21.945926042011706
+      "seconds": 21.782634584000334
     },
     {
       "stage": "calibration",
       "status": "SUCCESS",
-      "seconds": 0.24110762498457916
+      "seconds": 0.25919095799326897
     },
     {
       "stage": "ordering",
       "status": "SUCCESS",
-      "seconds": 24.12584095899365
+      "seconds": 23.222468708001543
     },
     {
       "stage": "refutations",
       "status": "SUCCESS",
-      "seconds": 108.93608520799899
+      "seconds": 106.84865004199673
     },
     {
       "stage": "compact",
       "status": "SUCCESS",
-      "seconds": 38.789750625001034
+      "seconds": 38.21550995900179
     },
     {
       "stage": "compact-native",
       "status": "SUCCESS",
-      "seconds": 0.4043424999981653
+      "seconds": 0.4226581250259187
     },
     {
       "stage": "compact-scale",
       "status": "SUCCESS",
-      "seconds": 66.63532491697697
-    }
-  ],
-  "jdk17_stages": [
-    {
-      "stage": "native-java",
-      "status": "SUCCESS",
-      "seconds": 5.040752291009994
+      "seconds": 65.44235937501071
     },
     {
-      "stage": "compact-native-java",
+      "stage": "price-bounds",
       "status": "SUCCESS",
-      "seconds": 1.8536449579987675
+      "seconds": 34.53208133301814
+    },
+    {
+      "stage": "resource-frontier",
+      "status": "SUCCESS",
+      "seconds": 6.732727291993797
+    },
+    {
+      "stage": "resource-vector",
+      "status": "SUCCESS",
+      "seconds": 1.433291207998991
+    },
+    {
+      "stage": "resource-frontier-native",
+      "status": "SUCCESS",
+      "seconds": 5.632318708987441
+    },
+    {
+      "stage": "budget-blind",
+      "status": "SUCCESS",
+      "seconds": 10.97596862501814
+    },
+    {
+      "stage": "universal-work",
+      "status": "SUCCESS",
+      "seconds": 0.47092500000144355
+    },
+    {
+      "stage": "universal-order",
+      "status": "SUCCESS",
+      "seconds": 8.585882041981677
     }
   ],
+  "standard_replay_seconds": 335.741013460065,
+  "jdk17_reproduction": {
+    "source_commit": "0124ba6bcd1dcb075796b0bab8f631b354cd74e4",
+    "stages": [
+      {
+        "stage": "native-java",
+        "status": "SUCCESS",
+        "seconds": 5.320180540991714,
+        "native_records": 3098,
+        "result_sha256": "844b3f3027f728e05cbe2cfc036a71897a7b9dfac1ba41a1d041d7d16579f194"
+      },
+      {
+        "stage": "compact-native-java",
+        "status": "SUCCESS",
+        "seconds": 1.6822045420121867,
+        "native_records": 610,
+        "result_sha256": "b06de5d2f1c4b2f87c3439020602000f7769446228f96a0211d28cf442b66be2"
+      },
+      {
+        "stage": "resource-vector-java",
+        "status": "SUCCESS",
+        "seconds": 2.660365792020457,
+        "native_records": 2442,
+        "result_sha256": "ac66b22fec3d2639b6003c3c9e36fc0cb7512b8366b19a99e00c5f24a4119b06"
+      },
+      {
+        "stage": "resource-frontier-java",
+        "status": "SUCCESS",
+        "seconds": 7.520730667019961,
+        "native_records": 9314,
+        "result_sha256": "eefa6852a0f959bd84974116083f39732d7e636e0c719b620d455975e2e6a162"
+      },
+      {
+        "stage": "budget-blind-java",
+        "status": "SUCCESS",
+        "seconds": 14.720841667003697,
+        "native_records": 17714,
+        "result_sha256": "c48ded5f561a92cb371a3b43057a109974e1038e8844632c92b7228f74b19233"
+      }
+    ],
+    "records": 33178,
+    "workers_identical": [
+      {
+        "path": "charged/worker.py",
+        "sha256": "7cb86320b98a8e40787c819fb63b178da3b0f231798bbc4ebcfe5b6ec4164823"
+      },
+      {
+        "path": "charged/compact_worker.py",
+        "sha256": "3caca0944e3f5b2f30a2c508cf825c7548846a6eddd02e9636e1704c25ecfd1e"
+      },
+      {
+        "path": "charged/resource_worker.py",
+        "sha256": "5b53235982221e1832c615c2072c1da357e8d48a6cd1614102aebac3cd994491"
+      }
+    ],
+    "prior_evidence_files_identical": 11452,
+    "scope": "Earlier five successful native replays carried forward by exact worker/input-byte identity, not rerun at this evidence commit"
+  },
   "native_deephaven": {
+    "source_commit": "610e415b7f7278cd67a7cfd529a7a71d73c4b035",
     "status": "SUCCESS",
     "studies": [
       {
@@ -142,8 +224,8 @@
     "dependency_cache_reused": true,
     "archive_supplied_with_required_hash": true
   },
-  "replay_input_semantics": "Same fixed recorded cases, fresh Java/native records and causal certificates where applicable; no timing campaign reruns",
+  "replay_input_semantics": "Complete fixed inputs and original outcomes; standard stages reconstruct mathematical values and trace/certificate checks. No timing campaign reruns.",
   "new_population": false,
   "independent_third_party_evaluation": false,
-  "host_relation": "Original author workstation; upstream source checkout is new, dependency cache reused"
+  "host_relation": "Original author workstation; fresh public checkout"
 }
