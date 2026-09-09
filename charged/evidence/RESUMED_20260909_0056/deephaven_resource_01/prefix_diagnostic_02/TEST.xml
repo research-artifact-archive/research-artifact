@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.deephaven.engine.table.impl.TestRetryPrefixCounterexample" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-09-08T18:03:14.841Z" hostname="Mac" time="0.185">
+  <properties/>
+  <testcase name="testMaximumPrefix" classname="io.deephaven.engine.table.impl.TestRetryPrefixCounterexample" time="0.177"/>
+  <testcase name="testNearMaximumControl" classname="io.deephaven.engine.table.impl.TestRetryPrefixCounterexample" time="0.007"/>
+  <system-out><![CDATA[RETRY_PREFIX {"case":"maximum","n":2,"q":0,"last_row_key":"9223372036854775807","visit_entries":9,"outcome":"DIAGNOSTIC_PREFIX_LIMIT","events":[["V","STAGE",0,0,0,0],["V","BEGIN",5,0,0,0],["V","V_LINK",1,0,0,0],["V","V_PARENT",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","END",5,0,0,-1]]}
+RETRY_PREFIX {"case":"near_maximum","n":2,"q":0,"last_row_key":"9223372036854775806","visit_entries":3,"outcome":"RETURNED_CORRECT_SNAPSHOT","events":[["V","STAGE",0,0,0,0],["V","BEGIN",5,0,0,0],["V","V_LINK",1,0,0,0],["V","V_PARENT",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_CELL",1,0,0,0],["V","V_NODE",1,0,0,0],["V","V_NODE",1,0,0,0],["V","END",5,0,0,1],["V","CHECK",5,5,0,3]]}
+]]></system-out>
+  <system-err><![CDATA[[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.engine.table.impl.perf.UpdatePerformanceTracker: property UpdatePerformanceTracker.reportIntervalMillis = 60000
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.engine.table.impl.perf.UpdatePerformanceTracker: property UpdatePerformanceTracker.logAllEntriesOnce = true
+[Test worker] INFO io.deephaven.stream.StreamToBlinkTableAdapter - Registering StreamToBlinkTableAdapter-io.deephaven.engine.table.impl.util.AsyncErrorImpl
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.util.metrics.MetricsManager: property MetricsManager.toStdout = true
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.util.metrics.MetricsManager: property MetricsManager.logPeriodSeconds = 30
+[Test worker] ERROR io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl - HierarchicalTable.snapshot error at nodeId=0: java.lang.IllegalStateException: AUTHOR_DIAGNOSTIC_PREFIX_LIMIT_9
+	at io.deephaven.engine.table.impl.TestRetryPrefixCounterexample.lambda$diagnose$4(TestRetryPrefixCounterexample.java:62)
+	at io.deephaven.engine.table.impl.remote.RetryStudyHooks.emit(RetryStudyHooks.java:61)
+	at io.deephaven.engine.table.impl.remote.RetryStudyHooks.work(RetryStudyHooks.java:97)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.visitExpandedNode(HierarchicalTableImpl.java:1298)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.visitExpandedNode(HierarchicalTableImpl.java:1427)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.traverseExpansionsAndFillSnapshotChunks(HierarchicalTableImpl.java:1281)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.lambda$snapshotData$4(HierarchicalTableImpl.java:1247)
+	at io.deephaven.engine.table.impl.remote.RetryStudyHooks.call(RetryStudyHooks.java:76)
+	at io.deephaven.engine.table.impl.remote.ConstructSnapshot.callDataSnapshotFunctionRefreshing(ConstructSnapshot.java:1175)
+	at io.deephaven.engine.table.impl.remote.ConstructSnapshot.callDataSnapshotFunction(ConstructSnapshot.java:1120)
+	at io.deephaven.engine.table.impl.remote.ConstructSnapshot.callDataSnapshotFunction(ConstructSnapshot.java:1058)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.snapshotData(HierarchicalTableImpl.java:1244)
+	at io.deephaven.engine.table.impl.hierarchical.HierarchicalTableImpl.snapshot(HierarchicalTableImpl.java:1034)
+	at io.deephaven.engine.table.impl.TestRetryPrefixCounterexample.diagnose(TestRetryPrefixCounterexample.java:66)
+	at io.deephaven.engine.table.impl.TestRetryPrefixCounterexample.testMaximumPrefix(TestRetryPrefixCounterexample.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at junit.framework.TestCase.runTest(TestCase.java:177)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:90)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestExecutor.runRequest(JUnitTestExecutor.java:174)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestExecutor.accept(JUnitTestExecutor.java:84)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestExecutor.accept(JUnitTestExecutor.java:47)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestDefinitionProcessor.processTestDefinition(AbstractJUnitTestDefinitionProcessor.java:65)
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.processTestDefinition(SuiteTestDefinitionProcessor.java:53)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.processTestDefinition(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:178)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+
+[Test worker] INFO io.deephaven.stream.StreamToBlinkTableAdapter - Deregistering StreamToBlinkTableAdapter-io.deephaven.engine.table.impl.util.AsyncErrorImpl
+]]></system-err>
+</testsuite>

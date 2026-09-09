@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.deephaven.engine.table.impl.TestTreeTable" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-09-08T17:42:00.440Z" hostname="Mac" time="0.901">
+  <properties/>
+  <testcase name="testRebase" classname="io.deephaven.engine.table.impl.TestTreeTable" time="0.9"/>
+  <system-out><![CDATA[RowPosition|    RowKey| __DEPTH__|__EXPANDED__|        ID|    Parent|  Sentinel
+-----------+----------+----------+------------+----------+----------+----------
+          0|         0|         1|(null)      |         3|(null)    |       103
+          1|         1|         1|true        |         1|(null)    |       101
+          2|         2|         2|(null)      |         5|         1|       105
+          3|         3|         2|(null)      |         4|         1|       104
+RowPosition|    RowKey| __DEPTH__|__EXPANDED__|        ID|    Parent|  Sentinel
+-----------+----------+----------+------------+----------+----------+----------
+          0|         0|         1|(null)      |         3|(null)    |       103
+          1|         1|         1|(null)      |         2|(null)    |       102
+          2|         2|         1|true        |         1|(null)    |       101
+          3|         3|         2|(null)      |         5|         1|       105
+          4|         4|         2|(null)      |         4|         1|       104
+]]></system-out>
+  <system-err><![CDATA[[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.engine.table.impl.perf.UpdatePerformanceTracker: property UpdatePerformanceTracker.reportIntervalMillis = 60000
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.engine.table.impl.perf.UpdatePerformanceTracker: property UpdatePerformanceTracker.logAllEntriesOnce = true
+[Test worker] INFO io.deephaven.stream.StreamToBlinkTableAdapter - Registering StreamToBlinkTableAdapter-io.deephaven.engine.table.impl.util.AsyncErrorImpl
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.util.metrics.MetricsManager: property MetricsManager.toStdout = true
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.util.metrics.MetricsManager: property MetricsManager.logPeriodSeconds = 30
+[Test worker] INFO io.deephaven.configuration.PropertyFile - io.deephaven.engine.rowset.impl.sortedranges.SortedRanges: property SortedRanges.debug = false
+[Test worker] INFO io.deephaven.stream.StreamToBlinkTableAdapter - Deregistering StreamToBlinkTableAdapter-io.deephaven.engine.table.impl.util.AsyncErrorImpl
+]]></system-err>
+</testsuite>

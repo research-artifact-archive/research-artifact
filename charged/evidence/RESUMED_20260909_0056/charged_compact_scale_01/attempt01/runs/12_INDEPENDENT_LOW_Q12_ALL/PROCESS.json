@@ -1,0 +1,187 @@
+{
+  "id": "12_INDEPENDENT_LOW_Q12_ALL",
+  "case_id": "12_INDEPENDENT_LOW",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_INDEPENDENT_LOW_Q12_ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_INDEPENDENT_LOW_Q12_ALL"
+  ],
+  "utc": "2026-09-08T23:25:26.197907+00:00",
+  "sampled_peak_rss_bytes": 40599552,
+  "samples": 80,
+  "cold_seconds": 4.359902875003172,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 5.7582976296544075e-05,
+      "method_import": 0.007970000006025657,
+      "construct": 0.4453575829975307,
+      "serialize_write": 0.016213082999456674,
+      "read_parse": 0.020020666008349508,
+      "check_and_runtime_index": 3.8385725829866715,
+      "query": 0.0005849160079378635
+    },
+    "check": {
+      "route": "charged_all_ideals",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+      "original_baseline_checked": true,
+      "inherited": {
+        "states": 4096,
+        "affine_intervals": 26588,
+        "point_checks": 26588,
+        "basis_point_checks": 44834,
+        "routing_prices_baseline_checked": true,
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+        "compiler_imported": false
+      },
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "charged_all_ideals",
+      "states": 4096,
+      "profile_rows": 22085,
+      "basis_lines": 39296
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 22,
+        "worst_total": 256
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 44,
+        "worst_total": 278
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 82,
+        "worst_total": 316
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 150,
+        "worst_total": 384
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 158,
+        "worst_total": 392
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+    "values": [
+      22,
+      44,
+      82,
+      150,
+      158,
+      158,
+      158,
+      158,
+      158,
+      158,
+      158,
+      158
+    ],
+    "certificate_bytes": 745450,
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 234,
+    "internal_seconds": 4.32884862498031,
+    "process_peak_rss_bytes": 41631744
+  },
+  "status": "SUCCESS"
+}

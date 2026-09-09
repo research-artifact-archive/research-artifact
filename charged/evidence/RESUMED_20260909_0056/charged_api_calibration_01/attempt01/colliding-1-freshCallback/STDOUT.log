@@ -1,0 +1,60 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.19, OpenJDK 64-Bit Server VM, 17.0.19+0
+# VM invoker: /opt/homebrew/opt/openjdk@17/bin/java
+# VM options: -Xms256m -Xmx256m -ea
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 200 ms each
+# Measurement: 5 iterations, 200 ms each
+# Timeout: 20 s per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.anonymous.retry.MyBenchmark.freshCallback
+# Parameters: (layout = colliding, length = 1)
+
+# Run progress: 0.00% complete, ETA 00:00:03
+# Fork: 1 of 2
+# Warmup Iteration   1: 20.838 ns/op
+# Warmup Iteration   2: 18.680 ns/op
+# Warmup Iteration   3: 18.264 ns/op
+Iteration   1: 18.196 ns/op
+Iteration   2: 18.192 ns/op
+Iteration   3: 18.202 ns/op
+Iteration   4: 18.147 ns/op
+Iteration   5: 18.148 ns/op
+
+# Run progress: 50.00% complete, ETA 00:00:01
+# Fork: 2 of 2
+# Warmup Iteration   1: 14.980 ns/op
+# Warmup Iteration   2: 12.853 ns/op
+# Warmup Iteration   3: 12.844 ns/op
+Iteration   1: 13.175 ns/op
+Iteration   2: 13.234 ns/op
+Iteration   3: 13.234 ns/op
+Iteration   4: 12.935 ns/op
+Iteration   5: 13.185 ns/op
+
+
+Result "org.anonymous.retry.MyBenchmark.freshCallback":
+  15.665 ±(99.9%) 4.006 ns/op [Average]
+  (min, avg, max) = (12.935, 15.665, 18.202), stdev = 2.650
+  CI (99.9%): [11.659, 19.671] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:03
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                   (layout)  (length)  Mode  Cnt   Score   Error  Units
+MyBenchmark.freshCallback  colliding         1  avgt   10  15.665 ± 4.006  ns/op
+
+Benchmark result is saved to <AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_api_calibration_01/attempt01/colliding-1-freshCallback/JMH.json

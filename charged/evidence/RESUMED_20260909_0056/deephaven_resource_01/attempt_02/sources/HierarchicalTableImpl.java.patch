@@ -1,0 +1,50 @@
+--- pinned/engine/table/src/main/java/io/deephaven/engine/table/impl/hierarchical/HierarchicalTableImpl.java
++++ instrumented/engine/table/src/main/java/io/deephaven/engine/table/impl/hierarchical/HierarchicalTableImpl.java
+@@ -982,6 +982,7 @@
+ 
+         @Override
+         public LinkedDirective newValue(@Nullable final Object nodeKey) {
++            io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("V_LINK", 1);
+             final long nodeId = nodeKeyToNodeId(nodeKey);
+             final long rowKeyInParentUnsorted = nodeId == rootNodeId() || nodeId == nullNodeId()
+                     ? NULL_ROW_KEY
+@@ -1125,6 +1126,7 @@
+             final int expandToDepth,
+             @NotNull final KeyedObjectHashMap<Object, KeyTableDirective> directivesByNodeKey,
+             @NotNull final IntrusiveDoublyLinkedQueue<KeyTableDirective> orderedDirectives) {
++        io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("K_DIR", 1);
+         final KeyTableDirective newDirectiveForKey = new KeyTableDirective(nodeKey, visitAction, expandToDepth);
+         final KeyTableDirective oldDirectiveForKey = directivesByNodeKey.put(nodeKey, newDirectiveForKey);
+         if (oldDirectiveForKey != null) {
+@@ -1173,6 +1175,7 @@
+             // Find ancestors iteratively until we hit the root or a node directive that already exists
+             boolean needToFindAncestors = true;
+             do {
++                io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("V_PARENT", 1);
+                 final Boolean parentNodeKeyFound =
+                         findParentNodeKey(nodeKey, linked.getRowKeyInParentUnsorted(), usePrev, parentNodeKeyHolder);
+                 if (parentNodeKeyFound == null) {
+@@ -1216,6 +1219,7 @@
+             return;
+         }
+         removed.getChildren().forEach((final LinkedDirective childDirective) -> {
++            io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("V_UNLINK", 1);
+             Assert.eq(linkedDirectives.remove(childDirective.nodeKey),
+                     "linkedDirectives.remove(childDirective.nodeKey)", childDirective, "childDirective");
+             removeOldChildren(childDirective, linkedDirectives);
+@@ -1291,6 +1295,7 @@
+             @NotNull final VisitAction action,
+             final int expandToDepth,
+             @Nullable final List<LinkedDirective> childDirectives) {
++        io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("V_NODE", 1);
+         try {
+             // Get our node-table state, and the correct table instance to expand.
+             final SnapshotStateImpl.NodeTableState nodeTableState = snapshotState.getNodeTableState(nodeId);
+@@ -1581,6 +1586,7 @@
+                         final WritableChunk<? super Values> destination = destinations[di];
+                         final WritableChunk<? super Values> destinationSlice = destinationSlices[di].resetFromChunk(
+                                 destination, offset, capacity);
++                        io.deephaven.engine.table.impl.remote.RetryStudyHooks.work("V_CELL", chunkRowsSize);
+                         if (snapshotState.usePrev()) {
+                             chunkSource.fillPrevChunk(fillContext, destinationSlice, chunkRows);
+                         } else {

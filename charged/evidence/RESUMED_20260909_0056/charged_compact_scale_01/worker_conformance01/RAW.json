@@ -1,0 +1,738 @@
+[
+  {
+    "case": 0,
+    "method": "PACK",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "PACK",
+      "phases": {
+        "input": 5.154201062396169e-05,
+        "method_import": 0.008334832993568853,
+        "construct": 2.0750012481585145e-05,
+        "serialize_write": 0.00014733299030922353,
+        "read_parse": 7.004200597293675e-05,
+        "check_and_runtime_index": 8.73749959282577e-05,
+        "query": 4.208300379104912e-05
+      },
+      "check": {
+        "route": "compatible_reduced",
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+        "original_baseline_checked": true,
+        "charged_boundary_checks": 7,
+        "inherited": {
+          "violations": [],
+          "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+          "checked_suffixes": 2,
+          "positive_premium_suffixes": 2,
+          "local_boundary_checks": 3,
+          "root_runs": 2,
+          "canonical_protection_first_thresholds": true,
+          "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+          "solver_imports": false,
+          "independent_theorem_proof": false
+        },
+        "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+        "constructor_imported": false
+      },
+      "stats": {
+        "route": "compatible_reduced",
+        "cursor_states": 3,
+        "root_runs": 2
+      },
+      "initial_actions": [
+        {
+          "job": 1,
+          "mode": "cheap",
+          "call": "validation_callback",
+          "excess": 0,
+          "worst_total": 6
+        },
+        {
+          "job": 1,
+          "mode": "cached",
+          "call": "cached_callback",
+          "excess": 2,
+          "worst_total": 8
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        }
+      ],
+      "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+      "values": [
+        0,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "certificate_bytes": 419,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 6,
+      "internal_seconds": 0.008759999996982515,
+      "process_peak_rss_bytes": 13811712
+    }
+  },
+  {
+    "case": 0,
+    "method": "ROOT",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "ROOT",
+      "phases": {
+        "input": 5.9375015553086996e-05,
+        "method_import": 0.0085270409763325,
+        "construct": 2.0458013750612736e-05,
+        "serialize_write": 0.00019166601123288274,
+        "read_parse": 5.5209005950018764e-05,
+        "index": 1.333013642579317e-06,
+        "query": 3.916997229680419e-06
+      },
+      "check": null,
+      "stats": {
+        "root_runs": 2
+      },
+      "certificate_scope": "REDUCTION_AWARE_ALL_BUDGET_ROOT_VALUE_ONLY_NO_INDEPENDENT_CERTIFICATE",
+      "values": [
+        0,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "certificate_bytes": 143,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 6,
+      "internal_seconds": 0.008866082993336022,
+      "process_peak_rss_bytes": 13549568
+    }
+  },
+  {
+    "case": 0,
+    "method": "ALL",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "ALL",
+      "phases": {
+        "input": 5.754097946919501e-05,
+        "method_import": 0.00846524999360554,
+        "construct": 0.00040029201772995293,
+        "serialize_write": 0.00018058298155665398,
+        "read_parse": 6.570800906047225e-05,
+        "check_and_runtime_index": 0.0003063750045839697,
+        "query": 5.033300840295851e-05
+      },
+      "check": {
+        "route": "charged_all_ideals",
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+        "original_baseline_checked": true,
+        "inherited": {
+          "states": 4,
+          "affine_intervals": 7,
+          "point_checks": 7,
+          "basis_point_checks": 12,
+          "routing_prices_baseline_checked": true,
+          "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+          "compiler_imported": false
+        },
+        "constructor_imported": false
+      },
+      "stats": {
+        "route": "charged_all_ideals",
+        "states": 4,
+        "profile_rows": 8,
+        "basis_lines": 11
+      },
+      "initial_actions": [
+        {
+          "job": 0,
+          "mode": "cheap",
+          "call": "conditional_commit",
+          "excess": 0,
+          "worst_total": 6
+        },
+        {
+          "job": 1,
+          "mode": "cached",
+          "call": "cached_callback",
+          "excess": 2,
+          "worst_total": 8
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 3,
+          "worst_total": 9
+        }
+      ],
+      "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+      "values": [
+        0,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "certificate_bytes": 659,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 6,
+      "internal_seconds": 0.009533457981888205,
+      "process_peak_rss_bytes": 14155776
+    }
+  },
+  {
+    "case": 0,
+    "method": "PEAK",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "PEAK",
+      "phases": {
+        "input": 5.641698953695595e-05,
+        "method_import": 0.0026383340009488165,
+        "construct": 6.19160127826035e-05,
+        "serialize_write": 0.0001796669967006892,
+        "read_parse": 5.474998033605516e-05,
+        "certificate_check": 5.699999746866524e-05,
+        "query": 2.500019036233425e-07
+      },
+      "values": [
+        0,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "certificate_bytes": 746,
+      "check": {
+        "values": [
+          0,
+          2,
+          3,
+          3,
+          3,
+          3
+        ],
+        "nodes": 10,
+        "kinds": {
+          "zero": 3,
+          "peak": 1,
+          "bounds": 6
+        },
+        "certificate_scope": "REQUESTED_ROOT_VALUES",
+        "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+        "compiler_or_solver_imported": false
+      },
+      "stats": {
+        "peak_probes": 1,
+        "cache_hits": 4,
+        "evaluated_nodes": 10,
+        "bound_nodes": 6,
+        "memo_states": 10,
+        "certificate_nodes": 10,
+        "reachable_masks": 1
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 6,
+      "internal_seconds": 0.003055250010220334,
+      "process_peak_rss_bytes": 12926976
+    }
+  },
+  {
+    "case": 0,
+    "method": "DP",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "DP",
+      "phases": {
+        "input": 5.495801451615989e-05,
+        "method_import": 0.0014007499848958105,
+        "construct": 4.804102354682982e-05,
+        "serialize_write": 0.00017183300224132836,
+        "read_parse": 4.020897904410958e-05
+      },
+      "values": [
+        0,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "certificate_bytes": 225,
+      "stats": {
+        "states": 4,
+        "rows": 1,
+        "cells": 3,
+        "equality_cells": 2,
+        "fixed_point_reached": false,
+        "bounds_preanswered": 5,
+        "root_saturation_threshold": 2
+      },
+      "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 6,
+      "internal_seconds": 0.0017242500034626573,
+      "process_peak_rss_bytes": 12845056
+    }
+  },
+  {
+    "case": 1,
+    "method": "PACK",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "PACK",
+      "phases": {
+        "input": 7.262500002980232e-05,
+        "method_import": 0.008053708996158093,
+        "construct": 1.9583996618166566e-05,
+        "serialize_write": 0.000152749998960644,
+        "read_parse": 5.3333002142608166e-05,
+        "check_and_runtime_index": 8.120801066979766e-05,
+        "query": 3.8583006244152784e-05
+      },
+      "check": {
+        "route": "compatible_reduced",
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+        "original_baseline_checked": true,
+        "charged_boundary_checks": 7,
+        "inherited": {
+          "violations": [],
+          "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+          "checked_suffixes": 2,
+          "positive_premium_suffixes": 2,
+          "local_boundary_checks": 3,
+          "root_runs": 2,
+          "canonical_protection_first_thresholds": true,
+          "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+          "solver_imports": false,
+          "independent_theorem_proof": false
+        },
+        "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+        "constructor_imported": false
+      },
+      "stats": {
+        "route": "compatible_reduced",
+        "cursor_states": 3,
+        "root_runs": 2
+      },
+      "initial_actions": [
+        {
+          "job": 1,
+          "mode": "cheap",
+          "call": "validation_callback",
+          "excess": 0,
+          "worst_total": 10
+        },
+        {
+          "job": 1,
+          "mode": "cheap",
+          "call": "validation_callback",
+          "excess": 5,
+          "worst_total": 15
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 1,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        }
+      ],
+      "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+      "values": [
+        0,
+        5,
+        8,
+        8,
+        8,
+        8
+      ],
+      "certificate_bytes": 422,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 10,
+      "internal_seconds": 0.008477707975544035,
+      "process_peak_rss_bytes": 13959168
+    }
+  },
+  {
+    "case": 1,
+    "method": "ROOT",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "ROOT",
+      "phases": {
+        "input": 5.1624985644593835e-05,
+        "method_import": 0.00797304097795859,
+        "construct": 1.8332997569814324e-05,
+        "serialize_write": 0.00013537498307414353,
+        "read_parse": 4.8416986828669906e-05,
+        "index": 1.2910168152302504e-06,
+        "query": 3.4999975468963385e-06
+      },
+      "check": null,
+      "stats": {
+        "root_runs": 2
+      },
+      "certificate_scope": "REDUCTION_AWARE_ALL_BUDGET_ROOT_VALUE_ONLY_NO_INDEPENDENT_CERTIFICATE",
+      "values": [
+        0,
+        5,
+        8,
+        8,
+        8,
+        8
+      ],
+      "certificate_bytes": 145,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 10,
+      "internal_seconds": 0.008236749999923632,
+      "process_peak_rss_bytes": 13582336
+    }
+  },
+  {
+    "case": 1,
+    "method": "ALL",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "ALL",
+      "phases": {
+        "input": 5.1458016969263554e-05,
+        "method_import": 0.007875208975747228,
+        "construct": 0.0003435830003581941,
+        "serialize_write": 0.00016570801381021738,
+        "read_parse": 7.879099575802684e-05,
+        "check_and_runtime_index": 0.0003191670111846179,
+        "query": 4.737498238682747e-05
+      },
+      "check": {
+        "route": "charged_all_ideals",
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+        "original_baseline_checked": true,
+        "inherited": {
+          "states": 4,
+          "affine_intervals": 7,
+          "point_checks": 7,
+          "basis_point_checks": 14,
+          "routing_prices_baseline_checked": true,
+          "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+          "compiler_imported": false
+        },
+        "constructor_imported": false
+      },
+      "stats": {
+        "route": "charged_all_ideals",
+        "states": 4,
+        "profile_rows": 8,
+        "basis_lines": 12
+      },
+      "initial_actions": [
+        {
+          "job": 0,
+          "mode": "cheap",
+          "call": "conditional_commit",
+          "excess": 0,
+          "worst_total": 10
+        },
+        {
+          "job": 1,
+          "mode": "cheap",
+          "call": "validation_callback",
+          "excess": 5,
+          "worst_total": 15
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        },
+        {
+          "job": 0,
+          "mode": "protected",
+          "call": "fresh_callback",
+          "excess": 8,
+          "worst_total": 18
+        }
+      ],
+      "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+      "values": [
+        0,
+        5,
+        8,
+        8,
+        8,
+        8
+      ],
+      "certificate_bytes": 669,
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 10,
+      "internal_seconds": 0.008888333017239347,
+      "process_peak_rss_bytes": 13811712
+    }
+  },
+  {
+    "case": 1,
+    "method": "PEAK",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "PEAK",
+      "phases": {
+        "input": 4.820901085622609e-05,
+        "method_import": 0.002491915976861492,
+        "construct": 5.862498073838651e-05,
+        "serialize_write": 0.00014258301234804094,
+        "read_parse": 7.158299558795989e-05,
+        "certificate_check": 5.8874982642009854e-05,
+        "query": 2.500019036233425e-07
+      },
+      "values": [
+        0,
+        5,
+        8,
+        8,
+        8,
+        8
+      ],
+      "certificate_bytes": 747,
+      "check": {
+        "values": [
+          0,
+          5,
+          8,
+          8,
+          8,
+          8
+        ],
+        "nodes": 10,
+        "kinds": {
+          "zero": 3,
+          "peak": 1,
+          "bounds": 6
+        },
+        "certificate_scope": "REQUESTED_ROOT_VALUES",
+        "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+        "compiler_or_solver_imported": false
+      },
+      "stats": {
+        "peak_probes": 1,
+        "cache_hits": 4,
+        "evaluated_nodes": 10,
+        "bound_nodes": 6,
+        "memo_states": 10,
+        "certificate_nodes": 10,
+        "reachable_masks": 1
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 10,
+      "internal_seconds": 0.0028784589958377182,
+      "process_peak_rss_bytes": 13058048
+    }
+  },
+  {
+    "case": 1,
+    "method": "DP",
+    "returncode": 0,
+    "result": {
+      "status": "SUCCESS",
+      "method": "DP",
+      "phases": {
+        "input": 4.82079922221601e-05,
+        "method_import": 0.001397833984810859,
+        "construct": 3.8875004975125194e-05,
+        "serialize_write": 0.00013374999980442226,
+        "read_parse": 3.9000005926936865e-05
+      },
+      "values": [
+        0,
+        5,
+        8,
+        8,
+        8,
+        8
+      ],
+      "certificate_bytes": 225,
+      "stats": {
+        "states": 4,
+        "rows": 1,
+        "cells": 3,
+        "equality_cells": 2,
+        "fixed_point_reached": false,
+        "bounds_preanswered": 5,
+        "root_saturation_threshold": 2
+      },
+      "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+      "budgets": [
+        0,
+        1,
+        2,
+        3,
+        8,
+        4294967296
+      ],
+      "baseline": 10,
+      "internal_seconds": 0.0016650829929858446,
+      "process_peak_rss_bytes": 12615680
+    }
+  }
+]

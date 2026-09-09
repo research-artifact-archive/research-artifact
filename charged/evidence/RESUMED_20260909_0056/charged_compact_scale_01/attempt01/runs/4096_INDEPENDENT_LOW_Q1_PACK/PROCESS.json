@@ -1,0 +1,81 @@
+{
+  "id": "4096_INDEPENDENT_LOW_Q1_PACK",
+  "case_id": "4096_INDEPENDENT_LOW",
+  "method": "PACK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/4096_INDEPENDENT_LOW_Q1_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/4096_INDEPENDENT_LOW_Q1_PACK"
+  ],
+  "utc": "2026-09-08T23:39:31.992338+00:00",
+  "sampled_peak_rss_bytes": 19283968,
+  "samples": 2,
+  "cold_seconds": 0.13915837500826456,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 0.0018616250017657876,
+      "method_import": 0.00829941700794734,
+      "construct": 0.009629416977986693,
+      "serialize_write": 0.0029755840077996254,
+      "read_parse": 0.002066457993350923,
+      "check_and_runtime_index": 0.08040620799874887,
+      "query": 1.983300899155438e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 20144,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 4096,
+        "positive_premium_suffixes": 4096,
+        "local_boundary_checks": 13649,
+        "root_runs": 39,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 4097,
+      "root_runs": 39
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 40,
+        "worst_total": 86045
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      40
+    ],
+    "certificate_bytes": 128082,
+    "budgets": [
+      1
+    ],
+    "baseline": 86005,
+    "internal_seconds": 0.10573812501388602,
+    "process_peak_rss_bytes": 19742720
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,112 @@
+{
+  "id": "four_chains-8-MIXED-q12-PEAK",
+  "case_id": "four_chains-8-MIXED",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/four_chains-8-MIXED-q12-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/four_chains-8-MIXED-q12-PEAK"
+  ],
+  "utc": "2026-09-08T21:29:50.620063+00:00",
+  "sampled_peak_rss_bytes": 28770304,
+  "samples": 9,
+  "cold_seconds": 0.5047667500039097,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 4.612500197254121e-05,
+      "method_import": 0.0019813330145552754,
+      "construct": 0.44844720797846094,
+      "serialize_write": 0.0035277499991934747,
+      "read_parse": 0.0027271670114714652,
+      "certificate_check": 0.0172083749785088,
+      "query": 7.089984137564898e-07
+    },
+    "values": [
+      11,
+      21,
+      35,
+      55,
+      81,
+      82,
+      82,
+      82,
+      82,
+      82,
+      82,
+      82
+    ],
+    "certificate_bytes": 321895,
+    "check": {
+      "values": [
+        11,
+        21,
+        35,
+        55,
+        81,
+        82,
+        82,
+        82,
+        82,
+        82,
+        82,
+        82
+      ],
+      "nodes": 3990,
+      "kinds": {
+        "zero": 159,
+        "peak": 3831
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 676485,
+      "cache_hits": 1480881,
+      "evaluated_nodes": 21655,
+      "memo_states": 21655,
+      "certificate_nodes": 3990,
+      "reachable_masks": 80
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.47398416601936333,
+    "process_peak_rss_bytes": 28934144
+  },
+  "status": "SUCCESS"
+}

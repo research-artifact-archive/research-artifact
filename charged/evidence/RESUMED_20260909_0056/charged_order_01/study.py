@@ -1,0 +1,126 @@
+from pathlib import Path
+import argparse,datetime,functools,hashlib,itertools,json,random,signal,sys,time,traceback
+
+HERE=Path(__file__).resolve().parent
+UP=HERE.parent/'charged_curves_02'
+sys.path.insert(0,str(UP))
+import compiler,basis,checker
+PALETTE=[(1,0,0,0,0),(3,2,0,0,0),(1,1,1,3,1),(2,6,1,1,1),
+         (6,2,3,1,1),(2,1,1,4,2),(4,7,2,5,1),(7,3,1,2,2)]
+BMAX=8
+STOP=datetime.datetime(2026,9,9,5,tzinfo=datetime.timezone.utc).timestamp()
+
+def save(name,obj):
+    with (HERE/name).open('x') as f:json.dump(obj,f,indent=2);f.write('\n')
+
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+
+def prepare():
+    inputs=[]
+    for n in [1,2,3]:
+        for k,jobs in enumerate(itertools.product(PALETTE,repeat=n)):
+            inputs.append(dict(id=f'grid-n{n}-{k:04}',stratum='AUTHORED_INDEPENDENT_GRID',jobs=jobs,edges=[]))
+    rng=random.Random(202609090512)
+    for n in [3,4,5,6]:
+        for k in range(64):
+            jobs=[(rng.randint(1,9),rng.randint(1,12),rng.randint(1,4),rng.randint(1,8),rng.randint(1,4)) for i in range(n)]
+            inputs.append(dict(id=f'positive-n{n}-{k:02}',stratum='AUTHORED_POSITIVE_FEES',jobs=jobs,edges=[]))
+    old=HERE.parent/'charged_callback_native_01/CASES.json'
+    for c in json.loads(old.read_text()):
+        if c['id'] in {'native-parent-control','native-fee-control'}:continue
+        inputs.append(dict(id='native/'+c['id'],stratum='OBSERVED_NATIVE_REPLAY',jobs=c['jobs'],edges=c['edges']))
+    assert len(inputs)==874
+    save('INPUTS.json',inputs)
+    files=[HERE/'PLAN.md',Path(__file__),HERE/'INPUTS.json',old,UP/'compiler.py',UP/'basis.py',UP/'checker.py',compiler.SOURCE]
+    save('MANIFEST.json',dict(created=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        files={str(p):sha(p) for p in files},inputs=len(inputs),roots=len(inputs)*9,budgets=list(range(9)),
+        caps=dict(unit_seconds=5,total_seconds=300,hard_stop_utc='2026-09-09T05:00:00Z'),python=sys.version))
+    print('materialized874 inputs7866 roots')
+
+def scalar(case):
+    ps=compiler.prices(case['jobs']);n=len(ps);full=(1<<n)-1
+    pred=[sum(1<<a for a,b in case['edges'] if b==j) for j in range(n)]
+    values={0:[0]*9};decisions={}
+    for mask in range(1,full+1):
+        avail=[i for i in range(n) if mask>>i&1 and pred[i]&mask==0]
+        if not avail:raise ValueError('cycle')
+        row=[0];choice=[None]
+        for b in range(1,9):
+            candidates=[]
+            for i in avail:
+                c,p,d,s=ps[i];child=values[mask^(1<<i)]
+                candidates.extend([(p+child[b],i,'protected'),
+                    (max(child[b],c+row[b-1]),i,'fast'),
+                    (d+max(child[b],s+child[b-1]),i,'cached_callback')])
+            v,i,mode=min(candidates);row.append(v);choice.append([i,mode])
+        values[mask]=row;decisions[mask]=choice
+    return values,decisions,pred
+
+def fixed(case,pred):
+    n=len(pred);ps=compiler.prices(case['jobs']);catalogue=[]
+    best=[None]*9;witness=[None]*9
+    for order in itertools.permutations(range(n)):
+        seen=0;valid=True
+        for i in order:
+            if pred[i]&~seen:valid=False;break
+            seen|=1<<i
+        if not valid:continue
+        child=[0]*9
+        for i in reversed(order):
+            c,p,d,s=ps[i];own=[0]
+            for b in range(1,9):own.append(min(p+child[b],max(child[b],c+own[b-1]),d+max(child[b],s+child[b-1])))
+            child=own
+        catalogue.append([order,child])
+        for b,v in enumerate(child):
+            if best[b] is None or v<best[b]:best[b]=v;witness[b]=order
+    assert catalogue
+    return best,witness,catalogue
+
+def expired(*args):raise TimeoutError('registered limit')
+
+def run():
+    manifest=json.loads((HERE/'MANIFEST.json').read_text())
+    for p,h in manifest['files'].items():assert sha(Path(p))==h
+    cases=json.loads((HERE/'INPUTS.json').read_text());start=time.monotonic();rows=[];strict=[]
+    save('RUN_STARTED.json',dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),manifest_sha256=sha(HERE/'MANIFEST.json')))
+    signal.signal(signal.SIGALRM,expired)
+    with (HERE/'RAW.jsonl').open('x') as raw,(HERE/'ALL_ORDERS.jsonl').open('x') as orders:
+        for case in cases:
+            t=time.monotonic();left=min(300-(t-start),STOP-time.time());r=dict(id=case['id'],stratum=case['stratum'],n=len(case['jobs']))
+            if left<=0:r['status']='NOT_RUN'
+            else:
+                signal.setitimer(signal.ITIMER_REAL,min(5,left))
+                try:
+                    values,decisions,pred=scalar(case);full=(1<<len(pred))-1;v=values[full]
+                    best,witness,catalogue=fixed(case,pred)
+                    encoded=json.loads(json.dumps(basis.compile_case(case)));checked=checker.check(encoded)
+                    cv=[compiler.base.at(encoded['curves'][str(full)],b) for b in range(9)]
+                    assert cv==v,('curve scalar',cv,v)
+                    assert all(a<=b for a,b in zip(v,best)),('fixed below adaptive',v,best)
+                    assert v[0]==best[0]==0
+                    assert v[1]==best[1],('single budget order',v,best)
+                    baseline=encoded['baseline']
+                    r.update(status='SUCCESS',adaptive=v,fixed=best,baseline=baseline,orders=len(catalogue),
+                             fixed_witness=witness,initial_actions=decisions[full],check=checked)
+                    orders.write(json.dumps(dict(id=case['id'],orders=catalogue),separators=(',',':'))+'\n');orders.flush()
+                    for b,(a,f) in enumerate(zip(v,best)):
+                        if a<f:
+                            gap=dict(id=case['id'],budget=b,adaptive=baseline+a,fixed=baseline+f,reduction=(f-a)/(baseline+f))
+                            strict.append(gap)
+                            if not (HERE/'FIRST_STRICT.json').exists():save('FIRST_STRICT.json',dict(input=case,result=gap,values=values,decisions=decisions,fixed_orders=catalogue))
+                except TimeoutError as e:r.update(status='TIMEOUT',error=str(e))
+                except AssertionError:r.update(status='FAILURE',error=traceback.format_exc())
+                except Exception:r.update(status='INVALID',error=traceback.format_exc())
+                finally:signal.setitimer(signal.ITIMER_REAL,0)
+            r['seconds']=time.monotonic()-t;rows.append(r);raw.write(json.dumps(r,separators=(',',':'))+'\n');raw.flush()
+            if r['status'] in ['FAILURE','TIMEOUT','INVALID'] and not (HERE/'FIRST_ADVERSE.json').exists():save('FIRST_ADVERSE.json',dict(input=case,result=r))
+    save('STRICT_CELLS.json',strict)
+    summary=dict(inputs=len(cases),recorded=len(rows),planned_roots=len(cases)*9,
+                 status_counts={s:sum(r['status']==s for r in rows) for s in ['SUCCESS','FAILURE','TIMEOUT','INVALID','NOT_RUN']},
+                 strict_cells=len(strict),strict_inputs=len(set(x['id'] for x in strict)),maximum_reduction=max([x['reduction'] for x in strict],default=0),
+                 elapsed_seconds=time.monotonic()-start,raw_sha256=sha(HERE/'RAW.jsonl'),orders_sha256=sha(HERE/'ALL_ORDERS.jsonl'))
+    save('SUMMARY.json',summary);print(json.dumps(summary,indent=2))
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','run']);args=p.parse_args()
+    {'prepare':prepare,'run':run}[args.command]()

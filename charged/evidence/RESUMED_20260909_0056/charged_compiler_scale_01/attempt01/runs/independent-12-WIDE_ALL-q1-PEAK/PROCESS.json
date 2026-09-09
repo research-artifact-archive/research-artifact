@@ -1,0 +1,68 @@
+{
+  "id": "independent-12-WIDE_ALL-q1-PEAK",
+  "case_id": "independent-12-WIDE_ALL",
+  "method": "PEAK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/independent-12-WIDE_ALL-q1-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/independent-12-WIDE_ALL-q1-PEAK"
+  ],
+  "utc": "2026-09-08T21:31:44.260630+00:00",
+  "sampled_peak_rss_bytes": 26902528,
+  "samples": 2,
+  "cold_seconds": 0.12679654199746437,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 6.962500629015267e-05,
+      "method_import": 0.0021136249997653067,
+      "construct": 0.04512029199395329,
+      "serialize_write": 0.006430958979763091,
+      "read_parse": 0.004885666014160961,
+      "certificate_check": 0.03702383299241774,
+      "query": 2.1249870769679546e-06
+    },
+    "values": [
+      1188422437713965063903159255040
+    ],
+    "certificate_bytes": 663097,
+    "check": {
+      "values": [
+        1188422437713965063903159255040
+      ],
+      "nodes": 8191,
+      "kinds": {
+        "zero": 4096,
+        "peak": 4095
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 4095,
+      "cache_hits": 57342,
+      "evaluated_nodes": 8191,
+      "memo_states": 8191,
+      "certificate_nodes": 8191,
+      "reachable_masks": 4095
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.09579162500449456,
+    "process_peak_rss_bytes": 27623424
+  },
+  "status": "SUCCESS"
+}

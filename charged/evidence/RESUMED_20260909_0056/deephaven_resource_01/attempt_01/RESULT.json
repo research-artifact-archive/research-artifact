@@ -1,0 +1,80 @@
+{
+  "started_utc": "2026-09-08T17:50:37.051613+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryResourceStudy",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestTreeTable.testRebase",
+    ":engine-table:test",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testClockChange",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedAfterSuccessfulConcurrentAttemptWithNestedLockedSnapshot",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedWhenExceptionEscapesConcurrentAttempt"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "timeout_seconds": 600,
+  "exploratory_cases": [
+    "none",
+    "k_before",
+    "k_after",
+    "v_before",
+    "v_after",
+    "both"
+  ],
+  "upstream_regression_count": 4,
+  "files": [
+    {
+      "name": "ConstructSnapshot.java",
+      "sha256": "6c05500ad2c75b6b1fd78b6cda0a1d76424b60229184b2d274d648472d1386c6"
+    },
+    {
+      "name": "ConstructSnapshot.java.patch",
+      "sha256": "aeb13b2186c5577a6bfdbfd7d818a016c7276b5cacfaa2d7be3ce3ffcafb5b39"
+    },
+    {
+      "name": "HierarchicalTableImpl.java",
+      "sha256": "1d548a2081e106c9d2e44bec743d5341ed0bcbceacab607c10cbad978606335c"
+    },
+    {
+      "name": "HierarchicalTableImpl.java.patch",
+      "sha256": "3c37d84e28e2c8a22a1b69aad2cbc84eef420cee64bdcaca7cc912eedb91478c"
+    },
+    {
+      "name": "INSTRUMENTATION_RECEIPT.json",
+      "sha256": "badc42b692e000761f5cbe9bddf5201e02f11b2c084d77cc4459eaa711beeab2"
+    },
+    {
+      "name": "PLAN.md",
+      "sha256": "58feab5ddcf6c5222c3e14998e97a96d01185a5a4dfca4bfef79e679e8544cfc"
+    },
+    {
+      "name": "RetryStudyHooks.java",
+      "sha256": "718a5264d57179a6d45e6da4f5717dad65404ab7835ebafb6f07f3900509f706"
+    },
+    {
+      "name": "TestRetryResourceStudy.java",
+      "sha256": "d9672b536ce229e70f9074ad58d0491cad2a3ae2e7299b51a744aed0358be283"
+    },
+    {
+      "name": "instrument.py",
+      "sha256": "dd3b65b876f081944d59ec0cd528881f6190946b0bfc48a73109604364bd5717"
+    }
+  ],
+  "exit_code": 1,
+  "status": "FAILURE",
+  "observed_scientific_rows": 0,
+  "ended_utc": "2026-09-08T17:51:06.264663+00:00"
+}

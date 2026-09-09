@@ -1,0 +1,9 @@
+# Value of retaining an acquired guard: diagnostic exploration
+
+The three-mode root equality remains a conjecture despite the two prior corpora. A prospective proof might try to complete or release a held, uncomputed guard immediately. This diagnostic checks that intermediate-state lemma separately, without assuming that a counterexample refutes root equality.
+
+Reuse all 2,114 exact inputs of charged_guaranteed_02 in their original order; these inputs and their all-unprepared root values are already observed. For each available job i at an all-unprepared boundary and each budget b=0,...,6, compare the exact primitive value at the state with only i in L against the minimum of (a) immediate release, paying r_i and continuing from all U, and (b) immediate guarded preparation/commit, paying w_i+p_i+r_i and continuing with i completed. Report every eligible state, strict advantage, equality, invalid comparison, failure, timeout and not-run input. Jobs unavailable at the initial boundary are outside this stated lemma and are counted as structurally ineligible, never removed after observing results.
+
+Also inspect the all-U root's prepare-i then acquire/validate-i option. Its branches pay w_i+g_i then continue from LC_i at budget b, or L_i at b-1. Compare it with the root optimum and with replacing the latter branch by the immediate release/complete bound. This distinguishes an intermediate option value from a root-relevant obstruction.
+
+The exact graph, minimax solver, full-state Bellman check and terminating policy check are imported unchanged from charged_guaranteed_02/explore.py. The new script only constructs the stated diagnostic queries. At most 5 seconds per input, 180 seconds total, and the September9 14:00 JST hard stop. No repeats or exclusions. Preserve first strict witness and all compact rows. This is author-side abstract-model exploration, not an actual-application result or a general proof.

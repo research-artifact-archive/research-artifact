@@ -1,0 +1,70 @@
+{
+  "id": "independent-8-LONG_PREMIUM-q4-ALL",
+  "case_id": "independent-8-LONG_PREMIUM",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/independent-8-LONG_PREMIUM-q4-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/independent-8-LONG_PREMIUM-q4-ALL"
+  ],
+  "utc": "2026-09-08T21:30:50.633473+00:00",
+  "sampled_peak_rss_bytes": 18677760,
+  "samples": 11,
+  "cold_seconds": 0.6093695419840515,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 5.383399548009038e-05,
+      "method_import": 0.004550332989310846,
+      "construct": 0.016148499998962507,
+      "serialize_write": 0.0010129160073120147,
+      "read_parse": 0.0007636249938514084,
+      "certificate_check": 0.5623693329980597,
+      "query": 4.750007065013051e-06
+    },
+    "values": [
+      22,
+      44,
+      88,
+      176
+    ],
+    "certificate_bytes": 86546,
+    "check": {
+      "states": 256,
+      "affine_intervals": 7214,
+      "point_checks": 18354,
+      "basis_point_checks": 8279,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 256,
+      "basis_lines": 2240,
+      "profile_rows": 1552
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.5849349169875495,
+    "process_peak_rss_bytes": 18677760
+  },
+  "status": "SUCCESS"
+}

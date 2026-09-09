@@ -1,0 +1,30 @@
+{
+  "started_utc": "2026-09-08T17:36:43.454978+00:00",
+  "argv": [
+    "./gradlew",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:test",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testClockChange",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedAfterSuccessfulConcurrentAttemptWithNestedLockedSnapshot",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedWhenExceptionEscapesConcurrentAttempt",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestTreeTable.testRebase"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "timeout_seconds": 900,
+  "fixed_test_count": 4,
+  "purpose": "Build setup and selected upstream regression baseline, not resource-bound or performance evidence",
+  "failure_policy": "Keep all failures; any changed setup gets a new attempt directory",
+  "exit_code": 1,
+  "status": "FAILURE",
+  "ended_utc": "2026-09-08T17:37:07.325244+00:00"
+}

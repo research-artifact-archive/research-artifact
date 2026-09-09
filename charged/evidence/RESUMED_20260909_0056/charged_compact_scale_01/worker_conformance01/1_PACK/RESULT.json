@@ -1,0 +1,103 @@
+{
+  "status": "SUCCESS",
+  "method": "PACK",
+  "phases": {
+    "input": 7.262500002980232e-05,
+    "method_import": 0.008053708996158093,
+    "construct": 1.9583996618166566e-05,
+    "serialize_write": 0.000152749998960644,
+    "read_parse": 5.3333002142608166e-05,
+    "check_and_runtime_index": 8.120801066979766e-05,
+    "query": 3.8583006244152784e-05
+  },
+  "check": {
+    "route": "compatible_reduced",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+    "original_baseline_checked": true,
+    "charged_boundary_checks": 7,
+    "inherited": {
+      "violations": [],
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+      "checked_suffixes": 2,
+      "positive_premium_suffixes": 2,
+      "local_boundary_checks": 3,
+      "root_runs": 2,
+      "canonical_protection_first_thresholds": true,
+      "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+      "solver_imports": false,
+      "independent_theorem_proof": false
+    },
+    "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "compatible_reduced",
+    "cursor_states": 3,
+    "root_runs": 2
+  },
+  "initial_actions": [
+    {
+      "job": 1,
+      "mode": "cheap",
+      "call": "validation_callback",
+      "excess": 0,
+      "worst_total": 10
+    },
+    {
+      "job": 1,
+      "mode": "cheap",
+      "call": "validation_callback",
+      "excess": 5,
+      "worst_total": 15
+    },
+    {
+      "job": 1,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 1,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 1,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 1,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+  "values": [
+    0,
+    5,
+    8,
+    8,
+    8,
+    8
+  ],
+  "certificate_bytes": 422,
+  "budgets": [
+    0,
+    1,
+    2,
+    3,
+    8,
+    4294967296
+  ],
+  "baseline": 10,
+  "internal_seconds": 0.008477707975544035,
+  "process_peak_rss_bytes": 13959168
+}

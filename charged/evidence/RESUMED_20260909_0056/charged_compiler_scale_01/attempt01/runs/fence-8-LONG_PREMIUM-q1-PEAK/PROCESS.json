@@ -1,0 +1,68 @@
+{
+  "id": "fence-8-LONG_PREMIUM-q1-PEAK",
+  "case_id": "fence-8-LONG_PREMIUM",
+  "method": "PEAK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-8-LONG_PREMIUM-q1-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-8-LONG_PREMIUM-q1-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:17.760999+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.031082917004823685,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 6.854100502096117e-05,
+      "method_import": 0.0022018339950591326,
+      "construct": 0.0003587079991120845,
+      "serialize_write": 0.0002483749995008111,
+      "read_parse": 0.00010549998842179775,
+      "certificate_check": 0.0003432079975027591,
+      "query": 3.7500285543501377e-07
+    },
+    "values": [
+      22
+    ],
+    "certificate_bytes": 7264,
+    "check": {
+      "values": [
+        22
+      ],
+      "nodes": 109,
+      "kinds": {
+        "zero": 55,
+        "peak": 54
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 54,
+      "cache_hits": 368,
+      "evaluated_nodes": 109,
+      "memo_states": 109,
+      "certificate_nodes": 109,
+      "reachable_masks": 54
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.003335457993671298,
+    "process_peak_rss_bytes": 16957440
+  },
+  "status": "SUCCESS"
+}

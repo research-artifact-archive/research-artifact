@@ -1,0 +1,114 @@
+{
+  "id": "4096_INDEPENDENT_LONG_P_Q12_PEAK",
+  "case_id": "4096_INDEPENDENT_LONG_P",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/4096_INDEPENDENT_LONG_P_Q12_PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/4096_INDEPENDENT_LONG_P_Q12_PEAK"
+  ],
+  "utc": "2026-09-08T23:40:36.784821+00:00",
+  "sampled_peak_rss_bytes": 19447808,
+  "samples": 2,
+  "cold_seconds": 0.11763862500083633,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 0.0023375420132651925,
+      "method_import": 0.0026204170135315508,
+      "construct": 0.005456332990434021,
+      "serialize_write": 0.0020172079966869205,
+      "read_parse": 0.0015498749853577465,
+      "certificate_check": 0.0652248749975115,
+      "query": 3.3300602808594704e-07
+    },
+    "values": [
+      40,
+      80,
+      160,
+      320,
+      640,
+      1280,
+      2560,
+      10240,
+      163840,
+      2621440,
+      171798691840,
+      263831251243064
+    ],
+    "certificate_bytes": 127515,
+    "check": {
+      "values": [
+        40,
+        80,
+        160,
+        320,
+        640,
+        1280,
+        2560,
+        10240,
+        163840,
+        2621440,
+        171798691840,
+        263831251243064
+      ],
+      "nodes": 12,
+      "kinds": {
+        "zero": 0,
+        "peak": 0,
+        "bounds": 12
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 0,
+      "cache_hits": 0,
+      "evaluated_nodes": 12,
+      "bound_nodes": 12,
+      "memo_states": 12,
+      "certificate_nodes": 12,
+      "reachable_masks": 0
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 86005,
+    "internal_seconds": 0.07968341701780446,
+    "process_peak_rss_bytes": 19447808
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,39 @@
+--- pinned/engine/table/src/main/java/io/deephaven/engine/table/impl/remote/ConstructSnapshot.java
++++ instrumented/engine/table/src/main/java/io/deephaven/engine/table/impl/remote/ConstructSnapshot.java
+@@ -1054,7 +1054,9 @@
+             @NotNull final String logPrefix,
+             @NotNull final SnapshotControl control,
+             @NotNull final SnapshotFunction function) {
+-        return callDataSnapshotFunction((final LogOutput logOutput) -> logOutput.append(logPrefix), control, function);
++        try (final RetryStudyHooks.Scope studyScope = RetryStudyHooks.scope(logPrefix, control)) {
++            return callDataSnapshotFunction((final LogOutput logOutput) -> logOutput.append(logPrefix), control, function);
++        }
+     }
+ 
+     /**
+@@ -1170,7 +1172,7 @@
+             try (final SafeCloseable ignored = LivenessScopeStack.open(snapshotLivenessScope, true)) {
+                 final Object startObject = state.startConcurrentSnapshot(control, beforeClockValue, usePrev);
+                 try {
+-                    functionSuccessful = function.call(usePrev, beforeClockValue);
++                    functionSuccessful = RetryStudyHooks.call(control, function, usePrev, beforeClockValue, false);
+                 } catch (NoSnapshotAllowedException ex) {
+                     // Breaking here will force an update graph lock acquire.
+                     // TODO: Optimization. If this exception is only used for cases when we can't use previous values,
+@@ -1211,6 +1213,7 @@
+                                 .append(" Suppressed exception from snapshot success function: ").append(e).endl();
+                     }
+                 }
++                RetryStudyHooks.outcome(control, beforeClockValue, afterClockValue, usePrev, functionSuccessful, snapshotSuccessful);
+                 attemptDurationMillis = System.currentTimeMillis() - attemptStart;
+                 if (log.isDebugEnabled()) {
+                     log.debug().append(logPrefix).append(" Concurrent snapshot function took ")
+@@ -1291,7 +1294,7 @@
+                 }
+ 
+                 final long attemptStart = System.currentTimeMillis();
+-                functionSuccessful = function.call(false, beforeClockValue);
++                functionSuccessful = RetryStudyHooks.call(control, function, false, beforeClockValue, true);
+                 Assert.assertion(functionSuccessful, "functionSuccessful");
+ 
+                 final long afterClockValue = updateGraph.clock().currentValue();

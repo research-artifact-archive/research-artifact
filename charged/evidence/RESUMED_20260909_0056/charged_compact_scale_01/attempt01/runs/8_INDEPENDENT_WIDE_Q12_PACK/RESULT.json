@@ -1,0 +1,157 @@
+{
+  "status": "SUCCESS",
+  "method": "PACK",
+  "phases": {
+    "input": 7.316700066439807e-05,
+    "method_import": 0.009354292007628828,
+    "construct": 5.14579878654331e-05,
+    "serialize_write": 0.00025358301354572177,
+    "read_parse": 7.829201058484614e-05,
+    "check_and_runtime_index": 0.0002581249864306301,
+    "query": 0.00011241700849495828
+  },
+  "check": {
+    "route": "compatible_reduced",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+    "original_baseline_checked": true,
+    "charged_boundary_checks": 37,
+    "inherited": {
+      "violations": [],
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+      "checked_suffixes": 8,
+      "positive_premium_suffixes": 8,
+      "local_boundary_checks": 23,
+      "root_runs": 6,
+      "canonical_protection_first_thresholds": true,
+      "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+      "solver_imports": false,
+      "independent_theorem_proof": false
+    },
+    "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "compatible_reduced",
+    "cursor_states": 9,
+    "root_runs": 6
+  },
+  "initial_actions": [
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 1743019575313815427057966907392,
+      "worst_total": 14736438227653166792399174762496
+    },
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 3486039150627630854115933814784,
+      "worst_total": 16479457802966982219457141669888
+    },
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 6496709326169675682670603927552,
+      "worst_total": 19490127978509027048011811782656
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8952782364111870148070466387968,
+      "worst_total": 21946201016451221513411674243072
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+  "values": [
+    1743019575313815427057966907392,
+    3486039150627630854115933814784,
+    6496709326169675682670603927552,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968,
+    8952782364111870148070466387968
+  ],
+  "certificate_bytes": 2423,
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "baseline": 12993418652339351365341207855104,
+  "internal_seconds": 0.010192957997787744,
+  "process_peak_rss_bytes": 13762560
+}

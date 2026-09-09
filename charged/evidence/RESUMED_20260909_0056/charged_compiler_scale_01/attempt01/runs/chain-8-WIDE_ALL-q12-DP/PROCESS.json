@@ -1,0 +1,84 @@
+{
+  "id": "chain-8-WIDE_ALL-q12-DP",
+  "case_id": "chain-8-WIDE_ALL",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/chain-8-WIDE_ALL-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/chain-8-WIDE_ALL-q12-DP"
+  ],
+  "utc": "2026-09-08T21:29:41.176202+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.02356733297347091,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 5.0458009354770184e-05,
+      "method_import": 0.0008660839812364429,
+      "construct": 0.0001102499954868108,
+      "serialize_write": 0.00015233299927785993,
+      "read_parse": 8.812500163912773e-05
+    },
+    "values": [
+      1267650600228229401496703205376,
+      2059932225370872777432142708736,
+      3169126500570573503741758013440,
+      4753689750855860255612637020160,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552,
+      6496709326169675682670603927552
+    ],
+    "certificate_bytes": 527,
+    "stats": {
+      "cells": 112,
+      "fixed_point_reached": true,
+      "rows": 14,
+      "states": 9
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 10061976639311570874380081692672,
+    "internal_seconds": 0.0012779170065186918,
+    "process_peak_rss_bytes": 16252928
+  },
+  "status": "SUCCESS"
+}

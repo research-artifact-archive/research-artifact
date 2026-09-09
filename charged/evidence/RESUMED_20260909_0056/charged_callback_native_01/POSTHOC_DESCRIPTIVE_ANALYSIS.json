@@ -1,0 +1,58 @@
+{
+  "concurrent_runs": 816,
+  "concurrent_runs_with_failure": 63,
+  "concurrent_failures": 74,
+  "concurrent_external_writes": 3060,
+  "all_trace_action_counts": {
+    "VS": 6747,
+    "P": 2019,
+    "VF": 4320,
+    "CS": 704,
+    "AS": 521,
+    "AF": 499,
+    "CF": 55
+  },
+  "observed_two_job_gap_b1_native": [
+    {
+      "id": "run-002982",
+      "layout": "distinct",
+      "cost": 64,
+      "ceiling": 64,
+      "trace": [
+        "1:CS",
+        "0:P"
+      ]
+    },
+    {
+      "id": "run-002983",
+      "layout": "distinct",
+      "cost": 64,
+      "ceiling": 64,
+      "trace": [
+        "1:CF",
+        "0:CS"
+      ]
+    },
+    {
+      "id": "run-002984",
+      "layout": "colliding",
+      "cost": 64,
+      "ceiling": 64,
+      "trace": [
+        "1:CS",
+        "0:P"
+      ]
+    },
+    {
+      "id": "run-002985",
+      "layout": "colliding",
+      "cost": 64,
+      "ceiling": 64,
+      "trace": [
+        "1:CF",
+        "0:CS"
+      ]
+    }
+  ],
+  "classification": "post-run descriptive counts in predeclared execution groups; no pre-result analysis claim"
+}

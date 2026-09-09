@@ -1,0 +1,520 @@
+[
+  {
+    "id": "unchanged_saturation",
+    "expected_accept": true,
+    "accepted": true,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            5,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        3
+      ],
+      "values": [
+        5
+      ],
+      "nodes": {
+        "1:3": {
+          "mask": 1,
+          "budget": 3,
+          "kind": "bounds",
+          "value": 5
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "premature_saturation",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            5,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        2
+      ],
+      "values": [
+        5
+      ],
+      "nodes": {
+        "1:2": {
+          "mask": 1,
+          "budget": 2,
+          "kind": "bounds",
+          "value": 5
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 117, in get\n    assert set(node) == allowed and actual == expected, (key, actual, expected)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('1:2', 5, 4)\n"
+  },
+  {
+    "id": "wrong_saturation_value",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            5,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        3
+      ],
+      "values": [
+        6
+      ],
+      "nodes": {
+        "1:3": {
+          "mask": 1,
+          "budget": 3,
+          "kind": "bounds",
+          "value": 6
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 117, in get\n    assert set(node) == allowed and actual == expected, (key, actual, expected)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('1:3', 6, 5)\n"
+  },
+  {
+    "id": "zero_premium_saturation",
+    "expected_accept": true,
+    "accepted": true,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        0
+      ],
+      "nodes": {
+        "1:1": {
+          "mask": 1,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 0
+        }
+      }
+    },
+    "error": null
+  },
+  {
+    "id": "wrong_zero_premium",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        1
+      ],
+      "nodes": {
+        "1:1": {
+          "mask": 1,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 1
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 117, in get\n    assert set(node) == allowed and actual == expected, (key, actual, expected)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('1:1', 1, 0)\n"
+  },
+  {
+    "id": "cyclic_saturated_input",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            5,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "budgets": [
+        100
+      ],
+      "values": [
+        10
+      ],
+      "nodes": {
+        "3:100": {
+          "mask": 3,
+          "budget": 100,
+          "kind": "bounds",
+          "value": 10
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 29, in check\n    assert ready, 'cycle'\n           ^^^^^\nAssertionError: cycle\n"
+  },
+  {
+    "id": "missing_unsaturated_node",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            3,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            3,
+            1
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        2
+      ],
+      "nodes": {
+        "1:1": {
+          "mask": 1,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 2
+        },
+        "2:0": {
+          "mask": 2,
+          "budget": 0,
+          "kind": "zero",
+          "value": 0
+        },
+        "2:1": {
+          "mask": 2,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 1
+        },
+        "3:1": {
+          "mask": 3,
+          "budget": 1,
+          "kind": "peak",
+          "value": 2,
+          "job": 0,
+          "peak": 0
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 111, in get\n    previous = get(successor, b - 1)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 51, in get\n    assert key in nodes, ('missing node', key)\n           ^^^^^^^^^^^^\nAssertionError: ('missing node', '1:0')\n"
+  },
+  {
+    "id": "wrong_peak",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            3,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            3,
+            1
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        2
+      ],
+      "nodes": {
+        "1:0": {
+          "mask": 1,
+          "budget": 0,
+          "kind": "zero",
+          "value": 0
+        },
+        "1:1": {
+          "mask": 1,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 2
+        },
+        "2:0": {
+          "mask": 2,
+          "budget": 0,
+          "kind": "zero",
+          "value": 0
+        },
+        "2:1": {
+          "mask": 2,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 1
+        },
+        "3:1": {
+          "mask": 3,
+          "budget": 1,
+          "kind": "peak",
+          "value": 2,
+          "job": 0,
+          "peak": 1
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 103, in get\n    assert point - get(child, k - 1) >= c, ('left peak inequality', key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('left peak inequality', '3:1')\n"
+  },
+  {
+    "id": "extraneous_node",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            3,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            3,
+            1
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        2
+      ],
+      "nodes": {
+        "1:0": {
+          "mask": 1,
+          "budget": 0,
+          "kind": "zero",
+          "value": 0
+        },
+        "1:1": {
+          "mask": 1,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 2
+        },
+        "2:0": {
+          "mask": 2,
+          "budget": 0,
+          "kind": "zero",
+          "value": 0
+        },
+        "2:1": {
+          "mask": 2,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 1
+        },
+        "3:1": {
+          "mask": 3,
+          "budget": 1,
+          "kind": "peak",
+          "value": 2,
+          "job": 0,
+          "peak": 0
+        },
+        "0:99": {
+          "mask": 0,
+          "budget": 99,
+          "kind": "zero",
+          "value": 0
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 124, in check\n    assert set(visited) == set(nodes), 'extraneous certificate nodes'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: extraneous certificate nodes\n"
+  },
+  {
+    "id": "nonmeeting_bounds",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            3,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            3,
+            1
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        1
+      ],
+      "values": [
+        2
+      ],
+      "nodes": {
+        "3:1": {
+          "mask": 3,
+          "budget": 1,
+          "kind": "bounds",
+          "value": 2
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 90, in get\n    assert lower == upper, ('elementary bounds do not meet', key, lower, upper)\n           ^^^^^^^^^^^^^^\nAssertionError: ('elementary bounds do not meet', '3:1', 2, 3)\n"
+  },
+  {
+    "id": "raw_zero_but_effective_positive",
+    "expected_accept": false,
+    "accepted": false,
+    "expected_result_met": true,
+    "artifact": {
+      "schema": "charged-requested-values-certificate-v3-bounds",
+      "input": {
+        "jobs": [
+          [
+            2,
+            0,
+            3,
+            0,
+            2
+          ]
+        ],
+        "edges": []
+      },
+      "budgets": [
+        2
+      ],
+      "values": [
+        0
+      ],
+      "nodes": {
+        "1:2": {
+          "mask": 1,
+          "budget": 2,
+          "kind": "bounds",
+          "value": 0
+        }
+      }
+    },
+    "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/conformance.py\", line 130, in run\n    point_checker.check(artifact)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 122, in check\n    values = [get(full, b) for b in budgets]\n              ^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/point_checker.py\", line 117, in get\n    assert set(node) == allowed and actual == expected, (key, actual, expected)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('1:2', 0, 4)\n"
+  }
+]

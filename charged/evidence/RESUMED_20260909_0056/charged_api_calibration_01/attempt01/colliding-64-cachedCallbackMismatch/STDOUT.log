@@ -1,0 +1,60 @@
+# JMH version: 1.37
+# VM version: JDK 17.0.19, OpenJDK 64-Bit Server VM, 17.0.19+0
+# VM invoker: /opt/homebrew/opt/openjdk@17/bin/java
+# VM options: -Xms256m -Xmx256m -ea
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 200 ms each
+# Measurement: 5 iterations, 200 ms each
+# Timeout: 20 s per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.anonymous.retry.MyBenchmark.cachedCallbackMismatch
+# Parameters: (layout = colliding, length = 64)
+
+# Run progress: 0.00% complete, ETA 00:00:03
+# Fork: 1 of 2
+# Warmup Iteration   1: 78.684 ns/op
+# Warmup Iteration   2: 70.191 ns/op
+# Warmup Iteration   3: 70.455 ns/op
+Iteration   1: 69.129 ns/op
+Iteration   2: 69.016 ns/op
+Iteration   3: 69.412 ns/op
+Iteration   4: 68.787 ns/op
+Iteration   5: 68.659 ns/op
+
+# Run progress: 50.00% complete, ETA 00:00:01
+# Fork: 2 of 2
+# Warmup Iteration   1: 72.298 ns/op
+# Warmup Iteration   2: 64.246 ns/op
+# Warmup Iteration   3: 64.147 ns/op
+Iteration   1: 64.037 ns/op
+Iteration   2: 64.282 ns/op
+Iteration   3: 64.089 ns/op
+Iteration   4: 64.091 ns/op
+Iteration   5: 63.821 ns/op
+
+
+Result "org.anonymous.retry.MyBenchmark.cachedCallbackMismatch":
+  66.532 ±(99.9%) 3.948 ns/op [Average]
+  (min, avg, max) = (63.821, 66.532, 69.412), stdev = 2.611
+  CI (99.9%): [62.584, 70.480] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:03
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                            (layout)  (length)  Mode  Cnt   Score   Error  Units
+MyBenchmark.cachedCallbackMismatch  colliding        64  avgt   10  66.532 ± 3.948  ns/op
+
+Benchmark result is saved to <AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_api_calibration_01/attempt01/colliding-64-cachedCallbackMismatch/JMH.json

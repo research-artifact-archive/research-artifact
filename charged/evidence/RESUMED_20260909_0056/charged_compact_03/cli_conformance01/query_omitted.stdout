@@ -1,0 +1,46 @@
+{
+  "route": "compatible_reduced",
+  "entry": {
+    "kind": "cursor",
+    "value": 0
+  },
+  "baseline": 1,
+  "queries": [
+    {
+      "budget": 0,
+      "excess": 0,
+      "total": 1,
+      "initial": {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 0,
+        "worst_total": 1
+      }
+    },
+    {
+      "budget": 1,
+      "excess": 1,
+      "total": 2,
+      "initial": {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 1,
+        "worst_total": 2
+      }
+    },
+    {
+      "budget": 2,
+      "excess": 2,
+      "total": 3,
+      "initial": {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 2,
+        "worst_total": 3
+      }
+    }
+  ]
+}

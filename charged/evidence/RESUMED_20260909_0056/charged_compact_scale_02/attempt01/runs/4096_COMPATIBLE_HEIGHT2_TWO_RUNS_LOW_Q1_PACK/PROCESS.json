@@ -1,0 +1,81 @@
+{
+  "id": "4096_COMPATIBLE_HEIGHT2_TWO_RUNS_LOW_Q1_PACK",
+  "case_id": "4096_COMPATIBLE_HEIGHT2_TWO_RUNS_LOW",
+  "method": "PACK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/inputs/4096_COMPATIBLE_HEIGHT2_TWO_RUNS_LOW_Q1_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/runs/4096_COMPATIBLE_HEIGHT2_TWO_RUNS_LOW_Q1_PACK"
+  ],
+  "utc": "2026-09-09T00:15:08.458697+00:00",
+  "sampled_peak_rss_bytes": 25903104,
+  "samples": 3,
+  "cold_seconds": 0.19570545898750424,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 0.001972708007087931,
+      "method_import": 0.007851250004023314,
+      "construct": 0.012233415996888652,
+      "serialize_write": 0.004930083989165723,
+      "read_parse": 0.004249249992426485,
+      "check_and_runtime_index": 0.1341083340230398,
+      "query": 1.9166007405146956e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 24574,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 4096,
+        "positive_premium_suffixes": 4096,
+        "local_boundary_checks": 20478,
+        "root_runs": 8192,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 4097,
+      "root_runs": 8192
+    },
+    "initial_actions": [
+      {
+        "job": 5,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 8192,
+        "worst_total": 16789504
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      8192
+    ],
+    "certificate_bytes": 283637,
+    "budgets": [
+      1
+    ],
+    "baseline": 16781312,
+    "internal_seconds": 0.16588795802090317,
+    "process_peak_rss_bytes": 26656768
+  },
+  "status": "SUCCESS"
+}

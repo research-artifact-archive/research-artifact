@@ -1,0 +1,114 @@
+{
+  "id": "chain-12-WIDE_ALL-q12-PEAK",
+  "case_id": "chain-12-WIDE_ALL",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/chain-12-WIDE_ALL-q12-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/chain-12-WIDE_ALL-q12-PEAK"
+  ],
+  "utc": "2026-09-08T21:57:25.792398+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.029794750007567927,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 0.0002482500276528299,
+      "method_import": 0.0028700840193778276,
+      "construct": 0.0009545830253046006,
+      "serialize_write": 0.0003122909984085709,
+      "read_parse": 0.0001720000000204891,
+      "certificate_check": 0.0007716249965596944,
+      "query": 3.33995558321476e-07
+    },
+    "values": [
+      1426106925256758076683791106048,
+      2535301200456458802993406410752,
+      4119864450741745554864285417472,
+      6338253001141147007483516026880,
+      9745063989254513524005905891328,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 18457,
+    "check": {
+      "values": [
+        1426106925256758076683791106048,
+        2535301200456458802993406410752,
+        4119864450741745554864285417472,
+        6338253001141147007483516026880,
+        9745063989254513524005905891328,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720
+      ],
+      "nodes": 158,
+      "kinds": {
+        "zero": 11,
+        "peak": 124,
+        "bounds": 23
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 324,
+      "cache_hits": 1024,
+      "evaluated_nodes": 159,
+      "bound_nodes": 23,
+      "memo_states": 159,
+      "certificate_nodes": 158,
+      "reachable_masks": 11
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.005340750009054318,
+    "process_peak_rss_bytes": 17317888
+  },
+  "status": "SUCCESS"
+}

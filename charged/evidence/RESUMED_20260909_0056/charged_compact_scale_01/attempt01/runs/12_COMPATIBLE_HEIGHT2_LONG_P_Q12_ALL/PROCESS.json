@@ -1,0 +1,187 @@
+{
+  "id": "12_COMPATIBLE_HEIGHT2_LONG_P_Q12_ALL",
+  "case_id": "12_COMPATIBLE_HEIGHT2_LONG_P",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_COMPATIBLE_HEIGHT2_LONG_P_Q12_ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_COMPATIBLE_HEIGHT2_LONG_P_Q12_ALL"
+  ],
+  "utc": "2026-09-08T23:26:19.729459+00:00",
+  "sampled_peak_rss_bytes": 20283392,
+  "samples": 32,
+  "cold_seconds": 1.7448053330008406,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 8.062500273808837e-05,
+      "method_import": 0.008119667007122189,
+      "construct": 0.07171429099980742,
+      "serialize_write": 0.00382345900288783,
+      "read_parse": 0.003537540993420407,
+      "check_and_runtime_index": 1.6303345409978647,
+      "query": 0.00024233400472439826
+    },
+    "check": {
+      "route": "charged_all_ideals",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+      "original_baseline_checked": true,
+      "inherited": {
+        "states": 729,
+        "affine_intervals": 19136,
+        "point_checks": 38037,
+        "basis_point_checks": 26636,
+        "routing_prices_baseline_checked": true,
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+        "compiler_imported": false
+      },
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "charged_all_ideals",
+      "states": 729,
+      "profile_rows": 3980,
+      "basis_lines": 7644
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 39,
+        "worst_total": 273
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 78,
+        "worst_total": 312
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 156,
+        "worst_total": 390
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 312,
+        "worst_total": 546
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 624,
+        "worst_total": 858
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 1248,
+        "worst_total": 1482
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 2496,
+        "worst_total": 2730
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 9984,
+        "worst_total": 10218
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 159744,
+        "worst_total": 159978
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 2555904,
+        "worst_total": 2556138
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 131932585139,
+        "worst_total": 131932585373
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 678604833218,
+        "worst_total": 678604833452
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+    "values": [
+      39,
+      78,
+      156,
+      312,
+      624,
+      1248,
+      2496,
+      9984,
+      159744,
+      2555904,
+      131932585139,
+      678604833218
+    ],
+    "certificate_bytes": 263053,
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 234,
+    "internal_seconds": 1.7178821669949684,
+    "process_peak_rss_bytes": 20561920
+  },
+  "status": "SUCCESS"
+}

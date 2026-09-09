@@ -1,0 +1,13 @@
+# 二threadのsource/APIモデルで全保存記録を再検査
+
+3094 ordinary rowsと2 normal native controlsの計3096行で、固定したforeground/writer microprogramの実行可能な順序が存在した。別の明示状態checkerがその全順序を再生し、fresh read、identity compare、publication、bin lock、AtomicLong allocation、可視log、submit/joinを確認した。元の2 deliberate native mutantsはstatic検査で拒否した。全3098行の期待結果を保持し、UNKNOWN/FAILURE/TIMEOUT/NOT_RUN0。所要2.539秒、最大探索189PC pairs。新native実行0。
+
+12記録対照は、期待する拒否層まで全て一致した。旧strong checkerが受理する移動Bログ、allocation整合化済み移動Bログ、ID5/6交換、colliding-bin構成は、完全な二PC探索でINFEASIBLEとなった。間違ったwriter seedはmodelのRandom列検査で拒否された。対応するdistinct-bin構成はFEASIBLEで証明書再生も成功した。B8のログがK7のログより前に現れる元の合法記録は受理する。ログ順をallocation順へ誤って置き換えてはいない。
+
+11順序証明書対照も全て期待どおり。長さを保った33操作の構成列は、古い値のread、lock重複、allocation順、log順、早いjoin、colliding bin違反を個別に拒否し、合法distinct列を受理した。旧binding/欠落/重複対照も保持した。
+
+この結果は、固定Java producerとJDK17既存key操作を翻訳した有限modelにおける「生成可能な順序の存在」である。実timestampや実際に起きた唯一のscheduleを復元せず、native実行を増やさない。探索と明示再生は別実装だがcanonical source-model translationを共有する。INFEASIBLEは探索閉包の全列挙による判定で、その閉包の別証明書は出力しない。作者側source audit・値再構成・料金検査と併用する。
+
+旧native RAW SHA-256:9c2a4149b747b19b8c893537500d55bb7f254645c9e710880e7da6882946f49b。
+VERIFICATION SHA-256:16e6d8d37302bec0b6b32836367894c75f4201b125d59b6c1ec911a1aeaac205。
+CERTIFICATES SHA-256:13923248f4d2ec6c10a97dc319681ede0f1ce48cc70344288b77c7064a7ed035。

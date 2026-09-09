@@ -1,0 +1,187 @@
+{
+  "id": "12_COMPATIBLE_HEIGHT2_WIDE_Q12_ALL",
+  "case_id": "12_COMPATIBLE_HEIGHT2_WIDE",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_COMPATIBLE_HEIGHT2_WIDE_Q12_ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_COMPATIBLE_HEIGHT2_WIDE_Q12_ALL"
+  ],
+  "utc": "2026-09-08T23:26:38.366208+00:00",
+  "sampled_peak_rss_bytes": 21053440,
+  "samples": 12,
+  "cold_seconds": 0.6680824579962064,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 7.124998955987394e-05,
+      "method_import": 0.008225083001889288,
+      "construct": 0.07484512499650009,
+      "serialize_write": 0.004252499988069758,
+      "read_parse": 0.0037406250194180757,
+      "check_and_runtime_index": 0.5445940420031548,
+      "query": 0.000259541004197672
+    },
+    "check": {
+      "route": "charged_all_ideals",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+      "original_baseline_checked": true,
+      "inherited": {
+        "states": 729,
+        "affine_intervals": 4980,
+        "point_checks": 5013,
+        "basis_point_checks": 8029,
+        "routing_prices_baseline_checked": true,
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+        "compiler_imported": false
+      },
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "charged_all_ideals",
+      "states": 729,
+      "profile_rows": 3693,
+      "basis_lines": 7137
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 1743019575313815427057966907392,
+        "worst_total": 20282409603651670423947251286016
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 3486039150627630854115933814784,
+        "worst_total": 22025429178965485851005218193408
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 6496709326169675682670603927552,
+        "worst_total": 25036099354507530679559888306176
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 11884224377139650639031592550400,
+        "worst_total": 30423614405477505635920876929024
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+    "values": [
+      1743019575313815427057966907392,
+      3486039150627630854115933814784,
+      6496709326169675682670603927552,
+      11884224377139650639031592550400,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088
+    ],
+    "certificate_bytes": 578801,
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 18539390028337854996889284378624,
+    "internal_seconds": 0.6360505000047851,
+    "process_peak_rss_bytes": 21053440
+  },
+  "status": "SUCCESS"
+}

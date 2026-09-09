@@ -1,0 +1,211 @@
+{
+  "utc": "2026-09-08T23:57:50.555322+00:00",
+  "parameters": {
+    "seed": 202609090841,
+    "old_cases": "all original36 native cases screened by p*delta and compatible edges; retain all screening rows",
+    "fresh_seeded": 16,
+    "budgets": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "layouts": [
+      "distinct",
+      "colliding"
+    ],
+    "concurrent_budget": 3,
+    "concurrent_seeds": [
+      11,
+      23
+    ],
+    "price_limit": 1000000,
+    "manual_cases": [
+      {
+        "id": "mixed-positive-delta-parent",
+        "jobs": [
+          [
+            2,
+            0,
+            1,
+            1,
+            2
+          ],
+          [
+            3,
+            2,
+            1,
+            4,
+            1
+          ],
+          [
+            4,
+            0,
+            3,
+            1,
+            2
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      {
+        "id": "mixed-cached-parent",
+        "jobs": [
+          [
+            1,
+            1,
+            1,
+            3,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            2,
+            3
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "zero-effective-premium",
+        "jobs": [
+          [
+            2,
+            0,
+            1,
+            3,
+            1
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "common-fee-separation",
+        "jobs": [
+          [
+            1,
+            1,
+            1,
+            2,
+            1
+          ],
+          [
+            2,
+            2,
+            1,
+            2,
+            1
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    ],
+    "parser_controls": [
+      "unchanged",
+      "reverse_order",
+      "baseline",
+      "root_mass",
+      "duplicate_schema",
+      "nonpositive_run",
+      "wrong_schema",
+      "price_limit",
+      "zero_premium"
+    ],
+    "parser_errors": {
+      "reverse_order": "non-topological order",
+      "baseline": "baseline mismatch",
+      "root_mass": "root premium mass",
+      "duplicate_schema": "duplicate or malformed compact row",
+      "nonpositive_run": "run ordering",
+      "wrong_schema": "compact schema",
+      "price_limit": "bounded native price domain"
+    },
+    "record_controls": [
+      "unchanged_cf",
+      "wrong_failure_epoch",
+      "failed_output_as_completed",
+      "wrong_fee",
+      "wrong_ceiling",
+      "wrong_selected_mode",
+      "under_counted_write",
+      "wrong_writer_seed"
+    ],
+    "record_reason_prefixes": {
+      "wrong_failure_epoch": "",
+      "failed_output_as_completed": "",
+      "wrong_fee": "('fee accounting',",
+      "wrong_ceiling": "('bound',",
+      "wrong_selected_mode": "",
+      "under_counted_write": "",
+      "wrong_writer_seed": "writer Random sequence differs"
+    },
+    "sequence_controls": [
+      "unchanged",
+      "missing_step",
+      "duplicate_step",
+      "wrong_raw_binding",
+      "wrong_input_binding"
+    ]
+  },
+  "sources": {
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/unrestricted_reference.py": "6a5b8884b8bda2b9f796af47df9e8adcf469ca98a458d614da807c08a1f30d7d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/fixed_policy.py": "6b1859532e4ca37f47a08904e65565cf6e41dd913ccb9a28df3dbc1898377011",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py": "ac9b567598ac38559996b9ee212717da09ae3687b419708c8ae1ca6e1c4a9af2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/sequence_checker.py": "c3a1dce63acf051395974bdd582689722e0eb8cb0c129469af6ef2abf81c4efb",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/model.py": "51086c4c9e6a0a96fe414b0e83da192bf8919238199edcda65618a24dec49c0d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py": "ff185cd1934227af12dcf3d7c97d83d5228c9a553cc9886b4c165ceda0a81326",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py": "407d12ac4fc4fb90c1f2c490d97f9099728f4f466c2c35b1853cc6b735344180",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/search.py": "e9ba4832d9a3a33f6bb69224c7cf9fa81d86ff72c23c74acece65121d9ba9703",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/study.py": "a4e399626b459110e3d6c4c65fc1cb80c8927c019b863bcb0f18135db7de0cec",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/CompactChargedCallbacks.java": "623f1afa318c71ad6288fa47d162b3da379c4fbabda14b7af83f51786d4b34f7",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/PLAN.md": "f6f44343aeb6ec580fb720cb97375764eb45b87e804855bf992a2623dde62ba3",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/CHECKER_SOURCE_BINDING.json": "2b7fbb2502015587340d4edbfd000c8ca9c7971899a8be416399b3815336970b",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/cli_conformance.py": "f568c21a8ad0dcf421d70e6028aa752d93d35cdac2e742dd357357b5bdc1c1bf",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/compact.py": "f10e08768fde7800e209b69b3ca9b4e9a212950fc2fcd1679dc0d01e07ec25a8",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/runtime.py": "cce68322fa2b7f8303b075dde21f1d8e36eed9ad9361ad2a6bd2731f12ce4b93",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/cli.py": "064cdb59df69d77a303060fc75147ecc51a52219f07b541e86282711545dce74",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/verify.py": "71666416d88a25a5ccc9e4a6a57a87c3da012fe8a4651e6969b65e86a7519ab8",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/inherited/dependency_hybrid_check_02/check.py": "6b2ad7f910a2257b541f8cd37c0d95432a1b7ff6835f199cd2f9e0e9222ad3b0",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/inherited/dependency_hybrid_01/hybrid.py": "2c6dc8292a285b7d26c8f8ccbaf68fd37358fff24f1d5b7c844c54b33b81f853",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_03/inherited/dependency_curves_01/curves.py": "400d221a339c31d0ebc6c96977b01cfdbfac513cf03638d7075c21b2904f865f",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_callback_native_01/CASES.json": "ad29ae4760ac8f2b8c0505fa1e4703e7d15f6b494c6d2782fab7a5baf5e696c2",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_curves_02/basis.py": "55aa8d314be3d7f7f221a413a41f80f74243d48134143493e518b50ed5bc979f",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_curves_02/compiler.py": "f8f836161ca7e365ecb8f7f751d9a2312bb2f32435ad7445b7e4d2812b771d88",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_curves_02/checker.py": "990538267902fffbe5a0a724521479c5443a0e2b11cf02b90ae5606c76bba67d",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260907_1942/dependency_curves_01/curves.py": "400d221a339c31d0ebc6c96977b01cfdbfac513cf03638d7075c21b2904f865f"
+  },
+  "native_execution": 0
+}

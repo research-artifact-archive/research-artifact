@@ -1,0 +1,80 @@
+{
+  "id": "independent-8-LONG_PREMIUM-q4-PEAK",
+  "case_id": "independent-8-LONG_PREMIUM",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/independent-8-LONG_PREMIUM-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/independent-8-LONG_PREMIUM-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:51.243541+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 1,
+  "cold_seconds": 0.06359195802360773,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.4042000556364655e-05,
+      "method_import": 0.002412084024399519,
+      "construct": 0.015465083997696638,
+      "serialize_write": 0.0019240000110585243,
+      "read_parse": 0.00134170800447464,
+      "certificate_check": 0.010343292000470683,
+      "query": 4.580069798976183e-07
+    },
+    "values": [
+      22,
+      44,
+      88,
+      176
+    ],
+    "certificate_bytes": 161424,
+    "check": {
+      "values": [
+        22,
+        44,
+        88,
+        176
+      ],
+      "nodes": 2255,
+      "kinds": {
+        "zero": 263,
+        "peak": 1992
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 5199,
+      "cache_hits": 28012,
+      "evaluated_nodes": 2264,
+      "memo_states": 2264,
+      "certificate_nodes": 2255,
+      "reachable_masks": 255
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.031560791976517066,
+    "process_peak_rss_bytes": 19628032
+  },
+  "status": "SUCCESS"
+}

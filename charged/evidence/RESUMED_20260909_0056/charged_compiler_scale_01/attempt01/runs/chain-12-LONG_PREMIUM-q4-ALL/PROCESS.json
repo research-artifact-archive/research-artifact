@@ -1,0 +1,70 @@
+{
+  "id": "chain-12-LONG_PREMIUM-q4-ALL",
+  "case_id": "chain-12-LONG_PREMIUM",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/chain-12-LONG_PREMIUM-q4-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/chain-12-LONG_PREMIUM-q4-ALL"
+  ],
+  "utc": "2026-09-08T21:29:41.751658+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.03866150000249036,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 4.833299317397177e-05,
+      "method_import": 0.004515500011621043,
+      "construct": 0.001102540991269052,
+      "serialize_write": 0.0002619170118123293,
+      "read_parse": 0.00010145799024030566,
+      "certificate_check": 0.008296832995256409,
+      "query": 3.583001671358943e-06
+    },
+    "values": [
+      23,
+      46,
+      92,
+      184
+    ],
+    "certificate_bytes": 5983,
+    "check": {
+      "states": 13,
+      "affine_intervals": 141,
+      "point_checks": 196,
+      "basis_point_checks": 820,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 13,
+      "basis_lines": 163,
+      "profile_rows": 75
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.014345208008307964,
+    "process_peak_rss_bytes": 17383424
+  },
+  "status": "SUCCESS"
+}

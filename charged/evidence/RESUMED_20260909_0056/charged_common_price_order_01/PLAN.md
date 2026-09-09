@@ -1,0 +1,11 @@
+# Common-price independent-order conjecture: fixed exploratory probe
+
+Route SCIENTIFIC. This asks a new restricted structural question, not a rescue of the failed mean-time calibration: for independent jobs with common conditional/callback fees v,k and p_i=lambda*w_i, does fixed ascending w attain the adaptive optimum for every budget? A positive theorem could avoid ideal enumeration in this uniform-resource subclass. The general heterogeneous charged c-sort counterexamples and all old outcomes remain unchanged. No conclusion about actual empirical prices follows.
+
+Fixed authored inputs: n=2,3,4,5; every work multiset from{1,2,4,7}; common lambda in{0,1,2,3,4,6,8,12,16}/4; common v,k in{0,1,3,7}. Scale all quantities by4 to integral charges, set g=0,r=k, and rotate vertex identities deterministically. There are(10+20+35+56)*9*16=17,424 inputs. Families may overlap earlier observed inputs; these are not held-out application samples. Retain every exact generated input before outcomes.
+
+For each input, compile/check both the independent full game and the ascending-w chain, serialize/reload each, and compare their complete canonical root profiles. Also independently compute scalar unrestricted/specified-order Bellman values at b=0..8 (156,816 roots per solver). Any verified smaller full-game value than the sorted-chain value refutes the conjecture, including differences appearing beyond the scalar grid in the complete profiles. Preserve first and all counterexamples; continue the fixed denominator subject to caps. Profile agreement on all inputs still does not prove the universal conjecture.
+
+Controls fixed before outcome: common2-job instance w=(1,2),lambda1,v=k2 scaled by4; ascending order must agree, descending order must be worse, and omitting cached mode from ascending-order control must be worse. These are analytical controls, not native application measurements. All controls have expected numeric excesses8 versus12 atB1 (total36 versus40 after baseline28).
+
+Perinput1second and total240seconds; parent270seconds, absolute04:50UTC. Timeout and invalid are not no-counterexample outcomes. Keep all statuses and missing units; no retries or exclusions. Author-side theorem analysis is separate and does not gain independence from this finite agreement. No human subjects, paidAPIs, native runs or publication mutation.

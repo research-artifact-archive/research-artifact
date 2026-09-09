@@ -1,0 +1,75 @@
+--- ChargedCallbacks.java
++++ CompactChargedCallbacks.java
+@@ -3,7 +3,7 @@
+ import java.util.concurrent.*;
+ import java.util.concurrent.atomic.*;
+ 
+-public final class ChargedCallbacks {
++public final class CompactChargedCallbacks {
+   static int[] ints(String x){return x.equals("-")?new int[0]:Arrays.stream(x.split(",")).mapToInt(Integer::parseInt).toArray();}
+   static String json(Object x){
+     if(x==null)return "null";
+@@ -17,24 +17,49 @@
+   }
+   static Map<String,Object> obj(Object... xs){Map<String,Object> m=new LinkedHashMap<>();for(int i=0;i<xs.length;i+=2)m.put(xs[i].toString(),xs[i+1]);return m;}
+   static final class Input {
+-    String id;int[] w,p,g,v,r,pred;int n;Map<Integer,long[][]> curves=new HashMap<>();
++    String id;int[] w,p,g,v,r,pred,order;int n;Map<Integer,Integer> cursors=new HashMap<>();
++    long[] ends,areas,heights,caps;long total;
+     Input(String line,Path dir)throws Exception{
+-      String[] z=line.split("\t");id=z[0];w=ints(z[1]);p=ints(z[2]);g=ints(z[3]);v=ints(z[4]);r=ints(z[5]);pred=ints(z[6]);n=w.length;
++      String[] z=line.split("\t");if(z.length!=8)throw new IllegalArgumentException("case row");
++      id=z[0];w=ints(z[1]);p=ints(z[2]);g=ints(z[3]);v=ints(z[4]);r=ints(z[5]);pred=ints(z[6]);n=w.length;
+       if(n<1||n>5||p.length!=n||g.length!=n||v.length!=n||r.length!=n||pred.length!=n)throw new IllegalArgumentException("shape");
+-      for(int i=0;i<n;i++)if(w[i]<=0||Math.min(Math.min(p[i],g[i]),Math.min(v[i],r[i]))<0||8*w[i]-Integer.bitCount(pred[i])<=0)throw new IllegalArgumentException("prices");
+-      for(String row:Files.readAllLines(dir.resolve(z[7]))){String[] a=row.split("\t");String[] b=a[1].split(";");long[][] f=new long[b.length][3];for(int j=0;j<b.length;j++){String[] c=b[j].split(":");for(int k=0;k<3;k++)f[j][k]=Long.parseLong(c[k]);}curves.put(Integer.parseInt(a[0]),f);}
++      for(int[] prices:List.of(w,p,g,v,r))for(int price:prices)if(price<0||price>1000000)throw new IllegalArgumentException("bounded native price domain");
++      int full=(1<<n)-1;
++      for(int i=0;i<n;i++)if(w[i]<=0||Math.min(Math.min(p[i],g[i]),Math.min(v[i],r[i]))<0||8*w[i]-Integer.bitCount(pred[i])<=0||pred[i]<0||(pred[i]&~full)!=0||(pred[i]&(1<<i))!=0)throw new IllegalArgumentException("prices or predecessors");
++      Map<String,String> fields=new HashMap<>();
++      for(String row:Files.readAllLines(dir.resolve(z[7]))){String[] a=row.split("\t",-1);if(a.length!=2||fields.put(a[0],a[1])!=null)throw new IllegalArgumentException("duplicate or malformed compact row");}
++      if(!fields.keySet().equals(Set.of("schema","order","runs","baseline"))||!"charged-root-cap-tsv-v1".equals(fields.get("schema")))throw new IllegalArgumentException("compact schema");
++      order=ints(fields.get("order"));if(order.length!=n)throw new IllegalArgumentException("order shape");
++      int mask=full;long previousT=-1,baseline=0;caps=new long[n+1];
++      for(int q=0;q<n;q++){
++        int i=order[q];if(i<0||i>=n||(mask&(1<<i))==0||(pred[i]&mask)!=0)throw new IllegalArgumentException("non-topological order");
++        long k=(long)g[i]+r[i],m=Math.min(v[i],k),delta=k-m,c=w[i]+m;
++        if(p[i]!=0&&delta!=0)throw new IllegalArgumentException("nonzero p times delta");
++        long t=delta==0?Math.min(c,(long)w[i]+p[i]):c;
++        if(t<previousT)throw new IllegalArgumentException("decreasing effective price");previousT=t;
++        cursors.put(mask,q);mask^=1<<i;baseline=Math.addExact(baseline,c);
++      }
++      cursors.put(0,n);if(Long.parseLong(fields.get("baseline"))!=baseline)throw new IllegalArgumentException("baseline mismatch");
++      for(int q=n-1;q>=0;q--){int i=order[q];long delta=(long)g[i]+r[i]-Math.min(v[i],(long)g[i]+r[i]);caps[q]=Math.addExact(caps[q+1],p[i]+delta);}
++      String[] rows=fields.get("runs").equals("-")?new String[0]:fields.get("runs").split(";");ends=new long[rows.length];areas=new long[rows.length];heights=new long[rows.length];
++      long length=0,area=0,last=Long.MAX_VALUE;
++      for(int j=0;j<rows.length;j++){String[] a=rows[j].split(":");if(a.length!=2)throw new IllegalArgumentException("run shape");long h=Long.parseLong(a[0]),count=Long.parseLong(a[1]);if(h<=0||count<=0||(j>0&&h>=last))throw new IllegalArgumentException("run ordering");last=h;length=Math.addExact(length,count);area=Math.addExact(area,Math.multiplyExact(h,count));ends[j]=length;areas[j]=area;heights[j]=h;}
++      total=area;if(total!=caps[0])throw new IllegalArgumentException("root premium mass");
+     }
+-    long value(int mask,int b){long[][] f=curves.get(mask);if(f==null)throw new IllegalArgumentException("missing curve");long[] q=f[0];for(long[] row:f){if(row[0]>b)break;q=row;}return q[1]+(b-q[0])*q[2];}
++    long root(int b){
++      if(b<0)throw new IllegalArgumentException("negative budget");int lo=0,hi=ends.length;
++      while(lo<hi){int mid=(lo+hi)>>>1;if(ends[mid]<=b)lo=mid+1;else hi=mid;}
++      if(lo==ends.length)return total;long before=lo==0?0:ends[lo-1],area=lo==0?0:areas[lo-1];
++      return Math.addExact(area,Math.multiplyExact(heights[lo],b-before));
++    }
++    long value(int mask,int b){Integer q=cursors.get(mask);if(q==null)throw new IllegalArgumentException("not a cursor suffix");return Math.min(root(b),caps[q]);}
+     int[] choose(int mask,int b){
+-      long best=Long.MAX_VALUE;int job=-1,mode=-1;
+-      for(int i=0;i<n;i++)if((mask&(1<<i))!=0&&(pred[i]&mask)==0){
+-        long m=Math.min(v[i],g[i]+r[i]),delta=g[i]+r[i]-m,child=value(mask^(1<<i),b);
+-        long cached=delta+child,fast=child,protectedQ=p[i]+delta+child;
+-        if(b>0){cached=delta+Math.max(child,w[i]+p[i]+value(mask^(1<<i),b-1));fast=Math.max(child,w[i]+m+value(mask,b-1));}
+-        long[] qs={cached,fast,protectedQ};
+-        for(int k=0;k<3;k++)if(qs[k]<best){best=qs[k];job=i;mode=k;}
+-      }
+-      if(job<0||best!=value(mask,b))throw new AssertionError("curve action mismatch");return new int[]{job,mode};
++      Integer q=cursors.get(mask);if(q==null||q==n)throw new IllegalArgumentException("nonterminal cursor required");int i=order[q];
++      long m=Math.min(v[i],(long)g[i]+r[i]),delta=(long)g[i]+r[i]-m,child=value(mask^(1<<i),b);
++      long cached=delta+child,fast=child,protectedQ=p[i]+delta+child;
++      if(b>0){cached=delta+Math.max(child,(long)w[i]+p[i]+value(mask^(1<<i),b-1));fast=Math.max(child,w[i]+m+value(mask,b-1));}
++      long best=protectedQ;int mode=2;if(fast<best){best=fast;mode=1;}if(cached<best){best=cached;mode=0;}
++      if(best!=value(mask,b))throw new AssertionError("original charged choice differs from compact cap");return new int[]{i,mode};
+     }
+     long ceiling(int b){long a=0;for(int i=0;i<n;i++)a+=w[i]+Math.min(v[i],g[i]+r[i]);return 8*(a+value((1<<n)-1,b));}
+   }

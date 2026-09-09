@@ -1,0 +1,137 @@
+[
+  {
+    "id": "unchanged",
+    "expected_accept": true,
+    "expected_error": null,
+    "accepted": true,
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/unchanged"
+    ],
+    "met": true
+  },
+  {
+    "id": "reverse_order",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: non-topological order",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/reverse_order"
+    ],
+    "met": true
+  },
+  {
+    "id": "baseline",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: baseline mismatch",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/baseline"
+    ],
+    "met": true
+  },
+  {
+    "id": "root_mass",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: root premium mass",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/root_mass"
+    ],
+    "met": true
+  },
+  {
+    "id": "duplicate_schema",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: duplicate or malformed compact row",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/duplicate_schema"
+    ],
+    "met": true
+  },
+  {
+    "id": "nonpositive_run",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: run ordering",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/nonpositive_run"
+    ],
+    "met": true
+  },
+  {
+    "id": "wrong_schema",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: compact schema",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/wrong_schema"
+    ],
+    "met": true
+  },
+  {
+    "id": "price_limit",
+    "expected_accept": false,
+    "expected_error": "Exception in thread \"main\" java.lang.IllegalArgumentException: bounded native price domain",
+    "accepted": false,
+    "returncode": 1,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/price_limit"
+    ],
+    "met": true
+  },
+  {
+    "id": "zero_premium",
+    "expected_accept": true,
+    "expected_error": null,
+    "accepted": true,
+    "returncode": 0,
+    "argv": [
+      "/opt/homebrew/opt/openjdk@17/bin/java",
+      "-cp",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/classes",
+      "CompactChargedCallbacks",
+      "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/attempt01/parser_inputs/zero_premium"
+    ],
+    "met": true
+  }
+]

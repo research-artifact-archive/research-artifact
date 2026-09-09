@@ -1,0 +1,11 @@
+# 混合価格コンパクト方策のJava検査（観測後の整理）
+
+固定済み26入力、610 native recordsを全件記録した。通常群は全経路502件＋concurrent104件＝606件で、SUCCESS606、FAILURE/TIMEOUT/INVALID/NOT_RUNは0。208 input--budget--layoutセルすべてで最大経路費用が元価格の固定順序scalar oracle・コンパクト値と一致した。native対照4、record対照8、sequence対照5、parser対照9は固定した期待outcomeと理由を満たした。
+
+元の36 native fixturesを結果前に構造条件で検査し、適合6、不適合30を全行保持。適合6に手作業4＋seed生成16を加えた。半順序に整合する価格条件が入口であり、実行後のoutcome除外ではない。Java変更はInput/selectorとclass名だけで、callback・kernel・writer・trace生成本体は旧版と同一。固定順序oracleは元料金を明示的に使い、別のsource-model feasibility/sequence checkerは既存ソースと同一。
+
+実行前の著者側監査で、対照の元recordが失敗すると全体が中断する実装と、意図しないJVM拒否も対照成功に数える実装を修正した。元recordのSUCCESSとFEASIBLE certificateを要求し、不成立はNOT_RUN。負対照は期待layer/reasonまたはIllegalArgumentExceptionの固定理由まで一致を要求する。変更はnative outcome観測前に固定され、元監査記録も保持した。
+
+raw SHA-256: d0d36c04f67cceb678d89763d1960070e6fb582c075b38c0dbf368adfb98dad7。verification SHA-256: a9c3eb76faac9729798628619ebd48d821045e4deead688187d480552171da4b。source-model searchの最大は105 program-counter pairs、検査0.720957秒。compile/executeと各入力準備は別receiptに記録され、総初回latencyの推定にしない。
+
+これはn<=5・固定価格上限を持つ著者作成Java fixtureにおける方策経路と、固定source translation内の存在的順序の検査である。全Java schedule、実運用頻度、経過時間の改善、独立査読または機械証明を示さない。Pythonのスケーラブル版は任意精度整数を使う。

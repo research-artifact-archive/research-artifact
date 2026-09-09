@@ -1,0 +1,87 @@
+{
+  "id": "fence-8-MIXED-q12-DP",
+  "case_id": "fence-8-MIXED",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/fence-8-MIXED-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/fence-8-MIXED-q12-DP"
+  ],
+  "utc": "2026-09-08T21:57:43.254973+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.03060341702075675,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 6.108402158133686e-05,
+      "method_import": 0.0014020420203451067,
+      "construct": 0.001478667021729052,
+      "serialize_write": 0.00016566697740927339,
+      "read_parse": 3.9583013858646154e-05
+    },
+    "values": [
+      15,
+      25,
+      38,
+      58,
+      82,
+      82,
+      82,
+      82,
+      82,
+      82,
+      82,
+      82
+    ],
+    "certificate_bytes": 256,
+    "stats": {
+      "bounds_preanswered": 7,
+      "cells": 864,
+      "equality_cells": 373,
+      "fixed_point_reached": false,
+      "root_saturation_threshold": 19,
+      "rows": 16,
+      "states": 55
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.003155334008624777,
+    "process_peak_rss_bytes": 16744448
+  },
+  "status": "SUCCESS"
+}

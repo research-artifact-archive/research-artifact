@@ -1,0 +1,94 @@
+{
+  "id": "fence-12-LONG_PREMIUM-q12-ALL",
+  "case_id": "fence-12-LONG_PREMIUM",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-LONG_PREMIUM-q12-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-LONG_PREMIUM-q12-ALL"
+  ],
+  "utc": "2026-09-08T21:30:33.758273+00:00",
+  "sampled_peak_rss_bytes": 20774912,
+  "samples": 17,
+  "cold_seconds": 0.9417348749993835,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 5.804200191050768e-05,
+      "method_import": 0.0050554169865790755,
+      "construct": 0.03915429100743495,
+      "serialize_write": 0.0018269169959239662,
+      "read_parse": 0.0017623750027269125,
+      "certificate_check": 0.8658793330250774,
+      "query": 8.417002391070127e-06
+    },
+    "values": [
+      23,
+      46,
+      92,
+      184,
+      368,
+      736,
+      1472,
+      5888,
+      94208,
+      1507328,
+      94531720899,
+      313532612711
+    ],
+    "certificate_bytes": 177209,
+    "check": {
+      "states": 377,
+      "affine_intervals": 12244,
+      "point_checks": 30034,
+      "basis_point_checks": 22947,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 377,
+      "basis_lines": 4787,
+      "profile_rows": 3094
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.9137855829903856,
+    "process_peak_rss_bytes": 20774912
+  },
+  "status": "SUCCESS"
+}

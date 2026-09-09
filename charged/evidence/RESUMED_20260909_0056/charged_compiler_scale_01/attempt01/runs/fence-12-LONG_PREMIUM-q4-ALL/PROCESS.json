@@ -1,0 +1,70 @@
+{
+  "id": "fence-12-LONG_PREMIUM-q4-ALL",
+  "case_id": "fence-12-LONG_PREMIUM",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-LONG_PREMIUM-q4-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-LONG_PREMIUM-q4-ALL"
+  ],
+  "utc": "2026-09-08T21:30:32.735562+00:00",
+  "sampled_peak_rss_bytes": 20381696,
+  "samples": 17,
+  "cold_seconds": 0.9502472080057487,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 5.512501229532063e-05,
+      "method_import": 0.004522750008618459,
+      "construct": 0.03997554199304432,
+      "serialize_write": 0.0019124170066788793,
+      "read_parse": 0.0017904159903991967,
+      "certificate_check": 0.8763778330176137,
+      "query": 5.3340045269578695e-06
+    },
+    "values": [
+      23,
+      46,
+      92,
+      184
+    ],
+    "certificate_bytes": 177209,
+    "check": {
+      "states": 377,
+      "affine_intervals": 12244,
+      "point_checks": 30034,
+      "basis_point_checks": 22947,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 377,
+      "basis_lines": 4787,
+      "profile_rows": 3094
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.9246799169923179,
+    "process_peak_rss_bytes": 20381696
+  },
+  "status": "SUCCESS"
+}

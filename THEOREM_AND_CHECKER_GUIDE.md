@@ -1,6 +1,6 @@
 # Theorem attribution and certificate checking
 
-This guide links the paper's mathematical results to their inherited foundations and implementation. The numbering refers to the paper snapshot in `package/paper/`; the revised paper retains these theorem numbers. It is a navigation aid, not an additional theorem, an independent review, or a claim of exhaustive literature priority. The full hypotheses and proofs are in the paper. Third-party articles are linked, not redistributed here.
+This guide links the paper's mathematical results to their inherited foundations and implementation. The numbering refers to the preceding zero-fee paper snapshot in `package/paper/`. For the charged revision, use [the research-lineage table](charged/RESEARCH_LINEAGE.md) and [charged theory guide](charged/THEORY_AND_IMPLEMENTATION.md). It is a navigation aid, not an additional theorem, an independent review, or a claim of exhaustive literature priority. The full hypotheses and proofs are in the paper. Third-party articles are linked, not redistributed here.
 
 ## What each result adds
 

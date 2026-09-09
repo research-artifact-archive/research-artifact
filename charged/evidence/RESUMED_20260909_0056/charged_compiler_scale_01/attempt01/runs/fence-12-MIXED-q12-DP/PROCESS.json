@@ -1,0 +1,84 @@
+{
+  "id": "fence-12-MIXED-q12-DP",
+  "case_id": "fence-12-MIXED",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-MIXED-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-MIXED-q12-DP"
+  ],
+  "utc": "2026-09-08T21:30:27.630768+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.04590374999679625,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 5.670799873769283e-05,
+      "method_import": 0.0008780840144027025,
+      "construct": 0.015903791005257517,
+      "serialize_write": 0.00018020797870121896,
+      "read_parse": 4.558300133794546e-05
+    },
+    "values": [
+      15,
+      26,
+      44,
+      69,
+      108,
+      145,
+      145,
+      145,
+      145,
+      145,
+      145,
+      145
+    ],
+    "certificate_bytes": 191,
+    "stats": {
+      "cells": 10528,
+      "fixed_point_reached": true,
+      "rows": 28,
+      "states": 377
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.01707462500780821,
+    "process_peak_rss_bytes": 16433152
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,84 @@
+{
+  "id": "four_chains-12-WIDE_ALL-q12-DP",
+  "case_id": "four_chains-12-WIDE_ALL",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/four_chains-12-WIDE_ALL-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/four_chains-12-WIDE_ALL-q12-DP"
+  ],
+  "utc": "2026-09-08T21:30:16.809610+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.03698325000004843,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 8.145900210365653e-05,
+      "method_import": 0.0009945000056177378,
+      "construct": 0.012087207986041903,
+      "serialize_write": 0.0001990000018849969,
+      "read_parse": 5.250002141110599e-05
+    },
+    "values": [
+      1188422437713965063903159255040,
+      2139160387885137115025686659072,
+      3723723638170423866896565665792,
+      5862884026055560981922252324864,
+      8952782364111870148070466387968,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 537,
+    "stats": {
+      "cells": 6885,
+      "fixed_point_reached": true,
+      "rows": 27,
+      "states": 256
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.013430625025648624,
+    "process_peak_rss_bytes": 16646144
+  },
+  "status": "SUCCESS"
+}

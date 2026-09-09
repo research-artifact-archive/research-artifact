@@ -1,0 +1,94 @@
+{
+  "id": "fence-12-WIDE_ALL-q12-ALL",
+  "case_id": "fence-12-WIDE_ALL",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-WIDE_ALL-q12-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-WIDE_ALL-q12-ALL"
+  ],
+  "utc": "2026-09-08T21:30:47.636412+00:00",
+  "sampled_peak_rss_bytes": 20905984,
+  "samples": 8,
+  "cold_seconds": 0.4351799580035731,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 5.85000088904053e-05,
+      "method_import": 0.004538874985883012,
+      "construct": 0.033713458018610254,
+      "serialize_write": 0.002069041976938024,
+      "read_parse": 0.002391167014138773,
+      "certificate_check": 0.3633413749921601,
+      "query": 9.000010322779417e-06
+    },
+    "values": [
+      1188422437713965063903159255040,
+      2059932225370872777432142708736,
+      3486039150627630854115933814784,
+      5466743213484239293954532573184,
+      8556641551540548460102746636288,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 385926,
+    "check": {
+      "states": 377,
+      "affine_intervals": 4557,
+      "point_checks": 5734,
+      "basis_point_checks": 7781,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 377,
+      "basis_lines": 4438,
+      "profile_rows": 2330
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.4061798330221791,
+    "process_peak_rss_bytes": 20873216
+  },
+  "status": "SUCCESS"
+}

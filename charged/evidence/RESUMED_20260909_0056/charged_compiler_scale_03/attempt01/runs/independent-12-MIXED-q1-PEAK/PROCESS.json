@@ -1,0 +1,70 @@
+{
+  "id": "independent-12-MIXED-q1-PEAK",
+  "case_id": "independent-12-MIXED",
+  "method": "PEAK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/independent-12-MIXED-q1-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/independent-12-MIXED-q1-PEAK"
+  ],
+  "utc": "2026-09-08T21:58:09.166472+00:00",
+  "sampled_peak_rss_bytes": 31637504,
+  "samples": 4,
+  "cold_seconds": 0.23946087498916313,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 8.054202771745622e-05,
+      "method_import": 0.002681999991182238,
+      "construct": 0.126043458993081,
+      "serialize_write": 0.0269981250166893,
+      "read_parse": 0.007643083023140207,
+      "certificate_check": 0.044768915977329016,
+      "query": 5.00003807246685e-07
+    },
+    "values": [
+      15
+    ],
+    "certificate_bytes": 544630,
+    "check": {
+      "values": [
+        15
+      ],
+      "nodes": 8189,
+      "kinds": {
+        "zero": 4094,
+        "peak": 4072,
+        "bounds": 23
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 4072,
+      "cache_hits": 57172,
+      "evaluated_nodes": 8189,
+      "bound_nodes": 23,
+      "memo_states": 8189,
+      "certificate_nodes": 8189,
+      "reachable_masks": 4072
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.20827050000661984,
+    "process_peak_rss_bytes": 31768576
+  },
+  "status": "SUCCESS"
+}

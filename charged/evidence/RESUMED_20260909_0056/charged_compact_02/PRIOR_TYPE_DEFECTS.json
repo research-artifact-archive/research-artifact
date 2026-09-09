@@ -1,0 +1,729 @@
+{
+  "utc": "2026-09-08T23:14:44.481429+00:00",
+  "source_hashes": {
+    "compact.py": "17fd5288822636614e4ff175a5564833beeb4118f7de16c91315830b77934c9c",
+    "runtime.py": "ce170f7843b7a8d5c775ce6d4a466dec14c0fe3e9745f82d5c065317cf94097e",
+    "cli.py": "49ba3cdd4f6b71a660eb88e04d49021342cb3b492f2feef00bb5d0be4c4f595e",
+    "conformance.py": "ca96aadbadadd59f2ae9be061d8e39c264922322c8c606b0b3d60628b811b59c",
+    "verify.py": "e3d06a6d2d1f491edd82e1eb4b4fa7e7615651389bb205f1d11e84e861bb8984"
+  },
+  "observations": [
+    {
+      "id": "external_bool",
+      "accepted": true,
+      "artifact": {
+        "schema": "charged-atomic-policy-v1",
+        "input": {
+          "jobs": [
+            [
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              3,
+              0,
+              0,
+              0
+            ]
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "route": "charged_all_ideals",
+        "baseline": 3,
+        "entry": {
+          "kind": "mask",
+          "value": 3
+        },
+        "backend": {
+          "schema": "experimental-three-mode-input-slope-basis-v1",
+          "input": {
+            "jobs": [
+              [
+                1,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "prices": [
+            [
+              1,
+              2,
+              0,
+              3
+            ],
+            [
+              2,
+              3,
+              0,
+              5
+            ]
+          ],
+          "curves": {
+            "0": [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "2": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                2,
+                3,
+                0
+              ]
+            ],
+            "3": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                4,
+                5,
+                0
+              ]
+            ]
+          },
+          "bases": {
+            "0": {
+              "0": 0
+            },
+            "2": {
+              "0": 3,
+              "5": 0,
+              "2": 0
+            },
+            "3": {
+              "0": 5,
+              "5": 0,
+              "2": 0,
+              "3": 0,
+              "1": 1
+            }
+          },
+          "actions": {
+            "2": {
+              "available": [
+                1
+              ],
+              "fast": 1
+            },
+            "3": {
+              "available": [
+                0
+              ],
+              "fast": 0
+            }
+          },
+          "full": 3,
+          "states": 3,
+          "baseline": 3
+        }
+      },
+      "expected_input": {
+        "jobs": [
+          [
+            true,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "external_float",
+      "accepted": true,
+      "artifact": {
+        "schema": "charged-atomic-policy-v1",
+        "input": {
+          "jobs": [
+            [
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              3,
+              0,
+              0,
+              0
+            ]
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "route": "charged_all_ideals",
+        "baseline": 3,
+        "entry": {
+          "kind": "mask",
+          "value": 3
+        },
+        "backend": {
+          "schema": "experimental-three-mode-input-slope-basis-v1",
+          "input": {
+            "jobs": [
+              [
+                1,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "edges": [
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "prices": [
+            [
+              1,
+              2,
+              0,
+              3
+            ],
+            [
+              2,
+              3,
+              0,
+              5
+            ]
+          ],
+          "curves": {
+            "0": [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "2": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                2,
+                3,
+                0
+              ]
+            ],
+            "3": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                4,
+                5,
+                0
+              ]
+            ]
+          },
+          "bases": {
+            "0": {
+              "0": 0
+            },
+            "2": {
+              "0": 3,
+              "5": 0,
+              "2": 0
+            },
+            "3": {
+              "0": 5,
+              "5": 0,
+              "2": 0,
+              "3": 0,
+              "1": 1
+            }
+          },
+          "actions": {
+            "2": {
+              "available": [
+                1
+              ],
+              "fast": 1
+            },
+            "3": {
+              "available": [
+                0
+              ],
+              "fast": 0
+            }
+          },
+          "full": 3,
+          "states": 3,
+          "baseline": 3
+        }
+      },
+      "expected_input": {
+        "jobs": [
+          [
+            1.0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "backend_bool_edge",
+      "accepted": true,
+      "artifact": {
+        "schema": "charged-atomic-policy-v1",
+        "input": {
+          "jobs": [
+            [
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              3,
+              0,
+              0,
+              0
+            ]
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "route": "charged_all_ideals",
+        "baseline": 3,
+        "entry": {
+          "kind": "mask",
+          "value": 3
+        },
+        "backend": {
+          "schema": "experimental-three-mode-input-slope-basis-v1",
+          "input": {
+            "jobs": [
+              [
+                1,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "edges": [
+              [
+                false,
+                true
+              ]
+            ]
+          },
+          "prices": [
+            [
+              1,
+              2,
+              0,
+              3
+            ],
+            [
+              2,
+              3,
+              0,
+              5
+            ]
+          ],
+          "curves": {
+            "0": [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "2": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                2,
+                3,
+                0
+              ]
+            ],
+            "3": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                4,
+                5,
+                0
+              ]
+            ]
+          },
+          "bases": {
+            "0": {
+              "0": 0
+            },
+            "2": {
+              "0": 3,
+              "5": 0,
+              "2": 0
+            },
+            "3": {
+              "0": 5,
+              "5": 0,
+              "2": 0,
+              "3": 0,
+              "1": 1
+            }
+          },
+          "actions": {
+            "2": {
+              "available": [
+                1
+              ],
+              "fast": 1
+            },
+            "3": {
+              "available": [
+                0
+              ],
+              "fast": 0
+            }
+          },
+          "full": 3,
+          "states": 3,
+          "baseline": 3
+        }
+      },
+      "expected_input": {
+        "jobs": [
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "backend_float_edge",
+      "accepted": true,
+      "artifact": {
+        "schema": "charged-atomic-policy-v1",
+        "input": {
+          "jobs": [
+            [
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              3,
+              0,
+              0,
+              0
+            ]
+          ],
+          "edges": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "route": "charged_all_ideals",
+        "baseline": 3,
+        "entry": {
+          "kind": "mask",
+          "value": 3
+        },
+        "backend": {
+          "schema": "experimental-three-mode-input-slope-basis-v1",
+          "input": {
+            "jobs": [
+              [
+                1,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                2,
+                3,
+                0,
+                0,
+                0
+              ]
+            ],
+            "edges": [
+              [
+                0,
+                1.0
+              ]
+            ]
+          },
+          "prices": [
+            [
+              1,
+              2,
+              0,
+              3
+            ],
+            [
+              2,
+              3,
+              0,
+              5
+            ]
+          ],
+          "curves": {
+            "0": [
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "2": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                2,
+                3,
+                0
+              ]
+            ],
+            "3": [
+              [
+                0,
+                0,
+                2
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                4,
+                5,
+                0
+              ]
+            ]
+          },
+          "bases": {
+            "0": {
+              "0": 0
+            },
+            "2": {
+              "0": 3,
+              "5": 0,
+              "2": 0
+            },
+            "3": {
+              "0": 5,
+              "5": 0,
+              "2": 0,
+              "3": 0,
+              "1": 1
+            }
+          },
+          "actions": {
+            "2": {
+              "available": [
+                1
+              ],
+              "fast": 1
+            },
+            "3": {
+              "available": [
+                0
+              ],
+              "fast": 0
+            }
+          },
+          "full": 3,
+          "states": 3,
+          "baseline": 3
+        }
+      },
+      "expected_input": {
+        "jobs": [
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    }
+  ],
+  "meaning": "The old strict binding accepted each malformed bool/float value; mathematical results are not changed."
+}

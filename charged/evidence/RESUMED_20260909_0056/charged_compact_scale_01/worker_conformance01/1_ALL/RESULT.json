@@ -1,0 +1,99 @@
+{
+  "status": "SUCCESS",
+  "method": "ALL",
+  "phases": {
+    "input": 5.1458016969263554e-05,
+    "method_import": 0.007875208975747228,
+    "construct": 0.0003435830003581941,
+    "serialize_write": 0.00016570801381021738,
+    "read_parse": 7.879099575802684e-05,
+    "check_and_runtime_index": 0.0003191670111846179,
+    "query": 4.737498238682747e-05
+  },
+  "check": {
+    "route": "charged_all_ideals",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+    "original_baseline_checked": true,
+    "inherited": {
+      "states": 4,
+      "affine_intervals": 7,
+      "point_checks": 7,
+      "basis_point_checks": 14,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "charged_all_ideals",
+    "states": 4,
+    "profile_rows": 8,
+    "basis_lines": 12
+  },
+  "initial_actions": [
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 0,
+      "worst_total": 10
+    },
+    {
+      "job": 1,
+      "mode": "cheap",
+      "call": "validation_callback",
+      "excess": 5,
+      "worst_total": 15
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 8,
+      "worst_total": 18
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+  "values": [
+    0,
+    5,
+    8,
+    8,
+    8,
+    8
+  ],
+  "certificate_bytes": 669,
+  "budgets": [
+    0,
+    1,
+    2,
+    3,
+    8,
+    4294967296
+  ],
+  "baseline": 10,
+  "internal_seconds": 0.008888333017239347,
+  "process_peak_rss_bytes": 13811712
+}

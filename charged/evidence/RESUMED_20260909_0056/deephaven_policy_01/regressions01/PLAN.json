@@ -1,0 +1,49 @@
+{
+  "started_utc": "2026-09-08T18:33:41.888445+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:test",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testClockChange",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedAfterSuccessfulConcurrentAttemptWithNestedLockedSnapshot",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedWhenExceptionEscapesConcurrentAttempt",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestTreeTable.testRebase"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "timeout_seconds": 180,
+  "fixed_test_count": 4,
+  "purpose": "Four unchanged upstream regression tests after opt-in policy integration",
+  "failure_policy": "Keep all failures; any changed setup gets a new attempt directory",
+  "predecessor": "deephaven_policy_01/attempt01",
+  "change": "Source bytes now include optional policy hooks",
+  "python_version": "3.10.9 (main, Jun 16 2026, 22:18:24) [Clang 17.0.0 (clang-1700.0.13.5)]",
+  "source_materialization_note": "Earlier extraction receipt mentions Python3.9 incorrectly; observed runtime is3.10.9, also lacking hashlib.file_digest",
+  "java_version": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n",
+  "source_files": [
+    {
+      "name": "ConstructSnapshot.java",
+      "sha256": "3dcfc370e89137c05856ca8eec4d934a7a353c9757f99057b7e11c89fba66771"
+    },
+    {
+      "name": "RetryStudyHooks.java",
+      "sha256": "5fc6a9cc6d59e3580aff138bde4b428c4c984a142dff58a22745261faff94839"
+    },
+    {
+      "name": "HierarchicalTableImpl.java",
+      "sha256": "1d548a2081e106c9d2e44bec743d5341ed0bcbceacab607c10cbad978606335c"
+    }
+  ]
+}

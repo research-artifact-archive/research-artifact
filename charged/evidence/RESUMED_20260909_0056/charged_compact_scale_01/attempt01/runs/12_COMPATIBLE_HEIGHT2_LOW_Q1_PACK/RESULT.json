@@ -1,0 +1,58 @@
+{
+  "status": "SUCCESS",
+  "method": "PACK",
+  "phases": {
+    "input": 7.004098733887076e-05,
+    "method_import": 0.0082014589861501,
+    "construct": 5.445801070891321e-05,
+    "serialize_write": 0.00015662499936297536,
+    "read_parse": 7.924999226815999e-05,
+    "check_and_runtime_index": 0.00032637501135468483,
+    "query": 1.1541997082531452e-05
+  },
+  "check": {
+    "route": "compatible_reduced",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+    "original_baseline_checked": true,
+    "charged_boundary_checks": 55,
+    "inherited": {
+      "violations": [],
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+      "checked_suffixes": 12,
+      "positive_premium_suffixes": 12,
+      "local_boundary_checks": 39,
+      "root_runs": 6,
+      "canonical_protection_first_thresholds": true,
+      "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+      "solver_imports": false,
+      "independent_theorem_proof": false
+    },
+    "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "compatible_reduced",
+    "cursor_states": 13,
+    "root_runs": 6
+  },
+  "initial_actions": [
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 22,
+      "worst_total": 256
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+  "values": [
+    22
+  ],
+  "certificate_bytes": 788,
+  "budgets": [
+    1
+  ],
+  "baseline": 234,
+  "internal_seconds": 0.008906915987608954,
+  "process_peak_rss_bytes": 13762560
+}

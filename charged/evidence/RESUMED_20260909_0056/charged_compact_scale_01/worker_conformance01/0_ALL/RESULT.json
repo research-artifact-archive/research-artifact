@@ -1,0 +1,99 @@
+{
+  "status": "SUCCESS",
+  "method": "ALL",
+  "phases": {
+    "input": 5.754097946919501e-05,
+    "method_import": 0.00846524999360554,
+    "construct": 0.00040029201772995293,
+    "serialize_write": 0.00018058298155665398,
+    "read_parse": 6.570800906047225e-05,
+    "check_and_runtime_index": 0.0003063750045839697,
+    "query": 5.033300840295851e-05
+  },
+  "check": {
+    "route": "charged_all_ideals",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+    "original_baseline_checked": true,
+    "inherited": {
+      "states": 4,
+      "affine_intervals": 7,
+      "point_checks": 7,
+      "basis_point_checks": 12,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "charged_all_ideals",
+    "states": 4,
+    "profile_rows": 8,
+    "basis_lines": 11
+  },
+  "initial_actions": [
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 0,
+      "worst_total": 6
+    },
+    {
+      "job": 1,
+      "mode": "cached",
+      "call": "cached_callback",
+      "excess": 2,
+      "worst_total": 8
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 3,
+      "worst_total": 9
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 3,
+      "worst_total": 9
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 3,
+      "worst_total": 9
+    },
+    {
+      "job": 0,
+      "mode": "protected",
+      "call": "fresh_callback",
+      "excess": 3,
+      "worst_total": 9
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+  "values": [
+    0,
+    2,
+    3,
+    3,
+    3,
+    3
+  ],
+  "certificate_bytes": 659,
+  "budgets": [
+    0,
+    1,
+    2,
+    3,
+    8,
+    4294967296
+  ],
+  "baseline": 6,
+  "internal_seconds": 0.009533457981888205,
+  "process_peak_rss_bytes": 14155776
+}

@@ -1,0 +1,80 @@
+{
+  "id": "fence-12-LONG_PREMIUM-q4-PEAK",
+  "case_id": "fence-12-LONG_PREMIUM",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-LONG_PREMIUM-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-LONG_PREMIUM-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:33.686477+00:00",
+  "sampled_peak_rss_bytes": 21004288,
+  "samples": 1,
+  "cold_seconds": 0.07115933299064636,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.658398731611669e-05,
+      "method_import": 0.00200899998890236,
+      "construct": 0.022311292006634176,
+      "serialize_write": 0.0029030420118942857,
+      "read_parse": 0.002050457987934351,
+      "certificate_check": 0.01703720900695771,
+      "query": 4.999747034162283e-07
+    },
+    "values": [
+      23,
+      46,
+      92,
+      184
+    ],
+    "certificate_bytes": 248991,
+    "check": {
+      "values": [
+        23,
+        46,
+        92,
+        184
+      ],
+      "nodes": 3360,
+      "kinds": {
+        "zero": 384,
+        "peak": 2976
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 7795,
+      "cache_hits": 38876,
+      "evaluated_nodes": 3368,
+      "memo_states": 3368,
+      "certificate_nodes": 3360,
+      "reachable_masks": 376
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.04639799997676164,
+    "process_peak_rss_bytes": 21086208
+  },
+  "status": "SUCCESS"
+}

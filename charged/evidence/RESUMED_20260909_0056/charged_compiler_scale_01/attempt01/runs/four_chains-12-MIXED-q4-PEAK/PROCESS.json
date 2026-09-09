@@ -1,0 +1,80 @@
+{
+  "id": "four_chains-12-MIXED-q4-PEAK",
+  "case_id": "four_chains-12-MIXED",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/four_chains-12-MIXED-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/four_chains-12-MIXED-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:00.760523+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 1,
+  "cold_seconds": 0.06333641600213014,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 7.04580161254853e-05,
+      "method_import": 0.0021343329863157123,
+      "construct": 0.014159125013975427,
+      "serialize_write": 0.0020467919821385294,
+      "read_parse": 0.0013741250149905682,
+      "certificate_check": 0.010414916003355756,
+      "query": 4.5797787606716156e-07
+    },
+    "values": [
+      15,
+      27,
+      47,
+      74
+    ],
+    "certificate_bytes": 168624,
+    "check": {
+      "values": [
+        15,
+        27,
+        47,
+        74
+      ],
+      "nodes": 2281,
+      "kinds": {
+        "zero": 263,
+        "peak": 2018
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 4776,
+      "cache_hits": 23865,
+      "evaluated_nodes": 2288,
+      "memo_states": 2288,
+      "certificate_nodes": 2281,
+      "reachable_masks": 255
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.030221666995203122,
+    "process_peak_rss_bytes": 19677184
+  },
+  "status": "SUCCESS"
+}

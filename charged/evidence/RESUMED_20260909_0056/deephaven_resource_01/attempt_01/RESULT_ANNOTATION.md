@@ -1,0 +1,1 @@
+Compilation stopped before tests: the study imported OutOfBandTest from the wrong package. Six primary executions are NOT_RUN. Copied upstream XML may be stale from baseline_02 and is not a fresh regression result. The exact erroneous source is retained in sources/. The corrected import is a development successor, not a replacement scientific outcome.

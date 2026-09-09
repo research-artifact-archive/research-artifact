@@ -1,0 +1,87 @@
+{
+  "id": "12_INDEPENDENT_WIDE_Q12_DP",
+  "case_id": "12_INDEPENDENT_WIDE",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_INDEPENDENT_WIDE_Q12_DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_INDEPENDENT_WIDE_Q12_DP"
+  ],
+  "utc": "2026-09-08T23:26:09.719553+00:00",
+  "sampled_peak_rss_bytes": 19677184,
+  "samples": 3,
+  "cold_seconds": 0.21228504201280884,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 6.500000017695129e-05,
+      "method_import": 0.0014166659966576844,
+      "construct": 0.1821245420142077,
+      "serialize_write": 0.0002553329977672547,
+      "read_parse": 0.000254084006883204
+    },
+    "values": [
+      1743019575313815427057966907392,
+      3486039150627630854115933814784,
+      6496709326169675682670603927552,
+      11884224377139650639031592550400,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088
+    ],
+    "certificate_bytes": 617,
+    "stats": {
+      "states": 4096,
+      "rows": 8,
+      "cells": 32760,
+      "equality_cells": 8834,
+      "fixed_point_reached": false,
+      "bounds_preanswered": 8,
+      "root_saturation_threshold": 15
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 18539390028337854996889284378624,
+    "internal_seconds": 0.18412629098747857,
+    "process_peak_rss_bytes": 19791872
+  },
+  "status": "SUCCESS"
+}

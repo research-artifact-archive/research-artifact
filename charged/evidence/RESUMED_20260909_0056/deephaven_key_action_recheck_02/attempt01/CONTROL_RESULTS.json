@@ -1,0 +1,998 @@
+[
+  {
+    "id": "prior-CONTROL_changed_budget",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 125, in check\n    require((a, c, d) == (budget, failures[j], expected_value), 'policy state/value mismatch')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: policy state/value mismatch\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_deleted_update",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 209, in check\n    require((a, c) == (pending['before'], pending['use_prev']) and b == clock, 'CHECK clock metadata mismatch')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: CHECK clock metadata mismatch\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_excess_work",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 155, in check\n    require(active['work']['K_DIR'] <= 4 and active['work']['V_PARENT'] <= 4\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: source-derived prefix cap violated\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_mixed_epoch",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 98, in check\n    require(len(set(epochs)) == 1, 'mixed epochs in output')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: mixed epochs in output\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_unchanged_action",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 232, in check\n    require((b, c, d) == (3, 4 if a % 2 else 3, 3), 'wrong or unchanged Action mutation')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: wrong or unchanged Action mutation\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_wrong_expanded_size",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 90, in check\n    require(row['expanded_size'] == len(order) == (17 if contracted else 31), 'wrong expanded size')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: wrong expanded size\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_wrong_k_epoch",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 90, in check\n    require(row['expanded_size'] == len(order) == (17 if contracted else 31), 'wrong expanded size')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: wrong expanded size\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_wrong_policy",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 126, in check\n    require(b in (0, 1) and bool(b) == desired(j, budget), 'incorrect policy choice')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: incorrect policy choice\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "prior-CONTROL_wrong_v_epoch",
+    "expected_accept": false,
+    "old_accepted": false,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 14, in check\n    result = legacy.check(row)\n             ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 272, in check\n    require(row['captured_value_epoch'] == successful_v_epoch and epochs[0] == successful_v_epoch\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_01/attempt01/sources/check_trace.py\", line 35, in require\n    raise ValueError(reason)\nValueError: wrong source epoch for successful V body\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "missing_work",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 157, in check\n    require(active['work'] == expected_work, 'normally returned body has missing/extra selected work')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: normally returned body has missing/extra selected work\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "wrong_usePrev",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 122, in check\n    require(b == int(opened) and opened == (a % 2 == 0), 'usePrev differs from frozen source choice')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: usePrev differs from frozen source choice\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "foreground_before_mutation",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 67, in check\n    require(owner == 'W' and kind == 'KEY_UPDATE', 'foreground continued while refresh request pending')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: foreground continued while refresh request pending\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "foreground_before_return",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 72, in check\n    require(state == 'WAIT_RETURN' and owner == 'W' and kind == action,\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: foreground continued after mutation before writer return\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "delayed_cut",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 85, in check\n    require(owner == stage and kind == 'CUT' and (a, b, c, d) == (cut_id, attempts[stage], count, 0),\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: eligible cut did not fire immediately at its hook\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "future_writer_exception",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 144, in check\n    require(not consistent(active['before'], clock, active['use_prev']),\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: exception justified only by a future writer\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "wrong_start_notification",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 64, in check\n    require(c == d == a // 2, 'START notification step')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: START notification step\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "missing_lock_entry",
+    "expected_accept": false,
+    "old_accepted": true,
+    "result": {
+      "accepted": false,
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/study.py\", line 97, in checked\n    return dict(accepted=True, result=strict.check(row))\n                                      ^^^^^^^^^^^^^^^^^\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 114, in check\n    require(kind == 'BEFORE_LOCK' and a == b == c == d == 0, 'missing protected lock entry')\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_key_action_recheck_02/strict.py\", line 18, in require\n    raise ValueError(reason)\nValueError: missing protected lock entry\n"
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "unchanged-3_cross_stage_curve_fast_tie",
+    "expected_accept": true,
+    "old_accepted": true,
+    "result": {
+      "accepted": true,
+      "result": {
+        "id": "3_cross_stage_curve_fast_tie",
+        "policy": "curve_fast_tie",
+        "schedule": "cross_stage",
+        "lambda": 3,
+        "q_bound": 2,
+        "cycles": 2,
+        "failures": 4,
+        "fast_attempts": 6,
+        "protected_bodies": 0,
+        "selected_work": 424,
+        "protected_work": 0,
+        "weighted_cost": 424,
+        "charged_cap": 424,
+        "model_value": 424,
+        "captured_key_epoch": 0,
+        "captured_value_epoch": 2,
+        "expanded_size": 31,
+        "key_updates": [
+          {
+            "index": 131,
+            "epoch": 1,
+            "actions": [
+              3,
+              4,
+              3
+            ]
+          },
+          {
+            "index": 354,
+            "epoch": 2,
+            "actions": [
+              3,
+              3,
+              3
+            ]
+          }
+        ],
+        "aborted_bodies": 0,
+        "issued_cuts": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "bodies": [
+          {
+            "stage": "K",
+            "before": 5,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 3,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "K",
+            "before": 6,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 14,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "V",
+            "before": 6,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 24,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 7,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 136,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 8,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 247,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 9,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 359,
+            "begin_epoch": 2,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          }
+        ],
+        "checks": [
+          {
+            "stage": "K",
+            "failed": true,
+            "before": 5,
+            "after": 6
+          },
+          {
+            "stage": "K",
+            "failed": false,
+            "before": 6,
+            "after": 6
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 6,
+            "after": 7
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 7,
+            "after": 8
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 8,
+            "after": 9
+          },
+          {
+            "stage": "V",
+            "failed": false,
+            "before": 9,
+            "after": 9
+          }
+        ],
+        "decisions": [
+          {
+            "stage": "K",
+            "budget": 4,
+            "fast": true
+          },
+          {
+            "stage": "K",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 2,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 1,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 0,
+            "fast": true
+          }
+        ],
+        "strict_completed_body_count": 6,
+        "strict_synchronization_checked": true,
+        "strict_scope": "fixed harness event order, body totals and captured epochs; not full Java WORK reachability"
+      }
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "unchanged-3_v_end_full_curve_fast_tie",
+    "expected_accept": true,
+    "old_accepted": true,
+    "result": {
+      "accepted": true,
+      "result": {
+        "id": "3_v_end_full_curve_fast_tie",
+        "policy": "curve_fast_tie",
+        "schedule": "v_end_full",
+        "lambda": 3,
+        "q_bound": 1,
+        "cycles": 1,
+        "failures": 1,
+        "fast_attempts": 3,
+        "protected_bodies": 0,
+        "selected_work": 212,
+        "protected_work": 0,
+        "weighted_cost": 212,
+        "charged_cap": 212,
+        "model_value": 316,
+        "captured_key_epoch": 0,
+        "captured_value_epoch": 1,
+        "expanded_size": 31,
+        "key_updates": [
+          {
+            "index": 120,
+            "epoch": 1,
+            "actions": [
+              3,
+              4,
+              3
+            ]
+          }
+        ],
+        "aborted_bodies": 0,
+        "issued_cuts": [
+          true
+        ],
+        "bodies": [
+          {
+            "stage": "K",
+            "before": 5,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 3,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "V",
+            "before": 5,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 13,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 7,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 125,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          }
+        ],
+        "checks": [
+          {
+            "stage": "K",
+            "failed": false,
+            "before": 5,
+            "after": 5
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 5,
+            "after": 7
+          },
+          {
+            "stage": "V",
+            "failed": false,
+            "before": 7,
+            "after": 7
+          }
+        ],
+        "decisions": [
+          {
+            "stage": "K",
+            "budget": 2,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 2,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 1,
+            "fast": true
+          }
+        ],
+        "strict_completed_body_count": 3,
+        "strict_synchronization_checked": true,
+        "strict_scope": "fixed harness event order, body totals and captured epochs; not full Java WORK reachability"
+      }
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "unchanged-3_cross_stage_upstream2",
+    "expected_accept": true,
+    "old_accepted": true,
+    "result": {
+      "accepted": true,
+      "result": {
+        "id": "3_cross_stage_upstream2",
+        "policy": "upstream2",
+        "schedule": "cross_stage",
+        "lambda": 3,
+        "q_bound": 2,
+        "cycles": 2,
+        "failures": 3,
+        "fast_attempts": 4,
+        "protected_bodies": 1,
+        "selected_work": 320,
+        "protected_work": 104,
+        "weighted_cost": 632,
+        "charged_cap": 632,
+        "model_value": 424,
+        "captured_key_epoch": 0,
+        "captured_value_epoch": 2,
+        "expanded_size": 31,
+        "key_updates": [
+          {
+            "index": 131,
+            "epoch": 1,
+            "actions": [
+              3,
+              4,
+              3
+            ]
+          },
+          {
+            "index": 249,
+            "epoch": 2,
+            "actions": [
+              3,
+              3,
+              3
+            ]
+          }
+        ],
+        "aborted_bodies": 0,
+        "issued_cuts": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "bodies": [
+          {
+            "stage": "K",
+            "before": 5,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 3,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "K",
+            "before": 6,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 14,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "V",
+            "before": 6,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 24,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 7,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 136,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 9,
+            "use_prev": 0,
+            "protected": 1,
+            "begin_index": 251,
+            "begin_epoch": 2,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 32,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 104,
+            "cap": 104
+          }
+        ],
+        "checks": [
+          {
+            "stage": "K",
+            "failed": true,
+            "before": 5,
+            "after": 6
+          },
+          {
+            "stage": "K",
+            "failed": false,
+            "before": 6,
+            "after": 6
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 6,
+            "after": 7
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 7,
+            "after": 8
+          }
+        ],
+        "decisions": [
+          {
+            "stage": "K",
+            "budget": 4,
+            "fast": true
+          },
+          {
+            "stage": "K",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 2,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 1,
+            "fast": false
+          }
+        ],
+        "strict_completed_body_count": 5,
+        "strict_synchronization_checked": true,
+        "strict_scope": "fixed harness event order, body totals and captured epochs; not full Java WORK reachability"
+      }
+    },
+    "expected_result_met": true
+  },
+  {
+    "id": "unchanged-3_k_full_v_split_curve_fast_tie",
+    "expected_accept": true,
+    "old_accepted": true,
+    "result": {
+      "accepted": true,
+      "result": {
+        "id": "3_k_full_v_split_curve_fast_tie",
+        "policy": "curve_fast_tie",
+        "schedule": "k_full_v_split",
+        "lambda": 3,
+        "q_bound": 2,
+        "cycles": 2,
+        "failures": 3,
+        "fast_attempts": 5,
+        "protected_bodies": 0,
+        "selected_work": 275,
+        "protected_work": 0,
+        "weighted_cost": 275,
+        "charged_cap": 320,
+        "model_value": 424,
+        "captured_key_epoch": 1,
+        "captured_value_epoch": 2,
+        "expanded_size": 17,
+        "key_updates": [
+          {
+            "index": 10,
+            "epoch": 1,
+            "actions": [
+              3,
+              4,
+              3
+            ]
+          },
+          {
+            "index": 205,
+            "epoch": 2,
+            "actions": [
+              3,
+              3,
+              3
+            ]
+          }
+        ],
+        "aborted_bodies": 0,
+        "issued_cuts": [
+          true,
+          true,
+          true
+        ],
+        "bodies": [
+          {
+            "stage": "K",
+            "before": 5,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 3,
+            "begin_epoch": 0,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "K",
+            "before": 7,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 15,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 4,
+              "V_PARENT": 0,
+              "V_LINK": 0,
+              "V_UNLINK": 0,
+              "V_NODE": 0,
+              "V_CELL": 0
+            },
+            "returned": 1,
+            "selected_work": 4,
+            "cap": 4
+          },
+          {
+            "stage": "V",
+            "before": 7,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 25,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 17,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 89,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 8,
+            "use_prev": 1,
+            "protected": 0,
+            "begin_index": 117,
+            "begin_epoch": 1,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 17,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 89,
+            "cap": 104
+          },
+          {
+            "stage": "V",
+            "before": 9,
+            "use_prev": 0,
+            "protected": 0,
+            "begin_index": 210,
+            "begin_epoch": 2,
+            "exception": false,
+            "work": {
+              "K_DIR": 0,
+              "V_PARENT": 4,
+              "V_LINK": 4,
+              "V_UNLINK": 0,
+              "V_NODE": 17,
+              "V_CELL": 64
+            },
+            "returned": 1,
+            "selected_work": 89,
+            "cap": 104
+          }
+        ],
+        "checks": [
+          {
+            "stage": "K",
+            "failed": true,
+            "before": 5,
+            "after": 7
+          },
+          {
+            "stage": "K",
+            "failed": false,
+            "before": 7,
+            "after": 7
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 7,
+            "after": 8
+          },
+          {
+            "stage": "V",
+            "failed": true,
+            "before": 8,
+            "after": 9
+          },
+          {
+            "stage": "V",
+            "failed": false,
+            "before": 9,
+            "after": 9
+          }
+        ],
+        "decisions": [
+          {
+            "stage": "K",
+            "budget": 4,
+            "fast": true
+          },
+          {
+            "stage": "K",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 3,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 2,
+            "fast": true
+          },
+          {
+            "stage": "V",
+            "budget": 1,
+            "fast": true
+          }
+        ],
+        "strict_completed_body_count": 5,
+        "strict_synchronization_checked": true,
+        "strict_scope": "fixed harness event order, body totals and captured epochs; not full Java WORK reachability"
+      }
+    },
+    "expected_result_met": true
+  }
+]

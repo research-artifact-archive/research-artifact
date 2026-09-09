@@ -1,8 +1,21 @@
-# Compiling Optimal Retry Policies for Dependent Transformations
+# Compiling Optimal Retry Policies with Charged Atomic Calls
 
 Anonymous research artifact for the paper of this title. The package contains the implementations, authored inputs, per-unit outcomes, controllers, certificates, traces, and supporting proof documents used in the paper. It includes unfavorable results and the full recorded denominators. This is an author-provided artifact; publication is not independent certification or evidence of acceptance.
 
-## Start here
+## Charged-call revision
+
+The [charged supplement](charged/README.md) adds the current three-mode compiler, mixed-price cursor reduction, native Java integration, Deephaven source case, and complete retained outcomes. See its [claim map](charged/CLAIM_EVIDENCE_MAP.md), [theory guide](charged/THEORY_AND_IMPLEMENTATION.md), and [theorem-by-theorem research lineage](charged/RESEARCH_LINEAGE.md). The preceding zero-fee package remains unchanged.
+
+```sh
+git clone https://github.com/research-artifact-archive/research-artifact.git
+cd research-artifact
+python3 -B tools/verify_release.py
+python3 -B charged/reproduce.py all --out work/charged-full --timeout 300
+```
+
+Use Python 3.10 or later with assertions enabled. The ten standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 1.2 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. A charged manuscript citing this evidence will be added after public-acquisition replay; the paper currently under `paper/` is the preceding zero-fee revision.
+
+## Preceding zero-fee package
 
 Use Python 3.10 or later with assertions enabled. The standard-library checks need no package installation or network access. The checkout contains approximately 1.5 GB of uncompressed data and more than 100,000 files.
 
@@ -14,10 +27,10 @@ cd research-artifact
 
 The command verifies release hashes and the frozen package, then replays small known-input checks of the latest compiler and supporting-line basis. It writes fresh results under `work/`. A quick check is not the full evaluation and does not replace earlier outcomes or increase scientific sample counts. To obtain an immutable version, check out the commit cited in the paper before running it.
 
-- [Revised paper](paper/main.pdf) and [source/build information](paper/README.md); [frozen pre-publication paper](package/paper/main.pdf) remains preserved.
+- [Preceding zero-fee paper](paper/main.pdf) and [source/build information](paper/README.md); [frozen pre-publication paper](package/paper/main.pdf) remains preserved.
 - [Compiler usage and complete latest replay](package/README.md).
 - [Evidence index](package/EVIDENCE_INDEX.md) and [paper-to-artifact map](PAPER_ARTIFACT_MAP.md).
-- [Theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
+- [Zero-fee theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
 - [Earlier stages and dependency requirements](package/history/v4/README.md).
 - [Rights and provenance](NOTICE.md).
 

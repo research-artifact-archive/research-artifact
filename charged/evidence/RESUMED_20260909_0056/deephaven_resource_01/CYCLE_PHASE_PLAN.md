@@ -1,0 +1,7 @@
+# One real update cycle, two snapshot failures
+
+This new exploratory group has two fixed inputs, preserving the earlier six schedules. Both use the same N31/M3/R16 balanced tree and refreshing key table. The first targets stageK; the second targets stageV. At the first unprotected body entry for the target, the driver starts an actual update cycle with sources unsatisfied and pauses before data updates. At the second unprotected body entry for the same target, it applies the same fixed source/key modifications, marks sources satisfied, flushes notifications and completes that cycle. There are exactly two driver actions and q=1 completed cycle per execution.
+
+Hypothesis: the first body is rejected for a step change, the second uses previous values and is rejected on cycle completion, and the upstream policy then performs a protected body. If this occurs,2q=2 is attained in one request. Actual null-control, failure, invalid, timeout, or differing mode outcomes are preserved rather than forced into this expected trace. No logical clock or result is fabricated. The previous source-progress counterexample remains unrepaired; this group uses only row keys0..30. All waits are bounded and cleanup completes an open test cycle before shutting down its foreground executor.
+
+The exact Java input is `TestRetryCyclePhases.java`. The driver and unchanged production-instrumentation hashes are captured before running. Run only the two named JUnit methods; they are author diagnostic application executions, not a final performance comparison or source-wide proof.

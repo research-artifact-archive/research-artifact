@@ -1,0 +1,112 @@
+{
+  "started_utc": "2026-09-08T17:53:14.474142+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryResourceStudy",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestTreeTable.testRebase",
+    ":engine-table:test",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testClockChange",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedAfterSuccessfulConcurrentAttemptWithNestedLockedSnapshot",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedWhenExceptionEscapesConcurrentAttempt"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "timeout_seconds": 600,
+  "exploratory_cases": [
+    "none",
+    "k_before",
+    "k_after",
+    "v_before",
+    "v_after",
+    "both"
+  ],
+  "upstream_regression_count": 4,
+  "files": [
+    {
+      "name": "ConstructSnapshot.java",
+      "sha256": "6c05500ad2c75b6b1fd78b6cda0a1d76424b60229184b2d274d648472d1386c6"
+    },
+    {
+      "name": "ConstructSnapshot.java.patch",
+      "sha256": "aeb13b2186c5577a6bfdbfd7d818a016c7276b5cacfaa2d7be3ce3ffcafb5b39"
+    },
+    {
+      "name": "HierarchicalTableImpl.java",
+      "sha256": "1d548a2081e106c9d2e44bec743d5341ed0bcbceacab607c10cbad978606335c"
+    },
+    {
+      "name": "HierarchicalTableImpl.java.patch",
+      "sha256": "3c37d84e28e2c8a22a1b69aad2cbc84eef420cee64bdcaca7cc912eedb91478c"
+    },
+    {
+      "name": "INSTRUMENTATION_RECEIPT.json",
+      "sha256": "badc42b692e000761f5cbe9bddf5201e02f11b2c084d77cc4459eaa711beeab2"
+    },
+    {
+      "name": "PLAN.md",
+      "sha256": "58feab5ddcf6c5222c3e14998e97a96d01185a5a4dfca4bfef79e679e8544cfc"
+    },
+    {
+      "name": "RetryStudyHooks.java",
+      "sha256": "718a5264d57179a6d45e6da4f5717dad65404ab7835ebafb6f07f3900509f706"
+    },
+    {
+      "name": "TestRetryResourceStudy.java",
+      "sha256": "8bc1f87e1ce17fb85839c3e79c3c0b1d7591e1342dec71eaec6762936007935c"
+    },
+    {
+      "name": "instrument.py",
+      "sha256": "dd3b65b876f081944d59ec0cd528881f6190946b0bfc48a73109604364bd5717"
+    },
+    {
+      "name": "run.py",
+      "sha256": "eb1e12662b293552d0dee4bd2d955564876470a41fe75d8d22f5d718c88b5b6d"
+    }
+  ],
+  "change_reason": "Correct test category import to io.deephaven.test.types.OutOfBandTest; six schedules and production instrumentation unchanged",
+  "exit_code": 0,
+  "status": "SUCCESS",
+  "observed_scientific_rows": 6,
+  "fresh_suites": [
+    {
+      "name": "io.deephaven.engine.table.impl.remote.TestConstructSnapshot",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "54a544b343bd6d3358bd12ba29eea30d7f6c348cdbb1158d727efd0a99182453"
+    },
+    {
+      "name": "io.deephaven.engine.table.impl.TestRetryResourceStudy",
+      "tests": "6",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "3a1302d285d8e0283720fdd2faf32cec1df24e2bb893c656217ac7b2197f50d4"
+    },
+    {
+      "name": "io.deephaven.engine.table.impl.TestTreeTable",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "sha256": "3ae4baa7aadae6769a8ed97ad4222d7e79e6cb6fe04c06ff08fcbb571883f33e"
+    }
+  ],
+  "raw_sha256": "bf795c00d6ab00778b427db7d295131786edfa5cde4a07e1f3c745c311a7cdb6",
+  "ended_utc": "2026-09-08T17:53:33.264780+00:00"
+}

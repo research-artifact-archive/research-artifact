@@ -1,0 +1,81 @@
+{
+  "id": "512_INDEPENDENT_TWO_RUNS_WIDE_Q1_PACK",
+  "case_id": "512_INDEPENDENT_TWO_RUNS_WIDE",
+  "method": "PACK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/inputs/512_INDEPENDENT_TWO_RUNS_WIDE_Q1_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/runs/512_INDEPENDENT_TWO_RUNS_WIDE_Q1_PACK"
+  ],
+  "utc": "2026-09-09T00:11:42.143071+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.05351299999165349,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 0.0003250419977121055,
+      "method_import": 0.00812333298381418,
+      "construct": 0.001368208002531901,
+      "serialize_write": 0.0008982919971458614,
+      "read_parse": 0.0007120000082068145,
+      "check_and_runtime_index": 0.015691958979004994,
+      "query": 1.504199462942779e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 3070,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 512,
+        "positive_premium_suffixes": 512,
+        "local_boundary_checks": 2558,
+        "root_runs": 1024,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 513,
+      "root_runs": 1024
+    },
+    "initial_actions": [
+      {
+        "job": 5,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 81129638414606681695789005144064,
+        "worst_total": 20890881891761220536665668824596480
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      81129638414606681695789005144064
+    ],
+    "certificate_bytes": 143689,
+    "budgets": [
+      1
+    ],
+    "baseline": 20809752253346613854969879819452416,
+    "internal_seconds": 0.027227374986978248,
+    "process_peak_rss_bytes": 15663104
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,70 @@
+{
+  "id": "four_chains-8-LONG_PREMIUM-q4-ALL",
+  "case_id": "four_chains-8-LONG_PREMIUM",
+  "method": "ALL",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/four_chains-8-LONG_PREMIUM-q4-ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/four_chains-8-LONG_PREMIUM-q4-ALL"
+  ],
+  "utc": "2026-09-08T21:29:51.327140+00:00",
+  "sampled_peak_rss_bytes": 17498112,
+  "samples": 2,
+  "cold_seconds": 0.1166072080086451,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 4.5833003241568804e-05,
+      "method_import": 0.004965041996911168,
+      "construct": 0.004412125010276213,
+      "serialize_write": 0.00043766701128333807,
+      "read_parse": 0.0002820419904310256,
+      "certificate_check": 0.07512808399042115,
+      "query": 3.875000402331352e-06
+    },
+    "values": [
+      22,
+      44,
+      88,
+      176
+    ],
+    "certificate_bytes": 26519,
+    "check": {
+      "states": 81,
+      "affine_intervals": 1612,
+      "point_checks": 3616,
+      "basis_point_checks": 2487,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "stats": {
+      "states": 81,
+      "basis_lines": 693,
+      "profile_rows": 458
+    },
+    "certificate_scope": "ALL_BUDGET_BELLMAN_PRICES_ROUTING_BASIS",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 127,
+    "internal_seconds": 0.0852957500028424,
+    "process_peak_rss_bytes": 17580032
+  },
+  "status": "SUCCESS"
+}

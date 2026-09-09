@@ -1,0 +1,1171 @@
+[
+  {
+    "id": "unchanged_cf",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 64,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": true,
+    "expected_status": "FEASIBLE",
+    "expected_layer": null,
+    "result": {
+      "status": "FEASIBLE",
+      "accepted": true,
+      "static": {
+        "cost": 64,
+        "ceiling": 64,
+        "failures": 1,
+        "writes": 1,
+        "kernel_calls": 3,
+        "exact_completion_outputs_checked": true,
+        "per_key_publication_chains_checked": true,
+        "per_attempt_write_witnesses_checked": true,
+        "foreground_attempts": 2,
+        "scope": "Logged API argument/output bindings; causality uses stated source/API semantics, not absent timestamps"
+      },
+      "sequence_check": {
+        "micro_steps": 31,
+        "all_logs": 8,
+        "allocations": 6,
+        "scope": "existential finite producer/API-model sequentialization; shared canonical model translation"
+      },
+      "search_states": 32,
+      "certificate": {
+        "schema": "charged-microprogram-path-v1",
+        "model_sha256": "f422cc20ada132b43f5524c37be9e5fe60b1f68db0dd0b19a4eb8be64f1e2c67",
+        "raw_sha256": "1c9debaad8465c37e4b4d384e14624a23103e99e23d97a2af5ad93b3f594fff3",
+        "input_sha256": "304c058a2122bbfbc9fb4c588e063cff2fc7c0407dec41dbba4018f9b39b32c8",
+        "order": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "met": true
+  },
+  {
+    "id": "wrong_failure_epoch",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 64,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          2
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 44, in verify_run\n    assert len(failures)==len(set(failures)) and set(failures)<=epochs\nAssertionError\n"
+    },
+    "met": true
+  },
+  {
+    "id": "failed_output_as_completed",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 64,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        3,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 39, in verify_run\n    assert len(done)==n and row['completed']==[done[i] for i in range(n)]\nAssertionError\n"
+    },
+    "met": true
+  },
+  {
+    "id": "wrong_fee",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 56,
+      "ceiling": 64,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "('fee accounting', 56, 64)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 65, in verify_run\n    assert row['cost']==cost,('fee accounting',row['cost'],cost)\nAssertionError: ('fee accounting', 56, 64)\n"
+    },
+    "met": true
+  },
+  {
+    "id": "wrong_ceiling",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 72,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "('bound', 64, 64)",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 67, in verify_run\n    assert row['ceiling']==ceiling and cost<=ceiling,('bound',cost,ceiling)\nAssertionError: ('bound', 64, 64)\n"
+    },
+    "met": true
+  },
+  {
+    "id": "wrong_selected_mode",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 64,
+      "writes": 1,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:P",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 51, in verify_run\n    assert mode==2;callbacks[i]+=1;expected_kernels[i]+=1;expected_protected[i]+=1;mask^=1<<i\nAssertionError\n"
+    },
+    "met": true
+  },
+  {
+    "id": "under_counted_write",
+    "run": {
+      "id": "compact-run-000159",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "replay",
+      "budget": 1,
+      "outcomes": "FS",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true,
+      "expected_trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "expected_cost": 64
+    },
+    "row": {
+      "id": "compact-run-000159",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 24,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        1
+      ],
+      "cost": 64,
+      "ceiling": 64,
+      "writes": 0,
+      "failures": [
+        [
+          0,
+          1
+        ]
+      ],
+      "trace": [
+        "0:CF",
+        "1:VS"
+      ],
+      "completed": [
+        5,
+        6
+      ],
+      "live": [
+        5,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": false,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "epoch": 1,
+          "seed": 1887958644
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 4,
+          "id": 5,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 618306404
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            5,
+            -1
+          ],
+          "seed": -812349578
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 166417,
+      "initialization_ns": 2000
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "fixed_policy_and_static",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "fixed_policy_and_static",
+      "reason": "",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 6, in verify\n    try:static=strong.verify_run(case,run,row,fixed_policy.ordinary)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/strong.py\", line 5, in verify_run\n    result=static_check.verify_run(case,run,row,oracle)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/static_check.py\", line 41, in verify_run\n    assert row['writes']==len(epochs)<=run['budget']\nAssertionError\n"
+    },
+    "met": true
+  },
+  {
+    "id": "wrong_writer_seed",
+    "run": {
+      "id": "compact-run-000166",
+      "case": "mixed-cached-parent",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 3,
+      "outcomes": "",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "compact-run-000166",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 16,
+      "protected_calls": [
+        1,
+        1
+      ],
+      "callbacks": [
+        1,
+        1
+      ],
+      "conditionals": [
+        0,
+        0
+      ],
+      "cost": 72,
+      "ceiling": 72,
+      "writes": 3,
+      "failures": [],
+      "trace": [
+        "0:P",
+        "1:P"
+      ],
+      "completed": [
+        3,
+        4
+      ],
+      "live": [
+        7,
+        5
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": 1581170940
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 3,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": -753068980
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 3
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 4,
+          "inside": true,
+          "parents": [
+            3,
+            -1
+          ],
+          "seed": 2072398174
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 4
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 4,
+          "id": 5,
+          "epoch": 1,
+          "seed": -248097407
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 3,
+          "id": 6,
+          "epoch": 1,
+          "seed": -819793820
+        },
+        {
+          "kind": "B",
+          "job": 0,
+          "source": 6,
+          "id": 7,
+          "epoch": 2,
+          "seed": -1019968340
+        }
+      ],
+      "elapsed_ns": 159708,
+      "initialization_ns": 14750
+    },
+    "expected_accept": false,
+    "expected_status": "REJECTED",
+    "expected_layer": "source_model",
+    "result": {
+      "status": "REJECTED",
+      "accepted": false,
+      "layer": "source_model",
+      "reason": "writer Random sequence differs",
+      "error": "Traceback (most recent call last):\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/causal.py\", line 9, in verify\n    try:program=model.build(case,run,row)\n  File \"<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_native_01/model.py\", line 171, in build\n    assert [e['job'] for _, e in background] == writer_jobs(run['seed'], n, run['budget']), 'writer Random sequence differs'\nAssertionError: writer Random sequence differs\n"
+    },
+    "met": true
+  }
+]

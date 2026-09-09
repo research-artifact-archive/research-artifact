@@ -1,0 +1,9 @@
+# 保存Java traceの強化再検査
+
+旧RAW SHA256 9c2a4149b747b19b8c893537500d55bb7f254645c9e710880e7da6882946f49b を変更せず、3,094普通記録・4旧controlを再検査した。全普通記録が追加した対応関係を満たし、旧controlも全期待結果。新native実行は0。再検査2.432秒。
+
+各trace操作とforeground K/D列を結び、成功Dが実際の当該操作の出力かを検査した。初期値・背景write・成功foreground出力のsource/resultを各keyの非分岐publication鎖へ結び、最終liveまで確認した。失敗witnessはそのattemptの入力identityを最初に置換する同じkeyの次epochであることを検査し、ログ上の継続anchorとの順序も検査した。
+
+既存run-000364から固定した6新controlsの全期待結果。正常＋非権威stats変更はold/newとも受理。異なるjobのwrite witness、誤ったepoch、失敗時prepared出力の成功Dへの置換、古い最終liveという4変異はoldが全て受理し、newが全て拒否した。旧検査器の不足を結果として保存する。
+
+検査対象は記録されたAPI引数・結果・phaseの対応であり、未記録のread/linearization時刻を復元したとは言わない。区間単射の論証はimmutable identityと実source/API意味論を使用する。任意Java scheduleの全数検査、独立査読、採択・新規性の確定ではない。

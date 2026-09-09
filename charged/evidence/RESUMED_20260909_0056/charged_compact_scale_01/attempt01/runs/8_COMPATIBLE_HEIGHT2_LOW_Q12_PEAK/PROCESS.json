@@ -1,0 +1,114 @@
+{
+  "id": "8_COMPATIBLE_HEIGHT2_LOW_Q12_PEAK",
+  "case_id": "8_COMPATIBLE_HEIGHT2_LOW",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/8_COMPATIBLE_HEIGHT2_LOW_Q12_PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/8_COMPATIBLE_HEIGHT2_LOW_Q12_PEAK"
+  ],
+  "utc": "2026-09-08T23:25:04.567677+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.039261500001885,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.6958000641316175e-05,
+      "method_import": 0.002590916003100574,
+      "construct": 0.0037890000094193965,
+      "serialize_write": 0.0010281669965479523,
+      "read_parse": 0.00038712500827386975,
+      "certificate_check": 0.0030647499952465296,
+      "query": 3.7500285543501377e-07
+    },
+    "values": [
+      22,
+      44,
+      82,
+      113,
+      113,
+      113,
+      113,
+      113,
+      113,
+      113,
+      113,
+      113
+    ],
+    "certificate_bytes": 34653,
+    "check": {
+      "values": [
+        22,
+        44,
+        82,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113,
+        113
+      ],
+      "nodes": 513,
+      "kinds": {
+        "zero": 79,
+        "peak": 289,
+        "bounds": 145
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 587,
+      "cache_hits": 3166,
+      "evaluated_nodes": 514,
+      "bound_nodes": 145,
+      "memo_states": 514,
+      "certificate_nodes": 513,
+      "reachable_masks": 76
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 164,
+    "internal_seconds": 0.010925792012130842,
+    "process_peak_rss_bytes": 13828096
+  },
+  "status": "SUCCESS"
+}

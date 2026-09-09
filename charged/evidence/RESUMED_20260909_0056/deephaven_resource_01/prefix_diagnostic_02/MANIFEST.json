@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryPrefixCounterexample"
+  ],
+  "started_utc": "2026-09-08T18:03:02.915300+00:00",
+  "timeout_seconds": 120,
+  "denominator": 2,
+  "test_sha256": "416fdad3f652a15a3485a4b69afe4bd968f9c31be3095a85565525e2d2f5a093",
+  "predecessor": "prefix_diagnostic_01",
+  "change": "Directly own/close snapshot output chunks on the diagnostic exceptional path; same source and twoinputs"
+}

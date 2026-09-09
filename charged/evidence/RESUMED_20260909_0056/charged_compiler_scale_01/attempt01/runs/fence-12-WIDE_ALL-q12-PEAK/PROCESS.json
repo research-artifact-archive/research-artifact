@@ -1,0 +1,112 @@
+{
+  "id": "fence-12-WIDE_ALL-q12-PEAK",
+  "case_id": "fence-12-WIDE_ALL",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-WIDE_ALL-q12-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-WIDE_ALL-q12-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:43.754819+00:00",
+  "sampled_peak_rss_bytes": 115245056,
+  "samples": 71,
+  "cold_seconds": 3.834107041009702,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.9165991842746735e-05,
+      "method_import": 0.002026292000664398,
+      "construct": 3.6075701249937993,
+      "serialize_write": 0.024382540985243395,
+      "read_parse": 0.019903625012375414,
+      "certificate_check": 0.1431127079995349,
+      "query": 7.909839041531086e-07
+    },
+    "values": [
+      1188422437713965063903159255040,
+      2059932225370872777432142708736,
+      3486039150627630854115933814784,
+      5466743213484239293954532573184,
+      8556641551540548460102746636288,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 2804446,
+    "check": {
+      "values": [
+        1188422437713965063903159255040,
+        2059932225370872777432142708736,
+        3486039150627630854115933814784,
+        5466743213484239293954532573184,
+        8556641551540548460102746636288,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720,
+        11488083564568328951063872798720
+      ],
+      "nodes": 25005,
+      "kinds": {
+        "zero": 486,
+        "peak": 24519
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 4874863,
+      "cache_hits": 10942714,
+      "evaluated_nodes": 150084,
+      "memo_states": 150084,
+      "certificate_nodes": 25005,
+      "reachable_masks": 376
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 3.7973361249896698,
+    "process_peak_rss_bytes": 118538240
+  },
+  "status": "SUCCESS"
+}

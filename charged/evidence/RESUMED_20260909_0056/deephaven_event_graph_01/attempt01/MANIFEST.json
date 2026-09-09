@@ -1,0 +1,73 @@
+{
+  "started_utc": "2026-09-08T19:37:28.529179+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryEventGraph"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "class": "TestRetryEventGraph",
+  "denominator": 12,
+  "timeout_seconds": 180,
+  "reason": "Public EventDrivenUpdateGraph requestRefresh with finite owned request quota and source latches; actual imported profile, same-B local and two-attempt replica, 12 pre-fixed cells",
+  "source_files": [
+    {
+      "name": "ConstructSnapshot.java",
+      "sha256": "d4785df10f321633a941110c72639c1cd7fb91407ab2ad2d500aef47a6265868"
+    },
+    {
+      "name": "HierarchicalTableImpl.java",
+      "sha256": "f6ef6ee838c1bc4e876103ad708b679d3fff8a8315d262940f6ea4d5f1fc3d76"
+    },
+    {
+      "name": "PLAN.md",
+      "sha256": "465a3021a87308e601f6815f69785c0f890b76f71349a55de1997e6bc3500289"
+    },
+    {
+      "name": "RetryStudyHooks.java",
+      "sha256": "0ac68146f36d169059fa85c88a5feff459ae5a8b0ebb394c06b10ddab6563c9a"
+    },
+    {
+      "name": "TestRetryEventGraph.java",
+      "sha256": "07b3410b80dec0c131164ce6340af4e83a397dcd4144a4e921a98dbd5669563c"
+    },
+    {
+      "name": "certificate_3.json",
+      "sha256": "fa83707e3b928e1377ef9877bf1369518b1acf1f0a9621662db10a74a0132af4"
+    },
+    {
+      "name": "check_trace.py",
+      "sha256": "e101d6e172ae9e90610d9e57875437b946bf10603960f10e38dd0128114521eb"
+    },
+    {
+      "name": "profile_3.txt",
+      "sha256": "f696b3c9e88837f4401ff0f1c094593b644257ed15bd9ed1302ec99935c28f52"
+    },
+    {
+      "name": "run_selected.py",
+      "sha256": "4727ff376b92017413c06273d3754c9f65e5f7142f09ab4833b52ce66c4e0402"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/remote/ConstructSnapshot.java",
+      "sha256": "d4785df10f321633a941110c72639c1cd7fb91407ab2ad2d500aef47a6265868"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/remote/RetryStudyHooks.java",
+      "sha256": "0ac68146f36d169059fa85c88a5feff459ae5a8b0ebb394c06b10ddab6563c9a"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/hierarchical/HierarchicalTableImpl.java",
+      "sha256": "f6ef6ee838c1bc4e876103ad708b679d3fff8a8315d262940f6ea4d5f1fc3d76"
+    }
+  ]
+}

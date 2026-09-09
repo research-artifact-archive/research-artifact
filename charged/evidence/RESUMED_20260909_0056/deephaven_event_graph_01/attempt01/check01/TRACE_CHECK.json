@@ -1,0 +1,1650 @@
+{
+  "classification": "author post-outcome checker, not independent evaluation or source proof",
+  "checker_sha256": "e101d6e172ae9e90610d9e57875437b946bf10603960f10e38dd0128114521eb",
+  "raw_sha256": "7b1c9841d1664eaa2cba42bccce6b1c6f1afbfcb712e8da2b2c3134e0e4f5d4d",
+  "denominator": 12,
+  "checked": 12,
+  "errors": [],
+  "controls": [
+    {
+      "mutation": "mixed_epoch",
+      "rejected": true,
+      "reason": "mixed epochs in output"
+    },
+    {
+      "mutation": "deleted_update",
+      "rejected": true,
+      "reason": "CHECK clock metadata mismatch"
+    },
+    {
+      "mutation": "excess_work",
+      "rejected": true,
+      "reason": "source-derived prefix cap violated"
+    },
+    {
+      "mutation": "wrong_policy",
+      "rejected": true,
+      "reason": "incorrect policy choice"
+    },
+    {
+      "mutation": "changed_budget",
+      "rejected": true,
+      "reason": "policy state/value mismatch"
+    }
+  ],
+  "results": [
+    {
+      "id": "3_none_curve_fast_tie",
+      "policy": "curve_fast_tie",
+      "schedule": "none",
+      "lambda": 3,
+      "q_bound": 0,
+      "cycles": 0,
+      "failures": 0,
+      "fast_attempts": 2,
+      "protected_bodies": 0,
+      "selected_work": 108,
+      "protected_work": 0,
+      "weighted_cost": 108,
+      "charged_cap": 108,
+      "model_value": 108,
+      "aborted_bodies": 0,
+      "issued_cuts": [],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 0,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_none_local_budget",
+      "policy": "local_budget",
+      "schedule": "none",
+      "lambda": 3,
+      "q_bound": 0,
+      "cycles": 0,
+      "failures": 0,
+      "fast_attempts": 2,
+      "protected_bodies": 0,
+      "selected_work": 108,
+      "protected_work": 0,
+      "weighted_cost": 108,
+      "charged_cap": 108,
+      "model_value": 108,
+      "aborted_bodies": 0,
+      "issued_cuts": [],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 0,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_none_upstream2",
+      "policy": "upstream2",
+      "schedule": "none",
+      "lambda": 3,
+      "q_bound": 0,
+      "cycles": 0,
+      "failures": 0,
+      "fast_attempts": 2,
+      "protected_bodies": 0,
+      "selected_work": 108,
+      "protected_work": 0,
+      "weighted_cost": 108,
+      "charged_cap": 108,
+      "model_value": 108,
+      "aborted_bodies": 0,
+      "issued_cuts": [],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 0,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_v_end_split_curve_fast_tie",
+      "policy": "curve_fast_tie",
+      "schedule": "v_end_split",
+      "lambda": 3,
+      "q_bound": 1,
+      "cycles": 1,
+      "failures": 2,
+      "fast_attempts": 4,
+      "protected_bodies": 0,
+      "selected_work": 316,
+      "protected_work": 0,
+      "weighted_cost": 316,
+      "charged_cap": 316,
+      "model_value": 316,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 124,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 235,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 5,
+          "after": 6
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 6,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_v_end_split_local_budget",
+      "policy": "local_budget",
+      "schedule": "v_end_split",
+      "lambda": 3,
+      "q_bound": 1,
+      "cycles": 1,
+      "failures": 2,
+      "fast_attempts": 4,
+      "protected_bodies": 0,
+      "selected_work": 316,
+      "protected_work": 0,
+      "weighted_cost": 316,
+      "charged_cap": 316,
+      "model_value": 316,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 124,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 235,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 5,
+          "after": 6
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 6,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_v_end_split_upstream2",
+      "policy": "upstream2",
+      "schedule": "v_end_split",
+      "lambda": 3,
+      "q_bound": 1,
+      "cycles": 1,
+      "failures": 2,
+      "fast_attempts": 3,
+      "protected_bodies": 1,
+      "selected_work": 316,
+      "protected_work": 104,
+      "weighted_cost": 628,
+      "charged_cap": 628,
+      "model_value": 316,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 13,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 124,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 236,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 5,
+          "after": 6
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 6,
+          "after": 7
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": false
+        }
+      ]
+    },
+    {
+      "id": "3_cross_stage_curve_fast_tie",
+      "policy": "curve_fast_tie",
+      "schedule": "cross_stage",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 2,
+      "failures": 4,
+      "fast_attempts": 6,
+      "protected_bodies": 0,
+      "selected_work": 424,
+      "protected_work": 0,
+      "weighted_cost": 424,
+      "charged_cap": 424,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "K",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 14,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 24,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 135,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 8,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 246,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 9,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 357,
+          "begin_epoch": 2,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 6
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 6,
+          "after": 6
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 6,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 7,
+          "after": 8
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 8,
+          "after": 9
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 9,
+          "after": 9
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": true
+        },
+        {
+          "stage": "K",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 0,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_cross_stage_local_budget",
+      "policy": "local_budget",
+      "schedule": "cross_stage",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 0,
+      "failures": 0,
+      "fast_attempts": 0,
+      "protected_bodies": 2,
+      "selected_work": 108,
+      "protected_work": 108,
+      "weighted_cost": 432,
+      "charged_cap": 432,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 4,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 14,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": false
+        },
+        {
+          "stage": "V",
+          "budget": 4,
+          "fast": false
+        }
+      ]
+    },
+    {
+      "id": "3_cross_stage_upstream2",
+      "policy": "upstream2",
+      "schedule": "cross_stage",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 2,
+      "failures": 3,
+      "fast_attempts": 4,
+      "protected_bodies": 1,
+      "selected_work": 320,
+      "protected_work": 104,
+      "weighted_cost": 632,
+      "charged_cap": 632,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "K",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 14,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 6,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 24,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 135,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 9,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 249,
+          "begin_epoch": 2,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 6
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 6,
+          "after": 6
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 6,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 7,
+          "after": 8
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": true
+        },
+        {
+          "stage": "K",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": false
+        }
+      ]
+    },
+    {
+      "id": "3_k_full_v_split_curve_fast_tie",
+      "policy": "curve_fast_tie",
+      "schedule": "k_full_v_split",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 2,
+      "failures": 3,
+      "fast_attempts": 5,
+      "protected_bodies": 0,
+      "selected_work": 320,
+      "protected_work": 0,
+      "weighted_cost": 320,
+      "charged_cap": 320,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "K",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 14,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 24,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 8,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 135,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 9,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 246,
+          "begin_epoch": 2,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 7
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 7,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 7,
+          "after": 8
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 8,
+          "after": 9
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 9,
+          "after": 9
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": true
+        },
+        {
+          "stage": "K",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": true
+        }
+      ]
+    },
+    {
+      "id": "3_k_full_v_split_local_budget",
+      "policy": "local_budget",
+      "schedule": "k_full_v_split",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 0,
+      "failures": 0,
+      "fast_attempts": 0,
+      "protected_bodies": 2,
+      "selected_work": 108,
+      "protected_work": 108,
+      "weighted_cost": 432,
+      "charged_cap": 432,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        false,
+        false,
+        false
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 4,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 14,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": false
+        },
+        {
+          "stage": "V",
+          "budget": 4,
+          "fast": false
+        }
+      ]
+    },
+    {
+      "id": "3_k_full_v_split_upstream2",
+      "policy": "upstream2",
+      "schedule": "k_full_v_split",
+      "lambda": 3,
+      "q_bound": 2,
+      "cycles": 2,
+      "failures": 3,
+      "fast_attempts": 4,
+      "protected_bodies": 1,
+      "selected_work": 320,
+      "protected_work": 104,
+      "weighted_cost": 632,
+      "charged_cap": 632,
+      "model_value": 424,
+      "aborted_bodies": 0,
+      "issued_cuts": [
+        true,
+        true,
+        true
+      ],
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 3,
+          "begin_epoch": 0,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "K",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 14,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "returned": 1,
+          "selected_work": 4,
+          "cap": 4
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "use_prev": 0,
+          "protected": 0,
+          "begin_index": 24,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 8,
+          "use_prev": 1,
+          "protected": 0,
+          "begin_index": 135,
+          "begin_epoch": 1,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        },
+        {
+          "stage": "V",
+          "before": 9,
+          "use_prev": 0,
+          "protected": 1,
+          "begin_index": 247,
+          "begin_epoch": 2,
+          "exception": false,
+          "work": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "returned": 1,
+          "selected_work": 104,
+          "cap": 104
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 7
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 7,
+          "after": 7
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 7,
+          "after": 8
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 8,
+          "after": 9
+        }
+      ],
+      "decisions": [
+        {
+          "stage": "K",
+          "budget": 4,
+          "fast": true
+        },
+        {
+          "stage": "K",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 3,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 2,
+          "fast": true
+        },
+        {
+          "stage": "V",
+          "budget": 1,
+          "fast": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "id": "12_INDEPENDENT_WIDE_Q12_PACK",
+  "case_id": "12_INDEPENDENT_WIDE",
+  "method": "PACK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_INDEPENDENT_WIDE_Q12_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_INDEPENDENT_WIDE_Q12_PACK"
+  ],
+  "utc": "2026-09-08T23:26:09.932545+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.039308167004492134,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 6.845800089649856e-05,
+      "method_import": 0.008001874986803159,
+      "construct": 4.891699063591659e-05,
+      "serialize_write": 0.0001681669964455068,
+      "read_parse": 9.275000775232911e-05,
+      "check_and_runtime_index": 0.00032633397495374084,
+      "query": 7.950002327561378e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 55,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 12,
+        "positive_premium_suffixes": 12,
+        "local_boundary_checks": 39,
+        "root_runs": 6,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 13,
+      "root_runs": 6
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 1743019575313815427057966907392,
+        "worst_total": 20282409603651670423947251286016
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 3486039150627630854115933814784,
+        "worst_total": 22025429178965485851005218193408
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 6496709326169675682670603927552,
+        "worst_total": 25036099354507530679559888306176
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 11884224377139650639031592550400,
+        "worst_total": 30423614405477505635920876929024
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 12518049677253765339779944153088,
+        "worst_total": 31057439705591620336669228531712
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      1743019575313815427057966907392,
+      3486039150627630854115933814784,
+      6496709326169675682670603927552,
+      11884224377139650639031592550400,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088,
+      12518049677253765339779944153088
+    ],
+    "certificate_bytes": 3336,
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 18539390028337854996889284378624,
+    "internal_seconds": 0.008793582994258031,
+    "process_peak_rss_bytes": 13942784
+  },
+  "status": "SUCCESS"
+}

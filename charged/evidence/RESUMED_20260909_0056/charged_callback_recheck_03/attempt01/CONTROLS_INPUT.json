@@ -1,0 +1,3217 @@
+[
+  {
+    "id": "prior-unchanged",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": true,
+    "expected_old_accept": true,
+    "expected_status": "FEASIBLE",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "prior-irrelevant_stats",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333,
+      "untrusted_statistics": {
+        "ignored": -1
+      }
+    },
+    "expected_accept": true,
+    "expected_old_accept": true,
+    "expected_status": "FEASIBLE",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "prior-wrong_failure_jobs",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": false,
+    "expected_status": "REJECTED",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "prior-wrong_failure_epoch",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": false,
+    "expected_status": "REJECTED",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "prior-failed_output_committed",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        13,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 13
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": false,
+    "expected_status": "REJECTED",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "prior-wrong_final_live",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        1,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": false,
+    "expected_status": "REJECTED",
+    "provenance": "previously observed recheck02 control"
+  },
+  {
+    "id": "moved_B_logs",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": true,
+    "expected_status": "INFEASIBLE",
+    "provenance": "source-derived impossible record, fixed before recheck03 outcomes"
+  },
+  {
+    "id": "moved_B_logs_relabelled",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 8,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 9,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 7,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 8,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 8,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": true,
+    "expected_status": "INFEASIBLE",
+    "provenance": "source-derived impossible record, fixed before recheck03 outcomes"
+  },
+  {
+    "id": "allocation_swap_5_6",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 2026090901,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        5,
+        10,
+        14,
+        6
+      ],
+      "live": [
+        5,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 6
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            6
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 5
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            6
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            6
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 6,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": true,
+    "expected_status": "INFEASIBLE",
+    "provenance": "source-derived impossible record, fixed before recheck03 outcomes"
+  },
+  {
+    "id": "wrong_writer_seed",
+    "case": {
+      "id": "fresh-0002",
+      "jobs": [
+        [
+          4,
+          21,
+          152,
+          2,
+          94
+        ],
+        [
+          2,
+          24,
+          71,
+          7,
+          126
+        ],
+        [
+          17,
+          24,
+          184,
+          2,
+          153
+        ],
+        [
+          20,
+          7,
+          174,
+          14,
+          92
+        ]
+      ],
+      "edges": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "stratum": 2,
+      "previously_observed": false,
+      "native_source_input_previously_observed": true
+    },
+    "run": {
+      "id": "run-000364",
+      "case": "fresh-0002",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 4,
+      "outcomes": "",
+      "seed": 0,
+      "mutant": "none",
+      "control": false,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "run-000364",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 496,
+      "protected_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "callbacks": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "conditionals": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "cost": 768,
+      "ceiling": 1632,
+      "writes": 4,
+      "failures": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "trace": [
+        "3:VS",
+        "0:VS",
+        "1:VF",
+        "1:VS",
+        "2:VF",
+        "2:VS"
+      ],
+      "completed": [
+        6,
+        10,
+        14,
+        5
+      ],
+      "live": [
+        6,
+        10,
+        14,
+        12
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -1866857438
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2114411099
+        },
+        {
+          "kind": "I",
+          "job": 2,
+          "id": 3,
+          "seed": -770991920
+        },
+        {
+          "kind": "I",
+          "job": 3,
+          "id": 4,
+          "seed": -1209904720
+        },
+        {
+          "kind": "K",
+          "job": 3,
+          "source": 4,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "seed": -733299728
+        },
+        {
+          "kind": "D",
+          "job": 3,
+          "id": 5
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -271582999
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 6
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 8,
+          "epoch": 1,
+          "seed": -75176712
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 7,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -124182834
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 3,
+          "id": 9,
+          "epoch": 1,
+          "seed": 241175511
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 8,
+          "id": 10,
+          "inside": false,
+          "parents": [
+            -1,
+            -1,
+            -1,
+            5
+          ],
+          "seed": -427247929
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 10
+        },
+        {
+          "kind": "B",
+          "job": 2,
+          "source": 9,
+          "id": 11,
+          "epoch": 2,
+          "seed": -1017289492
+        },
+        {
+          "kind": "B",
+          "job": 3,
+          "source": 5,
+          "id": 12,
+          "epoch": 1,
+          "seed": 1686190544
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 9,
+          "id": 13,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": 699942865
+        },
+        {
+          "kind": "K",
+          "job": 2,
+          "source": 11,
+          "id": 14,
+          "inside": false,
+          "parents": [
+            -1,
+            10,
+            -1,
+            -1
+          ],
+          "seed": -14603294
+        },
+        {
+          "kind": "D",
+          "job": 2,
+          "id": 14
+        }
+      ],
+      "elapsed_ns": 121000,
+      "initialization_ns": 9333
+    },
+    "expected_accept": false,
+    "expected_old_accept": true,
+    "expected_status": "REJECTED",
+    "expected_layer": "model_translation",
+    "expected_reason": "writer Random sequence differs",
+    "provenance": "fixed incorrect source-level Random input"
+  },
+  {
+    "id": "bin_distinct",
+    "case": {
+      "id": "constructed-bin-witness",
+      "jobs": [
+        [
+          4,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          10,
+          1,
+          1,
+          1
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "run": {
+      "id": "constructed-distinct",
+      "case": "constructed-bin-witness",
+      "layout": "distinct",
+      "kind": "concurrent",
+      "budget": 1,
+      "outcomes": "",
+      "seed": 0,
+      "mutant": "none",
+      "control": true,
+      "expected_accept": true
+    },
+    "row": {
+      "id": "constructed-distinct",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 48,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        2
+      ],
+      "cost": 88,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          1,
+          1
+        ]
+      ],
+      "trace": [
+        "0:P",
+        "1:VF",
+        "1:VS"
+      ],
+      "completed": [
+        4,
+        6
+      ],
+      "live": [
+        4,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -2038004752
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 3,
+          "epoch": 1,
+          "seed": -273747068
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 1090310448
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 4
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            4,
+            -1
+          ],
+          "seed": -721076030
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 3,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            4,
+            -1
+          ],
+          "seed": 337748131
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 0,
+      "initialization_ns": 0,
+      "provenance": "constructed logical record; never executed natively"
+    },
+    "expected_accept": true,
+    "expected_old_accept": true,
+    "expected_status": "FEASIBLE",
+    "provenance": "constructed source-model schedule witness"
+  },
+  {
+    "id": "bin_colliding",
+    "case": {
+      "id": "constructed-bin-witness",
+      "jobs": [
+        [
+          4,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          10,
+          1,
+          1,
+          1
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "run": {
+      "id": "constructed-colliding",
+      "case": "constructed-bin-witness",
+      "layout": "colliding",
+      "kind": "concurrent",
+      "budget": 1,
+      "outcomes": "",
+      "seed": 0,
+      "mutant": "none",
+      "control": true,
+      "expected_accept": false
+    },
+    "row": {
+      "id": "constructed-colliding",
+      "status": "SUCCESS",
+      "error": "",
+      "work": 48,
+      "protected_calls": [
+        1,
+        0
+      ],
+      "callbacks": [
+        1,
+        0
+      ],
+      "conditionals": [
+        0,
+        2
+      ],
+      "cost": 88,
+      "ceiling": 88,
+      "writes": 1,
+      "failures": [
+        [
+          1,
+          1
+        ]
+      ],
+      "trace": [
+        "0:P",
+        "1:VF",
+        "1:VS"
+      ],
+      "completed": [
+        4,
+        6
+      ],
+      "live": [
+        4,
+        6
+      ],
+      "events": [
+        {
+          "kind": "I",
+          "job": 0,
+          "id": 1,
+          "seed": -2038004752
+        },
+        {
+          "kind": "I",
+          "job": 1,
+          "id": 2,
+          "seed": 2063848287
+        },
+        {
+          "kind": "B",
+          "job": 1,
+          "source": 2,
+          "id": 3,
+          "epoch": 1,
+          "seed": -273747068
+        },
+        {
+          "kind": "K",
+          "job": 0,
+          "source": 1,
+          "id": 4,
+          "inside": true,
+          "parents": [
+            -1,
+            -1
+          ],
+          "seed": 1090310448
+        },
+        {
+          "kind": "D",
+          "job": 0,
+          "id": 4
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 2,
+          "id": 5,
+          "inside": false,
+          "parents": [
+            4,
+            -1
+          ],
+          "seed": -721076030
+        },
+        {
+          "kind": "K",
+          "job": 1,
+          "source": 3,
+          "id": 6,
+          "inside": false,
+          "parents": [
+            4,
+            -1
+          ],
+          "seed": 337748131
+        },
+        {
+          "kind": "D",
+          "job": 1,
+          "id": 6
+        }
+      ],
+      "elapsed_ns": 0,
+      "initialization_ns": 0,
+      "provenance": "constructed logical record; never executed natively"
+    },
+    "expected_accept": false,
+    "expected_old_accept": true,
+    "expected_status": "INFEASIBLE",
+    "provenance": "constructed source-model schedule witness"
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "schema": "charged-atomic-policy-v1",
+  "input": {
+    "jobs": [
+      [
+        5,
+        15,
+        0,
+        18,
+        2
+      ],
+      [
+        9,
+        1,
+        2,
+        18,
+        0
+      ],
+      [
+        18,
+        3,
+        2,
+        23,
+        0
+      ]
+    ],
+    "edges": [
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "route": "compatible_reduced",
+  "baseline": 38,
+  "entry": {
+    "kind": "cursor",
+    "value": 0
+  },
+  "backend": {
+    "schema": "dag-retry-ordered-cursor-v1",
+    "input": {
+      "cp": [
+        [
+          7,
+          15
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          20,
+          3
+        ]
+      ],
+      "edges": [
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "route": "ordered",
+    "order": [
+      0,
+      1,
+      2
+    ],
+    "protect_at_budget": [
+      3,
+      1,
+      1
+    ],
+    "value_slopes": [
+      [
+        7,
+        2
+      ],
+      [
+        5,
+        1
+      ]
+    ],
+    "completion_state": "cursor",
+    "normal_cost": 37,
+    "runtime_synthesis_calls": 0
+  }
+}

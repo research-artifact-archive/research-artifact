@@ -1,0 +1,86 @@
+{
+  "id": "32768_INDEPENDENT_LONG_P_Q12_DP",
+  "case_id": "32768_INDEPENDENT_LONG_P",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/32768_INDEPENDENT_LONG_P_Q12_DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/32768_INDEPENDENT_LONG_P_Q12_DP"
+  ],
+  "utc": "2026-09-08T23:43:37.917580+00:00",
+  "sampled_peak_rss_bytes": 26591232,
+  "samples": 1,
+  "cold_seconds": 0.07880258397199214,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 0.012713792006252334,
+      "method_import": 0.00147462502354756,
+      "construct": 0.03356899999198504,
+      "serialize_write": 0.000219000008655712,
+      "read_parse": 4.7959008952602744e-05
+    },
+    "values": [
+      40,
+      80,
+      160,
+      320,
+      640,
+      1280,
+      2560,
+      10240,
+      163840,
+      2621440,
+      171798691840,
+      2111075211706341
+    ],
+    "certificate_bytes": 288,
+    "stats": {
+      "states": 0,
+      "rows": 0,
+      "cells": 0,
+      "fixed_point_reached": false,
+      "bounds_preanswered": 12,
+      "root_saturation_threshold": 128948940318653
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 688125,
+    "internal_seconds": 0.051585584005806595,
+    "process_peak_rss_bytes": 29753344
+  },
+  "status": "SUCCESS"
+}

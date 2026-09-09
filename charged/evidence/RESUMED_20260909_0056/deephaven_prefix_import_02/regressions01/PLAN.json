@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-09-08T19:14:56.906462+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:test",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testClockChange",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedAfterSuccessfulConcurrentAttemptWithNestedLockedSnapshot",
+    "--tests",
+    "io.deephaven.engine.table.impl.remote.TestConstructSnapshot.testLockReleasedWhenExceptionEscapesConcurrentAttempt",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestTreeTable.testRebase",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryMaximumKeyRepair"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "timeout_seconds": 180,
+  "expected_test_count": 10,
+  "purpose": "Four upstream regressions and six preserved MAX-key repair controls after strict hooks; no new deployment claim",
+  "source_hashes": {
+    "ConstructSnapshot.java": "d4785df10f321633a941110c72639c1cd7fb91407ab2ad2d500aef47a6265868",
+    "HierarchicalTableImpl.java": "f6ef6ee838c1bc4e876103ad708b679d3fff8a8315d262940f6ea4d5f1fc3d76",
+    "RetryStudyHooks.java": "0ac68146f36d169059fa85c88a5feff459ae5a8b0ebb394c06b10ddab6563c9a"
+  }
+}

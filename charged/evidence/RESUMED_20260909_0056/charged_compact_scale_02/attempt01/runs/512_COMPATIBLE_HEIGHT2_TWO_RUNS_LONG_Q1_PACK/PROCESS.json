@@ -1,0 +1,81 @@
+{
+  "id": "512_COMPATIBLE_HEIGHT2_TWO_RUNS_LONG_Q1_PACK",
+  "case_id": "512_COMPATIBLE_HEIGHT2_TWO_RUNS_LONG",
+  "method": "PACK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/inputs/512_COMPATIBLE_HEIGHT2_TWO_RUNS_LONG_Q1_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_02/attempt01/runs/512_COMPATIBLE_HEIGHT2_TWO_RUNS_LONG_Q1_PACK"
+  ],
+  "utc": "2026-09-09T00:12:38.725058+00:00",
+  "sampled_peak_rss_bytes": 15450112,
+  "samples": 1,
+  "cold_seconds": 0.061768957995809615,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 0.00030266601243056357,
+      "method_import": 0.008353417011676356,
+      "construct": 0.0014990000054240227,
+      "serialize_write": 0.0008206249913200736,
+      "read_parse": 0.0005497909733094275,
+      "check_and_runtime_index": 0.018310166982701048,
+      "query": 1.533300383016467e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 3582,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 512,
+        "positive_premium_suffixes": 512,
+        "local_boundary_checks": 2558,
+        "root_runs": 1024,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 513,
+      "root_runs": 1024
+    },
+    "initial_actions": [
+      {
+        "job": 5,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 1024,
+        "worst_total": 263680
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      1024
+    ],
+    "certificate_bytes": 50050,
+    "budgets": [
+      1
+    ],
+    "baseline": 262656,
+    "internal_seconds": 0.029934541002148762,
+    "process_peak_rss_bytes": 15417344
+  },
+  "status": "SUCCESS"
+}

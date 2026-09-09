@@ -1,0 +1,105 @@
+{
+  "started_utc": "2026-09-08T18:13:13.058534+00:00",
+  "argv": [
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/jdk21/jdk-21.0.12.1+1/Contents/Home/bin/java",
+    "-classpath",
+    "gradle/wrapper/gradle-wrapper.jar",
+    "org.gradle.wrapper.GradleWrapperMain",
+    "--no-daemon",
+    "--no-scan",
+    "--max-workers=2",
+    "--gradle-user-home",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/gradle-home",
+    "-PmaxHeapSize=2g",
+    ":engine-table:testOutOfBand",
+    "--tests",
+    "io.deephaven.engine.table.impl.TestRetryCyclePhases"
+  ],
+  "cwd": "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/deephaven_source_01/checkout/deephaven-core-6367313a319b79437d4d2116c77836ad56d5138d",
+  "class": "TestRetryCyclePhases",
+  "denominator": 2,
+  "timeout_seconds": 180,
+  "reason": "Fixed one-cycle/two-action schedules for K and V; unchanged upstream retry policy and source instrumentation",
+  "source_files": [
+    {
+      "name": "CYCLE_PHASE_PLAN.md",
+      "sha256": "ff586978df0b8298418b51e45cf295dfdc06fae91cecf634a0a854f33ab7abc7"
+    },
+    {
+      "name": "ConstructSnapshot.java",
+      "sha256": "6c05500ad2c75b6b1fd78b6cda0a1d76424b60229184b2d274d648472d1386c6"
+    },
+    {
+      "name": "ConstructSnapshot.java.patch",
+      "sha256": "aeb13b2186c5577a6bfdbfd7d818a016c7276b5cacfaa2d7be3ce3ffcafb5b39"
+    },
+    {
+      "name": "HierarchicalTableImpl.java",
+      "sha256": "1d548a2081e106c9d2e44bec743d5341ed0bcbceacab607c10cbad978606335c"
+    },
+    {
+      "name": "HierarchicalTableImpl.java.patch",
+      "sha256": "3c37d84e28e2c8a22a1b69aad2cbc84eef420cee64bdcaca7cc912eedb91478c"
+    },
+    {
+      "name": "INSTRUMENTATION_RECEIPT.json",
+      "sha256": "badc42b692e000761f5cbe9bddf5201e02f11b2c084d77cc4459eaa711beeab2"
+    },
+    {
+      "name": "PLAN.md",
+      "sha256": "58feab5ddcf6c5222c3e14998e97a96d01185a5a4dfca4bfef79e679e8544cfc"
+    },
+    {
+      "name": "PREFIX_COUNTEREXAMPLE_PLAN.md",
+      "sha256": "160fc93f78767dfa8e9833e835ce681f2590a16a0b2549ce288985feb9241c53"
+    },
+    {
+      "name": "RESULT_SUMMARY_01.json",
+      "sha256": "3337b5b60a5f9d0de5b11edccc56df4d67e1d216a060e6b2f8cc2221eec8139c"
+    },
+    {
+      "name": "RetryStudyHooks.java",
+      "sha256": "718a5264d57179a6d45e6da4f5717dad65404ab7835ebafb6f07f3900509f706"
+    },
+    {
+      "name": "TestRetryCyclePhases.java",
+      "sha256": "a9e20cac4423e2cb0466a7b2f555f100c941f23018b11bf7b3afa67fee4cfdca"
+    },
+    {
+      "name": "TestRetryPrefixCounterexample.java",
+      "sha256": "416fdad3f652a15a3485a4b69afe4bd968f9c31be3095a85565525e2d2f5a093"
+    },
+    {
+      "name": "TestRetryResourceStudy.java",
+      "sha256": "8bc1f87e1ce17fb85839c3e79c3c0b1d7591e1342dec71eaec6762936007935c"
+    },
+    {
+      "name": "check_trace.py",
+      "sha256": "b5a490d295819778a323c477c086552a6b9f400dbe6d1b093e9911e7b54afdc5"
+    },
+    {
+      "name": "instrument.py",
+      "sha256": "dd3b65b876f081944d59ec0cd528881f6190946b0bfc48a73109604364bd5717"
+    },
+    {
+      "name": "run.py",
+      "sha256": "eb1e12662b293552d0dee4bd2d955564876470a41fe75d8d22f5d718c88b5b6d"
+    },
+    {
+      "name": "run_selected.py",
+      "sha256": "4727ff376b92017413c06273d3754c9f65e5f7142f09ab4833b52ce66c4e0402"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/remote/ConstructSnapshot.java",
+      "sha256": "6c05500ad2c75b6b1fd78b6cda0a1d76424b60229184b2d274d648472d1386c6"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/remote/RetryStudyHooks.java",
+      "sha256": "718a5264d57179a6d45e6da4f5717dad65404ab7835ebafb6f07f3900509f706"
+    },
+    {
+      "checkout_path": "engine/table/src/main/java/io/deephaven/engine/table/impl/hierarchical/HierarchicalTableImpl.java",
+      "sha256": "1d548a2081e106c9d2e44bec743d5341ed0bcbceacab607c10cbad978606335c"
+    }
+  ]
+}

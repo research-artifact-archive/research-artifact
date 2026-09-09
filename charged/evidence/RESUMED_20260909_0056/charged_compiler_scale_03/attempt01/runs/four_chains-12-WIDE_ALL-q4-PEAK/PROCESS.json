@@ -1,0 +1,82 @@
+{
+  "id": "four_chains-12-WIDE_ALL-q4-PEAK",
+  "case_id": "four_chains-12-WIDE_ALL",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/four_chains-12-WIDE_ALL-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/four_chains-12-WIDE_ALL-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:57:42.895609+00:00",
+  "sampled_peak_rss_bytes": 20430848,
+  "samples": 1,
+  "cold_seconds": 0.06336579099297523,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.750000127591193e-05,
+      "method_import": 0.002552208985434845,
+      "construct": 0.018199749989435077,
+      "serialize_write": 0.001929541991557926,
+      "read_parse": 0.001548458996694535,
+      "certificate_check": 0.011499207990709692,
+      "query": 4.1601015254855156e-07
+    },
+    "values": [
+      1188422437713965063903159255040,
+      2139160387885137115025686659072,
+      3723723638170423866896565665792,
+      5862884026055560981922252324864
+    ],
+    "certificate_bytes": 226797,
+    "check": {
+      "values": [
+        1188422437713965063903159255040,
+        2139160387885137115025686659072,
+        3723723638170423866896565665792,
+        5862884026055560981922252324864
+      ],
+      "nodes": 2271,
+      "kinds": {
+        "zero": 254,
+        "peak": 1917,
+        "bounds": 100
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction, reflected-recurrence cap and private-budget/fixed-mode elementary bounds",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 4466,
+      "cache_hits": 22708,
+      "evaluated_nodes": 2278,
+      "bound_nodes": 100,
+      "memo_states": 2278,
+      "certificate_nodes": 2271,
+      "reachable_masks": 251
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.035813124995911494,
+    "process_peak_rss_bytes": 20414464
+  },
+  "status": "SUCCESS"
+}

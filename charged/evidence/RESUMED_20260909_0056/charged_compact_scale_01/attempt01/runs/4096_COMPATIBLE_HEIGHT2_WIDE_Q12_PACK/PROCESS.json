@@ -1,0 +1,191 @@
+{
+  "id": "4096_COMPATIBLE_HEIGHT2_WIDE_Q12_PACK",
+  "case_id": "4096_COMPATIBLE_HEIGHT2_WIDE",
+  "method": "PACK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/4096_COMPATIBLE_HEIGHT2_WIDE_Q12_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/4096_COMPATIBLE_HEIGHT2_WIDE_Q12_PACK"
+  ],
+  "utc": "2026-09-08T23:42:37.218927+00:00",
+  "sampled_peak_rss_bytes": 26640384,
+  "samples": 2,
+  "cold_seconds": 0.16201741600525565,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 0.0030811660108156502,
+      "method_import": 0.008357082988368347,
+      "construct": 0.012878292007371783,
+      "serialize_write": 0.0074186670244671404,
+      "read_parse": 0.00505091599188745,
+      "check_and_runtime_index": 0.09121470898389816,
+      "query": 9.06249915715307e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 20144,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 4096,
+        "positive_premium_suffixes": 4096,
+        "local_boundary_checks": 13649,
+        "root_runs": 39,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 4097,
+      "root_runs": 39
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 3169126500570573503741758013440,
+        "worst_total": 6817187243539874928236489206661120
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 6259024838626882669889972076544,
+        "worst_total": 6820277141877931237402637420724224
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 12438821514739501002186400202752,
+        "worst_total": 6826456938554043855734933848850432
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 24560730379421944653998624604160,
+        "worst_total": 6838578847418726299386746073251840
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 48329179133701245932061809704960,
+        "worst_total": 6862347296173005600664809258352640
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 94360741554488826073910844850176,
+        "worst_total": 6908378858593793180806658293497856
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 182383230107836505140338173673472,
+        "worst_total": 6996401347147140859873085622321152
+      },
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 654186937880280635509892397924352,
+        "worst_total": 7468205054919584990242639846572032
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 4866827566926229729696217781239808,
+        "worst_total": 11680845683965534084428965229887488
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 4866827566926229729696217781239808,
+        "worst_total": 11680845683965534084428965229887488
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 4866827566926229729696217781239808,
+        "worst_total": 11680845683965534084428965229887488
+      },
+      {
+        "job": 0,
+        "mode": "protected",
+        "call": "fresh_callback",
+        "excess": 4866827566926229729696217781239808,
+        "worst_total": 11680845683965534084428965229887488
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      3169126500570573503741758013440,
+      6259024838626882669889972076544,
+      12438821514739501002186400202752,
+      24560730379421944653998624604160,
+      48329179133701245932061809704960,
+      94360741554488826073910844850176,
+      182383230107836505140338173673472,
+      654186937880280635509892397924352,
+      4866827566926229729696217781239808,
+      4866827566926229729696217781239808,
+      4866827566926229729696217781239808,
+      4866827566926229729696217781239808
+    ],
+    "certificate_bytes": 997034,
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 6814018117039304354732747448647680,
+    "internal_seconds": 0.1287644160038326,
+    "process_peak_rss_bytes": 27590656
+  },
+  "status": "SUCCESS"
+}

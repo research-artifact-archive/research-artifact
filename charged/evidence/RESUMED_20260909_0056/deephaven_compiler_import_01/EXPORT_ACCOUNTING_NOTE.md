@@ -1,0 +1,3 @@
+# Export accounting limitation
+
+The export receipt measures calls to compile_case and to the Bellman checker, and records complete emitted file sizes. Serialization and file I/O were executed but not separately timed by the first exporter. Thus these per-call nanoseconds must not be reported as total export or end-to-end cost. Native profile-loading time is recorded independently. Whole Gradle build/run durations and the earlier source/JDK/build setup receipts are also retained. No wall-clock speedup comparison is made by this packet. A future final timing protocol must include serialization, checking, loading and all required first-use construction within a single measured boundary.

@@ -1,6 +1,6 @@
 # Distribution updates
 
-The public release preserves its scientific snapshot and earlier commits. These updates do not add scientific samples, change theorem/proof blocks, or replace historical outcomes.
+The public release preserves its scientific snapshot and earlier commits. The earlier entries below concern distribution-only changes. The current charged supplement adds separately recorded research revisions and their full evidence; the act of publication/replay creates no new experimental samples and does not replace earlier outcomes.
 
 | Commit | Distribution change |
 |---|---|
@@ -11,3 +11,5 @@ The public release preserves its scientific snapshot and earlier commits. These 
 The following documentation clarification keeps the same manuscript and scientific payload: the exact range comparison expands a subtree when one front is a run, and chooses the longer subtree when both fronts are subtrees. The code and paper already made this distinction. Historical README working-directory instructions are also clarified at the public entry point.
 
 Author-side reproduction used unauthenticated HTTPS checkouts on the original workstation. All six standard full entry points (`reproduce.py`, `reproduce_extended.py`, `reproduce_oracle.py`, `reproduce_current.py`, `reproduce_latest.py`, and `reproduce_basis.py`) completed successfully. Optional `--with-cp` solver invocations were not included. Saved benchmark policies and complete original outcome partitions were inspected; historical timeout experiments were not rerun. This is not independent third-party artifact evaluation or a fresh performance comparison.
+
+The charged supplement adds 19,485 compact/fallback inputs, 606 ordinary compact native records plus four controls, two compact scale campaigns with all 420/180 units, and the earlier charged/source experiments listed in its claim map. The original 180-unit aggregation failure and separately recovered denominator remain intact. Original source versions and prior adverse results are preserved. Public acquisition/reproduction of this revision is reported separately from the earlier six-stage replay above.

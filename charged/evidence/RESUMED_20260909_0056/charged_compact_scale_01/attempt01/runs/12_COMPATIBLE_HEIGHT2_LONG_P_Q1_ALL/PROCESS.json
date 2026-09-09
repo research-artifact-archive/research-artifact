@@ -1,0 +1,77 @@
+{
+  "id": "12_COMPATIBLE_HEIGHT2_LONG_P_Q1_ALL",
+  "case_id": "12_COMPATIBLE_HEIGHT2_LONG_P",
+  "method": "ALL",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "ALL",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/12_COMPATIBLE_HEIGHT2_LONG_P_Q1_ALL.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/12_COMPATIBLE_HEIGHT2_LONG_P_Q1_ALL"
+  ],
+  "utc": "2026-09-08T23:26:17.869440+00:00",
+  "sampled_peak_rss_bytes": 20447232,
+  "samples": 32,
+  "cold_seconds": 1.7541395839944016,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "ALL",
+    "phases": {
+      "input": 6.3000014051795e-05,
+      "method_import": 0.008126250002533197,
+      "construct": 0.07143395801540464,
+      "serialize_write": 0.003343457996379584,
+      "read_parse": 0.003505125001538545,
+      "check_and_runtime_index": 1.6334857500041835,
+      "query": 8.516700472682714e-05
+    },
+    "check": {
+      "route": "charged_all_ideals",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+      "original_baseline_checked": true,
+      "inherited": {
+        "states": 729,
+        "affine_intervals": 19136,
+        "point_checks": 38037,
+        "basis_point_checks": 26636,
+        "routing_prices_baseline_checked": true,
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+        "compiler_imported": false
+      },
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "charged_all_ideals",
+      "states": 729,
+      "profile_rows": 3980,
+      "basis_lines": 7644
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 39,
+        "worst_total": 273
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+    "values": [
+      39
+    ],
+    "certificate_bytes": 263053,
+    "budgets": [
+      1
+    ],
+    "baseline": 234,
+    "internal_seconds": 1.720074917015154,
+    "process_peak_rss_bytes": 20676608
+  },
+  "status": "SUCCESS"
+}

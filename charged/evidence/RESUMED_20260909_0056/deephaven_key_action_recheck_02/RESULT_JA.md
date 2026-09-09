@@ -1,0 +1,10 @@
+# 変更Actionの保存済みnative記録を強化再検査
+
+固定36行は全て新しい検査に通った。旧9負対照・新8負対照を全て拒否し、4つの無変更の正当記録も受理した。計21/21対照が期待どおり。所要0.035秒、新native実行0。旧検査器は新8負対照を全て見逃すことも同時に確認した。
+
+追加検査は、正常return bodyの正確なselected-work総量、Updating中のusePrev、要求中および変更後復帰前のforeground禁止、CUT即時発火、例外が発生した時点の不整合、START通知step、protected lock入口を確認する。元raw/source/checker/check01結果は変更していない。
+
+K/V=(1,2)の17ノード結果は、新検査でも成功したK epoch1のdirectiveとV epoch2のpayloadに結び付いた。正常V bodyは保持されたK directiveに応じて104または89 operations、モデルcapは両方104を維持する。36記録に早期abort bodyはないため、その実測coverageは主張しない。全Java WORK順序の到達可能性や独立native評価を認証する結果でもない。
+
+RAW SHA-256:047ae27a3d33cb79f20b8a35bdd149f4f5957c08f73b40393b078e23e866e0ce。
+新VERIFICATION SHA-256:5b2b3625dde7db43c701bfc071ba141f50521ab1c20a1214f920c23139a9ef6c。

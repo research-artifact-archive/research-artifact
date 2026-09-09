@@ -1,0 +1,87 @@
+{
+  "id": "four_chains-12-MIXED-q12-DP",
+  "case_id": "four_chains-12-MIXED",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/four_chains-12-MIXED-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/four_chains-12-MIXED-q12-DP"
+  ],
+  "utc": "2026-09-08T21:57:34.572578+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.0386705830169376,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 5.8250006986781955e-05,
+      "method_import": 0.0013788329961244017,
+      "construct": 0.010139582998817787,
+      "serialize_write": 0.0001791669928934425,
+      "read_parse": 5.308300023898482e-05
+    },
+    "values": [
+      15,
+      27,
+      47,
+      74,
+      113,
+      145,
+      145,
+      145,
+      145,
+      145,
+      145,
+      145
+    ],
+    "certificate_bytes": 266,
+    "stats": {
+      "bounds_preanswered": 7,
+      "cells": 4080,
+      "equality_cells": 672,
+      "fixed_point_reached": false,
+      "root_saturation_threshold": 32,
+      "rows": 16,
+      "states": 256
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.011818083003163338,
+    "process_peak_rss_bytes": 16826368
+  },
+  "status": "SUCCESS"
+}

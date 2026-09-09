@@ -1,0 +1,84 @@
+{
+  "id": "independent-12-WIDE_ALL-q12-DP",
+  "case_id": "independent-12-WIDE_ALL",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/independent-12-WIDE_ALL-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/independent-12-WIDE_ALL-q12-DP"
+  ],
+  "utc": "2026-09-08T21:31:53.238186+00:00",
+  "sampled_peak_rss_bytes": 18186240,
+  "samples": 7,
+  "cold_seconds": 0.38799445898621343,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 5.9416983276605606e-05,
+      "method_import": 0.000871917000040412,
+      "construct": 0.36227529199095443,
+      "serialize_write": 0.00025520799681544304,
+      "read_parse": 0.0002197920111939311
+    },
+    "values": [
+      1188422437713965063903159255040,
+      1980704062856608439838598758400,
+      3406810988113366516522389864448,
+      5308286888455710618767444672512,
+      8318957063997755447322114785280,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 540,
+    "stats": {
+      "cells": 118755,
+      "fixed_point_reached": true,
+      "rows": 29,
+      "states": 4096
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.36369412500062026,
+    "process_peak_rss_bytes": 18186240
+  },
+  "status": "SUCCESS"
+}

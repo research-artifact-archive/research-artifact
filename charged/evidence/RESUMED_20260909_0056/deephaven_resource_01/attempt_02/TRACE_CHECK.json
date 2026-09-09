@@ -1,0 +1,534 @@
+{
+  "classification": "post-outcome author checker; not pre-registered final evaluation",
+  "source_bound_proved_by_this_checker": false,
+  "checker_sha256": "b5a490d295819778a323c477c086552a6b9f400dbe6d1b093e9911e7b54afdc5",
+  "results": [
+    {
+      "id": "both",
+      "status": "SUCCESS",
+      "cycles": 2,
+      "failures": 2,
+      "epoch": 2,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 6,
+          "returned": 1
+        },
+        {
+          "stage": "K",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 14,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 17,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 123,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 9,
+          "previous": 0,
+          "protected": 0,
+          "begin": 125,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 230,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 7,
+          "witness_cycles": [
+            7
+          ]
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 7,
+          "after": 9,
+          "witness_cycles": [
+            18
+          ]
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 9,
+          "after": 9,
+          "witness_cycles": []
+        }
+      ]
+    },
+    {
+      "id": "v_before",
+      "status": "SUCCESS",
+      "cycles": 1,
+      "failures": 1,
+      "epoch": 1,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 6,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 115,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 117,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 222,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 5,
+          "after": 7,
+          "witness_cycles": [
+            10
+          ]
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        }
+      ]
+    },
+    {
+      "id": "none",
+      "status": "SUCCESS",
+      "cycles": 0,
+      "failures": 0,
+      "epoch": 0,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 6,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 114,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 5,
+          "after": 5,
+          "witness_cycles": []
+        }
+      ]
+    },
+    {
+      "id": "k_after",
+      "status": "SUCCESS",
+      "cycles": 1,
+      "failures": 1,
+      "epoch": 1,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 6,
+          "returned": 1
+        },
+        {
+          "stage": "K",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 14,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 17,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 122,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 7,
+          "witness_cycles": [
+            7
+          ]
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        }
+      ]
+    },
+    {
+      "id": "v_after",
+      "status": "SUCCESS",
+      "cycles": 1,
+      "failures": 1,
+      "epoch": 1,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 6,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 114,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 117,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 222,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 5,
+          "after": 5,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": true,
+          "before": 5,
+          "after": 7,
+          "witness_cycles": [
+            115
+          ]
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        }
+      ]
+    },
+    {
+      "id": "k_before",
+      "status": "SUCCESS",
+      "cycles": 1,
+      "failures": 1,
+      "epoch": 1,
+      "bodies": [
+        {
+          "stage": "K",
+          "before": 5,
+          "previous": 0,
+          "protected": 0,
+          "begin": 1,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 7,
+          "returned": 1
+        },
+        {
+          "stage": "K",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 9,
+          "counts": {
+            "K_DIR": 4,
+            "V_PARENT": 0,
+            "V_LINK": 0,
+            "V_UNLINK": 0,
+            "V_NODE": 0,
+            "V_CELL": 0
+          },
+          "end": 14,
+          "returned": 1
+        },
+        {
+          "stage": "V",
+          "before": 7,
+          "previous": 0,
+          "protected": 0,
+          "begin": 17,
+          "counts": {
+            "K_DIR": 0,
+            "V_PARENT": 4,
+            "V_LINK": 4,
+            "V_UNLINK": 0,
+            "V_NODE": 32,
+            "V_CELL": 64
+          },
+          "end": 122,
+          "returned": 1
+        }
+      ],
+      "checks": [
+        {
+          "stage": "K",
+          "failed": true,
+          "before": 5,
+          "after": 7,
+          "witness_cycles": [
+            2
+          ]
+        },
+        {
+          "stage": "K",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        },
+        {
+          "stage": "V",
+          "failed": false,
+          "before": 7,
+          "after": 7,
+          "witness_cycles": []
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "mutation": "mixed_epoch",
+      "rejected": true,
+      "reason": "unissued version"
+    },
+    {
+      "mutation": "deleted_update",
+      "rejected": true,
+      "reason": "inconsistency without a recorded actual intervening cycle"
+    },
+    {
+      "mutation": "excess_cells",
+      "rejected": true,
+      "reason": "observed body exceeds selected-operation cap: V_CELL"
+    }
+  ]
+}

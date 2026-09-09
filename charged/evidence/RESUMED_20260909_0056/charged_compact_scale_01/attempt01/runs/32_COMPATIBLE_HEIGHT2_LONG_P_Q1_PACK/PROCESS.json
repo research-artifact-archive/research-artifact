@@ -1,0 +1,81 @@
+{
+  "id": "32_COMPATIBLE_HEIGHT2_LONG_P_Q1_PACK",
+  "case_id": "32_COMPATIBLE_HEIGHT2_LONG_P",
+  "method": "PACK",
+  "budgets": [
+    1
+  ],
+  "seconds_cap": 8,
+  "argv": [
+    "<AUTHOR_HOME>/.pyenv/versions/3.10.9/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/worker.py",
+    "PACK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/inputs/32_COMPATIBLE_HEIGHT2_LONG_P_Q1_PACK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compact_scale_01/attempt01/runs/32_COMPATIBLE_HEIGHT2_LONG_P_Q1_PACK"
+  ],
+  "utc": "2026-09-08T23:29:44.614450+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.03957095797522925,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PACK",
+    "phases": {
+      "input": 7.30419997125864e-05,
+      "method_import": 0.008034790982492268,
+      "construct": 0.00011579101555980742,
+      "serialize_write": 0.00019187500583939254,
+      "read_parse": 7.34579807613045e-05,
+      "check_and_runtime_index": 0.001041375013301149,
+      "query": 1.604200224392116e-05
+    },
+    "check": {
+      "route": "compatible_reduced",
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_CURSOR_SUFFIXES",
+      "original_baseline_checked": true,
+      "charged_boundary_checks": 222,
+      "inherited": {
+        "violations": [],
+        "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS",
+        "checked_suffixes": 32,
+        "positive_premium_suffixes": 32,
+        "local_boundary_checks": 158,
+        "root_runs": 13,
+        "canonical_protection_first_thresholds": true,
+        "basis": "direct Bellman equations for root caps; sorted-topological corollary",
+        "solver_imports": false,
+        "independent_theorem_proof": false
+      },
+      "global_optimality_basis": "jobwise p*delta=0 ordered equivalence and compatible-DAG corollary",
+      "constructor_imported": false
+    },
+    "stats": {
+      "route": "compatible_reduced",
+      "cursor_states": 33,
+      "root_runs": 13
+    },
+    "initial_actions": [
+      {
+        "job": 0,
+        "mode": "cheap",
+        "call": "conditional_commit",
+        "excess": 39,
+        "worst_total": 715
+      }
+    ],
+    "certificate_scope": "ALL_BUDGET_ORIGINAL_CHARGED_CURSOR_POLICY",
+    "values": [
+      39
+    ],
+    "certificate_bytes": 2564,
+    "budgets": [
+      1
+    ],
+    "baseline": 676,
+    "internal_seconds": 0.009557459008647129,
+    "process_peak_rss_bytes": 13615104
+  },
+  "status": "SUCCESS"
+}

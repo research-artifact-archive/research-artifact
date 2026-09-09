@@ -1,0 +1,80 @@
+{
+  "id": "fence-12-WIDE_ALL-q4-PEAK",
+  "case_id": "fence-12-WIDE_ALL",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/fence-12-WIDE_ALL-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/fence-12-WIDE_ALL-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:30:43.645631+00:00",
+  "sampled_peak_rss_bytes": 21495808,
+  "samples": 1,
+  "cold_seconds": 0.07111729099415243,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 6.745898281224072e-05,
+      "method_import": 0.0020322919881436974,
+      "construct": 0.02249562501674518,
+      "serialize_write": 0.002791332983179018,
+      "read_parse": 0.002285875001689419,
+      "certificate_check": 0.01750241601257585,
+      "query": 3.33995558321476e-07
+    },
+    "values": [
+      1188422437713965063903159255040,
+      2059932225370872777432142708736,
+      3486039150627630854115933814784,
+      5466743213484239293954532573184
+    ],
+    "certificate_bytes": 335316,
+    "check": {
+      "values": [
+        1188422437713965063903159255040,
+        2059932225370872777432142708736,
+        3486039150627630854115933814784,
+        5466743213484239293954532573184
+      ],
+      "nodes": 3361,
+      "kinds": {
+        "zero": 384,
+        "peak": 2977
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 7148,
+      "cache_hits": 38400,
+      "evaluated_nodes": 3368,
+      "memo_states": 3368,
+      "certificate_nodes": 3361,
+      "reachable_masks": 376
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.047208999982103705,
+    "process_peak_rss_bytes": 21594112
+  },
+  "status": "SUCCESS"
+}

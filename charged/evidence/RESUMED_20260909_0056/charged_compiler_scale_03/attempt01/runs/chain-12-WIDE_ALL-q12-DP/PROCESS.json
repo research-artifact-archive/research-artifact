@@ -1,0 +1,87 @@
+{
+  "id": "chain-12-WIDE_ALL-q12-DP",
+  "case_id": "chain-12-WIDE_ALL",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    4096,
+    65536,
+    4294967296,
+    18446744073709551616
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/inputs/chain-12-WIDE_ALL-q12-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_03/attempt01/runs/chain-12-WIDE_ALL-q12-DP"
+  ],
+  "utc": "2026-09-08T21:57:25.822819+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.031180207995930687,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 6.037499406374991e-05,
+      "method_import": 0.0013873749994672835,
+      "construct": 0.0005372499872464687,
+      "serialize_write": 0.00015162501949816942,
+      "read_parse": 4.545800038613379e-05
+    },
+    "values": [
+      1426106925256758076683791106048,
+      2535301200456458802993406410752,
+      4119864450741745554864285417472,
+      6338253001141147007483516026880,
+      9745063989254513524005905891328,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720,
+      11488083564568328951063872798720
+    ],
+    "certificate_bytes": 610,
+    "stats": {
+      "bounds_preanswered": 7,
+      "cells": 192,
+      "equality_cells": 42,
+      "fixed_point_reached": false,
+      "root_saturation_threshold": 32,
+      "rows": 16,
+      "states": 13
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      256,
+      4096,
+      65536,
+      4294967296,
+      18446744073709551616
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.002190541010349989,
+    "process_peak_rss_bytes": 16826368
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,80 @@
+{
+  "id": "chain-12-LONG_PREMIUM-q4-PEAK",
+  "case_id": "chain-12-LONG_PREMIUM",
+  "method": "PEAK",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "PEAK",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/chain-12-LONG_PREMIUM-q4-PEAK.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/chain-12-LONG_PREMIUM-q4-PEAK"
+  ],
+  "utc": "2026-09-08T21:29:41.790938+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.029871458013076335,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "PEAK",
+    "phases": {
+      "input": 5.216599674895406e-05,
+      "method_import": 0.002023832988925278,
+      "construct": 0.00044554201303981245,
+      "serialize_write": 0.0003874999820254743,
+      "read_parse": 0.00021520801237784326,
+      "certificate_check": 0.00047687499318271875,
+      "query": 4.169996827840805e-07
+    },
+    "values": [
+      23,
+      46,
+      92,
+      184
+    ],
+    "certificate_bytes": 8401,
+    "check": {
+      "values": [
+        23,
+        46,
+        92,
+        184
+      ],
+      "nodes": 109,
+      "kinds": {
+        "zero": 20,
+        "peak": 89
+      },
+      "certificate_scope": "REQUESTED_ROOT_VALUES",
+      "relies_on": "charged concavity, cheapest-fast reduction and reflected-recurrence cap theorem",
+      "compiler_or_solver_imported": false
+    },
+    "stats": {
+      "peak_probes": 226,
+      "cache_hits": 712,
+      "evaluated_nodes": 112,
+      "memo_states": 112,
+      "certificate_nodes": 109,
+      "reachable_masks": 12
+    },
+    "certificate_scope": "REQUESTED_ROOT_VALUES",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 177,
+    "internal_seconds": 0.003616415982833132,
+    "process_peak_rss_bytes": 17022976
+  },
+  "status": "SUCCESS"
+}

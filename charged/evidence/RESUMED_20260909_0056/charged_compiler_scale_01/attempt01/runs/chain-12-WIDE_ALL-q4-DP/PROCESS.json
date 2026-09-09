@@ -1,0 +1,60 @@
+{
+  "id": "chain-12-WIDE_ALL-q4-DP",
+  "case_id": "chain-12-WIDE_ALL",
+  "method": "DP",
+  "budgets": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "seconds_cap": 4,
+  "argv": [
+    "<AUTHOR_HOME>/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/worker.py",
+    "DP",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/inputs/chain-12-WIDE_ALL-q4-DP.json",
+    "<AUTHOR_WORKSPACE>/RESEARCH_RESTART_20260905/RESUMED_20260909_0056/charged_compiler_scale_01/attempt01/runs/chain-12-WIDE_ALL-q4-DP"
+  ],
+  "utc": "2026-09-08T21:29:50.050323+00:00",
+  "sampled_peak_rss_bytes": 0,
+  "samples": 0,
+  "cold_seconds": 0.023426458006724715,
+  "exit_code": 0,
+  "worker_result": {
+    "status": "SUCCESS",
+    "method": "DP",
+    "phases": {
+      "input": 5.6917022448033094e-05,
+      "method_import": 0.0008986250031739473,
+      "construct": 0.00012491701636463404,
+      "serialize_write": 0.00014591598301194608,
+      "read_parse": 4.612500197254121e-05
+    },
+    "values": [
+      1426106925256758076683791106048,
+      2535301200456458802993406410752,
+      4119864450741745554864285417472,
+      6338253001141147007483516026880
+    ],
+    "certificate_bytes": 271,
+    "stats": {
+      "cells": 96,
+      "fixed_point_reached": false,
+      "rows": 8,
+      "states": 13
+    },
+    "certificate_scope": "VALUES_ONLY_NO_INDEPENDENT_CERTIFICATE",
+    "budgets": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "baseline": 14023384765024787754057279209472,
+    "internal_seconds": 0.001281750010093674,
+    "process_peak_rss_bytes": 16318464
+  },
+  "status": "SUCCESS"
+}

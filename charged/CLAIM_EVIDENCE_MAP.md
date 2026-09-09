@@ -1,0 +1,24 @@
+# Claim and evidence map
+
+Paths below are relative to `evidence/RESUMED_20260909_0056/`. The manuscript supplies proofs; finite replay is not a replacement for those proofs. Earlier zero-fee evidence remains in `../package` and `../supplement`, and is not counted as charged-implementation performance.
+
+| Claim or limitation | Source and full evidence | Reproduction |
+|---|---|---|
+| Three charged modes, action-wise normal form, integer supporting-basis closure | Paper Sections 2–5; `charged_curves_02/{compiler,basis,checker,study}.py`, `INPUTS.json`, `RAW.jsonl`, controls/summary; 3,183 observed inputs | `curves` |
+| Actual external-write correspondence under the stated Java conditions | Paper Section 4; `charged_callback_native_01` Java/input/raw files; `charged_callback_recheck_03` source model/search/sequence checker and controls; 3,094 ordinary + four controls | `native`; optional `native-java` |
+| Mixed-price reduction and compatible-DAG cursor artifact | Paper Section 6; `charged_compact_03`, inherited-source mapping and semantic-source binding; `charged_compact_02/conformance01`; 19,485 inputs/527,409 branches/29 controls | `compact` |
+| Repaired numeric and explicit-input validation | Earlier accepted aliases in `charged_compact_02/PRIOR_TYPE_DEFECTS.json`; `charged_compact_03/cli_conformance01`, retaining old 02 null acceptance | `compact` includes all 14 CLI controls |
+| Original-price compact native selector and trace feasibility | `charged_compact_native_01`: unchanged kernel/callback/writer binding, independent fixed-order scalar policy, source-model checks, all 610 records, 208 cell maxima and all controls | `compact-native`; optional `compact-native-java` |
+| General-method construction costs and strong requested-value alternatives | `charged_compiler_scale_01` (224 units), `charged_compiler_scale_03` (144 units); complete raw/process ledgers, certificates, 76-input conformance; `_02` remains a preserved exploratory attempt | `scale` |
+| Large compatible charged inputs | `charged_compact_scale_01/attempt01`: 420 units, 258 success/152 timeout/10 memory failure, all methods/scopes; 84 complete PACK services | `compact-scale` |
+| Maximum-size mixed-price root profiles | `charged_compact_scale_02/attempt01`: 180 units, 108 success/51 timeout/21 memory failure; all 36 PACK profiles match the fixed `2n` sequence and every successful value matches the fixed closed form | `compact-scale` |
+| Final aggregation failure without measurement retry | Unmodified `_scale_02/benchmark.py`, complete RAW/PROCESS/ANALYTICAL_CHECKS, `recover_summary_01.py`, `SUMMARY_RECOVERED_01.json` | `compact-scale` retains original exit 1 and zero measurement reruns |
+| Source-derived hierarchical snapshot bounds, captured changing directives, public refresh integration | Paper Section 7; `deephaven_prefix_import_02` (216), `deephaven_event_graph_01` (12), `deephaven_key_action_01` (36), strict recheck; source snapshots/profiles/raw/controls | `deephaven`; optional native guide |
+| Phase information can improve the imported `2q` abstraction | `deephaven_phase_policy_01` (108); zero observed prefix aborts and policy-conditioned writer cuts in other studies remain reported | `deephaven` |
+| Mean-time calibration did not establish a positive premium or third-mode gain | `charged_api_calibration_01`: 72 cells, 144 forks, 720 measurements; only 2/8 fit settings, all fitted premiums zero; 72 admitted roots have no gain, 1,080 roots outside the fitted model | `calibration` |
+| Unrestricted common-price order conjecture is false | `charged_common_price_order_01` retains 17,424 finite matches; `charged_common_price_counter_02` preserves the later 31-versus-30 counterexample and scaled copy; `charged_order_01` retains sparse adaptive gains | `ordering` |
+| Charged exposed-guard generalizations remain unresolved/refuted | `charged_guaranteed_01/02`, `charged_guard_holding_01`, `charged_guard_targeted_03`, and the paper's limitations | `refutations` |
+
+The compact performance comparisons return different services. PACK returns a checked all-budget cursor policy; ROOT is a same-reduction value-only ablation without independent checking; ALL covers every reachable unfinished set; PEAK certifies requested values; DP returns requested values only. Ratios on shared successful units are descriptive single measurements. In particular, requested-value methods are faster on many shared successes. None of these synthetic families estimates application prevalence.
+
+The compact scale second campaign uses last query budgets `2^32-1, 2^32, 2^32+1, 2^64`, unlike the first campaign's `4096, 65536, 2^32, 2^64`. Its maximum root size is 65,536 positive runs at 32,768 jobs; complete PACK cold time is 1.333–1.603 seconds, with a maximum recorded RSS of 152,911,872 bytes. Original phase timings, serialized bytes, method failures and both input universes remain independently inspectable.

@@ -1,0 +1,54 @@
+{
+  "status": "SUCCESS",
+  "method": "ALL",
+  "phases": {
+    "input": 6.354201468639076e-05,
+    "method_import": 0.008470083004795015,
+    "construct": 0.06647749998955987,
+    "serialize_write": 0.0028697919915430248,
+    "read_parse": 0.002885750000132248,
+    "check_and_runtime_index": 0.47624745799112134,
+    "query": 8.67500202730298e-05
+  },
+  "check": {
+    "route": "charged_all_ideals",
+    "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_FOR_REACHABLE_UNFINISHED_SETS",
+    "original_baseline_checked": true,
+    "inherited": {
+      "states": 729,
+      "affine_intervals": 4980,
+      "point_checks": 5013,
+      "basis_point_checks": 8029,
+      "routing_prices_baseline_checked": true,
+      "domain": "ALL_NONNEGATIVE_INTEGER_BUDGETS_BY_AFFINE_PARTITION",
+      "compiler_imported": false
+    },
+    "constructor_imported": false
+  },
+  "stats": {
+    "route": "charged_all_ideals",
+    "states": 729,
+    "profile_rows": 3693,
+    "basis_lines": 7137
+  },
+  "initial_actions": [
+    {
+      "job": 0,
+      "mode": "cheap",
+      "call": "conditional_commit",
+      "excess": 22,
+      "worst_total": 256
+    }
+  ],
+  "certificate_scope": "ALL_BUDGET_ALL_REACHABLE_UNFINISHED_SETS_POLICY",
+  "values": [
+    22
+  ],
+  "certificate_bytes": 129743,
+  "budgets": [
+    1
+  ],
+  "baseline": 234,
+  "internal_seconds": 0.5571238330157939,
+  "process_peak_rss_bytes": 19300352
+}
