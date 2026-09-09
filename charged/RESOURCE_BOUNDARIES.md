@@ -1,6 +1,6 @@
 # Resource boundaries and independent-job price bound
 
-This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in seven study directories under `evidence/RESUMED_20260909_0056/`: the six price/resource studies below and `charged_budget_blind_native_01`. A portable replay checks those records without declaring new evaluation samples.
+This extension reports source-event resource counts, separate from the failed timing-to-fee calibration preserved elsewhere in this artifact. It does not measure throughput, user benefit, lock waiting, latency, or actual monetary charges. All inputs and full original outcomes remain in nine study directories under `evidence/RESUMED_20260909_0056/`: the six price/resource studies below and `charged_budget_blind_native_01`, plus two explicitly post-outcome work analyses. A portable replay checks those records without declaring new evaluation samples.
 
 ## Protected work under a completion-call cap
 
@@ -43,6 +43,20 @@ This is simultaneous pointwise minimax optimality, not per-execution optimality 
 
 The native selector stores only a cloned dependency array, a mode-family boolean and a remaining cheap-failure allowance. `choose(mask)` and `failedCheap()` are its only policy operations. The writer fixture, assertions and cost-ceiling oracle retain B, but no B, Input, writer, fee table or weights are passed to the selector. All 17,714 original native runs are retained, including 256 exhaustive groups at B=r. These finite tests and the recorded bytecode inspection support the implementation; the universal quantifiers rely on the proof above. Scalar-price minimax compilation elsewhere still uses a supplied B.
 
+## Total work of the universal policy
+
+The [full r=0 proof](evidence/RESUMED_20260909_0056/charged_universal_work_01/THEORY.md) establishes a cost of simultaneous protection optimality. Among universal three-mode programs with Q<=n whose worst L is optimal for **every** writer budget, the minimum worst W at B is `Omega+Omega_min(B,n)`. All-cached attains this for every B. The lower-bound adversary targets the largest jobs, inserting a fresh write before a target's first counted call exactly when that job has already executed its whole kernel. If h<k writes sufficed to force the k target kernels inside, the all-budget protection guarantee at t=h would be contradicted. Thus each target must have paid both a prior kernel and a protected kernel. No initial preparations, mandatory whole kernels and the single-job call interface are essential.
+
+Unknown B alone does not imply this W cost: the full proof gives a B-unaware two-job counterpolicy with Q=2 and worst (W,L)=(32,16) at B=1, but L=16 at B=0. All-cached has worst (40,16) at B=1 and L=0 at B=0. The counterpolicy is a mathematical construction; the retained native comparison separately uses the known-B scalar policy with the same B=1 maxima.
+
+The [fixed-policy proof for every r](evidence/RESUMED_20260909_0056/charged_universal_work_02/THEORY.md) characterizes the implemented rule that retries its current job until completion before advancing in a fixed topological order pi. Put M_i=max work in the prefix through i and S_i=the suffix including i. In both mode families Qmax=n+min(B,r). Two-mode Wmax is `Omega+min(B,r)*wmax`. Three-mode Wmax is `Omega+Top_B(all works)` at r=0, `Omega+B*wmax` at r>=1,B<=r, and
+
+```
+Omega + max_i [(r-1)*M_i + w_pi_i + Top_(B-r)(S_i)]
+```
+
+at r>=1,B>r. These are component maxima of this policy, not all-program W optimality for r>0 or a scalar/Pareto frontier. All 1,280 complete finite path groups and 17,200 already-observed records match the formulas; there are zero new measurements. The earlier r=0 analysis checks its full subset of160groups/1,632records. Both original analysis plans and the subsequent proofs are preserved with their chronology.
+
 ## Sharp scalar ratio for independent jobs
 
 Let k_i=g_i+r_i, c_i=w_i+min(v_i,k_i), delta_i=k_i-min(v_i,k_i), P_i=p_i+delta_i, and A=sum c_i. Write F_2,F_3 for the exact excess values of the original two and three modes. For independent jobs, arbitrary nonnegative fees and premiums, and any integer B>=0,
@@ -78,6 +92,8 @@ For sharpness take n=M^2 equal independent jobs, w=1, v=k=M, p=floor(alpha*M), a
 | `charged_resource_vector_native_01` | 96 policy/shape/price cases, 2,440 ordinary Java runs plus two native controls, 576 exhaustive replay groups. Counters W,L,Q and scalar cost are checked separately. |
 | `charged_resource_vector_recheck_02` | A later strict input-class check of all 96 tables and aggregation of 2,442 saved verification decisions, with an explicit old-checker counterexample and five aggregation controls. It was not a native rerun. The public worker additionally regenerates causal checks from the raw records. |
 | `charged_resource_frontier_native_01` | 128 cases, 9,312 ordinary Java runs plus two native controls, 1,024 exhaustive replay groups. Every group reaches the formula's L bound while obeying its Q cap. Native budgets are restricted to 0..3; no native constant-tail claim. |
+| `charged_universal_work_01` | Post-outcome r=0 analysis: all160groups/1,632original path records and two retained known-B comparison pairs. No new measurements. |
+| `charged_universal_work_02` | Post-outcome fixed-policy W,L,Q analysis: all1,280groups/17,200original path records. No new measurements. |
 | `charged_budget_blind_native_01` | 128 cases, 17,200 complete-path replays, 512 concurrent runs and two native controls, 1,280 exhaustive groups; all attain the universal formula. Selector receives no B, price or table. Oracle budgets0..4 and remaining cheap-failure allowance0..3; 256 groups at B=r establish the finite boundary contrast. |
 
 Each native study has eight record-corruption, five sequence-certificate and four parser controls. Source jobs use p=w, common v=k=kappa in {0,2}, g=0, and two to five jobs. The Java kernel performs eight elementary work units per declared w, so the checked linear metric is W+L+8*kappa*Q. Maxima of W,L,Q may occur on different executions: their separately maximized weighted sum must not be mistaken for the maximum scalar cost.
@@ -92,6 +108,7 @@ python3 charged/reproduce.py resource-frontier --out work/resource-frontier
 python3 charged/reproduce.py resource-vector --out work/resource-vector
 python3 charged/reproduce.py resource-frontier-native --out work/resource-frontier-native
 python3 charged/reproduce.py budget-blind --out work/budget-blind
+python3 charged/reproduce.py universal-work --out work/universal-work
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-vector-java --out work/resource-vector-java
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py resource-frontier-java --out work/resource-frontier-java
 JAVA_BIN=java JAVAC_BIN=javac python3 charged/reproduce.py budget-blind-java --out work/budget-blind-java

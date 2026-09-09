@@ -1,0 +1,96 @@
+[
+  {
+    "layout": "distinct",
+    "known_B_witness": {
+      "case": "common-two-chain-k2-scalar_three",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "scalar_three",
+      "budget": 1,
+      "layout": "distinct",
+      "paths": 2,
+      "expected_maxima": {
+        "W": 32,
+        "L": 16,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 72,
+      "observed": {
+        "count": 2,
+        "W": 32,
+        "L": 16,
+        "Q": 2,
+        "cost": 72
+      },
+      "met": true
+    },
+    "budget_blind_all_L_curves": {
+      "case": "common-two-chain-k2-blind_three-0",
+      "budget": 1,
+      "layout": "distinct",
+      "omega": 24,
+      "largest_work_sum": 16,
+      "expected_W": 40,
+      "expected_L": 16,
+      "met": true,
+      "observed": {
+        "ids": [
+          "blind-run-000386",
+          "blind-run-000387",
+          "blind-run-000388"
+        ],
+        "W": 40,
+        "L": 16,
+        "Q": 2
+      }
+    },
+    "interpretation": "cost of simultaneous L-optimality, not budget ignorance alone; component extrema may differ"
+  },
+  {
+    "layout": "colliding",
+    "known_B_witness": {
+      "case": "common-two-chain-k2-scalar_three",
+      "base": "common-two-chain",
+      "kappa": 2,
+      "policy": "scalar_three",
+      "budget": 1,
+      "layout": "colliding",
+      "paths": 2,
+      "expected_maxima": {
+        "W": 32,
+        "L": 16,
+        "Q": 2
+      },
+      "expected_cost_ceiling": 72,
+      "observed": {
+        "count": 2,
+        "W": 32,
+        "L": 16,
+        "Q": 2,
+        "cost": 72
+      },
+      "met": true
+    },
+    "budget_blind_all_L_curves": {
+      "case": "common-two-chain-k2-blind_three-0",
+      "budget": 1,
+      "layout": "colliding",
+      "omega": 24,
+      "largest_work_sum": 16,
+      "expected_W": 40,
+      "expected_L": 16,
+      "met": true,
+      "observed": {
+        "ids": [
+          "blind-run-000389",
+          "blind-run-000390",
+          "blind-run-000391"
+        ],
+        "W": 40,
+        "L": 16,
+        "Q": 2
+      }
+    },
+    "interpretation": "cost of simultaneous L-optimality, not budget ignorance alone; component extrema may differ"
+  }
+]

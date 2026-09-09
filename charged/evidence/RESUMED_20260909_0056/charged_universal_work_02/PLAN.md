@@ -1,0 +1,11 @@
+# Exact work of a fixed-order budget-unaware policy
+
+Post-outcome author analysis, preserving work_01 and all original native records. No new measurements or new input population. Source and equations are fixed before this analysis is run; the native W/L/Q records were already observed. Reconstruct all 17,200 ordinary replay records in all 1,280 groups (128 configured cases, B0..4, both layouts). Concurrent and intentional negative-control units remain in the original study; this analysis targets its complete finite policy path groups only, with no outcome filtering.
+
+For a fixed topological completion order pi, let M_i be the largest work in its prefix through i, S_i its suffix starting at i, and Omega_k(S) the sum of the largest min(k,|S|) works of S. The implemented least-ready rule has a fixed topological completion order independent of success/failure history. Denote total mandatory work Omega and largest work wmax.
+
+Both mode families have worst Q=n+min(B,r). For two modes, worst W=Omega+min(B,r)*wmax, and worst L=0 if B<r elseOmega. For three modes, worst L=Omega_min((B-r)+,n); at r=0, worst W=Omega+Omega_min(B,n). At r>=1,B<=r, worst W=Omega+B*wmax. At r>=1,B>r, conjectured exact W is Omega+max_i{(r-1)*M_i+w_pi_i+Omega_(B-r)(S_i)}.
+
+Reason: if the rth cheap failure occurs at i, the earlier r-1 cheap failures pay at most (r-1)M_i and the last pays w_i. Afterwards the remaining B-r writes can invalidate at most that many distinct cached completions from S_i. Every expression is achievable: place the first r-1 cheap failures on a prefix-maximum job, complete the intervening jobs, fail cheaply at i, then invalidate the largest suffix jobs during cached completion. Runs that never exhaust r failures have at most (r-1)wmax extra work and are covered by the i=n candidate. This is a fixed-policy resource characterization, not a general W-optimality, full Pareto or timing claim. Component maxima may occur on different paths.
+
+Falsifier: any mismatch of reconstructed raw W/L/Q maxima, frozen group maxima or one proposed closed form. Preserve every mismatch; no retry/exclusion. All source/native bytes and original results stay unchanged. Analysis cap60s; no native execution.
