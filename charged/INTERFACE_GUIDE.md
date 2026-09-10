@@ -47,3 +47,7 @@ Paper163 Sections2 and5 expand the pinned-source argument. A monotonically exten
 ## Paper172 section map and observation scope
 
 The current whole-kernel model and charging are in Section2; universal protected-work results in Section3; joint-work polynomial cases in Sections4--5; finite-program domination and the output-only boundary in Section6; completed-operation Java refinement in Section7. Historical repair-interface Section4.3 locators above refer to paper163 and its predecessors. Those separate results remain in their supplements. Section8 reports both original2,076 zero-retry native paths and12,224 one-retry paths, including both wrappers and verified TreeBins. Thus the earlier small-fixture tree/validation exclusion above describes that earlier study, not the new native matrix. Resizing and full JMM verification remain outside the native evidence.
+
+## Paper180 source and operation boundaries
+
+Current locators are model/charging2, universal protected work3, total-work cases4--5, finite programs and output-only interface6, conditional Java7, fixed guard-entry charges8, and evaluation9. Linux Section9.2 is a single-job source event upper refinement. Its snapshot operation exposes stronger name records; its two-cheap comparator has a different universal call cap. Neither is hidden inside the fixed whole-kernel class. Actual source event vectors, global writer attribution and all failed/expected-error outcomes are retained in the [Linux/guard guide](LINUX_GUARD.md).
