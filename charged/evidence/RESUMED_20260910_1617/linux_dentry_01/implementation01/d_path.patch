@@ -1,0 +1,109 @@
+--- a/fs/d_path.c
++++ b/fs/d_path.c
+@@ -9,6 +9,21 @@
+ #include "mount.h"
+ #include "internal.h"
+ 
++#ifdef CONFIG_D_PATH_KUNIT_TEST
++#include "d_path_retry_hooks.h"
++#else
++#define dpath_body_begin(protected) do { } while (0)
++#define dpath_body_end() do { } while (0)
++#define dpath_name_event() do { } while (0)
++#define dpath_copy_event(len, fault) do { } while (0)
++#define dpath_char_event() do { } while (0)
++#define dpath_mid_gate(dentry) do { } while (0)
++#define dpath_end_gate(phase) do { } while (0)
++#define dpath_validation_event() do { } while (0)
++#define dpath_guard_event() do { } while (0)
++#define dpath_rcu_event() do { } while (0)
++#endif
++
+ struct prepend_buffer {
+ 	char *buf;
+ 	int len;
+@@ -28,6 +43,7 @@
+ 	if (likely(p->len > 0)) {
+ 		p->len--;
+ 		*--p->buf = c;
++		dpath_char_event();
+ 		return true;
+ 	}
+ 	p->len = -1;
+@@ -48,9 +64,11 @@
+ static bool prepend_copy(void *dst, const void *src, int len)
+ {
+ 	if (unlikely(copy_from_kernel_nofault(dst, src, len))) {
++		dpath_copy_event(len, true);
+ 		memset(dst, 'x', len);
+ 		return false;
+ 	}
++	dpath_copy_event(len, false);
+ 	return true;
+ }
+ 
+@@ -328,27 +346,47 @@
+ /*
+  * Write full pathname from the root of the filesystem into the buffer.
+  */
++/* The upstream traversal is factored without changing its operations. */
++static void __dentry_path_body(const struct dentry *dentry,
++			       struct prepend_buffer *b, bool protected)
++{
++	dpath_body_begin(protected);
++	while (!IS_ROOT(dentry)) {
++		const struct dentry *parent = dentry->d_parent;
++
++		dpath_name_event();
++		dpath_mid_gate(dentry);
++		prefetch(parent);
++		if (!prepend_name(b, &dentry->d_name))
++			break;
++		dentry = parent;
++	}
++	dpath_body_end();
++}
++
+ static char *__dentry_path(const struct dentry *d, struct prepend_buffer *p)
+ {
+ 	const struct dentry *dentry;
+ 	struct prepend_buffer b;
+ 	int seq = 0;
+ 
++	dpath_rcu_event();
+ 	rcu_read_lock();
+ restart:
+ 	dentry = d;
+ 	b = *p;
++	if (seq & 1) {
++		dpath_end_gate(1);
++		dpath_validation_event();
++		dpath_guard_event();
++	}
+ 	read_seqbegin_or_lock(&rename_lock, &seq);
+-	while (!IS_ROOT(dentry)) {
+-		const struct dentry *parent = dentry->d_parent;
+-
+-		prefetch(parent);
+-		if (!prepend_name(&b, &dentry->d_name))
+-			break;
+-		dentry = parent;
+-	}
+-	if (!(seq & 1))
++	__dentry_path_body(dentry, &b, seq & 1);
++	if (!(seq & 1)) {
+ 		rcu_read_unlock();
++		dpath_end_gate(0);
++		dpath_validation_event();
++	}
+ 	if (need_seqretry(&rename_lock, seq)) {
+ 		seq = 1;
+ 		goto restart;
+@@ -446,3 +484,7 @@
+ 	__putname(page);
+ 	return error;
+ }
++
++#ifdef CONFIG_D_PATH_KUNIT_TEST
++#include "d_path_retry_test.c"
++#endif

@@ -1,0 +1,230 @@
+{
+  "utc": "2026-09-10T16:42:42.160954+00:00",
+  "status": "SUCCESS",
+  "error": null,
+  "seconds": 185.11878550000256,
+  "steps": [
+    {
+      "step": "docker_version",
+      "argv": [
+        "docker",
+        "version"
+      ],
+      "returncode": 0,
+      "seconds": 0.13960054199560545
+    },
+    {
+      "step": "image",
+      "argv": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/arm64",
+        "ubuntu:24.04@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254"
+      ],
+      "returncode": 0,
+      "seconds": 1.0574207500030752
+    },
+    {
+      "step": "create",
+      "argv": [
+        "docker",
+        "create",
+        "--name",
+        "dpath-artifact-34ba31452ce941ff",
+        "--platform",
+        "linux/arm64",
+        "--memory",
+        "4g",
+        "--cpus",
+        "2",
+        "--pids-limit",
+        "512",
+        "--security-opt",
+        "no-new-privileges",
+        "--mount",
+        "type=bind,source=/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260910_1617/PUBLICATION_07/local_kernel02,target=/work",
+        "ubuntu:24.04@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254",
+        "sleep",
+        "3600"
+      ],
+      "returncode": 0,
+      "seconds": 0.1447577920043841
+    },
+    {
+      "step": "start",
+      "argv": [
+        "docker",
+        "start",
+        "dpath-artifact-34ba31452ce941ff"
+      ],
+      "returncode": 0,
+      "seconds": 0.3461279589973856
+    },
+    {
+      "step": "apt_update",
+      "argv": [
+        "docker",
+        "exec",
+        "dpath-artifact-34ba31452ce941ff",
+        "apt-get",
+        "update"
+      ],
+      "returncode": 0,
+      "seconds": 7.565773499998613
+    },
+    {
+      "step": "apt_install",
+      "argv": [
+        "docker",
+        "exec",
+        "-e",
+        "DEBIAN_FRONTEND=noninteractive",
+        "dpath-artifact-34ba31452ce941ff",
+        "apt-get",
+        "install",
+        "-y",
+        "--no-install-recommends",
+        "build-essential",
+        "bison",
+        "flex",
+        "bc",
+        "libelf-dev",
+        "libssl-dev",
+        "python3",
+        "git",
+        "rsync",
+        "kmod",
+        "ca-certificates",
+        "xz-utils",
+        "cpio",
+        "qemu-system-arm"
+      ],
+      "returncode": 0,
+      "seconds": 26.723964874996454
+    },
+    {
+      "step": "packages",
+      "argv": [
+        "docker",
+        "exec",
+        "dpath-artifact-34ba31452ce941ff",
+        "dpkg-query",
+        "-W"
+      ],
+      "returncode": 0,
+      "seconds": 0.1302672920137411
+    },
+    {
+      "step": "directories",
+      "argv": [
+        "docker",
+        "exec",
+        "dpath-artifact-34ba31452ce941ff",
+        "mkdir",
+        "/linuxsrc",
+        "/build-kunit"
+      ],
+      "returncode": 0,
+      "seconds": 0.13059445800899994
+    },
+    {
+      "step": "extract",
+      "argv": [
+        "docker",
+        "exec",
+        "dpath-artifact-34ba31452ce941ff",
+        "tar",
+        "-xzf",
+        "/work/linux-v6.12.tar.gz",
+        "--strip-components=1",
+        "-C",
+        "/linuxsrc"
+      ],
+      "returncode": 0,
+      "seconds": 9.654684166991501
+    },
+    {
+      "step": "install",
+      "argv": [
+        "docker",
+        "exec",
+        "dpath-artifact-34ba31452ce941ff",
+        "python3",
+        "-c",
+        "\nfrom pathlib import Path\nimport hashlib,json,shutil\nd=Path('/work/native');src=Path('/linuxsrc')\nm=json.loads((d/'SOURCE_MANIFEST01.json').read_text())\nfor row in m['rows']:\n p=src/row['path']\n assert p.stat().st_size==row['bytes'] and hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256'],row['path']\nfor name in ['d_path.c','d_path_retry_hooks.h','d_path_retry_test.c','cached_body.c.inc','d_path_retry_inputs.h']:\n shutil.copyfile(d/'implementation03'/name,src/'fs'/name)\nf=src/'lib/Kconfig.debug';s=f.read_text();assert 'config D_PATH_KUNIT_TEST' not in s\nf.write_text(s+(d/'implementation03/Kconfig.append').read_text())\nprint(json.dumps(dict(upstream_files_verified=len(m['rows']),installed_source_files=5,kconfig_appended=True)))\n"
+      ],
+      "returncode": 0,
+      "seconds": 0.18112995800038334
+    },
+    {
+      "step": "kernel",
+      "argv": [
+        "docker",
+        "exec",
+        "-w",
+        "/linuxsrc",
+        "dpath-artifact-34ba31452ce941ff",
+        "python3",
+        "-u",
+        "tools/testing/kunit/kunit.py",
+        "run",
+        "--arch=arm64",
+        "--cross_compile=",
+        "--jobs=2",
+        "--timeout=600",
+        "--kunitconfig=/work/native/kunit_dpath.config",
+        "--build_dir=/build-kunit",
+        "--qemu_args=-smp 2 -m 1024",
+        "--json=/work/native/KUNIT_MATRIX_RESULT03B.json"
+      ],
+      "returncode": 0,
+      "seconds": 132.83362412499264
+    },
+    {
+      "step": "capture_KERNEL_MATRIX03B.config",
+      "returncode": 0
+    },
+    {
+      "step": "capture_KERNEL_MATRIX03B.test.log",
+      "returncode": 0
+    },
+    {
+      "step": "reconstruct",
+      "argv": [
+        "/anonymous-author-home/.pyenv/versions/3.10.9/bin/python3",
+        "-B",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260910_1617/PUBLICATION_07/local_kernel02/native/validate_matrix03b.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.5326666670007398
+    }
+  ],
+  "cleanup": [
+    {
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "2",
+        "dpath-artifact-34ba31452ce941ff"
+      ],
+      "returncode": 0,
+      "stdout": "dpath-artifact-34ba31452ce941ff\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "rm",
+        "dpath-artifact-34ba31452ce941ff"
+      ],
+      "returncode": 0,
+      "stdout": "dpath-artifact-34ba31452ce941ff\n",
+      "stderr": ""
+    }
+  ],
+  "existing_population": true,
+  "new_timing_samples": 0,
+  "scope": "Author-triggered source reproduction, not independent certification or a new sample population"
+}

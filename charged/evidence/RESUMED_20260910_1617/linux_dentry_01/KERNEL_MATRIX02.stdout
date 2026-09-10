@@ -1,0 +1,26 @@
+[15:56:52] Configuring KUnit Kernel ...
+[15:56:52] Building KUnit Kernel ...
+Populating config with:
+$ make ARCH=arm64 O=/build-kunit olddefconfig
+Building with:
+$ make all compile_commands.json ARCH=arm64 O=/build-kunit --jobs=2
+[15:56:58] Starting KUnit Kernel (1/1)...
+[15:56:58] ============================================================
+Running tests with:
+$ qemu-system-aarch64 -nodefaults -m 1024 -kernel /build-kunit/arch/arm64/boot/Image.gz -append 'kunit.enable=1 console=ttyAMA0 kunit_shutdown=reboot' -no-reboot -nographic -serial stdio -machine virt -cpu max,pauth-impdef=on -smp 2 -m 1024
+[15:56:59] ================= dpath-retry (9 subtests) =================
+[15:57:00] [PASSED] dpath_group_0
+[15:57:01] [PASSED] dpath_group_1
+[15:57:02] [PASSED] dpath_group_2
+[15:57:03] [PASSED] dpath_group_3
+[15:57:04] [PASSED] dpath_group_4
+[15:57:05] [PASSED] dpath_group_5
+[15:57:08] [PASSED] dpath_group_6
+[15:57:09] [PASSED] dpath_group_7
+[15:57:09] [PASSED] dpath_group_8
+[15:57:09] =================== [PASSED] dpath-retry ===================
+[15:57:09] ============================================================
+[15:57:09] Testing complete. Ran 9 tests: passed: 9
+[15:57:09] Test results stored in /work/KUNIT_MATRIX_RESULT02.json
+[15:57:09] Elapsed time: 16.351s total, 0.001s configuring, 5.508s building, 10.809s running
+

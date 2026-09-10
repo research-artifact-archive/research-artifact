@@ -1,0 +1,114 @@
+{
+  "utc": "2026-09-10T16:28:15.032616+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "-w",
+    "/linuxsrc",
+    "fse-dentry-kunit-20360910-2347",
+    "python3",
+    "-u",
+    "tools/testing/kunit/kunit.py",
+    "run",
+    "--arch=arm64",
+    "--cross_compile=",
+    "--jobs=2",
+    "--timeout=600",
+    "--kunitconfig=/work/kunit_dpath.config",
+    "--build_dir=/build-kunit",
+    "--qemu_args=-smp 2 -m 1034",
+    "--json=/work/KUNIT_MATRIX_RESULT03.json"
+  ],
+  "wall_cap_seconds": 3600,
+  "guest_cap_seconds": 600,
+  "inputs": [
+    {
+      "path": "INPUTS03.json",
+      "bytes": 292506,
+      "sha256": "3b120b63768cac1f0b213e95bb7dca9527f8dfaf6a9a35576a91f03a78e82be8"
+    },
+    {
+      "path": "PROTOCOL03.md",
+      "bytes": 2916,
+      "sha256": "3aa1cd83f54944d800beb4e553885ab5972450caa22a5d5204b9149770263eed"
+    },
+    {
+      "path": "SOURCE_REFINEMENT01.md",
+      "bytes": 5691,
+      "sha256": "a572f6694aebcea4997642530d9880ce39173af481809b71584b1be6751146a8"
+    },
+    {
+      "path": "SHARPENED_BODY_BOUND02.md",
+      "bytes": 2085,
+      "sha256": "b47c887927e325cf5b0aaba49080c156ff11532f7d17914eac485b863ca0febc"
+    },
+    {
+      "path": "kunit_dpath.config",
+      "bytes": 233,
+      "sha256": "f6b08668d26e07983483700b982f9ac15c26f923654ee5c9c6c30953539e3c78"
+    },
+    {
+      "path": "kernel_matrix03.py",
+      "bytes": 3386,
+      "sha256": "7336461c3406a745aba373586f3363dc478a8d5d3a0aa3057e73f54dc0e25c21"
+    },
+    {
+      "path": "patch_source01.py",
+      "bytes": 3651,
+      "sha256": "5499b487734d4473ae4abf39c25c21aa72ba897d4f0d971831c0a8fe133b2c3d"
+    },
+    {
+      "path": "validate_matrix03.py",
+      "bytes": 3160,
+      "sha256": "0d30ed0ab5a6dba3a85cc4f79fea0c7c4c3bc779741f11245d25fd5f764e641c"
+    },
+    {
+      "path": "validate_matrix02.py",
+      "bytes": 9423,
+      "sha256": "9f8d9ae23e44fc5f1c091943bf1680469621c42d7a84bb95784a0891b171d785"
+    },
+    {
+      "path": "implementation03/Kconfig.append",
+      "bytes": 198,
+      "sha256": "3afc61f91ef2df97977658dd17882ba489b7bdcd392da7b4ecb2282bfaf5f066"
+    },
+    {
+      "path": "implementation03/attribution.patch",
+      "bytes": 2456,
+      "sha256": "c57ae02e1b5880e9d707875c0fbf9aea277f514f0d0aa0c5dd6197ab354cba54"
+    },
+    {
+      "path": "implementation03/cached_body.c.inc",
+      "bytes": 2400,
+      "sha256": "db9eb344d18cdf2a791a79e1e7188fae58c7cf13e2fff6496bf2e8c0b8b7520a"
+    },
+    {
+      "path": "implementation03/d_path.c",
+      "bytes": 12921,
+      "sha256": "4c9e2e33caf972d7873c033087f7cf8f70a3bba980170954bbcac0b056502337"
+    },
+    {
+      "path": "implementation03/d_path.patch",
+      "bytes": 2616,
+      "sha256": "4a81b978b676bee281a5c607aa67c40a34dd99e52e2cfaf207c8e7dd3f90f825"
+    },
+    {
+      "path": "implementation03/d_path_retry_hooks.h",
+      "bytes": 540,
+      "sha256": "8e77e183f9778ee40b12049a2f06deba7fd85854c5d153289a20388f2e375072"
+    },
+    {
+      "path": "implementation03/d_path_retry_inputs.h",
+      "bytes": 49126,
+      "sha256": "8eea6a3277bd98effe97276668e1cb1f2bf254c2f2905bc14a0c2c75dd3f2b9f"
+    },
+    {
+      "path": "implementation03/d_path_retry_test.c",
+      "bytes": 19363,
+      "sha256": "47346b73277022f0290f20de1bd65396a48af2fded52d910e00ff5a4bfcbf43d"
+    }
+  ],
+  "planned_valid": 1920,
+  "planned_controls": 4,
+  "purpose": "third source execution for global writer attribution; unchanged existing population"
+}

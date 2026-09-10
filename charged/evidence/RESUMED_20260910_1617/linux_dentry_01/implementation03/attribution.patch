@@ -1,0 +1,53 @@
+--- implementation02/d_path_retry_test.c
++++ implementation03/d_path_retry_test.c
+@@ -409,6 +409,8 @@
+ 	char *expected = NULL, *reference = NULL, *result = NULL, *ref;
+ 	unsigned char *storage = NULL;
+ 	unsigned int i, writes, before_writes, total_writes, expected_len = 0;
++	unsigned int global_begin, global_end, global_writes;
++	bool global_ok;
+ 	u64 work = 0, protected_work = 0, bytes = 0, protected_bytes = 0;
+ 	u64 visits = 0, protected_visits = 0, output_hash = 0, expected_hash = 0;
+ 	u64 ceiling = 2ULL * (input->cap - 1) + 2;
+@@ -438,6 +440,7 @@
+ 	if (c->profile->pre)
+ 		dp_trigger(c, true);
+ 	before_writes = READ_ONCE(c->writes);
++	global_begin = read_seqbegin(&rename_lock);
+ 	switch (input->policy) {
+ 	case 0:
+ 		result = dentry_path_raw(c->query, (char *)storage + 16, input->cap);
+@@ -456,8 +459,14 @@
+ 		result = dpath_two_cheap_raw(c->query, (char *)storage + 16, input->cap);
+ 		break;
+ 	}
++	/* Attribution probes are outside every policy resource counter. */
++	smp_mb();
++	global_end = read_seqbegin(&rename_lock);
+ 	WRITE_ONCE(c->enabled, false);
+ 	writes = READ_ONCE(c->writes) - before_writes;
++	global_writes = (global_end - global_begin) / 2;
++	global_ok = !(global_begin & 1) && !(global_end & 1) &&
++		global_end >= global_begin && global_writes == writes;
+ 	dp_expected(c, expected, 32768, writes + before_writes);
+ 	expected_len = strlen(expected);
+ 	expected_error = expected_len + 1 > input->cap ? -ENAMETOOLONG : 0;
+@@ -520,7 +529,7 @@
+ 			persistent = dp_hash(result) == output_hash;
+ 	}
+ 	total_writes = READ_ONCE(c->writes);
+-	healthy = !READ_ONCE(c->error) && reference_ok && canary && persistent;
++	healthy = !READ_ONCE(c->error) && reference_ok && canary && persistent && global_ok;
+ 	detected = !output_ok || !bounds || !per_body;
+ 	pr_info("DPROW {\"id\":%u,\"status\":\"%s\",\"B\":%u,"
+ 		"\"writes_total\":%u,\"issued_end\":%u,\"issued_mid\":%u,"
+@@ -551,6 +560,9 @@
+ 		c->snapshot_takes, c->snapshot_releases, c->snapshot_ref_inc,
+ 		c->snapshot_ref_dec, c->snapshot_inline_bytes,
+ 		c->snapshot_alloc_bytes, c->snapshot_fallback);
++	pr_info("DPGLOBAL {\"id\":%u,\"begin\":%u,\"end\":%u,"
++		"\"global_writes\":%u,\"designated_writes\":%u,\"valid\":%u}\n",
++		input->id, global_begin, global_end, global_writes, writes, global_ok);
+ 	KUNIT_EXPECT_TRUE_MSG(test, healthy, "row %u environment/oracle", input->id);
+ 	KUNIT_EXPECT_EQ_MSG(test, detected, input->control,
+ 			   "row %u policy/control", input->id);

@@ -1,0 +1,108 @@
+{
+  "utc": "2026-09-10T14:51:19.834568+00:00",
+  "status": "SUCCESS",
+  "container": "fse-dentry-kunit-20260910-2347",
+  "seconds": 36.42460812500212,
+  "steps": [
+    {
+      "stage": "create01",
+      "argv": [
+        "docker",
+        "run",
+        "-d",
+        "--name",
+        "fse-dentry-kunit-20260910-2347",
+        "--platform",
+        "linux/arm64",
+        "--cpus",
+        "2",
+        "--memory",
+        "4g",
+        "--pids-limit",
+        "512",
+        "--security-opt",
+        "no-new-privileges",
+        "--mount",
+        "type=bind,source=/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260910_1617/linux_dentry_01,target=/work",
+        "-w",
+        "/work",
+        "ubuntu@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254",
+        "sleep",
+        "14400"
+      ],
+      "status": "SUCCESS",
+      "returncode": 0
+    },
+    {
+      "stage": "apt_update01",
+      "argv": [
+        "docker",
+        "exec",
+        "fse-dentry-kunit-20260910-2347",
+        "apt-get",
+        "update"
+      ],
+      "status": "SUCCESS",
+      "returncode": 0
+    },
+    {
+      "stage": "apt_install01",
+      "argv": [
+        "docker",
+        "exec",
+        "-e",
+        "DEBIAN_FRONTEND=noninteractive",
+        "fse-dentry-kunit-20260910-2347",
+        "apt-get",
+        "install",
+        "-y",
+        "--no-install-recommends",
+        "build-essential",
+        "bison",
+        "flex",
+        "bc",
+        "libelf-dev",
+        "libssl-dev",
+        "python3",
+        "git",
+        "rsync",
+        "kmod",
+        "curl",
+        "ca-certificates",
+        "xz-utils",
+        "cpio",
+        "qemu-system-arm"
+      ],
+      "status": "SUCCESS",
+      "returncode": 0
+    },
+    {
+      "stage": "packages01",
+      "argv": [
+        "docker",
+        "exec",
+        "fse-dentry-kunit-20260910-2347",
+        "dpkg-query",
+        "-W"
+      ],
+      "status": "SUCCESS",
+      "returncode": 0
+    },
+    {
+      "stage": "image01",
+      "argv": [
+        "docker",
+        "image",
+        "inspect",
+        "ubuntu@sha256:224a1869083a311ef3f13648a154ba79832fbef6364d31493642ca03082da254"
+      ],
+      "status": "SUCCESS",
+      "returncode": 0
+    }
+  ],
+  "privileged": false,
+  "memory_gib": 4,
+  "cpus": 2,
+  "persistent_mount": "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260910_1617/linux_dentry_01",
+  "maximum_container_lifetime_seconds": 14400
+}

@@ -1,0 +1,253 @@
+{
+  "utc": "2026-09-10T16:04:16.854573+00:00",
+  "source_sha256": "e4aebb21c83ca6c39faa8d8cc4180854b9da7316bfd0c6c0b3e4afe9ad3e124d",
+  "protocol_sha256": "77233a83b6f8eddfccedee848c7e95c5db71207036a3d9547ae7ebad1cda231e",
+  "input_sha256": "616c6840e1e8627276974a786034140996ab016eccd9bb76ed41b9a519992044",
+  "proof_sha256": "3e9538839e4df747ee551ef163640ece0b90d9fc5cb83bcb1f42719268a89005",
+  "planned_inputs": 1809,
+  "planned_universal_roots": 26874,
+  "planned_one_write": 1809,
+  "planned_boundary_checks": 5427,
+  "wall_cap_seconds": 300,
+  "status": "PASS",
+  "counts": {
+    "SUCCESS": 1809
+  },
+  "universal_roots": 26874,
+  "informed_one_write_cases": 1809,
+  "boundary_checks": 5427,
+  "interpreted_policy_paths": 86376,
+  "scalar_oracle_states": 205707,
+  "inputs_with_strict_order_effect": 506,
+  "errors": [],
+  "examples": [
+    {
+      "input": {
+        "id": 1806,
+        "kind": "order_example",
+        "w": [
+          1,
+          10
+        ],
+        "g": [
+          1,
+          1
+        ],
+        "edges": []
+      },
+      "status": "SUCCESS",
+      "universal": [
+        {
+          "r": 0,
+          "P": [
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 4,
+          "informed_boundary": 0
+        },
+        {
+          "r": 1,
+          "P": [
+            0,
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 7,
+          "informed_boundary": 0
+        },
+        {
+          "r": 2,
+          "P": [
+            0,
+            0,
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 11,
+          "informed_boundary": 0
+        }
+      ],
+      "informed_one_write": 11,
+      "best_order": [
+        1,
+        0
+      ],
+      "lawler_order": [
+        1,
+        0
+      ],
+      "order_values": [
+        {
+          "order": [
+            0,
+            1
+          ],
+          "P": 12
+        },
+        {
+          "order": [
+            1,
+            0
+          ],
+          "P": 11
+        }
+      ]
+    },
+    {
+      "input": {
+        "id": 1807,
+        "kind": "large_entry_charge",
+        "w": [
+          1,
+          10
+        ],
+        "g": [
+          100,
+          100
+        ],
+        "edges": []
+      },
+      "status": "SUCCESS",
+      "universal": [
+        {
+          "r": 0,
+          "P": [
+            200,
+            210,
+            211
+          ],
+          "policy_paths": 4,
+          "informed_boundary": 0
+        },
+        {
+          "r": 1,
+          "P": [
+            0,
+            200,
+            210,
+            211
+          ],
+          "policy_paths": 7,
+          "informed_boundary": 0
+        },
+        {
+          "r": 2,
+          "P": [
+            0,
+            0,
+            200,
+            210,
+            211
+          ],
+          "policy_paths": 11,
+          "informed_boundary": 0
+        }
+      ],
+      "informed_one_write": 201,
+      "best_order": [
+        1,
+        0
+      ],
+      "lawler_order": [
+        1,
+        0
+      ],
+      "order_values": [
+        {
+          "order": [
+            0,
+            1
+          ],
+          "P": 210
+        },
+        {
+          "order": [
+            1,
+            0
+          ],
+          "P": 201
+        }
+      ]
+    },
+    {
+      "input": {
+        "id": 1808,
+        "kind": "forced_heavy_first",
+        "w": [
+          10,
+          1
+        ],
+        "g": [
+          1,
+          1
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "status": "SUCCESS",
+      "universal": [
+        {
+          "r": 0,
+          "P": [
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 4,
+          "informed_boundary": 0
+        },
+        {
+          "r": 1,
+          "P": [
+            0,
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 7,
+          "informed_boundary": 0
+        },
+        {
+          "r": 2,
+          "P": [
+            0,
+            0,
+            2,
+            12,
+            13
+          ],
+          "policy_paths": 11,
+          "informed_boundary": 0
+        }
+      ],
+      "informed_one_write": 11,
+      "best_order": [
+        0,
+        1
+      ],
+      "lawler_order": [
+        0,
+        1
+      ],
+      "order_values": [
+        {
+          "order": [
+            0,
+            1
+          ],
+          "P": 11
+        }
+      ]
+    }
+  ],
+  "seconds": 0.6412091249949299,
+  "scope": "finite canonical-policy/source-independent corroboration, no native g calibration, no joint frontier or least-W claim"
+}

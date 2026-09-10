@@ -1,0 +1,94 @@
+{
+  "utc": "2026-09-10T15:29:33.336582+00:00",
+  "argv": [
+    "docker",
+    "exec",
+    "-w",
+    "/linuxsrc",
+    "fse-dentry-kunit-20260910-2347",
+    "python3",
+    "-u",
+    "tools/testing/kunit/kunit.py",
+    "run",
+    "--arch=arm64",
+    "--cross_compile=",
+    "--jobs=2",
+    "--timeout=600",
+    "--kunitconfig=/work/kunit_dpath.config",
+    "--build_dir=/build-kunit",
+    "--qemu_args=-smp 2 -m 1024",
+    "--json=/work/KUNIT_MATRIX_RESULT01.json"
+  ],
+  "wall_cap_seconds": 3600,
+  "guest_cap_seconds": 600,
+  "inputs": [
+    {
+      "path": "INPUTS01.json",
+      "bytes": 234637,
+      "sha256": "4a134bfe4eba6d0fd3a0c8e75f6e9bfc31c766740bb93980d33744faa3d21157"
+    },
+    {
+      "path": "PROTOCOL01.md",
+      "bytes": 8400,
+      "sha256": "4363518dc6b2d7d73d2795be65ca9582a19d9c1801ec7677ee328a04e8bf9836"
+    },
+    {
+      "path": "SOURCE_REFINEMENT01.md",
+      "bytes": 5691,
+      "sha256": "a572f6694aebcea4997642530d9880ce39173af481809b71584b1be6751146a8"
+    },
+    {
+      "path": "kunit_dpath.config",
+      "bytes": 233,
+      "sha256": "f6b08668d26e07983483700b982f9ac15c26f923654ee5c9c6c30953539e3c78"
+    },
+    {
+      "path": "kernel_matrix01.py",
+      "bytes": 3322,
+      "sha256": "c1653519cfe80b7b525509bba4141511cc151037e7d7019398978b1a8546fc84"
+    },
+    {
+      "path": "patch_source01.py",
+      "bytes": 3651,
+      "sha256": "5499b487734d4473ae4abf39c25c21aa72ba897d4f0d971831c0a8fe133b2c3d"
+    },
+    {
+      "path": "implementation01/Kconfig.append",
+      "bytes": 198,
+      "sha256": "3afc61f91ef2df97977658dd17882ba489b7bdcd392da7b4ecb2282bfaf5f066"
+    },
+    {
+      "path": "implementation01/cached_body.c.inc",
+      "bytes": 1570,
+      "sha256": "90062f92914ce9796cda10e08de87c103028f660eb8246a6b6a4769995a391e5"
+    },
+    {
+      "path": "implementation01/d_path.c",
+      "bytes": 12921,
+      "sha256": "4c9e2e33caf972d7873c033087f7cf8f70a3bba980170954bbcac0b056502337"
+    },
+    {
+      "path": "implementation01/d_path.patch",
+      "bytes": 2616,
+      "sha256": "4a81b978b676bee281a5c607aa67c40a34dd99e52e2cfaf207c8e7dd3f90f825"
+    },
+    {
+      "path": "implementation01/d_path_retry_hooks.h",
+      "bytes": 540,
+      "sha256": "8e77e183f9778ee40b12049a2f06deba7fd85854c5d153289a20388f2e375072"
+    },
+    {
+      "path": "implementation01/d_path_retry_inputs.h",
+      "bytes": 39526,
+      "sha256": "12c546bd4246bd2709567a02f2c1af31457140733203ff4d63a79fe1f83def65"
+    },
+    {
+      "path": "implementation01/d_path_retry_test.c",
+      "bytes": 17823,
+      "sha256": "cdb63df089fada79191ed06211c36502a0425fde9ecdc93877cdf64390fa58d8"
+    }
+  ],
+  "planned_valid": 1536,
+  "planned_controls": 4,
+  "purpose": "first exploratory actual-Linux semantic/source-resource matrix"
+}

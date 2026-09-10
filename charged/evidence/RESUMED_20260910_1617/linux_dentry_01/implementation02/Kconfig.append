@@ -1,0 +1,7 @@
+
+config D_PATH_KUNIT_TEST
+	bool "Source integration test of dentry path retry policies"
+	depends on KUNIT=y
+	default n
+	help
+	  Author exploratory KUnit matrix. Not a production policy replacement.

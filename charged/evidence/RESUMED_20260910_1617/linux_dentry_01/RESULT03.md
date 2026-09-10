@@ -1,0 +1,11 @@
+# Global sequence attribution: fixed third execution
+
+The successful03B execution completed in17.571 seconds on September11 01:29JST. It retains the exact1924-row second population and measures a new obligation: all global rename_lock writer sections bracketing each selected policy invocation. Each sample begins after any designated pre-write and ends before the reference oracle or late writer.
+
+All1924 sample pairs are even and nonwrapping. Their total1763 global writer sections equal the total1763 designated in-call sections, with zero rows containing an additional global section. The independent reconstruction is byte-identical to matrix02's full joined resource/output/body records (SHA2560ffef52f5c8084700c1e4956461b824a15c6ecb1e24cf1807bfcaab1fb9ad58a). All1920 valid rows and four deliberate defects retain their prior classifications, as do the384 higher-Q pairs. This third run is not pooled as a new independent population.
+
+The two earlier03 runner failures happened before any kernel execution: first a missing metadata filename, then a nonexistent container name caused by an overbroad version replacement. Their original runners, empty native outputs, errors, start/completion records and explicit corrections remain preserved. The successful03B runner restores the exact owned container and original1024MiB guest argument, with distinct filenames. No adverse scientific observation was replaced or rerun unchanged.
+
+This establishes absence of additional participating writer sections within these measured brackets. It does not establish absence of nonparticipating name mutation in other filesystems. The participating-writer, nonwrap, positive valid-buffer, nonnegative length, RCU lifetime and stable-copy premises remain. Q counts logical validation/completion blocks, not all native API calls. No copy-fault/allocation injection, native elapsed speedup or whole-filesystem minimax transfer is claimed.
+
+Records: PROTOCOL03.md, INPUTS03.json, implementation03/, PREPARATION03.json, kernel_matrix03b.py, KERNEL_MATRIX_START03B.json, KERNEL_MATRIX_COMPLETION03B.json, KERNEL_MATRIX03B.test.log, MATRIX_VALIDATION03B.json, MATRIX_GLOBAL03B.json, reconstruction03b/, RUNNER_PREFLIGHT_FIX03.json and RUNNER_INSTALL_FIX03B.json.
