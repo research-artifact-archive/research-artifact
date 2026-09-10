@@ -1,0 +1,3 @@
+# Source locator clarification after the fixed sensitivity analysis
+
+The original source, rows and sensitivity receipt remain unchanged. The two-cheap function in implementation03/cached_body.c.inc ends at line94, also the end of that file; the prior receipt's lines65--99 extend past it. This range excess changes no counted branch or primitive. In the pinned overlayfs/dir.c, lines263--310 define ovl_instantiate: d_mark_tmpfile at299 precedes d_instantiate at301. Lines1323--1334 show the backing-file path and call to ovl_instantiate. An extra file/path reference can precede marking; the initialization premise in SOURCE_REFINEMENT04.md is therefore necessary. This is a read-only source clarification, with no new native execution or broader publication proof.

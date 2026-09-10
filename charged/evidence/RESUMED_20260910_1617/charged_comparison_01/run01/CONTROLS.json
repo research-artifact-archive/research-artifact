@@ -1,0 +1,214 @@
+[
+  {
+    "id": "A_omit_guard",
+    "status": "DETECTED",
+    "payload": {
+      "correct": 17,
+      "mutant": 10
+    }
+  },
+  {
+    "id": "A_keep_guard_after_mismatch",
+    "status": "DETECTED",
+    "payload": {
+      "good": {
+        "W": 12,
+        "Pg": 3,
+        "Q": 2,
+        "writes": 1,
+        "events": [
+          {
+            "job": 0,
+            "mode": "cached",
+            "outside_body": 1,
+            "protected_body": 1,
+            "guard_charge": 2,
+            "mismatch": true
+          },
+          {
+            "job": 1,
+            "mode": "cheap",
+            "outside_body": 10,
+            "protected_body": 0,
+            "guard_charge": 0,
+            "mismatch": false
+          }
+        ]
+      },
+      "mutant": {
+        "W": 12,
+        "Pg": 10,
+        "Q": 2,
+        "writes": 1,
+        "events": [
+          {
+            "job": 0,
+            "mode": "cached",
+            "outside_body": 1,
+            "protected_body": 1,
+            "guard_charge": 2,
+            "mismatch": true
+          },
+          {
+            "job": 1,
+            "mode": "cached",
+            "outside_body": 10,
+            "protected_body": 0,
+            "guard_charge": 7,
+            "mismatch": false
+          }
+        ]
+      },
+      "root_bound": 19,
+      "claim": "path-cost control; root frontier need not change"
+    }
+  },
+  {
+    "id": "B_omit_total_comparison",
+    "status": "DETECTED",
+    "payload": {
+      "correct": [
+        [
+          10,
+          10
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          13,
+          5
+        ]
+      ],
+      "mutant": [
+        [
+          10,
+          5
+        ]
+      ]
+    }
+  },
+  {
+    "id": "B_informed_zero",
+    "status": "DETECTED",
+    "payload": {
+      "universal_frontier": [
+        [
+          10,
+          10
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          13,
+          5
+        ]
+      ],
+      "informed_zero": [
+        8,
+        0
+      ],
+      "class_change": true
+    }
+  },
+  {
+    "id": "B_negative_profit_forced",
+    "status": "DETECTED",
+    "payload": {
+      "correct": [
+        [
+          5,
+          5
+        ]
+      ],
+      "forced": {
+        "Wt": 13,
+        "Pt": 10,
+        "Q": 2,
+        "writes": 0,
+        "mask": 3,
+        "events": [
+          {
+            "opcode": "prepare",
+            "job": 0,
+            "Wt": 1,
+            "Pt": 0
+          },
+          {
+            "opcode": "cached_match",
+            "job": 0,
+            "Wt": 5,
+            "Pt": 5
+          },
+          {
+            "opcode": "prepare",
+            "job": 1,
+            "Wt": 2,
+            "Pt": 0
+          },
+          {
+            "opcode": "cached_match",
+            "job": 1,
+            "Wt": 5,
+            "Pt": 5
+          }
+        ],
+        "universal_call_cap_reason": "only completing operations; no cheap calls"
+      }
+    }
+  },
+  {
+    "id": "B_uniform_hardness_scope",
+    "status": "DETECTED",
+    "payload": {
+      "correct": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          19
+        ],
+        [
+          28,
+          14
+        ],
+        [
+          30,
+          12
+        ]
+      ],
+      "uniform": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          19
+        ],
+        [
+          28,
+          14
+        ],
+        [
+          30,
+          12
+        ]
+      ],
+      "scope_exclusion": true
+    }
+  }
+]

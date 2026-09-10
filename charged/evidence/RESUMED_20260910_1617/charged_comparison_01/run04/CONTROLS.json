@@ -1,0 +1,63 @@
+[
+  {
+    "id": "omit_comparison_from_total",
+    "correct": 5,
+    "altered": 4,
+    "detected": true
+  },
+  {
+    "id": "charge_full_suffix_after_mismatch",
+    "correct": 3,
+    "altered": 10,
+    "detected": true,
+    "scope": "single mismatch path; complete frontier need not change"
+  },
+  {
+    "id": "omit_mismatch_branch",
+    "correct": [
+      8,
+      5
+    ],
+    "altered": [
+      5,
+      2
+    ],
+    "detected": true
+  },
+  {
+    "id": "omit_required_dummy_guard",
+    "proposed_no_write_cap": [
+      9,
+      3
+    ],
+    "actual_bad": [
+      15,
+      8
+    ],
+    "detected": true
+  },
+  {
+    "id": "ignore_failed_call",
+    "Q_failed_plus_completion": 2,
+    "n": 1,
+    "altered_Q": 1,
+    "actual_writes": 1,
+    "detected": true
+  },
+  {
+    "id": "free_stale_preparation",
+    "actual_stale_prepare_cached_pair": [
+      8,
+      5
+    ],
+    "free_prepare_altered_pair": [
+      5,
+      5
+    ],
+    "dominating_fresh_pair": [
+      4,
+      4
+    ],
+    "detected": true
+  }
+]
