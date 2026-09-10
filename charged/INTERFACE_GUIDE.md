@@ -51,3 +51,5 @@ The current whole-kernel model and charging are in Section2; universal protected
 ## Paper180 source and operation boundaries
 
 Current locators are model/charging2, universal protected work3, total-work cases4--5, finite programs and output-only interface6, conditional Java7, fixed guard-entry charges8, and evaluation9. Linux Section9.2 is a single-job source event upper refinement. Its snapshot operation exposes stronger name records; its two-cheap comparator has a different universal call cap. Neither is hidden inside the fixed whole-kernel class. Actual source event vectors, global writer attribution and all failed/expected-error outcomes are retained in the [Linux/guard guide](LINUX_GUARD.md).
+
+Paper187 distinguishes body-work/protected-entry coordinates (Section5) from both-coordinates entry/comparison charges (Section8.1). Java Section7 is the zero-added-charge body-work specialization. Linux Section9.2 remains a conditional single-job source-event upper refinement; equal logical caps and equal native-call caps are different contracts. Its initialized-component premise excludes concurrent initialization outside the sequence protocol.

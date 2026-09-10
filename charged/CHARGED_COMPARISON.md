@@ -18,3 +18,5 @@ python3 charged/reproduce.py all --out work/all48 --timeout 300
 ```
 
 Use new output directories. Every original candidate, proof correction, failed-control expectation and scientific outcome remains available. Private model responses and primary articles are excluded; model-assisted author checking does not constitute proof certification or independent reproduction. The previous scientific payload and fixed paper180 remain unchanged during this evidence release. A subsequent paper will cite the new immutable evidence commit.
+
+Paper187 Section8.1 includes the complete one-write representation theorem, its all-program lower bound, NP-completeness and exponential-output proof. The proof and correction files in this guide are retained. General charged strong/weak hardness and original free-comparison hardness remain unresolved. The exact evidence commit `ddf0e2261e6a3e091e93e4bb8b12e5a8a4f9f0a4` passed all48 stages; this paper/guide publication adds no new sample.
