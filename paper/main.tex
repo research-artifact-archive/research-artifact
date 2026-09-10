@@ -491,7 +491,7 @@ The caller owns at most $q$ public refresh requests~\cite{deephavenContext}; syn
 \section{Implementation and Evaluation}
 \label{sec:eval}
 
-We test game/policy agreement and collateral blocking (RQ1), source integrations (RQ2), and construction costs (RQ3). These authored exploratory studies identify reused cases and fix new generation rules before outcomes. All inputs, failures, timeouts, invalids and corrections remain; none is held-out application data.
+RQ1 tests policies and blocking; RQ2 source integrations; RQ3 construction cost. Authored exploratory studies retain inputs, pre-outcome generation rules, failures, timeouts, invalids and corrections; none is held-out application data.
 
 An Apple M2/24 GiB runs Python 3.10.9/3.12.14 and OpenJDK 17.0.19; inspected map source matches the cited version, but its binary was not rebuilt. Hashes bind inputs, code, commands and traces. Codex assisted design, checkers, source comparison, proofs, analysis and writing; Claude informed direction. Measurements are archived executions. These checks are neither mechanical proofs nor blind review; no human or simulated-human study was performed.
 
@@ -559,7 +559,7 @@ All capped batches meet $Q\le32+r$. Across 320 measured batches/arm, $r=0$ two/t
 
 At $100\,\mu$s/$r=2$, three/two background p95 medians are 60.00/306.10 $\mu$s, lower in seven/eight blocks; foreground medians are 693.98/666.38 $\mu$s, with mixed block directions. At $0/10\,\mu$s, their foreground medians are 993.54/603.88 and 888.10/653.00 $\mu$s. Rebase/three foreground medians at $100\,\mu$s reverse across $r=0,2$: 680.96/713.35 versus 792.83/693.98; background medians are 63.08/85.17 versus 88.02/60.00. Identical eligible-rebase policies have different timings; variability and merge cost preclude a stable speedup inference. These stronger operations lie outside the abstract optimum.
 
-A changed comparator invokes Roslyn's existing multi-document content-copy operation once after the same guards. Fresh builds pass the same 236 semantic, 23 reentry and 96 compiler cases. Six cyclic process blocks retain all 1,728 arrival batches (1,440 measured/288 warmup). Batch/sequential cell-median ratios range 0.906--1.189 for foreground, 0.511--1.404 for background p95 and 0.917--1.281 for observed protected spans. These spans exclude acquisition/release; mixed directions and same-policy variability establish no consistent gain.
+A batch comparator uses Roslyn's multi-document content-copy operation with the same guards. Fresh builds pass 236 semantic, 23 reentry and 96 compiler cases. Six cyclic blocks retain all 1,728 arrival batches (1,440 measured/288 warmup). Batch/sequential cell-median ratios are 0.906--1.189 for foreground, 0.511--1.404 for background p95 and 0.917--1.281 for observed protected spans. These exclude acquisition/release; no consistent gain is established. A later document-state guard retains the link sequence and passes 236/23/96 cases (2,552 compiler projections). Four reference-removal cells use content merge instead of full recomputation; all 96 final states/diagnostics match the project-guard baseline. Timing is unmeasured.
 
 \paragraph{Deephaven boundaries.}
 All 216 prefix/END cells succeed, with 153 cycles/223 inconsistent bodies but no prefix abort: \texttt{ExpandAll} bypasses the check. Compiler/local wins occur in only 3/36 cells; six lose to the upstream replica and four to the unknown-budget threshold. Twelve public-graph cells expose policy-dependent refresh counts. Changing Actions gives 28 full/eight contracted results; two retain old directives after re-expansion. The repaired checker rejects 17 corruptions (eight missed earlier); ten regressions and 108 phase-aware cells pass. Full charges, source conditions and corrections remain; native minimax is unestablished.
@@ -625,7 +625,7 @@ Other exclusions are replenished budgets, structural changes, exceptions and ext
 
 The zero-fee model permits retained/batched guards with two-mode equality. Charging failed acquisitions changes this: five of 384 inputs improve (including 242 versus serial 243); immediate release/completion fails at an intermediate state (43 versus 45). Exposed-guard equality from all-unprepared states remains unproved.
 
-Roslyn's two patch deadlocks separate replayability from safe protection. Finite projections establish neither arbitrary-host safety nor editor throughput; both rebase variants retain merge cost. Deephaven needs owned refreshes and synchronized boundaries; its abstraction is not exact native minimax. Whole-system optimality and prevalence remain unknown.
+Roslyn patch deadlocks separate replayability from safe protection. Finite checks establish neither arbitrary-host safety nor editor throughput; rebase retains merge cost. Deephaven needs owned refreshes and synchronized boundaries; its abstraction is not exact native minimax. Whole-system optimality and prevalence remain unknown.
 
 Tests are not mechanical proofs. Scalar gains are sparse, calibration fails and direct methods can cost less. Java arrivals are forced; Roslyn arrivals are authored on one host with instrumentation overhead and process variability. Human benefit was not measured.
 
@@ -678,6 +678,6 @@ The charged supplement~\cite{chargedartifact} contains complete fixed inputs, pr
 
 \bibitem{artifact} Anonymous Authors. 2026. \emph{Compiling Optimal Retry Policies for Dependent Transformations: Research Artifact}. Version 5 with publication supplement, commit \texttt{e0e0110}. \url{https://github.com/research-artifact-archive/research-artifact/tree/e0e011023c0591bbbf422390ad8d29785ad0023f}.
 
-\bibitem{chargedartifact} Anonymous Authors. 2026. \emph{Retry Synthesis with Bounded Calls and Protected Work: Research Artifact}. Version 15 objective and batch-rebase supplement, commit \texttt{386a0e0}. \url{https://github.com/research-artifact-archive/research-artifact/tree/386a0e0c1c55be871d3b7393180c8fd82edb4189}.
+\bibitem{chargedartifact} Anonymous Authors. 2026. \emph{Retry Synthesis with Bounded Calls and Protected Work: Research Artifact}. Version 16 document-state guard supplement, commit \texttt{0364041}. \url{https://github.com/research-artifact-archive/research-artifact/tree/0364041816655d8c3cad83bdb18085ad766f47f8}.
 \end{thebibliography}
 \end{document}
