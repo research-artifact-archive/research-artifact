@@ -102,3 +102,5 @@ The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30:
 [Workflow and arrival-count supplement](WORKFLOW_REPAIR.md) adds stages32--33: fixed DAG equations, checkable policy thresholds, and reconstruction of foreground-period publications from existing native timelines.
 
 [Local/shared cap supplement](CAP_CONTRACTS.md) adds stages34--35: exact cap/toll equations and the fixed Roslyn per-update comparison with process-block intervals.
+
+[One-job regret](SINGLE_JOB_REGRET.md) adds standard stage36 and a full-program proof of the best deterministic one-job additive loss. Prior35 public replays remain in the reproduction receipt.
