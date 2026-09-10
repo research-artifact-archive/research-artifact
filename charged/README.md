@@ -98,3 +98,5 @@ The [compact partial-repair supplement](PARTIAL_COMPACT.md) adds standard stage2
 The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30: exact additive/toll recomputation and all saved batch-rebase native/arrival outcomes. Timing improvements are not established.
 
 [Document-state guard supplement](DOCUMENT_GUARD.md) adds stage31: all fixed native projections and the four changed resource rows. No new timing samples.
+
+[Workflow and arrival-count supplement](WORKFLOW_REPAIR.md) adds stages32--33: fixed DAG equations, checkable policy thresholds, and reconstruction of foreground-period publications from existing native timelines.

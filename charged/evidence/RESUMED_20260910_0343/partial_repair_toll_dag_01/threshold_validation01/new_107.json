@@ -1,0 +1,170 @@
+{
+  "schema": "repair-toll-common-policy-v1",
+  "jobs": [
+    {
+      "weights": [
+        2,
+        4,
+        6
+      ],
+      "footprints": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "observations": [
+        {
+          "mask": 0,
+          "c": 0,
+          "w": 0
+        },
+        {
+          "mask": 1,
+          "c": 1,
+          "w": 2
+        },
+        {
+          "mask": 2,
+          "c": 1,
+          "w": 4
+        },
+        {
+          "mask": 3,
+          "c": 2,
+          "w": 6
+        },
+        {
+          "mask": 4,
+          "c": 1,
+          "w": 6
+        },
+        {
+          "mask": 5,
+          "c": 2,
+          "w": 8
+        },
+        {
+          "mask": 6,
+          "c": 2,
+          "w": 10
+        },
+        {
+          "mask": 7,
+          "c": 1,
+          "w": 12
+        }
+      ],
+      "G": [
+        0,
+        12,
+        12,
+        12
+      ],
+      "W": 12,
+      "sigma": 1
+    },
+    {
+      "weights": [
+        2
+      ],
+      "footprints": [
+        1
+      ],
+      "observations": [
+        {
+          "mask": 0,
+          "c": 0,
+          "w": 0
+        },
+        {
+          "mask": 1,
+          "c": 1,
+          "w": 2
+        }
+      ],
+      "G": [
+        0,
+        2
+      ],
+      "W": 2,
+      "sigma": 1
+    }
+  ],
+  "edges": [
+    [
+      1,
+      0
+    ]
+  ],
+  "retries": 0,
+  "toll": 4,
+  "ceiling": 2,
+  "curve": [
+    8,
+    20,
+    22,
+    22
+  ],
+  "root": [
+    3,
+    0,
+    0
+  ],
+  "thresholds": [
+    {
+      "state": [
+        0,
+        0,
+        0
+      ],
+      "value": 8,
+      "job": null
+    },
+    {
+      "state": [
+        0,
+        0,
+        1
+      ],
+      "value": 20,
+      "job": null
+    },
+    {
+      "state": [
+        0,
+        0,
+        2
+      ],
+      "value": 22,
+      "job": null
+    },
+    {
+      "state": [
+        1,
+        0,
+        0
+      ],
+      "value": 4,
+      "job": 0
+    },
+    {
+      "state": [
+        1,
+        0,
+        1
+      ],
+      "value": 6,
+      "job": 0
+    },
+    {
+      "state": [
+        3,
+        0,
+        0
+      ],
+      "value": 0,
+      "job": 1
+    }
+  ]
+}

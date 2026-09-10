@@ -1,0 +1,26 @@
+\subsection{A Shared Retry Allowance Across a Workflow}
+\label{sec:partialdag}
+
+The same boundary extends beyond a single job. Consider $n$ persistent jobs with a DAG, each with its own component/footprint family. A ready job is freshly prepared before each attempted observation; no other preparation is retained. A write affects the currently attempted job, with no cross-job footprint. After a rejection the next ready job may be selected anew. The total call cap is $n+r$, with a shared $r$; acceptance pays that job's dirty-component work and permanently completes it. Write $W_i=G_i(\infty)$, $\sigma_i=\min\{b:G_i(b)=W_i\}$, $\Sigma=\sum_i\sigma_i$, and $W^*=\sum_iW_i$. Let $K(B)$ be the known-budget minimum worst repair work for this interface.
+
+\begin{theorem}[Workflow information boundary]
+\label{thm:repairdag}
+For $r\ge1$, one policy simultaneously attains $K(B)$ for every $B$ iff $G_i(1)=W_i$ for every job. This holds both for a fixed order and for choices among DAG-ready jobs. Under the condition,
+\[
+K(B)=\text{sum of the largest }\min((B-r)_+,n)\text{ values }W_i.
+\]
+For $r=0$, accepting every observation is simultaneously optimal for arbitrary footprints. More generally, the first budget at which $K(B)=W^*$ is
+\[
+B_{\rm sat}=\Sigma+r\max_i\sigma_i.
+\]
+\end{theorem}
+\begin{proof}
+If every job has a one-write maximum, reject the first $r$ nonempty observations globally and otherwise accept. Early acceptances are clean; after $r$ rejections, at most $(B-r)_+$ jobs can accept positive damage. To force the matching lower bound, target that many heaviest jobs, writing once before each target observation to cause maximum damage. A target completion costs $W_i$, and at most $r$ rejections add writes, so $r+k\le B$ writes suffice for $k$ targets. An attempted $(r+1)$st rejection would itself violate the call cap within budget; truncate the adversary there. Selection and precedence do not avoid completing the targets.
+
+For necessity, all $K(B)$ with $B\le r$ are zero. A simultaneous optimum must therefore reject when one write is issued before each of its first $r$ observations: after observation $t$, the history is compatible with only $t\le r$ writes in total. No job has yet completed. Now spend $\sigma_i$ writes to saturate each job on its next attempt. No rejection remains, so the policy pays $W^*$ with $B_0=\Sigma+r$ writes. If some $\sigma_j\ge2$, a competing policy reserves all $r$ rejections for fully dirty observations of job $j$ and accepts everything else. Full total work would require $\Sigma+r\sigma_j>B_0$ writes, as every invocation uses a fresh preparation. Its worst cost is therefore strictly below $W^*$; the attainable cost set is finite. This contradiction proves necessity even in a prescribed order.
+
+At $r=0$, every call must complete and acceptance dominates fresh whole-job completion. The value is $\max_{\sum b_i\le B}\sum_iG_i(b_i)$ independently of order. For the final statement, saturating every attempted observation uses at most $\Sigma+r\max_i\sigma_i$ writes on an admissible run and forces full work. Below that budget, reserve all $r$ rejections for full observations of a maximum-$\sigma_i$ job. Full work would require exactly that many writes, so the worst cost is strictly smaller.
+\end{proof}
+
+For two jobs, one with two unit singleton components and one with a single unit component, $r=1$ gives $K(B)=0,0,1,2,2,3$ at $B=0,\ldots,5$ in either order. Yet optimality at $B=1$ forces a first rejection; three subsequent writes saturate both jobs and force cost3 at $B=4$, where $K(4)=2$. The shared allowance does not remove the information gap. The theorem identifies its existence and saturation threshold; it does not give a closed form for every intermediate value in an arbitrary nonsaturating workflow.
+

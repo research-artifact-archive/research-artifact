@@ -1,0 +1,202 @@
+{
+  "utc": "2026-09-10T01:22:35.529006+00:00",
+  "status": "PASS",
+  "all_units": 37248,
+  "statuses": {
+    "SUCCESS": 37248
+  },
+  "seconds": 2.853471249996801,
+  "integer_scale": 2,
+  "counts": {
+    "known_budget_roots": 216282,
+    "known_game_states": 1615392,
+    "existence_states": 616039,
+    "existence_tests": 37248
+  },
+  "theorem_obligations": {
+    "no_retries": 13440,
+    "sufficient_every_DAG": 16338,
+    "independent_iff": 7296,
+    "large_sink_impossible": 11635
+  },
+  "negative_controls": [
+    {
+      "field": "G",
+      "detected": true
+    },
+    {
+      "field": "W",
+      "detected": true
+    },
+    {
+      "field": "sigma",
+      "detected": true
+    },
+    {
+      "field": "observations",
+      "detected": true
+    }
+  ],
+  "already_observed_examples": [
+    {
+      "input": {
+        "id": 15560,
+        "jobs": [
+          12,
+          0
+        ],
+        "edges": [],
+        "r": 1,
+        "kappa": 4
+      },
+      "row": {
+        "input": 15560,
+        "status": "SUCCESS",
+        "curve": [
+          8,
+          12,
+          14,
+          14,
+          16,
+          16,
+          16
+        ],
+        "first_accept_curve": [
+          8,
+          12,
+          14,
+          16,
+          16,
+          16,
+          16
+        ],
+        "simultaneous_exists": false,
+        "first_accept_optimal": false,
+        "checks": {
+          "nondecreasing": true,
+          "full_cap_by_ceiling": true,
+          "first_is_upper": true,
+          "first_implies_exists": true,
+          "independent_iff": true,
+          "large_sink_impossible": true
+        },
+        "ceiling": 5,
+        "known_states": 56,
+        "existence_states": 33
+      }
+    },
+    {
+      "input": {
+        "id": 15578,
+        "jobs": [
+          12,
+          0
+        ],
+        "edges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "r": 1,
+        "kappa": 4
+      },
+      "row": {
+        "input": 15578,
+        "status": "SUCCESS",
+        "curve": [
+          8,
+          12,
+          14,
+          16,
+          16,
+          16,
+          16
+        ],
+        "first_accept_curve": [
+          8,
+          12,
+          14,
+          16,
+          16,
+          16,
+          16
+        ],
+        "simultaneous_exists": true,
+        "first_accept_optimal": true,
+        "checks": {
+          "nondecreasing": true,
+          "full_cap_by_ceiling": true,
+          "first_is_upper": true,
+          "first_implies_exists": true
+        },
+        "ceiling": 5,
+        "known_states": 42,
+        "existence_states": 11
+      }
+    },
+    {
+      "input": {
+        "id": 15596,
+        "jobs": [
+          12,
+          0
+        ],
+        "edges": [
+          [
+            1,
+            0
+          ]
+        ],
+        "r": 1,
+        "kappa": 4
+      },
+      "row": {
+        "input": 15596,
+        "status": "SUCCESS",
+        "curve": [
+          8,
+          12,
+          14,
+          14,
+          16,
+          16,
+          16
+        ],
+        "first_accept_curve": [
+          8,
+          12,
+          14,
+          16,
+          16,
+          16,
+          16
+        ],
+        "simultaneous_exists": false,
+        "first_accept_optimal": false,
+        "checks": {
+          "nondecreasing": true,
+          "full_cap_by_ceiling": true,
+          "first_is_upper": true,
+          "first_implies_exists": true,
+          "large_sink_impossible": true
+        },
+        "ceiling": 5,
+        "known_states": 42,
+        "existence_states": 18
+      }
+    }
+  ],
+  "existence_without_always_accept": [
+    31543,
+    31555,
+    31567,
+    31579,
+    32659,
+    32671,
+    32719
+  ],
+  "failures": [],
+  "new_native_runs": 0,
+  "scope": "bounded mathematical corroboration; author-generated inputs, not source calibration or observed human benefit"
+}
