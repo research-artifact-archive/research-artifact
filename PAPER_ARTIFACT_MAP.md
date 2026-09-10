@@ -120,3 +120,5 @@ Local/shared-cap supplement: `charged/CAP_CONTRACTS.md` maps local/shared cap fo
 Fixed paper137 cites evidence commit `7e93190645f2f16f21539ad8bcb32404722ca294`. Its central whole-kernel cap/toll and workflow repair claims map to `charged/CAP_CONTRACTS.md` and `charged/WORKFLOW_REPAIR.md`; the new timing figure maps to per-update analysis, not the earlier arrival data. Supplement descriptions referring to paper129 describe that historical predecessor.
 
 One-job minimax regret: `charged/SINGLE_JOB_REGRET.md`, stage36, supplements the policy-specific bound in paper137. The next fixed paper will cite this immutable evidence commit.
+
+Fixed paper140 cites evidence commit `c49ae8bc180c17f5283cef9444324d3de3457ae8`. Its cap/toll claims map to `charged/CAP_CONTRACTS.md`, exact one-job minimax loss to `charged/SINGLE_JOB_REGRET.md`, and repair/workflow claims to `charged/WORKFLOW_REPAIR.md`. Figure3 maps to per-update timing analysis; Figure2 explains an indistinguishable repair prefix. Supplement descriptions referring to paper129 describe that historical predecessor.

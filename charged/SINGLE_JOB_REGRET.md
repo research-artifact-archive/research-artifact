@@ -17,3 +17,7 @@ python3 -B charged/reproduce.py single-job-regret --out work/single-job-regret01
 The stage recalculates all fixed mathematical rows and requires exact equality of inputs, root outputs and regret vectors. It performs no native run or timing measurement. It is also included in the standard `all` command as stage36.
 
 The adjacent primary-work comparison in `evidence/RESUMED_20260910_0343/closest_repair_work_1157/COMPARISON.md` attributes incremental reuse, repair-cost semantics and bounded iteration. Only the short comparison and retrieval metadata are redistributed; the original articles and author-helper conversations are excluded.
+
+## Original control deviation and separate post-outcome check
+
+The original plan requested a policy-action corruption, but the original script corrupted a policy cost instead. Its four recorded changed-output/cap controls and all scientific rows are preserved. A separate post-outcome check changes the existing w=5, kappa=1, r=2, B=0 policy from immediate cached to fresh completion while retaining its recorded cost1. The unchanged validator accepts the original and rejects the action change, whose correct cost is6. The plan, script and result are retained in `evidence/RESUMED_20260910_0343/single_job_regret_01/post_outcome_action_control/`. This additional check was chosen after seeing the original data; it is not counted among the original four controls, original roots or standard36 replay. No original input, outcome or script was rerun or altered to hide the deviation.
