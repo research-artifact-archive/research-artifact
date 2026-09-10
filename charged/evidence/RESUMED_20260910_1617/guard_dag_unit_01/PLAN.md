@@ -1,0 +1,7 @@
+# Unit guard charges and precedence
+
+New author-side scientific candidate after paper192 integration. Preserve the complete public36ce864/51-stage release, paper192 and all previous proofs. Do not relabel earlier unknown general-DAG strong hardness as an established earlier result. Root sole writer. Read-only author criticism and normal-usage Claude counterproof are allowed; no human studies, credit, reset or paid API. Stop10:00JST and prepare09:50.
+
+Candidate: the supplied B=1,Q<=n joint-cap problem with c_i=0 and all g_i=1 is strongly NP-complete already on a height-two DAG whose upper jobs have two predecessors. Its complete frontier nevertheless has at most n^2+1 points. This would separate independent common-guard greedy solvability from precedence-induced search hardness, without heterogeneous guard prices. The inherited all-program one-write representation is required. Prove the reduction first, then fix a small non-overlapping declared embedding/matrix check before execution. Finite verification is corroboration, not the strong hardness proof. Search primary scheduling literature for the inherited optimization relation without claiming generic scheduling hardness as new.
+
+Until criticism and fixed checks resolve the obligations, this is a candidate. Main paper192 remains unchanged and unreviewed; its next blind review should use a substantive fixed update after this question is resolved. Do not ask for another score on paper187.

@@ -1,112 +1,31 @@
-# What Bounded Retries Can Guarantee: Calls, Protected Work, and Partial Repair
+# The Total-Work Cost of Bounded Retry Guarantees
 
-Anonymous research artifact for the paper of this title. The package contains the implementations, authored inputs, per-unit outcomes, controllers, certificates, traces, and supporting proof documents used in the paper. It includes unfavorable results and the full recorded denominators. This is an author-provided artifact; publication is not independent certification or evidence of acceptance.
+Anonymous research artifact for the [stored manuscript](paper/main.pdf). Its exact source/PDF hashes and18-body/20-total-page snapshot are in [paper/SNAPSHOT.json](paper/SNAPSHOT.json). This release preserves manuscript187 and adds the [unit-guard precedence result](charged/UNIT_GUARD_DAG.md) for the next revision. Publication and replay are author activities; neither is independent certification or evidence of acceptance.
 
-## Charged-call revision
+The research asks how cheap validation, protected recomputation and cached guarded completion trade total work against protected work under bounded completion calls. Its guarantees require the specified persistent-job, observation and charging interfaces. It does not infer costs, a write budget, a caller SLA or contract compliance from arbitrary concurrent code.
 
-The [charged supplement](charged/README.md) adds the current three-mode compiler, mixed-price cursor reduction, native Java integration, Deephaven source case, and complete retained outcomes. See its [claim map](charged/CLAIM_EVIDENCE_MAP.md), [theory guide](charged/THEORY_AND_IMPLEMENTATION.md), and [theorem-by-theorem research lineage](charged/RESEARCH_LINEAGE.md). The [resource extension](charged/RESOURCE_BOUNDARIES.md) adds exact call-cap/protected-work bounds, a sharp price ratio for independent jobs and three native counter studies, including one policy that needs no writer-budget input. The preceding zero-fee package remains unchanged.
+## Start here
+
+* [Paper-to-evidence map](PAPER_ARTIFACT_MAP.md): current mathematical and source obligations, with replay stages.
+* [Guard and call accounting](charged/RESOURCE_ACCOUNTING.md): independent comparison-free joint caps, common-price greedy construction and the alternative atomic mismatch call weight.
+* [Unit guards and precedence](charged/UNIT_GUARD_DAG.md): strong joint-cap hardness despite polynomial frontier size; full proof, inherited scheduling attribution, fixed positive/negative checks and fees on every call.
+* [Research lineage](charged/RESEARCH_LINEAGE.md): earlier results, corrections and preserved failures. The older [charged overview](charged/README.md) retains the full extension history.
+
+## Reproduce
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git
 cd research-artifact
 python3 -B tools/verify_release.py
-python3 -B charged/reproduce.py all --out work/charged-full --timeout 300
+python3 -B charged/reproduce.py all --out work/all52 --timeout 300
 ```
 
-Use Python 3.10 or later with assertions enabled. The fifty-one standard stages use the standard library and replay saved evidence; they do not rerun the timing campaigns as fresh measurements. Optional Java and native Deephaven commands are in the supplement. It adds about 2.0 GB of stored evidence, including two losslessly compressed input ledgers. No prices or finite write/update budget are inferred from applications. The universal resource policy needs no B input; scalar minimax and Deephaven guarantees retain their supplied-budget conditions. The [charged manuscript](paper/main.pdf) cites the immutable evidence commit. The preceding immutable evidence commit ec02a7a passed all 17 then-current standard stages. The [bounded-source extension](charged/BOUNDED_SOURCE.md) adds four stages, the guarded-tail counterexample/refinement, controlled blocking and all Roslyn source outcomes; its fresh public checkout passed all 21 then-current stages, the guarded-tail Java replay and a fresh Roslyn source build. The [suffix certificate](charged/SUFFIX_CERTIFICATE.md) adds exact feasible choices, complete positive/adverse comparisons and stage 22; its fresh public checkout passed all 22 standard stages and re-executed all 20,594 suffix Java paths with byte-identical raw output. Earlier unchanged sources passed all five optional JDK17 native stages and all 372 native Deephaven records; see the [reproduction receipt](REPRODUCTION_20260909.json). These are author-side fixed-evidence replays.
+Use Python3.10+ with assertions enabled on a POSIX system. Always choose a new output directory. The52 standard stages verify and replay fixed evidence using the standard library; they do not rerun native timing campaigns as new samples. To reproduce a particular paper, check out its cited immutable evidence commit first. Individual stage commands and optional native rebuilds are linked from the map. This archive contains overlapping study populations, and its file or replay counts are not research sample sizes.
 
-The [source-semantics and partial-repair extension](charged/SOURCE_SEMANTICS_AND_PARTIAL_REPAIR.md) adds five stages: 592 event/state semantic records, 55 reentry processes with four retained TIMEOUTs, all 5,664 independent-arrival units, two exact partial-repair studies and 96 compiler-dependency/snapshot cases. It includes a guarded source-rebase comparator and a fresh native rebuild helper. Publication does not convert full-transform counts into elapsed-time or total-work guarantees. The immutable evidence checkout `79d9ad536028bf9fdd28c40965919164a4601955` passed all38 standard stages and its complete141919-file release inventory in a fresh unauthenticated checkout. Paper163 and its guides preserve that exact scientific payload; the full replay is recorded in the September10 reproduction receipt. Source rebuild and compiler-projection receipts are in [September10 reproduction](REPRODUCTION_20260910.json). Its preceding exact public checkout passed all27 then-current standard stages; source rebuild and compiler-projection receipts are in [September10 reproduction](REPRODUCTION_20260910.json).
+The [September10 reproduction receipt](REPRODUCTION_20260910.json) records completed local/public replays and their scope. A successful replay preserves earlier failures and timeouts as recorded outcomes. Native Java, Linux and Roslyn studies expose both positive witnesses and transfer limits; the Valkey comparator and cost-fit failures remain in the archive. No human evaluation is included.
 
-## Preceding zero-fee package
+## Earlier package and provenance
 
-Use Python 3.10 or later with assertions enabled. The standard-library checks need no package installation or network access. The checkout contains approximately 1.5 GB of uncompressed data and more than 100,000 files.
+The byte-preserved `package/` tree, its [older paper](package/paper/main.pdf), [usage](package/README.md) and [evidence index](package/EVIDENCE_INDEX.md) describe previous research versions. Their claims and sample counts retain their original scope. `./reproduce.sh portable` verifies that legacy package; it is not the52-stage charged replay above. Licenses, rights and source provenance are in [NOTICE.md](NOTICE.md) and the accompanying manifests.
 
-```sh
-git clone https://github.com/research-artifact-archive/research-artifact.git
-cd research-artifact
-./reproduce.sh portable
-```
-
-The command verifies release hashes and the frozen package, then replays small known-input checks of the latest compiler and supporting-line basis. It writes fresh results under `work/`. A quick check is not the full evaluation and does not replace earlier outcomes or increase scientific sample counts. To obtain an immutable version, check out the commit cited in the paper before running it.
-
-- [Current charged paper](paper/main.pdf) and [source/build information](paper/README.md); the [preceding zero-fee paper](package/paper/main.pdf) remains preserved.
-- [Compiler usage and complete latest replay](package/README.md).
-- [Evidence index](package/EVIDENCE_INDEX.md) and [paper-to-artifact map](PAPER_ARTIFACT_MAP.md).
-- [Zero-fee theorem attribution, checker pseudocode, and returned objects](THEOREM_AND_CHECKER_GUIDE.md).
-- [Earlier stages and dependency requirements](package/history/v4/README.md).
-- [Rights and provenance](NOTICE.md).
-
-The `package/` directory is the byte-preserved version-5 snapshot. Its historical README and paper describe their *pre-publication* local status; the current charged paper in `paper/` cites its separate public evidence commit. Prior package versions, metadata, aliases, projections, and negative outcomes retain their original meaning. The [publication supplement](supplement/README.md) adds preparation provenance, complete earlier comparisons, charged-acquisition refutations, and the constructive-gap search. The public entry points and this README are an additional distribution layer.
-
-READMEs archived under `package/history/` describe their original package roots. Their instructions to run “from this directory” do not refer to those archive subdirectories. In this distribution, use the repository-root commands in the paper-to-artifact map, or run the historical `reproduce*.py` commands from `package/`.
-
-## Run the compiler
-
-Create an input such as `{"cp":[[3,2],[1,4]],"edges":[[0,1]]}` in `work/case.json`, where each pair gives failure cost and protection premium. Use a new output path:
-
-```sh
-python3 -B package/retry.py compile --input work/case.json --out work/controller.json
-python3 -B package/retry.py check --artifact work/controller.json
-python3 -B package/retry.py query --artifact work/controller.json --budgets 0 1 2 1000000000000
-```
-
-The compiler assumes the mathematical retry contract in the paper. It does not infer costs, a write budget, or contract compliance from arbitrary concurrent code. Exact dispatch uses cost-compatible packing, a persistent unique-order representation, or the general ideal compiler. A supplied serial order on a branching DAG certifies that restricted order only. The general route may require exponentially many residual sets.
-
-## A counted-work cap decision
-
-Replay the four-job example from the introduction through the public compiler:
-
-```sh
-python3 -B tools/work_cap_example.py --out work/work-cap-example
-```
-
-For failure budget two and normal work 16, the checked adaptive policy has worst total work 24. The script enumerates all three legal fixed orders and compiles optimal adaptive modes within each; all three have worst total work 26. Thus the declared counted-work cap 25 can be met by the adaptive policy and by no fixed serial retry order. The primitive theorem rules out an improvement below 24 by retention or batching under its contract. This is a replay of the existing constructed example, not an elapsed-time result. The output directory preserves each controller and exact CLI response.
-
-## Full retained-result replay
-
-Reconstruct both paper tables and full recorded denominators with `python3 -B tools/reproduce_tables.py`. Use new output directories for each replay invocation. The following two commands replay 110,907 retained units; this count is not a new evaluation population:
-
-```sh
-python3 -B package/reproduce_latest.py all --out work/latest-full
-python3 -B package/reproduce_basis.py all --out work/basis-full
-```
-
-The older entry points cover complete primitive semantics, native Java correspondence, comparisons, budget queries, and the general sweep checker. Their exact workflows are in the paper-to-artifact map. Java stages require a Java 17 JDK; optional constraint-programming replays require the recorded OR-Tools dependency. Saved timeout experiments are inspected with their original outcomes and are not automatically rerun. Timing observations from different runs are not a randomized performance comparison.
-
-All inputs are authored. The evidence establishes bounded semantic checks and properties under the stated contract, not application prevalence, elapsed-time improvement, human benefit, or correctness of every possible Java execution.
-
-The [compact partial-repair supplement](charged/PARTIAL_COMPACT.md) adds stage28, an exact competitive-threshold compiler, a monotone-profile acceleration and all384 original/changed-version process outcomes, including all six earlier timeouts. This solves a separate partial-repair objective; it does not strengthen the whole-kernel theorem or calibrate Roslyn repair costs.
-
-The [objective and batch extension](charged/OBJECTIVES_AND_BATCH.md) adds stages29–30: exact additive/toll recomputation and all saved batch-rebase native/arrival outcomes. Timing improvements are not established.
-
-[Document-state guard supplement](charged/DOCUMENT_GUARD.md) adds stage31: all fixed native projections and the four changed resource rows. No new timing samples.
-
-[Workflow and arrival-count supplement](charged/WORKFLOW_REPAIR.md) adds stages32--33: fixed DAG equations, checkable policy thresholds, and reconstruction of foreground-period publications from existing native timelines.
-
-[Local/shared cap supplement](charged/CAP_CONTRACTS.md) adds stages34--35: exact cap/toll equations and the fixed Roslyn per-update comparison with process-block intervals.
-
-[One-job regret](charged/SINGLE_JOB_REGRET.md) adds standard stage36 and a full-program proof of the best deterministic one-job additive loss. Prior35 public replays remain in the reproduction receipt.
-
-The current [count guide](charged/COUNT_GUIDE.md) separates evaluation denominators; the [interface guide](charged/INTERFACE_GUIDE.md) explains the operation/history scopes. These documentation updates add no new scientific sample.
-
-[Workflow additive loss](charged/WORKFLOW_REGRET.md) adds standard stage37. It computes the least uniform cost allowance and an attaining budget-unaware policy for the repair interface, with all5900 finite policy-vector comparisons. The current fixed paper integrates this exact loss and policy construction in Section4.3 and distinguishes540 exploration from5360 fixed confirmation conditions in Section7.1.
-
-[Source/cost boundaries](charged/SOURCE_COST_BOUNDARIES.md) adds stage38: completed-operation Java source reasoning, optional preparation/cost counterexamples, all Valkey native/arrival outcomes and the stronger writer-maintenance alternative. The fixed-digest case does not establish operational importance. Public paper156 remains unchanged during this evidence extension.
-
-[Joint total/protected work](charged/JOINT_WORK.md) adds standard stage39: exact finite frontiers, the one-write scheduling reduction, the output-only partition frontier, and the saved native observation controls. All2,076valid-policy cases pass; four of52flag-ignoring controls violate their resource cap as predicted and48do not. The original controls and all earlier adverse findings remain. Public paper163 is unchanged during this evidence publication.
-
-[Arbitrary-retry frontiers](charged/GENERAL_RETRY.md) adds standard stages40--41: complete polynomial independent/enough-retry DAG formulas, full general-r domination, separately fixed stopping policies, all finite outcomes, and12,224saved native executions including verified TreeBins and both cheap wrappers. Large JSONL transport is lossless gzip with decoded hashes; all earlier scientific bytes and paper163 remain.
-
-The current fixed [paper172](paper/main.pdf), **The Total-Work Cost of Bounded Retry Guarantees**, integrates the complete arbitrary-retry independent-job frontier, sufficient-retry DAG frontier, full-program domination, scheduling/observation boundaries and conditional Java refinement. Its evidence commit `90812054158ced9ae313240f9211ec5f61f51f1e` passed all41 stages in a fresh unauthenticated checkout. This paper/guide update preserves that scientific payload. See the [paper guide](paper/README.md) for current section locators; earlier paragraphs describe historical releases.
-
-[Universal independent-job curves](charged/UNIVERSAL_INDEPENDENT.md) adds standard stages42--43: one budget-unaware policy attaining the exact least total-work curve for independent jobs at every retry allowance, all647fixed roots and34,814paths,36scope roots, and20,384saved actual Java executions with both wrappers and verified TreeBins. All prior scientific payload and fixed paper172 remain unchanged.
-
-[Linux source and guard-entry evidence](charged/LINUX_GUARD.md) adds standard stages44--45: saved actual Linux KUnit event reconstruction with all overlapping matrices and controls, global writer attribution, and fixed guard-entry formula checks. The optional native command rebuilds the exact third KUnit variant in its own Docker/QEMU container. Linux-derived files use GPL-2.0; the general MIT license does not replace their terms. All earlier scientific payload and fixed paper172 remain unchanged pending a later manuscript revision.
-
-The current fixed [paper180](paper/main.pdf), **The Total-Work Cost of Bounded Retry Guarantees**, adds least unknown-budget independent-job total-work curves for every retry allowance and the Linux source/guard-entry boundaries. Its body and Data Availability fit pages1--18; references occupy19--20. Immutable evidence commit `6ca1285673b758bf7706cbf8540237925435d6c2` passed all45 stages in a fresh unauthenticated checkout. This paper/guide update preserves every scientific payload. See the [current paper guide](paper/README.md); earlier paragraphs describe historical releases.
-
-[Charged comparison and counting extension](charged/CHARGED_COMPARISON.md) adds standard stages46--48: the supplied-one-write generalized scheduling reduction, the separate zero-write universal charged subset class, the fully charged supplied-one-write representation/decision boundary, and native primitive-count sensitivity. Original fixed paper180 and all preceding scientific payload remain unchanged during this evidence publication.
-
-The current fixed [paper187](paper/main.pdf), **The Total-Work Cost of Bounded Retry Guarantees**, incorporates the complete fully charged one-write representation, NP-complete cap decision and the native-call counting boundary. Its body and Data Availability occupy1--18; references19--20. Exact evidence commit `ddf0e2261e6a3e091e93e4bb8b12e5a8a4f9f0a4` passed all48 standard stages and the complete inventory in a fresh unauthenticated checkout. This paper/guide update changes no scientific sample. See the [current paper guide](paper/README.md); earlier entries describe historical releases.
-
-[Resource-accounting extension](charged/RESOURCE_ACCOUNTING.md) adds stages49--51: comparison-free independent joint-guard caps, common-guard greedy frontiers, and an alternative atomic cached-mismatch call weight. These proofs and fixed corroborations concern specified resource models. Paper187 and all earlier scientific payload remain unchanged in this evidence publication.
+The preceding [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) are preserved byte-for-byte for history. Their relative links refer to their original repository-root location. This new entry page replaces their obsolete titles and long chronological appendices without altering the scientific payload.
