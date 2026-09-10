@@ -1,0 +1,33 @@
+# Operation and information contracts
+
+This guide accompanies the current paper's Sections2–5. The full central proofs are in the PDF. It adds no experimental observation or mechanically checked theorem.
+
+| Feature | Whole-kernel operations | Component repair |
+|---|---|---|
+| Preparation | Full pure kernel, including from an older captured snapshot; arbitrary finite records may be retained | One complete fresh preparation before each counted call; no other preparation retained |
+| Observation | Honest unprotected entry inspection and operation returns | Dirty union inside the counted call; repeated footprint writes and their count are hidden |
+| Decision timing | Job and operation mode chosen before the environment's comparison gate; record selection uses the preceding store | Job chosen before footprints, then accept/reject after the dirty union is observed within the same call |
+| Objective | Protected kernel work L; total kernel work W and API calls Q are separate | Protected repair work, with per-call kappa and per-completion mu only where specified |
+| Cap | At most n+r counted calls; local and shared variants are explicit | At most q calls for one job, n+r for a workflow; exactly one outside preparation per call |
+
+Completion stores an exact immutable milestone and remains permanent despite later writes. No direct guard acquisition/release, guard surviving return, cross-job completion or outside publication is admitted by the whole-kernel entrypoint contract. Theorems are relative to these operations, not a completeness claim for arbitrary Java or lock APIs.
+
+## Quantifiers and inspection
+
+For each b, E_b consists of gate strategies with at most b writes along every play. An informed P(B,h) is admissible at B if it completes within the cap against every E in E_B. One unaware P(h) must satisfy its cap for every finite b and every E in E_b. Any fixed finite-write play can be reproduced by an environment capped at that play's write count. A budget-invariant policy needs no estimate of B to attain its entire protection curve. Promising a particular fixed protection ceiling still requires a valid bound on the writes for which that ceiling is asserted.
+
+The retained store and selected handle are separate: a failed cheap call clears selection without erasing copies. Copying cannot retag a result or fabricate kernel work. A legal fresh own-key identity is available after every finite history and invalidates all prepared records for that job, even if record selection occurs within the already-chosen operation. Two environments can share the same concrete prefix and differ at the next gate, subject to their remaining write allowance. The lower-bound adversaries have unconditional finite write bounds. Avoiding completion against one of those adversaries already violates admissibility on that same play; a generic claim about truncating arbitrary infinite environments is unnecessary.
+
+The informed three-mode proof accounts for the write causing a possible (r+1)st failure within r+k<=B. The unaware two-mode proof evaluates an execution with only r failures, then uses a different finite extension to show that another cheap call is inadmissible. The extra write is absent from the evaluated execution. The one-job charged proof separately counts noncompleting calls and actual writes, allowing fewer writes than failures when a stale record is reused.
+
+## Operational interpretation and evidence
+
+Java API calls, monitor acquisitions and protected kernel operations are different counters. Internal map reorganization preserves value references and is not an application invalidation. The fixed-source argument abstracts internal processing around the protected comparison/publication while preserving returned records and completion milestones. Pure, stable, normally terminating key methods and callback restrictions are explicit in the paper. This is not a verified running-JDK binary. Roslyn's stronger rebase operations retain merge costs and have no established exact reduction to either game.
+
+The existing direct games enumerate serial fresh-preparation policies. Their agreement corroborates the equations on their fixed finite inputs; the paper's operation-level proofs cover the broader retained-record/inspection class. Exact-D component games and exported-table checkers use the separate repair history. No old control, timeout, invalid, counterexample or native observation changes with this guide.
+
+## Research lineage
+
+The one-job additive-loss calculation is a capped rent-or-buy specialization, with the cap also changing the informed comparator beyond the allowed retries. See Lotker, Patt-Shamir and Rawitz, *Rent, Lease, or Buy*, SIAM J. Discrete Math.26(2),2012, https://doi.org/10.1137/100794018 .
+
+Algorithms with predictions already compare advice-informed behavior with robust guarantees when error is unknown. The manuscript's narrower question asks for one deterministic no-advice policy equal to a budget-informed minimax curve at every budget, under a universal call cap. It compares this with Purohit, Svitkina and Kumar, *Improving Online Algorithms via ML Predictions*, NeurIPS2018, https://proceedings.neurips.cc/paper/2018/hash/73a427badebe0e32caa2e1fc7530b7f3-Abstract.html ; and Lykouris and Vassilvitskii, *Competitive Caching with Machine Learned Advice*, ICML2018, https://proceedings.mlr.press/v80/lykouris18a.html . This comparison does not establish novelty against all literature.
