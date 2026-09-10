@@ -1,0 +1,232 @@
+{
+  "input": {
+    "id": 352,
+    "jobs": [
+      2,
+      1
+    ],
+    "edges": [
+      [
+        1,
+        0
+      ]
+    ],
+    "r": 0,
+    "kappa": 2
+  },
+  "integer_scale": 2,
+  "direct": {
+    "max_budget": 4,
+    "vectors": [
+      [
+        4,
+        10,
+        14,
+        16,
+        16
+      ]
+    ],
+    "curve": [
+      4,
+      10,
+      14,
+      16,
+      16
+    ],
+    "regret": 0,
+    "policy_states": 3,
+    "cartesian_combinations": 6,
+    "max_frontier": 1
+  },
+  "threshold": {
+    "schema": "repair-toll-common-policy-v1",
+    "jobs": [
+      {
+        "weights": [
+          2,
+          4
+        ],
+        "footprints": [
+          1,
+          2
+        ],
+        "observations": [
+          {
+            "mask": 0,
+            "c": 0,
+            "w": 0
+          },
+          {
+            "mask": 1,
+            "c": 1,
+            "w": 2
+          },
+          {
+            "mask": 2,
+            "c": 1,
+            "w": 4
+          },
+          {
+            "mask": 3,
+            "c": 2,
+            "w": 6
+          }
+        ],
+        "G": [
+          0,
+          4,
+          6
+        ],
+        "W": 6,
+        "sigma": 2
+      },
+      {
+        "weights": [
+          6
+        ],
+        "footprints": [
+          1
+        ],
+        "observations": [
+          {
+            "mask": 0,
+            "c": 0,
+            "w": 0
+          },
+          {
+            "mask": 1,
+            "c": 1,
+            "w": 6
+          }
+        ],
+        "G": [
+          0,
+          6
+        ],
+        "W": 6,
+        "sigma": 1
+      }
+    ],
+    "edges": [
+      [
+        1,
+        0
+      ]
+    ],
+    "retries": 0,
+    "toll": 2,
+    "ceiling": 3,
+    "curve": [
+      4,
+      10,
+      14,
+      16,
+      16
+    ],
+    "root": [
+      3,
+      0,
+      0
+    ],
+    "thresholds": [
+      {
+        "state": [
+          0,
+          0,
+          0
+        ],
+        "value": 4,
+        "job": null
+      },
+      {
+        "state": [
+          0,
+          0,
+          1
+        ],
+        "value": 10,
+        "job": null
+      },
+      {
+        "state": [
+          0,
+          0,
+          2
+        ],
+        "value": 14,
+        "job": null
+      },
+      {
+        "state": [
+          0,
+          0,
+          3
+        ],
+        "value": 16,
+        "job": null
+      },
+      {
+        "state": [
+          1,
+          0,
+          0
+        ],
+        "value": 2,
+        "job": 0
+      },
+      {
+        "state": [
+          1,
+          0,
+          1
+        ],
+        "value": 8,
+        "job": 0
+      },
+      {
+        "state": [
+          3,
+          0,
+          0
+        ],
+        "value": 0,
+        "job": 1
+      }
+    ]
+  },
+  "claim": {
+    "input": 352,
+    "status": "SUCCESS",
+    "checks": {
+      "informed_curve": true,
+      "plateau": true,
+      "loss": true,
+      "nonnegative": true,
+      "zero_iff": true,
+      "policy_attains_loss": true
+    },
+    "regret": 0,
+    "root_margin": 0,
+    "curve": [
+      4,
+      10,
+      14,
+      16,
+      16
+    ],
+    "policy_curve": [
+      4,
+      10,
+      14,
+      16,
+      16
+    ],
+    "pareto_vectors": 1,
+    "max_budget": 4,
+    "max_frontier": 1,
+    "cartesian_combinations": 6,
+    "policy_states": 3,
+    "extraction_replay_states": 42,
+    "threshold_states": 7
+  }
+}

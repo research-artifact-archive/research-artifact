@@ -104,3 +104,5 @@ The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30:
 [Local/shared cap supplement](CAP_CONTRACTS.md) adds stages34--35: exact cap/toll equations and the fixed Roslyn per-update comparison with process-block intervals.
 
 [One-job regret](SINGLE_JOB_REGRET.md) adds standard stage36 and a full-program proof of the best deterministic one-job additive loss. Prior35 public replays remain in the reproduction receipt.
+
+[Workflow additive loss](WORKFLOW_REGRET.md) adds standard stage37. It computes the least uniform cost allowance and an attaining budget-unaware policy for the repair interface, with all5900 finite policy-vector comparisons. Fixed paper152 remains unchanged pending manuscript integration.
