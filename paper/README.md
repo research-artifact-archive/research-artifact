@@ -1,6 +1,8 @@
-# What Retry Budgets Can Guarantee
+# What Bounded Retries Can Guarantee
 
-`main.pdf` is **What Retry Budgets Can Guarantee: Calls, Protected Work, and Partial Repair**. Its complete Conclusion ends on page18. Data Availability and references occupy pages19–20; the Data Availability statement is excluded from the body limit by the FSE2027 call. `SNAPSHOT.json` binds the PDF, source/assets and immutable evidence commit.
+`main.pdf` is **What Bounded Retries Can Guarantee: Calls, Protected Work, and Partial Repair**. Its complete Conclusion and Data Availability statement are on page18; references occupy pages19–20. `SNAPSHOT.json` binds the PDF, source/assets and immutable evidence commit.
+
+The current revision includes a numbered inspection/retention lemma, explicit program-node invariants for the finite-write adversary, and the clipping identity for repair histories. The notation and evaluation tables distinguish input conditions, game values, native records and expected control rejections; see the [count guide](../charged/COUNT_GUIDE.md). The title uses bounded retries to distinguish this completion contract from RPC retry quotas that allow failure. Adapton and Wei–Zhang are compared using their primary papers. The theorem formulas and scientific observations are unchanged.
 
 The current revision defines the operation state, retained records, visible histories, environmental gates and the distinct informed/unaware admissibility classes. Its inspection argument uses adversaries with unconditional finite write bounds. Java API guarantees are distinguished from bin-monitor implementation details and internal transfer costs. See [interface guide](../charged/INTERFACE_GUIDE.md). The manuscript compares its one-job loss to capped rent-or-buy and its exact no-advice criterion to algorithms with predictions. All central proofs remain in the paper.
 
