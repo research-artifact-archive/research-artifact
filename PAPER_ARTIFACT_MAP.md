@@ -116,3 +116,5 @@ Preparation receipts retain their original source hashes, even when public copie
 Workflow supplement: `charged/WORKFLOW_REPAIR.md` maps the unpriced DAG criterion, positive-toll bounds, history-dependent policy certificates, and measured arrival-count analysis to stages32--33. Paper129 predates these additions; the next fixed PDF will cite the immutable evidence commit.
 
 Local/shared-cap supplement: `charged/CAP_CONTRACTS.md` maps local/shared cap formulas, the full-kernel toll sensitivity bound, and per-update native comparisons to stages34--35. Paper129 predates these additions; the next fixed PDF will cite the immutable evidence commit.
+
+Fixed paper137 cites evidence commit `7e93190645f2f16f21539ad8bcb32404722ca294`. Its central whole-kernel cap/toll and workflow repair claims map to `charged/CAP_CONTRACTS.md` and `charged/WORKFLOW_REPAIR.md`; the new timing figure maps to per-update analysis, not the earlier arrival data. Supplement descriptions referring to paper129 describe that historical predecessor.

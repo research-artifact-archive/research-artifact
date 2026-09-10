@@ -6,6 +6,7 @@
 \usepackage{amsmath,booktabs,tabularx}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -17,36 +18,39 @@
 \newcommand{\LL}{\mathsf L}
 \newcommand{\LC}{\mathsf{LC}}
 \newcommand{\D}{\mathsf D}
-\title{Retry Synthesis with Bounded Calls and Protected Work}
+\title{What Retry Budgets Can Guarantee: Calls, Protected Work, and Partial Repair}
 \author{Anonymous Author(s)}
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 \begin{document}
 \begin{abstract}
-Retry limits bound failed attempts, but protected fallback can move whole transformations into critical sections. We study how to bound both calls and protected work without knowing how many concurrent writes will occur. For dependent, persistent transformations with fixed whole-kernel work, one policy uses at most $n+r$ validation or completion calls and simultaneously minimizes worst protected work for every write budget $B$: the sum of the largest $\min((B-r)_+,n)$ job works. Without cached completion, a policy satisfying the same universal call cap must protect all work already at $B=r$. A potential justifies the atomic-call model despite retained preparations, and actual-write environments match the bounds. For declared scalar prices, we separately construct checkable all-budget policies and identify a class with compact compilation. A Roslyn source modification preserves checked event, snapshot and compiler projections while bounding calls. In authored arrival experiments, cached completion reduces background delay at an intermediate arrival interval but increases foreground time under bursts. Source-permitted partial-rebase comparators avoid full protected recomputation in the unrelated-update workload, but retain merge cost and mixed timings. A partial-repair counterexample shows why the simultaneous optimum depends on whole-kernel operations.
-
+A retry limit bounds failed attempts, but its fallback may move every remaining transformation into a critical section. We characterize the call and protected-work guarantees that completion interfaces can provide without knowing the number of concurrent writes. For persistent jobs with mandatory whole-kernel work, a policy using cached completion meets $Q\le n+r$ in every finite-write execution and minimizes worst protected work simultaneously for every write bound $B$: the sum of the largest $\min((B-r)_+,n)$ job works. Without that operation, the same universal call cap forces full protection already at $B=r$. Partial repair changes this conclusion. For repeatable write footprints, we characterize exactly when a workflow with a shared retry allowance admits one optimal policy for every budget: each job must have a one-write maximum damage. Per-call costs make precedence and past clean completions relevant; an exact feasibility certificate constructs a common optimum when one exists. These results identify which operations and cost accounting support a claimed retry guarantee. Local and shared retry caps yield different exact frontiers, and charging each call adds a bounded loss to the whole-kernel policy. Java calls realize the abstract bounds under stated restrictions. Roslyn source modifications preserve checked event, snapshot and compiler projections; stronger partial-rebase operations avoid full protected recomputation on eligible updates but retain merge cost. Authored arrival experiments expose conditional background-delay benefits, foreground burst costs and variability, rather than a general latency guarantee.
 \end{abstract}
-\ccsdesc[500]{Software and its engineering~Formal software verification}
-\ccsdesc[300]{Software and its engineering~Concurrent programming structures}
-\keywords{program synthesis, concurrency, retries, quantitative games, resource guarantees}
+\ccsdesc[500]{Software and its engineering~Concurrent programming structures}
+\keywords{concurrent programming, retries, resource guarantees, partial repair, online policies}
 \maketitle
 \fancyfoot{}\fancyfoot[C]{Author research draft -- September 10, 2026}\thispagestyle{fancy}
 
 \section{Introduction}
 
-A retry limit requires a completion choice. Recomputing under protection guarantees completion but moves an entire transformation into a critical section. Reusing a preparation when it remains current can avoid that work. We seek a guarantee without knowing the number of concurrent writes.
+In optimistic update loops, a caller prepares outside protection and validates before publication. Switching to protected execution after finitely many failures bounds failed calls, but can protect all remaining computation. Which bounds on calls and protected work can be met together, and which completion operations are necessary?
 
-Consider two dependent transformations with works 8 and 16 and a cap of two validation or completion calls. Every call must complete a transformation. Fresh protected completion performs all 24 units under protection. Cached completion instead prepares outside and, within one completing callback, either reuses the preparation or recomputes after a mismatch. Its worst protected work is 0, 16, or 24 when at most 0, 1, or 2 writes occur (Figure~\ref{fig:modes}). The policy does not receive this write budget. The benefit has a cost: at one write its worst total work is 40, compared with 24 for fresh protected completion. The choice concerns which resource bounds can be met together.
+Bounded speculation followed by locking is established practice. With elision enabled, glibc's x86 mutex path defaults to at most three transaction starts before ordinary locking; HotSpot exposes \texttt{RTMRetryCount} for its RTM monitor path~\cite{glibcElision,hotspotRTM}. These are motivation for finite attempt budgets, not instances of our theorem: HTM can abort without a write, rolls back partial computation and does not retain an aborted result for our cached completion. We study explicit validate-and-complete interfaces. A caller may cap failures separately for each update, share an allowance across a batch, or require both. These contracts permit different total call counts and protected work. We characterize all three; a global allowance is a specification choice, not a property inferred from those libraries. No latency SLA is assumed.
+
+Consider two dependent transformations with works 8 and 16 and a cap of two validation or completion calls. Every call must complete a transformation. Fresh protected completion performs all 24 units under protection. Cached completion instead prepares outside and, within one completing callback, either reuses the preparation or recomputes after a mismatch. Its worst protected work is 0, 16, or 24 when at most 0, 1, or 2 writes occur (Figure~\ref{fig:modes}). The policy does not receive this bound. The benefit has a cost: at one write its worst total work is 40, compared with 24 for fresh protected completion.
 
 \begin{figure}[ht]
 \centering
 \small
-\begin{tabular}{ll}
-\toprule
-Before the retry cap & Prepare outside $\to$ validate: complete or fail\\
-After the cap, two modes & Fresh protected computation $\to$ complete\\
-After the cap, three modes & Prepare outside $\to$ protected reuse/recompute $\to$ complete\\
-\bottomrule
-\end{tabular}
+\begin{tikzpicture}[>=Stealth,every node/.style={font=\small},state/.style={draw,rounded corners,minimum width=24mm,minimum height=8mm}]
+\node[state] (u) at (0,0) {Unprepared};
+\node[state] (c) at (5,0) {Prepared};
+\node[state] (d) at (2.5,-1.7) {Completed};
+\draw[->] (u) to node[above] {prepare outside} (c);
+\draw[->] (c) to[bend right=35] node[above] {cheap mismatch: discard} (u);
+\draw[->] (u) to node[below left,align=center] {fresh protected\\completion} (d);
+\draw[->] (c) to node[above left,align=center] {matching\\publication} (d);
+\draw[->] (c) to[bend left=45] node[below right,align=center] {cached mismatch:\\recompute inside} (d);
+\end{tikzpicture}
 \medskip
 \begin{tabular}{r|rr|rr}
  & \multicolumn{2}{c|}{Worst protected work $L$}&\multicolumn{2}{c}{Worst total work $W$}\\
@@ -54,57 +58,55 @@ Write bound $B$ & Two modes & Three modes & Two modes & Three modes\\
 \midrule
 0&24&0&24&24\\1&24&16&24&40\\2&24&24&24&48\\
 \end{tabular}
-\caption{Completing modes after a retry cap, and the two-job example with $r=0$. Both fixed policies satisfy $Q\le2$ in every finite-write environment; neither receives $B$. Values follow from the model, not timing measurements.}
+\caption{Operation transitions and the two-job example with $r=0$. A cached callback completes on either comparison outcome; a cheap mismatch requires a new preparation. Both fixed policies satisfy $Q\le2$ in every finite-write environment; neither receives $B$. Values follow from the model, not timing measurements.}
 \label{fig:modes}
 \Description{Three retry modes and the two-job resource table. Cached completion reduces worst protected work at zero or one write while increasing total work after interference.}
 \end{figure}
 
-We generalize this example to any dependency DAG and allowance $r$ of extra calls, proving a lower bound and exact suffix certificate over the atomic-call interface. Separately, priced synthesis returns policies optimal for each supplied write allowance.
+For works $(1,2,3,5)$, a six-call cap allows $r=2$ failures. Cached completion guarantees at most eight protected work units at four writes. With only fresh fallback, every policy satisfying that universal cap can be forced to protect all eleven units at two writes. Thus cached completion is necessary for this pair of resource requirements. The units count kernel work, not milliseconds.
 
-Fallback and quantitative choices among retries, guards and caches are established~\cite{kung,cerny,cernyquality}, as are budgeted DP and input-slope envelopes~\cite{mannor,bkr,bertsimas2003}. We add three specialized arguments: the universal call/protection frontier and suffix feasibility; an initial-state normal-form potential covering retained preparations with matching actual-write environments; and finite all-budget closure with compact compilation on a compatible mixed-price class. Roslyn illustrates the count tradeoff and conditional timing effects; its variable work does not meet the priced contract.
+The operation contract is consequential. If an update can repair only dirty components, our exact single-job result makes the value of knowing $B$ depend on the allowed write footprints. If each call itself is charged, even a small positive toll can destroy simultaneous optimality. These converses tell a developer when importing the whole-kernel guarantee is invalid. Roslyn's prepared content-rebase paths supply a concrete example of a stronger operation whose merge cost must be retained.
 
-\section{Charged Atomic Calls}
+We make three contributions: exact local/shared call-protection frontiers, a fixed-call-cost loss bound and a suffix feasibility certificate; a footprint-based characterization of when partial repair admits one optimal policy for all budgets, including workflow precedence, per-call costs and policy certificates; and an operational assessment distinguishing Java realizations, Roslyn semantic projections and observed timing. Earlier supplied-price compilation and its full outcomes remain in the artifact. Fallback, online contention control, quantitative synchronization choices and robust dynamic programming are inherited ideas~\cite{kung,attiya2006,alistarh2018,cerny,cernyquality,mannor}. Our comparison concerns the additional resource equations and their operation-specific lower bounds, not the invention of retry or budget-unaware control.
+
+\section{Completion Interfaces and Resource Contracts}
 \label{sec:interface}
 
-Write $\N=\{0,1,\ldots\}$. Jobs $J=\{1,\ldots,n\}$ form a finite DAG with predecessor set $\operatorname{Pred}(i)$. Readiness requires all predecessors completed. Completion records the exact immutable output and persists despite later external writes. The objective is one successful foreground transformation per job, not a simultaneous snapshot or transaction.
+Write $\N=\{0,1,\ldots\}$. Jobs $J=\{1,\ldots,n\}$, $n\ge1$, form a finite DAG with predecessor set $\operatorname{Pred}(i)$. Readiness requires all predecessors completed. Completion records an exact immutable output and persists despite later external writes. The objective is one successful foreground transformation per job, not a simultaneous snapshot or transaction. Policies are deterministic and causal; no randomized expected-cost guarantee is claimed.
 
-Each ready job has a pure, opaque, whole kernel receiving its own-input identity and exact completed predecessor outputs. Its fixed unprotected work is $w_i>0$; under protection it costs $w_i+p_i$, $p_i\ge0$, including predecessor processing. Kernels finish with exact results; partial/incremental evaluation, preparation before readiness and discharge by external work are excluded. A preparation is a capability tied to its input identity and predecessor tuple. Captured outputs cannot be reconstructed by later reads of the mutable map.
+Each ready job has a pure, opaque, whole kernel receiving its own-input identity and exact completed predecessor outputs. Every execution performs its fixed work $w_i>0$, whether inside or outside protection. Partial/incremental evaluation, preparation before readiness and discharge by external work are excluded in this interface. A preparation is tied to its own-input identity and predecessor tuple. Captured outputs cannot be reconstructed by later reads of the mutable map.
 
-Local states are $\U$ (unprepared), $\C$ (current preparation), or $\D$ (completed), initially all $\U$. Several ready jobs may be in $\C$. An invalidation changes an own-input identity, preserving captured predecessor outputs. The environment has a global remaining allowance $b$, initially $B\in\N$. At zero allowance only matching outcomes are legal.
+Local states are $\U$ (unprepared), $\C$ (a retained preparation, possibly stale), or $\D$ (completed), initially all $\U$; several ready jobs may retain preparations. An invalidating write changes an own-input identity while preserving captured predecessor outputs. Identities never recur. The adaptive environment may place a fresh own-key write immediately before a comparison, including a comparison within a completing callback. It spends at most $B$ successful external writes; unused writes are allowed. The controller does not observe future writes. Budget knowledge, when permitted for a comparator, is stated explicitly.
 
-The declared charge $v_i\ge0$ covers an identity-conditional publication call. The charge $k_i\ge0$ covers entry and exit of an atomic callback, including a callback that only validates. It may be supplied as $g_i+r_i$. These charges define a resource metric; they are not measurements of API latency. All prices are integers, or rational prices scaled uniformly to integers. Table~\ref{tab:calls} defines the available counted operations. A callback holds protection only during that operation and performs no other job's foreground work.
+Let $W$ count all foreground kernel work, $L$ its protected part, and $Q$ validation, publication and completion calls, including failures. Preparations, initialization and external-writer calls are excluded from $Q$. These are separate resources. Common call overhead is excluded from $L$. Proposition~\ref{prop:fulltoll} charges it explicitly in this interface; Section~\ref{sec:toll} treats the distinct repair interface. Let $\Omega_k(T)$ sum the largest $\min(k,|T|)$ works in $T$. Write $\Omega(T)$ for the total; omitted sets mean $J$. Set $\Omega_0=0$.
 
 \begin{table}[ht]
-\caption{Counted atomic-call interface. A mismatch spends one invalidation token. Cached completion always finishes the job; validation-only mismatch retains the current live entry and reports failure.}
+\caption{Whole-kernel operations. Every validation or callback adds one to $Q$; preparation adds none. Entries show successor state and added $(W,L)$. Each callback holds protection only within that operation.}
 \label{tab:calls}
-\centering
+\centering\small
 \begin{tabular}{llll}
 \toprule
-Operation & Start & Matching outcome/cost & Mismatching outcome/cost\\
+Operation & Start & Match & Mismatch\\
 \midrule
-Prepare & $\U$ & $\C$, $w_i$ & ---\\
-Conditional publication & $\C$ & $\D$, $v_i$ & $\U$, $v_i$\\
-Validation-only callback & $\C$ & $\D$, $k_i$ & $\U$, $k_i$\\
-Fresh callback & $\U$ & $\D$, $k_i+w_i+p_i$ & ---\\
-Cached callback & $\C$ & $\D$, $k_i$ & $\D$, $k_i+w_i+p_i$\\
+Prepare & $\U$ & $\C$, $(w_i,0)$ & ---\\
+Conditional publication & $\C$ & $\D$, $(0,0)$ & $\U$, $(0,0)$\\
+Validation-only callback & $\C$ & $\D$, $(0,0)$ & $\U$, $(0,0)$\\
+Fresh callback & $\U$ & $\D$, $(w_i,w_i)$ & ---\\
+Cached callback & $\C$ & $\D$, $(0,0)$ & $\D$, $(w_i,w_i)$\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Discarding a preparation is free. A free inspection is permitted only with a legal outcome that preserves a currently usable preparation; it cannot certify that future interference is exhausted. Programs can select any ready job after any completed call, retain preparations or repeat inspections. There is no bare acquire/release operation, guard-retaining return or cross-job batch callback. All calls finish, and every noncompleting program, including one executing free cycles forever, has infinite objective. The environment resolves outcomes after observing the program's action.
-
-Retained guards permit additional choices; Section~\ref{sec:limits} preserves the zero-fee distinction and charged counterexamples.
+Call the first two validating operations \emph{cheap}: they publish on a match and may return without completion on a mismatch. Their label concerns kernel work; it does not assert a zero-time API call. Two modes provide cheap publication and fresh completion; three also provide cached completion. A failed validation leaves the live entry unchanged. Discarding a preparation is free. An inspection is an unprotected read of the current snapshot or identity; it may retain or discard a preparation, but neither publishes nor holds a guard. These reads and local bookkeeping are outside $Q$. The environment may leave the snapshot unchanged during inspection and write immediately before the next counted comparison, so inspection cannot certify the absence of future interference. Programs can select any ready job after a call, retain preparations and repeat inspections. There is no bare acquire/release, guard-retaining return, cross-job callback or outside completion. All calls and kernels terminate, and foreground scheduling eventually occurs. Noncompletion, including infinite free cycles, has infinite objective. Finite external writing alone does not provide scheduling fairness.
 
 \section{Universal Call and Protected-Work Guarantees}
 \label{sec:resources}
 
 For unfinished jobs $S$, let $\mathcal A(S)=\{i\in S:\operatorname{Pred}(i)\cap S=\varnothing\}$ denote the ready jobs.
 
-Let $W$ count all foreground kernel work, $L$ the part performed inside atomic callbacks, and $Q$ all foreground completion/validation calls, including failed conditionals. Reads, initialization and external-writer calls are excluded from $Q$. Here $w_i$ is each complete kernel's mandatory work on every input, inside or outside protection, not merely an upper bound. Let $\Omega_k(T)$ sum the largest $\min(k,|T|)$ works in $T$, and $\Omega(T)$ its total. Omitted sets mean $J$; $\Omega_0=0$ and $\Omega_n=\Omega$.
-
 \begin{theorem}[Protected work under a call cap]
 \label{thm:resources}
-Under Theorem~\ref{thm:writes}'s interface and environment, fix integers $B,r\ge0$. Among programs that complete all jobs with $Q\le n+r$ on every execution, the minimum worst protected work is
+In Section~\ref{sec:interface}'s interface, fix integers $B,r\ge0$. Among programs supplied with $B$ that complete all jobs with $Q\le n+r$ in every environment with at most $B$ writes, the minimum worst protected work is
 \[
  L_3^*(B,r)=\Omega_{\min((B-r)_+,n)},\qquad
  L_2^*(B,r)=\begin{cases}0,&B\le r,\\\Omega,&B>r,\end{cases}
@@ -133,24 +135,58 @@ Switch after $r$ cheap failures to a fresh read/preparation with cached completi
 For two modes when $B\ge r$, reject every cheap call with a fresh own-key write until $r$ rejections, then stop. Only protected calls complete before this. Afterwards, another rejectable call could fail in a different finite environment, violating the call cap. Thus all jobs complete under protection with at most $r\le B$ writes. That additional hypothetical write is absent from the lower-bound execution. Retained preparations and inspections cannot prevent a fresh write before comparison.
 \end{proof}
 
-For equal works and $B>r$, the ratio is $n/\min(B-r,n)$, reaching $n$ at $r=B-1$. Linear prices $W+\lambda L+\kappa Q$ correspond to $p_i=\lambda w_i$, $v_i=k_i=\kappa$; these counts do not estimate throughput.
+For equal works and $B>r$, the ratio is $n/\min(B-r,n)$, reaching $n$ at $r=B-1$. The lower bound depends on the universal cap: a budget-aware two-mode policy may use one more cheap call at $B=r$, since that call must match.
 
-\paragraph{Work cost of simultaneous protection optimality.}
-Among $\mathcal U_3(0)$ programs attaining the optimal worst-$L$ curve for every budget, minimum worst $W$ at $B$ is $\Omega+\Omega_{\min(B,n)}$. All-cached attains it with $Q=n$, $W=\Omega+L$. To prove necessity, target the $k=\min(B,n)$ largest jobs. Each counted call must complete. Immediately before each target's first comparison/acquisition, insert a fresh write exactly if its kernel was previously executed. Every target then executes inside. If this uses $h\le k$ writes, the simultaneous guarantee gives $\Omega_k\le L\le\Omega_h$. Positivity forces $h=k$: each target pays a prior and a protected kernel. Unknown $B$ alone does not force this cost; the artifact gives a counterexample.
+\subsection{Local Caps and a Shared Cap Can Be Required Together}
 
-For general $r$, consider the threshold family that freshly prepares before each attempt, uses cheap validation until $r$ global failures, and then cached completion. It may adaptively choose another ready job after any failure, but retains no other preparation.
-
-\begin{proposition}[Work-optimal choice within the threshold family]
-\label{prop:thresholdwork}
-Minimum-work ready selection minimizes worst $W$ within this family simultaneously for every $B,r$, even against selectors that receive $B$. A heap constructs its fixed order in $O(|E|+n\log(n+1))$ operations. This is not optimality among all causal programs or the full $(W,L,Q)$ Pareto frontier.
+Suppose job $i$ may incur at most $r_i$ noncompleting calls, and the batch at most $s\le R=\sum_i r_i$. These caps hold in every finite-write environment. Define the weighted subset value
+\[
+ A_{\boldsymbol c}(B)=\max_{T\subseteq J:\,\sum_{i\in T}c_i\le B}\sum_{i\in T}w_i,
+\]
+allowing zero-cost items. This is a knapsack value; the contribution is identifying the write cost that activates each job's protection.
+\begin{proposition}[Local and shared resource contracts]
+\label{prop:localcaps}
+The minimum worst protected work under both caps is
+\[
+\begin{aligned}
+ U_2(B;\boldsymbol r,s)&=\max\{A_{\boldsymbol r}(B),\Omega\,\mathbf1[B\ge s]\},\\
+ U_3(B;\boldsymbol r,s)&=\max\{A_{\boldsymbol r+\boldsymbol1}(B),\Omega_{(B-s)_+}\}.
+\end{aligned}
+\]
+One policy attains each curve simultaneously for every $B$: switch to guaranteed completion when either the current local allowance or the shared allowance is exhausted. Its worst call count is $n+\min(B,s)$.
 \end{proposition}
 \begin{proof}
-Let $X(S,b,t)$ be optimal excess work over mandatory work, with $t$ cheap failures left. At $t=0$ it is the sum of the largest $\min(b,|S|)$ works in $S$; at $b=0$ it is zero. For $b,t>0$,
-\[
-X(S,b,t)=\min_{i\in\mathcal A(S)}\max\{X(S-i,b,t),w_i+X(S,b-1,t-1)\}.
-\]
-If $T\subseteq S$, simulating omitted jobs as successful virtual attempts shows $X(T,b,t)\le X(S,b,t)$: they consume neither failures nor slack. For ready $i,j$ with $w_i\le w_j$, compare choosing $j$ first with choosing $i$, then $j$ after success. Failure of $i$, success of $i$ then failure of $j$, and both successes are each bounded by the $j$-first value, by weight order and subset monotonicity. Hence $i$ is optimal at every state. Failure changes neither readiness nor weights, so the rule repeats the current job independently of $b,t$.
+For a local lower bound, target a maximizing subset. Reject each target's cheap calls up to its local cap. In two modes another rejectable call is then universally inadmissible, so the target completes protectively using at most $r_i$ actual writes. In three modes, one additional write invalidates its eventual cached comparison; an earlier fresh completion already pays $w_i$. Thus each target costs at most $r_i+1$ writes. The shared lower bounds follow from Theorem~\ref{thm:universal}, since adding local constraints cannot enlarge its policy class.
+
+For the switching policy, if fewer than $s$ failures occur, a protected job has exhausted its own cap: it requires $r_i$ writes in two modes, and $r_i+1$ in three. If $s$ failures occur, two modes pay at most $\Omega$; in three, every protected completion still needs its own additional mismatch write, so at most $(B-s)_+$ jobs are protected. These two cases give the maximum above. A fresh preparation after every rejection makes the intervals disjoint. Distributing $\min(B,s)$ cheap failures among the local allowances attains the call bound; its maximum need not coincide with the protection maximum.
 \end{proof}
+
+With only local caps take $s=R$, giving $U_2=A_{\boldsymbol r}(B)$ and $U_3=A_{\boldsymbol r+\boldsymbol1}(B)$. Uniform $r_i=r\ge1$ yields $\Omega_{\lfloor B/r\rfloor}$ and $\Omega_{\lfloor B/(r+1)\rfloor}$, with $Q\le n+nr$. At $r=0$ these become $\Omega$ and $\Omega_B$, with $Q=n$. Reusing the rejected preparation at the threshold would lose the extra-write requirement of the three-mode bound. A per-job preparation cap is therefore a different contract. Sharing the same total allowance $R$ permits weakly less worst protected work than reserving local allowances; requiring local limits restricts that flexibility.
+
+\subsection{What a Fixed Cost per Call Changes}
+
+Let every counted call cost $\kappa\ge0$, and minimize $C=L+\kappa Q$. Let $C^*(B,r)$ be the minimum worst $C$ over the full $B$-informed program class in Theorem~\ref{thm:resources}. Here $B,r\in\N$ and only the shared cap is imposed; arbitrary local caps are not added to this comparator. Mode choice remains \emph{before} comparison, unlike the repair interface below.
+\begin{proposition}[A sharp loss bound for the threshold policy]
+\label{prop:fulltoll}
+The three-mode global-threshold policy $P_r$ has exact worst cost
+\[
+\begin{aligned}
+ C(P_r,B)&=n\kappa+\kappa\min(B,r)+\Omega_{(B-r)_+},\\
+ 0&\le C(P_r,B)-C^*(B,r)\le\kappa\min(B,r).
+\end{aligned}
+\]
+The resulting $r\kappa$ loss bound is sharp for this policy. Exact simultaneous optimality can fail for any positive toll smaller than a job's work.
+\end{proposition}
+\begin{proof}
+$P_r$ has at most $\min(B,r)$ failures and protection bounded by Theorem~\ref{thm:universal}. Both maxima occur together: reject the first $\min(B,r)$ cheap calls, then, if any writes remain, invalidate cached completions of the heaviest jobs. For every competing program, the resource lower-bound execution has $L\ge\Omega_{(B-r)_+}$ and also $Q\ge n$. Thus $C^*\ge n\kappa+\Omega_{(B-r)_+}$ on that same execution, proving the loss bound.
+
+For one job, $B=r+1$ lets the environment invalidate every attempt until completion. Immediate completion is optimal at $\kappa+w$, while $P_r$ pays $(r+1)\kappa+w$. Now let $r\ge1$ and $0<\kappa<w$. At $B=1$ the optimum is $2\kappa$: after its only failure a cheap-first informed policy completes cheaply. On a write-free prefix through the first counted call, choosing a completing operation can instead be forced to cost $\kappa+w>2\kappa$. A simultaneous optimum must therefore choose cheap on this prefix. Replay it at $B=r+1$, reject that call, then invalidate subsequent comparisons until completion. At most $r$ failures and one cached mismatch use at most $r+1$ writes, forcing $L=w,Q\ge2$. This costs more than $\kappa+w$. Inspections on other prefixes may reveal past writes; they do not defeat this common write-free prefix.
+\end{proof}
+The guarantee remains a count of kernel work when fixed overhead is significant. The proposition quantifies its cost sensitivity without identifying a toll with elapsed protected time or claiming minimax regret among all unaware policies.
+
+\subsection{Controlling Total Work Along the Protection Frontier}
+
+All-cached completion at $r=0$ uses $Q=n$ and $W=\Omega+L$: avoiding protection after a match requires prior outside work, while a mismatch repeats that work inside. A history can sometimes justify fresh completion of a remaining job, saving its outside preparation while preserving the protection bound. Fix a legal order. The threshold policy freshly prepares before every attempt, uses cheap calls until $r$ failures, then cached completion. The following criterion permits protection-preserving continuations; separate work-order optimization remains in the artifact.
 
 \paragraph{Certifying post-threshold protection choices.}
 After $r$ cheap failures, let $h$ count cached mismatches and $\ell$ work already protected. Consider a boundary with unfinished jobs $S$, no retained preparation, and an observed prefix admitting exactly $r+h$ actual writes. This holds for the modeled serial histories; it does not compress histories revealing additional writes.
@@ -178,60 +214,143 @@ At the threshold switch $C(S,0,0)$ holds. Certified choices preserve it, every l
 \end{proof}
 On chain $w=(2,4,1,1)$, $r=1,B=4$, all-tail reduces worst $W$ from 18 to 17 at $L=7,Q=5$; both return to 18 at $B\ge5$. The two certified rules are incomparable (Section~\ref{sec:eval}); feasibility does not establish general $W$-optimality.
 
-\section{A Three-Mode Normal Form}
-\label{sec:normal}
+\section{When Partial Repair Makes the Budget Valuable}
+\label{sec:partial}
 
-Write $S$ for unfinished jobs and $\mathcal A(S)$ for ready jobs. Reachable unfinished sets are upsets. For proofs we extend the game to all subsets, treating absent predecessors as completed. Define
-\begin{equation}
-\begin{aligned}
-m_i&=\min(v_i,k_i),& c_i&=w_i+m_i,\\
-\delta_i&=k_i-m_i,& P_i&=p_i+\delta_i,\\
-s_i&=w_i+p_i.
-\end{aligned}
-\label{eq:prices}
-\end{equation}
-An unavoidable baseline from an all-unprepared start is $A(S)=\sum_{i\in S}c_i$. Three serial modes remain at boundaries where unfinished jobs have no retained preparation:
+Whole-kernel recomputation makes the first invalidation of a preparation as damaging as further invalidations of that preparation. Some software can instead reuse unaffected components. We now characterize when that operation change destroys a common optimum. We first define a single-job repair interface, then extend it to workflows. This is not a reduction of every Roslyn merge to component work.
 
-\begin{enumerate}
-\item \emph{Protected}: execute a fresh callback, paying $c_i+P_i$, and remove $i$.
-\item \emph{Cheap validation}: prepare and invoke the cheaper validation API. A match pays $c_i$ and removes $i$; a mismatch pays $c_i$, leaves $i$ unprepared and spends one token.
-\item \emph{Cached completion}: prepare and invoke a cached callback. A match pays $c_i+\delta_i$; a mismatch pays $c_i+\delta_i+s_i$ and spends one token. Both remove $i$.
-\end{enumerate}
+\paragraph{Repair interface and observations.}
+One job consists of $m$ components with positive weights $w_c$. A write changes fresh versions on one nonempty footprint from a fixed finite family $\Gamma$. Footprints may overlap and repeat; each occurrence costs one write. Outside protection, preparation reads and computes every component anew. A protected call observes the dirty set $D$, the union of footprints since that preparation. It either accepts, repairs exactly $D$ and publishes the job, or rejects and prepares again outside. An empty observation can complete with no repair. No partial publication, free dirty-set query, retained protection or cheaper completion operation is available. A fresh whole-job completion costs at least repairing any dirty set. Calls and preparations terminate.
 
-Subtract the once-paid baseline. The optimal worst excess of these modes satisfies $F(\varnothing,b)=F(S,0)=0$ and, for $b>0$,
-\begin{equation}
-F(S,b)=\min_{i\in\mathcal A(S)}\left\{
-\begin{aligned}
-&P_i+F(S-i,b),\\
-&\max\{F(S-i,b),\ c_i+F(S,b-1)\},\\
-&\delta_i+\max\{F(S-i,b),\ s_i+F(S-i,b-1)\}
-\end{aligned}\right\},
-\label{eq:bellman}
-\end{equation}
-where $S-i=S\setminus\{i\}$. At $b=0$ cheap validation attains zero excess; the cached option has excess $\delta_i$, without a mismatch branch. Each mode outcome decreases $|S|+b$, so a minimizing deterministic controller finishes within $n+B$ mode invocations. This is worst-path control against an adaptive environment, not expected-cost control against a fixed distribution.
-
-\begin{theorem}[Charged atomic-call normal form]
-\label{thm:normal}
-For the interface of Section~\ref{sec:interface}, the minimum worst cost over all causal programs from the all-unprepared state is
+The controller sees $D$ and its history, but neither $B$ nor the number of repeated writes within an interval. It must complete in at most $q\ge1$ calls for every finite-write execution. The metric in the next theorem is protected repair work; common validation/publication overhead is excluded, not assumed absent. Let
 \[
-\operatorname{OPT}(J,B)=\sum_{i\in J}c_i+F(J,B).
+G(b)=\max_{0\le t\le b,\ \gamma_j\in\Gamma}
+       \sum_{c\in\gamma_1\cup\cdots\cup\gamma_t}w_c,
+\qquad W^*=w\!\left(\bigcup\Gamma\right).
 \]
-A serial three-mode controller attains it. Programs retaining several preparations or changing jobs between calls cannot improve the value.
+Then $G(0)=0$, $G$ is nondecreasing and subadditive, and $G(m)=W^*>0$. Unreachable components do not contribute to $W^*$. Singleton footprints give the prefix sums of weights sorted in decreasing order. A general footprint family need not have a cheap profile: computing these unions is part of the input-processing cost.
+
+\begin{theorem}[Exact value and information boundary for repair]
+\label{thm:repair}
+For a controller supplied with $B$, minimum worst repair work is
+\[
+K_q(B)=G(\lfloor B/q\rfloor).
+\]
+Among controllers receiving no $B$ that attain $K_q(B)=0$ for every $B<q$, the least possible worst-work envelope is
+\[
+T_q(B)=G((B-q+1)_+).
+\]
+One policy attains this envelope for all $B$. For $q\ge2$, a single controller is optimal for every $B$ if and only if $G(1)=W^*$. For $q=1$, such a controller always exists.
 \end{theorem}
 \begin{proof}
-The three modes implement Table~\ref{tab:calls} with exactly Equation~\eqref{eq:bellman}'s full costs. Their decreasing rank and captured successful outputs give the upper bound.
+Put $k=\lfloor B/q\rfloor$. The aware policy accepts work at most $G(k)$ and otherwise rejects while a call remains. An observation with greater work requires at least $k+1$ writes. Rejecting $q-1$ such observations exhausts all opportunities for a $q$th: $q(k+1)>B$. Thus forced acceptance on the last call still meets $G(k)$. This policy also satisfies the call cap outside its supplied budget, where the work guarantee is not asserted. Conversely, a word of at most $k$ footprints realizes $G(k)$. Repeat it after every preparation. Any accepting call pays $G(k)$, and $q$ repetitions use at most $qk\le B$ writes. Fresh whole-job completion is no cheaper.
 
-For the lower bound, let $x$ be any interface state with unfinished set $T$. Define
-\begin{equation}
-\Phi(x,b)=\sum_{i:x_i=\U}c_i+\sum_{i:x_i=\C}m_i+F(T,b).
-\label{eq:potential}
-\end{equation}
-Cached jobs remain ready because completion persists. For each operation we show a legal outcome preserving immediate cost plus successor potential. Preparation pays $w_i=c_i-m_i$ and replaces $c_i$ by $m_i$. Validation with charge $z_i\in\{v_i,k_i\}$ gives excess $z_i-m_i+F(T-i,b)$ on success or $w_i+z_i+F(T,b-1)$ on failure. Since $z_i\ge m_i$, their maximum dominates the cheap branch; at $b=0$ success suffices. Fresh callbacks use the protected inequality. Cached callbacks give excesses $\delta_i+F(T-i,b)$ and $\delta_i+s_i+F(T-i,b-1)$, exactly the cached branch. Discarding $\C$ raises potential by $w_i$; inspection admits a preserving outcome.
+For the unaware lower bound, write once in each of the first $q-1$ preparation intervals. After observation $j<q$, the history is compatible with only $j$ writes in total. Accepting positive damage, or fresh completion, would violate that budget's zero optimum. Hence the policy must reject all $q-1$ times. In its final interval spend up to $B-q+1$ writes realizing $G(B-q+1)$. No retry remains. The matching policy rejects its first $q-1$ nonempty observations, then accepts; earlier empty observations complete for zero work.
 
-Nature selects a witnessing branch after each action, within budget $b$. Telescoping gives the initial potential as a cost lower bound, covering arbitrary job switching and retained preparations. Noncompletion costs infinity; intermediate potentials need not equal intermediate optima.
+Every simultaneous optimum meets the preceding zero-work requirements. If $G(1)<W^*$, let $k\ge2$ be the first index with $G(k)>G(1)$, and set $B=q-1+k$. Then $1\le\lfloor B/q\rfloor<k$, so $K_q(B)=G(1)<G(k)=T_q(B)$. Conversely, if $G(1)=W^*$, both expressions are zero for $B<q$ and $W^*$ otherwise. For $q=1$ their arguments coincide.
 \end{proof}
 
-A resource cap $M$ is feasible exactly when $A(J)+F(J,B)\le M$. Prices and allowance are supplied; restricted or correlated outcomes preserve the upper guarantee but may lower the optimum.
+This is a condition on the damage a write can cause, not simply the availability of a partial-repair API. If one allowed footprint covers all reachable work, partial repair still admits simultaneous optimality. If writes affect separate components, additional writes can increase the damage and knowledge of $B$ changes the optimal acceptance threshold.
+
+For two unit components, singleton writes and $q=2$, $K_2(B)$ at $B=0,1,2,3$ is $0,0,1,1$. Optimality at $B=1$ forces an unaware policy to reject its first dirty component. Two subsequent writes make both components dirty; its last call costs 2 at $B=3$. The aware policy at that budget accepts one dirty component immediately and retries only two-component damage. These are complete executions of the specified interface, without assumptions about elapsed time.
+
+\paragraph{Quantifying the loss without a budget.}
+For repair work alone, a finite competitive ratio requires zero work when $K_q(B)=0$. Theorem~\ref{thm:repair} therefore identifies the exact optimal ratio as $\sup_{B\ge q}T_q(B)/K_q(B)$. Subadditivity gives an upper bound $q$: with $k=\lfloor B/q\rfloor$, $B-q+1\le qk$, so $G(B-q+1)\le qG(k)$. It is sharp for sufficiently many unit singleton components at $B=2q-1$, where the ratio is $q$. Thus the loss can grow with the call allowance; it is not a constant-price perturbation of whole-kernel optimality.
+
+\subsection{A Shared Retry Allowance Across a Workflow}
+\label{sec:partialdag}
+
+The same boundary extends beyond a single job. Consider $n$ persistent jobs with a DAG, each with its own component/footprint family. A ready job is freshly prepared before each attempted observation; no other preparation is retained. A write affects the currently attempted job, with no cross-job footprint. After a rejection the next ready job may be selected anew. The total call cap is $n+r$, with a shared $r$; acceptance pays that job's dirty-component work and permanently completes it. Write $W_i=G_i(\infty)$, $\sigma_i=\min\{b:G_i(b)=W_i\}$, $\Sigma=\sum_i\sigma_i$, and $W^*=\sum_iW_i$. Let $K(B)$ be the known-budget minimum worst repair work for this interface.
+
+\begin{theorem}[Workflow information boundary]
+\label{thm:repairdag}
+For $r\ge1$, one policy simultaneously attains $K(B)$ for every $B$ iff $G_i(1)=W_i$ for every job. This holds both for a fixed order and for choices among DAG-ready jobs. Under the condition,
+\[
+K(B)=\text{sum of the largest }\min((B-r)_+,n)\text{ values }W_i.
+\]
+For $r=0$, accepting every observation is simultaneously optimal for arbitrary footprints. More generally, the first budget at which $K(B)=W^*$ is
+\[
+B_{\rm sat}=\Sigma+r\max_i\sigma_i.
+\]
+\end{theorem}
+\begin{proof}
+If every job has a one-write maximum, reject the first $r$ nonempty observations globally and otherwise accept. Early acceptances are clean; after $r$ rejections, at most $(B-r)_+$ jobs can accept positive damage. To force the matching lower bound, target that many heaviest jobs, writing once before each target observation to cause maximum damage. A target completion costs $W_i$, and at most $r$ rejections add writes, so $r+k\le B$ writes suffice for $k$ targets. An attempted $(r+1)$st rejection would itself violate the call cap within budget; truncate the adversary there. Selection and precedence do not avoid completing the targets.
+
+For necessity, all $K(B)$ with $B\le r$ are zero. A simultaneous optimum must therefore reject when one write is issued before each of its first $r$ observations: after observation $t$, the history is compatible with only $t\le r$ writes in total. No job has yet completed. Now spend $\sigma_i$ writes to saturate each job on its next attempt. No rejection remains, so the policy pays $W^*$ with $B_0=\Sigma+r$ writes. If some $\sigma_j\ge2$, a competing policy reserves all $r$ rejections for fully dirty observations of job $j$ and accepts everything else. Full total work would require $\Sigma+r\sigma_j>B_0$ writes, as every invocation uses a fresh preparation. Its worst cost is therefore strictly below $W^*$; the attainable cost set is finite. This contradiction proves necessity even in a prescribed order.
+
+At $r=0$, every call must complete and acceptance dominates fresh whole-job completion. The value is $\max_{\sum b_i\le B}\sum_iG_i(b_i)$ independently of order. For the final statement, saturating every attempted observation uses at most $\Sigma+r\max_i\sigma_i$ writes on an admissible run and forces full work. Below that budget, reserve all $r$ rejections for full observations of a maximum-$\sigma_i$ job. Full work would require exactly that many writes, so the worst cost is strictly smaller.
+\end{proof}
+
+For two jobs, one with two unit singleton components and one with a single unit component, $r=1$ gives $K(B)=0,0,1,2,2,3$ at $B=0,\ldots,5$ in either order. Yet optimality at $B=1$ forces a first rejection; three subsequent writes saturate both jobs and force cost 3 at $B=4$, where $K(4)=2$. The shared allowance does not remove the information gap. The theorem identifies its existence and saturation threshold; it does not give a closed form for every intermediate value in an arbitrary nonsaturating workflow.
+
+\subsection{Charging Every Call Changes the Boundary Again}
+\label{sec:toll}
+
+Repair work omits the protected cost of validation itself. To expose this assumption, charge $\kappa\ge0$ on \emph{each} call and a common $\mu\ge0$ once upon completion. Acceptance on call $t$ costs $\mu+t\kappa+w(D)$. Preparation remains outside this metric. Let $M$ be the sorted multiset of $qm$ numbers
+\[
+\{\,t\kappa+G(k):1\le t\le q,\ 0\le k<m\,\},
+\]
+with one-based entries $M_j$ and repeated entries retained.
+
+\begin{theorem}[Toll curve and simultaneous-optimality boundary]
+\label{thm:toll}
+The known-budget optimum is $\mu+C_q(B)$, where
+\[
+C_q(B)=\begin{cases}
+\min\{\kappa+W^*,M_{B+1}\},& B<qm,\\
+\kappa+W^*,&B\ge qm.
+\end{cases}
+\]
+For $q\ge2$, simultaneous optimality holds exactly in the following cases: $\kappa=0$ and $G(1)=W^*$, or $\kappa\ge W^*$. It fails for every $0<\kappa<W^*$. The common cost $\mu$ does not change these conditions. At $q=1$, first acceptance is always simultaneously optimal.
+\end{theorem}
+\begin{proof}
+Remove $\mu$ and fix $T<\kappa+W^*$. On call $t$, an unacceptable dirty set has $t\kappa+w(D)>T$. Its least write cost is
+$a_t(T)=\min\{k:t\kappa+G(k)>T\}$. Such an index exists since $G(m)=W^*$. A sequence of $q$ unacceptable observations is possible exactly when $\sum_ta_t(T)\le B$: each interval can independently realize a minimum-cost witness. Otherwise accepting the first acceptable observation finishes within $q$ calls and cost $T$. Because $G$ is nondecreasing, $a_t(T)$ counts that shifted list's entries at most $T$. Hence $\sum_ta_t(T)$ is the rank of $T$ in $M$, with ties. The smallest achievable threshold below the first-accept cap is $M_{B+1}$, proving the curve.
+
+If $\kappa>0$ and a policy ever rejects a first observation, follow it by maximum damage until it accepts. At a sufficiently large finite budget it pays at least $2\kappa+W^*$, exceeding the aware first-accept cap $\kappa+W^*$. Thus a simultaneous optimum must accept every first observation. Let $k^*$ be the first index with $G(k^*)=W^*$. With known budget $k^*$, accept all first observations except maximum damage; reject that one and the next observation is necessarily clean. Its worst cost is at most $\max\{\kappa+W_{<},2\kappa\}$, where $W_{<}<W^*$ is the largest attainable nonmaximum damage. For $0<\kappa<W^*$ this is strictly smaller than the first-accept value $\kappa+W^*$. Conversely, when $\kappa\ge W^*$, presenting a first observation with damage $G(B)$ forces either $\kappa+G(B)$ on acceptance or at least $2\kappa$ on rejection. First acceptance attains the former, which is no larger. The zero-toll case is Theorem~\ref{thm:repair}.
+\end{proof}
+
+The zero-toll guarantee is therefore sensitive to the objective: even an arbitrarily small positive per-call charge precludes a common optimum until that charge reaches the maximum repair work. This does not refute a bound that deliberately measures kernel work alone. It identifies which overhead can be ignored for that particular optimality claim.
+
+The supplement also compiles the best deterministic competitive acceptance threshold. If $c(D)$ is the least footprint count realizing $D$ and $e$ sums those counts after rejections, acceptance on call $t$ is safe for ratio $R$ iff
+$\mu+t\kappa+w(D)\le R(\mu+C_q(e+c(D)))$.
+The comparator is smallest at this least-consistent budget. Monotonicity reduces ratio feasibility to a minimum-write failing path, with exact rational upper/lower certificates. Given correct profiles, the specialized compiler uses $O(qm\log(q+1)+qm\log U)$ arithmetic operations and $O(qm+q)$ space, where $U=\mu+q\kappa+W^*$ after integer scaling. Arbitrary footprint profiling and runtime minimum-cover computation remain separate costs; singleton footprints use sorting and $c(D)=|D|$.
+
+\subsection{With Call Charges, Precedence and History Matter}
+\label{sec:tolldag}
+
+Return to the workflow interface of Section~\ref{sec:partialdag}, charging $\kappa>0$ per call. Write $K^{\kappa}(B)$ for its known-budget value, $H(B)=\max_{\sum b_i\le B}\sum_iG_i(b_i)$ and $C_{\max}=n\kappa+\sum_iW_i$.
+
+\begin{theorem}[Call charges in workflows]
+\label{thm:tolldag}
+For independent jobs and $r\ge1$, a simultaneous optimum exists iff $\kappa\ge\max_iW_i$. This condition is sufficient on every DAG: first acceptance has exact value $n\kappa+H(B)$. On a general DAG, a sink with $W_i>\kappa$ prevents simultaneous optimality. The condition on all jobs is no longer necessary.
+\end{theorem}
+\begin{proof}
+For sufficiency, fix an allocation attaining $H(B)$. Present its dirty set on each job's first attempt and leave that job clean after a rejection. Accepting pays the allocated damage; rejecting incurs an extra toll at least as large. This matches the first-accept upper bound, regardless of order.
+
+For necessity, a simultaneous optimum cannot reject after a prefix whose completed jobs were all fully dirty: saturating every remaining attempt would then force cost above $C_{\max}$ at some finite budget. Hence fully dirty first observations force it to pay $C_{\max}$ with $\Sigma$ writes. If a job $j$ with $W_j>\kappa$ can be placed last, an aware policy at budget $\Sigma$ accepts preceding jobs. If any observation is less than full it accepts throughout, costing strictly below $C_{\max}$. Otherwise all $\Sigma$ necessary writes are spent; rejecting $j$ once then completing cleanly costs $C_{\max}-W_j+\kappa<C_{\max}$. The finite outcome set makes the worst cost strictly smaller. Every independent job, and every DAG sink, can be last.
+
+For the final claim, let $A$ have singleton components of weights 1 and 2, let $C$ have one component of weight 1, require $A$ before $C$, and take $r=1,\kappa=2$. First acceptance has curve $4,6,7,8$ at $B=0,1,2,\ge3$. Matching lower bounds subtract the mandatory toll 4. At $B=1$, dirty $A$'s weight-2 component: acceptance or rejection costs at least 2. At $B=2$, do the same, then dirty $C$ after acceptance (cost 3), or the weight-2 component again after rejection (cost 4). At $B=3$, first saturate $A$ with two writes; then dirty $C$ after acceptance (cost 4), or the weight-2 component after rejection (cost 4). Thus first acceptance is a common optimum although $\kappa<W_A$. Reversing the order makes $A$ a sink and removes every common optimum.
+\end{proof}
+
+History-dependent rejection can be essential even with one-component jobs. Consider chain $(a,h,a)$, $h>a>0$, with $r=1,\kappa=a$. Accept throughout except that a dirty middle job is rejected once if the first job completed cleanly. Its exact curve is $3a,4a,4a+h,5a+h$ at $B=0,1,2,\ge3$. First acceptance instead costs $3a+h>4a$ at one write. For upper bounds, a retry leaves at most $B-1$ writes; whenever its extra toll $a$ is paid, the clean first job has saved $a$. For matching lower bounds, one dirty observation forces at least $a$ beyond baseline. With two writes, leave the first job clean and dirty the middle, then dirty the last after acceptance or the middle again after rejection, forcing $a+h$. With three writes, dirty the first job: after acceptance apply that two-write strategy to the last two jobs; after rejection dirty the middle and last instead. This forces $h+2a$. A preceding clean rejection already spends the toll and leaves no retry. No writer budget is supplied; $(a,h)=(1,3)$ gives the saved seven-case separation.
+
+\paragraph{Constructing a Common Policy for Other DAGs.}
+A finite recurrence decides whether a common optimum exists beyond these closed-form cases. Set $E=\Sigma+r\max_i\sigma_i$; saturating every attempt proves $K^{\kappa}(b)=C_{\max}$ for $b\ge E$. Let $e$ be the least-consistent write count clipped to $E$, $t$ the remaining rejections, and $a$ the cost already paid. Define $\Theta(\varnothing,t,e)=K^{\kappa}(e)$ and, with $e_D=\min(e+c(D),E)$,
+\begin{equation}
+\Theta(S,t,e)=\max_{i\in\mathcal A(S)}\min_D
+\max\left\{\Theta(S-i,t,e_D)-\kappa-w_i(D),\
+\Theta(S,t-1,e_D)-\kappa\right\},
+\label{eq:viability}
+\end{equation}
+omitting the rejection term at $t=0$. A continuation exists exactly when $a\le\Theta(S,t,e)$; in particular, $\Theta(J,r,0)\ge0$ decides common optimality.
+
+To prove this, consider a completed history and sum the minimum footprint-word lengths of its observations. Fresh preparations and independent own-job writes realize those words in separate intervals, so the sum is the least budget consistent with that history. Every larger budget permits the same history by leaving writes unused. Since $K^\kappa$ is nondecreasing, meeting its value at the least budget is necessary and sufficient for that history to meet every consistent target. Above $E$ all targets equal $C_{\max}$; clipping this coordinate is exact even though a partial observation's minimum word can exceed its job's full-saturation count. Accumulated cost $a$ is never clipped.
+
+Induct on $|S|+t$. With no jobs left, feasibility is the interval $a\le K^\kappa(e)$. For a fixed ready job and observation, accepting adds $\kappa+w_i(D)$ and rejecting adds $\kappa$; either strictly decreases the induction measure. Each child's feasible costs therefore give a shifted downward interval. The choice after observing $D$ takes the larger endpoint. Requiring success for every observation takes the minimum; choosing a job before that observation takes the maximum. This proves Equation~\eqref{eq:viability} with its required $\exists i\,\forall D\,\exists\mathrm{action}$ order. A maximizing job and any satisfied child inequality supply an executable policy using history alone. If the initial interval excludes zero, the failed alternatives identify an adversarial finite observation path for each attempted controller choice.
+
+
+For each minimum footprint count, only its maximum attainable damage is needed in the adversarial alternatives. With $I$ unfinished sets and $h=\max_i(m_i+1)$, the table has $O(I(r+1)(E+1))$ entries and uses $O(In(r+1)(E+1)h)$ arithmetic operations, given profiles and the comparator. For a fixed order, $I=n+1$ and there is one job choice. This removes accumulated-cost enumeration, not potentially exponential DAG states or footprint profiling. It is a specialization of finite minimax and information-state reasoning, not a new general dynamic-programming principle.
 
 \section{Actual External Writes in Java}
 \label{sec:java}
@@ -240,238 +359,20 @@ Use Java 17's \texttt{ConcurrentHashMap} with one foreground thread, distinct pe
 
 Implement Table~\ref{tab:calls} using \texttt{replace(key,expected,result)} and \texttt{compute}. Validation-only callbacks return the prepared result on match, otherwise the unchanged entry with a failure flag; cached callbacks recompute on mismatch, and fresh callbacks always compute under protection. Capture permanent milestones locally rather than rereading the map.
 
-Callbacks perform no other-key map operations, other foreground kernels or direct guard work, including on cached matches; no guard survives. Multiple preparations are allowed. Prices charge the specified calls; bin collisions add no unperformed kernel work. Assume scheduling and call completion: finite write counts do not imply fairness.
+Callbacks perform no other-key map operations, other foreground kernels or direct guard work, including on cached matches; no guard survives. Multiple preparations are allowed. Bin collisions add no unperformed kernel work. Both \texttt{replace} and \texttt{compute} can acquire a bin monitor: $L$ counts kernel work within it, while Proposition~\ref{prop:fulltoll} separately accounts for fixed call costs. Assume scheduling and call completion: finite write counts do not imply fairness.
 
-\begin{theorem}[Matching actual-write environment]
+\begin{theorem}[Resource bounds for actual writes]
 \label{thm:writes}
-Under these conditions, with no initial preparations and at most $B$ successful external writes,
-\[
-\min_P\ \sup_{E:\#\mathrm{writes}(E)\le B}\operatorname{Cost}(P,E)
-=\sum_i c_i+F(J,B).
-\]
-The equality holds for separate or shared internal bins.
+Under the stated API, monitor and scheduling assumptions, Theorems~\ref{thm:resources}--\ref{thm:universal}'s exact call/protected-kernel-work bounds hold for Java programs using the listed operations, with separate or shared internal bins. This is a mathematical refinement argument for those operations, not a mechanically verified property of an entire JDK binary.
 \end{theorem}
 \begin{proof}
-Classify job $i$ as $\C$ exactly when some retained preparation has its current identity, otherwise $\U$. Use Equation~\eqref{eq:potential} with $b=B-\#\mathrm{writes}$. Immediately before a comparison acquires its monitor, the environment can preserve a current preparation or invalidate it with one fresh own-key write. Theorem~\ref{thm:normal}'s validation/cached inequalities apply. No monitor survives the boundary, so this works with colliding bins.
+For the upper bounds, the serial policies freshly read and prepare after every cheap failure. Their read-to-comparison intervals, including cached completions, are disjoint; every mismatch contains a distinct successful write. Thus at most $B$ mismatches occur. Every fresh/cached completing call completes exactly one job, and a cached mismatch performs precisely that job's kernel inside.
 
-Fresh preparation performs the $\U$-to-$\C$ credit transfer; computing from an old identity adds no current capability. Stale validation rejects without a write and leaves the semantic state unchanged. A stale cached callback recomputes inside: its excess is $k_i+s_i-c_i=P_i$ in state $\U$, or $k_i+s_i-m_i=w_i+P_i$ if another current preparation exists. Both dominate the protected option. Fresh callbacks use that option directly. Discarding the only current preparation increases potential; copies, stale preparations and preserving inspections cannot decrease it. Captured parents survive live-parent writes. Thus every operation admits a zero/one-write continuation preserving cost plus potential; telescoping gives the lower bound with at most $B$ writes. The interface forbids using a shared bin to perform another job's work inside the same call.
-
-For the upper bound, the serial controller freshly reads and prepares after every cheap failure. Its read-to-comparison intervals, including cached completions, are disjoint; each mismatch contains a distinct write. There are at most $B$ mismatches. Counting them may overestimate remaining writes, conservatively, so the three-mode guarantee applies in either layout.
+For the lower bounds, use the target-job adversaries of Section~\ref{sec:resources}. Immediately before a chosen comparison acquires its monitor, a successful own-key write installs a fresh identity, invalidating every retained preparation for that job. A cheap call fails; a cached call recomputes inside; a fresh callback already incurs its whole kernel inside. Stale copies cannot complete cheaply, captured parent outputs persist, and no monitor survives the preceding call. Bin collisions therefore do not prevent the next chosen write. The prohibition on other-job work within a callback ensures it cannot complete several targets for one call. The same write counts and hypothetical extra-write argument apply.
 \end{proof}
 
 \paragraph{Operational accounting.}
-Native kernels fold captured predecessor seeds and an immutable array of length $8w_i-|\operatorname{Pred}(i)|>0$, executing exactly $8w_i$ selected operations. The metric adds $8p_i$ per protected kernel, $8v_i$ per conditional call and $8k_i$ per callback, including mismatches. It scales the abstract objective by eight. Allocation, monitor waiting, initialization, background work and other API instructions are excluded; charges are not inferred from timing.
-
-\section{All-Budget Compilation}
-\label{sec:curves}
-
-Direct evaluation requires up to $(B+1)N$ states, $N\le2^n$. Our construction, for binary input length $\ell_{\mathrm{enc}}$, removes budget enumeration; arbitrary DAGs still retain the ideal dimension.
-
-\subsection{Reducing the Self-Referential Choice}
-
-\begin{lemma}[Subset monotonicity and cheapest validation]
-\label{lem:priority}
-If $T\subseteq S$, then $F(T,b)\le F(S,b)$. For any minimum-$c_i$ job $i\in\mathcal A(S)$, its cheap-validation option is no larger than that of any other available job.
-\end{lemma}
-\begin{proof}
-Simulate a policy for $S$ while completing omitted jobs without invalidation. Retained-job readiness is preserved, omitted jobs spend no token and add nonnegative excess, so $F(T,b)\le F(S,b)$. At $b=0$ cheap values are zero. At $b>0$, ready $j\ne i$ remains ready in $S-i$; hence
-\[
-F(S-i,b)\le\max\{F(S-\{i,j\},b),c_j+F(S-i,b-1)\}
-\le\max\{F(S-j,b),c_j+F(S,b-1)\}.
-\]
-The branch $c_i+F(S,b-1)$ is bounded by the same maximum since $c_i\le c_j$, proving the comparison.
-\end{proof}
-
-For $f(0)=0$, set $(I_sf)(0)=0$ and $(I_sf)(b)=\max\{f(b),s+f(b-1)\}$ for $b\ge1$.
-Fix a cheapest available $i$, put $g(b)=F(S-i,b)$, $c=c_i$, and
-\begin{equation}
-h(b)=\min_{j\in\mathcal A(S)}\{P_j+F(S-j,b),\ \delta_j+I_{s_j}F(S-j,\cdot)(b)\}.
-\label{eq:h}
-\end{equation}
-At zero, $h(0)=\min_j\{P_j,\delta_j\}$ is allowed to be positive. Monotonicity and feasible completing modes give $g(b)\le F(S,b)\le h(b)$. Equation~\eqref{eq:bellman} becomes
-\begin{equation}
-f_0=0,\qquad f_b=\min\{h(b),\max[g(b),c+f_{b-1}]\},\quad b>0.
-\label{eq:caprec}
-\end{equation}
-This is a specialization of a reflected recurrence~\cite{bkr}, not a new general dynamic-programming principle. Its particular child curves permit the following closed form.
-
-\begin{lemma}[Concave floor and cap]
-\label{lem:cap}
-Suppose $g,h$ are nonnegative, nondecreasing and discrete concave, $g(0)=0$, and $h\ge g$. Define
-\[
-D(0)=0,\qquad D(b)=\sum_{t=1}^b\max\{c,\Delta g(t)\},\quad c>0.
-\]
-Then Equation~\eqref{eq:caprec} has solution $f_b=\min\{h(b),D(b)\}$, which is nondecreasing and discrete concave.
-\end{lemma}
-This inherited lemma~\cite{artifact} follows by induction using $D(b)=\max\{g(b),c+D(b-1)\}$. If the cap bound at $b-1$ is strict, concavity forces its next increment below $c$, so the cap remains active. Flooring and pointwise minima preserve discrete concavity. The full proof is retained in the supplement.
-
-\subsection{Integer Insertion and Supporting Slopes}
-
-\begin{lemma}[Integer marginal insertion]
-\label{lem:insertion}
-Let a bounded curve with $f(0)=0$ have a nonnegative supporting representation $f(b)=\min_{d\in D}(db+q_d)$ for all integer $b\ge0$, with finite $D\subseteq\mathbb R_{\ge0}$ and $0\in D$. For $s>0$, define
-\[
-Q_s=\max_{b\in\N}\{f(b)-sb\}.
-\]
-Then
-\begin{equation}
-I_s f(b)=\min\left\{sb+Q_s,\ \min_{d\in D}\bigl(db+q_d+(s-d)_+\bigr)\right\}.
-\label{eq:insertion}
-\end{equation}
-Its marginal sequence is that of $f$ with one additional marginal $s$ inserted in decreasing order.
-\end{lemma}
-\begin{proof}
-Let $t$ count the nonincreasing marginals of $f$ that are at least $s$. Then $I_sf=f$ through $t$ and $I_sf(b)=s+f(b-1)$ afterwards, giving insertion and $Q_s=f(t)-st$. Each shifted line and the contact $sb+Q_s$ majorizes both portions. For attainment, an active slope at integer $b$ satisfies $\Delta f(b+1)\le d_b\le\Delta f(b)$ (only the first inequality at zero). At $b<t$ it is at least $s$ and unchanged; at $b=t,t+1$ the contact attains; at $b\ge t+2$ an active line at $b-1$ has slope below $s$, and its shifted line attains. This includes $t=0$ and $f\equiv0$.
-\end{proof}
-
-The contact is over integers. For $f(b)=\min\{100,b+1,3b\}$ and $s=2$, $I_s f(1)=2$. Replacing the integer contact 0 by the continuous supporting envelope's supremum $1/2$ gives $2.5$ in Equation~\eqref{eq:insertion}. Computing a real contact and rounding afterwards is not the stated identity.
-
-The floor operation also preserves a finite input-slope basis. If $f(b)=\min_d(db+q_d)$ and $c>0$, then
-\begin{equation}
-\sum_{t=1}^b\max\{c,\Delta f(t)\}
-=\min\left\{cb+Q_c,\ \min_{d>c}(db+q_d)\right\}.
-\label{eq:floorbasis}
-\end{equation}
-Let $a=\#\{t\ge1:\Delta f(t)>c\}$, the first integer maximizing $f(b)-cb$. The floor equals $f$ through $a$, and equals $cb+Q_c$ thereafter. At $b<a$ every attaining line has slope above $c$; at and after $a$, each retained larger-slope line stays above the contact line. This definition also handles a plateau with marginal exactly $c$, or $a=0$, without special rounding.
-
-\begin{theorem}[All-budget basis and encoded size]
-\label{thm:curves}
-For every residual set $S$, $F(S,\cdot)$ is nonnegative, nondecreasing and discrete concave, with eventual value $\sum_{i\in S}P_i$. It has a supporting representation
-\begin{equation}
-F(S,b)=\min_{d\in\mathcal D_S}(db+q_{S,d}),\qquad
-\mathcal D_S\subseteq\{0\}\cup\{c_i,s_i:i\in S\}.
-\label{eq:basis}
-\end{equation}
-There are at most $2|S|+1$ lines and at most $4|S|$ positive marginal runs. All reachable-state curves and action data can be constructed and checked in $2^n\operatorname{poly}(\ell_{\mathrm{enc}})$ bit time, with no iteration through the magnitude of $B$.
-\end{theorem}
-\begin{proof}
-Induct on $|S|$, starting with the zero line for the empty set. By Lemma~\ref{lem:insertion}, each cached term in $h$ shifts existing intercepts and adds only slope $s_j$. Protected terms shift intercepts by $P_j$. Their minimum is a concave supporting envelope. Lemma~\ref{lem:priority} gives $g\le F\le h$ independently of the desired formula, so Lemma~\ref{lem:cap} applies. Equation~\eqref{eq:floorbasis} adds only the cheapest available $c_i$. Union the line families and retain the smallest intercept per slope. This proves Equation~\eqref{eq:basis}, concavity and nondecreasingness.
-
-Protecting all jobs gives the bound $\sum_iP_i$. A bounded finite lower envelope of nonnegative slopes is eventually constant; let its limit be $L_S$. By smaller-set induction, sufficiently large budgets in Equation~\eqref{eq:bellman} satisfy
-\[
-L_S=\min_{i\in\mathcal A(S)}\left\{
-P_i+\sum_{j\in S-i}P_j,\quad c_i+L_S,\quad
-\delta_i+s_i+\sum_{j\in S-i}P_j\right\}.
-\]
-Here $c_i>0$ and $\delta_i+s_i=P_i+w_i>P_i$, forcing $L_S=\sum_{i\in S}P_i$.
-
-At most $2|S|$ distinct positive slopes give at most that many continuous-envelope changes. Integer sampling adds at most one bridging unit interval per noninteger change, so at most $4|S|$ positive runs suffice. This is a conservative upper bound, not a tightness claim. Summing $4|S|+1$ over all subsets gives $(2n+1)2^n$ profile entries, with at most $n2^n$ action identities.
-
-Intercepts obey $0\le q_{S,d}\le\sum_{i\in S}(P_i+w_i)$: protected/cached shifts add at most $P_i/P_i+w_i$, and contacts are bounded by child saturation. For affine profile triples $(a,y,d)$, contacts satisfy $Q_s=\max(y-sa)$ over listed breakpoints; the constant tail decreases after subtracting $sb$. Thus intercepts, crossings and integer neighbors have polynomial bit length in $\ell_{\mathrm{enc}}$. Each state uses polynomially many operations on $O(n)$ lines; the checker partitions at the same crossings. At most $2^n$ states give the bound.
-
-\end{proof}
-
-\subsection{Emitted Policies and Independent Checking}
-
-Profiles store affine pieces $(a,y,d)$ and a constant tail. Constructors process reachable upsets child-first. Runtime evaluates Equation~\eqref{eq:bellman} with indexed profiles, selects an argmin and decrements allowance on mismatch; queries are polynomial in $n$, stored size and $\log(B+1)$.
-
-A checker importing no constructor reconstructs readiness, reachable sets, raw/derived prices, baseline and action identities. It checks origins, continuity, decreasing slopes, tails and Bellman equality. Partition at own/child starts and their one-step shifts; all branch expressions are affine within a part. Endpoints and floor/ceiling neighbors of crossings certify each finite part; check the constant tail directly. The same method compares supporting bases with emitted curves. Induction on $|S|+b$ then certifies values and the mathematical argmin. Executable selection, arithmetic, parsing and abstraction remain trusted or separately tested. Arbitrary certificate encodings additionally cost their supplied length.
-
-\paragraph{What a requested-value query can skip.}
-Large $b$ need not require a profile. Classical concave allocation~\cite{federgruen} gives the following charged-model bounds:
-\begin{equation}
-\max_{\substack{b_i\in\N\\\sum_i b_i\le b}}\sum_{i\in S}\min(P_i,b_ic_i)
-\ \le F(S,b)\le\
-\min_{t\in\{0\}\cup\{c_i:i\in S\}}\left(\sum_{c_i>t}P_i+bt\right).
-\label{eq:elementarybounds}
-\end{equation}
-For the lower bound, assign private allowances $b_i$: protected/cached-failure completion pays at least $P_i$, while other completion after exhausting $b_i$ failures pays $b_ic_i$. For the upper bound, protect $c_i>t$ jobs and retry the rest. Allocation merges $\lfloor P_i/c_i\rfloor$ copies of $c_i$ and a remainder without enumerating $b$; equality certifies a value, and $b\ge\sum_i\lceil P_i/c_i\rceil$ certifies saturation. Requested-value methods use these tests per subproblem; their service differs from all-budget profiles/routing.
-
-\section{Compact Compilation and Its Limits}
-\label{sec:complexity}
-
-\subsection{Reducing Mixed Charges to Two Fees}
-
-For a concave suffix $f$ with $f(0)=0$, write
-\begin{equation}
-R_{a,q}f(b)=f(b)+\min\left\{q,\sum_{\ell=1}^b(a-\Delta f(\ell))_+\right\}.
-\label{eq:reduceddeficit}
-\end{equation}
-This is the two-fee operator with failure price $a>0$ and protected premium $q\ge0$: by Lemma~\ref{lem:cap}, it equals $\min(f+q,L_a f)$, where $L_a f(b)=\max_{0\le j\le b}\{f(j)+a(b-j)\}$. It is monotone in $f$.
-
-\begin{lemma}[Two-fee ordering and packing]
-\label{lem:twofee}
-Independent two-fee jobs admit a fixed optimal nondecreasing-$a$ completion order, including against adaptive choices. Composing their $R$ operators in this order gives their value $H$. Reverse composition fills marginal deficits below the next $a$: all positive suffix marginals except possibly the last are at least $a$. Each job adds at most two runs. Every sorted suffix is the root curve capped at its remaining premium sum.
-\end{lemma}
-The inherited proof~\cite{artifact} applies Lemma~\ref{lem:priority}'s minimum-failure-price comparison to the two-fee recurrence and inducts on $|S|+b$. Reverse composition raises a final partial marginal, then appends full $a$-columns and at most one remainder. Removing the new tail mass gives the suffix cap. The supplement retains the complete ordering and packing proof; the charged reduction below is additional.
-
-\begin{theorem}[Exact mixed-price reduction]
-\label{thm:chargedorder}
-Suppose $p_i\delta_i=0$ for every job, with the original prices from Equation~\eqref{eq:prices}, and set
-\begin{equation}
-t_i=\begin{cases}\min(c_i,s_i),&\delta_i=0,\\c_i,&\delta_i>0\quad(\text{hence }p_i=0).\end{cases}
-\label{eq:effectiveprice}
-\end{equation}
-For independent jobs, the charged excess $F(S,b)$ equals the two-fee optimum $H(S,b)$ with prices $(t_i,P_i)$ at every integer budget. A fixed nondecreasing-$t$ completion order is optimal. The same equality holds for a DAG satisfying $t_u\le t_v$ on every edge $u\to v$, with ties ordered topologically. The total charge remains $\sum_{i\in S}c_i+H(S,b)$.
-\end{theorem}
-\begin{proof}
-Marginal insertion (Lemma~\ref{lem:insertion}) commutes with deficit filling when $s\ge a$:
-\begin{equation}
-R_{a,q}I_s f=I_sR_{a,q}f.
-\label{eq:commute}
-\end{equation}
-Indeed, insertion of $s$ precedes every marginal below $a$ and adds no deficit; $R_{a,q}$ changes only those later marginals, raising them at most to $a$.
-
-If $f$ is a sorted suffix with effective costs at least $t$, $s\ge t$ and $q<s$, then $R_{t,q}f\le I_s f$. Before the final partial marginal the deficit is zero. At that marginal the increment is at most $t-\Delta f(b)\le s-\Delta f(b)$; after saturation it is at most $q<s$. These cases also show $R_{s,q}f=\min(f+q,I_s f)$ when $t=s$.
-
-For $\delta_i>0$, $p_i=0$, so cached completion is dominated: $\delta_i+I_{s_i}f\ge P_i+f$. The ordered charged operator is exactly $R_{c_i,P_i}$. For $\delta_i=0$, $P_i=p_i<s_i$, and it is $\min(f+P_i,L_{c_i}f,I_{s_i}f)$. The preceding suffix inequalities make this $R_{t_i,P_i}$, both when $t_i=c_i$ and when $t_i=s_i$. Thus the sorted charged policy attains $H$.
-
-For a matching lower bound, the two-fee Bellman equation bounds $H(S,b)$ by $P_i+H(S-i,b)$ and by $\max\{H(S-i,b),c_i+H(S,b-1)\}$, since $t_i\le c_i$. These cover protected and cheap choices. Positive-$\delta_i$ cached choices are covered by protection dominance. For a zero-$\delta_i$ job at any sorted position, write $H(S)=A R_{t_i,P_i}f$ and $H(S-i)=Af$. Every operator in the preceding composition $A$ has cost at most $t_i\le s_i$. Monotonicity, the suffix inequality and Equation~\eqref{eq:commute} give
-\[
-H(S)\le A I_{s_i}f=I_{s_i}Af=I_{s_i}H(S-i).
-\]
-Hence every original charged Bellman option is at least $H$; induction on $|S|+b$ proves the lower bound against adaptive choices. Finally, removing DAG edges gives an independent lower bound, and a compatible sorted topological policy attains it legally.
-\end{proof}
-
-The class mixes $k_i\le v_i$ jobs with zero-premium jobs. With $v_i=k_i=\kappa$ and $p_i=\lambda w_i$, $t_i=\min(w_i+\kappa,(1+\lambda)w_i)$ increases with $w_i$, so work order suffices. Effective prices preserve cached choices; the total-cost baseline remains $\sum c_i$.
-
-\subsection{A Checked Cursor Policy}
-
-Minimum-$t$ Kahn traversal finds a sorted topological order when the edge condition holds. Apply Lemma~\ref{lem:twofee}'s packing to $(t_i,P_i)$, retaining the original charged input. For sorted suffix $S_k$, root curve $H$ and $Z_k=\sum_{i\in S_k}P_i$, store
-\begin{equation}
-F(S_k,b)=\min\{H(b),Z_k\}.
-\label{eq:chargedcap}
-\end{equation}
-The artifact stores $O(n)$ entries beyond the graph for its $n+1$ policy suffixes; the general artifact covers all reachable unfinished sets.
-
-The checker recomputes reduction, baseline and order, then checks decreasing integer runs and mass $H(\infty)=Z_0$. For adjacent caps $a=Z_{k+1}\le z=Z_k$, partition at their first reaching budgets: verify the uncapped prefix, each boundary, constant marginal $t_i$ between them and saturation. Concavity extends endpoint checks; zero premiums require identical adjacent caps. Suffix induction verifies the two-fee equations; Theorem~\ref{thm:chargedorder} supplies charged/global optimality. Original-mode boundary controls do not substitute for this proof.
-
-Construction takes $O(|E|+n\log(n+1))$ arithmetic operations. Checking $r$ supplied runs takes $O(|E|+n\log(r+2)+r)$ plus encoding length; generated roots have $r\le2n$. Binary operand lengths count. Indexed queries cost $O(\log(n+1))$. The cursor evaluates all three original branches for its fixed next job: cheap failure stays, cached failure spends a token and advances. All charges remain original; inputs outside the sufficient class use the general compiler.
-
-The conditions are sufficient. For independent $w=(1,1,1,2)$, $p_i=w_i$, common $v=5,k=6$, and $B=1$, ascending work order costs 31, while order $(2,1,1,1)$ and the adaptive optimum cost 30; here $p_i\delta_i>0$. Even with $\delta_i=0$, sorting by $c_i$ can fail: $(w,p,k,v)=(5,6,5,8),(5,4,6,8)$ gives $c=(10,11)$ but $t=(10,9)$, and $B=1$ totals 31 versus 30. Both refutations remain in the artifact.
-
-\subsection{A Sharp Bound on Independent-Job Savings}
-
-The third mode's scalar benefit is bounded even outside the compact class. Write $F_2,F_3$ for the two- and three-mode excess values and $A=\sum_i c_i$.
-\begin{theorem}[Sharp independent-job ratio]
-\label{thm:ratio}
-For independent jobs with arbitrary charged prices and any integer $B\ge0$,
-\[
-\frac{A+F_2(B)}{A+F_3(B)}\le\frac{1+\sqrt2}{2}.
-\]
-The constant is a supremum, already approached with common $v_i=k_i$ and $p_i=\lambda w_i$.
-\end{theorem}
-\begin{proof}
-Put $X=F_2(B)$ and $Y=F_3(B)$. Equation~\eqref{eq:elementarybounds}'s private-budget argument gives $D(B)=\max_{\sum b_i\le B}\sum_i\min(P_i,b_ic_i)\le Y$, including when $\delta_i>0$.
-
-Pack the two-mode premiums in reverse sorted-$c$ order (Lemma~\ref{lem:twofee}), labelling each contribution by its job. A final unit column containing job $i$'s mass has height $h\le c_i$, since later caps are no larger. If $x_i$ is that job's mass in the first $B$ columns, then $\sum x_i=X$, $0\le x_i\le P_i$, and $\sum x_i/c_i\le B$: each nonzero column contributes at most its mass divided by its height, namely one.
-
-Let $\phi_i$ linearly interpolate $\min(P_i,bc_i)$ at integer $b$. Under $z_i\ge0$ and $\sum z_i\le B$, the maximum of $\sum\phi_i(z_i)$ is $D(B)$: select the $B$ largest nonincreasing unit slopes, preserving tied prefixes. For $z_i=x_i/c_i=\ell_i+\rho_i$, $\ell_i\in\N$, $0\le\rho_i<1$, $z_i\le P_i/c_i$ implies $\phi_i(z_i)\ge c_i(\ell_i+\rho_i^2)$. With $\alpha=\sqrt2-1$,
-\[
- \ell_i+\rho_i^2-2\alpha(\ell_i+\rho_i)+\alpha^2
- =\ell_i(1-2\alpha)+(\rho_i-\alpha)^2\ge0.
-\]
-Thus $Y\ge2\alpha X-\alpha^2A$; $1-\alpha^2=2\alpha$ gives the ratio. For sharpness take $n=M^2$ equal jobs with $w=1$, $v=k=M$, $p=\lfloor\alpha M\rfloor$ and $B=\lceil np/(M+1)\rceil$. Packing gives $F_2=\min(np,B(M+1))$ and $F_3=\min(np,B(p+1))$; their total-cost ratio converges to the bound.
-\end{proof}
-
-Hence the supremum relative total-cost saving is $3-2\sqrt2\approx17.16\%$ on independent inputs. The argument uses sorted independent-job packing; it asserts no such bound for arbitrary DAGs.
-
-
-\subsection{Hardness Outside the Compatible Class}
-
-With $v_i=k_i=0$, cached completion is dominated by a cheap attempt followed by immediate protection. The inherited zero-fee result~\cite{artifact} makes deciding $F(J,1)\le K$ NP-complete even for two DAG layers, indegree at most two, unit premiums and two positive failure prices. Its proof reduces CLIQUE~\cite{karp} by choosing which vertex jobs to protect before endpoint-dependent jobs; the full construction and fixed-order equation remain in the supplement. This establishes neither NP membership for binary $B$ nor necessity of ideal enumeration. A $w$-chain cover gives at most $\prod_\ell(n_\ell+1)$ ideals, polynomial for fixed $w$.
-
-Dependencies can require adaptive ordering without fees: $c=(3,7,5,1)$, $p=(2,2,6,2)$ and edges $0\to1,0\to2,1\to3$ give 24 versus 26 at $B=2$. Every fixed order gets adaptive modes and knows $B$. This constructed separation does not establish typical benefit.
+Native kernels fold captured predecessor seeds and an immutable array of length $8w_i-|\operatorname{Pred}(i)|>0$, executing exactly $8w_i$ selected operations. Counters record their protected subset and the specified calls separately. Supplementary scalar tests add $8p_i$ per protected kernel, $8v_i$ per conditional call and $8k_i$ per callback. Allocation, monitor waiting, initialization, background work and other API instructions are excluded; charges are not inferred from timing.
 
 \section{Source Integrations and Their Boundaries}
 \label{sec:deephaven}
@@ -483,160 +384,140 @@ Replayability and safety under protection are separate obligations. The scratch 
 
 RQ2 checks linked propagation, event payloads and snapshots. Variable/lazy work, allocation and \texttt{VersionStamp} generation limit transfer to counts. Custom loaders, changed-text notification reentry and arbitrary compiler behavior remain outside scope. No upstream numerical call cap or latency SLA was found; $r$ is authored. A stronger prepared-rebase comparator reuses existing \texttt{WithDocumentContentsFrom} when solution ID, related-document IDs and all affected project states remain unchanged. It merges prepared contents into the latest solution under protection, otherwise using three-mode fallback. This partial operation lies outside our whole-kernel interface.
 
-\paragraph{Deephaven with owned refreshes.}
-For \texttt{ConstructSnapshot}/hierarchical-table sources at \texttt{6367313a}, the server API materializes key directives $K$ followed by viewport $V$~\cite{deephavenSource}. Fixed keys/hierarchy, stated Action changes and a 16-row/four-column viewport yield source-derived selected-operation bounds $W_K=4,W_V=104$, including mid-body updates; the full derivation is supplementary. Completed $K$ persists for $V$ after live Actions change. With protected weight $1+\lambda$, supply $p_i=\lambda W_i$ and zero call charges. This excludes allocation, waiting and unselected API instructions.
-
-The caller owns at most $q$ public refresh requests~\cite{deephavenContext}; synchronized START/completion boundaries charge at most $2q$ failed bodies. Periodic updates do not supply such a bound~\cite{deephavenTree}, and partially notified interleavings are excluded. Imported compilation gives an upper bound: at $\lambda=3,q=2$ a script attains 424 versus a same-budget local rule's 432, but a phase-aware game gives 420. The abstract game is therefore not the native system's exact minimax game.
-
 \section{Implementation and Evaluation}
 \label{sec:eval}
 
-RQ1 tests policies and blocking; RQ2 source integrations; RQ3 construction cost. Authored exploratory studies retain inputs, pre-outcome generation rules, failures, timeouts, invalids and corrections; none is held-out application data.
+The evaluation asks whether implementations reproduce the resource and information distinctions (RQ1), and which source semantics, resource counts and timing effects the integration supports (RQ2). All studies are authored exploratory tests, with fixed input generation before their recorded executions; none is held-out application data. A later analysis of saved arrivals is explicitly post-outcome. Old failures, timeouts, invalids and corrections remain in the artifact.
 
-An Apple M2/24 GiB runs Python 3.10.9/3.12.14 and OpenJDK 17.0.19; inspected map source matches the cited version, but its binary was not rebuilt. Hashes bind inputs, code, commands and traces. Codex assisted design, checkers, source comparison, proofs, analysis and writing; Claude informed direction. Measurements are archived executions. These checks are neither mechanical proofs nor blind review; no human or simulated-human study was performed.
+An Apple M2/24 GiB runs Python 3.10.9/3.12.14 and OpenJDK 17.0.19; inspected map source matches the cited version but its binary was not rebuilt. Hashes bind inputs, code, commands and traces. Codex assisted design, checkers, source comparison, proofs, analysis and writing; Claude supplied separate proof/direction critiques and manuscript reviews. Measurements are archived executions. These are author-side checks, not mechanical proofs, independent third-party reproduction or human studies.
 
-\subsection{RQ1: Charged Values, Routing and Native Calls}
+An \emph{input} fixes a graph, weights and relevant prices/footprints. A \emph{root} is one starting game with specified budget and retry allowance. A recorded native \emph{maximum} is over its fixed finite environment set; the theorems, rather than finite enumeration, justify the unrestricted worst-case statement. Table~\ref{tab:checks} distinguishes these obligations and does not sum overlapping studies.
 
-Table~\ref{tab:checks} separates finite equation checks from native observations. Serialized/reloaded values are compared with direct recurrences; separate checkers reconstruct routing, prices, counters and policies. Numeric-alias, null-input, epoch, output and writer-order defects and corrections remain in the supplement. Native arithmetic is bounded.
+\subsection{RQ1: Do the Resource and Information Boundaries Hold?}
 
 \begin{table}[ht]
-\caption{Distinct finite checks, all agreeing after recorded repairs. Rows overlap; full parameters, old failures and controls remain in the artifact.}
+\caption{Checks relevant to the central resource claims. Each row has its own denominator; some earlier inputs recur in later extensions. Separate code reconstructs the compared quantities, while the proofs establish the general claims.}
 \label{tab:checks}
 \small\centering
-\begin{tabularx}{\linewidth}{p{.25\linewidth}X}
+\begin{tabularx}{\linewidth}{p{.28\linewidth}X}
 \toprule
-Obligation & Inputs and checked outcomes\\
+Obligation & Evidence and comparison\\
 \midrule
-Priced value/routing & 3,183 general inputs; 19,485 compact/fallback inputs (15,727 observed, 3,758 new), 527,409 branches.\\
-Native scalar accounting & 34 inputs, 2,278 paths, 816 concurrent runs, 340 maxima; compact: 610 records, 208 maxima, 30/36 screened inputs inapplicable.\\
-Resource frontier & 2,442 native records/576 maxima; direct equations on 265,629 budget/slack pairs of 5,421 DAGs; aware/unaware native records 9,314/17,714 and maxima 1,024/1,280.\\
-Threshold work choice & 86,662 fixed orders/2,773,184 pairs on 5,519 inputs; adaptive-family equations on 176,608 roots.\\
-Suffix existence & Separate finite-rank AND-OR recursion: 665,500 states, 363 weight tuples; suffix Java: 20,594 paths/384 maxima.\\
-Independent-job ratio & 13,295 inputs/172,835 roots and seven tightness families; another 622 inputs at three scales, 24,378 roots and 3,732 large-budget queries.\\
+Whole-kernel frontier & Direct equations on 265,629 budget/slack pairs from 5,421 DAGs. Native aware/unaware selectors: 9,314/17,714 records, 1,024/1,280 finite maxima.\\
+Local/shared and fixed toll & Direct games: 35,796 local/shared-cap roots and 42,084 call-toll roots; canonical policies and separate bounds agree.\\
+Single-job repair/toll & Repair: 3,495 inputs/160,080 checks. Per-call toll: 143,226 known-budget values and 33,688 competitive checks. Exact dirty-set games compare with curve/certificate methods.\\
+Shared-retry workflows & 8,960 graph/footprint/slack conditions, 61,246 known-budget roots. A quantified one-policy search on 6,208 conditions agrees with the all-budget existence criterion.\\
+Call-charged workflows & 37,248 conditions/216,282 budget roots, with a separate one-policy existence search on every condition.\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The native unaware selector receives no writer/price/table state; tested budgets reach four. Separate counters match $W,L,Q$ and $R=W+L+8\kappa Q$. Scalar three-mode gains occur in only 2/96 cells (72 versus 80); 94 tie. A decreasing five-job chain has scalar-optimal $L=48$ versus cached-all's 40 at equal $Q=5$ and worst cost 200: scalar optimality need not minimize protection. Repaired precondition checks cover all 96 tables/2,442 saved decisions and five unrelated-error controls.
+The native unaware selector receives no writer-budget, price or table state; tested budgets reach four. Separate counters reconstruct $W,L,Q$. A separate suffix-existence recursion agrees on 665,500 states over 363 weight tuples, with 20,594 native paths and 384 finite maxima. Certified post-threshold rules preserve the frontier, but a separate 176,640-root all-tail study gives only 285 strict work improvements and 176,355 ties. The artifact distinguishes this denominator from its earlier 176,608-root adaptive-threshold study. A larger 6,544-input comparison makes greedy certified choice better/worse/tied against all-tail at 1/3/209,404 roots. Constructed counterexamples refute global $W$-optimality of both rules and simultaneous optimality from every intermediate state. They do not refute suffix existence or the archived threshold-family optimum.
 
-All-tail checks cover 5,520 inputs/176,640 roots: 285 strict worst-$W$ improvements and 176,355 ties, all preserving the frontier; 2,552 Java paths match 144 maxima. Adding 1,024 five-job chains yields 6,544 inputs/209,408 roots: greedy certified choice is better/worse/tied versus all-tail at 1/3/209,404. Both native checkers reject eight corruptions. Later constructed counterexamples also refute global $W$-optimality of these two rules and simultaneous continuation optimality; they do not refute suffix \emph{existence} or threshold-family optimality. The ratio family at 65,536 jobs reaches 1.20545; the proof supplies the limit. Scaling is not independent sampling.
+For the new shared-retry study, all ordered pairs of 24 one-/two-component footprint types cover an empty DAG and either chain direction, with $r=0,1,2,3$. Ordered triples of four representative types cover all eight forward-edge DAGs. The known-budget game chooses a ready job, observes a dirty set, then chooses acceptance or rejection. A separate existence search quantifies one policy over all dirty histories, using accumulated work and minimum consistent writes; it does not read the theorem's saturation predicate as its answer. All 8,960 conditions and 6,208 existence tests agree, including the nonsaturated two-job separation. Four corrupted profiles are rejected. The positive-toll extension checks all 37,248 common-policy conditions, including four further corrupted profiles and seven cases where conditional rejection is required. All initial execution failures and corrections are retained in the artifact. This is bounded corroboration of the proof and its information pattern, not a new application population.
 
-\paragraph{Calibration and controlled blocking.}
-JMH 1.37~\cite{jmh} tests nine wrappers, four payloads and two layouts: all 72 cells/144 forks/720 measurements complete, with three 200-ms warmups and five 200-ms measurements per fork. A nonnegative $w,v,k,p$ fit admits only 2/8 settings at maximum residual $\le20\%$; all fitted $p$ are zero. None of 72 admitted scalar roots gains, and 1,080/1,152 roots remain outside. Short warmups, reuse and lifetime differences prevent a mean-time claim.
+Direct action-before-comparison games also agree on all 35,796 local/shared-cap roots, including 8,928 known-budget local-cap comparisons, and 42,084 fixed-toll roots. Each study detects four changed-input/result controls. These games cover serial fresh preparations; the proofs supply the broader program-class lower bounds.
 
-A separate Java probe uses four dependent kernels $(1,2,3,5)s$, $r=0,1,2$ and exactly $B=r$ initial failures. Both unaware policies use $Q=4+r$, $W=(11+r)s$; two/three modes protect $11s/0$ iterations. A budget-aware two-mode policy could also avoid protection. At each completing callback, an unchanged-value \texttt{compute} on another key signals readiness before entering; the foreground holds its bin until that signal. Same/disjoint-bin layouts share the hook. Four scales, three allowances, two layouts/modes and three JVMs with 30 repetitions give 4,320 measurements/1,440 warmups, all complete, matching 12 output references. A repaired cross-job checker validates all saved records and rejects 12 corruptions. Summed waits at the largest scale fall from 26.8 ms to 31.2 $\mu$s in shared bins; disjoint differences are submicrosecond and sometimes reverse. All 24 cells remain. This is forced collateral blocking, not natural-arrival performance, WCET or blocking of \texttt{get}.
+The new threshold representation matches all 37,248 observed existence answers and 120 additional three-component profile cases. A checker importing no constructor verifies 123 exported tables from full dirty-set observations and rejects four changed certificates; exhaustive executable traces check two common policies. The table uses 803,712 states over the earlier grid versus the boolean search's 616,039: eliminating accumulated-cost enumeration does not ensure fewer states on these small inputs. Partial observations can require more writes than full saturation; only the comparator coordinate is clipped.
 
+The repair compiler retains all 21,028 small/rational comparisons with direct games. Six initial scale timeouts, including two compact-method timeouts, remain; a changed bucket search completes its fixed 168-unit successor. Additive-excess checks cover 4,220 outcomes. These results assess supplied mathematical footprints; they do not calibrate Roslyn merges or establish that arbitrary footprint profiles are inexpensive.
 
+\paragraph{A controlled operational consequence.}
+A Java probe uses four dependent kernels $(1,2,3,5)s$, $r=0,1,2$, and exactly $B=r$ initial failures. Both unaware policies have $Q=4+r$, $W=(11+r)s$; two/three modes protect $11s/0$ iterations. A budget-aware two-mode policy could also avoid protection. During every completing callback, a background \texttt{compute} on another key signals readiness before entry; the foreground holds its bin until that signal. Shared/disjoint-bin layouts have the same hook. Four scales, three allowances, two layouts/modes and three JVMs give 4,320 measurements/1,440 warmups; all complete and match 12 output references. A cross-job checker rejects 12 corruptions. At the largest scale, summed waits fall from 26.8 ms to 31.2$\mu$s in shared bins. Disjoint differences are submicrosecond and sometimes reverse. All 24 cells remain. This forced collateral-blocking probe is not natural-arrival performance or a latency bound.
 
-\subsection{RQ2: Roslyn Semantics and Arriving Updates}
+\subsection{RQ2: What Does the Source Integration Preserve?}
 
 \paragraph{Source projection and semantic checks.}
 Pinned net8 Roslyn assemblies use a pinned .NET 10 RC runtime. Four projects' evaluated \texttt{Compile} items yield 3,837 files, 4,019 document occurrences and 40.8 MB, excluding two package-external items before outcomes. Fixed targets maximize sharing then size (63,593 bytes, two projects) and single-project size (background: 977,535 bytes). This source projection has internal references; updates append comments.
 
-The 174-case grid covers $r=0,1,2$, concentrated/distributed writers, same/linked targets, no-ops, distinct equal-content texts and missing/deleted targets. Patch04 plus four unmodified controls pass: 1,645 events, 941 publications, 1,975 snapshots and ten rejected corruptions. A separate checker binds immediate/queued payloads and callbacks to their solutions, checks publication chains and linked transitions, and preserves 4,016 untouched text identities/versions and checked metadata.
+The initial 174-case grid covers $r=0,1,2$, concentrated/distributed writers, same/linked targets, no-ops, distinct equal-content texts and missing/deleted targets. Patch04 plus four unmodified controls pass: 1,645 events, 941 publications, 1,975 snapshots and ten rejected corruptions. A separate checker binds immediate/queued payloads and callbacks to their solutions, checks publication chains and linked transitions, and preserves 4,016 untouched text identities/versions and checked metadata.
 
 Adding 58 rebase cases yields 236 passing cases, 2,190 events, 1,253 publications, 2,653 snapshots and 12 rejected corruptions. Its $B=5,6$ cases concentrate initial writes to realize $B$ within fewer calls: placement changed before outcomes; interleavings differ. Error-reentry/same-text controls pass 18/5 cases versus patch04's 14/4. Earlier 204 patched/16 unmodified scale checks, initial 3,960 measurements, same-text deadlock and four missing-document timeouts remain. These projections do not establish full concurrent equivalence. A 96-process study changes types/constants, unrelated source, parse options, references or linked text across eight arms and cold/warm caches. All 2,556 project projections match declared source, symbol, diagnostic and emission expectations; eight corruptions reject. Workspace/direct compilations share Roslyn; expectations cover only these authored programs.
 
-\paragraph{Retained forced-interference measurements.}
-Patch03 uses four updates/batch, $r=0,1,2$, deduplicated $B\in\{0,r,r+1,r+4\}$ and three processes with two warmup/ten measurements. Writers use the first $B$ pre-lock opportunities. All 990 measured/198 warmup units pass the old checker (11 corruptions), lacking payload validation. Across 330 measured batches/mode, original/two/three calls are 2,040/1,590/1,590, protected transformations 0/1,080/450 and total transformations 2,040/1,590/2,040. Three-mode foreground medians beat each comparator in four settings and lose in seven. New checks do not replace these timings.
+\paragraph{What earlier measurements establish.}
+Earlier forced-interference patch03 runs passed 990 measured/198 warm-up units without later payload validation; three-mode foreground medians improved in four settings and worsened in seven. An independent-arrival successor served 32 serial updates and 64 FIFO background requests at intervals $d\in\{0,10,100,1000\}\,\mu$s. A six-block balanced campaign passed 1,728 units, and a later rebase comparison passed 3,072 units. Texts were precomputed, the pre-lock hook was null, and no writer bound was supplied to the policy.
 
-\paragraph{Independent arrivals and a stronger source comparator.}
-Each batch serves 32 serial foreground replacements while a producer independently enqueues 64 background replacements at $j d$ from a shared epoch, $d\in\{0,10,100,1000\}\,\mu$s. A single FIFO worker invokes the original background API. Both threads signal readiness before the epoch; texts are precomputed and construction costs are separate. The pre-lock collision hook is null. The counter resets per batch without arrival/write inputs.
+These runs show count changes and mixed timing. At shared $r=2$, two/three modes used 10,802/10,786 calls over 320 measured batches and performed 7,131/3,641 full protected transformations. Three modes also increased total transformations to 14,427. At $d=100\,\mu$s, background p95 medians were 60.00/306.10$\,\mu$s for three/two modes, lower in seven of eight blocks; foreground medians had mixed block directions. At $d=0$, three-mode foreground time was 993.54 versus 603.88$\,\mu$s. No consistent general speedup follows.
 
-An initial six-arm study (unmodified, instrumented original, two/three modes at $r=0,2$) completes 864 units (720 measured/144 warmup), but places original processes first. A new six-block cyclic Latin design balances position; all 1,728 units (1,440/288) pass. At $100\,\mu$s/$r=2$, three/two background p95 medians are 73.33/265.35 $\mu$s, lower in all blocks; foreground directions mix. At $r=0$ background improves in five blocks but reverses 1.889 times in the sixth. Burst foreground is slower in all blocks. Instrumented-original foreground overhead is 6.9--13.8\% (initially 12.7--24.4\%).
+Prepared rebase uses stronger source operations. Eligible unrelated-project writes lead to zero full protected transformations, but 4,219/4,528 protected merges remain at $r=0/2$. A native multi-document batch version passes 236 semantic, 23 reentry and 96 compiler cases. Its 1,728 additional arrival units have batch/sequential median ratios 0.906--1.189 for foreground and 0.511--1.404 for background p95. Protected-span ratios 0.917--1.281 exclude acquisition/release. A document-state guard then changes four reference-removal decisions from recomputation to merge while all 96 compiler outcomes agree; its timing is unmeasured. None of these operations is assumed to have the whole-kernel or additive repair cost model.
 
-Adding rebase at $r=0,2$ gives 64 processes in eight cyclic Latin blocks, with two warmup/ten measured batches per interval. All 3,072 units (2,560/512) pass without exclusions. Instrumented arms share one binary. The checker validates timelines, linked payloads, 97 snapshots/batch and resource identities; ten corruptions reject. Figure~\ref{fig:arrivals} shows all 32 cells.
+\paragraph{Comparing shared and per-update contracts.}
+The local-cap baseline resets the existing retry field before each update; the checked patch04 libraries are unchanged. We fix eight arms: unmodified baseline, instrumented original, shared two/three at $r=2$, and per-job two/three at $r=1,2$. Eight cyclic Latin blocks place every arm at every process position. Each process has two warm-up and ten measured batches at each of the four intervals, shuffled before execution. All 3,072 units (2,560 measured/512 warm-up) complete and pass the source checks; all 12 corruption controls are detected. This is a new authored workload comparison, not a new deployment population.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figures/arrival_tradeoffs.pdf}
-\caption{Roslyn independent arrivals including prepared rebase. Lines are medians of 80 batches per cell; faint dots are eight process medians. Background delay is each batch's nearest-rank p95 over 64 requests from intended arrival to return. All four intervals and both retry allowances are shown. These authored arrivals do not establish a production latency bound.}
-\label{fig:arrivals}
-\Description{Four panels plot foreground batch time and background p95 delay for unmodified, original, two-mode, three-mode and rebase variants. Intermediate-interval background benefits coexist with foreground burst costs and variable rebase performance.}
-\end{figure}
-
-All capped batches meet $Q\le32+r$. Across 320 measured batches/arm, $r=0$ two/three modes use 10,240 calls; protected transformations fall from 10,240 to 4,274 while total transformations rise to 14,514. At $r=2$, calls are 10,802/10,786, protected transformations 7,131/3,641 and total transformations 10,802/14,427. Interleavings differ. Rebase uses 10,240 calls and outside transformations at either allowance, with zero full protected transformations but 4,219/4,528 protected merges. Unrelated-project background writes make every mismatch eligible. Protected work remains.
-
-At $100\,\mu$s/$r=2$, three/two background p95 medians are 60.00/306.10 $\mu$s, lower in seven/eight blocks; foreground medians are 693.98/666.38 $\mu$s, with mixed block directions. At $0/10\,\mu$s, their foreground medians are 993.54/603.88 and 888.10/653.00 $\mu$s. Rebase/three foreground medians at $100\,\mu$s reverse across $r=0,2$: 680.96/713.35 versus 792.83/693.98; background medians are 63.08/85.17 versus 88.02/60.00. Identical eligible-rebase policies have different timings; variability and merge cost preclude a stable speedup inference. These stronger operations lie outside the abstract optimum.
-
-A batch comparator uses Roslyn's multi-document content-copy operation with the same guards. Fresh builds pass 236 semantic, 23 reentry and 96 compiler cases. Six cyclic blocks retain all 1,728 arrival batches (1,440 measured/288 warmup). Batch/sequential cell-median ratios are 0.906--1.189 for foreground, 0.511--1.404 for background p95 and 0.917--1.281 for observed protected spans. These exclude acquisition/release; no consistent gain is established. A later document-state guard retains the link sequence and passes 236/23/96 cases (2,552 compiler projections). Four reference-removal cells use content merge instead of full recomputation; all 96 final states/diagnostics match the project-guard baseline. Timing is unmeasured.
-
-\paragraph{Deephaven boundaries.}
-All 216 prefix/END cells succeed, with 153 cycles/223 inconsistent bodies but no prefix abort: \texttt{ExpandAll} bypasses the check. Compiler/local wins occur in only 3/36 cells; six lose to the upstream replica and four to the unknown-budget threshold. Twelve public-graph cells expose policy-dependent refresh counts. Changing Actions gives 28 full/eight contracted results; two retain old directives after re-expansion. The repaired checker rejects 17 corruptions (eight missed earlier); ten regressions and 108 phase-aware cells pass. Full charges, source conditions and corrections remain; native minimax is unestablished.
-
-\subsection{RQ3: Construction Cost and Stronger Value Queries}
-
-For 24 DAGs ($n=8,12$), three price scales and 1/4/12 queries through $2^{64}$, ALL builds/reloads/checks profiles, PEAK certifies requested values and DP uses two Bellman rows, with 4-second/1-GiB imports-through-checking caps. Initial ALL/PEAK/DP successes are 63/62/64 of 72, with eight AND-OR successes. Stronger bounds raise PEAK to 64; others time out. Shared values agree. On 14 common 12-query successes, PEAK/ALL median time falls from 7.16 to 0.576; DP/ALL is 0.457. Only ALL finishes seven long-premium cases; its nine timeouts have 12 independent jobs.
-
-\paragraph{Compatible-class scaling.}
-Campaign A fixes 42 inputs ($n=8..32768$), independent/height-two DAGs, three price scales and 1/12 queries, with 8-second/1-GiB caps. All 420 outcomes are retained (Table~\ref{tab:compactscale}); PEAK/DP also validate adjacency. PACK's 12 largest-input runs take 0.837--1.151 seconds, peak RSS 122,044,416 bytes; median PEAK/PACK and DP/PACK ratios are 0.860/0.792.
+The additional per-update deltas sum to each batch's counts. For an update's actual publication count $B_i$, local modes satisfy $Q_i=1+f_i$, $f_i\le\min(B_i,r)$, and inside count at most $\mathbf1[B_i\ge r]$ (two) or $\mathbf1[B_i\ge r+1]$ (three). With $B_{\rm fg}$ counting publications between foreground start and end, summing gives the uniform count bounds of Proposition~\ref{prop:localcaps}. All individual updates and batches meet their own contract. Table~\ref{tab:arrivalscounts} shows every arrival interval; each entry contains separate medians, which need not coexist on a single execution.
 
 \begin{table}[ht]
-\caption{Compact-class campaigns. Each cell is success/timeout/memory limit. A: 84 units per method; B: 36 units per method with $2n$ root runs. All outcomes are retained; returned services differ.}
-\label{tab:compactscale}
-\centering
-\begin{tabular}{lllp{.47\linewidth}}
+\caption{New Roslyn cap comparison, 80 measured batches per cell. Entries are median $Q/B_{\rm fg}/N_{\rm inside}$: counted calls, foreground-period writes and full protected transformations. The universal call cap differs across rows.}
+\label{tab:arrivalscounts}
+\centering\small\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lr|rrrr}
 \toprule
-Method & A & B & Returned service\\
+Policy & $Q$ cap & $d=0$ & $10$ & $100$ & $1000\,\mu$s\\
 \midrule
-PACK &84/0/0&36/0/0&Checked all-budget cursor policy\\
-ROOT &84/0/0&36/0/0&Same-reduction values, no checker\\
-ALL &22/56/6&0/30/6&Checked all reachable unfinished sets\\
-PEAK &34/50/0&18/6/12&Checked requested root values\\
-DP &34/46/4&18/15/3&Requested values only\\
+Shared two, $r=2$ &34&34/3/32&34/3/32&34/2/31&33/1/0\\
+Shared three, $r=2$ &34&34/34/30&34/27/22&34/8/6&33/1/0\\
+Local two, $r=1$ &64&62/31.5/30&54/24/22&40/9/8&33/1/1\\
+Local three, $r=1$ &64&58/64/25&53/50.5/19&37/7/1&33/1/0\\
+Local two, $r=2$ &96&79.5/64/23.5&77/57/22&39/7.5/1&33/1/0\\
+Local three, $r=2$ &96&66/64/17&64.5/64/16&38/7/0&33/1/0\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-A has only 40 runs in its large curves. Campaign B uses 18 inputs at $n=512,4096,32768$, exactly $2n$ runs, long plateaus and queries through $2^{64}$. All 180 outcomes use the same caps. At 32,768 jobs, PACK constructs/checks 65,536 runs in 1.333--1.603 seconds, peak RSS 152,911,872 bytes; median PEAK/PACK and DP/PACK ratios are 0.301/0.206. Shared values agree. An aggregation repair uses saved raw records without rerunning. These structural samples do not establish prevalence; requested values can be cheaper.
+The local baselines can protect fewer updates, while allowing more calls. For example, at $100\,\mu$s the local three-mode $r=2$ medians are 38 calls and zero protected transformations; shared $r=2$ has 34 and 6. Their caps are 96 and 34, respectively. This illustrates a resource-contract choice, not dominance under equal constraints. The actual $B_{\rm fg}$ depends on the policy's completion time. A separate post-outcome reconstruction of 7,392 earlier batches also verifies that coordinate and all recorded count bounds; it does not turn the comparisons into a common controlled write budget.
 
-Other retained comparisons give 7,866 successful charged-order roots/874 inputs: only the known 24-versus-26 example gains from adaptation, none among 840 new independent inputs. Sixteen post hoc cases refute $c$ order. Zero-fee gains occur at 2/192 roots; CP-SAT/screened DP/full construction succeed on 78/68/53 roots, with remaining roots timing out.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/arrival_tradeoffs.pdf}
+\caption{New shared-cap timing comparison, $r=2$. Points are geometric means of eight paired block ratios of process medians; bars are 95\% percentile intervals from 10,000 fixed block-bootstrap resamples. Ratios above 1 favor two modes. Writer response is intended arrival to return; service is invocation to return. Each batch contributes its median across 64 writer requests. All four intervals and three metrics are shown.}
+\label{fig:arrivals}
+\Description{Three panels show paired three-mode to two-mode timing ratios with uncertainty intervals for all four arrival periods. Foreground and writer-service costs increase at burst intervals; every writer-response interval includes equal performance.}
+\end{figure}
 
-\section{Related Work}
+For shared three/two, foreground ratios at $0/10\,\mu$s are 1.72 [1.40,2.11] and 1.58 [1.17,2.16]; the two slower-arrival intervals include 1. All four writer-response intervals include 1 (Figure~\ref{fig:arrivals}). Added per-update counter snapshots occur inside foreground batch duration. Original/baseline point ratios are 0.83--1.08 and all four intervals include 1, so this run does not identify instrumentation overhead; earlier harness estimates remain separate. Block resampling does not remove residual host/order effects, and no multiplicity correction is applied. Native execution took 237.84 seconds after the prior public replay completed, and the artifact includes setup/build and analysis costs. These results connect cap scope to checked counts while limiting any timing interpretation.
+
+\paragraph{Earlier auxiliary objectives.}
+The artifact retains separate supplied-price compilation, calibration and Deephaven studies, with their complete definitions and all outcomes. They do not evaluate the common-policy repair interface. Three-mode scalar gains occurred in only 2/96 cells; a time fit met its fixed residual threshold in only 2/8 settings. General all-budget compilation sometimes cost more than requested-value computation, and a Deephaven phase-aware model improved a previous abstraction's value. These adverse results motivate keeping resource guarantees separate from timing or an exact native reduction.
+
+\section{Related Work and Research Lineage}
 \label{sec:related}
 
-\paragraph{Synchronization synthesis and fallback.}
-Kung and Robinson~\cite{kung}, Section 3.3/p.220, already retain the critical-section semaphore during reexecution after repeated validation failure. The mechanism is inherited; Theorems~\ref{thm:resources}--\ref{thm:universal} characterize its resource boundary here. \v{C}ern\'y et al.~\cite{cerny} synthesize retries/guards/caches from partial programs with a scheduler and weighted limit-average safety objective. Their Theorem~6 matches action distributions and weights in quantitative probabilistic bisimulation; the erratum corrects complexity to PSPACE. Our potential is an initial worst-total-cost lower bound, not intermediate-state equality.
+\paragraph{Fallback and online contention management.}
+Kung and Robinson~\cite{kung}, Section 3.3/p.220, already retain the critical-section semaphore during reexecution after repeated validation failure. Lock-elision retry caps likewise precede our work~\cite{glibcElision,hotspotRTM}. Cached completion here requires an unrolled-back preparation and atomic identity-check/recompute; HTM capacity or explicit aborts need not consume a write~\cite{gccRTM}. These mechanisms motivate the interfaces but do not establish their joint $Q,L$ guarantee.
 
-Their later work~\cite{cernyquality}, Sections 6.1--6.2, already optimizes protected-statement counts and statistically profiles acquisition/contention under an oblivious scheduler. Here a universal call cap is coupled to worst protected work for every actual-write bound, hidden from the selector. A fixed finite instance can be expressed as a general game; the all-$B$ policy and atomic-call lower bound require additional arguments. Preemption-safety synthesis~\cite{cernysafe} guarantees deadlock-free lock placement; our source integration has bounded checks. Worst fault-cost reachability~\cite{dumitrescu} and resilience/cost synthesis~\cite{neider,weinert} are established.
+Attiya et al.~\cite{attiya2006}, Sections 2--3/5, analyze one Greedy contention manager that does not receive the per-job non-conflict failure bound $k$. It is $O(ks)$-competitive for makespan with $s$ resources, with a corresponding deterministic lower bound under time-dependent resource requests. Thus a single policy for an unknown disturbance level and an all-policy lower bound are established. Our allowance counts global external writes, the cap constrains every finite-write execution, and the output is an exact protected-kernel-work curve for persistent jobs. Alistarh et al.~\cite{alistarh2018}, Sections 4--5, optimize whether and when to abort a conflicting transaction with known abort cost and unknown remaining duration. Their original throughput policy has no progress guarantee; Section 7 adds a probabilistic one. That objective and returned guarantee differ from the universal call cap here.
 
-\paragraph{Reduction and robust dynamic programming.}
-Gangamreddypalli et al.~\cite{structured} preserve failures and original successful final states. Our calls need not commute with same-key writes; neither an exact intermediate-state quotient nor cost-preserving reduction is established. Mannor et al.~\cite{mannor}, Section 4/Theorem 5, give global-deviation-budget DP; unfinished upsets, completing nominal branches and token-consuming failures instantiate it with negated cost/horizon $n+B$. Postek et al.~\cite{postek} give finite-candidate DP, state expansion and causal budgeted routing. Normal form/all-budget closure require additional proof.
+Guerraoui, Herlihy and Pochon~\cite{guerraoui2005}, Sections 3--4, establish a priority-based abort/wait manager with bounded-delay progress and a makespan guarantee against an offline scheduler. Diegues and Romano~\cite{diegues2014}, Sections 4--6 and its errata, adapt attempt budgets and capacity-abort handling using per-atomic-block measurements in GCC. Thus theoretically justified contention control and workload-oblivious adaptive fallback are prior contributions. Their transaction progress/cycle objectives differ from the persistent-preparation operations and hard local/shared count contracts here; their measurements do not calibrate our call toll.
 
-We inherit hardness, floor/cap and two-fee ordering/packing from this research's earlier zero-fee snapshot~\cite{artifact}; it is not independent prior work. The lineage map separates these from the present potential, universal frontier, second-slope closure, sharp ratio and mixed-price reduction.
+\paragraph{Synchronization synthesis and robust control.}
+\v{C}ern\'y et al.~\cite{cerny} choose retries, guards and caches in partial concurrent programs with a scheduler and weighted limit-average safety objective. Their Theorem 6 uses quantitative probabilistic bisimulation; the erratum corrects complexity to PSPACE. Later work optimizes protected-statement counts and statistically profiles acquisition/contention~\cite{cernyquality}; preemption-safety synthesis also addresses deadlock-free lock placement~\cite{cernysafe}. Our archived scalar potential concerns initial worst total cost, not source equivalence or intermediate-state quotients. Finite $n,B,r$ instances can be encoded as general games; we do not claim such tools cannot express them.
 
-\paragraph{Envelopes, reflection and allocation.}
-Burdzy et al.~\cite{bkr}, Equations (2.12)--(2.13)/Theorem 2.6, give the reflected recurrence; floor/cap specializes it to concavity. Marginal insertion is elementary. Bertsimas and Sim~\cite{bertsimas2003}, Theorem 3/Equations (15)--(19), give $Z(\Gamma)=\min_\ell\{\Gamma d_\ell+F_\ell\}$. Our additional Equations~\eqref{eq:insertion}--\eqref{eq:basis} close repeated causal failures, two completing modes and dependent choices; reduction to a fixed binary robust set is unestablished. Concave allocation~\cite{federgruen,bertsimas} supplies lower bounds; decision-dependent information and controllable uncertainty are broader settings~\cite{vayanos,ley}.
+Mannor et al.~\cite{mannor} supply global-deviation-budget DP; Postek et al.~\cite{postek} provide finite-candidate DP and causal budgeted routing. Information-state minimax control~\cite{dave} is a general framework for the repair stopping problem after proving its least-consistent-budget reduction. Our extra repair argument uses independently realizable intervals and monotonicity to reduce a feasibility tree to one minimum-write bad path. Generic backward induction and sufficient information are not new claims.
 
-\paragraph{Scheduling, hardening and ordering.}
-Fixed one-failure zero-fee modes map to Lawler sequencing~\cite{lawler}; choosing modes is hard. Fault-tolerant DAG schedules~\cite{izosimov} and stochastic fixed-priority hardening~\cite{an} impose timing/signalling constraints absent here. Chrobak et al.~\cite{chrobak}, Lemma 4/Theorem 5, compute prescribed-order latest completion in $O(n)$ regardless of fault bound, but mandate retry. Bold and Goerigk~\cite{bold} use $\Gamma+1$ layers after duration observation; activities complete despite delay, whereas our failure permits another choice before completion.
+\paragraph{Inherited auxiliary results.}
+The archived priced analysis uses reflected recurrences, robust envelopes, concave allocation and composition ordering~\cite{bkr,bertsimas2003,federgruen,bertsimas,kawase}. Fault-tolerant scheduling, resilient synthesis, decision-dependent optimization and ski rental have different timing or information contracts~\cite{chrobak,izosimov,an,neider,weinert,vayanos,ley,wu,li,bold}; a different recurrence alone does not preclude a reduction.
 
-Ski-rental thresholds/orderings~\cite{wu,li} require a resource-preserving map. The direct substitution $f(H)=\sum_{i\in H}p_i$, $g(H)=\sum_{i\in H}c_i$, $T=B$ gives 6 for $(p,c)=(2,5),(4,6)$ at $B=1$, versus our value 5; only that map is excluded. At $B=1$, charged fixed-order values compose $\psi_i(x)=\min\{x+P_i,\max(x,c_i),\delta_i+\max(x,s_i)\}$. Kawase et al.~\cite{kawase} provide the general composition-ordering connection, but not the present all-budget closure.
+The zero-fee snapshot~\cite{artifact} is an \emph{unpublished, unreviewed author artifact}. Its floor/cap lemma, two-fee ordering and restricted hardness concern supplied-price compilation. These auxiliary results and all adverse outcomes remain archived; the present theorems concern resource frontiers and partial-repair information boundaries.
 
 \section{Limitations and Threats to Validity}
 \label{sec:limits}
 
-\paragraph{Partial repair changes the information boundary.}
-Consider two unit components, two calls, single-component writes, and the choice to repair/finish or reject/reprepare outside. Known-$B$ minimax repair costs at $B=0,1,2,3$ are $0,0,1,1$: first accept at most $\lfloor B/2\rfloor$ dirty components; otherwise repair last. A $B$-unaware policy optimal at $B=1$ must reject one dirty component. Two further writes force both dirty, costing $2$ at $B=3$ and precluding simultaneous optimality. The artifact retains the footprint proof and all 3,495 inputs/160,080 checks.
+The exact resource frontier concerns mandatory whole kernels, persistent outputs and the listed completing calls. It does not include replenished write budgets, structural change, exceptions, external completion or retained guards. In retained charged-guard studies, five of 384 inputs improve over serial calls (including 242 versus 243); an intermediate state separates immediate completion/release from retaining the guard (43 versus 45). General retained-guard equality remains unproved. These counterexamples and the repair theorems delimit the result rather than refute a theorem under its stated interface.
 
-The artifact's exact competitive compiler uses minimum bad-cost paths and rational isolation, with compact singleton specialization. All 21,028 small/rational outcomes agree with direct games. Six initial timeouts (two compact) remain; changed bucket search completes all 168 units. Additive excess cancels a common completion cost $\mu$ (4,220 checks). Charging $\kappa$ per call instead gives a capped order-statistic known-budget curve (143,226 values/33,688 competitive checks). With call cap $q\ge2$, any $0<\kappa<W^*$ precludes all-budget optimality: rejecting first can incur an extra toll followed by maximum dirtiness $W^*$, while accepting first loses to a known-budget policy that rejects only maximum dirtiness. Separate proofs require correct footprint profiles; native calibration and broader novelty remain unestablished.
+Roslyn experiments cover selected source paths and authored changes. Same-text deadlocks and missing-document timeouts show why replayability does not imply safe protected execution. Event, snapshot and compiler projections do not establish arbitrary concurrent equivalence; direct/workspace compilations share the compiler engine. Rebase retains merge cost and is outside whole-kernel optimality. Our component profiles and call tolls have not been calibrated to that merge implementation. Footprint profiling may be exponential, and native validation can reveal different information.
 
-Other exclusions are replenished budgets, structural changes, exceptions and external completion. Scalar minimax needs supplied $B$ and prices; knowing writers have finished reduces cost to baseline.
-
-The zero-fee model permits retained/batched guards with two-mode equality. Charging failed acquisitions changes this: five of 384 inputs improve (including 242 versus serial 243); immediate release/completion fails at an intermediate state (43 versus 45). Exposed-guard equality from all-unprepared states remains unproved.
-
-Roslyn patch deadlocks separate replayability from safe protection. Finite checks establish neither arbitrary-host safety nor editor throughput; rebase retains merge cost. Deephaven needs owned refreshes and synchronized boundaries; its abstraction is not exact native minimax. Whole-system optimality and prevalence remain unknown.
-
-Tests are not mechanical proofs. Scalar gains are sparse, calibration fails and direct methods can cost less. Java arrivals are forced; Roslyn arrivals are authored on one host with instrumentation overhead and process variability. Human benefit was not measured.
+All measurements use one author workstation, authored arrivals and recorded process variability. Instrumentation costs and cache/JIT effects prevent inference of uninstrumented or production timing; no human benefit is measured. Scalar gains are sparse, the attempted time calibration fails in most settings, and requested-value methods can cost less than a compiler. Finite equation tests and AI-assisted proof inspection are not mechanical proofs or independent third-party reproductions.
 
 \section{Conclusion}
 
-Within the whole-kernel interface, one policy meets a call cap and minimizes worst protection for every hidden writer budget. Suffix certificates and priced compilation support further choices. Roslyn exhibits conditional background-delay gains, foreground burst costs and protection hazards.
+A finite retry allowance does not by itself determine protected work. Under the whole-kernel completion interface, cached reuse/recompute permits one policy to meet a universal call cap and the exact protection frontier for every hidden write bound. Partial repair and per-call costs have different, sharp information boundaries. These characterizations specify when an interface supports the desired resource contract. Source checks and arrival experiments expose both realizable count tradeoffs and the limits of interpreting them as timing improvements.
 
 \section*{Data Availability}
-The charged supplement~\cite{chargedartifact} contains complete fixed inputs, proofs, sources, raw outcomes, corrections and replay commands; prior zero-fee evidence~\cite{artifact} is unchanged. Original/public hashes record path projections. Licensed modified sources retain notices; upstream archives, runtimes, caches, articles and private correspondence are excluded.
+The public supplement~\cite{chargedartifact} contains proof details, fixed inputs, sources, raw outcomes, corrections and replay commands; the zero-fee evidence~\cite{artifact} is unchanged. The central resource and repair theorems are proved in this paper; archived auxiliary priced results are not needed for them. Original/public hashes record path projections. Licensed modified sources retain notices; upstream archives, runtimes, caches, articles and private correspondence are excluded.
 
 \begin{thebibliography}{99}
+\bibitem{guerraoui2005} Rachid Guerraoui, Maurice Herlihy, and Bastian Pochon. 2005. Toward a Theory of Transactional Contention Managers. In \emph{PODC}. Author version. \url{https://lpdwww.epfl.ch/upload/documents/publications/neg--509904679f181-pochon.pdf}.
+\bibitem{diegues2014} Nuno Diegues and Paolo Romano. 2014. Self-Tuning Intel Transactional Synchronization Extensions. In \emph{ICAC}, 209--219. \url{https://www.usenix.org/conference/icac14/technical-sessions/presentation/diegues}. \href{https://www.usenix.org/system/files/conference/icac14/icac14-errata-diegues.pdf}{Errata}.
 \bibitem{kung} H. T. Kung and John T. Robinson. 1981. On optimistic methods for concurrency control. \emph{ACM Transactions on Database Systems} 6, 2, 213--226. \url{https://doi.org/10.1145/319566.319567}.
 \bibitem{roslynSource} .NET Foundation. 2025. \emph{Roslyn source}, commit \texttt{6c4a46a31302167b425d5e0a31ea83c9a9aa1d09}. \texttt{Workspace.cs}, \texttt{Solution.cs}, \texttt{SolutionCompilationState.cs} and \texttt{SolutionState.cs}. Accessed September 10, 2026. \url{https://github.com/dotnet/roslyn/tree/6c4a46a31302167b425d5e0a31ea83c9a9aa1d09}.
 \bibitem{roslynPR} .NET Foundation contributors. 2020. Add SetCurrentSolution with solution transformation, pull request 42228. Source review on replayability and event ordering. Accessed September 10, 2026. \url{https://github.com/dotnet/roslyn/pull/42228}.
@@ -645,7 +526,6 @@ The charged supplement~\cite{chargedartifact} contains complete fixed inputs, pr
 \bibitem{deephavenSource} Deephaven Data Labs. 2026. \emph{Deephaven Core source}, commit \texttt{6367313a319b79437d4d2116c77836ad56d5138d}. Files \texttt{ConstructSnapshot.java}, \texttt{HierarchicalTableImpl.java}, \texttt{EventDrivenUpdateGraph.java}, and \texttt{JsTreeTable.java}. Accessed September 9, 2026. \url{https://github.com/deephaven/deephaven-core/tree/6367313a319b79437d4d2116c77836ad56d5138d}.
 \bibitem{deephavenTree} Deephaven Data Labs. 2026. \emph{tree: Real-time tree table}. Python documentation, version 0.40.7. Accessed September 9, 2026. \url{https://deephaven.io/core/0.40.7/docs/reference/table-operations/create/tree/}.
 \bibitem{deephavenContext} Deephaven Data Labs. 2026. \emph{Execution context}. Official documentation, custom update graphs. Accessed September 9, 2026. \url{https://deephaven.io/core/docs/conceptual/execution-context/}.
-\bibitem{dumitrescu} Emil Dumitrescu, Alain Girault, Herv\'e Marchand, and \'{E}ric Rutten. 2007. \emph{Optimal discrete controller synthesis for the modeling of fault-tolerant distributed systems}. INRIA Research Report RR-6137. \url{https://www.researchgate.net/publication/250079523_Optimal_discrete_controller_synthesis_for_modeling_fault-tolerant_distributed_systems}.
 \bibitem{mannor} Shie Mannor, Ofir Mebel, and Huan Xu. 2012. Lightning Does Not Strike Twice: Robust MDPs with Coupled Uncertainty. In \emph{ICML}. \url{https://icml.cc/2012/papers/215.pdf}.
 \bibitem{neider} Daniel Neider, Alexander Weinert, and Martin Zimmermann. 2020. Synthesizing optimally resilient controllers. \emph{Acta Informatica} 57, 195--221. \url{https://doi.org/10.1007/s00236-019-00345-7}.
 \bibitem{weinert} Alexander Weinert. 2019. \emph{Optimality and Resilience in Parity Games}. PhD thesis, Saarland University. Section 6.2. \url{https://finkbeiner.groups.cispa.de/_assets/paper.C89PMq4G.pdf}.
@@ -655,29 +535,28 @@ The charged supplement~\cite{chargedartifact} contains complete fixed inputs, pr
 \bibitem{chrobak} Marek Chrobak, Mathilde Hurand, and Ji\v{r}\'{i} Sgall. 2009. Algorithms for Testing Fault-Tolerance of Sequenced Jobs. \emph{Journal of Scheduling}. Author version. \url{https://iuuk.mff.cuni.cz/~sgall/ps/faults.pdf}.
 \bibitem{vayanos} Phebe Vayanos, Angelos Georghiou, and Han Yu. 2026. Robust Optimization with Decision-Dependent Information Discovery. \emph{Management Science} 72, 2, 1509--1528. \url{https://doi.org/10.1287/mnsc.2021.00160}.
 \bibitem{ley} Eva Ley, Rebecca Marx, Maximilian Merkert, Tim Niemann, and Sebastian Stiller. 2026. Decision-dependent robust optimization with elementwise controllable uncertainty sets. \emph{OR Spectrum}. \url{https://doi.org/10.1007/s00291-026-00856-z}.
-\bibitem{prism} PRISM-games developers. 2026. PRISM-games. Official tool documentation. Version 3.2.4 used in the experiments. \url{https://www.prismmodelchecker.org/games/}.
-
 \bibitem{cerny} Pavol \v{C}ern\'y, Krishnendu Chatterjee, Thomas A. Henzinger, Arjun Radhakrishna, and Rohit Singh. 2011. Quantitative Synthesis for Concurrent Programs. In \emph{CAV}, 243--259. \url{https://doi.org/10.1007/978-3-642-22110-1_20}. Author publication page and complexity erratum: \url{https://www.microsoft.com/en-us/research/publication/quantitative-synthesis-for-concurrent-programs/}.
 \bibitem{cernyquality} Pavol \v{C}ern\'y, Edmund M. Clarke, Thomas A. Henzinger, Arjun Radhakrishna, Leonid Ryzhyk, Roopsha Samanta, and Thorsten Tarrach. 2015. Optimizing Solution Quality in Synchronization Synthesis. \emph{arXiv preprint} arXiv:1511.07163v1. \url{https://arxiv.org/abs/1511.07163}.
 \bibitem{cernysafe} Pavol \v{C}ern\'y, Edmund M. Clarke, Thomas A. Henzinger, Arjun Radhakrishna, Leonid Ryzhyk, Roopsha Samanta, and Thorsten Tarrach. 2017. From non-preemptive to preemptive scheduling using synchronization synthesis. \emph{Formal Methods in System Design} 50, 97--139. \url{https://doi.org/10.1007/s10703-016-0256-5}.
-\bibitem{structured} Namratha Gangamreddypalli, Constantin Enea, and Shaz Qadeer. 2026. Reduction for Structured Concurrent Programs. \emph{arXiv preprint} arXiv:2601.13341. \url{https://arxiv.org/abs/2601.13341}.
 \bibitem{izosimov} Viacheslav Izosimov, Paul Pop, Petru Eles, and Zebo Peng. 2012. Scheduling and Optimization of Fault-Tolerant Embedded Systems with Transparency/Performance Trade-Offs. \emph{ACM Transactions on Embedded Computing Systems} 11, 3, Article 61, 35 pages. \url{https://doi.org/10.1145/2345770.2345773}.
 \bibitem{wu} Binghan Wu, Wei Bao, Dong Yuan, and Bing Zhou. 2022. Competitive Analysis for Multi-Commodity Ski-Rental Problem. In \emph{IJCAI}, 4672--4678. \url{https://doi.org/10.24963/ijcai.2022/648}.
-\bibitem{chm17} Oracle. 2021. ConcurrentHashMap, Java SE 17 API Specification. Accessed September 7,2026. \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ConcurrentHashMap.html}.
-\bibitem{cmap17} Oracle. 2021. ConcurrentMap, Java SE 17 API Specification. Accessed September 7,2026. \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ConcurrentMap.html}.
-\bibitem{chmsource17} OpenJDK. 2026. ConcurrentHashMap.java, jdk 17 u source, commit \texttt{982d53c227943a511e8d61694feced764b71a6c1}. Accessed September 7,2026. \url{https://github.com/openjdk/jdk17u/blob/982d53c227943a511e8d61694feced764b71a6c1/src/java.base/share/classes/java/util/concurrent/ConcurrentHashMap.java}.
+\bibitem{chm17} Oracle. 2021. ConcurrentHashMap, Java SE 17 API Specification. Accessed September 7, 2026. \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ConcurrentHashMap.html}.
+\bibitem{cmap17} Oracle. 2021. ConcurrentMap, Java SE 17 API Specification. Accessed September 7, 2026. \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ConcurrentMap.html}.
+\bibitem{chmsource17} OpenJDK. 2026. ConcurrentHashMap.java, jdk17u source, commit \texttt{982d53c227943a511e8d61694feced764b71a6c1}. Accessed September 7, 2026. \url{https://github.com/openjdk/jdk17u/blob/982d53c227943a511e8d61694feced764b71a6c1/src/java.base/share/classes/java/util/concurrent/ConcurrentHashMap.java}.
 \bibitem{li} Ziwei Li, Bo Sun, Zhiqiu Zhang, Mohammad Hajiesmaili, Binghan Wu, Lin F. Yang, and Yang Gao. 2025. Combinatorial Ski Rental Problem: Robust and Learning-Augmented Algorithms. In \emph{NeurIPS}. \url{https://papers.nips.cc/paper_files/paper/2025/hash/ae3e173398d6e43fea63cbcc16fbaa98-Abstract-Conference.html}.
-\bibitem{bkr} Krzysztof Burdzy, Weining Kang, and Kavita Ramanan. 2009. The Skorokhod problem in a time-dependent interval. \emph{Stochastic Processes and their Applications}119, 2, 428--452. \url{https://doi.org/10.1016/j.spa.2008.03.001}.
-\bibitem{lawler} Eugene L. Lawler. 1973. Optimal Sequencing of a Single Machine Subject to Precedence Constraints. \emph{Management Science}19, 5, 544--546. \url{https://doi.org/10.1287/mnsc.19.5.544}.
-
+\bibitem{bkr} Krzysztof Burdzy, Weining Kang, and Kavita Ramanan. 2009. The Skorokhod problem in a time-dependent interval. \emph{Stochastic Processes and their Applications} 119, 2, 428--452. \url{https://doi.org/10.1016/j.spa.2008.03.001}.
 \bibitem{cpsat} Laurent Perron, Fr\'{e}d\'{e}ric Didier, and Steven Gay. 2023. The CP-SAT-LP Solver (Invited Talk). In \emph{CP}, LIPIcs 280, 3:1--3:2. \url{https://doi.org/10.4230/LIPIcs.CP.2023.3}.
 \bibitem{postek} Krzysztof Postek, Ward Romeijnders, and Wolfram Wiesemann. 2025. Technical Note: Multi-Stage Robust Mixed-Integer Programming. \emph{Operations Research} 73, 6, 3345--3358. \url{https://doi.org/10.1287/opre.2023.0520}. \href{https://pubsonline.informs.org/doi/suppl/10.1287/opre.2023.0520/suppl_file/opre.2023.0520.sm1.pdf}{Online appendix}; \href{https://www.doc.ic.ac.uk/~wwiesema/multi-stage-ro.zip}{author code}.
 \bibitem{bertsimas2003} Dimitris Bertsimas and Melvyn Sim. 2003. Robust discrete optimization and network flows. \emph{Mathematical Programming} 98, 49--71. \url{https://doi.org/10.1007/s10107-003-0396-4}.
 \bibitem{bold} Matthew Bold and Marc Goerigk. 2021. A compact reformulation of the two-stage robust resource-constrained project scheduling problem. \emph{Computers \& Operations Research}. \url{https://doi.org/10.1016/j.cor.2021.105232}. \href{https://eprints.lancs.ac.uk/151025/1/paper.pdf}{Accepted manuscript}.
-\bibitem{karp} Richard M. Karp. 1972. Reducibility Among Combinatorial Problems. In \emph{Complexity of Computer Computations}, 85--103. \url{https://doi.org/10.1007/978-1-4684-2001-2_9}. \href{https://www2.seas.gwu.edu/~simhaweb/champalg/tsp/papers/KarpOriginal.pdf}{Primary paper}.
-
 \bibitem{artifact} Anonymous Authors. 2026. \emph{Compiling Optimal Retry Policies for Dependent Transformations: Research Artifact}. Version 5 with publication supplement, commit \texttt{e0e0110}. \url{https://github.com/research-artifact-archive/research-artifact/tree/e0e011023c0591bbbf422390ad8d29785ad0023f}.
 
-\bibitem{chargedartifact} Anonymous Authors. 2026. \emph{Retry Synthesis with Bounded Calls and Protected Work: Research Artifact}. Version 16 document-state guard supplement, commit \texttt{0364041}. \url{https://github.com/research-artifact-archive/research-artifact/tree/0364041816655d8c3cad83bdb18085ad766f47f8}.
+\bibitem{chargedartifact} Anonymous Authors. 2026. \emph{Retry Synthesis with Bounded Calls and Protected Work: Research Artifact}. Version 18 local/shared caps and per-update comparison, commit \texttt{7e93190}. \url{https://github.com/research-artifact-archive/research-artifact/tree/7e93190645f2f16f21539ad8bcb32404722ca294}.
+\bibitem{attiya2006} Hagit Attiya, Leah Epstein, Hadas Shachnai, and Tami Tamir. 2006. Transactional Contention Management as a Non-Clairvoyant Scheduling Problem. In \emph{PODC}. \url{https://cs.idc.ac.il/~tami/Papers/podc06.pdf}.
+\bibitem{alistarh2018} Dan Alistarh, Syed Kamran Haider, Raphael K\"ubler, and Giorgi Nadiradze. 2018. The Transactional Conflict Problem. \emph{arXiv preprint} arXiv:1804.00947v1. \url{https://arxiv.org/abs/1804.00947}.
+\bibitem{glibcElision} Free Software Foundation. 2025. GNU C Library 2.42: x86 lock elision, revision \texttt{d2097651}. \texttt{elision-lock.c} and \texttt{elision-conf.c}. \url{https://github.com/bminor/glibc/tree/d2097651cc57834dbfcaa102ddfacae0d86cfb66/sysdeps/unix/sysv/linux/x86}. Official tunables: \url{https://www.gnu.org/software/libc/manual/html_node/Elision-Tunables.html}.
+\bibitem{hotspotRTM} OpenJDK. 2025. HotSpot 21.0.8+9 RTM monitor code, revision \texttt{54f20959}. \texttt{c2\_MacroAssembler\_x86.cpp} and \texttt{globals\_x86.hpp}. \url{https://github.com/openjdk/jdk21u/tree/54f2095960f01d957f2335cafa0defb956e13a2c/src/hotspot/cpu/x86}.
+\bibitem{gccRTM} GNU Compiler Collection. n.d. x86 Transactional Memory Intrinsics. Accessed September 10, 2026. \url{https://gcc.gnu.org/onlinedocs/gcc/x86-transactional-memory-intrinsics.html}.
+\bibitem{dave} Aditya Dave, Nishanth Venkatesh, and Andreas A. Malikopoulos. 2024. Approximate Information States for Worst-Case Control and Learning in Uncertain Systems. \emph{arXiv preprint} arXiv:2301.05089v2. \url{https://arxiv.org/abs/2301.05089}.
 \end{thebibliography}
 \end{document}

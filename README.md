@@ -1,4 +1,4 @@
-# Retry Synthesis with Bounded Calls and Protected Work
+# What Retry Budgets Can Guarantee: Calls, Protected Work, and Partial Repair
 
 Anonymous research artifact for the paper of this title. The package contains the implementations, authored inputs, per-unit outcomes, controllers, certificates, traces, and supporting proof documents used in the paper. It includes unfavorable results and the full recorded denominators. This is an author-provided artifact; publication is not independent certification or evidence of acceptance.
 
