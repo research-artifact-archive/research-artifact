@@ -1,6 +1,8 @@
 # Exact total/protected-work frontiers with arbitrary retry slack
 
-Current manuscript203 Section5 and the [expanded full-program proof](FULL_PROGRAM_PROOF.md) include early preparation, retained records and old snapshots. Work charging is global from the common start, with distinct invalidated calculations and one mandatory final calculation per job. The supplied-budget suffix uses that global accounting. Post-gate selection uses only records computed before that gate. The separate single-B-unaware-program two-body cap consequence is in Section4.
+Current manuscript216 retains Theorem7/Lemma2 full-program extraction and charging. Section5.2 Proposition8 adds a [four-job unknown-budget DAG observation separation](OBSERVATION_DAG.md). Its all-program erased proof uses explicit forward coupling; the visible-branch extraction theorem is not a completeness theorem for erased enumeration. General positive-retry DAG least curves remain open.
+
+Historical manuscript203 Section5 and the [expanded full-program proof](FULL_PROGRAM_PROOF.md) include early preparation, retained records and old snapshots. Work charging is global from the common start, with distinct invalidated calculations and one mandatory final calculation per job. The supplied-budget suffix uses that global accounting. Post-gate selection uses only records computed before that gate. The separate single-B-unaware-program two-body cap consequence is in Section4.
 
 Current manuscript197 puts the least all-budget independent-work curve in Section4.1, supplied frontiers in4.2--4.3, changed call weight in4.4, program domination and recurrence in5, and observation erasure in5.2. Its Section7 added-cost complexity claims concern supplied B=1, Q<=n and are separate from the body-work retry results.
 

@@ -1,6 +1,8 @@
 # Joint guards and the counted completion resource
 
-Current manuscript203 summarizes independent-price results here as supplements, retaining the original complete proofs and every fixed outcome. Its Theorem10 states the charged representation and Theorem11 the unit-guard precedence boundary. No worker, fixed input, raw output or corroboration result changes in this proof-exposition publication.
+Current manuscript216 Section4.4 retains the alternative cached-mismatch call weight with a concise proof; the expanded accounting proofs and all fixed outcomes remain here. Current Theorem10/11 are in Sections7/7.1. The observation supplement is a separate body-work boundary, not a change to these priced results.
+
+Historical manuscript203 summarizes independent-price results here as supplements, retaining the original complete proofs and every fixed outcome. Its Theorem10 states the charged representation and Theorem11 the unit-guard precedence boundary. No worker, fixed input, raw output or corroboration result changes in this proof-exposition publication.
 
 Manuscript197 integrates these results in Sections4.4 and7.1. Section7.2 adds the unit-guard precedence boundary. The tight2^n-1 heterogeneous output proof remains here in the supplement. The parent scientific release f626c4c412f422b975e5c21d7251090e4a5b9fec passed all52 stages; this manuscript/guide publication adds no samples.
 

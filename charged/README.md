@@ -1,6 +1,8 @@
 # Charged atomic-call retry policies
 
-Current manuscript203: Theorem7/Lemma2 in Section5 and Theorem9 in Section6 have expanded proofs. [Full-program proof](FULL_PROGRAM_PROOF.md) gives the finite concrete-history construction and global distinct charges; [Java interface proof](JAVA_INTERFACE_PROOF.md) gives explicit A1--A6, pending writes, saved outputs and the strict erased case. Section7 retains Theorem10 for charged representation and Theorem11 for unit-guard precedence hardness. Independent-price algorithms are supplementary. No new experimental samples accompany this update.
+Current manuscript216 adds the explicit action/effect/observation/charge table and worked branch trace, and Section5.2 Proposition8 integrates the [unknown-budget DAG observation result](OBSERVATION_DAG.md). The cited evidence commit includes all53 standard stages, fully replayed from public retrieval. All preceding measurements and unfavorable outcomes are unchanged. Current unit-guard hardness is Theorem11 in Section7.1; older locators below are historical.
+
+Historical manuscript203: Theorem7/Lemma2 in Section5 and Theorem9 in Section6 have expanded proofs. [Full-program proof](FULL_PROGRAM_PROOF.md) gives the finite concrete-history construction and global distinct charges; [Java interface proof](JAVA_INTERFACE_PROOF.md) gives explicit A1--A6, pending writes, saved outputs and the strict erased case. Section7 retains Theorem10 for charged representation and Theorem11 for unit-guard precedence hardness. Independent-price algorithms are supplementary. No new experimental samples accompany this update.
 
 Current manuscript197: complete program/observation results are Section5; Java6; charged representation and complexity7; mathematical/Linux/Roslyn evaluation8. The free-comparison and unit-guard supplements are integrated. See the current paper guide and root map; earlier numbered descriptions below retain their historical versions.
 

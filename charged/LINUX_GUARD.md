@@ -1,6 +1,8 @@
 # Linux source traversal and the guard-entry boundary
 
-Current manuscript203 Section8.2 distinguishes source body attempts from both public calls and internal primitive calls. The upstream path bound is two body attempts; the cached-repair/two-cheap alternatives permit three. The source comments motivate eventual fallback, not an externally imposed numerical SLA. Variable work, private buffers and source-specific traversal conditions limit transfer to an illustrative upper refinement.
+Current manuscript216 Section8.2 explicitly labels the four detected fault cases as deliberately faulty variants, not defects newly found in unmodified upstream code. The logical, body-attempt and native-call distinctions and all measured outcomes are unchanged. The operation table clarifies the abstract contract; the source refinement keeps its stated narrower scope.
+
+Historical manuscript203 Section8.2 distinguishes source body attempts from both public calls and internal primitive calls. The upstream path bound is two body attempts; the cached-repair/two-cheap alternatives permit three. The source comments motivate eventual fallback, not an externally imposed numerical SLA. Variable work, private buffers and source-specific traversal conditions limit transfer to an illustrative upper refinement.
 
 Current manuscript197 Section8.2 retains the initialization premise and logical/native count distinction: one public invocation for each policy; logical maxima2/3 but six-primitive maxima10/10 for cached/two-cheap. It establishes no caller-required cap or native speedup. The supplied numerical prices of Section7 are a separate mathematical contract.
 

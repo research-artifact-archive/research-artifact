@@ -1,6 +1,8 @@
 # Unit guard charges and precedence
 
-Current manuscript203 Theorem11 (Section7.2) states this unit-guard hardness result; older Theorem12 references below are historical. The independent-price proof is now supplementary. This update changes no unit-guard input, proof construction, witness or outcome.
+Current manuscript216 Theorem11 is in Section7.1. Its unit-guard hardness result, inherited attribution, polynomial output bound and fixed corroboration are unchanged. Older section/theorem locators below refer to previous manuscript layouts.
+
+Historical manuscript203 Theorem11 (Section7.2) states this unit-guard hardness result; older Theorem12 references below are historical. The independent-price proof is now supplementary. This update changes no unit-guard input, proof construction, witness or outcome.
 
 The [complete proof](evidence/RESUMED_20260910_1617/guard_dag_unit_01/PROOF02.md) adds a boundary to the same supplied-B=1, Q<=n completion interface. Manuscript197 integrates the representation and this boundary in Section7, with Theorem12 stating the unit-guard result. All preceding scientific payloads and prior manuscript versions remain preserved in their immutable commits.
 

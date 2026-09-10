@@ -1,6 +1,8 @@
 # Operation and information contracts
 
-Current manuscript203 Section6 and the [expanded Java proof](JAVA_INTERFACE_PROOF.md) separate per-key API/source assumptions from completed-trace normalization and fresh-writer lower witnesses. Cheap publication returns a Boolean but saves the prepared output; fresh/cached completion saves the callback result. External-write counts exclude foreground stores. Strict erased results require the same returned object per job and erasure of the whole visible cached transition; hiding only the flag is insufficient.
+Current manuscript216 Section2 and Table1 give the complete live-state, publication, gate-order, effect/observation and Q/W/L interface. Figure1 follows an explicit 8/16 two-branch policy. Strict erasure in Section5.2 additionally changes the least unaware curve on the [four-job DAG](OBSERVATION_DAG.md); it requires the full visible-transition contract. The conditional Java source proof is unchanged.
+
+Historical manuscript203 Section6 and the [expanded Java proof](JAVA_INTERFACE_PROOF.md) separate per-key API/source assumptions from completed-trace normalization and fresh-writer lower witnesses. Cheap publication returns a Boolean but saves the prepared output; fresh/cached completion saves the callback result. External-write counts exclude foreground stores. Strict erased results require the same returned object per job and erasure of the whole visible cached transition; hiding only the flag is insufficient.
 
 Manuscript197 uses body coordinates in Sections2--6 and prices guard/comparison work in both coordinates in Section7. It assumes supplied B=1, Q<=n throughout Section7. Independent free-comparison algorithms and unit-guard DAG strong hardness do not assert native-cost calibration. A fee on every completing call translates the zero-retry resources by a constant. Section4.4 separately changes the weight of an atomic cached mismatch.
 

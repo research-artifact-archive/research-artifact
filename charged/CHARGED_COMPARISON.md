@@ -1,6 +1,8 @@
 # Comparison and protected-entry costs
 
-Current manuscript203 Section7: Theorem10 is the all-program supplied-one-write charged representation; Theorem11 is strong NP-completeness with unit guards on the endpoint-incidence DAG. Independent free-comparison NP/DP and common-guard algorithms remain in [resource accounting](RESOURCE_ACCOUNTING.md), with all numerical outcomes retained. Older theorem numbers below belong to their dated manuscripts.
+Current manuscript216 keeps Theorem10 charged representation and Theorem11 unit-guard precedence hardness, now located in Section7.1. Independent-price algorithms remain supplementary. No charged-resource input, construction, witness or measured outcome changes in this paper publication.
+
+Historical manuscript203 Section7: Theorem10 is the all-program supplied-one-write charged representation; Theorem11 is strong NP-completeness with unit guards on the endpoint-incidence DAG. Independent free-comparison NP/DP and common-guard algorithms remain in [resource accounting](RESOURCE_ACCOUNTING.md), with all numerical outcomes retained. Older theorem numbers below belong to their dated manuscripts.
 
 Manuscript197 Section7 now integrates the all-program representation (Theorem10), independent free-comparison boundary (Theorem11), and strongly NP-complete unit-guard height-two DAG boundary (Theorem12). Consequently the historical unresolved added-cost statements below have been partly settled by the later resource-accounting and unit-guard guides. The original zero-charge body frontier on any DAG is polynomial by Lawler. Every older proof, failure and payload remains unchanged.
 

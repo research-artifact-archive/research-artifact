@@ -1,10 +1,10 @@
 # The Total-Work Cost of Bounded Retry Guarantees
 
-Anonymous research artifact for the [stored manuscript](paper/main.pdf). Its exact source/PDF hashes and18-body/20-total-page snapshot are in [paper/SNAPSHOT.json](paper/SNAPSHOT.json). The fixed manuscript203 integrates the [unit-guard precedence result](charged/UNIT_GUARD_DAG.md), independent free-comparison algorithms and call-weight sensitivity. Its immutable evidence commit `f626c4c412f422b975e5c21d7251090e4a5b9fec` passed the complete inventory and all52 standard stages in a fresh unauthenticated acquisition; this paper/guide update changes no scientific sample. Expanded [full-program](charged/FULL_PROGRAM_PROOF.md) and [conditional Java](charged/JAVA_INTERFACE_PROOF.md) proofs state their model and source premises explicitly. Publication and replay are author activities; neither is independent certification or evidence of acceptance.
+Anonymous research artifact for the [stored manuscript](paper/main.pdf), fixed manuscript216. Its exact source/PDF hashes and18-body/20-total-page snapshot are in [paper/SNAPSHOT.json](paper/SNAPSHOT.json). The model now has explicit state, action effects/observations/charges and a two-branch worked example. Proposition8 incorporates the [four-job unknown-budget observation boundary](charged/OBSERVATION_DAG.md): strict erasure can raise least total work from20 to21 with the same optimal protection curve. The [full-program](charged/FULL_PROGRAM_PROOF.md) and [conditional Java](charged/JAVA_INTERFACE_PROOF.md) proofs state their premises explicitly.
+
+Its immutable evidence commit `b719eb7a6514d7f3a47f2a3af21e43b4ffd4699f` passed the complete public inventory and all53 standard stages in a fresh unauthenticated acquisition. This paper/guide update adds no scientific sample. Publication, replay and model review are author activities, not independent certification or acceptance evidence.
 
 The research asks how cheap validation, protected recomputation and cached guarded completion trade total work against protected work under bounded completion calls. Its guarantees require the specified persistent-job, observation and charging interfaces. It does not infer costs, a write budget, a caller SLA or contract compliance from arbitrary concurrent code.
-
-The newer [unknown-budget observation supplement](charged/OBSERVATION_DAG.md) adds a four-job precedence family with distinct least work curves under visible and strictly erased cached comparisons. It is newer than the stored manuscript203. Stage53 replays its complete fixed28-root check; no native/timing samples are added.
 
 ## Start here
 

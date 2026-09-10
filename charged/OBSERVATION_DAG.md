@@ -1,5 +1,7 @@
 # Cached observation and unknown budgets on a DAG
 
+Current manuscript216 Section5.2 Proposition8 contains the (5,1,1,2), r=1 result and its compact proof. The complete sufficient-family proof and every fixed outcome remain linked below. This manuscript follows the already published and publicly replayed53-stage evidence commit; it adds no measurements.
+
 The least unknown-budget total-work curve for independent jobs has a policy that ignores cached comparison results. This supplement shows that precedence can change this fact even when the same optimal protected-work curve and call cap are required.
 
 For A→U→V and independent Z, with works (5,1,1,2), r=1 and Q<=5, the exact least whole curves at B=0,...,4 are
@@ -23,4 +25,6 @@ python3 -B charged/reproduce.py universal-observation-dag --out work/observation
 
 The output directory must be new. The stage reruns the fixed checker with the same visible oracle, verifies every stable scientific output byte for byte, and excludes only wall-clock fields from metadata equality. All53 standard stages can be run with `all` in place of the stage name. Previous scientific payload and unfavorable results remain unchanged.
 
-At this supplementary release the stored PDF remains manuscript203. The present proof is newer than that PDF; no revised-paper or submission-ready status is implied.
+The stored PDF is now manuscript216 and includes this result. Publication and replay do not establish submission readiness.
+
+The [expanded proof](evidence/RESUMED_20260910_1617/universal_observation_dag_01/PROOF03.md) makes the existing publication overwrite x[i]=z_i explicit and gives a concrete trace showing why a post-completion inequality against the old capture does not reconstruct the comparison flag. PROOF02 and all earlier inputs/results remain unchanged.
