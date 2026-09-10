@@ -1,0 +1,20 @@
+--- batch_project_guard
++++ batch_document_guard
+@@ -1493,7 +1493,7 @@
+             tryPreparedRebase: static (preparedFrom, prepared, latest, data) =>
+             {
+                 // Stronger comparator outside the whole-kernel interface. Identity guards
+-                // conservatively reject changes to any affected project or link relation.
++                // reject changed affected document states or a changed link relation.
+                 if (!data.isCodeDocument || data.updatedDocumentIds.Count == 0 ||
+                     preparedFrom.Id != latest.Id || latest.GetDocument(data.documentId) is null)
+                     return null;
+@@ -1503,7 +1503,7 @@
+                     return null;
+                 foreach (var id in oldRelated.Append(data.documentId))
+                 {
+-                    if (!ReferenceEquals(preparedFrom.GetProjectState(id.ProjectId), latest.GetProjectState(id.ProjectId)))
++                    if (!ReferenceEquals(preparedFrom.GetRequiredDocument(id).DocumentState, latest.GetRequiredDocument(id).DocumentState))
+                         return null;
+                 }
+                 // Same guards and prepared payloads as sequential rebase. Update all

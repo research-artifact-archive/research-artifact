@@ -96,3 +96,5 @@ A separate `roslyn-compilation` stage introduced stage27: all 96 authored compil
 The [compact partial-repair supplement](PARTIAL_COMPACT.md) adds standard stage28 (`partial-compact`). It preserves both compiler versions, exact regression/certificate checks, the original216 outcomes with6 timeouts and the changed algorithm's168 successes. Read its separate objective and cost assumptions before using the returned competitive policy.
 
 The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30: exact additive/toll recomputation and all saved batch-rebase native/arrival outcomes. Timing improvements are not established.
+
+[Document-state guard supplement](DOCUMENT_GUARD.md) adds stage31: all fixed native projections and the four changed resource rows. No new timing samples.

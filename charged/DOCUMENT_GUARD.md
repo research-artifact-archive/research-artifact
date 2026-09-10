@@ -1,0 +1,9 @@
+# Document-state guard supplement
+
+The source rebase comparator now uses affected document-state identity instead of whole project-state identity, preserving the ordered related-document list and native batch content operation. This admits a linked project's reference removal in four previously rejected compiler cases while retaining the resulting diagnostics. The comparison is a use of an existing source operation, not a new general guard-synthesis algorithm.
+
+Stage31, `roslyn-document-guard`, checks every saved outcome from fresh source builds:236event/payload/state cases,23error/no-op reentry controls,96compiler cases (2,552project projections), and all288shared initial/background/final projections against the previous project-state guard. Exactly four resource rows change as predicted. All12event and8compiler corruption controls are detected. No new timing campaign was run; content merge and validation remain actual protected work.
+
+Run `python3 -B charged/reproduce.py roslyn-document-guard --out work/document-guard`. Optional `charged/roslyn_document_guard_native.py` rebuilds pinned Roslyn with an externally supplied SDK/source archive and reruns the native checks (`--compiler-projections` enables the96compiler cases). Its computational function bodies match the privately executed helper after documented portable-path substitutions; the published helper itself was not separately executed. See earlier source-native instructions for pinned inputs and toolchain acquisition.
+
+[Plan, outcome and paired counter differences](evidence/RESUMED_20260910_0343/roslyn_document_guard_01/REPORT.md) retain every denominator and limitation. The earlier batch timing outcomes, rejected patches and timeouts are unchanged. No weakest-guard, native additive-cost, general latency, practical-importance or submission-readiness claim follows.
