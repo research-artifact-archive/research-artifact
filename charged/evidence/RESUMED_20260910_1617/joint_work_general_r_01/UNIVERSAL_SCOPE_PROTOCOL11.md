@@ -1,0 +1,9 @@
+# Scope checks11, fixed before executing their oracle comparisons
+
+The independent-job formula09/proof10 is retained unchanged. This small new study checks concrete scope proposals from author-side Claude response07; it is not another attempt at any earlier input/result and not an independent review. Record all outcomes and complete policies, including deviations from predictions. Keep every earlier result. Single execution, maximum60 seconds, no data-dependent input additions inside this attempt.
+
+Use the existing full-history universal Pareto oracle `unknown02.py` and its separate policy interpreter. For each input, retain its entire root frontier, trees, W/L curves, input, states and time. Fixed inputs are works(10,1,1),(1,10,1),(1,1,10),(10,1),(1,10),(10,2,1,1), each crossed with r=0,1,2 and either independent or a chain in the given order:36 roots. The (10,1,1),r1,chain,B3 proposal is W33 rather than independent32. Every frontier must have the shared all-DAG early coordinates Omega+Bmax through B=r, and Omega+(r+1)max at B=r+1. Later DAG coordinates are observations, not predictions of the independent formula.
+
+The Claude statement that independent saturation also implies DAG-independence at later budgets is a falsifiable proposal. The proposed counterexample is the same10->1->1,r1,B3 root, whose independent works satisfy the stated sufficient saturation inequality. Record its actual outcome even if the proposed counterexample fails. Do not infer that every DAG has a least entire curve from these36 roots.
+
+This is a mathematical scope check, with no Java runs, timings, human/LLM-proxy experiments, or claims of novelty/significance/acceptance. The next mathematical manuscript revision requires a proof for each adopted general claim; finite comparisons alone cannot supply it.
