@@ -1,0 +1,23 @@
+# Exploratory finite corroboration 01 — fixed before outcomes
+
+September 10, 2026. Route SCIENTIFIC. Root is sole writer. This is an exploratory theorem check; it is neither preregistration of an unseen scientific hypothesis nor a final performance study. ANALYTIC_DRAFT01.md predates these checks. All existing adverse results remain unchanged.
+
+## Inputs and complete denominators
+
+1. DAG population: for n=1,2,3,4, all subsets of the possible edges i->j for i<j, and every weight assignment in {1,2,4}^n. This is 5,421 graph/weight inputs, including transitively redundant edge sets as distinct inputs. It represents all DAG shapes of these sizes after relabeling; it is not an enumeration of every labeled orientation. For each, enumerate the known-budget canonical-mode W/L Pareto frontier for B=0,...,n: 26,844 cases. No graph or weight exclusion.
+2. For every graph/weight input above, compare the B=1 frontier against the scheduling reduction at M=0 and every distinct job weight. There are 18,390 cap cases. Compare Lawler's backward order with direct enumeration of every topological order; independently interpret its emitted mode policy against every abstract match/mismatch path allowed by one write. Keep each order, frontier, policy trace costs and result. Test the claimed B=1 optimal-L corollary, including ties and single jobs, on all 5,421 inputs.
+3. Independent-job formula: every weight vector in {1,2,4}^n for n=1,...,5 and every B=0,...,n, totaling 2,004 cases. Compare the formula against the canonical-mode frontier and independently enumerate all feasible paths of the ascending attaining policy. Also evaluate that policy at B=n+1 for each of the 363 vectors; these are 363 additional saturation cases. Budget-dependent values are allowed to decrease because the L cap changes.
+4. Unknown-budget class: the 237 DAG/weight inputs from population 1 with n<=3. Enumerate all Pareto work curves in the immediate-prepare, fresh/cached finite policy-tree class subject to L<=Top_d at every terminal path with d mismatches; jobs can be chosen from every enabled vertex and match/mismatch branches can choose different continuations. Compare against the draft universal curve for B=0,...,n. Do not assume a greedy guard or the claimed W bound when pruning; only reject accumulated L>Top_d, whose no-future-write continuation is already impossible. These 237 checks do not establish a normal form for the unrestricted programming language.
+5. Explicit worked cases (1), (8,16) with no edges and each chain direction, and (4,4,1) with no edges, each run as a separately identified fixture through the same comparisons. Include all paths and the draft expected values. Fixtures do not augment the exhaustive denominators.
+
+## Methods and falsifiers
+
+Costs are integer kernel work. Store E=W-Omega and L. At known remaining budget b=0, prepare/cheap all remaining jobs has (E,L)=(0,0). At b>0, a fresh job adds (0,w_i) to one successor; a prepared/cached job joins a match successor at b with a mismatch successor at b-1 by componentwise maximum, adding (w_i,w_i) only on the mismatch branch. Keep nondominated pairs and witness policies. The r=0 call cap excludes cheap calls while b>0. This finite class is a corroboration tool; the arbitrary-program lower bounds must be established separately.
+
+Falsify a draft formula if it disagrees with a feasible finite counterexample, or if an emitted policy exceeds Q=n, its claimed W cap, or its claimed L cap on any enumerated path. Falsify the scheduling application if any topological order improves on the reported Lawler value. A matching finite optimum only corroborates the unrestricted claim. Any mismatch between implementations is FAILURE until investigated; it is not silently classified as a theorem counterexample or corrected in place.
+
+Use independent implementations for frontier construction, topological-order objective evaluation, and emitted-policy path interpretation. Preserve all inputs, raw case rows, exceptions, timeouts, witness paths and summaries. Positive, zero-budget, saturation, ties, precedence and post-mismatch cheap branches are included. No timings are interpreted as native speed or practical importance.
+
+## Execution and accounting
+
+One initial execution, total wall cap 600 seconds. No automatic rerun. Every planned case receives SUCCESS, FAILURE, INVALID, TIMEOUT, or NOT_EXECUTED; after cap expiry, account for all remaining cases. Save exact protocol/source SHA-256 and all raw-output hashes. Implementation repairs require a new named successor and retain the original attempt. Never overwrite or improve an unfavorable result by repeated execution. No new publication or manuscript adoption follows automatically from agreement.

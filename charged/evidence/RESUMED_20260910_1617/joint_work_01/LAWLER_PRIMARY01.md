@@ -1,0 +1,7 @@
+# Primary-source attribution
+
+Read the author's 1971 Berkeley technical report, *Optimal Sequencing of a Single Machine Subject to Precedence Constraints*, ERL-M327 (August 20, 1971), PDF pages 3–6 (printed pages 1–4): https://www2.eecs.berkeley.edu/Pubs/TechRpts/1971/Archive/ERL-m-327.pdf . The index-page URL returned 404; the PDF was accessible. The 1973 journal publication is E. L. Lawler, Management Science 19(5), 544–546, DOI https://doi.org/10.1287/mnsc.19.5.544 .
+
+The primary theorem selects a job eligible to be last that minimizes its completion-cost function evaluated at the total remaining processing time. Moving that job to the end cannot worsen the maximum cost; repeat backward. For our proposed reduction the monotone function is t+tau_i, so the selected sink has minimum tau_i. The source already supplies the general scheduling algorithm and its exchange argument. We claim no new scheduling algorithm. Our zero processing times are covered directly by the nonincrease argument even if one requires positive times in a conventional scheduling statement.
+
+The unverified contribution candidate is the equivalence from the entire r=0, known-one-write whole-kernel program class to this scheduling objective, plus the resulting exact resource frontier and information-price comparison. Source attribution establishes the inherited part; it does not certify that equivalence, novelty against other work, or FSE importance. Do not redistribute the source PDF in the public artifact.

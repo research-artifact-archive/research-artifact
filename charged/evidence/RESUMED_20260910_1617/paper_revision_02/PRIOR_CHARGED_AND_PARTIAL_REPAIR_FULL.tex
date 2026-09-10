@@ -1,0 +1,196 @@
+\subsection{Choosing Speculation When Every Call Has a Cost}
+
+Let each counted call cost $\kappa\ge0$ and minimize $C=L+\kappa Q$. Let $C^*(B,r)$ be the minimum worst cost over the full $B$-informed program class of Theorem~\ref{thm:resources}, with only the shared cap. Mode choice remains \emph{before} comparison; the partial-repair interface below allows a different observation/action order. Write $C(P,B)$ for policy $P$'s worst cost at budget $B$.
+
+\begin{proposition}[Loss of the global-threshold policy]
+\label{prop:fulltoll}
+The three-mode policy $P_r$ that freshly prepares before each attempt and switches after $r$ cheap failures to cached completion has
+\[
+\begin{aligned}
+ C(P_r,B)&=n\kappa+\kappa\min(B,r)+\Omega_{(B-r)_+},\\
+ 0\le C(P_r,B)-C^*(B,r)&\le\kappa\min(B,r)\le r\kappa.
+\end{aligned}
+\]
+The $r\kappa$ bound is sharp for this policy.
+\end{proposition}
+\begin{proof}
+The call and protection upper bounds follow from Theorem~\ref{thm:universal}. They are attained together: reject the first $\min(B,r)$ cheap calls, then use remaining writes to invalidate cached completions of the heaviest jobs. Every competitor has a resource lower-bound execution with both $L\ge\Omega_{(B-r)_+}$ and $Q\ge n$. Thus $C^*\ge n\kappa+\Omega_{(B-r)_+}$ on that execution. For one job and $B=r+1$, invalidating every comparison forces protected completion. Immediate cached completion is optimal at $\kappa+w$, while $P_r$ pays $(r+1)\kappa+w$.
+\end{proof}
+
+The bound compares a specified policy with an informed comparator. A caller may instead want the best possible loss without ever learning $B$. For one job this question has an exact answer.
+\begin{proposition}[Exact one-job minimax additive loss]
+\label{prop:regret}
+For one job with work $w>0$, let $P$ range over all deterministic programs that receive no $B$ and complete with $Q\le r+1$ in every finite-write environment. Then
+\[
+ \inf_P\sup_{B\ge0}\bigl(C(P,B)-C^*(B,r)\bigr)
+ =\min\{(w-\kappa)_+,r\kappa\}.
+\]
+Always-cached completion attains the first term for $r\ge1$; $P_r$ attains the second. Choose the smaller, without estimating $B$.
+\end{proposition}
+\begin{proof}
+The informed one-job value is $\kappa+\min(B\kappa,w)$ for $B\le r$, and $\kappa+w$ for $B>r$. For the first case, cheap attempts and immediate cached completion give the two upper bounds. For a lower bound, count all noncompleting calls in $a$. While $a<B$, invalidate each selected usable comparison with at most one fresh write. Actual writes are at most $a$; a cached completion can therefore be invalidated within $a+1\le B$ writes. Fresh completion already pays $w$. If $a=B$ is reached, stop writing: any subsequent completion has at least $B+1$ calls, regardless of its mode. For $B>r$, invalidating through the cap uses at most $r+1\le B$ writes and forces protected completion.
+
+Now consider an unaware program with $r\ge1$ and $0<\kappa<w$. Again invalidate each chosen usable comparison, and let $a\le r$ count all noncompleting calls before its first fresh/cached completion. If fresh, witness budget $B=a$ gives regret at least $a\kappa+w-\min(a\kappa,w)\ge w$. If cached and $a<r$, one more write and $B=a+1$ give regret at least $a\kappa+w-\min((a+1)\kappa,w)\ge w-\kappa$. If cached and $a=r$, use $B=r+1$ to get $r\kappa$. These are upper bounds on actual writes, not assumed equalities. Stop the adversary after at most $r+1$ noncompleting calls; the cap and finite-write completion exclude an infinite avoidance run. Fresh identities invalidate retained preparations after mode selection, so free inspections do not change the argument.
+
+Always-cached has worst regret $(w-\kappa)_+$ for $r\ge1$. Substituting the informed curve above into Proposition~\ref{prop:fulltoll} gives worst regret $r\kappa$ for $P_r$. Nonnegativity covers $r=0$, $\kappa=0$ and $\kappa\ge w$.
+\end{proof}
+
+This specializes classical cost balancing~\cite{karlin1988} and capped rent-or-buy~\cite{lotker2012}. For a serial threshold $t\le r$, subtracting the inevitable completion toll gives cost $B\kappa$ for $B\le t$ and $t\kappa+w$ otherwise. Beyond $B=r$, the call cap also forces the informed comparator to complete protectively. Threshold selection and regret are inherited ideas; the proof additionally covers inspections, retained records and fresh completion. When $0<\kappa<w$, immediate cached completion minimizes loss iff $w\le(r+1)\kappa$; otherwise use all retries. With $w=8,r=2$, tolls 1 and 3 select retries and immediate completion, respectively. The units are supplied costs; general whole-kernel workflow minimax loss remains open. The repair interface below has a separate finite solution.
+
+\section{When Partial Repair Makes the Budget Valuable}
+\label{sec:partial}
+
+Whole-kernel recomputation makes one invalidation as damaging as many. We next study an interface that reuses unaffected components, and characterize when partial damage destroys a common optimum. Roslyn merges are not assumed to satisfy this cost law.
+
+\paragraph{Repair interface and observations.}
+One job consists of $m$ components with positive weights $w_c$. A write changes fresh versions on one nonempty footprint from a fixed finite family $\Gamma$. Footprints may overlap and repeat; each occurrence costs one write. Outside protection, preparation reads and computes every component anew. A protected call observes the dirty set $D$, the union of footprints since that preparation. It either accepts, repairs exactly $D$ and publishes the job, or rejects and prepares again outside. An empty observation can complete with no repair. No partial publication, free dirty-set query, retained protection or cheaper completion operation is available. A fresh whole-job completion costs at least repairing any dirty set. Calls and preparations terminate.
+
+The turn order is preparation, an environment word of footprints, observation $D$, then the accept/reject choice within that same counted call. No write intervenes between observation and decision. A visible history lists job choices, observations and decisions, including current $D$; repeated writes and word lengths are hidden. Informed strategies additionally receive $B$. Completion is required within $q\ge1$ calls in every finite-write execution. One preparation per call permits at most $q$ preparations. The objective is protected repair work, excluding outside preparation and common call overhead. Let
+\[
+G(b)=\max_{0\le t\le b,\ \gamma_j\in\Gamma}
+       \sum_{c\in\gamma_1\cup\cdots\cup\gamma_t}w_c,
+\qquad W^*=w\!\left(\bigcup\Gamma\right).
+\]
+Then $G(0)=0$, $G$ is nondecreasing and subadditive, and $G(m)=W^*>0$. Unreachable components do not contribute to $W^*$. Singleton footprints give the prefix sums of weights sorted in decreasing order. A general footprint family need not have a cheap profile: computing these unions is part of the input-processing cost.
+
+\begin{theorem}[Exact value and information boundary for repair]
+\label{thm:repair}
+For a controller supplied with $B$, minimum worst repair work is
+\[
+K_q(B)=G(\lfloor B/q\rfloor).
+\]
+Among controllers receiving no $B$ that attain $K_q(B)=0$ for every $B<q$, the least possible worst-work envelope is
+\[
+T_q(B)=G((B-q+1)_+).
+\]
+One policy attains this envelope for all $B$. For $q\ge2$, a single controller is optimal for every $B$ if and only if $G(1)=W^*$. For $q=1$, such a controller always exists.
+\end{theorem}
+\begin{proof}
+Put $k=\lfloor B/q\rfloor$. The aware policy accepts work at most $G(k)$ and otherwise rejects while a call remains. An observation with greater work requires at least $k+1$ writes. Rejecting $q-1$ such observations exhausts all opportunities for a $q$th: $q(k+1)>B$. Thus forced acceptance on the last call still meets $G(k)$. This policy also satisfies the call cap outside its supplied budget, where the work guarantee is not asserted. Conversely, a word of at most $k$ footprints realizes $G(k)$. Repeat it after every preparation. Any accepting call pays $G(k)$, and $q$ repetitions use at most $qk\le B$ writes. Fresh whole-job completion is no cheaper.
+
+For the unaware lower bound, write once in each of the first $q-1$ preparation intervals. After observation $j<q$, the history is compatible with only $j$ writes in total. Accepting positive damage, or fresh completion, would violate that budget's zero optimum. Hence the policy must reject all $q-1$ times. In its final interval spend up to $B-q+1$ writes realizing $G(B-q+1)$. No retry remains. The matching policy rejects its first $q-1$ nonempty observations, then accepts; earlier empty observations complete for zero work.
+
+Every simultaneous optimum meets the preceding zero-work requirements. If $G(1)<W^*$, let $k\ge2$ be the first index with $G(k)>G(1)$, and set $B=q-1+k$. Then $1\le\lfloor B/q\rfloor<k$, so $K_q(B)=G(1)<G(k)=T_q(B)$. Conversely, if $G(1)=W^*$, both expressions are zero for $B<q$ and $W^*$ otherwise. For $q=1$ their arguments coincide.
+\end{proof}
+
+The boundary concerns write damage: a footprint covering all reachable work preserves simultaneous optimality. With separate-component writes, further damage can make budget knowledge change the optimal acceptance threshold.
+
+For two unit components, singleton writes and $q=2$, $K_2(B)$ at $B=0,1,2,3$ is $0,0,1,1$. Optimality at $B=1$ forces an unaware policy to reject its first dirty component. Two subsequent writes make both components dirty; its last call costs 2 at $B=3$. The aware policy at that budget accepts one dirty component immediately and retries only two-component damage. Figure~\ref{fig:information} isolates the shared observation behind this separation.
+
+\begin{figure}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{lXXX}
+\toprule
+Budget & First observation & Unaware decision & Possible final observation/cost\\
+\midrule
+$B=1$ & Only component A dirty & Must reject to achieve optimum 0 & Empty; cost 0\\
+$B=3$ & Only component A dirty & Same observed prefix: reject & Both A and B dirty; cost 2\\
+\bottomrule
+\end{tabularx}
+\caption{Two unit components and two calls. Before the first decision the controller cannot distinguish these budgets. At $B=3$, an informed controller can accept the first unit of damage and reject only full damage, guaranteeing cost 1. The unaware controller's forced first rejection exposes it to cost 2. No timing assumption is used.}
+\label{fig:information}
+\Description{Two environments share the same first dirty-component observation but require different optimal acceptance choices.}
+\end{figure}
+
+\paragraph{Quantifying the loss without a budget.}
+For repair work alone, a finite competitive ratio requires zero work when $K_q(B)=0$. Theorem~\ref{thm:repair} therefore identifies the exact optimal ratio as $\sup_{B\ge q}T_q(B)/K_q(B)$. Subadditivity gives an upper bound $q$: with $k=\lfloor B/q\rfloor$, $B-q+1\le qk$, so $G(B-q+1)\le qG(k)$. It is sharp for sufficiently many unit singleton components at $B=2q-1$, where the ratio is $q$. Thus the loss can grow with the call allowance; it is not a constant-price perturbation of whole-kernel optimality.
+
+\subsection{A Shared Retry Allowance Across a Workflow}
+\label{sec:partialdag}
+
+The same boundary extends beyond a single job. Consider $n$ persistent jobs with a DAG, each with its own component/footprint family. A ready job is freshly prepared before each attempted observation; no other preparation is retained. A write affects the currently attempted job, with no cross-job footprint. After a rejection the next ready job may be selected anew. The total call cap is $n+r$, with a shared $r$; acceptance pays that job's dirty-component work and permanently completes it. Write $W_i=G_i(\infty)$, $\sigma_i=\min\{b:G_i(b)=W_i\}$, $\Sigma=\sum_i\sigma_i$, and $W^*=\sum_iW_i$. Let $K(B)$ be the known-budget minimum worst repair work for this interface.
+
+\begin{theorem}[Workflow information boundary]
+\label{thm:repairdag}
+For $r\ge1$, one policy simultaneously attains $K(B)$ for every $B$ iff $G_i(1)=W_i$ for every job. This holds both for a fixed order and for choices among DAG-ready jobs. Under the condition,
+\[
+K(B)=\text{sum of the largest }\min((B-r)_+,n)\text{ values }W_i.
+\]
+For $r=0$, accepting every observation is simultaneously optimal for arbitrary footprints. More generally, the first budget at which $K(B)=W^*$ is
+\[
+B_{\rm sat}=\Sigma+r\max_i\sigma_i.
+\]
+\end{theorem}
+\begin{proof}
+If every job has a one-write maximum, reject the first $r$ nonempty observations globally and otherwise accept. Early acceptances are clean; after $r$ rejections, at most $(B-r)_+$ jobs can accept positive damage. To force the matching lower bound, target that many heaviest jobs, writing once before each target observation to cause maximum damage. A target completion costs $W_i$, and at most $r$ rejections add writes, so $r+k\le B$ writes suffice for $k$ targets. An attempted $(r+1)$st rejection would itself violate the call cap within budget; truncate the adversary there. Selection and precedence do not avoid completing the targets.
+
+For necessity, all $K(B)$ with $B\le r$ are zero. A simultaneous optimum must therefore reject when one write is issued before each of its first $r$ observations: after observation $t$, the history is compatible with only $t\le r$ writes in total. No job has yet completed. Now spend $\sigma_i$ writes to saturate each job on its next attempt. No rejection remains, so the policy pays $W^*$ with $B_0=\Sigma+r$ writes. If some $\sigma_j\ge2$, a competing policy reserves all $r$ rejections for fully dirty observations of job $j$ and accepts everything else. Full total work would require $\Sigma+r\sigma_j>B_0$ writes, as every invocation uses a fresh preparation. Its worst cost is therefore strictly below $W^*$; the attainable cost set is finite. This contradiction proves necessity even in a prescribed order.
+
+At $r=0$, every call must complete and acceptance dominates fresh whole-job completion. The value is $\max_{\sum b_i\le B}\sum_iG_i(b_i)$ independently of order. For the final statement, saturating every attempted observation uses at most $\Sigma+r\max_i\sigma_i$ writes on an admissible run and forces full work. Below that budget, reserve all $r$ rejections for full observations of a maximum-$\sigma_i$ job. Full work would require exactly that many writes, so the worst cost is strictly smaller.
+\end{proof}
+
+For two and one unit singleton components, $r=1$ gives $K(4)=2$, yet an unaware policy optimal at $B=1$ can be forced to pay 3 with four writes. Intermediate curves generally require the finite game.
+
+\subsection{Charging Every Call Changes the Boundary Again}
+\label{sec:toll}
+
+Repair work omits the protected cost of validation itself. To expose this assumption, charge $\kappa\ge0$ on \emph{each} call and a common $\mu\ge0$ once upon completion. Acceptance on call $t$ costs $\mu+t\kappa+w(D)$. Preparation remains outside this metric. Let $M$ be the sorted multiset of $qm$ numbers
+\[
+\{\,t\kappa+G(k):1\le t\le q,\ 0\le k<m\,\},
+\]
+with one-based entries $M_j$ and repeated entries retained.
+
+\begin{theorem}[Toll curve and simultaneous-optimality boundary]
+\label{thm:toll}
+The known-budget optimum is $\mu+C_q(B)$, where
+\[
+C_q(B)=\begin{cases}
+\min\{\kappa+W^*,M_{B+1}\},& B<qm,\\
+\kappa+W^*,&B\ge qm.
+\end{cases}
+\]
+For $q\ge2$, simultaneous optimality holds exactly in the following cases: $\kappa=0$ and $G(1)=W^*$, or $\kappa\ge W^*$. It fails for every $0<\kappa<W^*$. The common cost $\mu$ does not change these conditions. At $q=1$, first acceptance is always simultaneously optimal.
+\end{theorem}
+\begin{proof}
+Every completed play pays $\mu$ exactly once and rejects pay none, so remove that common constant. Fix $T<\kappa+W^*$. On call $t$, an unacceptable dirty set has $t\kappa+w(D)>T$. Its least write cost is
+$a_t(T)=\min\{k:t\kappa+G(k)>T\}$. Such an index exists since $G(m)=W^*$. A sequence of $q$ unacceptable observations is possible exactly when $\sum_ta_t(T)\le B$: each interval can independently realize a minimum-cost witness. Otherwise accepting the first acceptable observation finishes within $q$ calls and cost $T$. Because $G$ is nondecreasing, $a_t(T)$ counts indices $0\le k<m$ with $t\kappa+G(k)\le T$. The omitted $k=m$ term exceeds $T$ for every $t$. Thus $\sum_ta_t(T)$ counts all entries of $M$ at most $T$, including ties. Feasibility requires this count to exceed $B$, first occurring at $M_{B+1}$ if below the first-accept cap. For $B\ge qm$, the count cannot exceed $B$, leaving that cap. This proves both the index and endpoint.
+
+If $\kappa>0$ and a policy ever rejects a first observation, follow it by maximum damage until it accepts. At a sufficiently large finite budget it pays at least $2\kappa+W^*$, exceeding the aware first-accept cap $\kappa+W^*$. Thus a simultaneous optimum must accept every first observation. Let $k^*$ be the first index with $G(k^*)=W^*$. With known budget $k^*$, accept all first observations except maximum damage; reject that one and the next observation is necessarily clean. Its worst cost is at most $\max\{\kappa+W_{<},2\kappa\}$, where $W_{<}<W^*$ is the largest attainable nonmaximum damage. For $0<\kappa<W^*$ this is strictly smaller than the first-accept value $\kappa+W^*$. Conversely, when $\kappa\ge W^*$, presenting a first observation with damage $G(B)$ forces either $\kappa+G(B)$ on acceptance or at least $2\kappa$ on rejection. First acceptance attains the former, which is no larger. The zero-toll case is Theorem~\ref{thm:repair}.
+\end{proof}
+
+\subsection{With Call Charges, Precedence and History Matter}
+\label{sec:tolldag}
+
+Return to the workflow interface of Section~\ref{sec:partialdag}, charging $\kappa>0$ per call. Write $K^{\kappa}(B)$ for its known-budget value, $H(B)=\max_{\sum b_i\le B}\sum_iG_i(b_i)$ and $C_{\max}=n\kappa+\sum_iW_i$.
+
+\begin{theorem}[Call charges in workflows]
+\label{thm:tolldag}
+For independent jobs and $r\ge1$, a simultaneous optimum exists iff $\kappa\ge\max_iW_i$. This condition is sufficient on every DAG: first acceptance has exact value $n\kappa+H(B)$. On a general DAG, a sink with $W_i>\kappa$ prevents simultaneous optimality. The condition on all jobs is no longer necessary.
+\end{theorem}
+\begin{proof}
+For sufficiency, fix an allocation attaining $H(B)$. Present its dirty set on each job's first attempt and leave that job clean after a rejection. Accepting pays the allocated damage; rejecting incurs an extra toll at least as large. This matches the first-accept upper bound, regardless of order.
+
+For necessity, a simultaneous optimum cannot reject after a prefix whose completed jobs were all fully dirty: saturating every remaining attempt would then force cost above $C_{\max}$ at some finite budget. Hence fully dirty first observations force it to pay $C_{\max}$ with $\Sigma$ writes. If a job $j$ with $W_j>\kappa$ can be placed last, an aware policy at budget $\Sigma$ accepts preceding jobs. If any observation is less than full it accepts throughout, costing strictly below $C_{\max}$. Otherwise all $\Sigma$ necessary writes are spent; rejecting $j$ once then completing cleanly costs $C_{\max}-W_j+\kappa<C_{\max}$. The finite outcome set makes the worst cost strictly smaller. Every independent job, and every DAG sink, can be last.
+
+For the final claim, let $A$ have singleton components of weights 1 and 2, let $C$ have one component of weight 1, require $A$ before $C$, and take $r=1,\kappa=2$. First acceptance has curve $4,6,7,8$ at $B=0,1,2,\ge3$. Matching lower bounds subtract the mandatory toll 4. At $B=1$, dirty $A$'s weight-2 component: acceptance or rejection costs at least 2. At $B=2$, do the same, then dirty $C$ after acceptance (cost 3), or the weight-2 component again after rejection (cost 4). At $B=3$, first saturate $A$ with two writes; then dirty $C$ after acceptance (cost 4), or the weight-2 component after rejection (cost 4). Thus first acceptance is a common optimum although $\kappa<W_A$. Reversing the order makes $A$ a sink and removes every common optimum.
+\end{proof}
+
+History-dependent rejection can be essential even with one-component jobs. Consider chain $(a,h,a)$, $h>a>0$, with $r=1,\kappa=a$. Accept throughout except that a dirty middle job is rejected once if the first job completed cleanly. Its exact curve is $3a,4a,4a+h,5a+h$ at $B=0,1,2,\ge3$. First acceptance instead costs $3a+h>4a$ at one write. For upper bounds, a retry leaves at most $B-1$ writes; whenever its extra toll $a$ is paid, the clean first job has saved $a$. For matching lower bounds, one dirty observation forces at least $a$ beyond baseline. With two writes, leave the first job clean and dirty the middle, then dirty the last after acceptance or the middle again after rejection, forcing $a+h$. With three writes, dirty the first job: after acceptance apply that two-write strategy to the last two jobs; after rejection dirty the middle and last instead. This forces $h+2a$. A preceding clean rejection already spends the toll and leaves no retry. No writer budget is supplied; $(a,h)=(1,3)$ gives curve $3,4,7,8$.
+
+\paragraph{Constructing Policies and Minimizing Uniform Loss.}
+A finite recurrence decides whether a common optimum exists beyond these cases. Let $c(D)$ be the minimum footprint-word length realizing observation $D$ on the attempted job. Set $E=\Sigma+r\max_i\sigma_i$; saturating every attempt proves $K^{\kappa}(b)=C_{\max}$ for $b\ge E$. Let $e$ be the least-consistent write count clipped to $E$, $t$ the remaining rejections, and $a$ the cost already paid. Define $\Theta(\varnothing,t,e)=K^{\kappa}(e)$ and, with $e_D=\min(e+c(D),E)$,
+\begin{equation}
+\Theta(S,t,e)=\max_{i\in\mathcal A(S)}\min_D
+\max\left\{\Theta(S-i,t,e_D)-\kappa-w_i(D),\
+\Theta(S,t-1,e_D)-\kappa\right\},
+\label{eq:viability}
+\end{equation}
+omitting the rejection term at $t=0$. A continuation exists exactly when $a\le\Theta(S,t,e)$; in particular, $\Theta(J,r,0)\ge0$ decides common optimality.
+
+To prove this, consider a completed history and sum the minimum footprint-word lengths of its observations. Fresh preparations and independent own-job writes realize those words in separate intervals, so the sum is the least budget consistent with that history. Every larger budget permits the same history by leaving writes unused. Since $K^\kappa$ is nondecreasing, meeting its value at the least budget is necessary and sufficient for that history to meet every consistent target. Clipping preserves every extension because $\min(\min(e,E)+c(D),E)=\min(e+c(D),E)$. Below $E$ it retains the exact least budget; at or above $E$ every consistent comparator target is $C_{\max}$. Future observation sets depend on the job, not the hidden remaining budget, since one policy must cover all finite budgets. Thus clipping changes neither targets nor choices, even if $c(D)>\sigma_i$. Accumulated cost $a$ is never clipped.
+
+Induct on $|S|+t$. With no jobs left, feasibility is the interval $a\le K^\kappa(e)$. For a fixed ready job and observation, accepting adds $\kappa+w_i(D)$ and rejecting adds $\kappa$; either strictly decreases the induction measure. Each child's feasible costs therefore give a shifted downward interval. The choice after observing $D$ takes the larger endpoint. Requiring success for every observation takes the minimum; choosing a job before that observation takes the maximum. This proves Equation~\eqref{eq:viability} with its required $\exists i\,\forall D\,\exists\mathrm{action}$ order. A maximizing job and any satisfied child inequality supply an executable policy using history alone. If the initial interval excludes zero, the failed alternatives identify an adversarial finite observation path for each attempted controller choice.
+
+
+For this repair interface, also at $\kappa=0$, let $C(P,B)$ denote a universally capped unaware policy's worst cost. The minimum uniform additive loss is
+\[
+ \delta^*=\min_P\sup_{B\ge0}\{C(P,B)-K^\kappa(B)\}
+ =-\Theta(J,r,0)\ge0.
+\]
+For a fixed $P$, each reachable terminal history is realizable at its least consistent budget; monotonicity of $K^\kappa$ makes that budget its worst regret witness. Replacing every terminal target by $K^\kappa(e)+\delta$ shifts all thresholds by $\delta$, since minimum, maximum and constant subtraction commute with the shift. Hence a loss allowance $\delta$ is feasible iff $0\le\Theta(J,r,0)+\delta$. Shifted child inequalities extract an attaining policy. Finite job/observation alphabets and at most $n+r$ rounds make the policy minimum attained, before clipping. Fixed per-completion costs cancel from both policy and comparator.
+
+For the preceding $A\to C$ example with $\kappa=1$, the informed curve is $2,3,5,5,6$ at $B=0,1,2,3,\ge4$. An emitted policy has curve $2,4,5,6,6$ and minimum uniform loss $\delta^*=1$. At $\kappa=2$ the loss is zero. 
+
+
+For each minimum footprint count, only its maximum attainable damage is needed in the adversarial alternatives. With $I$ unfinished sets and $h=\max_i(m_i+1)$, the table has $O(I(r+1)(E+1))$ entries and uses $O(In(r+1)(E+1)h)$ arithmetic operations, given profiles and the comparator. For a fixed order, $I=n+1$ and there is one job choice. This removes accumulated-cost enumeration, not potentially exponential DAG states or footprint profiling. It is a specialization of finite minimax and information-state reasoning, not a new general dynamic-programming principle.
+

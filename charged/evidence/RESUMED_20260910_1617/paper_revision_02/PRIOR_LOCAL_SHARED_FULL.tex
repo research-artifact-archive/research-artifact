@@ -1,0 +1,26 @@
+\subsection{Local Caps and a Shared Cap Can Be Required Together}
+
+Suppose job $i$ may incur at most $r_i$ noncompleting calls, and the batch at most $s\le R=\sum_i r_i$. These caps hold in every finite-write environment. Define the weighted subset value
+\[
+ A_{\boldsymbol c}(B)=\max_{T\subseteq J:\,\sum_{i\in T}c_i\le B}\sum_{i\in T}w_i,
+\]
+allowing zero-cost items. This is a knapsack value; the contribution is identifying the write cost that activates each job's protection.
+\begin{proposition}[Local and shared resource contracts]
+\label{prop:localcaps}
+The minimum worst protected work under both caps is
+\[
+\begin{aligned}
+ U_2(B;\boldsymbol r,s)&=\max\{A_{\boldsymbol r}(B),\Omega\,\mathbf1[B\ge s]\},\\
+ U_3(B;\boldsymbol r,s)&=\max\{A_{\boldsymbol r+\boldsymbol1}(B),\Omega_{(B-s)_+}\}.
+\end{aligned}
+\]
+One policy attains each curve simultaneously for every $B$: switch to guaranteed completion when either the current local allowance or the shared allowance is exhausted. Its worst call count is $n+\min(B,s)$.
+\end{proposition}
+\begin{proof}
+For a local lower bound, target a maximizing subset. Reject each target's cheap calls up to its local cap. In two modes another rejectable call is then universally inadmissible, so the target completes protectively using at most $r_i$ actual writes. In three modes, one additional write invalidates its eventual cached comparison; an earlier fresh completion already pays $w_i$. Thus each target costs at most $r_i+1$ writes. The shared lower bounds follow from Theorem~\ref{thm:universal}, since adding local constraints cannot enlarge its policy class.
+
+For the switching policy, if fewer than $s$ failures occur, a protected job has exhausted its own cap: it requires $r_i$ writes in two modes, and $r_i+1$ in three. If $s$ failures occur, two modes pay at most $\Omega$; in three, every protected completion still needs its own additional mismatch write, so at most $(B-s)_+$ jobs are protected. These two cases give the maximum above. A fresh preparation after every rejection makes the intervals disjoint. Distributing $\min(B,s)$ cheap failures among the local allowances attains the call bound; its maximum need not coincide with the protection maximum.
+\end{proof}
+
+With only local caps, $s=R$ gives $U_2=A_{\boldsymbol r}(B)$ and $U_3=A_{\boldsymbol r+\boldsymbol1}(B)$. Uniform $r_i=r\ge1$ yields $\Omega_{\lfloor B/r\rfloor}$ and $\Omega_{\lfloor B/(r+1)\rfloor}$, with $Q\le n+nr$; at $r=0$, the values are $\Omega$ and $\Omega_B$, with $Q=n$. Reusing a rejected preparation loses the extra-write requirement. Sharing allowance $R$ permits weakly less worst protection than reserving it locally.
+

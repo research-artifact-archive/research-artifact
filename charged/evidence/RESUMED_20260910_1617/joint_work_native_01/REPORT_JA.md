@@ -1,0 +1,11 @@
+# 比較フラグを公開するJava completion wrapperの検証
+
+固定PROTOCOL01に従い、OpenJDK17.0.19+0で一回のcompile/runを実施した。処理開始2026-09-10T11:26:09Z、コンパイルを含め0.879秒。再実行・修正による結果置換なし。6fixture、2key配置、2kernel、全指定writer scheduleの正しい方策2,076件は、独立event replayで全件成功した。実際の外部writer threadは全件終了した。
+
+比較flagを無視する別の52対照では、予測した4件でL=24>16を検出した。残り48件は上限内に収まり、除外していない。従って「全2,128方策が契約を満たす」という結果ではない。4件は、chain8->16と独立8,16、M8、canonical kernel、各key配置において、最初の小ジョブの準備後・比較前にそのキーへ書くscheduleである。
+
+全行について、kernel入力、保存済み親参照、保護内外、比較時のcaptured/current identity、実際の比較Boolean、API返値、prepared返値との同一性、完了時のlive値と保存milestone、外部書込みを保存した。独立checkerは実際のkernel invocationからQ/W/Lを再構成し、全topological orderからLawlerの上限を別計算した。canonical kernelを含む全matrixでは70回の実際のmismatchで返値とprepared参照が同一だった。これが返値参照だけによる検出を一般のpure kernelへ仮定できない理由である。
+
+864実行では保存milestoneと最後のlive map値が異なったが、後続kernelは保存済みの正確な親出力を用いた。待ち合わせで指定した各writer phaseを実際のthreadで実行する有限検証であり、任意のJMM実行の機械証明ではない。W/Lは規定されたkernel work unitで、時間・SLA・現場効果の主張ではない。初期raw値やcanonical immutable objectの割当ては計算済みrecordを与えず、各prepared/completed結果にkernel invocationを課した。固定kernel規約外の定数伝播・計算省略はこのopaque-interface評価に含めない。
+
+全2128行、群別最大値とwitness、source/input/output hash、compile/runtime stdout/stderr、終了receiptを保存した。既存のBudgetBlindCallbacks.javaと全過去のrawは変更していない。SUMMARY01.jsonが件数とhash、MAXIMA01.jsonが群別最大値、CHECK_ROWS01.jsonlとRAW01.jsonlが全行である。
