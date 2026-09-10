@@ -1,5 +1,7 @@
 # Linux source traversal and the guard-entry boundary
 
+Current manuscript197 Section8.2 retains the initialization premise and logical/native count distinction: one public invocation for each policy; logical maxima2/3 but six-primitive maxima10/10 for cached/two-cheap. It establishes no caller-required cap or native speedup. The supplied numerical prices of Section7 are a separate mathematical contract.
+
 Standard stages44–45 extend the previous43 stages without changing their scientific payload. Run `python3 charged/reproduce.py linux-dentry --out /tmp/linux-saved-replay` and `python3 charged/reproduce.py guard-entry --out /tmp/guard-replay`, using new output directories. `python3 charged/reproduce.py all --out /tmp/charged-all` includes both stages. Standard replay performs no new native timing or kernel execution.
 
 The Linux v6.12 source experiment modifies a copy of `fs/d_path.c` only for its KUnit configuration. It compares upstream fallback, a cached second traversal, immediate locked traversal, a stronger 64-slot name-snapshot operation, and a two-cheap-then-locked comparator. A real guest writer calls `lock_rename` and `d_exchange`; source counters, full path strings/offsets, overflow outcomes, canaries and post-return persistence are checked. The second matrix has1920 valid rows plus four deliberate defects, across eight path families, six capacities and eight schedules. It retains the first1536 valid rows and four controls; these populations overlap.

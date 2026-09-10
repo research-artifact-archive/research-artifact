@@ -1,5 +1,7 @@
 # Exact total/protected-work frontiers with arbitrary retry slack
 
+Current manuscript197 puts the least all-budget independent-work curve in Section4.1, supplied frontiers in4.2--4.3, changed call weight in4.4, program domination and recurrence in5, and observation erasure in5.2. Its Section7 added-cost complexity claims concern supplied B=1, Q<=n and are separate from the body-work retry results.
+
 This extension adds corrected full-program domination at arbitrary retry allowance r, a complete polynomial independent-job frontier for every supplied B/r, and the all-DAG/output-only corollary when r>=B. The fixed common start charges every computed record. Fresh useful comparison writes invalidate the counterfactual matching record; stale failures are not charged again. Separate maxW/maxL are resource caps, not a combined objective or native-time prediction.
 
 The complete proofs are [general-r domination](evidence/RESUMED_20260910_1617/joint_work_general_r_01/PROOF02.md), [independent and enough-retry frontiers](evidence/RESUMED_20260910_1617/joint_work_general_r_01/INDEPENDENT_PROOF07.md), and [simplified stopping policy with sharp valid-budget range](evidence/RESUMED_20260910_1617/joint_work_general_r_01/SIMPLIFIED_PROOF08.md). Original drafts, pre-correction text, protocols and adverse examples remain; author consultation is not an independent proof or novelty verdict.

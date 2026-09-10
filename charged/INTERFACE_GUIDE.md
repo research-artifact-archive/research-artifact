@@ -1,5 +1,7 @@
 # Operation and information contracts
 
+Manuscript197 uses body coordinates in Sections2--6 and prices guard/comparison work in both coordinates in Section7. It assumes supplied B=1, Q<=n throughout Section7. Independent free-comparison algorithms and unit-guard DAG strong hardness do not assert native-cost calibration. A fee on every completing call translates the zero-retry resources by a constant. Section4.4 separately changes the weight of an atomic cached mismatch.
+
 This guide accompanies the current paper's Sections2–5. The full central proofs are in the PDF. It adds no experimental observation or mechanically checked theorem.
 
 | Feature | Whole-kernel operations | Component repair |

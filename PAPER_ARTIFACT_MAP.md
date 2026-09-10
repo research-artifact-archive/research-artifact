@@ -1,6 +1,6 @@
 # Paper-to-evidence map
 
-The stored manuscript is *The Total-Work Cost of Bounded Retry Guarantees*, snapshot187; its exact identity is [paper/SNAPSHOT.json](paper/SNAPSHOT.json). The comparison-free/common-guard, changed-call-weight and unit-guard DAG supplements below extend that manuscript and await integration into its next fixed version. Do not interpret older theorem numbers as current paper locators. References to different commits of this repository describe one research lineage, not independent novelty baselines.
+The stored manuscript is *The Total-Work Cost of Bounded Retry Guarantees*, snapshot197; its exact identity is [paper/SNAPSHOT.json](paper/SNAPSHOT.json). It integrates the comparison-free/common-guard, changed-call-weight and unit-guard DAG results below. Current locators: model2, universal protection3, total-work and call-weight results4, complete programs/observation5, Java6, charged representation and complexity7, evaluation8, related work9, limitations10, conclusion11. Do not interpret older theorem numbers as current paper locators. References to different commits of this repository describe one research lineage, not independent novelty baselines.
 
 | Obligation | Evidence entry | Standard replay stages |
 |---|---|---|

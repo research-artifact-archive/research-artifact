@@ -1,5 +1,7 @@
 # Charged atomic-call retry policies
 
+Current manuscript197: complete program/observation results are Section5; Java6; charged representation and complexity7; mathematical/Linux/Roslyn evaluation8. The free-comparison and unit-guard supplements are integrated. See the current paper guide and root map; earlier numbered descriptions below retain their historical versions.
+
 This supplement contains the charged-call research revision, including exact resource bounds attained without a writer-budget input, the sharp independent-job price ratio, the mixed-price reduction, checked cursor policies, Java integration, source-instrumented Deephaven case, and all retained experimental outcomes. The earlier zero-fee package remains in `../package` and its history. These are authored research inputs and implementations; declared charges do not estimate elapsed time.
 
 The current portable implementation is `charged_compact_03`. Inputs satisfying the proved price and dependency conditions use a linear-size cursor artifact. Other inputs use the general all-reachable-set compiler. The general fallback can require exponentially many unfinished sets; specifying a large binary budget alone does not enlarge the compact artifact.
