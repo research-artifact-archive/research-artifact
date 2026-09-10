@@ -1,0 +1,21 @@
+--- DocumentState_LinkedFileReuse.cs
++++ instrumented/DocumentState_LinkedFileReuse.cs
+@@ -63,6 +63,7 @@
+         ITreeAndVersionSource? siblingTreeSource,
+         bool forceEvenIfTreesWouldDiffer)
+     {
++        Workspace.CountRetryCost("document_update_contents");
+         if (!SupportsSyntaxTree)
+         {
+             return new DocumentState(
+@@ -86,7 +87,10 @@
+         // later added to us, it will do the same thing.
+         var originalTreeSource = this.TreeSource;
+         if (originalTreeSource is LinkedFileReuseTreeAndVersionSource linkedFileTreeAndVersionSource)
++        {
++            Workspace.CountRetryCost("linked_source_unwrap");
+             originalTreeSource = linkedFileTreeAndVersionSource.GetNonChainedTreeAndVersionSource();
++        }
+ 
+         // Always pass along the sibling text.  We will always be in sync with that.
+ 

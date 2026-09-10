@@ -1,0 +1,373 @@
+[
+  {
+    "status": "SUCCESS",
+    "tag": "large_decimal_versions",
+    "configuration": 4,
+    "mode": "retry",
+    "planned_sequence": [
+      1,
+      3
+    ],
+    "q": 2,
+    "toll": 8,
+    "B_used": 3,
+    "Q_validation": 2,
+    "Q_snapshot": 2,
+    "Q_wire": 4,
+    "L_payload": 24,
+    "W_payload": 72,
+    "C": 40,
+    "trace": [
+      {
+        "requested_observation": 1,
+        "prepared_versions": [
+          "922337203685477580899999999999999999",
+          "922337203685477580899999999999999999"
+        ],
+        "current_versions": [
+          "922337203685477580900000000000000000",
+          "922337203685477580899999999999999999"
+        ],
+        "expected_result": {
+          "versions": [
+            "922337203685477580900000000000000000",
+            "922337203685477580899999999999999999"
+          ],
+          "digests": [
+            "50560ad047959d8e3f410779220cd987f0285aaa",
+            "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+          ]
+        },
+        "returned": {
+          "next_t": 0,
+          "action": "r",
+          "next_e": 1,
+          "versions": [
+            "922337203685477580900000000000000000",
+            "922337203685477580899999999999999999"
+          ],
+          "mask": 1,
+          "hash_bytes": 0,
+          "dirty": [
+            1
+          ]
+        },
+        "published": null
+      },
+      {
+        "requested_observation": 3,
+        "prepared_versions": [
+          "922337203685477580900000000000000000",
+          "922337203685477580899999999999999999"
+        ],
+        "current_versions": [
+          "922337203685477580900000000000000001",
+          "922337203685477580900000000000000000"
+        ],
+        "expected_result": {
+          "versions": [
+            "922337203685477580900000000000000001",
+            "922337203685477580900000000000000000"
+          ],
+          "digests": [
+            "64d93888f7d731ddcd95e0bb3d1f3e667f7b0dbd",
+            "aa5d18e0ba5d5a4fb78430bf22c0725b3e75f4bc"
+          ]
+        },
+        "returned": {
+          "result": {
+            "digests": [
+              "64d93888f7d731ddcd95e0bb3d1f3e667f7b0dbd",
+              "aa5d18e0ba5d5a4fb78430bf22c0725b3e75f4bc"
+            ],
+            "versions": [
+              "922337203685477580900000000000000001",
+              "922337203685477580900000000000000000"
+            ]
+          },
+          "action": "a",
+          "next_e": 3,
+          "versions": [
+            "922337203685477580900000000000000001",
+            "922337203685477580900000000000000000"
+          ],
+          "mask": 3,
+          "hash_bytes": 24,
+          "dirty": [
+            1,
+            2
+          ]
+        },
+        "published": {
+          "digests": [
+            "64d93888f7d731ddcd95e0bb3d1f3e667f7b0dbd",
+            "aa5d18e0ba5d5a4fb78430bf22c0725b3e75f4bc"
+          ],
+          "versions": [
+            "922337203685477580900000000000000001",
+            "922337203685477580900000000000000000"
+          ]
+        }
+      }
+    ],
+    "command_counts": {
+      "oracle": 4,
+      "script_load": 0,
+      "setup": 0,
+      "snapshot": 2,
+      "validation": 2,
+      "external_write": 3
+    },
+    "foreground_sent_bytes": 1866,
+    "foreground_received_bytes": 788
+  },
+  {
+    "status": "SUCCESS",
+    "tag": "same_content_write",
+    "configuration": 4,
+    "mode": "retry",
+    "planned_sequence": [
+      1,
+      3
+    ],
+    "q": 2,
+    "toll": 8,
+    "B_used": 3,
+    "Q_validation": 2,
+    "Q_snapshot": 2,
+    "Q_wire": 4,
+    "L_payload": 24,
+    "W_payload": 72,
+    "C": 40,
+    "trace": [
+      {
+        "requested_observation": 1,
+        "prepared_versions": [
+          "0",
+          "0"
+        ],
+        "current_versions": [
+          "1",
+          "0"
+        ],
+        "expected_result": {
+          "versions": [
+            "1",
+            "0"
+          ],
+          "digests": [
+            "c08598945e566e4e53cf3654c922fa98003bf2f9",
+            "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+          ]
+        },
+        "returned": {
+          "next_t": 0,
+          "action": "r",
+          "next_e": 1,
+          "versions": [
+            "1",
+            "0"
+          ],
+          "mask": 1,
+          "hash_bytes": 0,
+          "dirty": [
+            1
+          ]
+        },
+        "published": null
+      },
+      {
+        "requested_observation": 3,
+        "prepared_versions": [
+          "1",
+          "0"
+        ],
+        "current_versions": [
+          "2",
+          "1"
+        ],
+        "expected_result": {
+          "versions": [
+            "2",
+            "1"
+          ],
+          "digests": [
+            "c08598945e566e4e53cf3654c922fa98003bf2f9",
+            "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+          ]
+        },
+        "returned": {
+          "result": {
+            "digests": [
+              "c08598945e566e4e53cf3654c922fa98003bf2f9",
+              "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+            ],
+            "versions": [
+              "2",
+              "1"
+            ]
+          },
+          "action": "a",
+          "next_e": 3,
+          "versions": [
+            "2",
+            "1"
+          ],
+          "mask": 3,
+          "hash_bytes": 24,
+          "dirty": [
+            1,
+            2
+          ]
+        },
+        "published": {
+          "digests": [
+            "c08598945e566e4e53cf3654c922fa98003bf2f9",
+            "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+          ],
+          "versions": [
+            "2",
+            "1"
+          ]
+        }
+      }
+    ],
+    "command_counts": {
+      "oracle": 7,
+      "script_load": 0,
+      "setup": 0,
+      "snapshot": 2,
+      "validation": 2,
+      "external_write": 3
+    },
+    "foreground_sent_bytes": 1726,
+    "foreground_received_bytes": 433
+  },
+  {
+    "status": "SUCCESS",
+    "tag": "repeat_footprint",
+    "configuration": 4,
+    "mode": "retry",
+    "planned_sequence": [
+      1,
+      3
+    ],
+    "q": 2,
+    "toll": 8,
+    "B_used": 6,
+    "Q_validation": 2,
+    "Q_snapshot": 2,
+    "Q_wire": 4,
+    "L_payload": 24,
+    "W_payload": 72,
+    "C": 40,
+    "trace": [
+      {
+        "requested_observation": 1,
+        "prepared_versions": [
+          "0",
+          "0"
+        ],
+        "current_versions": [
+          "2",
+          "0"
+        ],
+        "expected_result": {
+          "versions": [
+            "2",
+            "0"
+          ],
+          "digests": [
+            "64d93888f7d731ddcd95e0bb3d1f3e667f7b0dbd",
+            "797f2509ace3d3b20a6feaccfecd12ae8251bd45"
+          ]
+        },
+        "returned": {
+          "next_t": 0,
+          "action": "r",
+          "next_e": 1,
+          "versions": [
+            "2",
+            "0"
+          ],
+          "mask": 1,
+          "hash_bytes": 0,
+          "dirty": [
+            1
+          ]
+        },
+        "published": null
+      },
+      {
+        "requested_observation": 3,
+        "prepared_versions": [
+          "2",
+          "0"
+        ],
+        "current_versions": [
+          "4",
+          "2"
+        ],
+        "expected_result": {
+          "versions": [
+            "4",
+            "2"
+          ],
+          "digests": [
+            "3273ad64da3a0fa9ca22b06072883307f1504bc2",
+            "6da61c6e70e3f5f0edcca368004bc5fa4abe8dc1"
+          ]
+        },
+        "returned": {
+          "result": {
+            "digests": [
+              "3273ad64da3a0fa9ca22b06072883307f1504bc2",
+              "6da61c6e70e3f5f0edcca368004bc5fa4abe8dc1"
+            ],
+            "versions": [
+              "4",
+              "2"
+            ]
+          },
+          "action": "a",
+          "next_e": 3,
+          "versions": [
+            "4",
+            "2"
+          ],
+          "mask": 3,
+          "hash_bytes": 24,
+          "dirty": [
+            1,
+            2
+          ]
+        },
+        "published": {
+          "digests": [
+            "3273ad64da3a0fa9ca22b06072883307f1504bc2",
+            "6da61c6e70e3f5f0edcca368004bc5fa4abe8dc1"
+          ],
+          "versions": [
+            "4",
+            "2"
+          ]
+        }
+      }
+    ],
+    "command_counts": {
+      "oracle": 4,
+      "script_load": 0,
+      "setup": 0,
+      "snapshot": 2,
+      "validation": 2,
+      "external_write": 6
+    },
+    "foreground_sent_bytes": 1726,
+    "foreground_received_bytes": 433
+  },
+  {
+    "tag": "post_publication_write",
+    "status": "SUCCESS",
+    "published_value_remains_historical_linearization": true
+  }
+]

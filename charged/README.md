@@ -106,3 +106,5 @@ The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30:
 [One-job regret](SINGLE_JOB_REGRET.md) adds standard stage36 and a full-program proof of the best deterministic one-job additive loss. Prior35 public replays remain in the reproduction receipt.
 
 [Workflow additive loss](WORKFLOW_REGRET.md) adds standard stage37. It computes the least uniform cost allowance and an attaining budget-unaware policy for the repair interface, with all5900 finite policy-vector comparisons. The current fixed paper integrates this exact loss and policy construction in Section4.3 and distinguishes540 exploration from5360 fixed confirmation conditions in Section7.1.
+
+[Source/cost boundaries](SOURCE_COST_BOUNDARIES.md) adds stage38: completed-operation Java source reasoning, optional preparation/cost counterexamples, all Valkey native/arrival outcomes and the stronger writer-maintenance alternative. The fixed-digest case does not establish operational importance. Public paper156 remains unchanged during this evidence extension.

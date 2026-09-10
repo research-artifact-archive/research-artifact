@@ -1,0 +1,169 @@
+{
+  "status": "SUCCESS",
+  "tag": "large_decimal_version",
+  "server_kind": "unmodified",
+  "instrumented": false,
+  "configuration": 8,
+  "mode": "retry",
+  "root_action": "prepare",
+  "planned_sequence": [
+    1,
+    3
+  ],
+  "q": 2,
+  "coefficients": [
+    4,
+    1,
+    1
+  ],
+  "B_used": 3,
+  "Q_snapshot": 1,
+  "Q_validation": 2,
+  "Q_wire": 3,
+  "L": 3,
+  "W": 7,
+  "C": 22,
+  "outside_hashes": [
+    {
+      "stage": "initial",
+      "component": 0,
+      "bytes": 55,
+      "blocks": 1,
+      "digest": "5021b3d42aa093bffc34eedd7a1455f3624bc552"
+    },
+    {
+      "stage": "initial",
+      "component": 1,
+      "bytes": 119,
+      "blocks": 2,
+      "digest": "4aec06b709db1700f69a32ceb86645491d0fff3a"
+    },
+    {
+      "stage": "refresh",
+      "component": 0,
+      "bytes": 55,
+      "blocks": 1,
+      "digest": "f42fc57c149118d6307f96b17acc00f19b4c8de7"
+    }
+  ],
+  "trace": [
+    {
+      "returned": {
+        "hash_blocks": -1,
+        "action": "r",
+        "next_e": 1,
+        "mask": 1,
+        "hash_bytes": 0,
+        "dirty": [
+          1
+        ],
+        "next_t": 0,
+        "refresh": [
+          [
+            1,
+            "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+          ]
+        ],
+        "versions": [
+          "92233720368547758090000000000000000",
+          "92233720368547758089999999999999999"
+        ]
+      },
+      "current_versions": [
+        "92233720368547758090000000000000000",
+        "92233720368547758089999999999999999"
+      ],
+      "expected_result": {
+        "versions": [
+          "92233720368547758090000000000000000",
+          "92233720368547758089999999999999999"
+        ],
+        "digests": [
+          "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+          "4aec06b709db1700f69a32ceb86645491d0fff3a"
+        ]
+      },
+      "published": null,
+      "prepared_versions": [
+        "92233720368547758089999999999999999",
+        "92233720368547758089999999999999999"
+      ],
+      "next_prepared": {
+        "versions": [
+          "92233720368547758090000000000000000",
+          "92233720368547758089999999999999999"
+        ],
+        "digests": [
+          "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+          "4aec06b709db1700f69a32ceb86645491d0fff3a"
+        ]
+      }
+    },
+    {
+      "returned": {
+        "hash_blocks": -1,
+        "hash_bytes": 174,
+        "action": "a",
+        "next_e": 3,
+        "versions": [
+          "92233720368547758090000000000000001",
+          "92233720368547758090000000000000000"
+        ],
+        "mask": 3,
+        "result": {
+          "digests": [
+            "27d4d4f0dc384fcde55bc08383e065fa0c1336c1",
+            "89ee1f407a492649ecfbab58b2cab05d774541f2"
+          ],
+          "versions": [
+            "92233720368547758090000000000000001",
+            "92233720368547758090000000000000000"
+          ]
+        },
+        "dirty": [
+          1,
+          2
+        ]
+      },
+      "current_versions": [
+        "92233720368547758090000000000000001",
+        "92233720368547758090000000000000000"
+      ],
+      "expected_result": {
+        "versions": [
+          "92233720368547758090000000000000001",
+          "92233720368547758090000000000000000"
+        ],
+        "digests": [
+          "27d4d4f0dc384fcde55bc08383e065fa0c1336c1",
+          "89ee1f407a492649ecfbab58b2cab05d774541f2"
+        ]
+      },
+      "published": {
+        "digests": [
+          "27d4d4f0dc384fcde55bc08383e065fa0c1336c1",
+          "89ee1f407a492649ecfbab58b2cab05d774541f2"
+        ],
+        "versions": [
+          "92233720368547758090000000000000001",
+          "92233720368547758090000000000000000"
+        ]
+      },
+      "prepared_versions": [
+        "92233720368547758090000000000000000",
+        "92233720368547758089999999999999999"
+      ]
+    }
+  ],
+  "command_counts": {
+    "oracle": 4,
+    "script_load": 0,
+    "primitive": 0,
+    "setup": 0,
+    "snapshot": 1,
+    "validation": 2,
+    "external_write": 3
+  },
+  "foreground_sent_bytes": 1837,
+  "foreground_received_bytes": 914
+}

@@ -1,0 +1,62 @@
+--- SolutionCompilationState.cs
++++ instrumented/SolutionCompilationState.cs
+@@ -283,14 +283,20 @@
+ 
+         // Avoid allocating the builder if the map is empty and the callback doesn't need
+         // to be called with empty collections.
++        Workspace.CountRetryCost("tracker_map_entry");
+         if (projectIdToTrackerMap.Count == 0 && skipEmptyCallback)
++        {
++            Workspace.CountRetryCost("tracker_map_empty");
+             return projectIdToTrackerMap;
++        }
+ 
+         var projectIdToTrackerMapBuilder = projectIdToTrackerMap.ToBuilder();
+         foreach (var (id, tracker) in projectIdToTrackerMap)
+         {
++            Workspace.CountRetryCost("tracker_map_iteration");
+             if (!canReuse(id, argCanReuse))
+             {
++                Workspace.CountRetryCost("tracker_dependency_fork");
+                 var localTracker = tracker.Fork(tracker.ProjectState, translate: null);
+ 
+                 projectIdToTrackerMapBuilder[id] = localTracker;
+@@ -833,6 +839,7 @@
+         Func<TDocumentState, TDocumentData, TArg, TDocumentState> updateDocument)
+         where TDocumentState : TextDocumentState
+     {
++        Workspace.CountRetryCost("update_documents_call");
+         var state = WithDocumentStatesOfMultipleProjects(
+             documentsToUpdate
+                 .GroupBy(static d => d.documentId.ProjectId)
+@@ -845,11 +852,16 @@
+                     using var _ = ArrayBuilder<TDocumentState>.GetInstance(out var newDocumentStates);
+                     foreach (var (documentId, documentData) in g)
+                     {
++                        Workspace.CountRetryCost("update_document_iteration");
+                         var oldDocumentState = oldDocumentStates.GetRequiredState(documentId);
+                         var newDocumentState = updateDocument(oldDocumentState, documentData, arg);
+ 
+                         if (ReferenceEquals(oldDocumentState, newDocumentState))
++                        {
++                            Workspace.CountRetryCost("update_document_noop");
+                             continue;
++                        }
++                        Workspace.CountRetryCost("update_document_changed");
+ 
+                         newDocumentStates.Add(newDocumentState);
+                     }
+@@ -873,10 +885,13 @@
+ 
+         foreach (var (projectId, newDocumentStates) in updatedDocumentStatesPerProject)
+         {
++            Workspace.CountRetryCost("update_project_group");
+             if (newDocumentStates.IsEmpty)
+             {
++                Workspace.CountRetryCost("update_project_noop");
+                 continue;
+             }
++            Workspace.CountRetryCost("update_project_nonempty");
+ 
+             var oldProjectState = newCompilationState.SolutionState.GetRequiredProjectState(projectId);
+             var compilationTranslationAction = getTranslationAction(oldProjectState, newDocumentStates);

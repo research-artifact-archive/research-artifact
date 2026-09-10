@@ -9,3 +9,7 @@ Path projections are derivative distribution documents. They are not original pr
 AI assistance was used in author-side research, implementation, analysis, and writing. The authors remain responsible for the claims and checks. See the paper's Methods disclosure; assistant checks are not independent blind certification and no human-subject evaluation is represented.
 
 The charged supplement distributes the complete Deephaven Community License 1.0 and notice under `charged/licenses/deephaven/`, including its schema-related restrictions, and retains JMH BSD source notices. See [distribution details](charged/DISTRIBUTION.md) and its separate [provenance](charged/PROVENANCE.json). No upstream archives, installed runtimes or build caches are bundled. The repository license covers original author material only.
+
+## Valkey source excerpts and auxiliary source/cost study
+
+The source/cost extension retains individual Valkey `script_lua.c`, `sha1.c` and `sha1.h` files used to specify its patch/build. The Lua bridge retains its original BSD redistribution and disclaimer notices. The SHA source retains Steve Reid's public-domain notice. These upstream credits remain intact. The complete upstream archive and compiled server/client binaries are not distributed. Authored patches, harnesses, plans and raw outcomes are included under the artifact's existing authored-code terms.

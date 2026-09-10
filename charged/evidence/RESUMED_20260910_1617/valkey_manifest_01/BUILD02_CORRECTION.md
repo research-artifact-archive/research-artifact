@@ -1,0 +1,1 @@
+Build01 failed before source extraction because system Python tarfile lacks the filter argument. Build02 preserves the failure and uses explicit member path and link checks before extraction, in a fresh native02 directory. No native experiment has run.

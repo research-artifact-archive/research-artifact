@@ -1,0 +1,10 @@
+--- DocumentState.cs
++++ instrumented/DocumentState.cs
+@@ -452,6 +452,7 @@
+ 
+     protected override TextDocumentState UpdateText(ITextAndVersionSource newTextSource, PreservationMode mode, bool incremental)
+     {
++        Workspace.CountRetryCost("document_update_text");
+         ITreeAndVersionSource? newTreeSource;
+ 
+         if (!SupportsSyntaxTree)

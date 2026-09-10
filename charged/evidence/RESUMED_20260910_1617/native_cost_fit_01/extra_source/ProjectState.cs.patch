@@ -1,0 +1,34 @@
+--- ProjectState.cs
++++ instrumented/ProjectState.cs
+@@ -1058,6 +1058,7 @@
+         var recalculateDocumentVersion = false;
+         var recalculateSemanticVersion = false;
+ 
++        Workspace.CountRetryCost("dependent_versions_entry");
+         var contentChanged = !oldDocuments.SequenceEqual(
+             newDocuments,
+             static (oldDocument, newDocument) => oldDocument.TextAndVersionSource == newDocument.TextAndVersionSource);
+@@ -1066,6 +1067,7 @@
+         {
+             foreach (var oldDocument in oldDocuments)
+             {
++                Workspace.CountRetryCost("dependent_versions_iteration");
+                 if (oldDocument.TryGetTextVersion(out var oldVersion))
+                 {
+                     if (!_lazyLatestDocumentVersion.TryGetValue(out var documentVersion) || documentVersion == oldVersion)
+@@ -1082,6 +1084,7 @@
+ 
+         if (recalculateDocumentVersion)
+         {
++            Workspace.CountRetryCost("dependent_document_recalculate");
+             dependentDocumentVersion = AsyncLazy.Create(static async (arg, cancellationToken) =>
+                 await ComputeLatestDocumentVersionAsync(arg.newDocumentStates, arg.newAdditionalDocumentStates, cancellationToken).ConfigureAwait(false),
+                 arg: (newDocumentStates, newAdditionalDocumentStates));
+@@ -1106,6 +1109,7 @@
+ 
+         if (recalculateSemanticVersion)
+         {
++            Workspace.CountRetryCost("dependent_semantic_recalculate");
+             dependentSemanticVersion = AsyncLazy.Create(static (arg, cancellationToken) =>
+                 ComputeLatestDocumentTopLevelChangeVersionAsync(arg.newDocumentStates, arg.newAdditionalDocumentStates, cancellationToken),
+                 arg: (newDocumentStates, newAdditionalDocumentStates));

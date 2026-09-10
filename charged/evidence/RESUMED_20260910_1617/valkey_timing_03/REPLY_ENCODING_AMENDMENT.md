@@ -1,0 +1,5 @@
+# Pre-timing reply encoding amendment
+
+Before any timing execution, inspection found an avoidable cost in refresh02: cjson encoding copies/scans the full dirty payload returned on rejection. The timing candidate uses ordinary nested RESP arrays for replies, retaining the identical version/dirty/action/hash/publication branches. It still stores the final small manifest as JSON; request policy metadata also remains JSON. This is an author-code improvement, not an upstream server modification. Original refresh02 scripts, counts, traces and source proof remain immutable.
+
+The new scripts and decoder are hashed into the timing input manifest. Sixteen nonstatistical smoke cases (four policies by four update scenarios at scale1 and coefficients4,1,1) check the same final versions/digests, resource formula and call cap before warmups/measurements. This amendment is declared before those results; it does not reinterpret old timings, since none have yet been measured. The timing conclusions apply to these RESP scripts only.

@@ -1,0 +1,51 @@
+--- a/src/sha1.c
++++ b/src/sha1.c
+@@ -53,8 +53,12 @@
+ 
+ /* Hash a single 512-bit block. This is the core of the algorithm. */
+ 
++static __thread unsigned long long retry_sha1_count = 0;
++unsigned long long RetrySHA1Count(void) { return retry_sha1_count; }
++
+ void SHA1Transform(uint32_t state[5], const unsigned char buffer[64])
+ {
++    ++retry_sha1_count;
+     uint32_t a, b, c, d, e;
+     typedef union {
+         unsigned char c[64];
+--- a/src/sha1.h
++++ b/src/sha1.h
+@@ -13,6 +13,8 @@
+     unsigned char buffer[64];
+ } SHA1_CTX;
+ 
++unsigned long long RetrySHA1Count(void);
++
+ void SHA1Transform(uint32_t state[5], const unsigned char buffer[64]);
+ void SHA1Init(SHA1_CTX* context);
+ /* 'noinline' attribute is intended to prevent the `-Wstringop-overread` warning
+--- a/src/script_lua.c
++++ b/src/script_lua.c
+@@ -1011,6 +1011,11 @@
+ 
+ /* This adds server.sha1hex(string) to Lua scripts using the same hashing
+  * function used for sha1ing lua scripts. */
++static int luaRetrySHA1Count(lua_State *lua) {
++    lua_pushnumber(lua, (lua_Number)RetrySHA1Count());
++    return 1;
++}
++
+ static int luaRedisSha1hexCommand(lua_State *lua) {
+     int argc = lua_gettop(lua);
+     char digest[41];
+@@ -1431,6 +1436,10 @@
+     /* server.setresp */
+     lua_pushstring(lua, "setresp");
+     lua_pushcfunction(lua, luaSetResp);
++    lua_settable(lua, -3);
++
++    lua_pushstring(lua, "retrysha1blocks");
++    lua_pushcfunction(lua, luaRetrySHA1Count);
+     lua_settable(lua, -3);
+ 
+     /* server.sha1hex */

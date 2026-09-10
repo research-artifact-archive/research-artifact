@@ -1,0 +1,37 @@
+# General observation costs and positive heterogeneous tolls
+
+Author-side proof draft; not independently closed and not yet adopted in the paper. Every call has fresh preparation, an independently realizable footprint word, then observation and accept/reject. The controller is deterministic, observes no write budget, and must complete in at most q calls (or n+r for a workflow) in every finite-write execution. There is no persistent repair across attempts and no hidden change to allowed actions.
+
+## One job with arbitrary nonnegative observation cost
+
+Let O be the finite family of attainable dirty sets. Let c(D) be the least number of writes realizing D, c(empty)=0. Every nonempty footprint contributes one write; words and observations are independently realizable after every fresh preparation. Let h:O→R_{≥0} be a fixed finite cost with h(empty)=0. It need not be additive or monotone in D. Define G(b)=max_{c(D)≤b}h(D), W=max_D h(D), and suppose W>0. Define s=min_{h(D)>0}c(D) and sigma=min_{h(D)=W}c(D). Thus 1≤s≤sigma. These are source-cost assumptions, not measurements inferred from an elapsed-time fit.
+
+For an informed controller with q≥1 calls the exact value is K_q(B)=G(floor(B/q)). For the lower bound, choose D attaining that value with c(D)≤floor(B/q) and offer the same observation each time; q occurrences use at most B writes, and some acceptance is mandatory. For the upper bound, set k=floor(B/q), reject any h(D)>G(k) while calls remain, and accept otherwise. Every observation with h(D)>G(k) needs at least k+1 writes. There cannot be q of them within B, so this policy completes with cost at most G(k). This proof does not use additivity or monotonicity of h. G is monotone by the nested at-most-budget sets.
+
+For q≥2, an uninformed simultaneous optimum exists iff s=sigma, equivalently the maximum-damage profile G takes only values0 andW. Sufficiency: reject every positive-cost observation until the last call, accept every zero-cost observation, and accept on the last call. Positive observations each need at least s writes. For B<qs some accepted observation is zero; for B≥qs maximum damageW is realizable q times because sigma=s. This is exactly K_q(B).
+
+For necessity when s<sigma, repeat an observation D_s of positive cost with c(D_s)=s for q-1 calls. Simultaneous optimality requires rejection at each such prefix: the prefix admits a completion at budget (q-1)s, where floor((q-1)s/q)<s and hence K=0. Now offer maximum damage using sigma writes on the last call. The same policy paysW at B=(q-1)s+sigma, but floor(B/q)<sigma, so K_q(B)<W. This contradicts common optimality. For q1 first acceptance is always informed-optimal. For W0 every policy accepting immediately has zero cost. Under the original strictly positive component weights, every nonempty footprint has positive damage, s=1, and the result specializes to G(1)=W.
+
+The competitive bound q additionally needs structure such as subadditivity of G. It is false for general monotone h. With singleton footprints a,b, h(a)=h(b)=1,h(ab)=M, q2 and B3, any policy required to have cost0 for B<2 must reject a first singleton and then accept the union, payingM, whereas K_2(3)=1. M is arbitrary. By contrast h(a)=h(b)=0,h(ab)=10 has s=sigma=2 and a simultaneous optimum despite G(1)=0<W.
+
+## Positive job-specific tolls
+
+Let every job i have fixed per-call toll k_i>0 and fixed observation cost h_i, maximum W_i>0, saturation sigma_i. For a persistent workflow with shared r≥1, set Cmax=sum_i(k_i+W_i), Sigma=sum_i sigma_i. Write H(B)=max_{sum b_i≤B}sum_iG_i(b_i).
+
+If k_i≥W_i for every job, immediate acceptance is optimal at every B on every DAG and has value sum_i k_i+H(B). Fix an allocation attainingH(B). Offer its observation when job i is first attempted; if rejected, leave that job clean thereafter. Completion always incurs one mandatory k_i. Acceptance pays allocated damage; rejection adds a toll at least as large as that damage. Each first observation costs at most the allocated writes, so the adversary stays within B regardless of job order.
+
+If a job j with W_j>k_j can be placed last (any sink), no simultaneous optimum exists. A simultaneous optimum cannot reject after a prefix in which every completed job accepted maximum damage, because saturation of all remaining observations then costs strictly more than Cmax at a sufficiently large finite budget: every extra call has positive toll. On fully saturated first observations, it must therefore payCmax usingSigma writes. An informed policy at budgetSigma places j last and accepts earlier jobs. If any cost is below full, accept throughout and pay strictly less thanCmax. Otherwise allSigma writes are spent when j is seen fully dirty; reject j once and complete it cleanly, payingCmax-W_j+k_j<Cmax. The finite cost alphabet bounds every branch strictly belowCmax. Hence for independent jobs a common optimum exists iff each k_i≥W_i. The proof does not claim this condition necessary for nonsinks of an arbitrary DAG, or cover zero tolls by silently reusing the positive-toll argument.
+
+The existing threshold recurrence generalizes by subtracting k_i on either branch of an attempt of job i. With E=Sigma+r*max_i sigma_i, K saturates atCmax because the adversary can saturate every attempt. Least-consistent write counts, finite history realizability, target monotonicity and the terminal uniform shift justify delta*=-Theta(J,r,0) exactly as in the original finite repair interface. No new general minimax-DP invention is claimed.
+
+## Total-work accounting identity
+
+Use new metrics Lplus and Wplus to avoid silently redefining the paper's kernel-onlyL. Suppose every attempt of job i performs fixed outside work p_i and fixed protected guard g_i; its unique completion performs protected h_i(D)+mu_i with fixedmu_i. All work is measured in the same explicitly supplied additive resource unit. Let a_i be attempts of jobi. Then Lplus=sum_i[g_i*a_i+h_i(D_i)+mu_i], Wplus=sum_i p_i*a_i+Lplus, Q=sum_i a_i. Consequently
+
+alpha*Lplus+beta*Wplus+kappa*Q = sum_i[(beta*p_i+(alpha+beta)*g_i+kappa)*a_i+(alpha+beta)*h_i(D_i)] +(alpha+beta)*sum_i mu_i.
+
+The last term is a common offset only if the same mandatory jobs complete once for policy and comparator. It cancels in regret and policy choice, not absolute cost. The job tolls are positive if the fixed terms make them so. If guard, preparation or publication depends on observations, caches, hidden contents, rejected attempts, or joint batching, this identity's constant assumptions must be reconsidered. Roslyn probe01 shows such native state dependence and is not an instantiation of the identity. This algebra itself is a corollary, not a claim of strong novelty.
+
+## Existing checks
+
+Exploration01 confirms three single-job fixtures using full observation-policy vectors and an independently structured threshold computation. The proposed heterogeneous conditions survive512 independent-job and1,024 two-job-DAG conditions, using an adapted author recurrence. These finite checks are corroboration, not a proof certificate or native evidence.

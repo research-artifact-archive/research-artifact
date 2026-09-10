@@ -1,0 +1,1774 @@
+[
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "none",
+    "policy": "direct",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 87250,
+    "common_setup_ns": 192250,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 79542,
+    "L_reader": 6,
+    "W_reader": 6,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 6,
+    "update_weight": 0,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 0,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 278,
+    "events": [
+      {
+        "kind": "reader_validation",
+        "start_ns": 2375,
+        "end_ns": 81917,
+        "roundtrip_ns": 79542
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 37000,
+        "slowlog_id": 15
+      }
+    ],
+    "max_any_server_ns": 37000,
+    "sum_any_server_ns": 37000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 6,
+        "W": 6,
+        "hash_ns": 0,
+        "writer_operations": [],
+        "latency_with_writers_ns": 84208,
+        "trace": [
+          {
+            "action": "direct"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "none",
+    "policy": "compiled",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 306584,
+    "common_setup_ns": 52500,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 70001,
+    "reader_command_plus_hash_ns": 220585,
+    "L_reader": 0,
+    "W_reader": 6,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 6,
+    "update_weight": 0,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 0,
+      "reader_snapshot": 1,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_snapshot": {
+        "sent": 79,
+        "received": 405
+      },
+      "reader_validation": {
+        "sent": 3283,
+        "received": 186
+      }
+    },
+    "total_wire_bytes": 3953,
+    "events": [
+      {
+        "kind": "reader_snapshot",
+        "start_ns": 3500,
+        "end_ns": 35292,
+        "roundtrip_ns": 31792
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 182000,
+        "end_ns": 300792,
+        "roundtrip_ns": 118792
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 76000,
+        "slowlog_id": 25
+      },
+      {
+        "kind": "reader_snapshot",
+        "duration_ns": 2000,
+        "slowlog_id": 22
+      }
+    ],
+    "max_any_server_ns": 76000,
+    "sum_any_server_ns": 78000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 0,
+        "W": 6,
+        "hash_ns": 70001,
+        "writer_operations": [],
+        "latency_with_writers_ns": 305000,
+        "trace": [
+          {
+            "action": "a",
+            "mask": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "none",
+    "policy": "maintained",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 95500,
+    "common_setup_ns": 46667,
+    "maintenance_build_ns": 40000,
+    "initial_hash_ns": 7834,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 50750,
+    "L_reader": 0,
+    "W_reader": 0,
+    "W_writer": 0,
+    "W_initial": 6,
+    "W_total": 6,
+    "update_weight": 0,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 1,
+      "writer": 0,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 192,
+        "received": 4
+      },
+      "writer": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 474,
+    "events": [
+      {
+        "kind": "maintenance_build",
+        "start_ns": 11375,
+        "end_ns": 39583,
+        "roundtrip_ns": 28208
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 41791,
+        "end_ns": 92541,
+        "roundtrip_ns": 50750
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 18000,
+        "slowlog_id": 40
+      },
+      {
+        "kind": "maintenance_build",
+        "duration_ns": 1000,
+        "slowlog_id": 32
+      }
+    ],
+    "max_any_server_ns": 18000,
+    "sum_any_server_ns": 19000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "0",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "5021b3d42aa093bffc34eedd7a1455f3624bc552",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 0,
+        "W": 0,
+        "hash_ns": 0,
+        "writer_operations": [],
+        "latency_with_writers_ns": 53833,
+        "trace": [
+          {
+            "action": "maintained"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "small_each",
+    "policy": "direct",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 87291,
+    "common_setup_ns": 54458,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 46209,
+    "L_reader": 6,
+    "W_reader": 6,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 6,
+    "update_weight": 1,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 1,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 160,
+        "received": 7
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 445,
+    "events": [
+      {
+        "kind": "writer",
+        "start_ns": 1833,
+        "end_ns": 35125,
+        "roundtrip_ns": 33292
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 37916,
+        "end_ns": 84125,
+        "roundtrip_ns": 46209
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 16000,
+        "slowlog_id": 58
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 12000,
+        "slowlog_id": 50
+      }
+    ],
+    "max_any_server_ns": 16000,
+    "sum_any_server_ns": 28000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 6,
+        "W": 6,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 36042
+          }
+        ],
+        "latency_with_writers_ns": 85750,
+        "trace": [
+          {
+            "action": "direct"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "small_each",
+    "policy": "compiled",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 239250,
+    "common_setup_ns": 45958,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 7251,
+    "reader_command_plus_hash_ns": 155293,
+    "L_reader": 1,
+    "W_reader": 7,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 7,
+    "update_weight": 1,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 1,
+      "reader_snapshot": 1,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 160,
+        "received": 7
+      },
+      "reader_snapshot": {
+        "sent": 79,
+        "received": 405
+      },
+      "reader_validation": {
+        "sent": 3283,
+        "received": 186
+      }
+    },
+    "total_wire_bytes": 4120,
+    "events": [
+      {
+        "kind": "reader_snapshot",
+        "start_ns": 2916,
+        "end_ns": 31875,
+        "roundtrip_ns": 28959
+      },
+      {
+        "kind": "writer",
+        "start_ns": 42958,
+        "end_ns": 71375,
+        "roundtrip_ns": 28417
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 115708,
+        "end_ns": 234791,
+        "roundtrip_ns": 119083
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 75000,
+        "slowlog_id": 73
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 10000,
+        "slowlog_id": 69
+      },
+      {
+        "kind": "reader_snapshot",
+        "duration_ns": 1000,
+        "slowlog_id": 65
+      }
+    ],
+    "max_any_server_ns": 75000,
+    "sum_any_server_ns": 86000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 1,
+        "W": 7,
+        "hash_ns": 7251,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 29500
+          }
+        ],
+        "latency_with_writers_ns": 237875,
+        "trace": [
+          {
+            "action": "a",
+            "mask": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "small_each",
+    "policy": "maintained",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 190875,
+    "common_setup_ns": 91708,
+    "maintenance_build_ns": 30041,
+    "initial_hash_ns": 6793,
+    "writer_hash_ns": 2500,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 113250,
+    "L_reader": 0,
+    "W_reader": 0,
+    "W_writer": 1,
+    "W_initial": 6,
+    "W_total": 7,
+    "update_weight": 1,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 1,
+      "writer": 1,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 192,
+        "received": 4
+      },
+      "writer": {
+        "sent": 214,
+        "received": 7
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 695,
+    "events": [
+      {
+        "kind": "maintenance_build",
+        "start_ns": 10000,
+        "end_ns": 29875,
+        "roundtrip_ns": 19875
+      },
+      {
+        "kind": "writer",
+        "start_ns": 34959,
+        "end_ns": 73167,
+        "roundtrip_ns": 38208
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 74959,
+        "end_ns": 188209,
+        "roundtrip_ns": 113250
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 18000,
+        "slowlog_id": 92
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 17000,
+        "slowlog_id": 84
+      },
+      {
+        "kind": "maintenance_build",
+        "duration_ns": 1000,
+        "slowlog_id": 80
+      }
+    ],
+    "max_any_server_ns": 18000,
+    "sum_any_server_ns": 36000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "0",
+            "0"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4aec06b709db1700f69a32ceb86645491d0fff3a",
+            "761aa01ebd15cf1ca7aa8926bd39ce28cf2b6cfa"
+          ]
+        },
+        "L": 0,
+        "W": 0,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 1,
+            "hash_ns": 2500,
+            "operation_ns": 42834
+          }
+        ],
+        "latency_with_writers_ns": 159333,
+        "trace": [
+          {
+            "action": "maintained"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_first",
+    "policy": "direct",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 144208,
+    "common_setup_ns": 48916,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 47625,
+    "L_reader": 6,
+    "W_reader": 6,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 6,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 3,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 674,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 973,
+    "events": [
+      {
+        "kind": "writer",
+        "start_ns": 1500,
+        "end_ns": 31166,
+        "roundtrip_ns": 29666
+      },
+      {
+        "kind": "writer",
+        "start_ns": 32708,
+        "end_ns": 59708,
+        "roundtrip_ns": 27000
+      },
+      {
+        "kind": "writer",
+        "start_ns": 61125,
+        "end_ns": 92375,
+        "roundtrip_ns": 31250
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 94000,
+        "end_ns": 141625,
+        "roundtrip_ns": 47625
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 17000,
+        "slowlog_id": 118
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 6000,
+        "slowlog_id": 110
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 106
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 9000,
+        "slowlog_id": 102
+      }
+    ],
+    "max_any_server_ns": 17000,
+    "sum_any_server_ns": 40000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 6,
+        "W": 6,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 31083
+          },
+          {
+            "component": 1,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 28042
+          },
+          {
+            "component": 2,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 32250
+          }
+        ],
+        "latency_with_writers_ns": 143042,
+        "trace": [
+          {
+            "action": "direct"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_first",
+    "policy": "compiled",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 440042,
+    "common_setup_ns": 44750,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 50708,
+    "reader_command_plus_hash_ns": 266291,
+    "L_reader": 0,
+    "W_reader": 12,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 12,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 3,
+      "reader_snapshot": 1,
+      "reader_validation": 2
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 674,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 79,
+        "received": 405
+      },
+      "reader_validation": {
+        "sent": 6566,
+        "received": 639
+      }
+    },
+    "total_wire_bytes": 8384,
+    "events": [
+      {
+        "kind": "reader_snapshot",
+        "start_ns": 2583,
+        "end_ns": 30583,
+        "roundtrip_ns": 28000
+      },
+      {
+        "kind": "writer",
+        "start_ns": 78292,
+        "end_ns": 105417,
+        "roundtrip_ns": 27125
+      },
+      {
+        "kind": "writer",
+        "start_ns": 106833,
+        "end_ns": 132625,
+        "roundtrip_ns": 25792
+      },
+      {
+        "kind": "writer",
+        "start_ns": 134292,
+        "end_ns": 162958,
+        "roundtrip_ns": 28666
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 203542,
+        "end_ns": 300250,
+        "roundtrip_ns": 96708
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 344875,
+        "end_ns": 435750,
+        "roundtrip_ns": 90875
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 54000,
+        "slowlog_id": 145
+      },
+      {
+        "kind": "reader_validation",
+        "duration_ns": 59000,
+        "slowlog_id": 142
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 137
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 133
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 129
+      },
+      {
+        "kind": "reader_snapshot",
+        "duration_ns": 1000,
+        "slowlog_id": 125
+      }
+    ],
+    "max_any_server_ns": 59000,
+    "sum_any_server_ns": 138000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 0,
+        "W": 12,
+        "hash_ns": 50708,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 28250
+          },
+          {
+            "component": 1,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 27000
+          },
+          {
+            "component": 2,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 29708
+          }
+        ],
+        "latency_with_writers_ns": 438750,
+        "trace": [
+          {
+            "action": "r",
+            "mask": 7
+          },
+          {
+            "action": "a",
+            "mask": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_first",
+    "policy": "maintained",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 208541,
+    "common_setup_ns": 66750,
+    "maintenance_build_ns": 42250,
+    "initial_hash_ns": 12124,
+    "writer_hash_ns": 8624,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 46458,
+    "L_reader": 0,
+    "W_reader": 0,
+    "W_writer": 6,
+    "W_initial": 6,
+    "W_total": 12,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 1,
+      "writer": 3,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 192,
+        "received": 4
+      },
+      "writer": {
+        "sent": 836,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 1331,
+    "events": [
+      {
+        "kind": "maintenance_build",
+        "start_ns": 16416,
+        "end_ns": 41708,
+        "roundtrip_ns": 25292
+      },
+      {
+        "kind": "writer",
+        "start_ns": 48041,
+        "end_ns": 83833,
+        "roundtrip_ns": 35792
+      },
+      {
+        "kind": "writer",
+        "start_ns": 89416,
+        "end_ns": 117625,
+        "roundtrip_ns": 28209
+      },
+      {
+        "kind": "writer",
+        "start_ns": 122541,
+        "end_ns": 157083,
+        "roundtrip_ns": 34542
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 158625,
+        "end_ns": 205083,
+        "roundtrip_ns": 46458
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 16000,
+        "slowlog_id": 172
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 9000,
+        "slowlog_id": 164
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 7000,
+        "slowlog_id": 160
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 13000,
+        "slowlog_id": 156
+      },
+      {
+        "kind": "maintenance_build",
+        "duration_ns": 2000,
+        "slowlog_id": 152
+      }
+    ],
+    "max_any_server_ns": 16000,
+    "sum_any_server_ns": 47000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 0,
+        "W": 0,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 1,
+            "hash_ns": 2917,
+            "operation_ns": 41166
+          },
+          {
+            "component": 1,
+            "work": 2,
+            "hash_ns": 2791,
+            "operation_ns": 33041
+          },
+          {
+            "component": 2,
+            "work": 3,
+            "hash_ns": 2916,
+            "operation_ns": 38916
+          }
+        ],
+        "latency_with_writers_ns": 164333,
+        "trace": [
+          {
+            "action": "maintained"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_each",
+    "policy": "direct",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 139958,
+    "common_setup_ns": 57208,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 44667,
+    "L_reader": 6,
+    "W_reader": 6,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 6,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 3,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 674,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 973,
+    "events": [
+      {
+        "kind": "writer",
+        "start_ns": 1750,
+        "end_ns": 31625,
+        "roundtrip_ns": 29875
+      },
+      {
+        "kind": "writer",
+        "start_ns": 33958,
+        "end_ns": 61166,
+        "roundtrip_ns": 27208
+      },
+      {
+        "kind": "writer",
+        "start_ns": 62625,
+        "end_ns": 91208,
+        "roundtrip_ns": 28583
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 93041,
+        "end_ns": 137708,
+        "roundtrip_ns": 44667
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 14000,
+        "slowlog_id": 198
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 190
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 186
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 7000,
+        "slowlog_id": 182
+      }
+    ],
+    "max_any_server_ns": 14000,
+    "sum_any_server_ns": 37000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 6,
+        "W": 6,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 31750
+          },
+          {
+            "component": 1,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 28625
+          },
+          {
+            "component": 2,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 29709
+          }
+        ],
+        "latency_with_writers_ns": 138709,
+        "trace": [
+          {
+            "action": "direct"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_each",
+    "policy": "compiled",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 386375,
+    "common_setup_ns": 46375,
+    "maintenance_build_ns": 0,
+    "initial_hash_ns": 0,
+    "writer_hash_ns": 0,
+    "reader_hash_ns": 11791,
+    "reader_command_plus_hash_ns": 216167,
+    "L_reader": 0,
+    "W_reader": 12,
+    "W_writer": 0,
+    "W_initial": 0,
+    "W_total": 12,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 0,
+      "writer": 3,
+      "reader_snapshot": 1,
+      "reader_validation": 2
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 0,
+        "received": 0
+      },
+      "writer": {
+        "sent": 674,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 79,
+        "received": 405
+      },
+      "reader_validation": {
+        "sent": 6566,
+        "received": 639
+      }
+    },
+    "total_wire_bytes": 8384,
+    "events": [
+      {
+        "kind": "reader_snapshot",
+        "start_ns": 2667,
+        "end_ns": 30084,
+        "roundtrip_ns": 27417
+      },
+      {
+        "kind": "writer",
+        "start_ns": 41459,
+        "end_ns": 70292,
+        "roundtrip_ns": 28833
+      },
+      {
+        "kind": "writer",
+        "start_ns": 71792,
+        "end_ns": 97042,
+        "roundtrip_ns": 25250
+      },
+      {
+        "kind": "writer",
+        "start_ns": 98417,
+        "end_ns": 126417,
+        "roundtrip_ns": 28000
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 164000,
+        "end_ns": 258334,
+        "roundtrip_ns": 94334
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 299584,
+        "end_ns": 382209,
+        "roundtrip_ns": 82625
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 51000,
+        "slowlog_id": 225
+      },
+      {
+        "kind": "reader_validation",
+        "duration_ns": 59000,
+        "slowlog_id": 222
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 8000,
+        "slowlog_id": 217
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 7000,
+        "slowlog_id": 213
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 9000,
+        "slowlog_id": 209
+      },
+      {
+        "kind": "reader_snapshot",
+        "duration_ns": 1000,
+        "slowlog_id": 205
+      }
+    ],
+    "max_any_server_ns": 59000,
+    "sum_any_server_ns": 135000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 0,
+        "W": 12,
+        "hash_ns": 11791,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 30084
+          },
+          {
+            "component": 1,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 26375
+          },
+          {
+            "component": 2,
+            "work": 0,
+            "hash_ns": 0,
+            "operation_ns": 28916
+          }
+        ],
+        "latency_with_writers_ns": 385041,
+        "trace": [
+          {
+            "action": "r",
+            "mask": 7
+          },
+          {
+            "action": "a",
+            "mask": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cell": -1,
+    "scale": 1,
+    "R": 1,
+    "scenario": "all_each",
+    "policy": "maintained",
+    "block": -2,
+    "warmup": false,
+    "smoke": true,
+    "status": "SUCCESS",
+    "error": null,
+    "mixed_trace_ns": 176875,
+    "common_setup_ns": 44500,
+    "maintenance_build_ns": 30625,
+    "initial_hash_ns": 7250,
+    "writer_hash_ns": 7958,
+    "reader_hash_ns": 0,
+    "reader_command_plus_hash_ns": 41084,
+    "L_reader": 0,
+    "W_reader": 0,
+    "W_writer": 6,
+    "W_initial": 6,
+    "W_total": 12,
+    "update_weight": 6,
+    "P": 6,
+    "commands": {
+      "maintenance_build": 1,
+      "writer": 3,
+      "reader_snapshot": 0,
+      "reader_validation": 1
+    },
+    "wire": {
+      "maintenance_build": {
+        "sent": 192,
+        "received": 4
+      },
+      "writer": {
+        "sent": 836,
+        "received": 21
+      },
+      "reader_snapshot": {
+        "sent": 0,
+        "received": 0
+      },
+      "reader_validation": {
+        "sent": 100,
+        "received": 178
+      }
+    },
+    "total_wire_bytes": 1331,
+    "events": [
+      {
+        "kind": "maintenance_build",
+        "start_ns": 10917,
+        "end_ns": 30500,
+        "roundtrip_ns": 19583
+      },
+      {
+        "kind": "writer",
+        "start_ns": 35709,
+        "end_ns": 65542,
+        "roundtrip_ns": 29833
+      },
+      {
+        "kind": "writer",
+        "start_ns": 70792,
+        "end_ns": 98000,
+        "roundtrip_ns": 27208
+      },
+      {
+        "kind": "writer",
+        "start_ns": 102750,
+        "end_ns": 131917,
+        "roundtrip_ns": 29167
+      },
+      {
+        "kind": "reader_validation",
+        "start_ns": 133125,
+        "end_ns": 174209,
+        "roundtrip_ns": 41084
+      }
+    ],
+    "server_events": [
+      {
+        "kind": "reader_validation",
+        "duration_ns": 15000,
+        "slowlog_id": 252
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 9000,
+        "slowlog_id": 244
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 7000,
+        "slowlog_id": 240
+      },
+      {
+        "kind": "writer",
+        "duration_ns": 10000,
+        "slowlog_id": 236
+      },
+      {
+        "kind": "maintenance_build",
+        "duration_ns": 2000,
+        "slowlog_id": 232
+      }
+    ],
+    "max_any_server_ns": 15000,
+    "sum_any_server_ns": 43000,
+    "reader_outputs": [
+      {
+        "read": 0,
+        "result": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "expected": {
+          "versions": [
+            "1",
+            "1",
+            "1"
+          ],
+          "digests": [
+            "f42fc57c149118d6307f96b17acc00f19b4c8de7",
+            "4c398d4e25f2d76a5a7ae401a515c289f564181d",
+            "c437f806ff3c7023743f2adfc15b261cb1de8982"
+          ]
+        },
+        "L": 0,
+        "W": 0,
+        "hash_ns": 0,
+        "writer_operations": [
+          {
+            "component": 0,
+            "work": 1,
+            "hash_ns": 2458,
+            "operation_ns": 34458
+          },
+          {
+            "component": 1,
+            "work": 2,
+            "hash_ns": 2875,
+            "operation_ns": 32083
+          },
+          {
+            "component": 2,
+            "work": 3,
+            "hash_ns": 2625,
+            "operation_ns": 33458
+          }
+        ],
+        "latency_with_writers_ns": 144666,
+        "trace": [
+          {
+            "action": "maintained"
+          }
+        ]
+      }
+    ]
+  }
+]
