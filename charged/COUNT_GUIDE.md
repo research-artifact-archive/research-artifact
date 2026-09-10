@@ -9,8 +9,9 @@ This guide clarifies the current paper's evaluation table without changing input
 | Whole-kernel toll | 5,688 conditions; 42,084 game roots | The stated resource/loss bounds, not equality of every cost coordinate |
 | Partial repair | 3,495 inputs; 160,080 cells | Exact dirty-set DP, damage-profile DP, and formula |
 | Repair toll | 16,844 profiles; 143,226 informed values; 33,688 competitive values | Informed and competitive comparisons have separate denominators |
-| Shared repair workflow | 8,960 conditions; 61,246 informed values; 6,208 existence searches | Known-budget value equations and common-policy existence are separate checks |
+| Shared repair workflow | 8,960 conditions; 61,246 informed values; 6,208 existence searches (two jobs r<=2; three jobs r<=1) | Known-budget value equations and common-policy existence are separate checks |
 | Toll workflow | 37,248 conditions =31,104 two-job +6,144 three-job; 216,282 known-budget values | Value enumeration is distinct from the 37,248 threshold/existence checks |
+| Uniform workflow repair loss | 540 exploratory +5,360 fixed conditions | Full-history policy vectors vs negative threshold roots and extracted policy losses; 13,257 nondominated root vectors and43,460 budget coordinates; 2,458 positive-loss and3,442 zero-loss conditions |
 | Informed native frontier | 9,314 records =8,800 replay +512 concurrent +2 controls | 1,024 replay groups; coordinatewise maxima and intended control outcomes |
 | Unaware native frontier | 17,714 records =17,200 replay +512 concurrent +2 controls | 1,280 replay groups; coordinatewise maxima and intended control outcomes |
 
@@ -29,3 +30,5 @@ The Roslyn236 suite contains four modes x58 cases plus four unmodified zero-writ
 - [Toll workflow threshold validation](evidence/RESUMED_20260910_0343/partial_repair_toll_dag_01/threshold_validation01/SUMMARY.json)
 
 The complete mappings and adverse observations remain in the existing supplement guides and provenance ledger. Standard replay commands inspect archived timing observations; they do not obtain fresh timing measurements. All evaluation inputs are authored.
+
+The uniform-loss fixed confirmation has12,344 nondominated root vectors,40,640 budget coordinates and2,256 positive-loss conditions. The earlier exploration has913 vectors,2,820 coordinates and202 positive-loss conditions. These are different units, not extra independent populations. Each stage rejects four corrupted claims. [Full-history policy-vector confirmation](evidence/RESUMED_20260910_0343/workflow_uniform_regret_02/fixed02/SUMMARY.json) and [earlier exploration](evidence/RESUMED_20260910_0343/workflow_uniform_regret_02/run01/SUMMARY.json) retain all outcomes.
