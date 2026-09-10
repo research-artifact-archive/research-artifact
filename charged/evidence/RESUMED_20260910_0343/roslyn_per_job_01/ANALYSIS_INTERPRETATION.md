@@ -1,0 +1,9 @@
+# Interpretation and plot preparation
+
+All3,072 planned units passed native and separate checks; all12 corruption controls were detected. Native execution took237.839726 seconds after the earlier public replay completed; harness build took the time in build01/RESULT.json. Analysis retains32 cells and96 paired bootstrap intervals. Eight blocks each contain separate processes; statistical independence or representativeness of host conditions is not established. The intervals resample the recorded blocks and do not remove residual order/host effects or apply multiplicity correction.
+
+The new harness adds per-update counter snapshots and, for local modes, resets Remaining outside each measured API invocation. Those operations remain inside foreground batch duration. This is deliberate accounting instrumentation and affects transfer to uninstrumented programs. The original/baseline paired foreground point ratios are0.827–1.079; all four95% intervals include1, so this run does not identify an instrumentation overhead. It does not replace the earlier harness's overhead estimates.
+
+Global two/three modes share Q<=34, whereas per-job r1 permits Q<=64 and r2 permits Q<=96. Their policy-end-dependent write counts differ. The aggregate count medians may not co-occur on any single path; every individual update and batch is checked against its own bound. Count reductions cannot be converted to a causal timing gain.
+
+The first plot invocation stopped at import before creating a figure because the bundled runtime lacked matplotlib. Open-source plotting dependencies were then installed into a separate task-specific directory; the original plotting source and this environment issue are preserved. No native or statistical outcome was rerun to change results. The final plot uses all four intervals for the predeclared shared three/two contrast, across all three timing metrics; the complete96-interval set remains in SUMMARY.json.

@@ -100,3 +100,5 @@ The [objective and batch extension](OBJECTIVES_AND_BATCH.md) adds stages29–30:
 [Document-state guard supplement](DOCUMENT_GUARD.md) adds stage31: all fixed native projections and the four changed resource rows. No new timing samples.
 
 [Workflow and arrival-count supplement](WORKFLOW_REPAIR.md) adds stages32--33: fixed DAG equations, checkable policy thresholds, and reconstruction of foreground-period publications from existing native timelines.
+
+[Local/shared cap supplement](CAP_CONTRACTS.md) adds stages34--35: exact cap/toll equations and the fixed Roslyn per-update comparison with process-block intervals.
