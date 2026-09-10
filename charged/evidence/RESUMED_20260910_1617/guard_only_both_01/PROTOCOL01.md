@@ -1,0 +1,17 @@
+# Fixed corroboration01
+
+This is prospective code corroboration of author candidate01, whose N=2/3 output-family arithmetic was already hand-checked. It is not a preregistration of that derivation or independent certification.
+
+Inputs: 764 independent general cases (all714 multisets of1--4 job pairs w in{1,2,4}, g in{0,1,3}, plus50 seeded five-job lists); 836 uniform cases (all nondecreasing1--6 works in{1,2,4,7}, common g in{0,1,2,7});55 positive-subset-sum item multisets of1--5 elements in{1,2,3}, every target1..sum items; and eight exponential-output inputs N=2..9. These populations overlap and are not pooled as unique workloads. All c=0; B=1,Q<=n. No native execution or timing claim.
+
+General: compare the unrestricted ready-job/mode recurrence inherited from fixed charged04, all order/mask formula pairs, and all cached-first/descending-work subset pairs. Record every order/mask pair. Compare the entry-processing DP on all cap-grid corners induced by exact-frontier coordinates and their immediate integer neighbors, plus zero and mandatory-cost boundary. Compute expectations from the independently enumerated full frontier, not from the new DP. Preserve every query result.
+
+Uniform: compare the direct mode recurrence, all subsets, and the count-DP threshold-sweep frontier with concrete subset witnesses. Thresholds are0 and all w_i+j*g for j1..n. Count-DP uses previous-layer states. Compare guard-processing and count-DP decisions on the same cap-grid; record all threshold witnesses. Check n^2+1 frontier-size upper bound.
+
+Subset embedding: build candidate01's exact formulas with N=2m, zero pads and positive w/g. Direct original subset enumeration is the yes/no oracle for every target. Enumerate all2^N completion subsets and evaluate the cached-first frontier once per item instance; also use the unrestricted mode recurrence for m<=3. Compare the guard-processing decision DP for every target. Preserve all encoded parameters, caps, chosen witnesses, original truth, and results. Do not assume only known-yes targets.
+
+Output family: for every N=2..9 compare all-mode recurrence and all cached subsets; verify the exact expected frontier cardinality2^N-1 and every point formula. Interpret the no-write and every single cached-mismatch path for every subset's chosen order, including the dominated all-cached policy, checking coordinate maxima. Record all these paths. This finite confirmation does not prove the asymptotic bound.
+
+Controls: implement seven deliberate alterations: omit entry from total; ignore mismatch K in protection; ascending cached works; use updated rather than previous-layer states so a zero-guard item repeats; omit Gamma feasibility; use a count-only guard assumption on heterogeneous inputs; ignore a selected deadline test. Search the declared finite inputs/caps for each alteration's first genuine disagreement, and retain its concrete correct/altered outputs. A control with no detected disagreement is reported undetected, not forced to pass. No alterations affect the main run.
+
+Freeze INPUTS, checker, protocol and inherited checker hash before execution. Supervisor limit600seconds; any exception, mismatch, timeout, incomplete input set or undetected declared control makes the attempt non-success. Save raw gzip ledgers, hashes, all denominators and process outcome. Never retry unchanged inputs to replace an adverse result. Corrections require a new numbered version and reason. No source/paper publication until proof criticism and evidence are assessed.
