@@ -1,9 +1,10 @@
 # Paper-to-evidence map
 
-The stored manuscript is *The Total-Work Cost of Bounded Retry Guarantees*, snapshot197; its exact identity is [paper/SNAPSHOT.json](paper/SNAPSHOT.json). It integrates the comparison-free/common-guard, changed-call-weight and unit-guard DAG results below. Current locators: model2, universal protection3, total-work and call-weight results4, complete programs/observation5, Java6, charged representation and complexity7, evaluation8, related work9, limitations10, conclusion11. Do not interpret older theorem numbers as current paper locators. References to different commits of this repository describe one research lineage, not independent novelty baselines.
+The stored manuscript is *The Total-Work Cost of Bounded Retry Guarantees*, snapshot203; its exact identity is [paper/SNAPSHOT.json](paper/SNAPSHOT.json). It integrates the comparison-free/common-guard, changed-call-weight and unit-guard DAG results below. Current locators: model2, universal protection3, total-work and call-weight results4, complete programs/observation5, Java6, charged representation and complexity7, evaluation8, related work9, limitations10, conclusion11. Do not interpret older theorem numbers as current paper locators. References to different commits of this repository describe one research lineage, not independent novelty baselines.
 
 | Obligation | Evidence entry | Standard replay stages |
 |---|---|---|
+| All-program extraction and source realization: full proofs of manuscript Theorem7/Lemma2 and Theorem9 | [Full-program proof](charged/FULL_PROGRAM_PROOF.md), [conditional Java proof](charged/JAVA_INTERFACE_PROOF.md) | Mathematical arguments; no new replay stage |
 | Complete body-work frontiers for independent jobs and arbitrary retry slack | [General retry](charged/GENERAL_RETRY.md) | `general-retry`, `one-retry-native` |
 | Least total-work curve for a universally completing policy with optimal protection at every hidden budget | [Universal independent jobs](charged/UNIVERSAL_INDEPENDENT.md) | `universal-independent`, `universal-independent-native` |
 | One-write full-program representation with entry/comparison work charged in both resources | [Charged-comparison guide](charged/CHARGED_COMPARISON.md) | `charged-comparison`, `fully-charged-one-write` |

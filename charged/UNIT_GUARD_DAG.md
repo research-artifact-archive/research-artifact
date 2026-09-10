@@ -1,5 +1,7 @@
 # Unit guard charges and precedence
 
+Current manuscript203 Theorem11 (Section7.2) states this unit-guard hardness result; older Theorem12 references below are historical. The independent-price proof is now supplementary. This update changes no unit-guard input, proof construction, witness or outcome.
+
 The [complete proof](evidence/RESUMED_20260910_1617/guard_dag_unit_01/PROOF02.md) adds a boundary to the same supplied-B=1, Q<=n completion interface. Manuscript197 integrates the representation and this boundary in Section7, with Theorem12 stating the unit-guard result. All preceding scientific payloads and prior manuscript versions remain preserved in their immutable commits.
 
 With free comparisons and zero entry costs, any DAG admits an O(n³) complete body-resource frontier by the inherited Lawler reduction. Charging each guarded entry one unit in BOTH total and protected resources makes joint-cap decision strongly NP-complete even on an endpoint-incidence DAG of height two, with at most two predecessors per job and body works in {1,n+1}. Yet every DAG with a common guard price has at most n²+1 frontier points. Thus the difficulty can be finding a small frontier, rather than its output length. Independent jobs with common entry prices retain the preceding greedy algorithm.

@@ -1,5 +1,7 @@
 # Joint guards and the counted completion resource
 
+Current manuscript203 summarizes independent-price results here as supplements, retaining the original complete proofs and every fixed outcome. Its Theorem10 states the charged representation and Theorem11 the unit-guard precedence boundary. No worker, fixed input, raw output or corroboration result changes in this proof-exposition publication.
+
 Manuscript197 integrates these results in Sections4.4 and7.1. Section7.2 adds the unit-guard precedence boundary. The tight2^n-1 heterogeneous output proof remains here in the supplement. The parent scientific release f626c4c412f422b975e5c21d7251090e4a5b9fec passed all52 stages; this manuscript/guide publication adds no samples.
 
 This extension adds three standard stages49--51. The complete prior48-stage release, corrected proof05 and fixed manuscript187 remain unchanged. The populations overlap earlier studies. These are author proofs and bounded corroborations, without mechanical proof certification, independent reproduction or a native latency claim.

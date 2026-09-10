@@ -1,5 +1,7 @@
 # Comparison and protected-entry costs
 
+Current manuscript203 Section7: Theorem10 is the all-program supplied-one-write charged representation; Theorem11 is strong NP-completeness with unit guards on the endpoint-incidence DAG. Independent free-comparison NP/DP and common-guard algorithms remain in [resource accounting](RESOURCE_ACCOUNTING.md), with all numerical outcomes retained. Older theorem numbers below belong to their dated manuscripts.
+
 Manuscript197 Section7 now integrates the all-program representation (Theorem10), independent free-comparison boundary (Theorem11), and strongly NP-complete unit-guard height-two DAG boundary (Theorem12). Consequently the historical unresolved added-cost statements below have been partly settled by the later resource-accounting and unit-guard guides. The original zero-charge body frontier on any DAG is polynomial by Lawler. Every older proof, failure and payload remains unchanged.
 
 This extension keeps three optimization contracts separate. [Proof03](evidence/RESUMED_20260910_1617/charged_comparison_01/PROOF03.md) gives (A) the supplied-one-write W/P_g scheduling reduction with body-only W, and (B) the universally admissible zero-write W_t/P_t subset frontier. [Fully charged proof05](evidence/RESUMED_20260910_1617/charged_comparison_01/FULLY_CHARGED_PROOF05.md) gives the supplied-one-write W_t/P_t frontier over all deterministic completion programs, represented by an order, a fresh/cached subset and a first-mismatch switch. Guard and comparison charges are paid in both coordinates in that latter class.

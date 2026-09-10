@@ -1,5 +1,7 @@
 # Linux source traversal and the guard-entry boundary
 
+Current manuscript203 Section8.2 distinguishes source body attempts from both public calls and internal primitive calls. The upstream path bound is two body attempts; the cached-repair/two-cheap alternatives permit three. The source comments motivate eventual fallback, not an externally imposed numerical SLA. Variable work, private buffers and source-specific traversal conditions limit transfer to an illustrative upper refinement.
+
 Current manuscript197 Section8.2 retains the initialization premise and logical/native count distinction: one public invocation for each policy; logical maxima2/3 but six-primitive maxima10/10 for cached/two-cheap. It establishes no caller-required cap or native speedup. The supplied numerical prices of Section7 are a separate mathematical contract.
 
 Standard stages44–45 extend the previous43 stages without changing their scientific payload. Run `python3 charged/reproduce.py linux-dentry --out /tmp/linux-saved-replay` and `python3 charged/reproduce.py guard-entry --out /tmp/guard-replay`, using new output directories. `python3 charged/reproduce.py all --out /tmp/charged-all` includes both stages. Standard replay performs no new native timing or kernel execution.
