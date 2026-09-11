@@ -1,0 +1,9 @@
+# Unequal fresh and cached-mismatch protection charges
+
+New author hypothesis BEFORE any new check or model response. The exact residual theorem uses equal protection charges w_i for fresh and cached mismatch. It is important to test whether the compact characterization survives when the wrapper charges additional work on mismatch. This is a distinct model, not a correction to the uncharged theorem.
+
+Let a cached mismatch protect q_i>0 and fresh protect p_i with0<p_i<=q_i. Match protects0; subtract common per-completion guard costs if they are identical on every mode. Let the contractual benchmark be Top_(k+b)(q over J). This benchmark is the all-cache curve and is NOT assumed minimax-optimal in the expanded model. For a residual state(D,k,ell), universal future-b obligation remains ell+L_suffix<=Top_(k+b)(q_J). All-cache viability still has ell<=Top_k(q_D), but a general fresh/cache policy might be viable outside this set, because targets chosen fresh cost p_i rather than q_i.
+
+A simple arbitrary-state candidate: D has q=(1,1), k=1,ell=2; S has one q=100,p=1. The state violates ell<=Top1(D)=1 but fresh-completing S gives total3<=Top1(J)=100 at every future budget b>=0. Therefore necessity fails in this unequal-charge game, and future job charges may matter. This is an arbitrary residual state, not claimed reachable from the original initial state while preserving its contract. The large ratio100:1 may not model realistic fees; seek a fixed additive q=p+h example and reachable-prefix distinction before claiming practical impact.
+
+Possible repair: conservative filter ell+p_i<=Top_k(q_(D+i)) remains sufficient with always-cached fallback because q_i charges cached mismatches and p_i<=q_i. Exact maximal permissiveness is not yet established and should not be claimed. Need distinguish a harmless known additive baseline from a mismatch-only fee.

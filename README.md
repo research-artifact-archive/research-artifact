@@ -10,6 +10,8 @@ The newer [distinct-order supplement](charged/SHORT_ORDER_POLICY.md) proves that
 
 The newer [safe suffix supplement](charged/SAFE_FRESH_SUFFIX.md) gives a general sufficient transformation preserving optimal protection and never increasing worst body work over an all-cached suffix. Its fixed714-root replay retains all22,583 paths, the2 preselected improvements,712 equalities and a faulty one-guard control. Stage55 is outside unchanged manuscript216.
 
+The new [residual safety supplement](charged/RESIDUAL_SAFETY.md) characterizes exact safe modes using completed data only and identifies the fee conditions preserving that interface. All16,267 new/earlier-filter comparisons have equal worst-work curves. Stage56 also preserves the failed attempt to lift a local whole-curve obstruction to the initial state. These results are outside the stored manuscript216 until the substantive new paper is published.
+
 ## Start here
 
 * [Paper-to-evidence map](PAPER_ARTIFACT_MAP.md): current mathematical and source obligations, with replay stages.
@@ -24,15 +26,15 @@ The newer [safe suffix supplement](charged/SAFE_FRESH_SUFFIX.md) gives a general
 git clone https://github.com/research-artifact-archive/research-artifact.git
 cd research-artifact
 python3 -B tools/verify_release.py
-python3 -B charged/reproduce.py all --out work/all55 --timeout 300
+python3 -B charged/reproduce.py all --out work/all56 --timeout 300
 ```
 
-Use Python3.10+ with assertions enabled on a POSIX system. Always choose a new output directory. The55 standard stages verify and replay fixed evidence using the standard library; they do not rerun native timing campaigns as new samples. To reproduce a particular paper, check out its cited immutable evidence commit first. Individual stage commands and optional native rebuilds are linked from the map. This archive contains overlapping study populations, and its file or replay counts are not research sample sizes.
+Use Python3.10+ with assertions enabled on a POSIX system. Always choose a new output directory. The56 standard stages verify and replay fixed evidence using the standard library; they do not rerun native timing campaigns as new samples. To reproduce a particular paper, check out its cited immutable evidence commit first. Individual stage commands and optional native rebuilds are linked from the map. This archive contains overlapping study populations, and its file or replay counts are not research sample sizes.
 
 The [September10 reproduction receipt](REPRODUCTION_20260910.json) records completed local/public replays and their scope. A successful replay preserves earlier failures and timeouts as recorded outcomes. Native Java, Linux and Roslyn studies expose both positive witnesses and transfer limits; the Valkey comparator and cost-fit failures remain in the archive. No human evaluation is included.
 
 ## Earlier package and provenance
 
-The byte-preserved `package/` tree, its [older paper](package/paper/main.pdf), [usage](package/README.md) and [evidence index](package/EVIDENCE_INDEX.md) describe previous research versions. Their claims and sample counts retain their original scope. `./reproduce.sh portable` verifies that legacy package; it is not the55-stage charged replay above. Licenses, rights and source provenance are in [NOTICE.md](NOTICE.md) and the accompanying manifests.
+The byte-preserved `package/` tree, its [older paper](package/paper/main.pdf), [usage](package/README.md) and [evidence index](package/EVIDENCE_INDEX.md) describe previous research versions. Their claims and sample counts retain their original scope. `./reproduce.sh portable` verifies that legacy package; it is not the56-stage charged replay above. Licenses, rights and source provenance are in [NOTICE.md](NOTICE.md) and the accompanying manifests.
 
 The preceding [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) are preserved byte-for-byte for history. Their relative links refer to their original repository-root location. This new entry page replaces their obsolete titles and long chronological appendices without altering the scientific payload.
