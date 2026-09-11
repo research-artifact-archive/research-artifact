@@ -146,3 +146,5 @@ Current [paper187](../paper/README.md) places the fully charged one-write repres
 [Residual resource safety](RESIDUAL_SAFETY.md) adds the56th standard stage, with an exact completed-state filter, common/separated-fee extension and opposite permissions under indistinguishable future costs. All prior studies and adverse outcomes remain. The stored manuscript216 is unchanged by this supplement-only batch.
 
 [Java residual filter](JAVA_RESIDUAL_FILTER.md) adds stage57: a future-data-free Java interface, two linked heaps,498 filter sequences and996 native paths with all events checked. All62 worst-work comparator coordinates are equal. Both implementation versions and their full traces remain. The stored manuscript216 is unchanged.
+
+Stages58/59: [general charged residual proof/filter](CHARGED_GENERAL.md) and [three actual-cost oracle](THREE_COST_RESIDUAL.md). Both execute fixed evaluators; all original adverse outcomes and the filter attempt01 timeout remain. These two stages supplement the currently published paper219 and are outside that fixed PDF; see the [paper mapping](../PAPER_ARTIFACT_MAP.md).

@@ -1,0 +1,270 @@
+[
+  {
+    "label": "future_fee_funds_fresh_all_orders",
+    "id": 578,
+    "family": "heterogeneous",
+    "p": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "h": [
+      0,
+      0,
+      0,
+      2
+    ],
+    "q": [
+      1,
+      1,
+      1,
+      3
+    ],
+    "prefix": {
+      "D": 1,
+      "k": 1,
+      "ell": 1,
+      "target": 1
+    },
+    "graphs": [
+      {
+        "graph": 0,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "V_prefix": 2,
+        "fresh_threshold": 1,
+        "fresh_safe": true
+      },
+      {
+        "graph": 1,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "V_prefix": 2,
+        "fresh_threshold": 1,
+        "fresh_safe": true
+      },
+      {
+        "graph": 2,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "V_prefix": 2,
+        "fresh_threshold": 1,
+        "fresh_safe": true
+      }
+    ],
+    "independent_results": [
+      {
+        "input": 578,
+        "graph": 0,
+        "best_thresholds": [
+          0,
+          2,
+          3
+        ],
+        "fresh_safe": true,
+        "chosen_suffix_policy": 2
+      },
+      {
+        "input": 578,
+        "graph": 1,
+        "best_thresholds": [
+          0,
+          2,
+          3
+        ],
+        "fresh_safe": true,
+        "chosen_suffix_policy": 2
+      },
+      {
+        "input": 578,
+        "graph": 2,
+        "best_thresholds": [
+          0,
+          2,
+          3
+        ],
+        "fresh_safe": true,
+        "chosen_suffix_policy": 1
+      }
+    ]
+  },
+  {
+    "label": "body_only_control",
+    "id": 576,
+    "family": "heterogeneous",
+    "p": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "h": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "q": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "prefix": {
+      "D": 1,
+      "k": 1,
+      "ell": 1,
+      "target": 1
+    },
+    "graphs": [
+      {
+        "graph": 0,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "V_prefix": 1,
+        "fresh_threshold": 0,
+        "fresh_safe": false
+      },
+      {
+        "graph": 1,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "V_prefix": 1,
+        "fresh_threshold": 0,
+        "fresh_safe": false
+      },
+      {
+        "graph": 2,
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            3,
+            2
+          ]
+        ],
+        "V_prefix": 1,
+        "fresh_threshold": 0,
+        "fresh_safe": false
+      }
+    ],
+    "independent_results": [
+      {
+        "input": 576,
+        "graph": 0,
+        "best_thresholds": [
+          0,
+          1,
+          2
+        ],
+        "fresh_safe": false,
+        "chosen_suffix_policy": null
+      },
+      {
+        "input": 576,
+        "graph": 1,
+        "best_thresholds": [
+          0,
+          1,
+          2
+        ],
+        "fresh_safe": false,
+        "chosen_suffix_policy": null
+      },
+      {
+        "input": 576,
+        "graph": 2,
+        "best_thresholds": [
+          0,
+          1,
+          2
+        ],
+        "fresh_safe": false,
+        "chosen_suffix_policy": null
+      }
+    ]
+  }
+]
