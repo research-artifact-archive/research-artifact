@@ -1,6 +1,6 @@
 # Charged atomic-call retry policies
 
-Current [manuscript219](../paper/README.md) centers the resource-contract cost, exact residual safety filter, fee-information boundary and executable Java interface. The [current evidence map](../PAPER_ARTIFACT_MAP.md) supersedes historical paper/section locators in the chronological entries below. All earlier scientific payloads and adverse outcomes remain unchanged.
+Current [manuscript232](../paper/README.md) centers the sharp arbitrary-DAG bound for every permitted caller, the exact residual safety interface and its fee-dependent information boundary. The [current evidence map](../PAPER_ARTIFACT_MAP.md) supersedes historical paper/section locators in the chronological entries below. All earlier scientific payloads and adverse outcomes remain unchanged. A fresh unauthenticated acquisition of evidence commit759160fa128d0f2653d3195ea0d9b2289f4198f8 passed the complete inventory and all60 standard stages.
 
 Current manuscript216 adds the explicit action/effect/observation/charge table and worked branch trace, and Section5.2 Proposition8 integrates the [unknown-budget DAG observation result](OBSERVATION_DAG.md). The cited evidence commit includes all53 standard stages, fully replayed from public retrieval. All preceding measurements and unfavorable outcomes are unchanged. Current unit-guard hardness is Theorem11 in Section7.1; older locators below are historical.
 

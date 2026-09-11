@@ -1,32 +1,31 @@
 # Resource Contracts for Completing Optimistic Computations
 
-Anonymous research artifact for [manuscript219](paper/main.pdf). The paper asks what total work one completion policy must spend to guarantee both a fixed call allowance and optimal protected work for every unknown interference budget. It then characterizes exactly which completion modes preserve the residual protection contract, what information a safety component can omit, and when extra charges change that answer.
+Anonymous research artifact for [manuscript232](paper/main.pdf). The paper asks how much total work a scheduler may spend while retaining a fixed call allowance and optimal protected work at every unknown interference budget. For an arbitrary finite dependency DAG, an exact safety filter permits every completion mode that preserves the residual protection contract. Every caller following the specified immediate-preparation protocol has worst body work within `(3r+2)/(2r+2)` of the best general program satisfying the same simultaneous contract. The factor is sharp over this entire caller class; it is 5/4 for one spare call.
 
-The fixed paper has18 main-text pages and3 reference pages. [Its snapshot](paper/SNAPSHOT.json) binds the source/PDF bytes. [The paper guide](paper/README.md) explains the final structure, and the [evidence map](PAPER_ARTIFACT_MAP.md) connects its claims to reproducible studies.
+The fixed paper has18 main-text pages, with Data Availability and references on pages19–21. [Its snapshot](paper/SNAPSHOT.json) binds the source/PDF bytes. The [paper guide](paper/README.md) explains the structure and the [evidence map](PAPER_ARTIFACT_MAP.md) connects claims to their fixed studies.
 
-The main new interface needs only completed weights, observed mismatch count, incurred protection and the proposed current weight. [Residual safety](charged/RESIDUAL_SAFETY.md) supplies the full proof, fee conditions and an indistinguishable-prefix counterexample. [The Java component](charged/JAVA_RESIDUAL_FILTER.md) implements that interface with two linked heaps and includes its original/revised traces. All16,267 new/earlier-filter whole-work comparisons and all62 Java comparator coordinates are equal; additional safe choices do not establish a new worst-work improvement.
+[The arbitrary-DAG approximation](charged/DAG_APPROXIMATION.md) includes the general proof, author audits and the sole fixed finite study:16,263 roots,96,795 budget rows and4,632,516 expanded states, with zero violations. The finite checker does not enumerate the full general-program comparator; the lower bound is analytical. Sharpness is a limiting geometric family, not an empirical performance ratio or a tight factor for minimum-ready scheduling.
 
-The native/source studies preserve narrower correspondence conditions and adverse results: Linux relaxes a two-body-attempt bound to three; Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. This is an author research artifact, and publication or model review does not establish acceptance or submission readiness.
+[Residual safety](charged/RESIDUAL_SAFETY.md), [general fee separation](charged/CHARGED_GENERAL.md) and [three actual operation prices](charged/THREE_COST_RESIDUAL.md) distinguish body costs from resource charges. The body-only filter needs completed weights and current proposed work; arbitrary future fee premiums can require future information. The [Java component](charged/JAVA_RESIDUAL_FILTER.md) implements the body/common-premium interface with two heaps. All16,267 policy comparisons and all62 Java worst-work comparator coordinates are equal: extra permissions alone did not improve those worst-work values.
+
+Native/source studies retain their narrower scope and adverse results. The cached Linux variant preserves the two-body-attempt bound, while the earlier two-cheap variant permits three. Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. These results do not establish a natural client needing the combined contract, native latency gains, strong novelty or submission readiness.
 
 ## Reproduce
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git
 cd research-artifact
+git checkout 759160fa128d0f2653d3195ea0d9b2289f4198f8
 python3 -B tools/verify_release.py
 python3 -B charged/reproduce.py all --out work/all60 --timeout 300
 ```
 
-Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. The60 standard stages verify and reinterpret fixed evidence with the standard library. They create no new independent workload population or timing sample. Optional native rebuild commands, including Java17, are separate and linked from the evidence guides. Check out the immutable evidence commit cited by a particular paper to reproduce that snapshot. Complete public replay and native-rebuild receipts for this release are recorded in [REPRODUCTION_20260911.json](REPRODUCTION_20260911.json), with exact completed and pending scopes.
+Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. A fresh unauthenticated acquisition of this immutable evidence commit passed its complete142,751-file inventory and all60 standard stages. The [reproduction receipt](REPRODUCTION_20260911.json) gives the exact scope. The paper publication changes the manuscript and explanatory metadata, with scientific sources, inputs, proofs, traces and replay code unchanged. At the evidence commit, the stored older manuscript is219; manuscript232 is in this later paper publication.
+
+Standard replays use fixed populations and create no new independent workload or timing sample. Optional native rebuild commands are separate. `./reproduce.sh portable` verifies the legacy package. Prior native Java rebuilds remain identified by their original commit; they were not repeated as new measurements for this paper publication.
 
 ## Earlier evidence and provenance
 
-The byte-preserved [legacy package](package/README.md), [earlier paper](package/paper/main.pdf), [evidence index](package/EVIDENCE_INDEX.md) and the charged study history retain preceding claims, failures, timeouts and populations. Historical paper/section references in individual study notes refer to their original snapshots. The earlier [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) remain byte-for-byte; their relative links refer to their original repository-root location.
+The [legacy package](package/README.md), [earlier paper](package/paper/main.pdf), [evidence index](package/EVIDENCE_INDEX.md) and charged study history retain earlier claims, failures, timeouts and populations. Historical section locators refer to their original snapshots. The [earlier root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) remain unchanged; their links refer to their original root location.
 
-`./reproduce.sh portable` checks the legacy package. It is a separate verification from the60-stage charged replay. Licenses, source provenance, reversible compression and path projections are described in [NOTICE.md](NOTICE.md), the release manifest and charged/PROVENANCE.json. The [September10 reproduction receipt](REPRODUCTION_20260910.json) retains preceding completed checks; the new receipt does not rewrite them. Counts across studies overlap and are not independent samples of software workloads.
-
-The two additional fixed-domain mathematical/implementation replays are [charged-general](charged/CHARGED_GENERAL.md) and [three-cost-residual](charged/THREE_COST_RESIDUAL.md).
-
-Stage60 adds the [sharp arbitrary-DAG caller approximation](charged/DAG_APPROXIMATION.md), with exact fixed-population replay and preserved historical proof/audit provenance.
-
-The new stage60 is supplementary to fixed manuscript219. Its local staged replay succeeded; freshly retrieved full60-stage reproduction is pending for this release.
+Licenses, provenance, compression and path projections are described in [NOTICE.md](NOTICE.md), the release manifest and charged/PROVENANCE.json. The [September10 receipt](REPRODUCTION_20260910.json) and prior releases retain preceding checks. Counts overlap across studies. Author reproduction and model-assisted review are not independent certification or an acceptance decision.
