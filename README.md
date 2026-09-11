@@ -8,7 +8,7 @@ The fixed paper has18 main-text pages, with Data Availability and references on 
 
 [Residual safety](charged/RESIDUAL_SAFETY.md), [general fee separation](charged/CHARGED_GENERAL.md) and [three actual operation prices](charged/THREE_COST_RESIDUAL.md) distinguish body costs from resource charges. The body-only filter needs completed weights and current proposed work; arbitrary future fee premiums can require future information. The [Java component](charged/JAVA_RESIDUAL_FILTER.md) implements the body/common-premium interface with two heaps. All16,267 policy comparisons and all62 Java worst-work comparator coordinates are equal: extra permissions alone did not improve those worst-work values.
 
-Native/source studies retain their narrower scope and adverse results. The cached Linux variant preserves the two-body-attempt bound, while the earlier two-cheap variant permits three. Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. These results do not establish a natural client needing the combined contract, native latency gains, strong novelty or submission readiness.
+Native/source studies retain their narrower scope and adverse results. The cached Linux variant preserves a two-logical-call cap but permits three body attempts, relaxing upstream's two-body-attempt bound. The earlier two-cheap variant can also use three logical calls. Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. These results do not establish a natural client needing the combined contract, native latency gains, strong novelty or submission readiness.
 
 ## Reproduce
 
