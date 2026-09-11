@@ -1,0 +1,11 @@
+# Fixed check of a short order-separation policy
+
+This new policy was derived after the fixed distinct-weight example07 and the analytic minimum-ready lower proof08. It is post-outcome mathematical development on that same root, not a new independent population. Preserve all earlier exploratory inputs, equalities, counterexamples and proofs.
+
+Fix jobs0..5, works(62,83,15,84,30,31), edges1->2,3->4->5, r=3. Before three cheap failures, immediately prepare and cheaply call the minimum-work ready unfinished job. If the third failure targets job1, execute jobs3,4,5 using immediate preparation/cached completion in that order, then finish1,2 in order. Only for these last two jobs, choose fresh when L+w_i <= Top_(d-3), and immediate cached otherwise, where d counts observed cheap failures plus cached mismatches. If the third failure targets any other job, use immediate cached completions in minimum-ready order throughout. The policy receives no B.
+
+Enumerate every complete branch once, preserving concrete mode/job/outcome, completed set, observed d, Q,W,L. Check readiness, Q<=9, protection at every prefix, and the complete worst curves for B0..9; verify the exact optimal-protection curve, and W(7)=752 with an explicit attaining path. Compare the independently interpreted tree against the unchanged unknown02 operation interpreter. No DP optimality inference is made. Compare curves to the already-recorded07 reference as a retrospective cross-check only; equality is not a protocol success prerequisite beyond the stated caps.
+
+Also fix one deliberately altered policy: in the special chain3,4,5, permit a fresh completion whenever the same current protection inequality allows it. The mathematical prediction is that premature fresh5 loses the useful comparison and violates W(7)<=752. Enumerate and retain all its branches even if this prediction fails. It is a negative control, not another root or a discovered upstream defect.
+
+One attempt,10s computation cap, no retry. Save source/input/protocol hashes before execution, all branch outcomes, summaries and tree bytes; preserve FAILURE/TIMEOUT exactly. No native experiment, author acceptance rating, mechanical all-program proof, or new whole-DAG least-curve theorem is claimed.

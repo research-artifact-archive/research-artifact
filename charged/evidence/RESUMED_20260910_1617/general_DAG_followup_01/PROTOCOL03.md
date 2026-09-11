@@ -1,0 +1,9 @@
+# Prospective DAG least-curve exploration03
+
+SCIENTIFIC exploration, root sole writer. This is an attempt to falsify the unproved existence of one least total-work curve for general DAGs under simultaneous all-budget optimal protected work and universal Q<=n+r. It does not change existing theorem or final-evaluation outcomes.
+
+Before execution fix INPUTS03.json: one previously hand-derived four-job regression, 128 distinct fixed-seed cases for each n5--8 (weights1,2,3,5,8,13; retry1--4; forward edges), then every nonempty forward-edge mask on four vertices, weights1,2,5 and retries1--3. These are authored exploration inputs, not a representative empirical population. Exclude no observed unfavorable result. The known regression is not a new discovery.
+
+Use the unchanged unknown02.py Universal oracle. Its state tracks unfinished set, remaining retries, observed useful-bad count and spent protected work. Return complete nondominated vectors of duplicate work over remaining budgets, under the global protection curve. Independently interpret each retained policy tree for readiness, Q, W and L over every useful-gate outcome path; require total W=mandatory work+oracle curve and exact L=globalTop_(B-r). Full-program transfer relies on the separate concrete-history theorem, not this finite code.
+
+Use a300s campaign deadline and a5s per-input deadline. Preserve every selected input with SUCCESS, TIMEOUT, FAILURE or NOT_EXECUTED. Stop after a verified root frontier has more than one incomparable W curve, after any semantic failure, or at the campaign deadline; retain all remaining inputs as NOT_EXECUTED with cause. Save complete witness trees and interpreted vectors for the known case and any width>1 candidate. A width>1 result is a candidate counterexample requiring separate mathematical reconstruction; a width1 population proves no general theorem. No native timing, paidAPI, credit or human/proxy study. Prior inputs/raw remain unchanged.

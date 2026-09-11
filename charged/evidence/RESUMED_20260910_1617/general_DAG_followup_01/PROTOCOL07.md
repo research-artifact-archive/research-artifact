@@ -1,0 +1,3 @@
+# Claude-proposed distinct-weight falsifier07
+
+One new input is fixed before execution, drawn from the preserved ordinary ClaudeCost16 technical answer. Its predicted B7 gap14 is unverified. Use the unchanged full Universal and minimum-ready-order04 recurrences, interpret every returned tree and save all outcomes, including equality, timeout or semantic failure. Limit5s, one execution, no retry. This adaptive one-root follow-up is not a fresh independent population or a general proof. Prior nine equality outcomes stay unchanged. Preserve the code-derived witness even if the hand calculation is wrong; distinguish finite discrepancy from all-program or general structural theorems.
