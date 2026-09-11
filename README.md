@@ -1,6 +1,6 @@
 # Resource Contracts for Completing Optimistic Computations
 
-Anonymous research artifact for [manuscript232](paper/main.pdf). The paper asks how much total work a scheduler may spend while retaining a fixed call allowance and optimal protected work at every unknown interference budget. For an arbitrary finite dependency DAG, an exact safety filter permits every completion mode that preserves the residual protection contract. Every caller following the specified immediate-preparation protocol has worst body work within `(3r+2)/(2r+2)` of the best general program satisfying the same simultaneous contract. The factor is sharp over this entire caller class; it is 5/4 for one spare call.
+Anonymous research artifact for [manuscript240](paper/main.pdf). The paper asks how much total work a scheduler may spend while retaining a fixed call allowance and optimal protected work at every unknown interference budget. For an arbitrary finite dependency DAG, an exact safety filter permits every completion mode that preserves the residual protection contract. Every caller following the specified immediate-preparation protocol has worst body work within `(3r+2)/(2r+2)` of the best general program satisfying the same simultaneous contract. The factor is sharp over this entire caller class; it is 5/4 for one spare call.
 
 The fixed paper has18 main-text pages, with Data Availability and references on pages19–21. [Its snapshot](paper/SNAPSHOT.json) binds the source/PDF bytes. The [paper guide](paper/README.md) explains the structure and the [evidence map](PAPER_ARTIFACT_MAP.md) connects claims to their fixed studies.
 
@@ -9,6 +9,8 @@ The fixed paper has18 main-text pages, with Data Availability and references on 
 [Residual safety](charged/RESIDUAL_SAFETY.md), [general fee separation](charged/CHARGED_GENERAL.md) and [three actual operation prices](charged/THREE_COST_RESIDUAL.md) distinguish body costs from resource charges. The body-only filter needs completed weights and current proposed work; arbitrary future fee premiums can require future information. The [Java component](charged/JAVA_RESIDUAL_FILTER.md) implements the body/common-premium interface with two heaps. All16,267 policy comparisons and all62 Java worst-work comparator coordinates are equal: extra permissions alone did not improve those worst-work values.
 
 Native/source studies retain their narrower scope and adverse results. The cached Linux variant preserves a two-logical-call cap but permits three body attempts, relaxing upstream's two-body-attempt bound. The earlier two-cheap variant can also use three logical calls. Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. These results do not establish a natural client needing the combined contract, native latency gains, strong novelty or submission readiness.
+
+A separate [joint-resource supplement](paper/supplement/JOINT_RESOURCES.md) derives common optimality for monotone resource objectives on independent jobs, exact equal-work DAG classes, and a sharp price-dependent caller bound. These are consequences of existing proof witnesses, outside the manuscript's numbered theorems and the60-stage replay. Nine arithmetic illustrations are separately reproducible; they are not new native samples. Original derivations and corrections are preserved with their scope. This addition does not resolve the manuscript's significance or application gap.
 
 ## Reproduce
 
@@ -20,7 +22,7 @@ python3 -B tools/verify_release.py
 python3 -B charged/reproduce.py all --out work/all60 --timeout 300
 ```
 
-Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. A fresh unauthenticated acquisition of this immutable evidence commit passed its complete142,751-file inventory and all60 standard stages. The [reproduction receipt](REPRODUCTION_20260911.json) gives the exact scope. The paper publication changes the manuscript and explanatory metadata, with scientific sources, inputs, proofs, traces and replay code unchanged. At the evidence commit, the stored older manuscript is219; manuscript232 is in this later paper publication.
+Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. A fresh unauthenticated acquisition of this immutable evidence commit passed its complete142,751-file inventory and all60 standard stages. The [reproduction receipt](REPRODUCTION_20260911.json) gives the exact scope. This release changes manuscript exposition and adds a separately scoped analytical supplement; all existing60-stage code, proof, input and trace payloads remain unchanged. At the evidence commit, the stored older manuscript is219; manuscript240 is in this later paper publication.
 
 Standard replays use fixed populations and create no new independent workload or timing sample. Optional native rebuild commands are separate. `./reproduce.sh portable` verifies the legacy package. Prior native Java rebuilds remain identified by their original commit; they were not repeated as new measurements for this paper publication.
 

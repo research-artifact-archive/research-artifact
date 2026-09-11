@@ -1,8 +1,8 @@
 {
-  "schema": "author-public-reproduction-20260911-v2",
-  "utc": "2026-09-11T06:31:11.397900+00:00",
+  "schema": "author-public-reproduction-20260911-v3",
+  "utc": "2026-09-11T07:27:39.726967+00:00",
   "evidence_commit": "759160fa128d0f2653d3195ea0d9b2289f4198f8",
-  "public_acquisition": "fresh unauthenticated HTTPS; credential helpers, extra auth headers and global/system git config disabled",
+  "public_acquisition": "fresh unauthenticated HTTPS; complete inventory and all60 standard stages",
   "complete_public_inventory_verified": 142751,
   "standard_stage_count": 60,
   "all_standard_stages": "SUCCESS",
@@ -249,14 +249,14 @@
     }
   ],
   "standard_replay_seconds": 878.7996158329915,
-  "replay_scope": "fixed evidence; native timings are not repeated as new samples",
-  "previous57_stage_record_unchanged": {
-    "schema": "author-public-reproduction-20260911-v1",
-    "utc": "2026-09-11T04:12:22.772366+00:00",
-    "evidence_commit": "0716120a06423e871305bf51825f903ba3ccbde0",
+  "replay_scope": "fixed evidence, not new native measurements",
+  "previous_record": {
+    "schema": "author-public-reproduction-20260911-v2",
+    "utc": "2026-09-11T06:31:11.397900+00:00",
+    "evidence_commit": "759160fa128d0f2653d3195ea0d9b2289f4198f8",
     "public_acquisition": "fresh unauthenticated HTTPS; credential helpers, extra auth headers and global/system git config disabled",
-    "complete_public_inventory_verified": 142584,
-    "standard_stage_count": 57,
+    "complete_public_inventory_verified": 142751,
+    "standard_stage_count": 60,
     "all_standard_stages": "SUCCESS",
     "standard_stage_results": [
       {
@@ -486,51 +486,322 @@
       {
         "stage": "java-residual-filter",
         "status": "SUCCESS"
+      },
+      {
+        "stage": "charged-general",
+        "status": "SUCCESS"
+      },
+      {
+        "stage": "three-cost-residual",
+        "status": "SUCCESS"
+      },
+      {
+        "stage": "dag-approximation",
+        "status": "SUCCESS"
       }
     ],
+    "standard_replay_seconds": 878.7996158329915,
     "replay_scope": "fixed evidence; native timings are not repeated as new samples",
-    "public_native_Java_rebuild": {
-      "status": "SUCCESS",
-      "filter_sequences": 498,
-      "heap_regression_roots": 2,
-      "native_roots": 48,
-      "native_paths": 996,
-      "native_events": 31892,
-      "saved_traces_byte_exact": true,
-      "new_independent_population": false,
-      "new_timing_samples": 0
+    "previous57_stage_record_unchanged": {
+      "schema": "author-public-reproduction-20260911-v1",
+      "utc": "2026-09-11T04:12:22.772366+00:00",
+      "evidence_commit": "0716120a06423e871305bf51825f903ba3ccbde0",
+      "public_acquisition": "fresh unauthenticated HTTPS; credential helpers, extra auth headers and global/system git config disabled",
+      "complete_public_inventory_verified": 142584,
+      "standard_stage_count": 57,
+      "all_standard_stages": "SUCCESS",
+      "standard_stage_results": [
+        {
+          "stage": "curves",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "native",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "deephaven",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "scale",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "calibration",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "ordering",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "refutations",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "compact",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "compact-native",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "compact-scale",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "price-bounds",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "resource-frontier",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "resource-vector",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "resource-frontier-native",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "budget-blind",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "universal-work",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "universal-order",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "adaptive-work",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "probe-blocking",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-source",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "protected-tail",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "protected-suffix",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-semantics",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-reentry",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-arrivals",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "partial-repair",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-compilation",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "partial-compact",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "partial-objectives",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-batch",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-document-guard",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "workflow-repair",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "arrival-budget",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "cap-contracts",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "roslyn-per-job",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "single-job-regret",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "workflow-regret",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "source-cost-boundaries",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "joint-work",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "general-retry",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "one-retry-native",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "universal-independent",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "universal-independent-native",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "linux-dentry",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "guard-entry",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "charged-comparison",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "fully-charged-one-write",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "linux-counting",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "guard-only-joint",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "uniform-guard",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "double-counted-mismatch",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "unit-guard-dag",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "universal-observation-dag",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "short-order-policy",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "safe-fresh-suffix",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "residual-safety",
+          "status": "SUCCESS"
+        },
+        {
+          "stage": "java-residual-filter",
+          "status": "SUCCESS"
+        }
+      ],
+      "replay_scope": "fixed evidence; native timings are not repeated as new samples",
+      "public_native_Java_rebuild": {
+        "status": "SUCCESS",
+        "filter_sequences": 498,
+        "heap_regression_roots": 2,
+        "native_roots": 48,
+        "native_paths": 996,
+        "native_events": 31892,
+        "saved_traces_byte_exact": true,
+        "new_independent_population": false,
+        "new_timing_samples": 0
+      },
+      "paper219": {
+        "pdf_sha256": "27271b61ece03556e9017cb7b9f782e80d20eb9ad15ce5e99a6e9623d10cf1c1",
+        "body_pages": 18,
+        "total_pages": 21,
+        "fixed_PDF_separate_secret_model_review": "submitted; result not yet incorporated",
+        "preceding214_review": "Reject, confidence3/4, retained; not a decision for219",
+        "main_scientific_payload_changed_in_paper_publication": false,
+        "source_inputs_traces_proofs_preserved": true,
+        "new_experimental_samples": 0
+      },
+      "retained_transport_failure": {
+        "scope": "local stage56 first replay comparator",
+        "cause": "in-memory tuple compared with JSON array",
+        "corrected": "normalize to JSON value before witness comparison; no scientific source/input/result changes",
+        "subsequent_local_and_public_replay": "SUCCESS"
+      },
+      "actual_client_and_native_latency_benefit": "NOT_ESTABLISHED",
+      "author_reproduction_not_independent_certification": true,
+      "submission_ready": false
     },
-    "paper219": {
-      "pdf_sha256": "27271b61ece03556e9017cb7b9f782e80d20eb9ad15ce5e99a6e9623d10cf1c1",
+    "paper232": {
+      "pdf_sha256": "0e72e8a280120d40d2c6901dc91bb3d237484eae5a3a2524f978e78f944730e7",
       "body_pages": 18,
       "total_pages": 21,
-      "fixed_PDF_separate_secret_model_review": "submitted; result not yet incorporated",
-      "preceding214_review": "Reject, confidence3/4, retained; not a decision for219",
+      "fixed_PDF_separate_model_review": "pending; no review result inferred from author checks",
+      "preceding225_review": "Reject, confidence4/5, retained; not a decision for232",
       "main_scientific_payload_changed_in_paper_publication": false,
       "source_inputs_traces_proofs_preserved": true,
       "new_experimental_samples": 0
-    },
-    "retained_transport_failure": {
-      "scope": "local stage56 first replay comparator",
-      "cause": "in-memory tuple compared with JSON array",
-      "corrected": "normalize to JSON value before witness comparison; no scientific source/input/result changes",
-      "subsequent_local_and_public_replay": "SUCCESS"
     },
     "actual_client_and_native_latency_benefit": "NOT_ESTABLISHED",
     "author_reproduction_not_independent_certification": true,
     "submission_ready": false
   },
-  "paper232": {
-    "pdf_sha256": "0e72e8a280120d40d2c6901dc91bb3d237484eae5a3a2524f978e78f944730e7",
+  "paper240": {
+    "pdf_sha256": "e58b68aa7b03fd6b4beda821efc9e1d8b734450811220a7c956b313bb334ae99",
     "body_pages": 18,
     "total_pages": 21,
-    "fixed_PDF_separate_model_review": "pending; no review result inferred from author checks",
-    "preceding225_review": "Reject, confidence4/5, retained; not a decision for232",
-    "main_scientific_payload_changed_in_paper_publication": false,
-    "source_inputs_traces_proofs_preserved": true,
-    "new_experimental_samples": 0
+    "full_model_review_this_PDF": false,
+    "latest_full_review": "232 Reject confidence4/5",
+    "changed": "exposition, proof details, notation/procedure/evidence tables, native prose; numbered theorem formulas unchanged",
+    "all_existing60_stage_payloads_unchanged": true,
+    "new_native_samples": 0
   },
-  "actual_client_and_native_latency_benefit": "NOT_ESTABLISHED",
-  "author_reproduction_not_independent_certification": true,
+  "analytical_supplement": {
+    "path": "paper/supplement/SUPPLEMENT_MANIFEST.json",
+    "outside_PDF_numbered_results": true,
+    "new_standard_stage": false,
+    "arithmetic_examples_only": 9
+  },
+  "actual_client_native_latency_benefit": "NOT_ESTABLISHED",
   "submission_ready": false
 }

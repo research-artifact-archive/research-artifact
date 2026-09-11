@@ -1,0 +1,404 @@
+{
+  "completed_utc": "2026-09-11T06:48:50.799335+00:00",
+  "input_sha256": "ae9cc24c4a018ae5153d633137b8ce4aa6e9b5574ec3cf51b1073a4b615723fc",
+  "case_count": 9,
+  "rows": [
+    {
+      "id": "C1_joint_correlation",
+      "input": {
+        "id": "C1_joint_correlation",
+        "kind": "corners",
+        "weights": [
+          "1",
+          "100"
+        ],
+        "r": 1,
+        "B": 3,
+        "lambda": "1",
+        "gamma": "0",
+        "indicator_thresholds": [
+          "301",
+          "101",
+          "0"
+        ]
+      },
+      "corners_W_L_Q": [
+        [
+          "301",
+          "100",
+          "3"
+        ],
+        [
+          "203",
+          "101",
+          "3"
+        ]
+      ],
+      "joint_corner_costs": [
+        "401",
+        "304"
+      ],
+      "joint_optimum": "401",
+      "maximizing_corner_indices_1_based": [
+        1
+      ],
+      "componentwise_maxima": [
+        "301",
+        "101",
+        "3"
+      ],
+      "sum_of_separate_suprema": "402",
+      "separate_minus_joint": "1",
+      "monotone_indicator_at_each_corner": [
+        0,
+        0
+      ],
+      "monotone_indicator_at_componentwise_maxima": 1
+    },
+    {
+      "id": "C2_price_changes_worst_corner",
+      "input": {
+        "id": "C2_price_changes_worst_corner",
+        "kind": "corners",
+        "weights": [
+          "1",
+          "100"
+        ],
+        "r": 1,
+        "B": 3,
+        "lambda": "100",
+        "gamma": "2"
+      },
+      "corners_W_L_Q": [
+        [
+          "301",
+          "100",
+          "3"
+        ],
+        [
+          "203",
+          "101",
+          "3"
+        ]
+      ],
+      "joint_corner_costs": [
+        "10307",
+        "10309"
+      ],
+      "joint_optimum": "10309",
+      "maximizing_corner_indices_1_based": [
+        2
+      ],
+      "componentwise_maxima": [
+        "301",
+        "101",
+        "3"
+      ],
+      "sum_of_separate_suprema": "10407",
+      "separate_minus_joint": "98"
+    },
+    {
+      "id": "C3_early_budget",
+      "input": {
+        "id": "C3_early_budget",
+        "kind": "corners",
+        "weights": [
+          "2",
+          "5"
+        ],
+        "r": 2,
+        "B": 1,
+        "lambda": "3",
+        "gamma": "2"
+      },
+      "corners_W_L_Q": [
+        [
+          "12",
+          "0",
+          "3"
+        ]
+      ],
+      "joint_corner_costs": [
+        "18"
+      ],
+      "joint_optimum": "18",
+      "maximizing_corner_indices_1_based": [
+        1
+      ],
+      "componentwise_maxima": [
+        "12",
+        "0",
+        "3"
+      ],
+      "sum_of_separate_suprema": "18",
+      "separate_minus_joint": "0"
+    },
+    {
+      "id": "C4_zero_retry",
+      "input": {
+        "id": "C4_zero_retry",
+        "kind": "corners",
+        "weights": [
+          "1",
+          "2",
+          "4"
+        ],
+        "r": 0,
+        "B": 2,
+        "lambda": "1",
+        "gamma": "7"
+      },
+      "corners_W_L_Q": [
+        [
+          "11",
+          "4",
+          "3"
+        ],
+        [
+          "13",
+          "6",
+          "3"
+        ]
+      ],
+      "joint_corner_costs": [
+        "36",
+        "40"
+      ],
+      "joint_optimum": "40",
+      "maximizing_corner_indices_1_based": [
+        2
+      ],
+      "componentwise_maxima": [
+        "13",
+        "6",
+        "3"
+      ],
+      "sum_of_separate_suprema": "40",
+      "separate_minus_joint": "0"
+    },
+    {
+      "id": "G1_one_job",
+      "input": {
+        "id": "G1_one_job",
+        "kind": "geometric",
+        "r": 1,
+        "theta": "2",
+        "gamma": "0",
+        "t": "1",
+        "n": 1
+      },
+      "q": "1/3",
+      "weights_descending": [
+        "1"
+      ],
+      "Omega": "1",
+      "all_s_terms": [
+        "3"
+      ],
+      "constant_s_term": "3",
+      "term_equality": true,
+      "bad_caller_joint_cost": "4",
+      "optimal_joint_cost": "4",
+      "ratio": "1",
+      "ratio_decimal_display_only": 1.0,
+      "beta": "11/9",
+      "ratio_le_beta": true,
+      "gamma_calls_over_t": "0",
+      "work_only_alpha": "5/4"
+    },
+    {
+      "id": "G2_finite_geometric",
+      "input": {
+        "id": "G2_finite_geometric",
+        "kind": "geometric",
+        "r": 1,
+        "theta": "2",
+        "gamma": "0",
+        "t": "1",
+        "n": 4
+      },
+      "q": "1/3",
+      "weights_descending": [
+        "1",
+        "1/3",
+        "1/9",
+        "1/27"
+      ],
+      "Omega": "40/27",
+      "all_s_terms": [
+        "3",
+        "3",
+        "3",
+        "3"
+      ],
+      "constant_s_term": "3",
+      "term_equality": true,
+      "bad_caller_joint_cost": "49/9",
+      "optimal_joint_cost": "121/27",
+      "ratio": "147/121",
+      "ratio_decimal_display_only": 1.2148760330578512,
+      "beta": "11/9",
+      "ratio_le_beta": true,
+      "gamma_calls_over_t": "0",
+      "work_only_alpha": "5/4"
+    },
+    {
+      "id": "G3_unscaled_positive_call_price",
+      "input": {
+        "id": "G3_unscaled_positive_call_price",
+        "kind": "geometric",
+        "r": 1,
+        "theta": "2",
+        "gamma": "7",
+        "t": "1",
+        "n": 12
+      },
+      "q": "1/3",
+      "weights_descending": [
+        "1",
+        "1/3",
+        "1/9",
+        "1/27",
+        "1/81",
+        "1/243",
+        "1/729",
+        "1/2187",
+        "1/6561",
+        "1/19683",
+        "1/59049",
+        "1/177147"
+      ],
+      "Omega": "265720/177147",
+      "all_s_terms": [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+      ],
+      "constant_s_term": "3",
+      "term_equality": true,
+      "bad_caller_joint_cost": "5698228/59049",
+      "optimal_joint_cost": "16917538/177147",
+      "ratio": "8547342/8458769",
+      "ratio_decimal_display_only": 1.0104711453877036,
+      "beta": "11/9",
+      "ratio_le_beta": true,
+      "gamma_calls_over_t": "91",
+      "work_only_alpha": "5/4"
+    },
+    {
+      "id": "G4_scaled_positive_call_price",
+      "input": {
+        "id": "G4_scaled_positive_call_price",
+        "kind": "geometric",
+        "r": 1,
+        "theta": "2",
+        "gamma": "7",
+        "t": "10000",
+        "n": 12
+      },
+      "q": "1/3",
+      "weights_descending": [
+        "10000",
+        "10000/3",
+        "10000/9",
+        "10000/27",
+        "10000/81",
+        "10000/243",
+        "10000/729",
+        "10000/2187",
+        "10000/6561",
+        "10000/19683",
+        "10000/59049",
+        "10000/177147"
+      ],
+      "Omega": "2657200000/177147",
+      "all_s_terms": [
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000",
+        "30000"
+      ],
+      "constant_s_term": "30000",
+      "term_equality": true,
+      "bad_caller_joint_cost": "3253063459/59049",
+      "optimal_joint_cost": "7987730377/177147",
+      "ratio": "9759190377/7987730377",
+      "ratio_decimal_display_only": 1.2217726333253274,
+      "beta": "11/9",
+      "ratio_le_beta": true,
+      "gamma_calls_over_t": "91/10000",
+      "work_only_alpha": "5/4"
+    },
+    {
+      "id": "G5_price_can_worsen_work_only_factor",
+      "input": {
+        "id": "G5_price_can_worsen_work_only_factor",
+        "kind": "geometric",
+        "r": 4,
+        "theta": "2",
+        "gamma": "0",
+        "t": "1",
+        "n": 12
+      },
+      "q": "2/3",
+      "weights_descending": [
+        "1",
+        "2/3",
+        "4/9",
+        "8/27",
+        "16/81",
+        "32/243",
+        "64/729",
+        "128/2187",
+        "256/6561",
+        "512/19683",
+        "1024/59049",
+        "2048/177147"
+      ],
+      "Omega": "527345/177147",
+      "all_s_terms": [
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6"
+      ],
+      "constant_s_term": "6",
+      "term_equality": true,
+      "bad_caller_joint_cost": "763541/59049",
+      "optimal_joint_cost": "1590227/177147",
+      "ratio": "2290623/1590227",
+      "ratio_decimal_display_only": 1.4404377488245388,
+      "beta": "13/9",
+      "ratio_le_beta": true,
+      "gamma_calls_over_t": "0",
+      "work_only_alpha": "7/5"
+    }
+  ],
+  "all_geometric_equalities_and_upper_bounds": true,
+  "limits": "Arithmetic of displayed expressions only; not a semantic experiment or a proof certificate."
+}
