@@ -142,3 +142,5 @@ Current [paper187](../paper/README.md) places the fully charged one-write repres
 [Safe fresh suffix transformation](SAFE_FRESH_SUFFIX.md) adds stage55 outside manuscript216. Two visible guards preserve the least protected curve and cannot increase worst body work over the same cheap prefix followed by all-cached completion. All714 fixed roots and22,583 paths are stored; strict improvements occur only on2 preselected prior roots, and712 are equal. No general-DAG least-work or new native/population claim.
 
 [Residual resource safety](RESIDUAL_SAFETY.md) adds the56th standard stage, with an exact completed-state filter, common/separated-fee extension and opposite permissions under indistinguishable future costs. All prior studies and adverse outcomes remain. The stored manuscript216 is unchanged by this supplement-only batch.
+
+[Java residual filter](JAVA_RESIDUAL_FILTER.md) adds stage57: a future-data-free Java interface, two linked heaps,498 filter sequences and996 native paths with all events checked. All62 worst-work comparator coordinates are equal. Both implementation versions and their full traces remain. The stored manuscript216 is unchanged.

@@ -1,0 +1,9 @@
+# Revision02: strict abstract heap-update bound
+
+2026-09-11, after attempt01 SUCCESS. Initial Java PriorityQueue implementation and all raw results stay unchanged. Functional correspondence passed all fixed cases, but grow() in an array-backed heap can copy O(|D|) elements on one insertion. Its O(log n) update statement needs amortized interpretation at the container level, not the requested strict abstract bound.
+
+New v2/ResidualFilter.java uses two linked complete binary heaps with constant-time root access and O(log n) binary-index navigation and sifting, allocating at most one node per heap insertion. Each filter update performs a constant number of such insertions/removals. It stores no future job data. Garbage collection, allocation latency and wall-clock bounds remain unclaimed. A completion-count checked-add preflight is also added.
+
+Protocol remains the existing fixed PROTOCOL.md plus this pre-run amendment. Repeat all unchanged 498 filter rows and 996 native paths against unchanged independent reference and native wrapper; do not add the repeated counts as independent evidence. Add exactly two structural filter roots to exercise linked-heap index boundaries through 65/130 completions, frozen in HEAP_STRUCTURE_INPUTS before the v2 run. Root1: initial completed weights1..65,k0,ell0, then mismatch current weights1..65, querying before each. Root2: initial completed weights65..1,k33,ell0, then matched current weights66..130, then mismatched current weights3..67, querying before each. These are heap-regression checks, not software-workload samples.
+
+No earlier failed run is hidden; no performance measurement is added. Max compile30s, filter60s, native120s, compare120s, structure60s; overall360s and03:53UTC cutoff remain. All source and input hashes recorded before compilation.

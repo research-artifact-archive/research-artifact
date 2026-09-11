@@ -1,0 +1,452 @@
+{
+  "id": "strict-safe-fresh-normal-filter-distinct-39",
+  "root": "strict-safe-fresh-normal-filter-distinct",
+  "status": "SUCCESS",
+  "error": "",
+  "actualExternalWrites": 2,
+  "bodyW": 345,
+  "bodyL": 83,
+  "Q": 7,
+  "savedOutputs": [
+    {
+      "id": 7,
+      "payload": 5822983486146363701
+    },
+    {
+      "id": 12,
+      "payload": 5822983487716219274
+    },
+    {
+      "id": 13,
+      "payload": -2217434056763473815
+    },
+    {
+      "id": 14,
+      "payload": -1808297484687954748
+    },
+    {
+      "id": 15,
+      "payload": -8665573158963494427
+    },
+    {
+      "id": 16,
+      "payload": -3988752431500806746
+    }
+  ],
+  "liveOutputs": [
+    {
+      "id": 7,
+      "payload": 5822983486146363701
+    },
+    {
+      "id": 12,
+      "payload": 5822983487716219274
+    },
+    {
+      "id": 13,
+      "payload": -2217434056763473815
+    },
+    {
+      "id": 14,
+      "payload": -1808297484687954748
+    },
+    {
+      "id": 15,
+      "payload": -8665573158963494427
+    },
+    {
+      "id": 16,
+      "payload": -3988752431500806746
+    }
+  ],
+  "writerTerminated": true,
+  "events": [
+    {
+      "kind": "initial",
+      "job": 0,
+      "id": 1,
+      "payload": 17
+    },
+    {
+      "kind": "initial",
+      "job": 1,
+      "id": 2,
+      "payload": 34
+    },
+    {
+      "kind": "initial",
+      "job": 2,
+      "id": 3,
+      "payload": 51
+    },
+    {
+      "kind": "initial",
+      "job": 3,
+      "id": 4,
+      "payload": 68
+    },
+    {
+      "kind": "initial",
+      "job": 4,
+      "id": 5,
+      "payload": 85
+    },
+    {
+      "kind": "initial",
+      "job": 5,
+      "id": 6,
+      "payload": 102
+    },
+    {
+      "kind": "select",
+      "job": 0,
+      "mode": "cheap",
+      "filter": {
+        "k": 0,
+        "ell": 0,
+        "topSum": 0,
+        "completed": 0,
+        "kth": null
+      }
+    },
+    {
+      "kind": "body",
+      "job": 0,
+      "source": 1,
+      "parents": [],
+      "out": 7,
+      "payload": 5822983486146363701,
+      "weight": 100,
+      "protected": false
+    },
+    {
+      "kind": "compare",
+      "mode": "cheap",
+      "job": 0,
+      "captured": 1,
+      "current": 1,
+      "prepared": 7,
+      "match": true
+    },
+    {
+      "kind": "answer",
+      "job": 0,
+      "mode": "cheap",
+      "success": true,
+      "match": true,
+      "saved": 7,
+      "live": 7,
+      "filter": {
+        "k": 0,
+        "ell": 0,
+        "topSum": 0,
+        "completed": 1,
+        "kth": null
+      }
+    },
+    {
+      "kind": "select",
+      "job": 1,
+      "mode": "cheap",
+      "filter": {
+        "k": 0,
+        "ell": 0,
+        "topSum": 0,
+        "completed": 1,
+        "kth": null
+      }
+    },
+    {
+      "kind": "body",
+      "job": 1,
+      "source": 2,
+      "parents": [
+        7
+      ],
+      "out": 8,
+      "payload": 5822983487216861774,
+      "weight": 1,
+      "protected": false
+    },
+    {
+      "kind": "write",
+      "job": 1,
+      "source": 2,
+      "out": 9,
+      "payload": 109,
+      "phase": "gate"
+    },
+    {
+      "kind": "compare",
+      "mode": "cheap",
+      "job": 1,
+      "captured": 2,
+      "current": 9,
+      "prepared": 8,
+      "match": false
+    },
+    {
+      "kind": "answer",
+      "job": 1,
+      "mode": "cheap",
+      "success": false,
+      "match": false,
+      "saved": null,
+      "live": 9,
+      "filter": {
+        "k": 0,
+        "ell": 0,
+        "topSum": 0,
+        "completed": 1,
+        "kth": null
+      }
+    },
+    {
+      "kind": "select",
+      "job": 1,
+      "mode": "cached",
+      "filter": {
+        "k": 0,
+        "ell": 0,
+        "topSum": 0,
+        "completed": 1,
+        "kth": null
+      }
+    },
+    {
+      "kind": "body",
+      "job": 1,
+      "source": 9,
+      "parents": [
+        7
+      ],
+      "out": 10,
+      "payload": 5822983487341701149,
+      "weight": 1,
+      "protected": false
+    },
+    {
+      "kind": "write",
+      "job": 1,
+      "source": 9,
+      "out": 11,
+      "payload": 334,
+      "phase": "gate"
+    },
+    {
+      "kind": "compare",
+      "mode": "cached",
+      "job": 1,
+      "captured": 9,
+      "current": 11,
+      "prepared": 10,
+      "match": false
+    },
+    {
+      "kind": "body",
+      "job": 1,
+      "source": 11,
+      "parents": [
+        7
+      ],
+      "out": 12,
+      "payload": 5822983487716219274,
+      "weight": 1,
+      "protected": true
+    },
+    {
+      "kind": "answer",
+      "job": 1,
+      "mode": "cached",
+      "success": true,
+      "match": false,
+      "saved": 12,
+      "live": 12,
+      "filter": {
+        "k": 1,
+        "ell": 1,
+        "topSum": 100,
+        "completed": 2,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "select",
+      "job": 2,
+      "mode": "fresh",
+      "filter": {
+        "k": 1,
+        "ell": 1,
+        "topSum": 100,
+        "completed": 2,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "body",
+      "job": 2,
+      "source": 3,
+      "parents": [
+        12
+      ],
+      "out": 13,
+      "payload": -2217434056763473815,
+      "weight": 2,
+      "protected": true
+    },
+    {
+      "kind": "answer",
+      "job": 2,
+      "mode": "fresh",
+      "success": true,
+      "match": null,
+      "saved": 13,
+      "live": 13,
+      "filter": {
+        "k": 1,
+        "ell": 3,
+        "topSum": 100,
+        "completed": 3,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "select",
+      "job": 3,
+      "mode": "fresh",
+      "filter": {
+        "k": 1,
+        "ell": 3,
+        "topSum": 100,
+        "completed": 3,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "body",
+      "job": 3,
+      "source": 4,
+      "parents": [
+        13
+      ],
+      "out": 14,
+      "payload": -1808297484687954748,
+      "weight": 80,
+      "protected": true
+    },
+    {
+      "kind": "answer",
+      "job": 3,
+      "mode": "fresh",
+      "success": true,
+      "match": null,
+      "saved": 14,
+      "live": 14,
+      "filter": {
+        "k": 1,
+        "ell": 83,
+        "topSum": 100,
+        "completed": 4,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "select",
+      "job": 4,
+      "mode": "cached",
+      "filter": {
+        "k": 1,
+        "ell": 83,
+        "topSum": 100,
+        "completed": 4,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "body",
+      "job": 4,
+      "source": 5,
+      "parents": [
+        14
+      ],
+      "out": 15,
+      "payload": -8665573158963494427,
+      "weight": 80,
+      "protected": false
+    },
+    {
+      "kind": "compare",
+      "mode": "cached",
+      "job": 4,
+      "captured": 5,
+      "current": 5,
+      "prepared": 15,
+      "match": true
+    },
+    {
+      "kind": "answer",
+      "job": 4,
+      "mode": "cached",
+      "success": true,
+      "match": true,
+      "saved": 15,
+      "live": 15,
+      "filter": {
+        "k": 1,
+        "ell": 83,
+        "topSum": 100,
+        "completed": 5,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "select",
+      "job": 5,
+      "mode": "cached",
+      "filter": {
+        "k": 1,
+        "ell": 83,
+        "topSum": 100,
+        "completed": 5,
+        "kth": 100
+      }
+    },
+    {
+      "kind": "body",
+      "job": 5,
+      "source": 6,
+      "parents": [
+        15
+      ],
+      "out": 16,
+      "payload": -3988752431500806746,
+      "weight": 80,
+      "protected": false
+    },
+    {
+      "kind": "compare",
+      "mode": "cached",
+      "job": 5,
+      "captured": 6,
+      "current": 6,
+      "prepared": 16,
+      "match": true
+    },
+    {
+      "kind": "answer",
+      "job": 5,
+      "mode": "cached",
+      "success": true,
+      "match": true,
+      "saved": 16,
+      "live": 16,
+      "filter": {
+        "k": 1,
+        "ell": 83,
+        "topSum": 100,
+        "completed": 6,
+        "kth": 100
+      }
+    }
+  ]
+}

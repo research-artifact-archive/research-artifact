@@ -1,0 +1,128 @@
+{
+  "finished_utc": "2026-09-11T03:44:05.215370+00:00",
+  "status": "SUCCESS",
+  "processes": [
+    {
+      "label": "java_version",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+        "-version"
+      ],
+      "started_utc": "2026-09-11T03:44:03.517120+00:00",
+      "max_seconds": 10,
+      "pid": 85102,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:03.557463+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "compile",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/javac",
+        "--release",
+        "17",
+        "-Xlint:all",
+        "-d",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02/classes",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/v2/ResidualFilter.java",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/Json.java",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/FilterDriver.java",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/NativeIntegration.java"
+      ],
+      "started_utc": "2026-09-11T03:44:03.557784+00:00",
+      "max_seconds": 30,
+      "pid": 85104,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:04.104318+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "filter",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+        "-cp",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02/classes",
+        "FilterDriver",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/FILTER_INPUTS.tsv"
+      ],
+      "started_utc": "2026-09-11T03:44:04.104734+00:00",
+      "max_seconds": 60,
+      "pid": 85112,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:04.253913+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "native",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+        "-cp",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02/classes",
+        "NativeIntegration",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/NATIVE_INPUTS.tsv"
+      ],
+      "started_utc": "2026-09-11T03:44:04.254275+00:00",
+      "max_seconds": 120,
+      "pid": 85113,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:04.603150+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "comparison",
+      "command": [
+        "/anonymous-author-home/.pyenv/versions/3.10.9/bin/python3",
+        "-B",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/compare.py",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02"
+      ],
+      "started_utc": "2026-09-11T03:44:04.603694+00:00",
+      "max_seconds": 120,
+      "pid": 85118,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:05.084615+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "heap",
+      "command": [
+        "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+        "-cp",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02/classes",
+        "FilterDriver",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/HEAP_STRUCTURE_INPUTS.tsv"
+      ],
+      "started_utc": "2026-09-11T03:44:05.084970+00:00",
+      "max_seconds": 60,
+      "pid": 85121,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:05.167022+00:00",
+      "owned_child_reaped": true
+    },
+    {
+      "label": "heap_comparison",
+      "command": [
+        "/anonymous-author-home/.pyenv/versions/3.10.9/bin/python3",
+        "-B",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/heap_structure.py",
+        "compare",
+        "/author-workspace/RESEARCH_RESTART_20260905/RESUMED_20260911_1123/java_residual_filter_01/attempt02"
+      ],
+      "started_utc": "2026-09-11T03:44:05.167349+00:00",
+      "max_seconds": 60,
+      "pid": 85122,
+      "status": "SUCCESS",
+      "returncode": 0,
+      "finished_utc": "2026-09-11T03:44:05.215105+00:00",
+      "owned_child_reaped": true
+    }
+  ],
+  "owned_live_children": 0,
+  "freeze_sha256": "d1f1ce318044f698a5c24c12e099d23b8ecafb0e612d22f38713fb8183a9e13b"
+}
