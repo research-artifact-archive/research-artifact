@@ -24,6 +24,6 @@ The [whole-curve archive](evidence/RESUMED_20260911_1123/whole_curve_obstruction
 python3 -B charged/reproduce.py residual-safety --out work/residual56 --timeout 300
 ```
 
-The driver reads the fixed scientific code and previous interpreters, creates a new tree and requires stable results to match. Timings and compression headers are not compared as scientific outcomes. It runs no native timing campaign and creates no new independent sample. All55 previous stages remain available; public manuscript216 is unchanged by this supplement-only batch. The new manuscript will cite a verified public evidence commit after its own build and review preparation.
+The driver reads the fixed scientific code and previous interpreters, creates a new tree and requires stable results to match. Timings and compression headers are not compared as scientific outcomes. It runs no native timing campaign and creates no new independent sample. All55 preceding stages remain available. This supplement was initially published alongside manuscript216. Current manuscript219 integrates the residual/fee results in Sections5–6 and cites the verified combined57-stage evidence commit.
 
 The mechanisms of optimistic fallback/reuse, budgeted top sums and permissive safety control are inherited. The claims concern the stated completion interface. Full-cost correspondence, actual-client demand and native application benefits require separate evidence; the earlier Linux/Roslyn/Valkey adverse results remain in force.

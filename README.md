@@ -1,26 +1,12 @@
-# The Total-Work Cost of Bounded Retry Guarantees
+# Resource Contracts for Completing Optimistic Computations
 
-Anonymous research artifact for the [stored manuscript](paper/main.pdf), fixed manuscript216. Its exact source/PDF hashes and18-body/20-total-page snapshot are in [paper/SNAPSHOT.json](paper/SNAPSHOT.json). The model now has explicit state, action effects/observations/charges and a two-branch worked example. Proposition8 incorporates the [four-job unknown-budget observation boundary](charged/OBSERVATION_DAG.md): strict erasure can raise least total work from20 to21 with the same optimal protection curve. The [full-program](charged/FULL_PROGRAM_PROOF.md) and [conditional Java](charged/JAVA_INTERFACE_PROOF.md) proofs state their premises explicitly.
+Anonymous research artifact for [manuscript219](paper/main.pdf). The paper asks what total work one completion policy must spend to guarantee both a fixed call allowance and optimal protected work for every unknown interference budget. It then characterizes exactly which completion modes preserve the residual protection contract, what information a safety component can omit, and when extra charges change that answer.
 
-Its immutable evidence commit `b719eb7a6514d7f3a47f2a3af21e43b4ffd4699f` passed the complete public inventory and all53 standard stages in a fresh unauthenticated acquisition. This paper/guide update adds no scientific sample. Publication, replay and model review are author activities, not independent certification or acceptance evidence.
+The fixed paper has18 main-text pages and3 reference pages. [Its snapshot](paper/SNAPSHOT.json) binds the source/PDF bytes. [The paper guide](paper/README.md) explains the final structure, and the [evidence map](PAPER_ARTIFACT_MAP.md) connects its claims to reproducible studies.
 
-The research asks how cheap validation, protected recomputation and cached guarded completion trade total work against protected work under bounded completion calls. Its guarantees require the specified persistent-job, observation and charging interfaces. It does not infer costs, a write budget, a caller SLA or contract compliance from arbitrary concurrent code.
+The main new interface needs only completed weights, observed mismatch count, incurred protection and the proposed current weight. [Residual safety](charged/RESIDUAL_SAFETY.md) supplies the full proof, fee conditions and an indistinguishable-prefix counterexample. [The Java component](charged/JAVA_RESIDUAL_FILTER.md) implements that interface with two linked heaps and includes its original/revised traces. All16,267 new/earlier-filter whole-work comparisons and all62 Java comparator coordinates are equal; additional safe choices do not establish a new worst-work improvement.
 
-The newer [distinct-order supplement](charged/SHORT_ORDER_POLICY.md) proves that minimum-ready targets on every call can require at least766 work while a short explicit policy uses752, with the same universal Q/L guarantees. Its427-path candidate and421-path premature-fresh control concern one already-observed root. Stage54 replays the fixed root and short policy; the stored manuscript216 and its cited53-stage evidence are unchanged.
-
-The newer [safe suffix supplement](charged/SAFE_FRESH_SUFFIX.md) gives a general sufficient transformation preserving optimal protection and never increasing worst body work over an all-cached suffix. Its fixed714-root replay retains all22,583 paths, the2 preselected improvements,712 equalities and a faulty one-guard control. Stage55 is outside unchanged manuscript216.
-
-The new [residual safety supplement](charged/RESIDUAL_SAFETY.md) characterizes exact safe modes using completed data only and identifies the fee conditions preserving that interface. All16,267 new/earlier-filter comparisons have equal worst-work curves. Stage56 also preserves the failed attempt to lift a local whole-curve obstruction to the initial state. These results are outside the stored manuscript216 until the substantive new paper is published.
-
-The [Java residual-filter implementation](charged/JAVA_RESIDUAL_FILTER.md) supplies the same completed/current interface using linked heaps. Its498 operation sequences and996 native paths match the reference, including a strict permission difference; all62 worst-work comparisons remain equal. Stage57 is outside manuscript216.
-
-## Start here
-
-* [Paper-to-evidence map](PAPER_ARTIFACT_MAP.md): current mathematical and source obligations, with replay stages.
-* [Unknown-budget observation boundary](charged/OBSERVATION_DAG.md): complete forward-coupling proof, exact policy curves and strict interface premises.
-* [Guard and call accounting](charged/RESOURCE_ACCOUNTING.md): independent comparison-free joint caps, common-price greedy construction and the alternative atomic mismatch call weight.
-* [Unit guards and precedence](charged/UNIT_GUARD_DAG.md): strong joint-cap hardness despite polynomial frontier size; full proof, inherited scheduling attribution, fixed positive/negative checks and fees on every call.
-* [Research lineage](charged/RESEARCH_LINEAGE.md): earlier results, corrections and preserved failures. The older [charged overview](charged/README.md) retains the full extension history.
+The native/source studies preserve narrower correspondence conditions and adverse results: Linux relaxes a two-body-attempt bound to three; Roslyn does not establish fixed-work transfer and is slower under the stated dense arrivals; writer-maintained Valkey alternatives remain stronger. This is an author research artifact, and publication or model review does not establish acceptance or submission readiness.
 
 ## Reproduce
 
@@ -31,12 +17,10 @@ python3 -B tools/verify_release.py
 python3 -B charged/reproduce.py all --out work/all57 --timeout 300
 ```
 
-Use Python3.10+ with assertions enabled on a POSIX system. Always choose a new output directory. The57 standard stages verify and replay fixed evidence using the standard library; they do not rerun native timing campaigns as new samples. To reproduce a particular paper, check out its cited immutable evidence commit first. Individual stage commands and optional native rebuilds are linked from the map. This archive contains overlapping study populations, and its file or replay counts are not research sample sizes.
+Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. The57 standard stages verify and reinterpret fixed evidence with the standard library. They create no new independent workload population or timing sample. Optional native rebuild commands, including Java17, are separate and linked from the evidence guides. Check out the immutable evidence commit cited by a particular paper to reproduce that snapshot. Complete public replay and native-rebuild receipts for this release are recorded in [REPRODUCTION_20260911.json](REPRODUCTION_20260911.json), with exact completed and pending scopes.
 
-The [September10 reproduction receipt](REPRODUCTION_20260910.json) records completed local/public replays and their scope. A successful replay preserves earlier failures and timeouts as recorded outcomes. Native Java, Linux and Roslyn studies expose both positive witnesses and transfer limits; the Valkey comparator and cost-fit failures remain in the archive. No human evaluation is included.
+## Earlier evidence and provenance
 
-## Earlier package and provenance
+The byte-preserved [legacy package](package/README.md), [earlier paper](package/paper/main.pdf), [evidence index](package/EVIDENCE_INDEX.md) and the charged study history retain preceding claims, failures, timeouts and populations. Historical paper/section references in individual study notes refer to their original snapshots. The earlier [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) remain byte-for-byte; their relative links refer to their original repository-root location.
 
-The byte-preserved `package/` tree, its [older paper](package/paper/main.pdf), [usage](package/README.md) and [evidence index](package/EVIDENCE_INDEX.md) describe previous research versions. Their claims and sample counts retain their original scope. `./reproduce.sh portable` verifies that legacy package; it is not the57-stage charged replay above. Licenses, rights and source provenance are in [NOTICE.md](NOTICE.md) and the accompanying manifests.
-
-The preceding [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) are preserved byte-for-byte for history. Their relative links refer to their original repository-root location. This new entry page replaces their obsolete titles and long chronological appendices without altering the scientific payload.
+`./reproduce.sh portable` checks the legacy package. It is a separate verification from the57-stage charged replay. Licenses, source provenance, reversible compression and path projections are described in [NOTICE.md](NOTICE.md), the release manifest and charged/PROVENANCE.json. The [September10 reproduction receipt](REPRODUCTION_20260910.json) retains preceding completed checks; the new receipt does not rewrite them. Counts across studies overlap and are not independent samples of software workloads.

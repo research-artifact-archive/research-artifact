@@ -1,5 +1,7 @@
 # Charged atomic-call retry policies
 
+Current [manuscript219](../paper/README.md) centers the resource-contract cost, exact residual safety filter, fee-information boundary and executable Java interface. The [current evidence map](../PAPER_ARTIFACT_MAP.md) supersedes historical paper/section locators in the chronological entries below. All earlier scientific payloads and adverse outcomes remain unchanged.
+
 Current manuscript216 adds the explicit action/effect/observation/charge table and worked branch trace, and Section5.2 Proposition8 integrates the [unknown-budget DAG observation result](OBSERVATION_DAG.md). The cited evidence commit includes all53 standard stages, fully replayed from public retrieval. All preceding measurements and unfavorable outcomes are unchanged. Current unit-guard hardness is Theorem11 in Section7.1; older locators below are historical.
 
 Historical manuscript203: Theorem7/Lemma2 in Section5 and Theorem9 in Section6 have expanded proofs. [Full-program proof](FULL_PROGRAM_PROOF.md) gives the finite concrete-history construction and global distinct charges; [Java interface proof](JAVA_INTERFACE_PROOF.md) gives explicit A1--A6, pending writes, saved outputs and the strict erased case. Section7 retains Theorem10 for charged representation and Theorem11 for unit-guard precedence hardness. Independent-price algorithms are supplementary. No new experimental samples accompany this update.
