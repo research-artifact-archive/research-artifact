@@ -14,15 +14,19 @@ The native/source studies preserve narrower correspondence conditions and advers
 git clone https://github.com/research-artifact-archive/research-artifact.git
 cd research-artifact
 python3 -B tools/verify_release.py
-python3 -B charged/reproduce.py all --out work/all59 --timeout 300
+python3 -B charged/reproduce.py all --out work/all60 --timeout 300
 ```
 
-Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. The59 standard stages verify and reinterpret fixed evidence with the standard library. They create no new independent workload population or timing sample. Optional native rebuild commands, including Java17, are separate and linked from the evidence guides. Check out the immutable evidence commit cited by a particular paper to reproduce that snapshot. Complete public replay and native-rebuild receipts for this release are recorded in [REPRODUCTION_20260911.json](REPRODUCTION_20260911.json), with exact completed and pending scopes.
+Use Python3.10+ with assertions enabled on a POSIX system and a fresh output directory. The60 standard stages verify and reinterpret fixed evidence with the standard library. They create no new independent workload population or timing sample. Optional native rebuild commands, including Java17, are separate and linked from the evidence guides. Check out the immutable evidence commit cited by a particular paper to reproduce that snapshot. Complete public replay and native-rebuild receipts for this release are recorded in [REPRODUCTION_20260911.json](REPRODUCTION_20260911.json), with exact completed and pending scopes.
 
 ## Earlier evidence and provenance
 
 The byte-preserved [legacy package](package/README.md), [earlier paper](package/paper/main.pdf), [evidence index](package/EVIDENCE_INDEX.md) and the charged study history retain preceding claims, failures, timeouts and populations. Historical paper/section references in individual study notes refer to their original snapshots. The earlier [root guide](docs/README_BEFORE_UNIT_GUARD.md) and [paper map](docs/PAPER_ARTIFACT_MAP_BEFORE_UNIT_GUARD.md) remain byte-for-byte; their relative links refer to their original repository-root location.
 
-`./reproduce.sh portable` checks the legacy package. It is a separate verification from the59-stage charged replay. Licenses, source provenance, reversible compression and path projections are described in [NOTICE.md](NOTICE.md), the release manifest and charged/PROVENANCE.json. The [September10 reproduction receipt](REPRODUCTION_20260910.json) retains preceding completed checks; the new receipt does not rewrite them. Counts across studies overlap and are not independent samples of software workloads.
+`./reproduce.sh portable` checks the legacy package. It is a separate verification from the60-stage charged replay. Licenses, source provenance, reversible compression and path projections are described in [NOTICE.md](NOTICE.md), the release manifest and charged/PROVENANCE.json. The [September10 reproduction receipt](REPRODUCTION_20260910.json) retains preceding completed checks; the new receipt does not rewrite them. Counts across studies overlap and are not independent samples of software workloads.
 
 The two additional fixed-domain mathematical/implementation replays are [charged-general](charged/CHARGED_GENERAL.md) and [three-cost-residual](charged/THREE_COST_RESIDUAL.md).
+
+Stage60 adds the [sharp arbitrary-DAG caller approximation](charged/DAG_APPROXIMATION.md), with exact fixed-population replay and preserved historical proof/audit provenance.
+
+The new stage60 is supplementary to fixed manuscript219. Its local staged replay succeeded; freshly retrieved full60-stage reproduction is pending for this release.

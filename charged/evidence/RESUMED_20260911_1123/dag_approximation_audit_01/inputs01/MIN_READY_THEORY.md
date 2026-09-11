@@ -1,0 +1,19 @@
+# One order minimizing fixed-policy work for every budget and retry allowance
+
+Fix a finite DAG and positive mandatory works w_i. Consider only the policy family that fixes a legal topological order pi, repeatedly attempts the current job until completion, then advances to the next job. Before the rth global cheap failure it makes fresh cheap attempts; afterwards it freshly prepares and cached-completes each remaining job. Thus r=0 means all-cached. The interface, captured parents, disjoint read-to-comparison intervals, counted calls and whole-kernel assumptions are those of the paper. No claim below compares all causal programs or adaptive-order policies.
+
+**Theorem.** A Kahn topological traversal choosing a minimum-work ready job at every position returns one order minimizing the policy's component-wise worst total work W simultaneously for every integer B,r>=0. Ties may be resolved arbitrarily. It also retains the same previously proved worst-L and worst-Q envelopes, which do not depend on the order. The constructor uses only the DAG and works: no B, r or price input. The runtime subsequently needs r and the mode family, but no B or price input. For independent jobs this is nondecreasing work order. For n=0 the empty order has W=L=Q=0.
+
+**Proof.** For r=0 or B<=r, the previously proved W expression is order independent. Otherwise r>=1 and d=B-r>=1. With M_i the maximum work through position i and S_i the suffix including i, its extra work is
+
+```
+C(pi) = max_i [(r-1)*M_i + w_pi_i + Top_d(S_i)].
+```
+
+Fix a common prefix and let g be a minimum-work ready job. If a legal order continues u1,...,um,g,T, move g immediately after the prefix. This is legal because all predecessors of g already belong to the prefix. The old first job u1 is also ready, so w_g<=w_u1. The new term of g is no larger than the old u1 term: their suffix multisets coincide, while its current work and prefix maximum cannot increase. For every u_j, the prefix maximum is unchanged, because its prefix already contains u1, whose work dominates w_g. Its suffix loses g, so its Top_d term cannot increase. Earlier prefix terms and later T terms are unchanged. Therefore the move never increases C. Apply it at each position to transform any legal order into the greedy one. The inequalities hold simultaneously for every r>=1,d>=1. This proves the theorem, including arbitrary equal-work tie choices.
+
+A binary min-heap gives O(|E|+n log(n+1)) arithmetic/comparison operations and O(|E|+n) space, excluding input integer bit costs. The included independent scan checker validates the bound input, order permutation, precedence and minimum-ready-work condition in O(n(|E|+n)) elementary operations; it does not claim the constructor's heap complexity. A returned artifact binds the canonical input SHA-256 and carries the order. Replay of this local optimality condition relies on the theorem for the global guarantee.
+
+The one-to-seven-job finite comparison uses the complete original5,421weighted-DAG inputs,96new authored seeded inputs, an empty input and a previously reasoned1,2,3 illustration. Every legal order is enumerated before cost outcomes; the direct fixed-policy work recurrence is separate from the closed form. This is not a held-out application population, measured speedup or native integration study. Original native selectors remain unchanged; this new standalone weight-aware constructor is separate from their no-weight least-index selector.
+
+For independent works1,2,3, r=1,B=3, increasing order has W=13 and decreasing order W=14. This mathematical illustration was reasoned before the finite study and is not counted as a new discovery from it. The result is an order-choice improvement within the fixed policy family; scalar maxima, all-program W optimality at r>0, complete Pareto optimality, external novelty and application importance remain unestablished.
