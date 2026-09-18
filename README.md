@@ -1,6 +1,6 @@
 # FG-DUCS replication package
 
-This anonymous package accompanies **Fine-Grained Dynamic Update Controller Synthesis** at [research-artifact-archive/research-artifact](https://github.com/research-artifact-archive/research-artifact). It contains the complete MTSA-derived tool sources including the FG-DUCS extensions, models, raw data, supplementary proofs and reproduction scripts. The authors have confirmed redistribution permission for the MTSA-derived sources; existing file headers are preserved. Included scripts fetch third-party JARs from official upstream distributions. The package includes the completed Xeon RQ3 and all controlled, independent, Travel and hub RQ4 returns. Both authorized RQ3 supplements and all legacy-fidelity campaigns have returned; existing adverse outcomes are retained.
+This anonymous package accompanies **Fine-Grained Dynamic Update Controller Synthesis** at [research-artifact-archive/research-artifact](https://github.com/research-artifact-archive/research-artifact). The repository provides the complete MTSA-derived tool sources including the FG-DUCS extensions, models, saved validation evidence, supplementary proofs and reproduction scripts. Larger raw outputs are prepared as split assets awaiting the `v2-preview` Release, as recorded below. The authors have confirmed redistribution permission for the MTSA-derived sources; existing file headers are preserved. Included scripts fetch third-party JARs from official upstream distributions. The package includes the completed Xeon RQ3 and all controlled, independent, Travel and hub RQ4 returns. Both authorized RQ3 supplements and all legacy-fidelity campaigns have returned; existing adverse outcomes are retained.
 
 ## Contents and claim mapping
 
@@ -137,13 +137,13 @@ The assembler verifies decompressed bytes before replacing a distribution copy, 
 
 ## Scope, privacy, and AI use
 
-Certificates validate search results relative to shared parsing, monitor, transfer, Post and goal code. The separate explicit checker shares the frontend and goal logic; the raw-LTS oracle parses independently but covers only its supported subset. All were maintained by the same author team. Residual-soundness evidence and A1-A4 runtime conformance are external premises; the output is a finite policy/rank/handover table for a conforming execution platform.
+Certificates validate search results relative to shared parsing, monitor, transfer, Post and goal code. The separate explicit checker shares the frontend and goal logic; the raw-LTS oracle parses independently but covers only its supported subset. All were maintained by the same author team. Residual soundness outside the documented A/E certifications and A1-A4 runtime conformance remain external premises; the output is a finite policy/rank/handover table for a conforming execution platform.
 
 Generative AI assisted research design, implementation/tests, experiment scripting/execution, analysis and writing. Saved executable outputs supply numerical evidence. Model extraction and source/publication claims require explicit checks described in the paper.
 
 Distribution copies replace personal filesystem prefixes with package-relative paths or `<USER_HOME>`. Decisions, measurements, seeds, timestamps, model bytes and JAR bytes are preserved. Original local logs remain retained. Saved log-file digests describe the pre-redaction source files; they are not checksum claims about redacted distribution copies. Bibliographic author names in third-person citations and upstream attribution are not submission-author metadata. This package contains neither private author facts nor downloaded third-party papers.
 
-The intended public destination is the anonymous repository cited by the paper. LICENSE covers only the stated original contributions; NOTICE records confirmed MTSA-derived source redistribution permission, the upstream license investigation, and separate third-party terms. Public push awaits human inspection and confirmation. The shaded solver and third-party JARs remain excluded from public distribution.
+The source package is published at the anonymous repository cited by the paper. LICENSE covers only the stated original contributions; NOTICE records confirmed MTSA-derived source redistribution permission, the upstream license investigation, and separate third-party terms. The shaded solver and third-party JARs remain excluded from public distribution.
 
 
 For AD provenance, original environment bytes are checked before distribution. Anonymous copies redact the Python user-home path and annotate `environment*.json` with `distribution_redaction` (original SHA-256, changed field names, and personal-path-only scope). Run metadata retain the original fingerprint. The public renderer checks that explicit relationship and stable host/runtime facts; it does not claim byte equality between redacted and original environments. Trial statuses, measurements, inputs, JAR identities and configs are unchanged. Full Maven-source dependency metadata remain part of the source tree; the private legacy-fidelity `lib/` tree is excluded entirely.
@@ -218,35 +218,26 @@ submission-author identity; both original JavaBDD copyright/contact lines are
 retained. No submission-author identifying matches remain.
 
 
-## Residual interpretations (AG audit)
+## Residual interpretations (AG diagnostics and AH certification)
 
-The unchanged strict history-inclusive check H remains 0/273. The added
-activation-safe check A establishes language equivalence for all 138 NEW
-requirement occurrences, conditional on a nonempty safe-history set at an
-actual activation. Plant-level nonemptiness is not established by the free
-product. This is a different requirement interpretation from H and does not
-claim safety of past violating histories.
+The strict history-inclusive check H remains 0/273, with all historical columns and witnesses preserved. Under activation-safe A, the language and frontend-rule checks establish RS inclusion for **all 138 NEW initializations**. Equality additionally requires a nonempty actual safe-history set; its plant-level nonemptiness is not established. An empty safe-history intersection is universal, so inclusion still holds. This interpretation does not claim safety of past violating histories.
 
-All 135 entry-scoped UPD initializers remain unverified under E. The saved
-DFA's reset self-consistency is distinct from the missing comparison with a
-valuation-parametric reference language. Observer synchronization is only a
-diagnostic, not an E certificate or a language counterexample. See S3/S4 and
-the module README for the exact checks, one-shot event constraints, witnesses
-and generated counts. Original H columns, input exports and campaign evidence
-are preserved; no synthesis campaign was rerun. Claude's confirmed model and
-research roles are now recorded in Methods; the remaining author fact checks
-are explicitly marked in the manuscript.
+Under entry-scoped E, **89/135 UPD initializations are exact by Lemma E-prime**. The checker reads the expanded definitions of all referenced fluents: each must be a declared fluent whose initiating/terminating labels are recognized update commands, which cannot occur before entry. Their entry values therefore equal their declared initial values. The constant initializer must match the non-error boundary obtained from monitor state zero after one `hotSwapIn`.
+
+The remaining **46/135** reference implicit action fluents (`event_predicate`) and remain unverified; their values can depend on pre-entry plant history, and the corresponding reference languages are not established by the saved DFA. No additional cases were excluded by declared plant-fluent labels. Compiled-reset self-consistency and observer synchronization remain diagnostics, not certificates or language counterexamples.
+
+The added `rs_E_ah_exact` and evidence columns hold the current E-prime classification; the old `rs_E_exact` and `e_*` columns retain the historical AG result. S3/S4 and the module README explain the checks, one-shot constraints, witnesses and generated counts. All prior columns, input exports and campaign evidence are preserved; no synthesis campaign was rerun. Claude's confirmed model and research roles are recorded in Methods; the remaining author fact checks stay explicitly marked in the manuscript.
 
 ## Key distribution identities
 
 | File | SHA-256 |
 |---|---|
-| `paper/main.pdf` | `799bc58afdcd74dbde84f15870fac893c969327a1ecd9e9e265a85a4c62fc5d5` |
-| `paper/supplement.pdf` | `2eac7c3b00a8f8563a5c72ee4b5a04f46deccf637207c8f5a38c1f7779996613` |
+| `paper/main.pdf` | `96cf3a1f12d45b6e631f6172d8bc7ab94256effbc16621aa60f9dfbfaa9ba6b0` |
+| `paper/supplement.pdf` | `190720cb90532ba2e92f9d13408909cd69afde2e0e8629be95b12bcfbe2e0974` |
 | `fetch_assets.py` | `5dff4b083c15ee7de348625d1da8cf0ae325453c1dfa39b7956f7e07fb3225d5` |
 | `restore_results.py` | `283066e8512101a6f41cf2e1bad5311f3e1cf90cb0eb77c607113f6964cdbfcd` |
 | `result-assets.json` | `97bc32f4f2f611e44927d72b55550046603184e5ea15775d1d4abc450de86fa7` |
-| `FSE2027_SUBMISSION_20260914/experiments/rs_coverage/summary.csv` | `6c4fda3773718b56cb7090a7ca4da7b48a1562a139efbc4d79d86c94f08b27e1` |
+| `FSE2027_SUBMISSION_20260914/experiments/rs_coverage/summary.csv` | `a3de15da4fc92884d1f3a0095b7781390449c78cfe54ab93f360a605751d0f4d` |
 | `FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/scripts/render_results.py` | `20627c81821d59523152e8de84f7a2b7122ac691daded3bfe0fb461da9dcc6ad` |
 | `Implementation/Source Code/maven-root/mtsa/pom.xml` | `3fdc4272800b699fc4fa3e6916321d5d4a17302f22a5941f2c23fabf97a68e54` |
 

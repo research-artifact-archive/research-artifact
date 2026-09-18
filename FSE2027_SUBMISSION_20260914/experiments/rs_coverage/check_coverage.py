@@ -7,7 +7,7 @@ violates RS. ERROR continues absorbing while observer values keep evolving.
 from __future__ import annotations
 from collections import deque,defaultdict,Counter
 from pathlib import Path
-import argparse,csv,hashlib,json,re,subprocess,time
+import argparse,csv,hashlib,io,json,re,subprocess,time
 
 HERE=Path(__file__).resolve().parent
 SUBMISSION=HERE.parents[1]
@@ -15,10 +15,25 @@ LABELS={'gsm':'GSM','industry':'Industry','metasocket':'MetaSocket','powerplant'
  'productioncell_arms1':'PC Arms=1','productioncell_arms2':'PC Arms=2','railcab':'Railcab','surveillance':'Surveillance','workflow':'Workflow'}
 ERROR=-1
 
-def csv_write(path,rows):
+def append_only_fields(path,rows):
+ """Check every saved value in its original row; keep the complete old header."""
  fields=list(dict.fromkeys(k for row in rows for k in row))
- with path.open('w',newline='',encoding='utf-8') as out:
-  writer=csv.DictWriter(out,fieldnames=fields);writer.writeheader();writer.writerows(rows)
+ if not path.exists():return fields
+ with path.open(newline='',encoding='utf-8') as source:
+  reader=csv.DictReader(source);old_fields=list(reader.fieldnames or []);old=list(reader)
+ if len(old)!=len(rows):raise ValueError('Existing CSV row count changed: '+str(path))
+ for index,(before,after) in enumerate(zip(old,rows),1):
+  for key in old_fields:
+   value='' if after.get(key) is None else str(after[key])
+   if value!=before[key]:
+    raise ValueError(f'Existing CSV value/order changed: {path}, row {index}, column {key}')
+ return old_fields+[key for key in fields if key not in old_fields]
+
+def csv_write(path,rows,preserve_existing=False):
+ fields=append_only_fields(path,rows) if preserve_existing else list(dict.fromkeys(k for row in rows for k in row))
+ out=io.StringIO(newline='');writer=csv.DictWriter(out,fieldnames=fields);writer.writeheader();writer.writerows(rows)
+ data=out.getvalue().encode('utf-8')
+ if not path.exists() or path.read_bytes()!=data:path.write_bytes(data)
 
 def digest(path):
  h=hashlib.sha256()
@@ -251,6 +266,58 @@ def explore_scopes(row,alphabet,limit=200000):
    reason='Compiled-reset and observer synchronization do not provide a valuation-parameterized semantic initializer.')],separators=(',',':'))
  return result
 
+def is_entry_stage_action(action):
+ """E-prime's declared update labels, not broad stop/start name prefixes.
+
+ The historical one-shot predicate also includes hotSwapOut. Do not change it:
+ E-prime uses the narrower AH label class and leaves that AG analysis intact.
+ """
+ return isinstance(action,str) and (action=='hotSwapIn' or re.fullmatch(
+   r'(?:stopOldSpec|startNewSpec|reconfigure)(?:_[A-Za-z0-9][A-Za-z0-9_.]*)?',action) is not None)
+
+def check_entry_stage_syntax(row):
+ """Lemma E-prime over saved definitions; no plant/history or DFA recompilation."""
+ keys=('rs_E_ah_exact','rs_E_ah_basis','rs_E_ah_update_only','rs_E_ah_referenced_labels',
+       'rs_E_ah_excluded_observers','rs_E_ah_boundary_matches','rs_E_ah_boundary_check','rs_E_ah_note')
+ if row.get('kind')!='upd':return {key:'NOT_APPLICABLE' for key in keys}
+ excluded=[];labels=set();fluents=row.get('referenced_fluents')
+ if not isinstance(fluents,list):
+  excluded.append(dict(reason='missing_referenced_fluent_definitions'));fluents=[]
+ for fluent in fluents:
+  reasons=[]
+  if fluent.get('kind')!='declared_fluent':reasons.append('not_a_declared_fluent')
+  if not isinstance(fluent.get('initial_value'),bool):reasons.append('missing_declared_boolean_initial_value')
+  for field in ('initiating','terminating'):
+   actions=fluent.get(field)
+   if not isinstance(actions,list) or any(not isinstance(action,str) for action in actions):
+    reasons.append('missing_expanded_'+field+'_labels');continue
+   labels.update(actions)
+   if any(not is_entry_stage_action(action) for action in actions):reasons.append('non_update_'+field+'_label')
+  if reasons:excluded.append(dict(name=fluent.get('name',''),kind=fluent.get('kind','MISSING'),
+    initiating=fluent.get('initiating'),terminating=fluent.get('terminating'),reasons=reasons))
+ boundary=row.get('boundary_state_after_hotSwapIn');initial=row.get('monitor_initial');actual=None;boundary_error=''
+ try:
+  actual=monitor_function(row)(initial,'hotSwapIn')
+ except (KeyError,TypeError,ValueError) as error:boundary_error=str(error)
+ count=row.get('monitor_nonerror_states')
+ boundary_matches=(type(initial) is int and initial==0 and type(count) is int and count>0
+   and type(boundary) is int and 0<=boundary<count and actual==boundary and not boundary_error
+   and row.get('error_state')==ERROR and row.get('initializer_mode')=='constant_after_hotSwapIn')
+ exact=not excluded and boundary_matches
+ return dict(rs_E_ah_exact=exact,
+  rs_E_ah_basis='LEMMA_E_PRIME' if exact else 'UNVERIFIED_OUTSIDE_E_PRIME_SUFFICIENT_CONDITION',
+  rs_E_ah_update_only=not excluded,rs_E_ah_referenced_labels=json.dumps(sorted(labels),separators=(',',':')),
+  rs_E_ah_excluded_observers=json.dumps(excluded,sort_keys=True,separators=(',',':')),
+  rs_E_ah_boundary_matches=boundary_matches,
+  rs_E_ah_boundary_check=json.dumps(dict(monitor_initial=initial,computed_boundary=actual,saved_boundary=boundary,
+    initializer_mode=row.get('initializer_mode'),error=boundary_error),sort_keys=True,separators=(',',':')),
+  rs_E_ah_note=('Lemma E-prime: every referenced observer is a declared fluent affected only by recognized update labels. '
+    'No update label occurs before entry, so every entry has the declared initial valuation; the non-error constant initializer '
+    'equals monitor state 0 after one hotSwapIn. Exact under the stated entry-scoped interpretation.' if exact else
+    'The E-prime sufficient condition is not established. Event predicates or plant-fluent values can depend on pre-entry '
+    'ordinary history; their valuation-parameterized reference languages remain unavailable. '
+    'This is unverified, not a language counterexample; boundary diagnostics are reported separately.'))
+
 def read_metrics(path):
  text=path.read_text(errors='replace');lines=text.splitlines()
  header=next((i for i,line in enumerate(lines) if line.startswith('mode,result,solver_status,') and 'metric_key' in line),None)
@@ -299,7 +366,7 @@ def tex(s):
 
 def render(rows,contracts,output):
  output.mkdir(parents=True,exist_ok=True)
- csv_write(output/'rs-requirements.csv',rows);csv_write(output/'contract-coverage.csv',contracts)
+ csv_write(output/'rs-requirements.csv',rows,preserve_existing=True);csv_write(output/'contract-coverage.csv',contracts,preserve_existing=True)
  per_model=[]
  for model in LABELS:
   group=[r for r in rows if r['model']==model]
@@ -313,23 +380,26 @@ def render(rows,contracts,output):
    e_exact_sufficient=sum(r['e_exact_sufficient'] is True for r in group),
    ae_unverified=sum((r['a_exact_sufficient'] if r['kind']=='new' else r['e_exact_sufficient']) is not True for r in group),
    e_observer_sync=sum(r.get('e_post_entry_observers_synchronize') is True for r in group),
-   e_reset_consistent=sum(r.get('e_compiled_boundary_matches') is True for r in group)))
- csv_write(output/'rs-model-summary.csv',per_model)
+   e_reset_consistent=sum(r.get('e_compiled_boundary_matches') is True for r in group),
+   e_ah_exact_sufficient=sum(r['rs_E_ah_exact'] is True for r in group),
+   ae_ah_unverified=sum((r['a_exact_sufficient'] if r['kind']=='new' else r['rs_E_ah_exact']) is not True for r in group)))
+ csv_write(output/'rs-model-summary.csv',per_model,preserve_existing=True)
  lines=[r'\noindent\textbf{RS sufficient-condition coverage}\par',
   r'Counts are requirement occurrences over base/R1/R2; repeated new requirements remain in the denominator. '
   r'The independent free product includes absorbing ERROR and evolving fluent values after error. '
   r'A failed sufficient check leaves RS untested and does not establish a reachable contract violation.',
   r'\begin{center}\scriptsize\begin{tabular}{@{}lrrrrrrrr@{}}\toprule',
-  r'Model & New / upd & H checked & H FD & H exact & H untested & A exact$^a$ & E exact & A/E unverified\\\midrule']
- for g in per_model:lines.append(f"{LABELS[g['model']]} & {g['new']} / {g['upd']} & {g['classified']} & {g['fluent_determined']} & {g['exact_residual_certified']} & {g['rs_untested']} & {g['a_exact_sufficient']} & {g['e_exact_sufficient']} & {g['ae_unverified']}"+r'\\')
+  r'Model & New / upd & H checked & H FD & H exact & H untested & A sound$^a$ & E exact$^b$ & A/E unverified\\\midrule']
+ for g in per_model:lines.append(f"{LABELS[g['model']]} & {g['new']} / {g['upd']} & {g['classified']} & {g['fluent_determined']} & {g['exact_residual_certified']} & {g['rs_untested']} & {g['a_exact_sufficient']} & {g['e_ah_exact_sufficient']} & {g['ae_ah_unverified']}"+r'\\')
  lines.extend([r'\bottomrule\end{tabular}\end{center}',
   r'FD means that equal reachable fluent valuations determine the same monitor state, including ERROR. '
   r'Exact additionally requires compatibility with the actual initializer: NEW uses its non-error lookup; '
   r'UPD uses a constant monitor state after \texttt{hotSwapIn}. '
   r'Per-requirement state counts, two conflicting histories, and update-boundary checks are in \path{rs-requirements.csv}.',
-  r'$^a$A certifies the safe-prefix language condition and the frontend selection rule, conditional on a non-error activation entry and a nonempty actual safe-history set; the latter is not checked without the plant. '
-  r'With an empty safe-history set, inclusion is automatic but equality is unproved. '
-  r'E enumerates entry-observer valuations and checks reset consistency; the saved DFA has no valuation-parameterized semantic initializer, so these diagnostics do not certify E exactness. '
+  r'$^a$All \RSAInclusionNew{} NEW occurrences satisfy RS under A: the checked safe-prefix language condition gives equality when the actual safe-history set is nonempty; with an empty set, inclusion is automatic. '
+  r'Plant-level nonemptiness is not established, so exactness remains conditional. '
+  r'$^b$The current E column uses the added AH result (Lemma E$^{\prime}$): every referenced fluent is declared and affected only by update labels, which cannot occur before entry; the constant initializer must match the non-error state after one \texttt{hotSwapIn}. '
+  r'Remaining event/plant predicates retain unverified reference-language comparisons. Historical AG E columns and all H/A results are unchanged. '
   r'Update labels occur at most once in the new prefix explorations; continuation-language equivalence is checked over all words, a stronger condition.'])
  (output/'rs-model-table.tex').write_text('\n'.join(lines)+'\n')
  total=len(rows);checked=sum(r['fluent_determined']!='UNCLASSIFIED' for r in rows);fd=sum(r['fluent_determined'] is True for r in rows);exact=sum(r['exact_residual_certified'] is True for r in rows)
@@ -341,10 +411,13 @@ def render(rows,contracts,output):
          'RSAEUnverifiedOccurrences':sum((r['a_exact_sufficient'] if r['kind']=='new' else r['e_exact_sufficient']) is not True for r in rows),
          'RSEObserverSyncOccurrences':sum(r.get('e_post_entry_observers_synchronize') is True for r in rows),
          'RSEResetConsistentOccurrences':sum(r.get('e_compiled_boundary_matches') is True for r in rows)}
- macros.update(RSAExactNew=macros['RSAExactOccurrences'],RSEExactUpd=macros['RSEExactOccurrences'],
+ macros.update(RSEAHExactOccurrences=sum(r['rs_E_ah_exact'] is True for r in rows),
+   RSAHEUnverifiedOccurrences=sum((r['a_exact_sufficient'] if r['kind']=='new' else r['rs_E_ah_exact']) is not True for r in rows),
+   RSAInclusionNew=macros['RSAExactOccurrences'])
+ macros.update(RSAExactNew=macros['RSAExactOccurrences'],RSEExactUpd=macros['RSEAHExactOccurrences'],
    RSUpdOccurrences=macros['RSUpdateOccurrences'],
    RSAUnverifiedNew=macros['RSNewOccurrences']-macros['RSAExactOccurrences'],
-   RSEUnverifiedUpd=macros['RSUpdateOccurrences']-macros['RSEExactOccurrences'])
+   RSEUnverifiedUpd=macros['RSUpdateOccurrences']-macros['RSEAHExactOccurrences'])
  (output/'rs-counts.tex').write_text('\n'.join('\\providecommand{\\'+k+'}{'+str(v)+'}' for k,v in macros.items())+'\n')
  cl=[r'\noindent\textbf{Benchmark contract coverage}\par',
   r'Each triple is base/R1/R2. Transfer fan-out and loadable endpoint counts come from preserved first-trial outputs; '
@@ -388,18 +461,15 @@ def main():
    for key in ('conflict_witness','boundary_witness'):
     if key in result:result[key]=json.dumps(result[key],sort_keys=True,separators=(',',':'))
    scopes=explore_scopes(requirement,alphabet,a.state_cap)
-   rows.append(dict(base,**result,**scopes))
+   ah=check_entry_stage_syntax(requirement)
+   rows.append(dict(base,**result,**scopes,**ah))
    print(model,requirement['target'],requirement['kind'],requirement['requirement'],result['status'],result.get('conflict_witness',''),
-         scopes.get('a_status'),scopes.get('e_status'))
+         scopes.get('a_status'),scopes.get('e_status'),ah['rs_E_ah_basis'])
  contracts=contract_rows(exports,a.raw_root)
  previous=HERE/'summary.csv'
- if previous.exists():
-  old=list(csv.DictReader(previous.open()))
-  old_h=[{k:v for k,v in r.items() if not k.startswith(('a_','e_','rs_A_','rs_E_'))} for r in old]
-  new_h=[{k:'' if r.get(k) is None else str(r[k]) for k in before} for r,before in zip(rows,old_h)]
-  if len(old_h)!=len(rows) or old_h!=new_h:raise ValueError('Existing H columns changed; refusing to overwrite summary')
-  print('H_COLUMNS_UNCHANGED',len(rows))
- csv_write(HERE/'summary.csv',rows);csv_write(HERE/'contract-coverage.csv',contracts)
+ append_only_fields(previous,rows)
+ print('ALL_EXISTING_COLUMNS_AND_ROW_ORDER_UNCHANGED',len(rows))
+ csv_write(previous,rows,preserve_existing=True);csv_write(HERE/'contract-coverage.csv',contracts,preserve_existing=True)
  render(rows,contracts,a.output)
 
 if __name__=='__main__':main()

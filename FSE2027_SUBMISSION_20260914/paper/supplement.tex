@@ -244,7 +244,7 @@ Explore the freely reachable monitor/observer product over one-shot update histo
 \begin{proof}
 Every admissible safe history reaches a non-error product pair with observer vector $f(\xi)$. By language equivalence and lookup compatibility, its residual language equals $\mathcal L_r(\iota_r(\xi))$. A nonempty intersection of these equal languages is that language. For an empty history set, the universal intersection contains the initialized language, proving the stated inclusion.
 \end{proof}
-Language equivalence, rather than equality of state identifiers, is also the frontend's acceptance condition for multiple non-error states at a lookup vector. Our independent checker compares deterministic state pairs until an ERROR/non-error distinction or pair closure, and separately reconstructs the frontend's error-priority, equivalent-state/minimum-ID rule. This checks the saved monitor/observer exports against the source rule; the exports do not contain the materialized runtime lookup table. The nonemptiness of safe histories at each actual plant activation remains an external condition for the exactness claim.
+Language equivalence, rather than equality of state identifiers, is also the frontend's acceptance condition for multiple non-error states at a lookup vector. Our independent checker compares deterministic state pairs until an ERROR/non-error distinction or pair closure, and separately reconstructs the frontend's error-priority, equivalent-state/minimum-ID rule. This checks the saved monitor/observer exports against the source rule; the exports do not contain the materialized runtime lookup table. The check establishes $\mathsf{RS}_A$ inclusion for all \RSAExactNew/\RSNewOccurrences{} NEW initializers without a nonemptiness premise. Equality additionally requires nonempty safe histories at the actual activation; their plant-level nonemptiness remains unverified.
 
 \paragraph{Interpretation E: entry-scoped UPD requirements.}
 An update-interval requirement becomes effective at entry. Its reference monitor starts afresh with the actual entry fluent vector $v$, consumes \texttt{hotSwapIn} once, and observes the subsequent update interval. Let $\mathcal L_r^E(v)$ denote the resulting continuation language and $b_r$ the frontend's constant post-entry monitor state. For the entry vectors $V_r(\xi)$ compatible with $\xi$, define
@@ -262,7 +262,20 @@ Let $V_r$ overapproximate all reachable entry observer vectors under the one-sho
 \begin{proof}
 Every actual entry vector belongs to $V_r$, so its reference post-entry language equals the boundary language by hypothesis. Thus the nonempty intersection over $V_r(\xi)$ consists of copies of $\mathcal L_r(b_r)$ and equals that language. Constant initialization uses $b_r$, giving equality in $\mathsf{RS}_E$.
 \end{proof}
-The E audit distinguishes compiled-reset self-consistency from the lemma's reference-language premise. The saved DFA transition function depends on its monitor state and event, not on a separately supplied observer vector. Comparing that same DFA from $m_r^0$ after \texttt{hotSwapIn} for every vector would therefore pass vacuously. We enumerate the one-shot reachable observer vectors and diagnose post-entry observer synchronization. The valuation-parametric reference-language comparison was not implemented within this bounded audit, so no E initializer is certified; all remain explicit as unverified in S4. A post-entry observer difference is not itself a language-inequivalence counterexample.
+\begin{samepage}
+\begin{lemma}[E$'$: update-stage fluents suffice]
+\label{lem:rs-e-prime}
+Suppose an UPD monitor references only declared fluents whose initiating and terminating labels are update commands: \texttt{stopOldSpec}, \texttt{startNewSpec}, \texttt{reconfigure} (including their indexed forms), or \texttt{hotSwapIn}. No such label occurs before actual entry. If the constant initializer is the non-error boundary state $b_r$ obtained from compiled state zero by consuming \texttt{hotSwapIn} once, then it satisfies $\mathsf{RS}_E$ with equality at every actual entry.
+\end{lemma}
+\begin{proof}
+Before entry, no defining update label occurs, so all referenced fluents retain their declared initial values.
+The fresh E monitor therefore starts at state zero and consumes \texttt{hotSwapIn} once, reaching $b_r$.
+Every actual entry has reference language $\mathcal L_r(b_r)$, so the reference intersection equals that language.
+\end{proof}
+\end{samepage}
+The E$'$ check reads the expanded initiating/terminating sets of each referenced fluent from the saved model exports, checks the constant initializer and its non-error boundary, and certifies \RSEExactUpd/\RSUpdOccurrences{} UPD occurrences. It uses the actual game's exclusion of pre-entry update commands; the older free-history diagnostic admits such commands and is retained unchanged. A name such as \texttt{stopPump} is an ordinary plant event, not an update command.
+
+The remaining \RSEUnverifiedUpd{} occurrences reference implicit action fluents, whose values can change with pre-entry plant history. Their valuation-parametric reference languages are not established by the saved DFA. Its transition function depends on state and event, not on an attached observer vector; repeating its fixed reset for each vector would pass vacuously. Thus these cases remain unverified. Preserved observer differences are diagnostics, not language-inequivalence counterexamples. S4 reports both the historical checks and the added E$'$ classification.
 
 \subsection{Lifecycle induction and residual meanings}
 At entry, each component is old, all update operations are pending, old monitor states are inherited from the reachable monitored endpoint, new monitors are inactive, and update-interval monitors receive the supplied $\iota_r$. This establishes the version/pending equivalence and $t\in\ActT(P)\iff\mu(t)\ne\bot$.
@@ -489,7 +502,7 @@ Both follow-ups have returned. The generated provenance below retains the origin
 \clearpage
 
 \paragraph{Artifact reproduction status.}
-The local package contains the full derived source tree, saved RQ1/RQ2 evidence, the compiled-monitor exports and Python RS checker, generated tables/figures, and verified split assets for larger raw outputs. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The README preserves the prior empty-Maven-cache build logs and their environment. A clean clone of the new anonymous repository, its immutable revision, and fresh RQ1/RQ2 smoke verification await author publication; these are pending checks, not completed evidence. The old repository URL is not used for this package.
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. A clean HTTPS clone, build with an empty Maven cache, and RQ1/RQ2 derive-only smoke checks passed; the rederived fields match the saved expectations after path normalization. Tests were compiled but not executed. The README records the environment, elapsed times and anonymized logs in \path{validation/clean-clone/}, separately from the earlier local build evidence. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. Larger raw outputs remain in verified split assets awaiting the \texttt{v2-preview} pre-release, so public asset download/restoration is untested. The final \texttt{fse27-submission} tag will be created after v2 is frozen.
 
 \section{Expanded related-work comparison}
 \begin{table}[!htbp]

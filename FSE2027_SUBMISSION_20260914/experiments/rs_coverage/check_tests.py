@@ -10,6 +10,15 @@ def example(restore=False,kind='new',initial=False):
  return dict(monitor_initial=0,monitor_nonerror_states=1,alphabet=['bad','restore'],
    transitions=[[0,'bad',-1],[0,'restore',0]],referenced_fluents=[f],kind=kind,boundary_state_after_hotSwapIn=0)
 
+def stage_example(initial=False):
+ return dict(kind='upd',initializer_mode='constant_after_hotSwapIn',monitor_initial=0,
+   monitor_nonerror_states=2,error_state=-1,boundary_state_after_hotSwapIn=1,
+   alphabet=['hotSwapIn','stopOldSpec_P','work'],
+   transitions=[[0,'hotSwapIn',1],[1,'hotSwapIn',1],[0,'stopOldSpec_P',0],[1,'stopOldSpec_P',0],
+                [0,'work',0],[1,'work',1]],
+   referenced_fluents=[dict(name='Pending_P',kind='declared_fluent',initial_value=initial,
+     initiating=['hotSwapIn'],terminating=['stopOldSpec_P'])])
+
 class CoverageTests(unittest.TestCase):
  def test_nonerror_single_state_is_not_sufficient_when_error_and_fluent_restore(self):
   row=example(restore=True);result=c.explore(row,['bad','restore'])
@@ -125,5 +134,102 @@ class CoverageTests(unittest.TestCase):
      updates=[x for x in w['pre_entry_history'] if c.is_update_action(x)]
      self.assertEqual(len(updates),len(set(updates)));self.assertNotIn('hotSwapIn',updates)
   self.assertEqual((a,e,sync,reset),(138,0,89,135))
+
+ def test_e_prime_accepts_both_declared_initial_values_without_resetting_them(self):
+  for initial in (False,True):
+   row=stage_example(initial);before=copy.deepcopy(row)
+   result=c.check_entry_stage_syntax(row)
+   self.assertTrue(result['rs_E_ah_exact']);self.assertEqual(result['rs_E_ah_basis'],'LEMMA_E_PRIME')
+   values=(initial,)
+   for action in ['work','work','stopPump','startPump']:
+    values=c.fluent_step(values,row['referenced_fluents'],action)
+   self.assertEqual(values,(initial,));self.assertEqual(row,before)
+
+ def test_e_prime_excludes_action_predicates_even_when_the_initiator_is_an_update(self):
+  row=stage_example();row['referenced_fluents'][0].update(kind='event_predicate',terminating=['*'])
+  result=c.check_entry_stage_syntax(row)
+  self.assertFalse(result['rs_E_ah_exact']);self.assertTrue(result['rs_E_ah_boundary_matches'])
+  self.assertIn('not_a_declared_fluent',json.loads(result['rs_E_ah_excluded_observers'])[0]['reasons'])
+
+ def test_e_prime_excludes_plant_stop_start_prefixes_wildcards_and_hot_swap_out(self):
+  for action in ('stopPump','startPump','reconfigurePlant','stopOldSpecifier','reconfigure_','hotSwapOut','*'):
+   with self.subTest(action=action):
+    row=stage_example();row['referenced_fluents'][0]['terminating']=[action]
+    self.assertFalse(c.check_entry_stage_syntax(row)['rs_E_ah_exact'])
+  for action in ('stopOldSpec','startNewSpec','reconfigure','hotSwapIn','stopOldSpec_P',
+                 'startNewSpec_P_NEW_1','reconfigure_PRODUCTION_CELL_2'):
+   self.assertTrue(c.is_entry_stage_action(action))
+  self.assertTrue(c.is_update_action('hotSwapOut')) # Historical AG predicate is unchanged.
+
+ def test_e_prime_missing_or_unknown_observer_definitions_never_certify(self):
+  cases=[]
+  row=stage_example();del row['referenced_fluents'];cases.append(row)
+  for key in ('kind','initial_value','initiating','terminating'):
+   row=stage_example();del row['referenced_fluents'][0][key];cases.append(row)
+  row=stage_example();row['referenced_fluents'][0]['kind']='unknown';cases.append(row)
+  row=stage_example();row['referenced_fluents'][0]['terminating']=None;cases.append(row)
+  for row in cases:self.assertFalse(c.check_entry_stage_syntax(row)['rs_E_ah_exact'])
+
+ def test_e_prime_requires_state_zero_a_nonerror_matching_boundary_and_constant_mode(self):
+  for changed in ({'monitor_initial':1},{'boundary_state_after_hotSwapIn':0},
+                  {'boundary_state_after_hotSwapIn':-1},{'boundary_state_after_hotSwapIn':2},
+                  {'initializer_mode':'fluent_lookup_nonerror_entries'},{'error_state':None}):
+   row=stage_example();row.update(changed);result=c.check_entry_stage_syntax(row)
+   self.assertTrue(result['rs_E_ah_update_only']);self.assertFalse(result['rs_E_ah_boundary_matches'])
+   self.assertFalse(result['rs_E_ah_exact'])
+  row=stage_example();row['transitions'].append([0,'hotSwapIn',0])
+  self.assertFalse(c.check_entry_stage_syntax(row)['rs_E_ah_exact'])
+  row=stage_example();row['transitions']=[edge for edge in row['transitions'] if edge[:2]!=[0,'hotSwapIn']]
+  self.assertFalse(c.check_entry_stage_syntax(row)['rs_E_ah_exact'])
+
+ def test_e_prime_new_is_not_applicable_and_empty_declared_observer_set_is_distinct_from_missing(self):
+  row=stage_example();row['kind']='new'
+  self.assertEqual(set(c.check_entry_stage_syntax(row).values()),{'NOT_APPLICABLE'})
+  row=stage_example();row['referenced_fluents']=[]
+  self.assertTrue(c.check_entry_stage_syntax(row)['rs_E_ah_exact'])
+
+ def test_append_only_csv_preserves_sparse_old_columns_and_appends_after_full_header(self):
+  with tempfile.TemporaryDirectory() as temp:
+   p=Path(temp)/'data.csv';p.write_bytes(b'model,kind,a_exact_sufficient,e_exact_sufficient,rs_E_exact\r\n'
+     b'gsm,new,True,NOT_APPLICABLE,NOT_APPLICABLE\r\nindustry,upd,,False,False\r\n')
+   rows=[dict(model='gsm',kind='new',a_exact_sufficient=True,e_exact_sufficient='NOT_APPLICABLE',
+              rs_E_exact='NOT_APPLICABLE',rs_E_ah_exact='NOT_APPLICABLE'),
+         dict(model='industry',kind='upd',e_exact_sufficient=False,rs_E_exact=False,rs_E_ah_exact=True)]
+   c.csv_write(p,rows,preserve_existing=True)
+   with p.open(newline='') as stream:
+    reader=csv.DictReader(stream);saved=list(reader)
+   self.assertEqual(reader.fieldnames,['model','kind','a_exact_sufficient','e_exact_sufficient','rs_E_exact','rs_E_ah_exact'])
+   self.assertEqual(saved[1]['rs_E_exact'],'False');self.assertEqual(saved[1]['rs_E_ah_exact'],'True')
+   before=p.read_bytes();c.csv_write(p,rows,preserve_existing=True);self.assertEqual(p.read_bytes(),before)
+
+ def test_append_only_csv_rejects_h_a_e_changes_and_row_reordering_before_write(self):
+  with tempfile.TemporaryDirectory() as temp:
+   p=Path(temp)/'data.csv';rows=[dict(model='a',h=False,a=True,e=False),dict(model='b',h=False,a=True,e=False)]
+   c.csv_write(p,rows);before=p.read_bytes()
+   for key in ('h','a','e'):
+    changed=copy.deepcopy(rows);changed[0][key]=not changed[0][key]
+    with self.assertRaises(ValueError):c.csv_write(p,changed,preserve_existing=True)
+    self.assertEqual(p.read_bytes(),before)
+   for changed in (rows[::-1],rows[:1]):
+    with self.assertRaises(ValueError):c.csv_write(p,changed,preserve_existing=True)
+    self.assertEqual(p.read_bytes(),before)
+
+ def test_saved_e_prime_certificates_cover_definitions_and_leave_ag_columns_distinct(self):
+  observed=set()
+  for path in sorted((c.HERE/'raw/expanded-predicates').glob('*.json')):
+   for row in json.loads(path.read_text())['requirements']:
+    result=c.check_entry_stage_syntax(row)
+    if row['kind']!='upd':continue
+    observed.add(result['rs_E_ah_exact'])
+    if result['rs_E_ah_exact']:
+     self.assertEqual({f['kind'] for f in row['referenced_fluents']},{'declared_fluent'})
+     self.assertEqual(c.monitor_function(row)(0,'hotSwapIn'),row['boundary_state_after_hotSwapIn'])
+     self.assertNotEqual(row['boundary_state_after_hotSwapIn'],-1)
+     for f in row['referenced_fluents']:
+      self.assertNotIn('*',f['initiating']+f['terminating'])
+    else:
+     self.assertTrue(json.loads(result['rs_E_ah_excluded_observers']))
+    self.assertNotIn('rs_E_exact',result);self.assertNotIn('e_exact_sufficient',result)
+  self.assertEqual(observed,{True,False})
 
 if __name__=='__main__':unittest.main(verbosity=2)
