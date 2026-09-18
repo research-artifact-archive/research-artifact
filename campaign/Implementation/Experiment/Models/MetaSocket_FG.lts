@@ -1,0 +1,266 @@
+// —————————–COMMENTS—————————––
+
+// - To execute revised OTF-DUCS, select “UPDATE_CONTROLLER_OTF_FG” in the
+// dropdown menu, and then press the compose button (||).
+// - In the section of UPDATING CONTROLLER SPEC, in this file, you can spec
+// different transition requeriments presented in the paper.
+// - You can animate the controller obtained pressing the blue A in the top bar
+// - After composing, you can validate that the controller obtained satisfy
+// each updating controller goal formula by modelchecking.
+
+// —————————ENVIRONMENTS—————————–
+
+set Controllable64 = {des64, output}
+set Controllable128 = {des128, output}
+set Alphabet64 = {Controllable64, input}
+set Alphabet128 = {Controllable128, input}
+set Alphabet = {des64, des128, output, input}
+
+IO = (input -> output -> IO).
+DES64 = (des64 -> DES64).
+DES128 = (des128 -> DES128).
+
+||ENV_DES64 = (DES64 || IO).
+||ENV_DES128 = (DES128 || IO).
+
+//For OTF-DUC
+IO_OLD = (input -> PROCESS),
+PROCESS = (output -> IO_OLD).
+
+IO_NEW = (input -> PROCESS),
+PROCESS = (output -> IO_NEW).
+
+relation R_IO = {IO_OLD@IO_OLD = reconfigure -> IO_NEW@IO_NEW,
+PROCESS@IO_OLD = reconfigure -> PROCESS@IO_NEW}
+
+relation R_IO_FG = {IO_OLD@IO_OLD = reconfigure_IO -> IO_NEW@IO_NEW,
+PROCESS@IO_OLD = reconfigure_IO -> PROCESS@IO_NEW}
+
+relation R_64_128 = {DES64@DES64 = reconfigure -> DES128@DES128}
+
+relation R_64_128_FG = {DES64@DES64 = reconfigure_64_128 -> DES128@DES128}
+
+map MAPPING_IO = {IO_OLD, IO_NEW, R_IO}.
+map MAPPING_64_128 = {DES64, DES128, R_64_128}.
+
+||MapEnv_64_128 = (MAPPING_IO || MAPPING_64_128).
+
+// —————————OLD CONTROLLER SPEC —————————–
+
+fluent InputRecieve = <input, output>
+fluent EncriptionDone64 = <des64, input>
+fluent EncriptionDone128 = <des128, input>
+
+ltl_property P_DES64 = []((des64 -> InputRecieve) && (output -> EncriptionDone64))
+ltl_property P_DES128 = []((des128 -> InputRecieve) && (output -> EncriptionDone128))
+
+controllerSpec DES64_SPEC = {
+safety = {P_DES64}
+controllable = {Controllable64}
+}
+
+controller ||CONTROLLER64 = ENV_DES64~{DES64_SPEC}.
+||CONTROLLER_ENVIRONMENT_64 = (CONTROLLER64||ENV_DES64).
+
+// —————————NEW CONTROLLER SPEC —————————–
+
+controllerSpec DES128_SPEC = {
+safety = {P_DES128}
+controllable = {Controllable128}
+}
+
+controller ||CONTROLLER128 = ENV_DES128~{DES128_SPEC}.
+||CONTROLLER_ENVIRONMENT_128 = (CONTROLLER128||ENV_DES128).
+
+// —————————UPDATING CONTROLLER SPEC—————————–
+
+set StopOldSpecActions = {stopOldSpec_P_DES64}
+set StartNewSpecActions = {startNewSpec_P_DES128}
+set ReconfigureActions = {reconfigure_IO, reconfigure_64_128}
+
+fluent AfterStopBeforeStart_P_DES128 = <StopOldSpecActions, startNewSpec_P_DES128>
+fluent AfterStopBeforeStart = <stopOldSpec, startNewSpec>
+fluent Pending_StopOldSpec_P_DES64 = <hotSwapIn, stopOldSpec_P_DES64>
+fluent Pending_StartNewSpec_P_DES128 = <hotSwapIn, startNewSpec_P_DES128>
+fluent Pending_Reconfigure_IO = <hotSwapIn, reconfigure_IO>
+fluent Pending_Reconfigure_64_128 = <hotSwapIn, reconfigure_64_128>
+
+// T1: 更新中であるならば，更新先制御器の制御可能事象を実行しない
+ltl_property R1_TRD_P_DES128 = [](AfterStopBeforeStart_P_DES128 -> !(des64 || des128 || output))
+ltl_property R1_TRD_SFG = [](AfterStopBeforeStart -> !(des64 || des128 || output))
+
+ltl_property R1_OTF_P_DES128 = [](AfterStopBeforeStart_P_DES128 -> !{des64, des128, output})
+ltl_property R1_OTF_SFG = [](AfterStopBeforeStart -> !{des64, des128, output})
+
+// T2: 各環境モデルを更新（reconfigure）する前に，必ず該当のstopOldSpecとstartNewSpecを実施する
+ltl_property R2_StopOldSpec_P_DES64 = [](Pending_StopOldSpec_P_DES64 -> (Pending_Reconfigure_IO && Pending_Reconfigure_64_128))
+ltl_property R2_StartNewSpec_P_DES128 = [](Pending_StartNewSpec_P_DES128 -> (Pending_Reconfigure_IO && Pending_Reconfigure_64_128))
+
+// ————————— NOT On-The-Fly —————————–
+
+updatingController UpdCont_FG = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG = UpdCont_FG.
+
+updatingController UpdCont_FG_R1 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R1_TRD_P_DES128,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R1 = UpdCont_FG_R1.
+
+updatingController UpdCont_FG_R2 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R2_StopOldSpec_P_DES64,
+transition = R2_StartNewSpec_P_DES128,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R2 = UpdCont_FG_R2.
+
+updatingController UpdCont_SFG = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG = UpdCont_SFG.
+
+updatingController UpdCont_SFG_R1 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R1_TRD_SFG,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R1 = UpdCont_SFG_R1.
+
+updatingController UpdCont_SFG_R2 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R2_StopOldSpec_P_DES64,
+transition = R2_StartNewSpec_P_DES128,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R2 = UpdCont_SFG_R2.
+
+// ————————— Apply On-The-Fly —————————–
+
+updatingController UpdCont_OTF_FG = {
+oldController = CONTROLLER64,
+newController = CONTROLLER128,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG = UpdCont_OTF_FG.
+
+updatingController UpdCont_OTF_FG_R1 = {
+oldController = CONTROLLER64,
+newController = CONTROLLER128,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R1_OTF_P_DES128,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R1 = UpdCont_OTF_FG_R1.
+
+updatingController UpdCont_OTF_FG_R2 = {
+oldController = CONTROLLER64,
+newController = CONTROLLER128,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R2_StopOldSpec_P_DES64,
+transition = R2_StartNewSpec_P_DES128,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R2 = UpdCont_OTF_FG_R2.
+
+updatingController UpdCont_OTF_SFG = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG = UpdCont_OTF_SFG.
+
+updatingController UpdCont_OTF_SFG_R1 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R1_OTF_SFG,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R1 = UpdCont_OTF_SFG_R1.
+
+updatingController UpdCont_OTF_SFG_R2 = {
+oldController = CONTROLLER_ENVIRONMENT_64,
+oldEnvironment = {IO_OLD, DES64},
+newEnvironment = {IO_NEW, DES128},
+mapRelation = {R_IO_FG, R_64_128_FG},
+oldGoal = DES64_SPEC,
+newGoal = DES128_SPEC,
+transition = R2_StopOldSpec_P_DES64,
+transition = R2_StartNewSpec_P_DES128,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R2 = UpdCont_OTF_SFG_R2.

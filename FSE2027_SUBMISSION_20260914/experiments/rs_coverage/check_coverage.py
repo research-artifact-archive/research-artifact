@@ -398,8 +398,8 @@ def render(rows,contracts,output):
   r'Per-requirement state counts, two conflicting histories, and update-boundary checks are in \path{rs-requirements.csv}.',
   r'$^a$All \RSAInclusionNew{} NEW occurrences satisfy RS under A: the checked safe-prefix language condition gives equality when the actual safe-history set is nonempty; with an empty set, inclusion is automatic. '
   r'Plant-level nonemptiness is not established, so exactness remains conditional. '
-  r'$^b$The current E column uses the added AH result (Lemma E$^{\prime}$): every referenced fluent is declared and affected only by update labels, which cannot occur before entry; the constant initializer must match the non-error state after one \texttt{hotSwapIn}. '
-  r'Remaining event/plant predicates retain unverified reference-language comparisons. Historical AG E columns and all H/A results are unchanged. '
+  r'$^b$The current E column uses the syntactic sufficient condition (Lemma E$^{\prime}$): every referenced fluent is declared and affected only by update labels, which cannot occur before entry; the constant initializer must match the non-error state after one \texttt{hotSwapIn}. '
+  r'Remaining event/plant predicates retain unverified reference-language comparisons. Earlier E diagnostic columns and all H/A results are unchanged. '
   r'Update labels occur at most once in the new prefix explorations; continuation-language equivalence is checked over all words, a stronger condition.'])
  (output/'rs-model-table.tex').write_text('\n'.join(lines)+'\n')
  total=len(rows);checked=sum(r['fluent_determined']!='UNCLASSIFIED' for r in rows);fd=sum(r['fluent_determined'] is True for r in rows);exact=sum(r['exact_residual_certified'] is True for r in rows)

@@ -23,35 +23,6 @@
   \PackageError{main}{This manuscript requires XeLaTeX}%
     {Select XeLaTeX as the compiler, or keep the supplied latexmkrc file.}
 \fi
-\usepackage{xeCJK}
-\IfFontExistsTF{Noto Serif CJK JP}{%
-  \setCJKmainfont[
-    ItalicFont=Noto Serif CJK JP,
-    BoldItalicFont=Noto Serif CJK JP,
-    SmallCapsFont=Noto Serif CJK JP
-  ]{Noto Serif CJK JP}%
-  \setCJKsansfont[
-    ItalicFont=Noto Sans CJK JP,
-    BoldItalicFont=Noto Sans CJK JP,
-    SmallCapsFont=Noto Sans CJK JP
-  ]{Noto Sans CJK JP}%
-  \setCJKmonofont{Noto Sans Mono CJK JP}%
-}{%
-  \setCJKmainfont[
-    BoldFont=ipaexg.ttf,
-    ItalicFont=ipaexm.ttf,
-    BoldItalicFont=ipaexg.ttf,
-    SmallCapsFont=ipaexm.ttf
-  ]{ipaexm.ttf}%
-  \setCJKsansfont[
-    BoldFont=ipaexg.ttf,
-    ItalicFont=ipaexg.ttf,
-    BoldItalicFont=ipaexg.ttf,
-    SmallCapsFont=ipaexg.ttf
-  ]{ipaexg.ttf}%
-  \setCJKmonofont{ipaexg.ttf}%
-}
-
 \AtBeginDocument{%
   \providecommand\BibTeX{{Bib\TeX}}}
 
@@ -543,7 +514,7 @@ Our MTSA extension~\cite{paper:MTSA2008} implements canonical configurations, la
 \par\noindent\textbf{TCB 3---cross-checks:} the explicit checker constructs successors separately but shares the frontend, endpoints and goal predicate. The restricted raw-LTS oracle also parses independently. Both were revised by the same author team. Residual meanings and runtime conformance remain external premises.
 
 \paragraph{Use of generative AI}
-OpenAI Codex (GPT-6 Astra; start date [要確認]) assisted contract design, semantic analysis, Java \texttt{otf} implementation/tests, campaign, rendering and analysis scripts, and figures. June--August 2026 implementation and ICSE-format drafting also used generative AI [要確認: systems/versions]. From September 14, Claude Fable 5.1 in the Anthropic desktop app assisted planning/structural diagnosis, authored the Windows driver and runbook, inspected returned raw, read source code to diagnose legacy comparisons, and drafted author decisions and task instructions. Claude authored neither manuscript prose, Java nor the renderer. ChatGPT reviewed manuscript PDFs on August 7 and September 18 [要確認: models]. Tests, raw-LTS oracles, certificate checks, primary sources and author review checked these contributions; shared authorship and AI assistance permit correlated faults. Models/logs/raw were processed locally; PDFs went to external review services. Numerical evidence uses saved outputs, not initial AI readings. Separately, Codex assisted prose drafting/revision; authors retain responsibility.
+OpenAI Codex (GPT-6 Astra; start date [TO CONFIRM]) assisted contract design, semantic analysis, Java \texttt{otf} implementation/tests, campaign, rendering and analysis scripts, and figures. June--August 2026 implementation and ICSE-format drafting also used generative AI [TO CONFIRM: systems/versions]. From September 14, Claude Fable 5.1 in the Anthropic desktop app assisted planning/structural diagnosis, authored the Windows driver and runbook, inspected returned raw, read source code to diagnose legacy comparisons, and drafted author decisions and task instructions. Claude authored neither manuscript prose, Java nor the renderer. ChatGPT reviewed manuscript PDFs on August 7 and September 18 [TO CONFIRM: models]. Tests, raw-LTS oracles, certificate checks, primary sources and author review checked these contributions; shared authorship and AI assistance permit correlated faults. Models/logs/raw were processed locally; PDFs went to external review services. Numerical evidence uses saved outputs, not initial AI readings. Separately, Codex assisted prose drafting/revision; authors retain responsibility.
 
 \paragraph{Runtime adapter}
 A platform interprets the returned policy/rank/handover table under A1--A4. Java names entry/load \texttt{hotSwapIn}/\texttt{hotSwapOut}; the linked LTS uses an atomic goal quotient. A phase-disjoint observation map $\alpha$ must satisfy:

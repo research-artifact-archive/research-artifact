@@ -1,4 +1,9 @@
-# Residual-soundness sufficient-condition coverage
+# Residual initialization coverage
+
+Module: `FSE2027_SUBMISSION_20260914/experiments/rs_coverage/`.
+Use `python quickstart.py` at the package root for the protected, isolated check.
+The module commands below also write module-local CSVs: run them only in a disposable package copy.
+
 
 This standalone module classifies the actual compiled NEW and UPD safety monitors for the nine benchmark models and their base/R1/R2 contracts. It performs no controller synthesis, endpoint-product construction, benchmark replay, or source/model modification. The scope is a plant-independent sufficient condition for exact residual initialization; failure leaves residual soundness (RS) untested for the actual plant histories.
 

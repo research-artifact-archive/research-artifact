@@ -1,0 +1,9 @@
+COMMAND: ["<USER_HOME>/.cache/fgducs-plot-runtime-20260915/bin/python", "-B", "<OUTPUT>/run-20260918T231620Z/workspace/FSE2027_SUBMISSION_20260914/experiments/paper_witnesses/check_diagrams.py"]
+PASS: all drawn W_cell/W_b/W_r primitive edges, total monitor transitions, endpoints and 13-state/11-edge policy.
+RQ2 edge correspondence: cell plant projection 8, branch 15, requirement plant 4; requirement rejection formulas/start guard confirmed.
+PASS dashed transfers: W_cell A=1, W_cell B=1, W_b=2, W_r=1; all 5 drawn pairs equal the finite checker and the RQ2 relations under the explicit state/event renaming.
+PASS RQ2 mapRelation: all 5 updating-controller declarations select the expected 4 relation definitions; no extra/duplicate transfer pairs.
+Scope: cell equality is only the move-labelled plant projection and empty-state transfers. The executable cell has no inspection or lifecycle monitors; paper adds j and r_one/r_old/r_inspect. Requirement plant and transfer correspond, but the fixture uses safety formulas plus a start-after-align guard rather than the paper monitor error-state/Start encoding. Branch plant and transfer correspond under state/event renaming. No full-game isomorphism claimed.
+
+EXIT: 0
+ELAPSED_SECONDS: 0.032

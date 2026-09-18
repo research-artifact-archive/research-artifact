@@ -68,7 +68,7 @@ The public adapter follows the GUI's compile → continueCompilation → applyCo
 From this directory, `python3 prepare_package.py` generates inputs/configs and compiles only the separate adapter using JDK 17, then `python3 assemble_delta.py` creates copies of the runner/driver. These preparation commands use the adjacent private source tree and existing rq3_xeon bundle; they never rebuild MTSA. Existing raw must be preserved. `python3 check_fidelity.py` (7 checks) and `python3 bundle_delta/scripts/check_orchestration.py` (9 checks) are infrastructure fixtures only and start no synthesis JVM. `cli/PublishedMtsaRunnerCheck.java` supplies 4 additional classification assertions; its raw log is `raw/adapter-classification-check.log`. The initial fixture assertion failure about an absolute output path is retained in `raw/fidelity-checks-initial.log`.
 
 
-## Returned Xeon reference results (decisions AD/AE)
+## Returned Xeon reference results
 
 The returned campaign files are immutable. `render_fidelity.py` validates their complete plans, all 210 planned slots, metadata, original input/config/JAR digests, 64 GiB heap and 1200 s cap, five-trial eligibility and saved summary values before rendering. Of the 210 slots, 190 executed and 20 explicitly skipped after the five fork exceptions. All 21 conditions return a controller in the lab-maintained original-source build. All 16 jointly processed conditions also return a controller in the fork, consistently across five repetitions; the other five are unmeasured. These are **reference experiments on monolithic inputs**, not additional RQ3 cells or identical FG games. No cross-tool timing ratio is computed.
 
