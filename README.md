@@ -174,7 +174,7 @@ The RQ3/Travel time ratio is for the solver plus internal certificate-check inte
 
 The publication location is https://github.com/research-artifact-archive/research-artifact. The repository is reinitialized for this FG-DUCS package, replacing its previous content; the `main` branch history contains only this package's publication commits. The final submission tag `fse27-submission` will be created at the final push after v2 is frozen. Until then, `main` is the working preview and the two split result assets are designated for the `v2-preview` pre-release. Release creation and asset upload are pending; the manifest and asset digests are already included. No final-submission tag exists yet.
 
-The 198.503-second clean-cache build above is prior local evidence. Public clean-clone verification is pending and will be recorded here after execution. Clone the current preview as follows; use `git checkout fse27-submission` only after the final tag has been published:
+The public preview was independently cloned over HTTPS and verified on macOS arm64 with OpenJDK 17.0.19 and Maven 3.9.16. From a new empty Maven cache, the source build succeeded in **643.205 seconds**; this includes a slow FreeHEP dependency transfer. Upstream dependency acquisition and digest verification took **89.486 seconds** separately. Tests were compiled but execution was skipped. Saved-package checks passed for all **92 RQ1 and 14 RQ2 jobs**. The `--derive-only` smoke runs succeeded and matched all derived fields of the **46 RQ1 oracle rows and 14 RQ2 expectation rows**, after normalizing clone paths. These derive runs do not rerun synthesis or regenerate the saved RQ2 prose annotations. Logs and timings are in `validation/clean-clone/`; the earlier 198.503-second local build remains separate evidence. Clone the current preview as follows; use `git checkout fse27-submission` only after the final tag has been published:
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git fg-ducs-clean
@@ -193,7 +193,7 @@ python restore_results.py --assets /path/to/downloaded-assets --verify-only
 python restore_results.py --assets /path/to/downloaded-assets
 ```
 
-The restore script verifies both asset and per-file digests. The clean-clone commands above are prepared instructions until an executed result is recorded here. Source models, the measured JAR and original raw remain unchanged.
+The restore script verifies both asset and per-file digests. Public Release download and restoration have not been checked because the `v2-preview` Release is not yet published; local asset restoration checks below remain separate evidence. Source models, the measured JAR and original raw remain unchanged.
 
 
 ## Source extent and local package checks
@@ -212,7 +212,7 @@ verified every archived file digest, checked saved RQ1/RQ2 certificates, and
 regenerated the paper tables from the restored raw. The dependency-metadata
 restoration was checked for exact bytes, repeatability, and refusal to replace
 a differing existing file. These checks run on saved data and package copies;
-they are not new synthesis trials or the pending public clean-clone check.
+they are not new synthesis trials. The later public clean-clone check is recorded separately above.
 The anonymity scan distinguishes required third-party legal attribution from
 submission-author identity; both original JavaBDD copyright/contact lines are
 retained. No submission-author identifying matches remain.
