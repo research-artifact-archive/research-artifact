@@ -1,0 +1,43 @@
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.29\linewidth}p{.20\linewidth}p{.25\linewidth}p{.20\linewidth}@{}}
+\caption{Separate monolithic reference experiment: all 21 conditions. S denotes SUCCESS (controller returned); sizes are first-trial states/transitions. Each completed cell has five consistent SUCCESS decisions; sizes may vary across repetitions (below). N/M labels annotate raw CRASH records, without changing them.}\label{tab:legacy-fidelity}\\
+\toprule Input / condition & Original-source lab build & Fork legacy path & Comparison\\\midrule\endfirsthead
+\toprule Input / condition & Original-source lab build & Fork legacy path & Comparison\\\midrule\endhead
+\bottomrule\endfoot
+GSM\newline supplied & S 86/119 & N/M\newline (fork parser) & N/M\\
+GSM\newline empty & S 92/117 & N/M\newline (fork parser) & N/M\\
+Industry\newline supplied & S 3,050/9,496 & S 3,050/9,496 & MATCH\\
+Industry\newline empty & S 2,312/6,615 & S 2,312/6,615 & MATCH\\
+MetaSocket\newline UPD64\_128 & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD64\_64COM & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD128\_64 & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD128\_128COM & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD64COM\_64 & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD64COM\_128COM & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD128COM\_128 & S 36/59 & S 36/59 & MATCH\\
+MetaSocket\newline UPD128COM\_64COM & S 36/59 & S 36/59 & MATCH\\
+PowerPlant\newline supplied & S 79/141 & N/M\newline (fork parser) & N/M\\
+ProductionCell\newline supplied & S 168/267 & S 168/267 & MATCH\\
+ProductionCell\newline empty & S 107/158 & S 107/158 & MATCH\\
+Railcab\newline supplied & S 448/803 & S 443/796 & SIZE-\newline MISMATCH\\
+Railcab\newline empty & S 471/708 & S 471/708 & MATCH\\
+Surveillance\newline supplied & S 1,394/2,959 & N/M\newline (instrumentation) & N/M\\
+Surveillance\newline empty & S 665/1,414 & N/M\newline (instrumentation) & N/M\\
+Workflow\newline supplied & S 679/1,144 & S 679/1,144 & MATCH\\
+Workflow\newline empty & S 193/287 & S 193/287 & MATCH\\
+\end{longtable}\endgroup
+The two campaigns retain 210 planned slots: 190 executed trials and 20 explicit skips following the five fork exceptions. Those exceptions occur before a legacy GR decision and give no evidence of legacy synthesis capability or failure.
+\paragraph{Saved exception text: fork parser.}
+\noindent\texttt{ltsa.lts.LTSException:}\par\noindent\texttt{name already defined\ \ LeavesPumpOn}\par
+\noindent\texttt{ltsa.lts.LTSException:}\par\noindent\texttt{name already defined\ \ T\_NO\_UPDATE\_WHILE\_SEND}\par
+\paragraph{Saved exception text: instrumentation.}
+\noindent\texttt{java.lang.IllegalArgumentException:}\par\noindent\texttt{Derived old-action authority is inconsistent: weather.old}\par
+\begin{center}\small
+\begin{tabular}{@{}llrrrrr@{}}\toprule
+Tool & Condition & Rep. 1 & Rep. 2 & Rep. 3 & Rep. 4 & Rep. 5\\\midrule
+Fork & ProductionCell / empty & 107/158 & 102/150 & 107/158 & 102/150 & 107/158\\
+Lab build & Railcab / supplied & 448/803 & 448/809 & 449/805 & 443/796 & 442/797\\
+Fork & Railcab / supplied & 443/796 & 442/794 & 449/805 & 451/811 & 449/805\\
+Lab build & Railcab / empty & 471/708 & 471/708 & 471/708 & 429/651 & 471/708\\
+\bottomrule\end{tabular}\end{center}
+These are all 4 tool/condition cells whose returned controller sizes vary across the five successful trials; other completed cells retain their first-trial sizes. The fifteen size matches and the five-state Railcab difference in the main text compare first trials only. In particular, the Railcab supplied lab-build trial 4 returns the same size as fork trial 1; a persistent tool-specific size difference or controller equivalence is not established.

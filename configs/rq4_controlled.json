@@ -1,0 +1,1677 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "repetitions": 1,
+  "timeout_seconds": 1200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "backend": "lts",
+  "experiment_id": "fg-ducs-xeon-rq4_controlled",
+  "models": [
+    {
+      "factors": {
+        "baseline_model": "ctrl_fanout_01",
+        "changed_factor": "normal_controllable_action_candidates",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates the number of controllable candidates offered to lazy/eager bucket exploration",
+        "controlled_family": "controllable_candidate_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables every ordinary self-loop and selects the deterministic reconfiguration",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_ctrl_fanout_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/ctrl_fanout_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "ctrl_fanout_01",
+        "changed_factor": "normal_controllable_action_candidates",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates the number of controllable candidates offered to lazy/eager bucket exploration",
+        "controlled_family": "controllable_candidate_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables every ordinary self-loop and selects the deterministic reconfiguration",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_ctrl_fanout_02",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/ctrl_fanout_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "ctrl_fanout_01",
+        "changed_factor": "normal_controllable_action_candidates",
+        "changed_factor_value": 4,
+        "construct_validity_role": "isolates the number of controllable candidates offered to lazy/eager bucket exploration",
+        "controlled_family": "controllable_candidate_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables every ordinary self-loop and selects the deterministic reconfiguration",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 4,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_ctrl_fanout_04",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/ctrl_fanout_04.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "ctrl_fanout_01",
+        "changed_factor": "normal_controllable_action_candidates",
+        "changed_factor_value": 8,
+        "construct_validity_role": "isolates the number of controllable candidates offered to lazy/eager bucket exploration",
+        "controlled_family": "controllable_candidate_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables every ordinary self-loop and selects the deterministic reconfiguration",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 8,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_ctrl_fanout_08",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/ctrl_fanout_08.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "ctrl_fanout_01",
+        "changed_factor": "normal_controllable_action_candidates",
+        "changed_factor_value": 16,
+        "construct_validity_role": "isolates the number of controllable candidates offered to lazy/eager bucket exploration",
+        "controlled_family": "controllable_candidate_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables every ordinary self-loop and selects the deterministic reconfiguration",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 16,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_ctrl_fanout_16",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/ctrl_fanout_16.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "transfer_outcomes_01",
+        "changed_factor": "transfer_max_fan_out",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates relational-transfer fan-out and its universal successor obligation",
+        "controlled_family": "local_transfer_outcomes",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "every adversarial transfer outcome is a loadable all-new goal",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_transfer_outcomes_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/transfer_outcomes_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "transfer_outcomes_01",
+        "changed_factor": "transfer_max_fan_out",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates relational-transfer fan-out and its universal successor obligation",
+        "controlled_family": "local_transfer_outcomes",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "every adversarial transfer outcome is a loadable all-new goal",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 2,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 2,
+          "transfer_relation_edges": 2,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_transfer_outcomes_02",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/transfer_outcomes_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "transfer_outcomes_01",
+        "changed_factor": "transfer_max_fan_out",
+        "changed_factor_value": 4,
+        "construct_validity_role": "isolates relational-transfer fan-out and its universal successor obligation",
+        "controlled_family": "local_transfer_outcomes",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "every adversarial transfer outcome is a loadable all-new goal",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 4,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 4,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_transfer_outcomes_04",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/transfer_outcomes_04.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "transfer_outcomes_01",
+        "changed_factor": "transfer_max_fan_out",
+        "changed_factor_value": 8,
+        "construct_validity_role": "isolates relational-transfer fan-out and its universal successor obligation",
+        "controlled_family": "local_transfer_outcomes",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "every adversarial transfer outcome is a loadable all-new goal",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 8,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 8,
+          "transfer_relation_edges": 8,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_transfer_outcomes_08",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/transfer_outcomes_08.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "transfer_outcomes_01",
+        "changed_factor": "transfer_max_fan_out",
+        "changed_factor_value": 16,
+        "construct_validity_role": "isolates relational-transfer fan-out and its universal successor obligation",
+        "controlled_family": "local_transfer_outcomes",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "every adversarial transfer outcome is a loadable all-new goal",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 16,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 16,
+          "transfer_relation_edges": 16,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_transfer_outcomes_16",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/transfer_outcomes_16.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_events_00",
+        "changed_factor": "uncontrollable_action_count",
+        "changed_factor_value": 0,
+        "construct_validity_role": "isolates the number of enabled uncontrollable buckets",
+        "controlled_family": "uncontrollable_event_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each uncontrollable event is acyclic and reaches a state with a deterministic all-new transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_events_00",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_events_00.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_events_00",
+        "changed_factor": "uncontrollable_action_count",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates the number of enabled uncontrollable buckets",
+        "controlled_family": "uncontrollable_event_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each uncontrollable event is acyclic and reaches a state with a deterministic all-new transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 2,
+          "reachable_old_local_states": 2,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 2,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_events_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_events_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_events_00",
+        "changed_factor": "uncontrollable_action_count",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates the number of enabled uncontrollable buckets",
+        "controlled_family": "uncontrollable_event_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each uncontrollable event is acyclic and reaches a state with a deterministic all-new transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 3,
+          "reachable_old_local_states": 3,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 3,
+          "uncontrollable_action_count": 2,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_events_02",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_events_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_events_00",
+        "changed_factor": "uncontrollable_action_count",
+        "changed_factor_value": 4,
+        "construct_validity_role": "isolates the number of enabled uncontrollable buckets",
+        "controlled_family": "uncontrollable_event_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each uncontrollable event is acyclic and reaches a state with a deterministic all-new transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 5,
+          "reachable_old_local_states": 5,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 5,
+          "uncontrollable_action_count": 4,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_events_04",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_events_04.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_events_00",
+        "changed_factor": "uncontrollable_action_count",
+        "changed_factor_value": 8,
+        "construct_validity_role": "isolates the number of enabled uncontrollable buckets",
+        "controlled_family": "uncontrollable_event_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each uncontrollable event is acyclic and reaches a state with a deterministic all-new transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 9,
+          "reachable_old_local_states": 9,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 9,
+          "uncontrollable_action_count": 8,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_events_08",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_events_08.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_outcomes_01",
+        "changed_factor": "uncontrollable_max_outcome_fan_out",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates adversarial result fan-out within one uncontrollable action bucket",
+        "controlled_family": "uncontrollable_outcome_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "all outcomes of the single uncontrollable bucket are acyclic and have a deterministic transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 2,
+          "reachable_old_local_states": 2,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 2,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_outcomes_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_outcomes_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_outcomes_01",
+        "changed_factor": "uncontrollable_max_outcome_fan_out",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates adversarial result fan-out within one uncontrollable action bucket",
+        "controlled_family": "uncontrollable_outcome_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "all outcomes of the single uncontrollable bucket are acyclic and have a deterministic transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 3,
+          "reachable_old_local_states": 3,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 3,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 2
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_outcomes_02",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_outcomes_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_outcomes_01",
+        "changed_factor": "uncontrollable_max_outcome_fan_out",
+        "changed_factor_value": 4,
+        "construct_validity_role": "isolates adversarial result fan-out within one uncontrollable action bucket",
+        "controlled_family": "uncontrollable_outcome_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "all outcomes of the single uncontrollable bucket are acyclic and have a deterministic transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 5,
+          "reachable_old_local_states": 5,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 5,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 4
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_outcomes_04",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_outcomes_04.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "uc_outcomes_01",
+        "changed_factor": "uncontrollable_max_outcome_fan_out",
+        "changed_factor_value": 8,
+        "construct_validity_role": "isolates adversarial result fan-out within one uncontrollable action bucket",
+        "controlled_family": "uncontrollable_outcome_fanout",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "all outcomes of the single uncontrollable bucket are acyclic and have a deterministic transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 9,
+          "reachable_old_local_states": 9,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 9,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 8
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "reachable_old_local_states",
+          "reachable_new_local_states",
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_uc_outcomes_08",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/uc_outcomes_08.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "requirements_00",
+        "changed_factor": "requirements_per_endpoint",
+        "changed_factor_value": 0,
+        "construct_validity_role": "isolates requirement tester and activation-domain volume",
+        "controlled_family": "requirement_monitor_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each forbidden controllable action is disabled and every one-state new tester has a unique loadable residual",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": []
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_requirements_00",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/requirements_00.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "requirements_00",
+        "changed_factor": "requirements_per_endpoint",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates requirement tester and activation-domain volume",
+        "controlled_family": "requirement_monitor_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each forbidden controllable action is disabled and every one-state new tester has a unique loadable residual",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 1,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 1,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 2,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "requirement_update_events"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_requirements_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/requirements_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "requirements_00",
+        "changed_factor": "requirements_per_endpoint",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates requirement tester and activation-domain volume",
+        "controlled_family": "requirement_monitor_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each forbidden controllable action is disabled and every one-state new tester has a unique loadable residual",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 2,
+          "normal_controllable_action_candidates": 3,
+          "old_requirement_monitors": 2,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 4,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "requirement_update_events"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_requirements_02",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/requirements_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "requirements_00",
+        "changed_factor": "requirements_per_endpoint",
+        "changed_factor_value": 4,
+        "construct_validity_role": "isolates requirement tester and activation-domain volume",
+        "controlled_family": "requirement_monitor_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each forbidden controllable action is disabled and every one-state new tester has a unique loadable residual",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 4,
+          "normal_controllable_action_candidates": 5,
+          "old_requirement_monitors": 4,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 8,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "requirement_update_events"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_requirements_04",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/requirements_04.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "requirements_00",
+        "changed_factor": "requirements_per_endpoint",
+        "changed_factor_value": 8,
+        "construct_validity_role": "isolates requirement tester and activation-domain volume",
+        "controlled_family": "requirement_monitor_count",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "each forbidden controllable action is disabled and every one-state new tester has a unique loadable residual",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 8,
+          "normal_controllable_action_candidates": 9,
+          "old_requirement_monitors": 8,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 16,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "requirement_update_events"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_requirements_08",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/requirements_08.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "precedence_closure_00",
+        "changed_factor": "precedence_transitive_edges",
+        "changed_factor_value": 0,
+        "construct_validity_role": "isolates ordering constraints and transitive precedence density",
+        "controlled_family": "precedence_density",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the strict precedence graph is acyclic and its topological order completes all four deterministic transfers",
+        "factor_vector": {
+          "components": 4,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "precedence_direct_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_precedence_closure_00",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/precedence_closure_00.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "precedence_closure_00",
+        "changed_factor": "precedence_transitive_edges",
+        "changed_factor_value": 1,
+        "construct_validity_role": "isolates ordering constraints and transitive precedence density",
+        "controlled_family": "precedence_density",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the strict precedence graph is acyclic and its topological order completes all four deterministic transfers",
+        "factor_vector": {
+          "components": 4,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.16666666666666666,
+          "precedence_direct_edges": 1,
+          "precedence_transitive_edges": 1,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "precedence_direct_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_precedence_closure_01",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/precedence_closure_01.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "precedence_closure_00",
+        "changed_factor": "precedence_transitive_edges",
+        "changed_factor_value": 2,
+        "construct_validity_role": "isolates ordering constraints and transitive precedence density",
+        "controlled_family": "precedence_density",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the strict precedence graph is acyclic and its topological order completes all four deterministic transfers",
+        "factor_vector": {
+          "components": 4,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.3333333333333333,
+          "precedence_direct_edges": 2,
+          "precedence_transitive_edges": 2,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "precedence_direct_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_precedence_closure_02",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/precedence_closure_02.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "precedence_closure_00",
+        "changed_factor": "precedence_transitive_edges",
+        "changed_factor_value": 3,
+        "construct_validity_role": "isolates ordering constraints and transitive precedence density",
+        "controlled_family": "precedence_density",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the strict precedence graph is acyclic and its topological order completes all four deterministic transfers",
+        "factor_vector": {
+          "components": 4,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.5,
+          "precedence_direct_edges": 2,
+          "precedence_transitive_edges": 3,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "precedence_direct_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_precedence_closure_03",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/precedence_closure_03.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "precedence_closure_00",
+        "changed_factor": "precedence_transitive_edges",
+        "changed_factor_value": 6,
+        "construct_validity_role": "isolates ordering constraints and transitive precedence density",
+        "controlled_family": "precedence_density",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the strict precedence graph is acyclic and its topological order completes all four deterministic transfers",
+        "factor_vector": {
+          "components": 4,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 1.0,
+          "precedence_direct_edges": 3,
+          "precedence_transitive_edges": 6,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 4,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "medium",
+        "small_exhaustive_gate": false,
+        "unavoidable_mediators": [
+          "precedence_direct_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_precedence_closure_06",
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/precedence_closure_06.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "decision_transfer_complete",
+        "changed_factor": "reachable_old_transfer_coverage",
+        "changed_factor_value": "all",
+        "construct_validity_role": "minimal paired mutation separating realizable from semantic unrealizability",
+        "controlled_family": "decision_boundary",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "all reachable old starts have a transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 2,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 2,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_decision_transfer_complete",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/decision_transfer_complete.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "decision_transfer_complete",
+        "changed_factor": "reachable_old_transfer_coverage",
+        "changed_factor_value": "one_of_two",
+        "construct_validity_role": "minimal paired mutation separating realizable from semantic unrealizability",
+        "controlled_family": "decision_boundary",
+        "expected_decision": "unrealizable",
+        "expected_decision_basis": "OLD_ALT is reachable, has no returning normal transition, and has no transfer",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "unrealizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 2,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "transfer_relation_edges"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_decision_transfer_partial",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/decision_transfer_partial.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "decision_self_loop_controllable",
+        "changed_factor": "spin_controllability",
+        "changed_factor_value": "controllable",
+        "construct_validity_role": "paired classification mutation for the strong-completion boundary",
+        "controlled_family": "decision_boundary",
+        "expected_decision": "realizable",
+        "expected_decision_basis": "the controller disables spin and reconfigures",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "realizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 2,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 0,
+          "uncontrollable_max_outcome_fan_out": 0
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "uncontrollable_action_count",
+          "uncontrollable_max_outcome_fan_out"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_decision_self_loop_controllable",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/decision_self_loop_controllable.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    },
+    {
+      "factors": {
+        "baseline_model": "decision_self_loop_controllable",
+        "changed_factor": "spin_controllability",
+        "changed_factor_value": "uncontrollable",
+        "construct_validity_role": "paired classification mutation for the strong-completion boundary",
+        "controlled_family": "decision_boundary",
+        "expected_decision": "unrealizable",
+        "expected_decision_basis": "the adversary can repeat the enabled uncontrollable spin forever",
+        "factor_vector": {
+          "components": 1,
+          "expected_decision": "unrealizable",
+          "new_requirement_monitors": 0,
+          "normal_controllable_action_candidates": 1,
+          "old_requirement_monitors": 0,
+          "precedence_density": 0.0,
+          "precedence_direct_edges": 0,
+          "precedence_transitive_edges": 0,
+          "reachable_new_local_states": 1,
+          "reachable_old_local_states": 1,
+          "requirement_update_events": 0,
+          "transfer_max_fan_out": 1,
+          "transfer_relation_edges": 1,
+          "uncontrollable_action_count": 1,
+          "uncontrollable_max_outcome_fan_out": 1
+        },
+        "size_tier": "small",
+        "small_exhaustive_gate": true,
+        "unavoidable_mediators": [
+          "normal_controllable_action_candidates",
+          "uncontrollable_action_count",
+          "uncontrollable_max_outcome_fan_out"
+        ]
+      },
+      "family": "rq4_controlled_factor",
+      "id": "rq4_decision_self_loop_uncontrollable",
+      "jvm_properties_override": {
+        "mtsa.revised.otf.independentQueryLimit": "5000000",
+        "mtsa.revised.otf.independentStateLimit": "500000",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive"
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full",
+        "fg_ducs_otf_eager_controllable",
+        "fg_ducs_otf_update_first"
+      ],
+      "path": "inputs/controlled/decision_self_loop_uncontrollable.lts",
+      "repetitions": 1,
+      "target_ids": [
+        "base"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "artifact_digests": {
+    "output": {
+      "bytes": 81742,
+      "exists": true,
+      "sha256": "fafc7d548e0df2aadbec3f4d76b9c46cb442c2a9f934e21f9b7382120764812f"
+    },
+    "stderr": {
+      "bytes": 264,
+      "exists": true,
+      "sha256": "34fd3ee0e1b81a3ef2573c0f89653ed21098d4dc5bbfbb6f1cb99e1afd48ea13"
+    },
+    "stdout": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions": {
+      "bytes": "",
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "artifacts": {
+    "output": "runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/output.txt",
+    "stderr": "runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/stderr.txt",
+    "stdout": "runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/stdout.txt",
+    "transitions": "runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/transitions.txt"
+  },
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentQueryLimit=10000000",
+    "-Dmtsa.revised.otf.independentStateLimit=1000000",
+    "-Dmtsa.revised.otf.independentVerification=true",
+    "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx12g",
+    "-cp",
+    "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/nondeterministic_one_bad__action_rename.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "command_text": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=true -Dmtsa.revised.otf.independentQueryLimit=10000000 -Dmtsa.revised.otf.independentStateLimit=1000000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.solver=otf -Xmx12g -cp 'Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar' ltsa.updatingControllers.cli.SingleCompositionRunner --lts 'Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/nondeterministic_one_bad__action_rename.lts' --target UPDATE_CONTROLLER_OTF_FG --output 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/output.txt' --transitions 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf/transitions.txt' --transition-output summary",
+  "completed": true,
+  "config_sha256": "5a40ee27dd3154c7502dd95ae670db1ccb88cac0e4b63e3f663b8ad59f279b9c",
+  "cwd": ".",
+  "elapsed_monotonic_ns": 760774000,
+  "elapsed_monotonic_seconds": 0.760774,
+  "evaluation_csv": {
+    "errors": [],
+    "found": true,
+    "header": [
+      "mode",
+      "result",
+      "solver_status",
+      "verification_status",
+      "run_verified",
+      "failure_reason",
+      "section",
+      "metric_key",
+      "metric_label",
+      "value",
+      "unit",
+      "formula",
+      "metric_schema_version",
+      "metric_description_id",
+      "section_readable_ja",
+      "metric_readable_ja",
+      "metric_category",
+      "artifact",
+      "phase",
+      "action",
+      "event",
+      "stat"
+    ],
+    "marker_count": 1,
+    "row_count": 217
+  },
+  "execution_environment_fingerprint_sha256": "f2b934ad383592519329ac3bf1725938ad9663752e294eefcf551236032a78ab",
+  "exit_code": 6,
+  "experiment_id": "fgducs-semantic-revision-20260914-rq1",
+  "finished_utc": "2026-09-14T07:29:57.737721+00:00",
+  "harness_error": "",
+  "harness_errors": [],
+  "harness_termination_action": "",
+  "input_model": {
+    "bytes": 1533,
+    "exists": true,
+    "sha256": "2c997a74564f36ea315e4d7ec1ee376c8233ec5ef86038c4b1f396258b176c29"
+  },
+  "job": {
+    "analysis_role": "correctness_primary",
+    "block_id": "semantic_nondeterministic_one_bad__action_rename__base__rep01",
+    "global_order_index": 80,
+    "job_id": "semantic_nondeterministic_one_bad__action_rename__base__rep01__fg_ducs_otf",
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.revised.otf.independentQueryLimit": "10000000",
+      "mtsa.revised.otf.independentStateLimit": "1000000",
+      "mtsa.revised.otf.independentVerification": "true",
+      "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+      "mtsa.revised.otf.solver": "otf"
+    },
+    "method_base_order": [
+      "fg_ducs_otf",
+      "direct_full"
+    ],
+    "method_id": "fg_ducs_otf",
+    "method_order": [
+      "fg_ducs_otf",
+      "direct_full"
+    ],
+    "method_order_index": 0,
+    "method_order_seed": 15523001992461836438,
+    "model_factors": {
+      "base_case": "nondeterministic_one_bad",
+      "coverage_tags": [
+        "losing",
+        "relational_transfer",
+        "universal_outcomes",
+        "requirement_activation_mismatch"
+      ],
+      "expected_decision": "unrealizable",
+      "metamorphic_group": "nondeterministic_one_bad",
+      "model_sha256": "2c997a74564f36ea315e4d7ec1ee376c8233ec5ef86038c4b1f396258b176c29",
+      "semantic_boundary": "one outcome of a nondeterministic transfer has no valid new-requirement activation",
+      "suite_manifest_sha256": "60e132141d12eea883bb220108f52ad3cdb94f84e4dcea9bed1011601b304c94",
+      "variant": "action_rename"
+    },
+    "model_family": "rq1_semantic_boundary_v2",
+    "model_id": "semantic_nondeterministic_one_bad__action_rename",
+    "model_path": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/nondeterministic_one_bad__action_rename.lts",
+    "model_planned_repetitions": 1,
+    "repetition": 1,
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "unit_order_index": 40,
+    "unit_order_seed": 8816969980923002946
+  },
+  "meta_schema_version": 1,
+  "order_algorithm": "seeded-per-unit-permutation/cyclic-rotation/reverse-every-cycle-v1",
+  "peak_rss_bytes": 105005056,
+  "peak_rss_kib": 102544,
+  "plan_sha256": "36c769976c4e03121388101495708461e66426ace4aa46deb67347eea5567bf9",
+  "rss_measurement_kind": "darwin_proc_pid_rusage_resident",
+  "rss_measurement_status": "measured",
+  "rss_poll_interval_seconds": 0.05,
+  "rss_samples_attempted": 13,
+  "rss_samples_available": 13,
+  "spawn_error": "",
+  "started_utc": "2026-09-14T07:29:56.655541+00:00",
+  "status": "UNREALIZABLE",
+  "timed_out": false,
+  "timeout_seconds": 120.0,
+  "timeout_termination_action": "",
+  "transition_output_mode": "summary"
+}

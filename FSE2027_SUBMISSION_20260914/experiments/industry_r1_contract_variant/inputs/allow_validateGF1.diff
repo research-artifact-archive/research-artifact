@@ -1,0 +1,15 @@
+--- Industry_FG.original.lts
++++ Industry_FG_R1_allow_validateGF1.lts
+@@ -194,9 +194,9 @@
+ // T1: 更新中であるならば，更新先制御器の制御可能事象を実行しない
+ //ltl_property T1 = [](Updating -> !{validateTOR, validateDSD1, validateQA, validateGF1, reviewTOR, reviewDSD1, readyTOR,  readyDSD1})
+ assert AnyAction = (validateTOR || validateDSD1 || validateQA || validateGF1 || reviewTOR || reviewDSD1 || readyTOR || readyDSD1)
+-ltl_property R1_P_NEW_TOR_POLICY = [](AfterStopBeforeStart_P_NEW_TOR_POLICY -> !AnyAction)
+-ltl_property R1_P_NEW_DSD1_POLICY = [](AfterStopBeforeStart_P_NEW_DSD1_POLICY -> !AnyAction)
+-ltl_property R1_P_NEW_DO_NOT_SEND_TWICE = [](AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE -> !AnyAction)
++ltl_property R1_P_NEW_TOR_POLICY = [](AfterStopBeforeStart_P_NEW_TOR_POLICY -> !(AnyAction && !validateGF1))
++ltl_property R1_P_NEW_DSD1_POLICY = [](AfterStopBeforeStart_P_NEW_DSD1_POLICY -> !(AnyAction && !validateGF1))
++ltl_property R1_P_NEW_DO_NOT_SEND_TWICE = [](AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE -> !(AnyAction && !validateGF1))
+ ltl_property R1_SFG = [](AfterStopBeforeStart -> !AnyAction)
+ 
+ // T2: 各環境モデルを更新（reconfigure）する前に，必ず該当のstopOldSpecとstartNewSpecを実施する

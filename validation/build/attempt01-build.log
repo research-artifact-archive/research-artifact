@@ -1,0 +1,26 @@
+FG-DUCS isolated Maven build
+Source: prepared anonymous distribution copy
+Empty repository at start: true
+Original sources, dependencies and campaign JAR are unchanged.
+
+COMMAND ["/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java", "-version"]
+openjdk version "17.0.19" 2026-04-21
+OpenJDK Runtime Environment Homebrew (build 17.0.19+0)
+OpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)
+
+COMMAND ["/opt/homebrew/bin/mvn", "-version"]
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Maven home: /opt/homebrew/Cellar/maven/3.9.16/libexec
+Java version: 17.0.19, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home
+Default locale: en_JP, platform encoding: UTF-8
+OS name: "mac os x", version: "15.7.9", arch: "aarch64", family: "mac"
+
+COPIED_DEPENDENCY_JARS 20
+NON_JAR_OR_LFS_POINTERS []
+COMMAND ["/opt/homebrew/bin/mvn", "-B", "-f", "FSE2027_SUBMISSION_20260914/artifact/build/clean-maven-20260916/maven-root/mtsa/pom.xml", "-Dmaven.repo.local=FSE2027_SUBMISSION_20260914/artifact/build/clean-maven-20260916/repository", "package", "-DskipTests", "-Djacoco.skip=true", "-Dstyle.color=never"]
+START_UTC 2026-09-15T01:43:07.424629+00:00
+END_UTC 2026-09-15T01:45:50.049830+00:00
+ELAPSED_SECONDS 162.62447183400218
+EXIT_CODE 143
+STATUS FAILURE
+ repeated slow FreeHEP lookups; original attempt is incomplete, not a source compilation failure. Next attempt changes only repository order and starts with a different empty Maven repository.

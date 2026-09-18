@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "repetitions": 5,
+  "timeout_seconds": 1200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "backend": "lts",
+  "experiment_id": "fg-ducs-xeon-rq4_independent",
+  "models": [
+    {
+      "id": "independent_k02",
+      "path": "inputs/independent/independent_k02.lts",
+      "family": "independent",
+      "factors": {
+        "K": 2
+      }
+    },
+    {
+      "id": "independent_k03",
+      "path": "inputs/independent/independent_k03.lts",
+      "family": "independent",
+      "factors": {
+        "K": 3
+      }
+    },
+    {
+      "id": "independent_k04",
+      "path": "inputs/independent/independent_k04.lts",
+      "family": "independent",
+      "factors": {
+        "K": 4
+      }
+    },
+    {
+      "id": "independent_k05",
+      "path": "inputs/independent/independent_k05.lts",
+      "family": "independent",
+      "factors": {
+        "K": 5
+      }
+    },
+    {
+      "id": "independent_k06",
+      "path": "inputs/independent/independent_k06.lts",
+      "family": "independent",
+      "factors": {
+        "K": 6
+      }
+    },
+    {
+      "id": "independent_k07",
+      "path": "inputs/independent/independent_k07.lts",
+      "family": "independent",
+      "factors": {
+        "K": 7
+      }
+    },
+    {
+      "id": "independent_k08",
+      "path": "inputs/independent/independent_k08.lts",
+      "family": "independent",
+      "factors": {
+        "K": 8
+      }
+    },
+    {
+      "id": "independent_k09",
+      "path": "inputs/independent/independent_k09.lts",
+      "family": "independent",
+      "factors": {
+        "K": 9
+      }
+    },
+    {
+      "id": "independent_k10",
+      "path": "inputs/independent/independent_k10.lts",
+      "family": "independent",
+      "factors": {
+        "K": 10
+      }
+    },
+    {
+      "id": "independent_k11",
+      "path": "inputs/independent/independent_k11.lts",
+      "family": "independent",
+      "factors": {
+        "K": 11
+      }
+    },
+    {
+      "id": "independent_k12",
+      "path": "inputs/independent/independent_k12.lts",
+      "family": "independent",
+      "factors": {
+        "K": 12
+      }
+    },
+    {
+      "id": "independent_k13",
+      "path": "inputs/independent/independent_k13.lts",
+      "family": "independent",
+      "factors": {
+        "K": 13
+      }
+    },
+    {
+      "id": "independent_k14",
+      "path": "inputs/independent/independent_k14.lts",
+      "family": "independent",
+      "factors": {
+        "K": 14
+      }
+    },
+    {
+      "id": "independent_k15",
+      "path": "inputs/independent/independent_k15.lts",
+      "family": "independent",
+      "factors": {
+        "K": 15
+      }
+    },
+    {
+      "id": "independent_k16",
+      "path": "inputs/independent/independent_k16.lts",
+      "family": "independent",
+      "factors": {
+        "K": 16
+      }
+    },
+    {
+      "id": "independent_k17",
+      "path": "inputs/independent/independent_k17.lts",
+      "family": "independent",
+      "factors": {
+        "K": 17
+      }
+    },
+    {
+      "id": "independent_k18",
+      "path": "inputs/independent/independent_k18.lts",
+      "family": "independent",
+      "factors": {
+        "K": 18
+      }
+    },
+    {
+      "id": "independent_k19",
+      "path": "inputs/independent/independent_k19.lts",
+      "family": "independent",
+      "factors": {
+        "K": 19
+      }
+    },
+    {
+      "id": "independent_k20",
+      "path": "inputs/independent/independent_k20.lts",
+      "family": "independent",
+      "factors": {
+        "K": 20
+      }
+    }
+  ]
+}

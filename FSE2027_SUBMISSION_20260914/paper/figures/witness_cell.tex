@@ -1,0 +1,104 @@
+% Complete W_cell diagram. Wedge records are checked against executable primitives.
+\begin{figure*}[!htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, every node/.style={font=\scriptsize},
+ st/.style={circle,draw,minimum size=4.5mm,inner sep=1pt},
+ ps/.style={draw,rounded corners=1pt,inner sep=2pt,font=\scriptsize},
+ lab/.style={font=\scriptsize\bfseries}]
+\newcommand{\FGedge}[5]{\draw[->,#5] (#1-#2) to node[font=\scriptsize,fill=white,inner sep=.4pt] {$#3$} (#1-#4);}
+\node[lab] at (1.35,.5) {$A$: old / new};
+\node[st] (Ao-h) at (.5,0) {$h$}; \node[st] (Ao-e) at (2.2,0) {$e$};
+\node[st] (An-h) at (.5,-1.0) {$h$}; \node[st] (An-e) at (2.2,-1.0) {$e$};
+\draw[->] (.05,0)--(Ao-h); \draw[->] (.05,-1)--(An-h);
+\FGedge{Ao}{h}{m_B}{e}{bend left=18}
+\FGedge{Ao}{e}{m_A}{h}{bend left=18}
+\FGedge{An}{h}{m_B}{e}{bend left=18}
+\FGedge{An}{e}{m_A}{h}{bend left=18}
+\draw[->,dashed] (Ao-e)--node[right] {$g_A$}(An-e);
+\node[lab] at (4.75,.5) {$B$: old / new};
+\node[st] (Bo-h) at (3.9,0) {$h$}; \node[st] (Bo-e) at (5.6,0) {$e$};
+\node[st] (Bn-h) at (3.9,-1) {$h$}; \node[st] (Bn-e) at (5.6,-1) {$e$};
+\draw[->] (6.05,0)--(Bo-e); \draw[->] (6.05,-1)--(Bn-e);
+\FGedge{Bo}{e}{m_B}{h}{bend left=18}
+\FGedge{Bo}{h}{m_A}{e}{bend left=18}
+\FGedge{Bn}{e}{m_B}{h}{bend left=18}
+\FGedge{Bn}{h}{m_A}{e}{bend left=18}
+\FGedge{Bn}{h}{j}{h}{loop below}
+\draw[->,dashed] (Bo-e)--node[right] {$g_B$}(Bn-e);
+\node[lab] at (7.3,.5) {$C^o$};
+\node[st] (Co-co) at (7.3,-.65) {$c_o$};\draw[->] (6.65,-.65)--(Co-co);
+\FGedge{Co}{co}{m_A,m_B}{co}{loop above}
+\node[lab] at (10.3,.5) {$C^n$};
+\node[st] (Cn-c) at (9.4,-.65) {$c$};\node[st] (Cn-d) at (11.4,-.65) {$d$};
+\draw[->] (8.75,-.65)--(Cn-c);
+\FGedge{Cn}{c}{m_A,j}{c}{loop above}
+\FGedge{Cn}{c}{m_B}{d}{bend left=18}
+\FGedge{Cn}{d}{j}{c}{bend left=18}
+\FGedge{Cn}{d}{m_B}{d}{loop above}
+\node[lab] at (1.3,-2) {$r_{\rm one}$ (initial $A$)};
+\node[st] (One-A) at (.5,-2.55) {$A$};\node[st] (One-B) at (2.15,-2.55) {$B$};\node[st] (One-E) at (1.3,-3.65) {$E$};
+\FGedge{One}{A}{m_B}{B}{bend left=18}
+\FGedge{One}{B}{m_A}{A}{bend left=18}
+\FGedge{One}{A}{m_A}{E}{}
+\FGedge{One}{B}{m_B}{E}{}
+\FGedge{One}{E}{\Sigma}{E}{loop below}
+\node[lab] at (5.1,-2) {$r_{\rm old}$ (initial $k$)};
+\node[st] (Old-k) at (4.25,-2.95) {$k$};\node[st] (Old-E) at (5.95,-2.95) {$E$};
+\FGedge{Old}{k}{j}{E}{}
+\FGedge{Old}{E}{\Sigma}{E}{loop below}
+\node[lab] at (9.75,-2) {$r_{\rm inspect}$ (initial $c$)};
+\node[st] (Ins-c) at (8.35,-2.55) {$c$};\node[st] (Ins-d) at (10.05,-2.55) {$d$};\node[st] (Ins-E) at (11.45,-3.65) {$E$};
+\FGedge{Ins}{c}{m_B}{d}{bend left=18}
+\FGedge{Ins}{d}{j}{c}{bend left=18}
+\FGedge{Ins}{d}{m_A}{E}{}
+\FGedge{Ins}{E}{\Sigma}{E}{loop right}
+\node[lab] at (1.65,-4.65) {Reachable old endpoint};
+\node[st] (OldCL-xA) at (.5,-5.2) {$x_A$};\node[st] (OldCL-xB) at (2.8,-5.2) {$x_B$};
+\draw[->] (-.05,-5.2)--(OldCL-xA);
+\FGedge{OldCL}{xA}{m_B}{xB}{bend left=18}
+\FGedge{OldCL}{xB}{m_A}{xA}{bend left=18}
+\node[lab] at (8.4,-4.65) {Reachable new endpoint ($Z_{load}$: double circles)};
+\node[st,double] (NewCL-zA) at (5.55,-5.25) {$z_A$};\node[st] (NewCL-yB) at (8.05,-5.25) {$y_B$};\node[st,double] (NewCL-zB) at (10.55,-5.25) {$z_B$};
+\draw[->] (4.9,-5.25)--(NewCL-zA);
+\FGedge{NewCL}{zA}{m_B}{yB}{}
+\FGedge{NewCL}{yB}{j}{zB}{}
+\FGedge{NewCL}{zB}{m_A}{zA}{bend left=20}
+\FGedge{NewCL}{zB}{j}{zB}{loop right}
+\node[lab,anchor=west] at (-.15,-6.45) {Policy $p_A$ (remaining rank $6,\ldots,0$)};
+\foreach \n/\txt in {0/ooA;k-,1/onA;k-,2/onB;k-,3/onB;kd,4/onB;-d,5/onB;-c,6/nnB;-c}
+ \node[ps] (PA-\n) at ({.45+2.05*\n},-7.05) {$\txt$};
+\FGedge{PA}{0}{\rho_B}{1}{}
+\FGedge{PA}{1}{m_B}{2}{}
+\FGedge{PA}{2}{s}{3}{}
+\FGedge{PA}{3}{t}{4}{}
+\FGedge{PA}{4}{j}{5}{}
+\FGedge{PA}{5}{\rho_A}{6}{}
+\node[lab,anchor=west] at (-.15,-7.6) {Policy $p_B$ (remaining rank $5,\ldots,0$)};
+\foreach \n/\txt in {0/ooB;k-,1/noB;k-,2/noA;k-,3/noA;kc,4/noA;-c,5/nnA;-c}
+ \node[ps] (PB-\n) at ({.45+2.05*\n},-8.2) {$\txt$};
+\FGedge{PB}{0}{\rho_A}{1}{}
+\FGedge{PB}{1}{m_A}{2}{}
+\FGedge{PB}{2}{s}{3}{}
+\FGedge{PB}{3}{t}{4}{}
+\FGedge{PB}{4}{\rho_B}{5}{}
+\end{tikzpicture}
+\par\smallskip
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\scriptsize
+$m_A/m_B/j=move_A/move_B/inspect$; $o/n,h/e,k/c/d/E/-=$ old/new, holding/empty, ok/clear/pending/error/inactive.
+$\SigmaN=\{m_A,m_B,j\}$, $\SigmaU=\{\rho_A,\rho_B,s,t\}$, $\Sigmauc=\emptyset$; $s=\ustart{r_{inspect}}\prec t=\ustop{r_{old}}$.
+For $v_Av_Bx;\mu_o\mu_i$, $P=\{\rho_i:v_i=o\}\cup\{s:\mu_i=-\}\cup\{t:\mu_o\ne-\}$; $x$ is holder and $r_{one}$ state.
+Initial plant states are $(A_h^v,B_e^v)$. Alphabets are the displayed outgoing labels over all local states; $g_i=\{(e_i^o,e_i^n)\}$.
+\par $R^{old/new/upd}=\{r_{old}\}/\{r_{inspect}\}/\{r_{one}\}$.
+$\mathsf{Start}_{one}$ is the two old one-product states, $\iota_{one}=$ holder; its observation preserves moves (exact RS).
+$\mathsf{Start}_{inspect}$ contains all eight tagged one-product states; $\iota_{inspect}=d$ at $B_h$, otherwise $c$.
+Before activation, its observation erases every label except $s$. Thus $c$ is exact at $B_e$; at $B_h$, $\mathcal L(d)\subsetneq\mathcal L(c)$ (witness $m_A$), a conservative residual.
+\par $x_A=(A_h^o,B_e^o,c_o,k)$, $x_B=(A_e^o,B_h^o,c_o,k)$;
+$z_A=(A_h^n,B_e^n,c,c)$, $y_B=(A_e^n,B_h^n,d,d)$, $z_B=(A_e^n,B_h^n,c,c)$.
+$Q_0$ consists of the first states of $p_A,p_B$; their last states are goals with $\kappa=z_B,z_A$, respectively; $Z_{load}=\{z_A,z_B\}$.
+The displayed paths define $\sigma$ (empty elsewhere), with 13 states and 11 edges. A bulk $g_A\times g_B$ requires unreachable $(A_e^o,B_e^o)$.
+\par Unlisted plant/controller transitions are empty; unlisted non-error monitor transitions self-loop; $E$ absorbs every label. Comma-separated arrow labels denote separate edges. The four $\Post$ rules determine every bucket; the unsafe-inclusive closure census is in Supplement~S1.
+}}
+\caption{Complete Production Cell witness $\mathcal W_{\rm cell}$: local replacements, active requirements, endpoints and a policy from both entries. Dashed arrows are transfer relations, not ordinary events.}
+\Description{Four two-state plant versions, three monitors including every error edge, old and new controllers and endpoints, and two labeled policy chains. The legend supplies the full update contract and omitted-transition conventions.}
+\label{fig:wcell-complete}
+\end{figure*}

@@ -1,0 +1,102 @@
+Command: ['mvn', '-B', 'test', '-Dtest=ltsa.updatingControllers.otf.ActivationSpecTest,ltsa.updatingControllers.otf.FineGrainedOtfDucsTest,ltsa.updatingControllers.otf.OtfDucsSynthesizerTest,ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest', '-Dfork.number=0', '-Dthread.count=1', '-Dparallel=none', '-DfailIfNoTests=true', '-Djacoco.skip=true']
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Maven home: /opt/homebrew/Cellar/maven/3.9.16/libexec
+Java version: 17.0.19, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home
+Default locale: en_JP, platform encoding: UTF-8
+OS name: "mac os x", version: "15.7.9", arch: "aarch64", family: "mac"
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< mtsa:mtsa >------------------------------
+[INFO] Building mtsa 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] Parameter 'systemPropertyVariables' is unknown for plugin 'jacoco-maven-plugin:0.8.7:prepare-agent (default-prepare-agent)'
+[WARNING] Parameter 'skipTests' is unknown for plugin 'jacoco-maven-plugin:0.8.7:prepare-agent (default-prepare-agent)'
+[WARNING] Parameter 'systemPropertyVariables' is unknown for plugin 'jacoco-maven-plugin:0.8.7:report (report)'
+[WARNING] Parameter 'skipTests' is unknown for plugin 'jacoco-maven-plugin:0.8.7:report (report)'
+[WARNING] The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2: https://issues.sonatype.org/browse/MVNCENTRAL-244
+[INFO] 
+[INFO] --- jacoco:0.8.7:prepare-agent (default-prepare-agent) @ mtsa ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ mtsa ---
+[INFO] Copying 431 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.5:compile (default-compile) @ mtsa ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 980 source files to Implementation/Source Code/maven-root/mtsa/target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ mtsa ---
+[INFO] Copying 840 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.5:testCompile (default-testCompile) @ mtsa ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 158 source files to Implementation/Source Code/maven-root/mtsa/target/test-classes
+[INFO] 
+[INFO] --- surefire:2.21.0:test (default-test) @ mtsa ---
+[WARNING] useSystemClassloader setting has no effect when not forking
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] Running TestSuite
+[ERROR] Tests run: 41, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 0.189 s <<< FAILURE! - in TestSuite
+[ERROR] commandBecomesAvailableAfterUncontrollableFinishes(ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.IllegalArgumentException: Certificate-producing synthesis requires initialSnapshotsFromReachable and goalSignaturesFromReachable; use synthesizeTrustedEndpointProjections only when externally supplied endpoint projections are known complete
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.checkDecision(QuiescentUpdateBoundaryTest.java:27)
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.commandBecomesAvailableAfterUncontrollableFinishes(QuiescentUpdateBoundaryTest.java:52)
+
+[ERROR] disabledSynchronizationDoesNotBlockCommand(ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.IllegalArgumentException: Certificate-producing synthesis requires initialSnapshotsFromReachable and goalSignaturesFromReachable; use synthesizeTrustedEndpointProjections only when externally supplied endpoint projections are known complete
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.checkDecision(QuiescentUpdateBoundaryTest.java:27)
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.disabledSynchronizationDoesNotBlockCommand(QuiescentUpdateBoundaryTest.java:104)
+
+[ERROR] matchedNonquiescentStateContinuesToQuiescentGoal(ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.IllegalArgumentException: Certificate-producing synthesis requires initialSnapshotsFromReachable and goalSignaturesFromReachable; use synthesizeTrustedEndpointProjections only when externally supplied endpoint projections are known complete
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.checkDecision(QuiescentUpdateBoundaryTest.java:27)
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.matchedNonquiescentStateContinuesToQuiescentGoal(QuiescentUpdateBoundaryTest.java:74)
+
+[ERROR] matchingGoalWithUncontrollableLoopIsLosing(ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.IllegalArgumentException: Certificate-producing synthesis requires initialSnapshotsFromReachable and goalSignaturesFromReachable; use synthesizeTrustedEndpointProjections only when externally supplied endpoint projections are known complete
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.checkDecision(QuiescentUpdateBoundaryTest.java:27)
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.matchingGoalWithUncontrollableLoopIsLosing(QuiescentUpdateBoundaryTest.java:66)
+
+[ERROR] uncontrollableLoopDisablesTransferAtPostBoundary(ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.IllegalArgumentException: Certificate-producing synthesis requires initialSnapshotsFromReachable and goalSignaturesFromReachable; use synthesizeTrustedEndpointProjections only when externally supplied endpoint projections are known complete
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.checkDecision(QuiescentUpdateBoundaryTest.java:27)
+	at ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest.uncontrollableLoopDisablesTransferAtPostBoundary(QuiescentUpdateBoundaryTest.java:40)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   QuiescentUpdateBoundaryTest.commandBecomesAvailableAfterUncontrollableFinishes:52->checkDecision:27 » IllegalArgument
+[ERROR]   QuiescentUpdateBoundaryTest.disabledSynchronizationDoesNotBlockCommand:104->checkDecision:27 » IllegalArgument
+[ERROR]   QuiescentUpdateBoundaryTest.matchedNonquiescentStateContinuesToQuiescentGoal:74->checkDecision:27 » IllegalArgument
+[ERROR]   QuiescentUpdateBoundaryTest.matchingGoalWithUncontrollableLoopIsLosing:66->checkDecision:27 » IllegalArgument
+[ERROR]   QuiescentUpdateBoundaryTest.uncontrollableLoopDisablesTransferAtPostBoundary:40->checkDecision:27 » IllegalArgument
+[INFO] 
+[ERROR] Tests run: 41, Failures: 5, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.401 s
+[INFO] Finished at: 2026-09-14T15:53:44+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.21.0:test (default-test) on project mtsa: There are test failures.
+[ERROR] 
+[ERROR] Please refer to Implementation/Source Code/maven-root/mtsa/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date]-jvmRun[N].dump, [date].dumpstream and [date]-jvmRun[N].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+EXIT_CODE=1
+ELAPSED_SECONDS=9.372729541006265

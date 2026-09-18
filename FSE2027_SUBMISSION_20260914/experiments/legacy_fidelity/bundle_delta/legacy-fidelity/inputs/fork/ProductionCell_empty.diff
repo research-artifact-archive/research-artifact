@@ -1,0 +1,29 @@
+--- 2017-TSE-ProductionCell.lts
++++ ProductionCell_empty.lts
+@@ -154,21 +154,21 @@
+     mapping = MAPPING_ENV,
+     oldGoal = DRILL_POLISH_CLEAN,
+     newGoal = CLEAN_PAINT_DRILL,
+-//    transition = T_NO_TP,
++    transition = T_NO_TP,
+ //    transition = T_REMOVE_POLISHED_OR_NEW_REQ,
+ //	  transition = T_UPDATE_WHILE_EMPTY,
+ //    transition = T_NO_POLISH_ON_UPDATE,
+ //    transition = T_FINISH_WITH_OLD_REQ,
+-	  transition = T_SWITCH_TO_NEW_ASAP,
++	  //transition = T_SWITCH_TO_NEW_ASAP,
+     nonblocking
+ }
+ 
+ ||UPDATE_CONTROLLER = UpdCont.
+ 
+ // ---------------------------TEST AND RESULTS-----------------------------
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec,beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec,hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert S_OLD = (OLD_TOOL_ORDER  && OLD_OUT_IF_FINISHED && DRILL_ONCE && POLISH_ONCE && CLEAN_ONCE)
+ assert S_NEW = (NEW_TOOL_ORDER && NEW_OUT_IF_FINISHED && DRILL_ONCE && PAINT_ONCE && CLEAN_ONCE)

@@ -1,0 +1,64 @@
+\clearpage\noindent\textbf{Censored JVM attempts and elapsed time}\par
+The 1,200 s cap covers the whole JVM invocation, including startup, frontend and endpoints, solving, checks and output. For each Direct-Full timeout with five consistent FG completions, $b=1200/\operatorname{median}(t_{\rm FG,elapsed})$ is a lower bound on that censored attempt relative to the FG elapsed median, not a Direct-Full median or a solver-only speedup. The last column records the $1200/\operatorname{median}(t_{\rm FG,solver})$ quotient for transparency; it has no solver-time lower-bound interpretation because the cap includes non-solver work. Displayed bounds are rounded downward.
+\begin{longtable}{@{}llrrrr@{}}\toprule
+Model & Target & FG elapsed (s) & FG solver (s) & $b$ ($\geq$) & Cap/solver\\\midrule\endhead
+Industry & r1 & 563.93 & 562.13 & 2.12 & 2.13\\
+PC Arms=1 & r1 & 1.32 & 0.08 & 910.06 & 15125.54\\
+PC Arms=2 & base & 19.36 & 2.61 & 61.99 & 459.89\\
+PC Arms=2 & r1 & 19.86 & 2.60 & 60.43 & 461.22\\
+Railcab & base & 2.23 & 0.17 & 539.14 & 7090.31\\
+Railcab & r1 & 5.25 & 3.18 & 228.62 & 377.56\\
+Surveillance & base & 4.34 & 2.01 & 276.32 & 596.89\\
+Surveillance & r1 & 21.16 & 18.64 & 56.71 & 64.37\\
+Surveillance & r2 & 39.89 & 37.07 & 30.08 & 32.38\\
+Workflow & base & 7.06 & 0.11 & 169.92 & 10810.32\\
+Workflow & r1 & 7.17 & 0.33 & 167.45 & 3688.87\\
+Workflow & r2 & 23.05 & 16.06 & 52.05 & 74.70\\
+\bottomrule\end{longtable}
+Workflow/R2 uses the authorized supplementary attempt; the original operational interruption remains in the provenance table. Industry/R1 compares an unresolved attempt with a completed LOSS decision. The table measures time to decide the supplied game, not time to return a controller.
+\clearpage\noindent\textbf{Total JVM elapsed seconds: five-run median [min, max]}\par
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & -- & -- & -- & -- & --\\
+ & R1 & -- & -- & -- & -- & --\\
+ & R2 & -- & -- & -- & -- & --\\
+\addlinespace[2pt]
+Industry & BASE & -- & -- & -- & -- & N/M\\
+ & R1 & -- & TO & -- & TO & N/M\\
+ & R2 & -- & -- & -- & -- & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & -- & -- & -- & -- & --\\
+ & R1 & -- & -- & -- & -- & --\\
+ & R2 & -- & -- & -- & -- & --\\
+\addlinespace[2pt]
+PowerPlant & BASE & -- & -- & -- & -- & --\\
+ & R1 & -- & -- & -- & -- & --\\
+ & R2 & -- & -- & -- & -- & --\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & -- & -- & -- & -- & N/M\\
+ & R1 & -- & -- & -- & TO & OOM\\
+ & R2 & -- & -- & -- & -- & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & -- & TO & TO & TO & OOM\\
+ & R1 & -- & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & -- & TO & -- & TO & OOM\\
+ & R1 & -- & TO & -- & TO & OOM\\
+ & R2 & -- & -- & -- & -- & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & -- & TO & -- & TO & OOM\\
+ & R1 & -- & TO & -- & TO & OOM\\
+ & R2 & -- & TO & -- & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & -- & -- & -- & TO & OOM\\
+ & R1 & -- & TO & -- & TO & OOM\\
+ & R2 & -- & -- & -- & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+Incomplete cells retain their original display statuses and receive no timing estimate. Elapsed time is measured by the harness monotonic clock; timeout termination overhead is excluded from the conservative 1,200 s numerator above.

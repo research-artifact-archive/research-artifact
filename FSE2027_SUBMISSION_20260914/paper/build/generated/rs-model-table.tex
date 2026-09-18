@@ -1,0 +1,16 @@
+\noindent\textbf{RS sufficient-condition coverage}\par
+Counts are requirement occurrences over base/R1/R2; repeated new requirements remain in the denominator. The independent free product includes absorbing ERROR and evolving fluent values after error. A failed sufficient check leaves RS untested and does not establish a reachable contract violation.
+\begin{center}\scriptsize\begin{tabular}{@{}lrrrrrrrr@{}}\toprule
+Model & New / upd & H checked & H FD & H exact & H untested & A exact$^a$ & E exact & A/E unverified\\\midrule
+GSM & 3 / 3 & 6 & 0 & 0 & 6 & 3 & 0 & 3\\
+Industry & 9 / 9 & 18 & 0 & 0 & 18 & 9 & 0 & 9\\
+MetaSocket & 3 / 3 & 6 & 0 & 0 & 6 & 3 & 0 & 3\\
+PowerPlant & 9 / 10 & 19 & 0 & 0 & 19 & 9 & 0 & 10\\
+PC Arms=1 & 18 / 18 & 36 & 0 & 0 & 36 & 18 & 0 & 18\\
+PC Arms=2 & 36 / 36 & 72 & 0 & 0 & 72 & 36 & 0 & 36\\
+Railcab & 21 / 18 & 39 & 0 & 0 & 39 & 21 & 0 & 18\\
+Surveillance & 21 / 21 & 42 & 0 & 0 & 42 & 21 & 0 & 21\\
+Workflow & 18 / 17 & 35 & 0 & 0 & 35 & 18 & 0 & 17\\
+\bottomrule\end{tabular}\end{center}
+FD means that equal reachable fluent valuations determine the same monitor state, including ERROR. Exact additionally requires compatibility with the actual initializer: NEW uses its non-error lookup; UPD uses a constant monitor state after \texttt{hotSwapIn}. Per-requirement state counts, two conflicting histories, and update-boundary checks are in \path{rs-requirements.csv}.
+$^a$A certifies the safe-prefix language condition and the frontend selection rule, conditional on a non-error activation entry and a nonempty actual safe-history set; the latter is not checked without the plant. With an empty safe-history set, inclusion is automatic but equality is unproved. E enumerates entry-observer valuations and checks reset consistency; the saved DFA has no valuation-parameterized semantic initializer, so these diagnostics do not certify E exactness. Update labels occur at most once in the new prefix explorations; continuation-language equivalence is checked over all words, a stronger condition.

@@ -1,0 +1,198 @@
+FG-DUCS: origins, dependency licenses, and publication status
+
+This is a local source-package candidate. No public push or Release has been
+created. All solver and third-party JARs are excluded from this repository.
+fetch_assets.py obtains exact dependencies directly from the official MTSA
+upstream tree, or imports an existing lawfully obtained solver copy, with size
+and SHA-256 checks. Availability at an upstream URL is not redistribution
+permission. The new-script MIT grant in LICENSE does not override any item below.
+
+1. MTSA-derived sources
+
+Upstream: https://mtsa.dc.uba.ar/
+Repository: https://git.exactas.uba.ar/lafhis/mtsa
+Dependency acquisition is pinned to upstream commit
+ d10ba71f092dc9645a80d2752bd089691f158156
+The FG-DUCS extension is in ltsa.updatingControllers.otf. Inherited Java sources,
+models and third-party source headers retain their original origin and terms.
+A license granting redistribution of the complete MTSA source collection has
+not been established from the inspected upstream repository/site/POM.
+The authors have confirmed redistribution permission for the MTSA-derived sources.
+This confirmation is independent of the upstream-documentation search and
+does not extend to third-party binary dependencies. The artifact therefore
+includes the complete MTSA-derived tool sources with the FG-DUCS extension.
+
+Individual source portions have separate notices: Oracle SpringUtilities,
+JUNG-derived layout code, LUFA, and Arduino/Wiring code. TarjanAlgorithm contains
+both a BSD-style header and an AGPLv3 header; an express choice between those
+terms has not been established. No existing copyright, condition or disclaimer
+is removed or replaced by the new-script license. A permissive license on a
+new script is not a permissive license on this inherited collection.
+
+The optional src/main/SPECTRATranslator subtree and src/test/benchmarks are
+also retained as source/model material. SPECTRA is a separate Eclipse tool,
+not part of the verified Maven build. The three component LICENSE files in
+Translator, spectra-lang and spectra-synt reproduce BSD-3-Clause terms.
+Two net.sf.javabdd source files additionally retain their original GNU LGPL
+header and third-party copyright/contact attribution. Their referenced
+COPYING file and the exact LGPL version are absent from the inherited subtree;
+no blanket BSD or MIT claim is made for that collection. Those original
+headers are unchanged. Native libraries, JARs, generated binary traces and
+archives are omitted. A contact-only upstream benchmark note is omitted;
+personal filesystem prefixes in an upstream log are anonymized only in this
+copy. These are not source-code or benchmark-input changes.
+
+2. Exact local dependencies used by the build
+
+All ten local Maven coordinates below originate in the official MTSA tree at
+maven-root/locallib and/or maven-root/mtsa/lib. They are not bundled in this repo;
+fetch_assets.py downloads upstream copies into the required paths. The two
+SceneBeans files have different bytes: locallib/scenebeans.jar is 193167 bytes,
+whereas the Maven SceneBeans-1.0.0.jar is 221453 bytes. The script keeps them
+separate. A coordinate's declared version need not be the binary's real version.
+
+* jargs:jargs:1.0 (jargs.jar): JArgs 1.0, BSD three-clause terms. Preserve the
+  copyright, conditions and disclaimer. The release ZIP contains LICENCE:
+  https://downloads.sourceforge.net/project/jargs/jargs/1.0/jargs-1.0.zip
+* javacv:javacv:1.0 (javacv.jar): the binary is JavaCV 0.5, whose exact license
+  text is GPLv2 with the Classpath Exception. The exception concerns independent
+  modules; it does not remove the JavaCV source/notice obligations:
+  https://raw.githubusercontent.com/bytedeco/javacv/0.5/LICENSE.txt
+* jgraphx:jgraphx:0.1 (jgraphx.jar): the binary is JGraphX 3.3.0.1, BSD three-clause
+  terms, including retention of copyright/conditions/disclaimer:
+  https://raw.githubusercontent.com/jgraph/jgraphx/v3.3.0.1/license.txt
+* com.microsoft:z3:1.0 (com.microsoft.z3.jar): manifest version 4.3.0. Its exact
+  upstream license is Microsoft Research License Agreement, Non-Commercial Use
+  Only. Copying/distribution is limited to the stated non-commercial purposes,
+  under the same conditions, with notices and disclaimers retained. The current
+  Z3 project's MIT terms are not being applied to this old binary:
+  https://raw.githubusercontent.com/Z3Prover/z3/z3-4.3.0/LICENSE.txt
+* synoptic:synoptic:1.0 (synoptic.jar): see section 3 below; the complete 109 MB
+  bundle's exact permissions and corresponding-source obligations are unresolved.
+* lejos:nxt:1.0 (classes.jar) and pccomm:pccomm:0.1 (pccomm.jar): leJOS/NXT and PC
+  communications. The exact binary versions and coverage of all bundled parts
+  are unresolved. The official NXT page describes MPL 1.0 and separately licensed
+  libraries, not a blanket grant over these unidentified bundles:
+  https://sourceforge.net/p/lejos/wiki-nxt/Licensing%20Issues/
+* ev3classes:ev3classes:0.1 (ev3classes.jar): exact source/version and complete
+  permissions remain unconfirmed. The NXT terms are not automatically applied
+  to this EV3 binary. Relevant official repository:
+  https://sourceforge.net/p/lejos/ev3/ci/master/tree/
+* jadrone:jadrone:0.32 (yadrone_032.jar): individual YADrone source headers carry
+  BSD-style text, but coverage and source correspondence for the complete 0.32
+  binary remain unresolved. Source provenance description:
+  https://raw.githubusercontent.com/MahatmaX/YADrone/master/YADrone/readme.txt
+* uk.ac.ic:SceneBeans:1.0.0 (SceneBeans-1.0.0.jar) and the distinct locallib
+  scenebeans.jar: the official distribution description does not establish a
+  complete redistribution grant for these binaries:
+  https://www.doc.ic.ac.uk/ltsa/scenebeans/
+
+3. Synoptic/WESSBAS bundle, not redistributed
+
+The 109442641-byte JAR has internal coordinate
+org.fortiss.pmwt.wex:wessbas.synoptic:1.0.0. Its extension readme and five nested
+JARs match the WESSBAS Synoptic fork:
+https://github.com/Wessbas/synoptic
+https://raw.githubusercontent.com/Wessbas/synoptic/master/Licence.md
+That license applies MIT terms to the project except explicitly separately
+licensed libraries under lib/. It is not a MIT grant over the entire bundle.
+The precise source-to-binary correspondence of this complete object and all
+nested-library conditions has not been established.
+
+The nested objects are Daikonizer.jar, daikon.jar, plume.jar,
+json-simple-1.1.1.jar, and junit-4.9b2.jar. The Daikon/Plume bundles contain TMate
+SVNKit COPYING terms with source-availability conditions, and additional GNU
+Library GPLv2, Apache 2.0 and Hamcrest notices. A Hamcrest LICENSE inside JUnit
+4.9b2 is not a license for JUnit itself. Current Daikon core terms are not being
+substituted for the terms of these older composite objects. The fetched upstream
+object is identified by hash in README; it is excluded from our repo and Release.
+
+4. Frozen shaded solver: not distributed
+
+The 698961879-byte mtsa-1.0-SNAPSHOT.jar includes all 284 Synoptic classes and all
+five nested JARs byte-for-byte. Removing the separate Synoptic file therefore
+does not clear the shaded binary's conditions.
+
+More decisively, FFmpeg 4.0.1 native libraries in the shaded JAR, directly checked
+for several Android and Linux ABIs, contain configuration flags --enable-gpl,
+--enable-version3, --enable-nonfree and --enable-openssl, and identify themselves
+as "nonfree and unredistributable". The exact FFmpeg license explains that
+OpenSSL is incompatible with GPLv2/v3 and that nonfree combinations can be
+unredistributable:
+https://raw.githubusercontent.com/FFmpeg/FFmpeg/n4.0.1/LICENSE.md
+https://raw.githubusercontent.com/bytedeco/javacpp-presets/1.4.2/ffmpeg/cppbuild.sh
+This frozen binary is not publicly distributed, including as a Release asset.
+Its runtime bytes are kept unchanged for the ongoing measurements. The README
+retains its SHA-256 and the verified clean-cache source-build procedure. The
+fetch script permits verified local import; it has no Release retrieval route.
+A slim CLI binary excluding the problematic dependencies is optional work after
+the v2 freeze and is not part of the current artifact or its v1 requirements.
+
+The separate original-DUCS reference JAR (672505060 bytes, SHA-256
+4ab198ba14c9f0f829c36808025aefc063e2a3a0836679490179cc407e6133e5)
+is a lab-maintained build of source commit
+e1bf040b83e36b36308bce22e280133682986250, not an identified publication release.
+Its Linux libavcodec.so.58 likewise contains nonfree/GPL/OpenSSL configuration
+and identifies itself as nonfree and unredistributable. It is omitted from the
+public artifact and all Releases. Only the separate adapter source, inputs,
+scripts and sanitized observations are included here. The private Xeon transfer
+ZIP is not part of this public source package.
+
+5. Other principal shaded/build dependencies
+
+These are dependencies of the existing source/POM, not bundled JARs in this repo.
+A POM license declaration does not establish that every notice and source
+obligation was satisfied by the existing shaded output. The shade configuration
+has no general LICENSE/NOTICE aggregation step. Full transitive clearance remains
+unfinished; the following version-specific findings prevent blanket labeling.
+
+* JavaCV 1.4.2 has Apache/GPL/Classpath language in its exact license, separately
+  from the local JavaCV 0.5 above. Wrappers do not license their native payloads:
+  https://raw.githubusercontent.com/bytedeco/javacv/1.4.2/LICENSE.txt
+* JavaCPP 0.7: GPLv2 with Classpath Exception:
+  https://raw.githubusercontent.com/bytedeco/javacpp/0.7/LICENSE.txt
+* OpenCV 3.4.2-1.4.2 presets and OpenPnP OpenCV 3.2.0-1 include additional native
+  libraries and their own notices (OpenEXR, Jasper, JPEG, PNG, TIFF, protobuf,
+  ITT and others). The OpenPnP POM declares BSD; that is not one grant covering
+  all those payloads:
+  https://repo.maven.apache.org/maven2/org/openpnp/opencv/3.2.0-1/opencv-3.2.0-1.pom
+* ONNX Runtime 1.10.0 declares MIT and carries a substantial ThirdPartyNotices.txt
+  (including Intel MKL conditions), which must not be reduced to the MIT label:
+  https://repo.maven.apache.org/maven2/com/microsoft/onnxruntime/onnxruntime/1.10.0/onnxruntime-1.10.0.pom
+* GNU JEL 2.0.1: GNU's version-specific explanation identifies GPLv3 from 2.0.1:
+  https://www.gnu.org/software/jel/
+* JUNG 2.0.1, JavaOSC 0.2 and JGoodies Forms 1.2.1 declare BSD in their published
+  parent/POM files; each original copyright and notice remains relevant:
+  https://repo.maven.apache.org/maven2/net/sf/jung/jung2/2.0.1/jung2-2.0.1.pom
+  https://repo.maven.apache.org/maven2/com/illposed/osc/javaosc-parent/0.2/javaosc-parent-0.2.pom
+  https://repo.maven.apache.org/maven2/com/jgoodies/forms/1.2.1/forms-1.2.1.pom
+* JSSC 2.8.0 declares LGPLv3, Swing Layout 1.0.2 LGPL 2.1; JCommon 1.0.16 and
+  JFreeChart 1.0.13 declare LGPL. Exact bundle compliance is unconfirmed:
+  https://repo.maven.apache.org/maven2/org/scream3r/jssc/2.8.0/jssc-2.8.0.pom
+  https://repo.maven.apache.org/maven2/net/java/dev/swing-layout/swing-layout/1.0.2/swing-layout-1.0.2.pom
+* FreeHEP vectorgraphics modules 2.4 declare Apache/LGPL; JGraphT 1.5.2 declares
+  LGPL 2.1/EPL 2.0. These declarations are not an inferred choice for every file:
+  https://repo.maven.apache.org/maven2/org/freehep/freehep-vectorgraphics/2.4/freehep-vectorgraphics-2.4.pom
+  https://repo.maven.apache.org/maven2/org/jgrapht/jgrapht-core/1.5.2/jgrapht-core-1.5.2.pom
+* JUnit 4.12 declares EPL 1.0 (distinct from nested JUnit 4.9b2):
+  https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.pom
+* jaxp-ri 1.4: a complete applicable license was not established from the inspected
+  POM/JAR; its absence there is not proof that no license exists:
+  https://repo.maven.apache.org/maven2/com/sun/org/apache/jaxp-ri/1.4/jaxp-ri-1.4.pom
+* Apache 2.0 declarations or original notices were found for Commons Collections
+  3.2, Lang 2.2, IO 1.3.2, Log4j 1.2.17, Spring 4.3.10.RELEASE, ZXing 2.2,
+  Guava 12.0.1, TestNG 6.11, JavaTuples 1.2, Dronecontroller 0.2.0, Fastutil
+  8.5.12 and Surefire report plugin 2.20.1; JSON-simple 1.1.1 declares Apache 2.0
+  in its manifest. Module-specific LICENSE/NOTICE text remains required where
+  applicable. Fastutil exact-version text:
+  https://raw.githubusercontent.com/vigna/fastutil/8.5.12/LICENSE-2.0
+  Surefire as an ordinary dependency also brings Maven/Doxia/Plexus/Struts
+  transitive components; their complete notification set is not yet established.
+
+6. Privacy and required attribution
+
+Submission-author names, affiliations, personal paths and contact details are
+excluded. Required third-party legal notices are not replaced by anonymous
+invented copyright holders. Existing upstream source headers are preserved.
+This distinguishes attribution to upstream software from identifying the
+submission authors; any actual collision requires resolution before publication.

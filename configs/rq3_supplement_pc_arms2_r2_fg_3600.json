@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "legacy_ducs",
+      "target_template": "UPDATE_CONTROLLER_FG{suffix}",
+      "analysis_role": "prior_tool_on_fine_grained_input_legacy_semantics",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true"
+      }
+    }
+  ],
+  "repetitions": 1,
+  "timeout_seconds": 3600,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "r2",
+      "suffix": "_R2"
+    }
+  ],
+  "backend": "lts",
+  "experiment_id": "rq3_supplement_pc_arms2_r2_fg_3600",
+  "models": [
+    {
+      "id": "productioncell_arms2",
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+      "method_ids": [
+        "fg_ducs_otf"
+      ]
+    }
+  ]
+}

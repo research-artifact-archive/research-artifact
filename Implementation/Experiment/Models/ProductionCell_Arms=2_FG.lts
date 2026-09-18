@@ -1,0 +1,565 @@
+// -----------------------------COMMENTS-------------------------------
+
+// - To execute revised OTF-DUCS, select "UPDATE_CONTROLLER_OTF_FG" in the
+// dropdown menu, and then press the compose button (||).
+// - In the section of UPDATING CONTROLLER SPEC, in this file, you can spec
+// different transition requeriments presented in the paper.
+// - You can animate the controller obtained pressing the blue A in the top bar
+// - After composing, you can validate that the controller obtained satisfy 
+// each updating controller goal formula by modelchecking.
+
+// ---------------------------ENVIRONMENTS-----------------------------
+
+const N = 2
+const K = 1
+range Arms = 1..N
+range Stages = 1..K
+
+set ToolActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], paint[Arms], out[Arms]}
+set ToolResults = {drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], paintOk[Arms], paintNOk[Arms]}
+set ToolDelays = {wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages], wait_paint[Arms][Stages]}
+set OldControllableActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]*/}
+set OldAlphabet = {OldControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]}
+set NewControllableActions = {drill[Arms], paint[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]*/}
+set NewAlphabet = {NewControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]}
+
+//Old Model
+PRODUCTION_CELL_OLD(I=1) = (in[I] -> ARM),
+ARM = ( polish[I] -> POLISHED[1]
+| drill[I] -> DRILLED[1]
+| clean[I] -> CLEANED[1]
+| stamp[I] -> TRASHED
+| out[I] -> OUT),
+OUT = (reset[I] -> PRODUCTION_CELL_OLD),
+DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+POLISHED[k:Stages] = (when(k<K) wait_polish[I][k] -> POLISHED[k+1] | when(k==K) {polishOk[I],polishNOk[I]} -> ARM),
+CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+TRASHED = (stampOk[I] -> ARM).
+
+//New Model
+PRODUCTION_CELL_NEW(I=1) = (in[I] -> ARM),
+ARM = ( paint[I] -> PAINTED[1]
+| drill[I] -> DRILLED[1]
+| clean[I] -> CLEANED[1]
+| stamp[I] -> TRASHED
+| out[I] -> OUT),
+OUT = (reset[I] -> PRODUCTION_CELL_NEW),
+DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+PAINTED[k:Stages] = (when(k<K) wait_paint[I][k] -> PAINTED[k+1] | when(k==K) {paintOk[I],paintNOk[I]} -> ARM),
+CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+TRASHED = (stampOk[I] -> ARM).
+
+||OLD_ENV = (forall[i:Arms] PRODUCTION_CELL_OLD(i)).
+||NEW_ENV = (forall[i:Arms] PRODUCTION_CELL_NEW(i)).
+
+relation R_PRODUCTION_CELL(I) = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(I) = reconfigure -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(I),
+ARM@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+OUT@PRODUCTION_CELL_OLD(I) = reconfigure -> OUT@PRODUCTION_CELL_NEW(I),
+TRASHED@PRODUCTION_CELL_OLD(I) = reconfigure -> TRASHED@PRODUCTION_CELL_NEW(I),
+forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> DRILLED[k]@PRODUCTION_CELL_NEW(I),
+forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> CLEANED[k]@PRODUCTION_CELL_NEW(I)}
+
+relation R_PRODUCTION_CELL_1_FG = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(1),
+ARM@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+OUT@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> OUT@PRODUCTION_CELL_NEW(1),
+TRASHED@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> TRASHED@PRODUCTION_CELL_NEW(1),
+forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> DRILLED[k]@PRODUCTION_CELL_NEW(1),
+forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> CLEANED[k]@PRODUCTION_CELL_NEW(1)}
+
+relation R_PRODUCTION_CELL_2_FG = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(2),
+ARM@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> ARM@PRODUCTION_CELL_NEW(2),
+OUT@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> OUT@PRODUCTION_CELL_NEW(2),
+TRASHED@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> TRASHED@PRODUCTION_CELL_NEW(2),
+forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> DRILLED[k]@PRODUCTION_CELL_NEW(2),
+forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> ARM@PRODUCTION_CELL_NEW(2),
+forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> CLEANED[k]@PRODUCTION_CELL_NEW(2)}
+
+map MAP_PRODUCTION_CELL_1 = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_NEW(1), R_PRODUCTION_CELL(1)}
+map MAP_PRODUCTION_CELL_2 = {PRODUCTION_CELL_OLD(2), PRODUCTION_CELL_NEW(2), R_PRODUCTION_CELL(2)}
+
+||MAP_ENV = (MAP_PRODUCTION_CELL_1 || MAP_PRODUCTION_CELL_2).
+
+// —————————OLD CONTROLLER SPEC—————————–
+
+fluent Drilled[i:Arms] = <drillOk[i],reset[i]>
+fluent DrillPending[i:Arms] = <drill[i],{drillOk[i],drillNOk[i]}>
+fluent Polished[i:Arms] = <polishOk[i],reset[i]>
+fluent PolishPending[i:Arms] = <polish[i],{polishOk[i],polishNOk[i]}>
+fluent Cleaned[i:Arms] = <cleanOk[i],reset[i]>
+fluent CleanPending[i:Arms] = <clean[i],{cleanOk[i],cleanNOk[i]}>
+fluent Painted[i:Arms] = <paintOk[i],reset[i]>
+fluent PaintPending[i:Arms] = <paint[i],{paintOk[i],paintNOk[i]}>
+fluent Faulty[i:Arms] = <stampOk[i],reset[i]>
+fluent FaultyPending[i:Arms] = <stamp[i],stampOk[i]>
+fluent Processing[i:Arms] = <in[i],reset[i]>
+fluent OutDone[i:Arms] = <out[i],reset[i]>
+
+assert OLD_TOOL_ORDER = forall[i:Arms] ((CleanPending[i] -> Polished[i]) && (PolishPending[i] -> Drilled[i]))
+assert OLD_OUT_IF_FINISHED = forall[i:Arms] (out[i] -> (Drilled[i] && Polished[i] && Cleaned[i]))
+assert DRILL_ONCE = forall[i:Arms] ( drill[i] -> !Drilled[i] )
+assert POLISH_ONCE = forall[i:Arms] ( polish[i] -> !Polished[i] )
+assert CLEAN_ONCE = forall[i:Arms] ( clean[i] -> !Cleaned[i] )
+assert AVOID_STAMPING = forall[i:Arms] ( !stamp[i] )
+
+ltl_property P_OLD_TOOL_ORDER = []OLD_TOOL_ORDER
+ltl_property P_OLD_OUT_IF_FINISHED = []OLD_OUT_IF_FINISHED
+ltl_property P_DRILL_ONCE = []DRILL_ONCE
+ltl_property P_POLISH_ONCE = []POLISH_ONCE
+ltl_property P_CLEAN_ONCE = []CLEAN_ONCE
+ltl_property P_AVOID_STAMPING = []AVOID_STAMPING
+
+assert OLD_TOOL_ORDER_1 = ((CleanPending[1] -> Polished[1]) && (PolishPending[1] -> Drilled[1]))
+assert OLD_OUT_IF_FINISHED_1 = (out[1] -> (Drilled[1] && Polished[1] && Cleaned[1]))
+assert DRILL_ONCE_1 = (drill[1] -> !Drilled[1])
+assert POLISH_ONCE_1 = (polish[1] -> !Polished[1])
+assert CLEAN_ONCE_1 = (clean[1] -> !Cleaned[1])
+assert AVOID_STAMPING_1 = (!stamp[1])
+
+ltl_property P_OLD_TOOL_ORDER_1 = []OLD_TOOL_ORDER_1
+ltl_property P_OLD_OUT_IF_FINISHED_1 = []OLD_OUT_IF_FINISHED_1
+ltl_property P_DRILL_ONCE_1 = []DRILL_ONCE_1
+ltl_property P_POLISH_ONCE_1 = []POLISH_ONCE_1
+ltl_property P_CLEAN_ONCE_1 = []CLEAN_ONCE_1
+ltl_property P_AVOID_STAMPING_1 = []AVOID_STAMPING_1
+
+assert OLD_TOOL_ORDER_2 = ((CleanPending[2] -> Polished[2]) && (PolishPending[2] -> Drilled[2]))
+assert OLD_OUT_IF_FINISHED_2 = (out[2] -> (Drilled[2] && Polished[2] && Cleaned[2]))
+assert DRILL_ONCE_2 = (drill[2] -> !Drilled[2])
+assert POLISH_ONCE_2 = (polish[2] -> !Polished[2])
+assert CLEAN_ONCE_2 = (clean[2] -> !Cleaned[2])
+assert AVOID_STAMPING_2 = (!stamp[2])
+
+ltl_property P_OLD_TOOL_ORDER_2 = []OLD_TOOL_ORDER_2
+ltl_property P_OLD_OUT_IF_FINISHED_2 = []OLD_OUT_IF_FINISHED_2
+ltl_property P_DRILL_ONCE_2 = []DRILL_ONCE_2
+ltl_property P_POLISH_ONCE_2 = []POLISH_ONCE_2
+ltl_property P_CLEAN_ONCE_2 = []CLEAN_ONCE_2
+ltl_property P_AVOID_STAMPING_2 = []AVOID_STAMPING_2
+
+controllerSpec DRILL_POLISH_CLEAN = {
+safety = {
+P_OLD_TOOL_ORDER_1, P_OLD_OUT_IF_FINISHED_1, P_DRILL_ONCE_1, P_POLISH_ONCE_1, P_CLEAN_ONCE_1, P_AVOID_STAMPING_1,
+P_OLD_TOOL_ORDER_2, P_OLD_OUT_IF_FINISHED_2, P_DRILL_ONCE_2, P_POLISH_ONCE_2, P_CLEAN_ONCE_2, P_AVOID_STAMPING_2
+}
+controllable = {OldControllableActions}
+}
+controller ||C_DRILL_POLISH_CLEAN = (OLD_ENV)~{DRILL_POLISH_CLEAN}.
+||DrillPolishClean = (C_DRILL_POLISH_CLEAN || OLD_ENV).
+
+// —————————NEW CONTROLLER SPEC—————————–
+
+assert NEW_TOOL_ORDER = forall[i:Arms] ((DrillPending[i] -> (Painted[i] && Cleaned[i])) && (PaintPending[i] -> (Cleaned[i] && !Drilled[i])) && (CleanPending[i] -> (!Painted[i] && !Drilled[i])))
+assert NEW_OUT_IF_FINISHED = forall[i:Arms] (out[i] -> (Drilled[i] && Cleaned[i] && Painted[i]))
+assert PAINT_ONCE = forall[i:Arms] ( paint[i] -> !Painted[i] )
+
+ltl_property P_NEW_TOOL_ORDER = []NEW_TOOL_ORDER
+ltl_property P_NEW_OUT_IF_FINISHED = []NEW_OUT_IF_FINISHED
+ltl_property P_PAINT_ONCE = []PAINT_ONCE
+
+assert NEW_TOOL_ORDER_1 = ((DrillPending[1] -> (Painted[1] && Cleaned[1])) && (PaintPending[1] -> (Cleaned[1] && !Drilled[1])) && (CleanPending[1] -> (!Painted[1] && !Drilled[1])))
+assert NEW_OUT_IF_FINISHED_1 = (out[1] -> (Drilled[1] && Cleaned[1] && Painted[1]))
+assert PAINT_ONCE_1 = (paint[1] -> !Painted[1])
+
+ltl_property P_NEW_TOOL_ORDER_1 = []NEW_TOOL_ORDER_1
+ltl_property P_NEW_OUT_IF_FINISHED_1 = []NEW_OUT_IF_FINISHED_1
+ltl_property P_PAINT_ONCE_1 = []PAINT_ONCE_1
+
+assert NEW_TOOL_ORDER_2 = ((DrillPending[2] -> (Painted[2] && Cleaned[2])) && (PaintPending[2] -> (Cleaned[2] && !Drilled[2])) && (CleanPending[2] -> (!Painted[2] && !Drilled[2])))
+assert NEW_OUT_IF_FINISHED_2 = (out[2] -> (Drilled[2] && Cleaned[2] && Painted[2]))
+assert PAINT_ONCE_2 = (paint[2] -> !Painted[2])
+
+ltl_property P_NEW_TOOL_ORDER_2 = []NEW_TOOL_ORDER_2
+ltl_property P_NEW_OUT_IF_FINISHED_2 = []NEW_OUT_IF_FINISHED_2
+ltl_property P_PAINT_ONCE_2 = []PAINT_ONCE_2
+
+controllerSpec CLEAN_PAINT_DRILL = {
+safety = {
+P_NEW_TOOL_ORDER_1, P_NEW_OUT_IF_FINISHED_1, P_DRILL_ONCE_1, P_CLEAN_ONCE_1, P_PAINT_ONCE_1, P_AVOID_STAMPING_1,
+P_NEW_TOOL_ORDER_2, P_NEW_OUT_IF_FINISHED_2, P_DRILL_ONCE_2, P_CLEAN_ONCE_2, P_PAINT_ONCE_2, P_AVOID_STAMPING_2
+}
+controllable = {NewControllableActions}
+}
+controller ||C_CLEAN_PAINT_DRILL = (NEW_ENV)~{CLEAN_PAINT_DRILL}.
+||CleanPaintDrill = (C_CLEAN_PAINT_DRILL || NEW_ENV).
+
+// —————————UPDATING CONTROLLER SPEC—————————–
+
+set StopOldSpecActions = {stopOldSpec_P_OLD_TOOL_ORDER_1, stopOldSpec_P_OLD_OUT_IF_FINISHED_1, stopOldSpec_P_DRILL_ONCE_1, stopOldSpec_P_POLISH_ONCE_1, stopOldSpec_P_CLEAN_ONCE_1, stopOldSpec_P_AVOID_STAMPING_1, stopOldSpec_P_OLD_TOOL_ORDER_2, stopOldSpec_P_OLD_OUT_IF_FINISHED_2, stopOldSpec_P_DRILL_ONCE_2, stopOldSpec_P_POLISH_ONCE_2, stopOldSpec_P_CLEAN_ONCE_2, stopOldSpec_P_AVOID_STAMPING_2}
+set StartNewSpecActions = {startNewSpec_P_NEW_TOOL_ORDER_1, startNewSpec_P_NEW_OUT_IF_FINISHED_1, startNewSpec_P_DRILL_ONCE_1, startNewSpec_P_CLEAN_ONCE_1, startNewSpec_P_PAINT_ONCE_1, startNewSpec_P_AVOID_STAMPING_1, startNewSpec_P_NEW_TOOL_ORDER_2, startNewSpec_P_NEW_OUT_IF_FINISHED_2, startNewSpec_P_DRILL_ONCE_2, startNewSpec_P_CLEAN_ONCE_2, startNewSpec_P_PAINT_ONCE_2, startNewSpec_P_AVOID_STAMPING_2}
+set ReconfigureActions = {reconfigure_PRODUCTION_CELL_1, reconfigure_PRODUCTION_CELL_2}
+
+fluent AfterStopBeforeStart_P_NEW_TOOL_ORDER_1 = <StopOldSpecActions, startNewSpec_P_NEW_TOOL_ORDER_1>
+fluent AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_1 = <StopOldSpecActions, startNewSpec_P_NEW_OUT_IF_FINISHED_1>
+fluent AfterStopBeforeStart_P_DRILL_ONCE_1 = <StopOldSpecActions, startNewSpec_P_DRILL_ONCE_1>
+fluent AfterStopBeforeStart_P_CLEAN_ONCE_1 = <StopOldSpecActions, startNewSpec_P_CLEAN_ONCE_1>
+fluent AfterStopBeforeStart_P_PAINT_ONCE_1 = <StopOldSpecActions, startNewSpec_P_PAINT_ONCE_1>
+fluent AfterStopBeforeStart_P_AVOID_STAMPING_1 = <StopOldSpecActions, startNewSpec_P_AVOID_STAMPING_1>
+fluent AfterStopBeforeStart_P_NEW_TOOL_ORDER_2 = <StopOldSpecActions, startNewSpec_P_NEW_TOOL_ORDER_2>
+fluent AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_2 = <StopOldSpecActions, startNewSpec_P_NEW_OUT_IF_FINISHED_2>
+fluent AfterStopBeforeStart_P_DRILL_ONCE_2 = <StopOldSpecActions, startNewSpec_P_DRILL_ONCE_2>
+fluent AfterStopBeforeStart_P_CLEAN_ONCE_2 = <StopOldSpecActions, startNewSpec_P_CLEAN_ONCE_2>
+fluent AfterStopBeforeStart_P_PAINT_ONCE_2 = <StopOldSpecActions, startNewSpec_P_PAINT_ONCE_2>
+fluent AfterStopBeforeStart_P_AVOID_STAMPING_2 = <StopOldSpecActions, startNewSpec_P_AVOID_STAMPING_2>
+fluent AfterStopBeforeStart = <stopOldSpec, startNewSpec>
+fluent Pending_StopOldSpec_P_OLD_TOOL_ORDER_1 = <hotSwapIn, stopOldSpec_P_OLD_TOOL_ORDER_1>
+fluent Pending_StopOldSpec_P_POLISH_ONCE_1 = <hotSwapIn, stopOldSpec_P_POLISH_ONCE_1>
+fluent Pending_StopOldSpec_P_OLD_OUT_IF_FINISHED_1 = <hotSwapIn, stopOldSpec_P_OLD_OUT_IF_FINISHED_1>
+fluent Pending_StopOldSpec_P_DRILL_ONCE_1 = <hotSwapIn, stopOldSpec_P_DRILL_ONCE_1>
+fluent Pending_StopOldSpec_P_CLEAN_ONCE_1 = <hotSwapIn, stopOldSpec_P_CLEAN_ONCE_1>
+fluent Pending_StopOldSpec_P_AVOID_STAMPING_1 = <hotSwapIn, stopOldSpec_P_AVOID_STAMPING_1>
+fluent Pending_StopOldSpec_P_OLD_TOOL_ORDER_2 = <hotSwapIn, stopOldSpec_P_OLD_TOOL_ORDER_2>
+fluent Pending_StopOldSpec_P_POLISH_ONCE_2 = <hotSwapIn, stopOldSpec_P_POLISH_ONCE_2>
+fluent Pending_StopOldSpec_P_OLD_OUT_IF_FINISHED_2 = <hotSwapIn, stopOldSpec_P_OLD_OUT_IF_FINISHED_2>
+fluent Pending_StopOldSpec_P_DRILL_ONCE_2 = <hotSwapIn, stopOldSpec_P_DRILL_ONCE_2>
+fluent Pending_StopOldSpec_P_CLEAN_ONCE_2 = <hotSwapIn, stopOldSpec_P_CLEAN_ONCE_2>
+fluent Pending_StopOldSpec_P_AVOID_STAMPING_2 = <hotSwapIn, stopOldSpec_P_AVOID_STAMPING_2>
+fluent Pending_StartNewSpec_P_NEW_TOOL_ORDER_1 = <hotSwapIn, startNewSpec_P_NEW_TOOL_ORDER_1>
+fluent Pending_StartNewSpec_P_NEW_OUT_IF_FINISHED_1 = <hotSwapIn, startNewSpec_P_NEW_OUT_IF_FINISHED_1>
+fluent Pending_StartNewSpec_P_DRILL_ONCE_1 = <hotSwapIn, startNewSpec_P_DRILL_ONCE_1>
+fluent Pending_StartNewSpec_P_CLEAN_ONCE_1 = <hotSwapIn, startNewSpec_P_CLEAN_ONCE_1>
+fluent Pending_StartNewSpec_P_PAINT_ONCE_1 = <hotSwapIn, startNewSpec_P_PAINT_ONCE_1>
+fluent Pending_StartNewSpec_P_AVOID_STAMPING_1 = <hotSwapIn, startNewSpec_P_AVOID_STAMPING_1>
+fluent Pending_StartNewSpec_P_NEW_TOOL_ORDER_2 = <hotSwapIn, startNewSpec_P_NEW_TOOL_ORDER_2>
+fluent Pending_StartNewSpec_P_NEW_OUT_IF_FINISHED_2 = <hotSwapIn, startNewSpec_P_NEW_OUT_IF_FINISHED_2>
+fluent Pending_StartNewSpec_P_DRILL_ONCE_2 = <hotSwapIn, startNewSpec_P_DRILL_ONCE_2>
+fluent Pending_StartNewSpec_P_CLEAN_ONCE_2 = <hotSwapIn, startNewSpec_P_CLEAN_ONCE_2>
+fluent Pending_StartNewSpec_P_PAINT_ONCE_2 = <hotSwapIn, startNewSpec_P_PAINT_ONCE_2>
+fluent Pending_StartNewSpec_P_AVOID_STAMPING_2 = <hotSwapIn, startNewSpec_P_AVOID_STAMPING_2>
+fluent Pending_Reconfigure_PRODUCTION_CELL_1 = <hotSwapIn, reconfigure_PRODUCTION_CELL_1>
+fluent Pending_Reconfigure_PRODUCTION_CELL_2 = <hotSwapIn, reconfigure_PRODUCTION_CELL_2>
+
+// T1: 更新中であるならば，更新先制御器の制御可能事象を実行しない
+ltl_property R1_TRD_P_NEW_TOOL_ORDER_1 = [](AfterStopBeforeStart_P_NEW_TOOL_ORDER_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_NEW_OUT_IF_FINISHED_1 = [](AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_DRILL_ONCE_1 = [](AfterStopBeforeStart_P_DRILL_ONCE_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_CLEAN_ONCE_1 = [](AfterStopBeforeStart_P_CLEAN_ONCE_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_PAINT_ONCE_1 = [](AfterStopBeforeStart_P_PAINT_ONCE_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_AVOID_STAMPING_1 = [](AfterStopBeforeStart_P_AVOID_STAMPING_1 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_NEW_TOOL_ORDER_2 = [](AfterStopBeforeStart_P_NEW_TOOL_ORDER_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_NEW_OUT_IF_FINISHED_2 = [](AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_DRILL_ONCE_2 = [](AfterStopBeforeStart_P_DRILL_ONCE_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_CLEAN_ONCE_2 = [](AfterStopBeforeStart_P_CLEAN_ONCE_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_PAINT_ONCE_2 = [](AfterStopBeforeStart_P_PAINT_ONCE_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_P_AVOID_STAMPING_2 = [](AfterStopBeforeStart_P_AVOID_STAMPING_2 -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+ltl_property R1_TRD_SFG = [](AfterStopBeforeStart -> !(drill[1] || polish[1] || clean[1] || paint[1] || stamp[1] || drill[2] || polish[2] || clean[2] || paint[2] || stamp[2]))
+
+ltl_property R1_OTF_P_NEW_TOOL_ORDER_1 = [](AfterStopBeforeStart_P_NEW_TOOL_ORDER_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_NEW_OUT_IF_FINISHED_1 = [](AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_DRILL_ONCE_1 = [](AfterStopBeforeStart_P_DRILL_ONCE_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_CLEAN_ONCE_1 = [](AfterStopBeforeStart_P_CLEAN_ONCE_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_PAINT_ONCE_1 = [](AfterStopBeforeStart_P_PAINT_ONCE_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_AVOID_STAMPING_1 = [](AfterStopBeforeStart_P_AVOID_STAMPING_1 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_NEW_TOOL_ORDER_2 = [](AfterStopBeforeStart_P_NEW_TOOL_ORDER_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_NEW_OUT_IF_FINISHED_2 = [](AfterStopBeforeStart_P_NEW_OUT_IF_FINISHED_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_DRILL_ONCE_2 = [](AfterStopBeforeStart_P_DRILL_ONCE_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_CLEAN_ONCE_2 = [](AfterStopBeforeStart_P_CLEAN_ONCE_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_PAINT_ONCE_2 = [](AfterStopBeforeStart_P_PAINT_ONCE_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_P_AVOID_STAMPING_2 = [](AfterStopBeforeStart_P_AVOID_STAMPING_2 -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+ltl_property R1_OTF_SFG = [](AfterStopBeforeStart -> !{drill[1], polish[1], clean[1], paint[1], stamp[1], drill[2], polish[2], clean[2], paint[2], stamp[2]})
+
+// T2: 各環境モデルを更新（reconfigure）する前に，必ず該当のstopOldSpecとstartNewSpecを実施する
+ltl_property R2_StopOldSpec_P_OLD_TOOL_ORDER_1 = [](Pending_StopOldSpec_P_OLD_TOOL_ORDER_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_POLISH_ONCE_1 = [](Pending_StopOldSpec_P_POLISH_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_1 = [](Pending_StopOldSpec_P_OLD_OUT_IF_FINISHED_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_DRILL_ONCE_1 = [](Pending_StopOldSpec_P_DRILL_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_CLEAN_ONCE_1 = [](Pending_StopOldSpec_P_CLEAN_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_AVOID_STAMPING_1 = [](Pending_StopOldSpec_P_AVOID_STAMPING_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StopOldSpec_P_OLD_TOOL_ORDER_2 = [](Pending_StopOldSpec_P_OLD_TOOL_ORDER_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StopOldSpec_P_POLISH_ONCE_2 = [](Pending_StopOldSpec_P_POLISH_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_2 = [](Pending_StopOldSpec_P_OLD_OUT_IF_FINISHED_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StopOldSpec_P_DRILL_ONCE_2 = [](Pending_StopOldSpec_P_DRILL_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StopOldSpec_P_CLEAN_ONCE_2 = [](Pending_StopOldSpec_P_CLEAN_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StopOldSpec_P_AVOID_STAMPING_2 = [](Pending_StopOldSpec_P_AVOID_STAMPING_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_NEW_TOOL_ORDER_1 = [](Pending_StartNewSpec_P_NEW_TOOL_ORDER_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_1 = [](Pending_StartNewSpec_P_NEW_OUT_IF_FINISHED_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_DRILL_ONCE_1 = [](Pending_StartNewSpec_P_DRILL_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_CLEAN_ONCE_1 = [](Pending_StartNewSpec_P_CLEAN_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_PAINT_ONCE_1 = [](Pending_StartNewSpec_P_PAINT_ONCE_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_AVOID_STAMPING_1 = [](Pending_StartNewSpec_P_AVOID_STAMPING_1 -> Pending_Reconfigure_PRODUCTION_CELL_1)
+ltl_property R2_StartNewSpec_P_NEW_TOOL_ORDER_2 = [](Pending_StartNewSpec_P_NEW_TOOL_ORDER_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_2 = [](Pending_StartNewSpec_P_NEW_OUT_IF_FINISHED_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_DRILL_ONCE_2 = [](Pending_StartNewSpec_P_DRILL_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_CLEAN_ONCE_2 = [](Pending_StartNewSpec_P_CLEAN_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_PAINT_ONCE_2 = [](Pending_StartNewSpec_P_PAINT_ONCE_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+ltl_property R2_StartNewSpec_P_AVOID_STAMPING_2 = [](Pending_StartNewSpec_P_AVOID_STAMPING_2 -> Pending_Reconfigure_PRODUCTION_CELL_2)
+
+// ————————— NOT On-The-Fly —————————–
+
+updatingController UpdCont_FG = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG = UpdCont_FG.
+
+updatingController UpdCont_FG_R1 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R1_TRD_P_NEW_TOOL_ORDER_1,
+transition = R1_TRD_P_NEW_OUT_IF_FINISHED_1,
+transition = R1_TRD_P_DRILL_ONCE_1,
+transition = R1_TRD_P_CLEAN_ONCE_1,
+transition = R1_TRD_P_PAINT_ONCE_1,
+transition = R1_TRD_P_AVOID_STAMPING_1,
+transition = R1_TRD_P_NEW_TOOL_ORDER_2,
+transition = R1_TRD_P_NEW_OUT_IF_FINISHED_2,
+transition = R1_TRD_P_DRILL_ONCE_2,
+transition = R1_TRD_P_CLEAN_ONCE_2,
+transition = R1_TRD_P_PAINT_ONCE_2,
+transition = R1_TRD_P_AVOID_STAMPING_2,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R1 = UpdCont_FG_R1.
+
+updatingController UpdCont_FG_R2 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_1,
+transition = R2_StopOldSpec_P_POLISH_ONCE_1,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_1,
+transition = R2_StopOldSpec_P_DRILL_ONCE_1,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_1,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_1,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_2,
+transition = R2_StopOldSpec_P_POLISH_ONCE_2,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_2,
+transition = R2_StopOldSpec_P_DRILL_ONCE_2,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_2,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_2,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_1,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_1,
+transition = R2_StartNewSpec_P_DRILL_ONCE_1,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_1,
+transition = R2_StartNewSpec_P_PAINT_ONCE_1,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_1,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_2,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_2,
+transition = R2_StartNewSpec_P_DRILL_ONCE_2,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_2,
+transition = R2_StartNewSpec_P_PAINT_ONCE_2,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_2,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R2 = UpdCont_FG_R2.
+
+updatingController UpdCont_SFG = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG = UpdCont_SFG.
+
+updatingController UpdCont_SFG_R1 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R1_TRD_SFG,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R1 = UpdCont_SFG_R1.
+
+updatingController UpdCont_SFG_R2 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_1,
+transition = R2_StopOldSpec_P_POLISH_ONCE_1,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_1,
+transition = R2_StopOldSpec_P_DRILL_ONCE_1,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_1,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_1,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_2,
+transition = R2_StopOldSpec_P_POLISH_ONCE_2,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_2,
+transition = R2_StopOldSpec_P_DRILL_ONCE_2,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_2,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_2,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_1,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_1,
+transition = R2_StartNewSpec_P_DRILL_ONCE_1,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_1,
+transition = R2_StartNewSpec_P_PAINT_ONCE_1,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_1,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_2,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_2,
+transition = R2_StartNewSpec_P_DRILL_ONCE_2,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_2,
+transition = R2_StartNewSpec_P_PAINT_ONCE_2,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_2,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R2 = UpdCont_SFG_R2.
+
+// ————————— Apply On-The-Fly —————————–
+
+updatingController UpdCont_OTF_FG = {
+oldController = C_DRILL_POLISH_CLEAN,
+newController = C_CLEAN_PAINT_DRILL,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG = UpdCont_OTF_FG.
+
+updatingController UpdCont_OTF_FG_R1 = {
+oldController = C_DRILL_POLISH_CLEAN,
+newController = C_CLEAN_PAINT_DRILL,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R1_OTF_P_NEW_TOOL_ORDER_1,
+transition = R1_OTF_P_NEW_OUT_IF_FINISHED_1,
+transition = R1_OTF_P_DRILL_ONCE_1,
+transition = R1_OTF_P_CLEAN_ONCE_1,
+transition = R1_OTF_P_PAINT_ONCE_1,
+transition = R1_OTF_P_AVOID_STAMPING_1,
+transition = R1_OTF_P_NEW_TOOL_ORDER_2,
+transition = R1_OTF_P_NEW_OUT_IF_FINISHED_2,
+transition = R1_OTF_P_DRILL_ONCE_2,
+transition = R1_OTF_P_CLEAN_ONCE_2,
+transition = R1_OTF_P_PAINT_ONCE_2,
+transition = R1_OTF_P_AVOID_STAMPING_2,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R1 = UpdCont_OTF_FG_R1.
+
+updatingController UpdCont_OTF_FG_R2 = {
+oldController = C_DRILL_POLISH_CLEAN,
+newController = C_CLEAN_PAINT_DRILL,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_1,
+transition = R2_StopOldSpec_P_POLISH_ONCE_1,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_1,
+transition = R2_StopOldSpec_P_DRILL_ONCE_1,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_1,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_1,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_2,
+transition = R2_StopOldSpec_P_POLISH_ONCE_2,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_2,
+transition = R2_StopOldSpec_P_DRILL_ONCE_2,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_2,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_2,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_1,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_1,
+transition = R2_StartNewSpec_P_DRILL_ONCE_1,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_1,
+transition = R2_StartNewSpec_P_PAINT_ONCE_1,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_1,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_2,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_2,
+transition = R2_StartNewSpec_P_DRILL_ONCE_2,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_2,
+transition = R2_StartNewSpec_P_PAINT_ONCE_2,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_2,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R2 = UpdCont_OTF_FG_R2.
+
+updatingController UpdCont_OTF_SFG = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG = UpdCont_OTF_SFG.
+
+updatingController UpdCont_OTF_SFG_R1 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R1_OTF_SFG,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R1 = UpdCont_OTF_SFG_R1.
+
+updatingController UpdCont_OTF_SFG_R2 = {
+oldController = DrillPolishClean,
+oldEnvironment = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_OLD(2)},
+newEnvironment = {PRODUCTION_CELL_NEW(1), PRODUCTION_CELL_NEW(2)},
+mapRelation = {R_PRODUCTION_CELL_1_FG, R_PRODUCTION_CELL_2_FG},
+oldGoal = DRILL_POLISH_CLEAN,
+newGoal = CLEAN_PAINT_DRILL,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_1,
+transition = R2_StopOldSpec_P_POLISH_ONCE_1,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_1,
+transition = R2_StopOldSpec_P_DRILL_ONCE_1,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_1,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_1,
+transition = R2_StopOldSpec_P_OLD_TOOL_ORDER_2,
+transition = R2_StopOldSpec_P_POLISH_ONCE_2,
+transition = R2_StopOldSpec_P_OLD_OUT_IF_FINISHED_2,
+transition = R2_StopOldSpec_P_DRILL_ONCE_2,
+transition = R2_StopOldSpec_P_CLEAN_ONCE_2,
+transition = R2_StopOldSpec_P_AVOID_STAMPING_2,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_1,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_1,
+transition = R2_StartNewSpec_P_DRILL_ONCE_1,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_1,
+transition = R2_StartNewSpec_P_PAINT_ONCE_1,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_1,
+transition = R2_StartNewSpec_P_NEW_TOOL_ORDER_2,
+transition = R2_StartNewSpec_P_NEW_OUT_IF_FINISHED_2,
+transition = R2_StartNewSpec_P_DRILL_ONCE_2,
+transition = R2_StartNewSpec_P_CLEAN_ONCE_2,
+transition = R2_StartNewSpec_P_PAINT_ONCE_2,
+transition = R2_StartNewSpec_P_AVOID_STAMPING_2,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R2 = UpdCont_OTF_SFG_R2.

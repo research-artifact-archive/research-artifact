@@ -1,0 +1,15 @@
+\noindent\textbf{Benchmark contract coverage}\par
+Each triple is base/R1/R2. Transfer fan-out and loadable endpoint counts come from preserved first-trial outputs; component/requirement counts and explicit precedence are cross-checked against the parsed definitions.
+\begin{center}\scriptsize\begin{tabular}{@{}lrrrrl@{}}\toprule
+Model & Components & Multi-target & Initializers & Prec. & $|Z_{\rm load}|$\\\midrule
+GSM & 1 & No & 1/2/3 & 0 & 9\\
+Industry & 3 & No & 3/6/9 & 0 & 81\\
+MetaSocket & 2 & No & 1/2/3 & 0 & 4\\
+PowerPlant & 2 & No & 3/6/10 & 0 & 4\\
+PC Arms=1 & 1 & No & 6/12/18 & 0 & 9\\
+PC Arms=2 & 2 & No/No/-- & 12/24/36 & 0 & 137\\
+Railcab & 4 & Yes & 7/14/18 & 0 & 71\\
+Surveillance & 2 & No & 7/14/21 & 0 & 107\\
+Workflow & 5 & No & 6/12/17 & 0 & 21\\
+\bottomrule\end{tabular}\end{center}
+Multi-target reports whether a transfer source has more than one outcome. Initializers count NEW plus UPD requirements; NEW table lookup and UPD constant boundary initialization are distinguished in the RS table. PC Arms=2/R2 multi-target status is unmeasured (--): preserved runs do not contain the final transfer census. Zero explicit precedence does not mean transition monitors impose no ordering constraints.

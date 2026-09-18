@@ -1,0 +1,894 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "repetitions": 5,
+  "timeout_seconds": 1200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "backend": "synthetic_hub",
+  "experiment_id": "fg-ducs-xeon-rq4_hub",
+  "models": [
+    {
+      "id": "hub_s698_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 698,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s698_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 698,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s698_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 698,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s917_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 917,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s917_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 917,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s917_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 917,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s1818_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 1818,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s1818_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 1818,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s1818_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 1818,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s2343_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2343,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s2343_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2343,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s2343_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2343,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s2673_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2673,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s2673_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2673,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s2673_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 2673,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s3242_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3242,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s3242_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3242,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s3242_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3242,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s3821_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3821,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s3821_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3821,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s3821_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 3821,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s4833_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 4833,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s4833_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 4833,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s4833_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 4833,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5059_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5059,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5059_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5059,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5059_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5059,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5132_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5132,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5132_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5132,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5132_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5132,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5217_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5217,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5217_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5217,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5217_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5217,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5256_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5256,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5256_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5256,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5256_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5256,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5354_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5354,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5354_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5354,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5354_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5354,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5482_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5482,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5482_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5482,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5482_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5482,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5588_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5588,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5588_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5588,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5588_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5588,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s5831_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5831,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s5831_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5831,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s5831_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 5831,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s6212_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6212,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s6212_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6212,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s6212_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6212,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s6569_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6569,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s6569_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6569,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s6569_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6569,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s6808_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6808,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s6808_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6808,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s6808_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 6808,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s7096_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7096,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s7096_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7096,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s7096_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7096,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s7833_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7833,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s7833_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7833,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s7833_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7833,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s7855_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7855,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s7855_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7855,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s7855_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 7855,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s8126_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8126,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s8126_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8126,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s8126_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8126,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s8285_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8285,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s8285_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8285,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s8285_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8285,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s8511_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8511,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s8511_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8511,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s8511_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 8511,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s9203_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9203,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s9203_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9203,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s9203_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9203,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s9606_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9606,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s9606_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9606,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s9606_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9606,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s9643_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9643,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s9643_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9643,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s9643_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9643,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s9814_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9814,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s9814_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9814,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s9814_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9814,
+        "profile": "u_cross"
+      }
+    },
+    {
+      "id": "hub_s9944_u0",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9944,
+        "profile": "u0"
+      }
+    },
+    {
+      "id": "hub_s9944_u_local",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9944,
+        "profile": "u_local"
+      }
+    },
+    {
+      "id": "hub_s9944_u_cross",
+      "path": "inputs/hub/seed_config.json",
+      "family": "n4_hub",
+      "factors": {
+        "seed": 9944,
+        "profile": "u_cross"
+      }
+    }
+  ]
+}

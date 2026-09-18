@@ -1,0 +1,124 @@
+Compiled: TOR
+Compiled: DSD1
+Compiled: GATEFORM1
+Composition:Environment = Environment.TOR || Environment.DSD1 || Environment.GATEFORM1
+State Space: 5 * 8 * 3 = 2 ** 8
+Composing...
+-- States: 120 Transitions: 494 Memory used: 33837KB
+Composed in 4ms
+Formula !P_TOR_POLICY = (true U ((validateDSD1 | validateGF1) & !TORDone))
+GBA 2 states 4 transitions
+Buchi automata:
+P_TOR_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |validateDSD1&!TORDone -> S1 |validateGF1&!TORDone -> S1).
+Composition:P_TOR_POLICY = TORDone || validateDSD1 || validateGF1 || SYNC || P_TOR_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 24 Transitions: 86 Memory used: 35574KB
+Composed in 0ms
+After Tau elimination = 12 state
+Tau reduction ON
+P_TOR_POLICY minimising...
+Minimised States: 3 in 1ms
+make DFA(P_TOR_POLICY)
+DFA(P_TOR_POLICY) has 2 states.
+Tau reduction ON
+P_TOR_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_DSD1_POLICY = (true U ((DSD1Done & validateTOR) | (validateGF1 & !DSD1Done)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_DSD1_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |DSD1Done&validateTOR -> S1 |validateGF1&!DSD1Done -> S1).
+Composition:P_DSD1_POLICY = DSD1Done || validateGF1 || validateTOR || SYNC || P_DSD1_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 24 Transitions: 98 Memory used: 34455KB
+Composed in 0ms
+After Tau elimination = 12 state
+Tau reduction ON
+P_DSD1_POLICY minimising...
+Minimised States: 3 in 0ms
+make DFA(P_DSD1_POLICY)
+DFA(P_DSD1_POLICY) has 2 states.
+Tau reduction ON
+P_DSD1_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_DO_NOT_SEND_TWICE = (true U ((Finished & validateGF1) | ((DSD1Done & validateDSD1) | (TORDone & validateTOR))))
+GBA 2 states 5 transitions
+Buchi automata:
+P_DO_NOT_SEND_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |DSD1Done&validateDSD1 -> S1 |Finished&validateGF1 -> S1 |TORDone&validateTOR -> S1).
+Composition:P_DO_NOT_SEND_TWICE = TORDone || DSD1Done || Finished || validateTOR || validateDSD1 || validateGF1 || SYNC || P_DO_NOT_SEND_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 8
+Composing...
+-- States: 80 Transitions: 404 Memory used: 17799KB
+Composed in 2ms
+After Tau elimination = 40 state
+Tau reduction ON
+P_DO_NOT_SEND_TWICE minimising...
+Minimised States: 5 in 2ms
+make DFA(P_DO_NOT_SEND_TWICE)
+DFA(P_DO_NOT_SEND_TWICE) has 4 states.
+Tau reduction ON
+P_DO_NOT_SEND_TWICE minimising...
+Minimised States: 4 in 0ms
+Composition:OldController = Environment || P_DO_NOT_SEND_TWICE || P_TOR_POLICY || P_DSD1_POLICY
+State Space: 120 * 4 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 64 Transitions: 212 Memory used: 18336KB
+Composed in 0ms
+Solving the LTS control problem.
+Environment states: 65
+Game states: 65
+Analysis time: 33ms.
+Controller [64] generated successfully.
+Composition:OldController = OldController || P_DO_NOT_SEND_TWICE || P_TOR_POLICY || P_DSD1_POLICY
+State Space: 64 * 4 * 2 * 2 = 2 ** 10
+Composing...
+-- States: 64 Transitions: 148 Memory used: 19234KB
+Composed in 2ms
+Compiled: OldController
+Composition:Environment = Environment.TOR || Environment.DSD1 || Environment.GATEFORM1
+State Space: 5 * 8 * 3 = 2 ** 8
+Composing...
+-- States: 120 Transitions: 494 Memory used: 20785KB
+Composed in 2ms
+Compiled: BEFORE_RECONF
+Processing formula for update: P_TOR_POLICY_UPD_OLD
+Processing formula for update: P_DSD1_POLICY_UPD_OLD
+Processing formula for update: P_DO_NOT_SEND_TWICE_UPD_OLD
+Processing formula for update: P_NEW_TOR_POLICY_UPD_NEW
+Processing formula for update: P_NEW_DSD1_POLICY_UPD_NEW
+Processing formula for update: P_NEW_DO_NOT_SEND_TWICE_UPD_NEW
+Processing formula for update: T_Empty
+Environment states:14763
+Solving safety goals for the controller synthesis
+Environment states after safety: 3134
+Synthezising GR
+Environment after safety is deterministic
+Solving a deterministic controller synthesis
+Controller [2312] generated successfully.
+DCU built in: 2161ms
+Compile is Complete!
+
+
+===================================================
+                    Composition                    
+===================================================
+Composition:UPDATE_CONTROLLER = UpdCont
+State Space: 2312 = 2 ** 12
+Composing...
+-- States: 2312 Transitions: 6615 Memory used: 38706KB
+Composed in 19ms
+
+
+[info] Composition is Complete!
+[info] Max Space      : 14763
+[info] Max Transition : 99676
+[info] Max Memory     : 119432 MB
+[info] Execution Time : 2351 ms
+

@@ -1,0 +1,19 @@
+\clearpage\noindent\textbf{Travel and hub: completed returns}\par
+Travel retains all 48 instances; hub retains 30 seeds under each of three UC profiles.
+W/TO/OOM are first-trial counts. Five-run timing eligibility is shown separately.
+\begin{center}\small\begin{tabular}{@{}llrrrr@{}}\toprule
+Family & Method & W & TO & OOM & Five-run cells\\\midrule
+Travel & FG lazy & 20 & 26 & 2 & 20\\
+Travel & Eager & 20 & 26 & 2 & 20\\
+Travel & Update-first & 20 & 26 & 2 & 20\\
+Travel & Direct-Full & 18 & 28 & 2 & 18\\
+Hub & FG lazy & 90 & 0 & 0 & 90\\
+Hub & Eager & 90 & 0 & 0 & 90\\
+Hub & Update-first & 90 & 0 & 0 & 90\\
+Hub & Direct-Full & 90 & 0 & 0 & 90\\
+\bottomrule\end{tabular}\end{center}
+All completed decisions agree. Travel has 960 planned repetition slots: 504 executed trials and 456 explicit resource-failure skips; hub completes all 1,800 trials.
+\texttt{rq4-points.csv} retains all plotted method/instance cells; the two \texttt{rq4-*-comparisons.csv} files retain paired ratios and unresolved statuses.
+Travel lazy/Direct-Full state ratios range from 0.03435 to 0.46154 over 18 completed pairs. The upper endpoint is $N=1,K=1$ (12/26 states); all eight $N=1$ ratios exceed one third. No case is excluded to tighten this range.
+Lazy and update-first match states, queries and outcomes on all 20 completed Travel instances. Unresolved instances have no measured structure and do not count as equal pairs.
+Hub timings are solve-only; Travel LTS timings include the internal checks. Ratios are paired within each family, never pooled across these scopes.

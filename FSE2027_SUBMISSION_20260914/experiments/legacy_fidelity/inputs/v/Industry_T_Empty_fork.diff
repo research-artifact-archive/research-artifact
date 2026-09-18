@@ -1,0 +1,15 @@
+--- 2017-TSE-Industry_T_Empty_active.lts
++++ Industry_T_Empty_fork.lts
+@@ -95,9 +95,9 @@
+ // ---------------------------UPDATING CONTROLLER SPEC-----------------------------
+ //Updating controller fluents
+ fluent InTransition = <stopOldSpec, startNewSpec> 
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec= <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec= <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ fluent StartN = <startNewSpec, adjustGF1>
+ 

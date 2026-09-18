@@ -1,0 +1,24 @@
+--- 2017-TSE-Surveillance.lts
++++ Surveillance_empty.lts
+@@ -166,9 +166,9 @@
+ ltl_property T_NO_PICTURE_WHILE_UPDATE = (picture -> (!((StopOldSpec && !StartNewSpec)  || (StartNewSpec && !StopOldSpec) )))
+ 
+ // Updating Controller Fluents
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ updatingController UpdCont = {
+     oldController = EnvironmentAndController,
+@@ -176,7 +176,7 @@
+     oldGoal = OldSpec,
+     newGoal = NewSpec,
+ //    T = True is executed if no transition requirement is set
+-//	transition = T_NO_TP,
++	transition = T_NO_TP,
+ //    transition = T_NO_TP_AND_NOT_UPDATE_AT_BASE,
+ //    transition = T_NO_MOVE_WHILE_UPDATE,
+ //    transition = T_NO_PICTURE_WHILE_UPDATE,

@@ -1,0 +1,15 @@
+--- 2017-TSE-MetaSocket.lts
++++ MetaSocket_supplied.lts
+@@ -104,9 +104,9 @@
+ 
+ 
+ //------------------T--------------------
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ // For avoiding overlapping
+ ltl_property T_FROM_DES64 = (StartNewSpec -> !EncriptionDone64)

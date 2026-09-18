@@ -1,0 +1,100 @@
+{
+  "case_ids": [
+    "valid_control",
+    "old_controller_missing_controllable_action",
+    "old_endpoint_deadlock",
+    "old_uncontrollable_suppression",
+    "new_endpoint_deadlock"
+  ],
+  "generator_id": "concrete-lts-endpoint-contract-gate-v1",
+  "method_contract": {
+    "agreement": "both solver modes must report the same process class and registered contract reason",
+    "invalid_input_is_not_unrealizable": true,
+    "methods": [
+      "fg_ducs_otf",
+      "direct_full"
+    ]
+  },
+  "model_count": 5,
+  "models": [
+    {
+      "bytes": 1146,
+      "contract_case": "valid_control",
+      "contract_oracle": "valid_endpoint_contract",
+      "description": "A well-formed, deadlock-free endpoint pair that must reach synthesis and independent exhaustive verification.",
+      "expected_decision": "realizable",
+      "expected_process_status": "SUCCESS",
+      "expected_reason_fragment": "",
+      "id": "valid_control",
+      "model_family": "contract_gate",
+      "path": "Models/valid_control.lts",
+      "sha256": "a485ab9a186cf91db46710945ae33098f051fd257e69f6a4ed4e30a3dfd55416",
+      "target": "UPDATE_CONTROLLER_OTF_FG",
+      "verification_mode": "independent_exhaustive_fixed_point"
+    },
+    {
+      "bytes": 1254,
+      "contract_case": "old_controller_missing_controllable_action",
+      "contract_oracle": "controller_observes_environment_alphabet",
+      "description": "The old environment owns controllable auxiliary, but the supplied old controller alphabet omits that event.",
+      "expected_decision": "",
+      "expected_process_status": "INVALID_INPUT",
+      "expected_reason_fragment": "old controller alphabet omits environment actions",
+      "id": "old_controller_missing_controllable_action",
+      "model_family": "contract_gate",
+      "path": "Models/old_controller_missing_controllable_action.lts",
+      "sha256": "2b017a7941c75db5637255e8519a48ad37bbb0fd19d0ee1eb14c84ef62a9bff6",
+      "target": "UPDATE_CONTROLLER_OTF_FG",
+      "verification_mode": "pre_synthesis_input_contract_gate"
+    },
+    {
+      "bytes": 1163,
+      "contract_case": "old_endpoint_deadlock",
+      "contract_oracle": "old_closed_loop_deadlock_rejected",
+      "description": "The supplied old controller disables its only controllable event, so the reachable old closed loop is deadlocked.",
+      "expected_decision": "",
+      "expected_process_status": "INVALID_INPUT",
+      "expected_reason_fragment": "old closed loop is deadlocked",
+      "id": "old_endpoint_deadlock",
+      "model_family": "contract_gate",
+      "path": "Models/old_endpoint_deadlock.lts",
+      "sha256": "524b84e7c932461ca24d663ab30dbf3305b6ead68cf69aec7335d475db49382a",
+      "target": "UPDATE_CONTROLLER_OTF_FG",
+      "verification_mode": "pre_synthesis_input_contract_gate"
+    },
+    {
+      "bytes": 1239,
+      "contract_case": "old_uncontrollable_suppression",
+      "contract_oracle": "uncontrollable_endpoint_action_preserved",
+      "description": "The old environment enables uncontrollable fault, but the supplied old controller blocks it while retaining idle.",
+      "expected_decision": "",
+      "expected_process_status": "INVALID_INPUT",
+      "expected_reason_fragment": "old endpoint disables uncontrollable action",
+      "id": "old_uncontrollable_suppression",
+      "model_family": "contract_gate",
+      "path": "Models/old_uncontrollable_suppression.lts",
+      "sha256": "b53f94cda7bd3b295ec4f9e26e2ed08fce04cb95da63ea068ce2f115e98dc569",
+      "target": "UPDATE_CONTROLLER_OTF_FG",
+      "verification_mode": "pre_synthesis_input_contract_gate"
+    },
+    {
+      "bytes": 1163,
+      "contract_case": "new_endpoint_deadlock",
+      "contract_oracle": "new_closed_loop_deadlock_rejected",
+      "description": "The supplied new controller disables its only controllable event, so the reachable new closed loop is deadlocked.",
+      "expected_decision": "",
+      "expected_process_status": "INVALID_INPUT",
+      "expected_reason_fragment": "new closed loop is deadlocked",
+      "id": "new_endpoint_deadlock",
+      "model_family": "contract_gate",
+      "path": "Models/new_endpoint_deadlock.lts",
+      "sha256": "33b0c08c08f894911893eaab5b4f729303194c9580ef83af4208f74eb28364bf",
+      "target": "UPDATE_CONTROLLER_OTF_FG",
+      "verification_mode": "pre_synthesis_input_contract_gate"
+    }
+  ],
+  "purpose": "end-to-end distinction between valid synthesis inputs, invalid endpoint contracts, and unrealizable valid games",
+  "schema_version": "fse2027-contract-gate-suite-v1",
+  "scope_note": "Old-root and new-goal coverage omissions cannot be authored as external LTS cases because the adapter derives declarations and projections from the same complete reachable endpoint traversal. The fourth external case therefore covers the symmetric new endpoint deadlock obligation. Internal projection defenses remain covered by Java unit tests.",
+  "target": "UPDATE_CONTROLLER_OTF_FG"
+}

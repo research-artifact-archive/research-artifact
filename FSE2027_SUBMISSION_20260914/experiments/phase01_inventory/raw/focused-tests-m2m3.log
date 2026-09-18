@@ -1,0 +1,59 @@
+Command: ['mvn', '-B', 'test', '-Dtest=ltsa.updatingControllers.otf.ActivationSpecTest,ltsa.updatingControllers.otf.FineGrainedOtfDucsTest,ltsa.updatingControllers.otf.OtfDucsSynthesizerTest,ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest', '-Dfork.number=0', '-Dthread.count=1', '-Dparallel=none', '-DfailIfNoTests=true', '-Djacoco.skip=true']
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Maven home: /opt/homebrew/Cellar/maven/3.9.16/libexec
+Java version: 17.0.19, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home
+Default locale: en_JP, platform encoding: UTF-8
+OS name: "mac os x", version: "15.7.9", arch: "aarch64", family: "mac"
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------------< mtsa:mtsa >------------------------------
+[INFO] Building mtsa 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] Parameter 'systemPropertyVariables' is unknown for plugin 'jacoco-maven-plugin:0.8.7:prepare-agent (default-prepare-agent)'
+[WARNING] Parameter 'skipTests' is unknown for plugin 'jacoco-maven-plugin:0.8.7:prepare-agent (default-prepare-agent)'
+[WARNING] Parameter 'systemPropertyVariables' is unknown for plugin 'jacoco-maven-plugin:0.8.7:report (report)'
+[WARNING] Parameter 'skipTests' is unknown for plugin 'jacoco-maven-plugin:0.8.7:report (report)'
+[WARNING] The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2: https://issues.sonatype.org/browse/MVNCENTRAL-244
+[INFO] 
+[INFO] --- jacoco:0.8.7:prepare-agent (default-prepare-agent) @ mtsa ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ mtsa ---
+[INFO] Copying 431 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.5:compile (default-compile) @ mtsa ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 980 source files to Implementation/Source Code/maven-root/mtsa/target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ mtsa ---
+[INFO] Copying 840 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.5:testCompile (default-testCompile) @ mtsa ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 158 source files to Implementation/Source Code/maven-root/mtsa/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] Implementation/Source Code/maven-root/mtsa/src/test/java/ltsa/updatingControllers/otf/QuiescentUpdateBoundaryTest.java:[30,19] error: no suitable constructor found for IndependentExplicitStrongSolver(FineGrainedUpdateProblem<String,String>)
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.395 s
+[INFO] Finished at: 2026-09-14T15:52:00+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.5:testCompile (default-testCompile) on project mtsa: Compilation failure
+[ERROR] Implementation/Source Code/maven-root/mtsa/src/test/java/ltsa/updatingControllers/otf/QuiescentUpdateBoundaryTest.java:[30,19] error: no suitable constructor found for IndependentExplicitStrongSolver(FineGrainedUpdateProblem<String,String>)
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+EXIT_CODE=1
+ELAPSED_SECONDS=9.418620709002425

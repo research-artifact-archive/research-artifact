@@ -1,0 +1,180 @@
+{
+  "artifact_digests": {
+    "output": {
+      "bytes": 81667,
+      "exists": true,
+      "sha256": "c621bad8427cbe34711fa7bc6ac0bbbde6541fcc1db37b59fbc3f7e07f0e3809"
+    },
+    "stderr": {
+      "bytes": 262,
+      "exists": true,
+      "sha256": "6f4ea44add9485b7c1b03903031a50a56bb924088595032f46d7c22889c9cf2b"
+    },
+    "stdout": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions": {
+      "bytes": "",
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "artifacts": {
+    "output": "runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/output.txt",
+    "stderr": "runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/stderr.txt",
+    "stdout": "runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/stdout.txt",
+    "transitions": "runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/transitions.txt"
+  },
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentQueryLimit=10000000",
+    "-Dmtsa.revised.otf.independentStateLimit=1000000",
+    "-Dmtsa.revised.otf.independentVerification=true",
+    "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx12g",
+    "-cp",
+    "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/empty_transfer__declaration_order.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "command_text": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=true -Dmtsa.revised.otf.independentQueryLimit=10000000 -Dmtsa.revised.otf.independentStateLimit=1000000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.solver=otf -Xmx12g -cp 'Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar' ltsa.updatingControllers.cli.SingleCompositionRunner --lts 'Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/empty_transfer__declaration_order.lts' --target UPDATE_CONTROLLER_OTF_FG --output 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/output.txt' --transitions 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf/transitions.txt' --transition-output summary",
+  "completed": true,
+  "config_sha256": "5a40ee27dd3154c7502dd95ae670db1ccb88cac0e4b63e3f663b8ad59f279b9c",
+  "cwd": ".",
+  "elapsed_monotonic_ns": 758615959,
+  "elapsed_monotonic_seconds": 0.758615959,
+  "evaluation_csv": {
+    "errors": [],
+    "found": true,
+    "header": [
+      "mode",
+      "result",
+      "solver_status",
+      "verification_status",
+      "run_verified",
+      "failure_reason",
+      "section",
+      "metric_key",
+      "metric_label",
+      "value",
+      "unit",
+      "formula",
+      "metric_schema_version",
+      "metric_description_id",
+      "section_readable_ja",
+      "metric_readable_ja",
+      "metric_category",
+      "artifact",
+      "phase",
+      "action",
+      "event",
+      "stat"
+    ],
+    "marker_count": 1,
+    "row_count": 217
+  },
+  "execution_environment_fingerprint_sha256": "f2b934ad383592519329ac3bf1725938ad9663752e294eefcf551236032a78ab",
+  "exit_code": 6,
+  "experiment_id": "fgducs-semantic-revision-20260914-rq1",
+  "finished_utc": "2026-09-14T07:30:04.894884+00:00",
+  "harness_error": "",
+  "harness_errors": [],
+  "harness_termination_action": "",
+  "input_model": {
+    "bytes": 1388,
+    "exists": true,
+    "sha256": "1d64394292b74ddbf49ddf5e9c1d904b79c275659bd86bc7a5677bd55383a34b"
+  },
+  "job": {
+    "analysis_role": "correctness_primary",
+    "block_id": "semantic_empty_transfer__declaration_order__base__rep01",
+    "global_order_index": 85,
+    "job_id": "semantic_empty_transfer__declaration_order__base__rep01__fg_ducs_otf",
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.revised.otf.independentQueryLimit": "10000000",
+      "mtsa.revised.otf.independentStateLimit": "1000000",
+      "mtsa.revised.otf.independentVerification": "true",
+      "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+      "mtsa.revised.otf.solver": "otf"
+    },
+    "method_base_order": [
+      "direct_full",
+      "fg_ducs_otf"
+    ],
+    "method_id": "fg_ducs_otf",
+    "method_order": [
+      "direct_full",
+      "fg_ducs_otf"
+    ],
+    "method_order_index": 1,
+    "method_order_seed": 17738473281009095972,
+    "model_factors": {
+      "base_case": "empty_transfer",
+      "coverage_tags": [
+        "losing",
+        "partial_transfer"
+      ],
+      "expected_decision": "unrealizable",
+      "metamorphic_group": "empty_transfer",
+      "model_sha256": "1d64394292b74ddbf49ddf5e9c1d904b79c275659bd86bc7a5677bd55383a34b",
+      "semantic_boundary": "reachable old endpoint has an empty transfer set",
+      "suite_manifest_sha256": "60e132141d12eea883bb220108f52ad3cdb94f84e4dcea9bed1011601b304c94",
+      "variant": "declaration_order"
+    },
+    "model_family": "rq1_semantic_boundary_v2",
+    "model_id": "semantic_empty_transfer__declaration_order",
+    "model_path": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/semantic_boundaries_v2/Models/empty_transfer__declaration_order.lts",
+    "model_planned_repetitions": 1,
+    "repetition": 1,
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "unit_order_index": 42,
+    "unit_order_seed": 8816969980923002946
+  },
+  "meta_schema_version": 1,
+  "order_algorithm": "seeded-per-unit-permutation/cyclic-rotation/reverse-every-cycle-v1",
+  "peak_rss_bytes": 97615872,
+  "peak_rss_kib": 95328,
+  "plan_sha256": "36c769976c4e03121388101495708461e66426ace4aa46deb67347eea5567bf9",
+  "rss_measurement_kind": "darwin_proc_pid_rusage_resident",
+  "rss_measurement_status": "measured",
+  "rss_poll_interval_seconds": 0.05,
+  "rss_samples_attempted": 13,
+  "rss_samples_available": 13,
+  "spawn_error": "",
+  "started_utc": "2026-09-14T07:30:03.819699+00:00",
+  "status": "UNREALIZABLE",
+  "timed_out": false,
+  "timeout_seconds": 120.0,
+  "timeout_termination_action": "",
+  "transition_output_mode": "summary"
+}

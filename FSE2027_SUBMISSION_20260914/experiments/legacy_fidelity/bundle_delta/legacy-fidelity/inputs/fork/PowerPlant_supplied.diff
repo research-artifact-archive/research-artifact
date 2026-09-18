@@ -1,0 +1,15 @@
+--- 2017-TSE-PowerPlant.lts
++++ PowerPlant_supplied.lts
+@@ -80,9 +80,9 @@
+ // ---------------------------UPDATING CONTROLLER SPEC-----------------------------
+ //Updating controller fluents
+ fluent InTransition = <stopOldSpec, startNewSpec> 
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec= <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec= <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert AnyAction = (stopPump || startPump || procedure || endProcedure || request)
+ 

@@ -1,0 +1,24 @@
+--- 2017-TSE-Railcab.lts
++++ Railcab_empty.lts
+@@ -138,9 +138,9 @@
+ // ---------------------------UPDATING CONTROLLER SPEC-----------------------------
+ 
+ // Updating Controller Fluents
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert AnyAction = (requestEnter || brake || emergencyBrake || idle_c || checkCrossingStatus|| endOfTS || approachingCrossing|| 
+ 			lastBrake|| lastEmergencyBrake || noReturn || enterCrossing || enterAllowed[1] || enterAllowed[0] || working || notWorking)
+@@ -156,7 +156,7 @@
+     oldGoal = OldSpec,
+     newGoal = NewSpec,
+ // 	T = True is executed if no transition requirement is set
+-//	transition = T_NO_TP,
++	transition = T_NO_TP,
+ //	transition = T_BRAKE,
+ 	nonblocking
+ 

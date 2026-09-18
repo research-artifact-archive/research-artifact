@@ -1,0 +1,23 @@
+--- 2017-TSE-GSM.lts
++++ GSM_empty.lts
+@@ -110,16 +110,16 @@
+ 	mapping = MapEnvironment,
+     oldGoal = OldSpec,
+     newGoal = NewSpec,
+-//    transition = T_NO_TP,
++    transition = T_NO_TP,
+ //	transition = T_NO_UPDATE_WHILE_SEND,
+     nonblocking
+     
+ }
+ 
+ // ---------------------------TEST AND RESULTS-----------------------------
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert S_OLD = (DECODE)
+ assert S_NEW = (NEW_DECODE)

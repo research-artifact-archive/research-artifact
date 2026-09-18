@@ -1,0 +1,44 @@
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & W 0.0224$^{\dagger}$ & W 0.0332$^{\dagger}$ & W 0.0233 & W 0.0416 & W 0.241\\
+ & R1 & W 0.0228 & W 0.0348$^{\dagger}$ & W 0.0243 & W 0.045 & W 0.306\\
+ & R2 & W 0.0201$^{\dagger}$ & W 0.0281 & W 0.0225 & W 0.0327$^{\dagger}$ & W 0.25\\
+\addlinespace[2pt]
+Industry & BASE & W 0.19 & W 14.5 & W 0.542 & W 154 & N/M\\
+ & R1 & L 562 & TO & L 461$^{\dagger}$ & TO & N/M\\
+ & R2 & W 1.15 & W 2.96 & W 0.455 & W 28 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & W 0.0149$^{\dagger}$ & W 0.0302$^{\dagger}$ & W 0.0165$^{\dagger}$ & W 0.0408 & W 0.323\\
+ & R1 & W 0.0136$^{\dagger}$ & W 0.0278$^{\dagger}$ & W 0.0147 & W 0.0426$^{\dagger}$ & W 0.443\\
+ & R2 & W 0.0152$^{\dagger}$ & W 0.018 & W 0.0154$^{\dagger}$ & W 0.024$^{\dagger}$ & W 0.29\\
+\addlinespace[2pt]
+PowerPlant & BASE & W 0.0463$^{\dagger}$ & W 0.487 & W 0.052 & W 1.85 & W 18$^{\dagger}$\\
+ & R1 & W 0.125$^{\dagger}$ & W 1.08 & W 0.152 & W 5.51 & W 896$^{\dagger}$\\
+ & R2 & W 0.18 & W 0.251 & W 0.114 & W 1.01 & W 8.25\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & W 0.0741$^{\dagger}$ & W 26 & W 0.886 & W 157 & N/M\\
+ & R1 & W 0.0793 & W 188 & W 3.15 & TO & OOM\\
+ & R2 & W 6.16$^{\dagger}$ & W 12.2 & W 1.17 & W 77.8 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & W 2.61$^{\dagger}$ & TO & TO & TO & OOM\\
+ & R1 & W 2.6 & TO & TO & TO & OOM\\
+ & R2 & TO\textsuperscript{a} & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & W 0.169 & TO & W 2.26 & TO & OOM\\
+ & R1 & W 3.18 & TO & W 6.74 & TO & OOM\\
+ & R2 & W 15.5 & W 38.7 & W 4.16 & W 283 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & W 2.01 & TO & W 2.63$^{\dagger}$ & TO & OOM\\
+ & R1 & W 18.6 & TO & W 126 & TO & OOM\\
+ & R2 & W 37.1 & TO & W 16.1 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & W 0.111 & W 508 & W 0.116 & TO & OOM\\
+ & R1 & W 0.325 & TO & W 0.215 & TO & OOM\\
+ & R2 & W 16.1 & W 23.9 & W 3.18 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+\par\smallskip{\scriptsize W/L: winning/losing. Seconds: median only for five valid, consistent completions; ranges in S4. TO: 1,200 s timeout; OOM: out of memory. N/M (capture cap): author-side M9MtsSnapshot instrumentation stops before synthesis at its fixed 250,000-state cap; no evidence of Legacy capability or solver failure. Original operational interruptions are retained in S4. Legacy uses native semantics. Other incomplete groups show statuses, without medians. $\dagger$: $(\max-\min)/\mathrm{median}>10\%$ (also a zero median with a positive range); see Supplement~S4.}\par{\scriptsize $^{a}$ The separate 3,600 s single trial also timed out (peak process RSS 67.1 GiB; 64 GiB heap cap). $^{\ddagger}$ The original trial was operationally interrupted; the pre-authorized same-setting replacement timed out at 1,200 s. Both records remain in Supplement~S4. RSS does not establish heap saturation.}

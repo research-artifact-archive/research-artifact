@@ -1,0 +1,518 @@
+{
+  "rq3": {
+    "fg_ducs_otf": {
+      "stage1": {
+        "SUCCESS": 25,
+        "UNREALIZABLE": 1,
+        "TIMEOUT": 1
+      },
+      "original_stage1": {
+        "SUCCESS": 25,
+        "UNREALIZABLE": 1,
+        "TIMEOUT": 1
+      },
+      "complete_five": 26
+    },
+    "fg_ducs_otf_eager_controllable": {
+      "stage1": {
+        "SUCCESS": 17,
+        "TIMEOUT": 10
+      },
+      "original_stage1": {
+        "SUCCESS": 17,
+        "TIMEOUT": 10
+      },
+      "complete_five": 17
+    },
+    "fg_ducs_otf_update_first": {
+      "stage1": {
+        "SUCCESS": 23,
+        "UNREALIZABLE": 1,
+        "TIMEOUT": 3
+      },
+      "original_stage1": {
+        "SUCCESS": 23,
+        "UNREALIZABLE": 1,
+        "TIMEOUT": 3
+      },
+      "complete_five": 24
+    },
+    "direct_full": {
+      "stage1": {
+        "SUCCESS": 14,
+        "TIMEOUT": 13
+      },
+      "original_stage1": {
+        "SUCCESS": 14,
+        "TIMEOUT": 12,
+        "INTERRUPTED_NOT_RETRIED": 1
+      },
+      "complete_five": 14
+    },
+    "legacy_ducs": {
+      "stage1": {
+        "SUCCESS": 9,
+        "CRASH": 5,
+        "OOM": 13
+      },
+      "original_stage1": {
+        "SUCCESS": 9,
+        "CRASH": 5,
+        "OOM": 13
+      },
+      "complete_five": 9
+    }
+  },
+  "rq3_supplementary": {
+    "pc": {
+      "original": {
+        "role": "original",
+        "campaign": "rq3",
+        "config_source": "rq3/config.json",
+        "job_id": "productioncell_arms2__r2__rep01__fg_ducs_otf",
+        "model_id": "productioncell_arms2",
+        "target_id": "r2",
+        "method_id": "fg_ducs_otf",
+        "repetition": 1,
+        "planned_repetitions": 5,
+        "original_record": "rq3/runs/productioncell_arms2__r2__rep01__fg_ducs_otf/meta.json",
+        "source_meta": "rq3/runs/productioncell_arms2__r2__rep01__fg_ducs_otf/meta.json",
+        "status": "TIMEOUT",
+        "started_utc": "2026-09-15T09:55:34.006646+00:00",
+        "finished_utc": "2026-09-15T10:15:38.375540+00:00",
+        "timeout_seconds": 1200,
+        "java_heap": "64g",
+        "elapsed_monotonic_seconds": 1202.9342833,
+        "peak_rss_bytes": 33590321152,
+        "peak_rss_gib": 31.283424377441406,
+        "rss_measurement_kind": "windows_process_working_set",
+        "skip_reason": "",
+        "timing_median_eligible": false,
+        "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+        "input_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+        "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+        "logical_cpu_count": 24,
+        "physical_memory_bytes": 274539106304,
+        "os_version": "10.0.19045",
+        "environment_verification": "source_bytes_verified",
+        "environment_source_sha256": "6a4776918feb44b9d798cc7e9d31b1cb3dfded503d04b53b0e013a538c3675e7",
+        "heap_occupancy_measured": false
+      },
+      "followup": [
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_pc_arms2_r2_fg_3600",
+          "config_source": "rq3_supplement_pc_arms2_r2_fg_3600/config.json",
+          "job_id": "productioncell_arms2__r2__rep01__fg_ducs_otf",
+          "model_id": "productioncell_arms2",
+          "target_id": "r2",
+          "method_id": "fg_ducs_otf",
+          "repetition": 1,
+          "planned_repetitions": 1,
+          "original_record": "rq3/runs/productioncell_arms2__r2__rep01__fg_ducs_otf/meta.json",
+          "source_meta": "rq3_supplement_pc_arms2_r2_fg_3600/runs/productioncell_arms2__r2__rep01__fg_ducs_otf/meta.json",
+          "status": "TIMEOUT",
+          "started_utc": "2026-09-18T06:58:43.395208+00:00",
+          "finished_utc": "2026-09-18T07:58:50.033019+00:00",
+          "timeout_seconds": 3600,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": 3605.163026,
+          "peak_rss_bytes": 72098258944,
+          "peak_rss_gib": 67.14673614501953,
+          "rss_measurement_kind": "windows_process_working_set",
+          "skip_reason": "",
+          "timing_median_eligible": false,
+          "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+          "input_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "source_bytes_verified",
+          "environment_source_sha256": "a52f98cc4e626c132409a847e86ca9bd943855158b927f2be620cf8303406393",
+          "heap_occupancy_measured": false
+        }
+      ]
+    },
+    "workflow": {
+      "original": {
+        "role": "original",
+        "campaign": "rq3",
+        "config_source": "rq3/config.json",
+        "job_id": "workflow__r2__rep01__direct_full",
+        "model_id": "workflow",
+        "target_id": "r2",
+        "method_id": "direct_full",
+        "repetition": 1,
+        "planned_repetitions": 5,
+        "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+        "source_meta": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+        "status": "INTERRUPTED_NOT_RETRIED",
+        "started_utc": "2026-09-15T00:12:34.878356+00:00",
+        "finished_utc": "",
+        "timeout_seconds": 1200,
+        "java_heap": "64g",
+        "elapsed_monotonic_seconds": "",
+        "peak_rss_bytes": "",
+        "peak_rss_gib": "",
+        "rss_measurement_kind": "windows_process_working_set",
+        "skip_reason": "",
+        "timing_median_eligible": false,
+        "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+        "input_sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1",
+        "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+        "logical_cpu_count": 24,
+        "physical_memory_bytes": 274539106304,
+        "os_version": "10.0.19045",
+        "environment_verification": "source_bytes_verified",
+        "environment_source_sha256": "6a4776918feb44b9d798cc7e9d31b1cb3dfded503d04b53b0e013a538c3675e7",
+        "heap_occupancy_measured": false
+      },
+      "followup": [
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_workflow_r2_direct_full",
+          "config_source": "rq3_supplement_workflow_r2_direct_full/config.json",
+          "job_id": "workflow__r2__rep01__direct_full",
+          "model_id": "workflow",
+          "target_id": "r2",
+          "method_id": "direct_full",
+          "repetition": 1,
+          "planned_repetitions": 5,
+          "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+          "source_meta": "rq3_supplement_workflow_r2_direct_full/runs/workflow__r2__rep01__direct_full/meta.json",
+          "status": "TIMEOUT",
+          "started_utc": "2026-09-18T06:38:27.266316+00:00",
+          "finished_utc": "2026-09-18T06:58:30.415640+00:00",
+          "timeout_seconds": 1200,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": 1201.6564006,
+          "peak_rss_bytes": 14919704576,
+          "peak_rss_gib": 13.895057678222656,
+          "rss_measurement_kind": "windows_process_working_set",
+          "skip_reason": "",
+          "timing_median_eligible": false,
+          "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+          "input_sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "source_bytes_verified",
+          "environment_source_sha256": "9ca8a52d48faa2f4fea1682e1a438624ab8bd50bc5c6834430146c67a68a6859",
+          "heap_occupancy_measured": false
+        },
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_workflow_r2_direct_full",
+          "config_source": "rq3_supplement_workflow_r2_direct_full/config.json",
+          "job_id": "workflow__r2__rep02__direct_full",
+          "model_id": "workflow",
+          "target_id": "r2",
+          "method_id": "direct_full",
+          "repetition": 2,
+          "planned_repetitions": 5,
+          "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+          "source_meta": "rq3_supplement_workflow_r2_direct_full/runs/workflow__r2__rep02__direct_full/meta.json",
+          "status": "SKIPPED_AFTER_RESOURCE_FAILURE",
+          "started_utc": "",
+          "finished_utc": "",
+          "timeout_seconds": 1200,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": "",
+          "peak_rss_bytes": "",
+          "peak_rss_gib": "",
+          "rss_measurement_kind": "",
+          "skip_reason": "[(1, 'TIMEOUT')]",
+          "timing_median_eligible": false,
+          "jar_sha256": "",
+          "input_sha256": "",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "not_applicable_skipped",
+          "environment_source_sha256": "",
+          "heap_occupancy_measured": false
+        },
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_workflow_r2_direct_full",
+          "config_source": "rq3_supplement_workflow_r2_direct_full/config.json",
+          "job_id": "workflow__r2__rep03__direct_full",
+          "model_id": "workflow",
+          "target_id": "r2",
+          "method_id": "direct_full",
+          "repetition": 3,
+          "planned_repetitions": 5,
+          "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+          "source_meta": "rq3_supplement_workflow_r2_direct_full/runs/workflow__r2__rep03__direct_full/meta.json",
+          "status": "SKIPPED_AFTER_RESOURCE_FAILURE",
+          "started_utc": "",
+          "finished_utc": "",
+          "timeout_seconds": 1200,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": "",
+          "peak_rss_bytes": "",
+          "peak_rss_gib": "",
+          "rss_measurement_kind": "",
+          "skip_reason": "[(1, 'TIMEOUT'), (2, 'SKIPPED_AFTER_RESOURCE_FAILURE')]",
+          "timing_median_eligible": false,
+          "jar_sha256": "",
+          "input_sha256": "",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "not_applicable_skipped",
+          "environment_source_sha256": "",
+          "heap_occupancy_measured": false
+        },
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_workflow_r2_direct_full",
+          "config_source": "rq3_supplement_workflow_r2_direct_full/config.json",
+          "job_id": "workflow__r2__rep04__direct_full",
+          "model_id": "workflow",
+          "target_id": "r2",
+          "method_id": "direct_full",
+          "repetition": 4,
+          "planned_repetitions": 5,
+          "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+          "source_meta": "rq3_supplement_workflow_r2_direct_full/runs/workflow__r2__rep04__direct_full/meta.json",
+          "status": "SKIPPED_AFTER_RESOURCE_FAILURE",
+          "started_utc": "",
+          "finished_utc": "",
+          "timeout_seconds": 1200,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": "",
+          "peak_rss_bytes": "",
+          "peak_rss_gib": "",
+          "rss_measurement_kind": "",
+          "skip_reason": "[(1, 'TIMEOUT'), (2, 'SKIPPED_AFTER_RESOURCE_FAILURE'), (3, 'SKIPPED_AFTER_RESOURCE_FAILURE')]",
+          "timing_median_eligible": false,
+          "jar_sha256": "",
+          "input_sha256": "",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "not_applicable_skipped",
+          "environment_source_sha256": "",
+          "heap_occupancy_measured": false
+        },
+        {
+          "role": "supplementary",
+          "campaign": "rq3_supplement_workflow_r2_direct_full",
+          "config_source": "rq3_supplement_workflow_r2_direct_full/config.json",
+          "job_id": "workflow__r2__rep05__direct_full",
+          "model_id": "workflow",
+          "target_id": "r2",
+          "method_id": "direct_full",
+          "repetition": 5,
+          "planned_repetitions": 5,
+          "original_record": "rq3/runs/workflow__r2__rep01__direct_full/meta.json",
+          "source_meta": "rq3_supplement_workflow_r2_direct_full/runs/workflow__r2__rep05__direct_full/meta.json",
+          "status": "SKIPPED_AFTER_RESOURCE_FAILURE",
+          "started_utc": "",
+          "finished_utc": "",
+          "timeout_seconds": 1200,
+          "java_heap": "64g",
+          "elapsed_monotonic_seconds": "",
+          "peak_rss_bytes": "",
+          "peak_rss_gib": "",
+          "rss_measurement_kind": "",
+          "skip_reason": "[(1, 'TIMEOUT'), (2, 'SKIPPED_AFTER_RESOURCE_FAILURE'), (3, 'SKIPPED_AFTER_RESOURCE_FAILURE'), (4, 'SKIPPED_AFTER_RESOURCE_FAILURE')]",
+          "timing_median_eligible": false,
+          "jar_sha256": "",
+          "input_sha256": "",
+          "host_cpu": "Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz",
+          "logical_cpu_count": 24,
+          "physical_memory_bytes": 274539106304,
+          "os_version": "10.0.19045",
+          "environment_verification": "not_applicable_skipped",
+          "environment_source_sha256": "",
+          "heap_occupancy_measured": false
+        }
+      ]
+    }
+  },
+  "paired": {
+    "fg_ducs_otf_eager_controllable": {
+      "both_decided": 17,
+      "agreeing": 17,
+      "disagreements": [],
+      "paired_time_cells": 17,
+      "ratio_min": 1.184193251936458,
+      "ratio_median": 2.0382501648714,
+      "ratio_max": 4575.053898473042
+    },
+    "fg_ducs_otf_update_first": {
+      "both_decided": 24,
+      "agreeing": 24,
+      "disagreements": [],
+      "paired_time_cells": 24,
+      "ratio_min": 0.18941371986402736,
+      "ratio_median": 1.073067840907686,
+      "ratio_max": 39.76406675405869
+    },
+    "direct_full": {
+      "both_decided": 14,
+      "agreeing": 14,
+      "disagreements": [],
+      "paired_time_cells": 14,
+      "ratio_min": 1.5765393199422344,
+      "ratio_median": 9.14288799156031,
+      "ratio_max": 2123.8060352393168
+    },
+    "legacy_ducs": {
+      "both_decided": 9,
+      "agreeing": 9,
+      "disagreements": [],
+      "paired_time_cells": 9,
+      "ratio_min": 10.749330954504906,
+      "ratio_median": 21.746448528916716,
+      "ratio_max": 7196.760802010647
+    }
+  },
+  "fg_instance_median_seconds": 0.184646,
+  "controlled": {
+    "cells": 132,
+    "instances": 33,
+    "all_method_agreement": 33,
+    "decisions": {
+      "fg_ducs_otf": {
+        "SUCCESS": 31,
+        "UNREALIZABLE": 2
+      },
+      "fg_ducs_otf_eager_controllable": {
+        "SUCCESS": 31,
+        "UNREALIZABLE": 2
+      },
+      "fg_ducs_otf_update_first": {
+        "SUCCESS": 31,
+        "UNREALIZABLE": 2
+      },
+      "direct_full": {
+        "SUCCESS": 31,
+        "UNREALIZABLE": 2
+      }
+    }
+  },
+  "independent": {
+    "cells": 76,
+    "complete_five": 76,
+    "k20": {
+      "direct_full": {
+        "states": "1048576",
+        "queries": "11534335",
+        "median_seconds": 853.302356
+      },
+      "fg_ducs_otf": {
+        "states": "21",
+        "queries": "20",
+        "median_seconds": 0.035432000000000005
+      },
+      "fg_ducs_otf_eager_controllable": {
+        "states": "211",
+        "queries": "230",
+        "median_seconds": 0.06253600000000001
+      },
+      "fg_ducs_otf_update_first": {
+        "states": "21",
+        "queries": "20",
+        "median_seconds": 0.031809000000000004
+      }
+    }
+  },
+  "travel": {
+    "cells": 192,
+    "instances": 48,
+    "methods": {
+      "fg_ducs_otf": {
+        "stage1": {
+          "SUCCESS": 20,
+          "TIMEOUT": 26,
+          "OOM": 2
+        },
+        "complete_five": 20
+      },
+      "fg_ducs_otf_eager_controllable": {
+        "stage1": {
+          "SUCCESS": 20,
+          "TIMEOUT": 26,
+          "OOM": 2
+        },
+        "complete_five": 20
+      },
+      "fg_ducs_otf_update_first": {
+        "stage1": {
+          "SUCCESS": 20,
+          "TIMEOUT": 26,
+          "OOM": 2
+        },
+        "complete_five": 20
+      },
+      "direct_full": {
+        "stage1": {
+          "SUCCESS": 18,
+          "TIMEOUT": 28,
+          "OOM": 2
+        },
+        "complete_five": 18
+      }
+    },
+    "paired_time_cells": 18,
+    "ratio_min": 1.4866001617686706,
+    "ratio_median": 3.9289629450310994,
+    "ratio_max": 34.20864895518842,
+    "fg_over_df_states_min": 0.03435063858019572,
+    "fg_over_df_states_max": 0.46153846153846156,
+    "fg_median_seconds": 0.083321,
+    "fg_max_seconds": 262.795144,
+    "lazy_update_first_measured_structure_pairs": 20,
+    "lazy_update_first_identical_structure_pairs": 20,
+    "decision_disagreements": []
+  },
+  "hub": {
+    "cells": 360,
+    "instances": 90,
+    "methods": {
+      "fg_ducs_otf": {
+        "stage1": {
+          "SUCCESS": 90
+        },
+        "complete_five": 90
+      },
+      "fg_ducs_otf_eager_controllable": {
+        "stage1": {
+          "SUCCESS": 90
+        },
+        "complete_five": 90
+      },
+      "fg_ducs_otf_update_first": {
+        "stage1": {
+          "SUCCESS": 90
+        },
+        "complete_five": 90
+      },
+      "direct_full": {
+        "stage1": {
+          "SUCCESS": 90
+        },
+        "complete_five": 90
+      }
+    },
+    "paired_time_cells": 90,
+    "ratio_min": 5.34690511239273,
+    "ratio_median": 78.10895595914283,
+    "ratio_max": 118.38487541521656,
+    "fg_over_df_states_min": 0.008515167642362959,
+    "fg_over_df_states_max": 0.6407940225270436,
+    "fg_median_seconds": 0.0819112,
+    "fg_max_seconds": 0.9180398000000001,
+    "lazy_update_first_measured_structure_pairs": 90,
+    "lazy_update_first_identical_structure_pairs": 0,
+    "decision_disagreements": []
+  }
+}

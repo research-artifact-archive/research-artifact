@@ -1,0 +1,22 @@
+--- existing/run-all.ps1
++++ delta/run-all.ps1
+@@ -112,6 +112,8 @@
+ 
+ # ---------------------------------------------------------------- stages
+ $stagesFor = @{
++    'legacy_fidelity_published' = @('stage1','stage2','collect')
++    'legacy_fidelity_fork' = @('stage1','stage2','collect')
+     'rq3'             = @('stage1','stage2','collect')
+     'rq4_controlled'  = @('stage1','collect')        # structural only, no repetitions
+     'rq4_independent' = @('stage1','stage2','collect')
+@@ -153,6 +155,10 @@
+ }
+ 
+ Write-Host ''
++if ($Campaigns -contains 'legacy_fidelity_published' -or $Campaigns -contains 'legacy_fidelity_fork') {
++    & $PythonPath (Join-Path $PSScriptRoot 'scripts\collect_legacy_fidelity.py') --root $PSScriptRoot
++    if ($LASTEXITCODE -ne 0) { Fail 'Legacy fidelity comparison collection failed; raw preserved.' }
++}
+ Write-Host '=== Summary ==='
+ $results | Format-Table -AutoSize | Out-String -Width 160 | ForEach-Object { Write-Host $_ }
+ Write-Host 'Next: zip the whole raw\ folder and copy it back to the Mac (see XEON_RUNBOOK_JA.md).'

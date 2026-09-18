@@ -1,0 +1,15 @@
+--- 2017-TSE-GSM.lts
++++ GSM_supplied.lts
+@@ -117,9 +117,9 @@
+ }
+ 
+ // ---------------------------TEST AND RESULTS-----------------------------
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert S_OLD = (DECODE)
+ assert S_NEW = (NEW_DECODE)

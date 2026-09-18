@@ -1,0 +1,35 @@
+\noindent\textbf{Authorized RQ3 follow-ups: original and returned records}\par
+Workflow/R2 Direct-Full uses the pre-authorized same-setting replacement for its table status ($\mathrm{TO}^{\ddagger}$). The original operational interruption remains below. PC Arms=2/R2 retains its original 1,200 s TO; the 3,600 s single trial is a separate sensitivity check. Neither follow-up supplies a median or performance ratio.
+\begingroup\scriptsize\begin{longtable}{@{}p{.21\linewidth}p{.73\linewidth}@{}}\toprule Field & Recorded value\\\midrule\endhead
+Record & PC Arms=2/R2; fg\_ducs\_otf; original\\
+Campaign / config & rq3 / config.json\\
+Start / end (UTC) & 2026-09-15T09:55:34.006646+00:00 / 2026-09-15T10:15:38.375540+00:00\\
+Cap / heap / status & 1200 s / 64g / TIMEOUT\\
+Elapsed / peak RSS & 1202.9343 s / 31.2834 GiB (process working set)\\
+Original association & rq3/runs/productioncell\_arms2\_\_r2\_\_rep01\_\_fg\_ducs\_otf/meta.json\\
+\addlinespace[4pt]
+Record & PC Arms=2/R2; fg\_ducs\_otf; supplementary\\
+Campaign / config & rq3\_supplement\_pc\_arms2\_r2\_fg\_3600 / config.json\\
+Start / end (UTC) & 2026-09-18T06:58:43.395208+00:00 / 2026-09-18T07:58:50.033019+00:00\\
+Cap / heap / status & 3600 s / 64g / TIMEOUT\\
+Elapsed / peak RSS & 3605.1630 s / 67.1467 GiB (process working set)\\
+Original association & rq3/runs/productioncell\_arms2\_\_r2\_\_rep01\_\_fg\_ducs\_otf/meta.json\\
+\addlinespace[4pt]
+Record & Workflow/R2; direct\_full; original\\
+Campaign / config & rq3 / config.json\\
+Start / end (UTC) & 2026-09-15T00:12:34.878356+00:00 / not recorded\\
+Cap / heap / status & 1200 s / 64g / INTERRUPTED\_NOT\_RETRIED\\
+Elapsed / peak RSS & not recorded / not recorded\\
+Original association & rq3/runs/workflow\_\_r2\_\_rep01\_\_direct\_full/meta.json\\
+\addlinespace[4pt]
+Record & Workflow/R2; direct\_full; supplementary\\
+Campaign / config & rq3\_supplement\_workflow\_r2\_direct\_full / config.json\\
+Start / end (UTC) & 2026-09-18T06:38:27.266316+00:00 / 2026-09-18T06:58:30.415640+00:00\\
+Cap / heap / status & 1200 s / 64g / TIMEOUT\\
+Elapsed / peak RSS & 1201.6564 s / 13.8951 GiB (process working set)\\
+Original association & rq3/runs/workflow\_\_r2\_\_rep01\_\_direct\_full/meta.json\\
+\addlinespace[4pt]
+\bottomrule\end{longtable}\endgroup
+After repetition 1 times out, Workflow repetitions 2--5 have status \path{SKIPPED_AFTER_RESOURCE_FAILURE}; all five planned slots are retained in the generated provenance CSV. The PC follow-up planned one trial.
+Returned artifact digests and saved configuration/plan identities are verified. Input bytes, frozen JAR identity, JVM arguments, and stable host/runtime facts match the original records. The PC follow-up changes only the time cap and repetition count. All use the Xeon W-2265, 24 logical CPUs, Windows 10 build 19045, Temurin 17.0.20.1, and a 64 GiB heap cap.
+Peak RSS is sampled Windows process working-set memory. Heap occupancy was not recorded; the limiting resource remains unidentified. The recorded elapsed duration includes timeout termination overhead. The interrupted original has no recorded end time or RSS.

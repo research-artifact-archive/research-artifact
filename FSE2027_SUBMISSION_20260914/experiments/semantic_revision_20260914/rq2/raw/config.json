@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment_id": "fgducs-semantic-revision-20260914-rq2",
+  "description": "Executable formal-restriction capability witnesses and neutral controls. Every terminal decision is checked by an independent exhaustive reachable-state fixed point; timings are not evidence.",
+  "master_seed": 2027080505,
+  "repetitions": 1,
+  "timeout_seconds": 60,
+  "rss_poll_interval_seconds": 0.05,
+  "java": "/opt/homebrew/opt/openjdk@17/bin/java",
+  "java_heap": "2g",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "results_root": "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq2",
+  "models": [
+    {
+      "id": "pc_separation_local_fg",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/pc_separation_local_fg.lts",
+      "family": "production_cell_granularity",
+      "method_ids": [
+        "full_fg"
+      ]
+    },
+    {
+      "id": "pc_separation_global_product",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/pc_separation_global_product.lts",
+      "family": "production_cell_granularity",
+      "method_ids": [
+        "full_fg"
+      ]
+    },
+    {
+      "id": "pc_neutral_local_fg",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/pc_neutral_local_fg.lts",
+      "family": "production_cell_granularity",
+      "method_ids": [
+        "full_fg"
+      ]
+    },
+    {
+      "id": "pc_neutral_global_product",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/pc_neutral_global_product.lts",
+      "family": "production_cell_granularity",
+      "method_ids": [
+        "full_fg"
+      ]
+    },
+    {
+      "id": "branching_separation",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_separation.lts",
+      "family": "observation_dependent_policy",
+      "method_ids": [
+        "full_fg",
+        "fixed_script_a",
+        "fixed_script_b"
+      ]
+    },
+    {
+      "id": "branching_neutral",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_neutral.lts",
+      "family": "observation_dependent_policy",
+      "method_ids": [
+        "full_fg",
+        "fixed_script_a",
+        "fixed_script_b"
+      ]
+    },
+    {
+      "id": "requirement_boundary_separation",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/requirement_boundary_separation.lts",
+      "family": "requirement_boundary",
+      "method_ids": [
+        "full_fg",
+        "requirement_block"
+      ]
+    },
+    {
+      "id": "requirement_boundary_neutral",
+      "path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/requirement_boundary_neutral.lts",
+      "family": "requirement_boundary",
+      "method_ids": [
+        "full_fg",
+        "requirement_block"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "methods": [
+    {
+      "id": "full_fg",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "formal_unrestricted_fg",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.independentStateLimit": "100000",
+        "mtsa.revised.otf.independentQueryLimit": "1000000"
+      }
+    },
+    {
+      "id": "fixed_script_a",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG_FIXED_A{suffix}",
+      "analysis_role": "formal_fixed_script_head_a",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.independentStateLimit": "100000",
+        "mtsa.revised.otf.independentQueryLimit": "1000000"
+      }
+    },
+    {
+      "id": "fixed_script_b",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG_FIXED_B{suffix}",
+      "analysis_role": "formal_fixed_script_head_b",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.revised.otf.policyRestriction": "full_fg",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.independentStateLimit": "100000",
+        "mtsa.revised.otf.independentQueryLimit": "1000000"
+      }
+    },
+    {
+      "id": "requirement_block",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "formal_requirement_block",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.revised.otf.policyRestriction": "requirement_block",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "true",
+        "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+        "mtsa.revised.otf.independentStateLimit": "100000",
+        "mtsa.revised.otf.independentQueryLimit": "1000000"
+      }
+    }
+  ],
+  "protocol_notes": {
+    "evidence_class": "formal_capability_witness_not_performance",
+    "manifest": "Implementation/Experiment/FSE2027/rq2-formal-witness/manifest.json",
+    "expected_job_count": 14,
+    "independent_oracle": "exhaustive_reachable_fixed_point",
+    "timing_claims_allowed": false,
+    "policy_discipline_auxiliary_conditions_excluded": [
+      "contiguous_transfer",
+      "contiguous_update",
+      "fixed_update_order"
+    ]
+  }
+}

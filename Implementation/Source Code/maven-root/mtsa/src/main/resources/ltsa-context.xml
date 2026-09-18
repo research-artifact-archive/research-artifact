@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="counterEnactor" class="MTSAEnactment.ar.uba.dc.lafhis.enactment.CounterEnactor">
+        <constructor-arg index="0" value="Counter"/>
+        <constructor-arg index="1" value="resetCounter"/>
+    </bean>
+
+    <bean id="controllerScheduler" class="MTSAEnactment.ar.uba.dc.lafhis.enactment.TakeFirstController">
+        <constructor-arg index="0" value="Take First Controller"/>
+    </bean>
+
+    <bean id="randomScheduler" class="MTSAEnactment.ar.uba.dc.lafhis.enactment.RandomController">
+        <constructor-arg index="0" value="Random Controller"/>
+    </bean>
+
+    <bean id="UpdateControllerScheduler" class="MTSAEnactment.ar.uba.dc.lafhis.enactment.UpdateControllerScheduler">
+        <constructor-arg index="0" value="Update Controller Scheduler"/>
+    </bean>
+
+    <bean id="UIController" class="MTSAEnactment.ar.uba.dc.lafhis.enactment.UIController">
+        <constructor-arg index="0" value="UI Controller"/>
+    </bean>
+
+    <bean id="enactorFactory" class="ltsa.enactment.EnactorFactory"/>
+    <bean id="schedullerFactory" class="ltsa.enactment.SchedulerFactory"/>
+
+</beans>

@@ -1,0 +1,88 @@
+--- existing/scripts/campaign.py
++++ delta/scripts/campaign.py
+@@ -16,6 +16,11 @@
+ ORIGINAL_COMMAND=runner.build_command
+ 
+ def command(config,job,root,output,transitions):
++    if config.get('backend')=='published_mtsa':
++        result=ORIGINAL_COMMAND(config,job,root,output,transitions)
++        index=result.index('-cp')+1
++        result[index]=os.pathsep.join([str(root/config['runner_classpath']),result[index]])
++        return result
+     if config.get('backend')!='synthetic_hub':return ORIGINAL_COMMAND(config,job,root,output,transitions)
+     factors=job['model_factors']
+     return [config['java'],'-Xmx'+config['java_heap'],'-cp',str(root/config['classpath']),
+@@ -45,13 +50,20 @@
+         job=jobs[row['job_id']]
+         row.update(invalid=False,inconsistent=False,invalid_reason='',expected_mismatch=False)
+         status=row['process_status']
+-        if job['method_id']=='legacy_ducs' and row.get('output_path'):
++        if job['method_id'] in {'legacy_ducs','published_mtsa'} and row.get('output_path'):
+             parsed=common.parse_evaluation_file(folder/row['output_path'])
+             values={r.get('metric_key'):r.get('value','') for r in parsed['rows']}
+             row['output_controller_states']=values.get('output_update_controller_states','')
+             row['output_controller_transitions']=values.get('output_update_controller_transitions','')
+             row['legacy_peak_state_space_states']=values.get('peak_state_space_states','')
+             row['legacy_peak_state_space_transitions']=values.get('peak_state_space_transitions','')
++            if config.get('backend')=='published_mtsa':
++                row['solver_time_ms']=values.get('published_compile_compose_time_ms','')
++                row['compile_compose_time_ms']=values.get('published_compile_compose_time_ms','')
++                row['reference_tool']='lab-maintained build of the original DUCS source'
++                if status in GOOD and (parsed['errors'] or row.get('solver_status')!={'SUCCESS':'REALIZABLE','UNREALIZABLE':'UNREALIZABLE'}[status]):
++                    row['invalid']=True;row['invalid_reason']='published adapter decision/CSV mismatch'
++
+         if config.get('backend')=='synthetic_hub' and row.get('output_path'):
+             path=folder/row['output_path']
+             if path.is_file():
+@@ -79,7 +91,7 @@
+         if row['process_status'] in GOOD:
+             if config.get('backend')!='synthetic_hub' and not row.get('evaluation_csv_found'):
+                 row['invalid']=True;row['invalid_reason']='missing evaluation CSV'
+-            if job['method_id']!='legacy_ducs':
++            if job['method_id'] not in {'legacy_ducs','published_mtsa'}:
+                 if row.get('internal_certificate_check')!='passed':
+                     row['invalid']=True;row['invalid_reason']='internal certificate check absent or failed'
+                 if config.get('backend')!='synthetic_hub' and row['process_status']=='SUCCESS' and row.get('link_checker')!='passed':
+@@ -93,7 +105,7 @@
+     cells=collections.defaultdict(list); instances=collections.defaultdict(list)
+     for row in raw:
+         cells[cell(row)].append(row)
+-        if row['method_id']!='legacy_ducs':instances[(row['model_id'],row['target_id'])].append(row)
++        if row['method_id'] not in {'legacy_ducs','published_mtsa'}:instances[(row['model_id'],row['target_id'])].append(row)
+     for group in list(cells.values())+list(instances.values()):
+         decisions={r['decision'] for r in group if r['process_status'] in GOOD and not r['invalid']}
+         if len(decisions)>1:
+@@ -112,7 +124,7 @@
+                  expected_mismatch=any(r['expected_mismatch'] for r in group),
+                  statuses=';'.join(str(r['repetition'])+':'+r['process_status'] for r in group),
+                  timing_summary_eligible=complete and target==5,
+-                 measurement_scope=('solver_only_synthetic' if config.get('backend')=='synthetic_hub' else 'legacy_solve_control_problem' if key[2]=='legacy_ducs' else 'solve_and_internal_check_lts'),
++                 measurement_scope=('published_compile_and_compose' if config.get('backend')=='published_mtsa' else 'solver_only_synthetic' if config.get('backend')=='synthetic_hub' else 'legacy_solve_control_problem' if key[2]=='legacy_ducs' else 'solve_and_internal_check_lts'),
+                  structure_repetition=1,states_discovered=first.get('states_discovered',''),
+                  successor_queries=first.get('successor_queries',''),transition_outcomes=first.get('transition_outcomes',''),
+                  output_policy_states=first.get('output_controller_states',''),output_policy_transitions=first.get('output_controller_transitions',''))
+@@ -193,10 +205,15 @@
+     if shutil.disk_usage(ROOT).free < config['minimum_free_disk_gib']*1024**3:raise RuntimeError('Insufficient free disk')
+     for path in [config['classpath']]+[model['path'] for model in config['models']]:
+         if not (ROOT/path).is_file():raise FileNotFoundError(path)
++    if config.get('required_classpath_sha256') and common.sha256_file(ROOT/config['classpath'])!=config['required_classpath_sha256']:
++        raise RuntimeError('Fixed synthesis JAR bytes differ')
++    if config.get('runner_classpath') and common.sha256_file(ROOT/config['runner_classpath'])!=config['required_runner_sha256']:
++        raise RuntimeError('Published adapter bytes differ')
+     stamp=time.strftime('%Y%m%d-%H%M%S')
+     probe=subprocess.run([sys.executable,str(ROOT/'scripts/process_probe.py'),'--java',config['java'],'--output',str(folder/('process_tree_smoke-'+stamp+'.csv'))],cwd=ROOT)
+     if probe.returncode:raise RuntimeError('Process-tree/RSS startup probe failed; no experiments started')
+     env=common.environment_manifest(config,ROOT);env['physical_memory_bytes_portable']=ram
++    if config.get('runner_classpath'):env['runner_module']=common.file_digest(ROOT/config['runner_classpath'])
+     env['model_input_bytes']={model['path']:common.file_digest(ROOT/model['path'])['sha256'] for model in config['models']}
+     # Standard raw host metadata; no source/git inspection is needed for this copied bundle.
+     env.pop('git_revision_probe',None);env.pop('git_status_probe',None)
+@@ -204,7 +221,7 @@
+     previous=folder/'environment.json'
+     if previous.exists():
+         old=common.read_json(previous)
+-        for field in ('system','machine','processor','logical_cpu_count','physical_memory_bytes_portable','java_version_probe','python_version','model_input_bytes'):
++        for field in ('system','machine','processor','logical_cpu_count','physical_memory_bytes_portable','java_version_probe','python_version','model_input_bytes','runner_module'):
+             if old.get(field)!=env.get(field):raise RuntimeError('Execution host/runtime changed: '+field)
+         if old.get('classpath',{}).get('sha256')!=env.get('classpath',{}).get('sha256'):
+             raise RuntimeError('The campaign JAR bytes changed; refusing a mixed-build resume')

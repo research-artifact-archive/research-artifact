@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "legacy-fidelity/lib/original-mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "fidelity.PublishedMtsaRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "legacy_ducs",
+      "target_template": "{suffix}",
+      "analysis_role": "fork_legacy_on_original_monolithic_input",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true"
+      }
+    },
+    {
+      "id": "published_mtsa",
+      "target_template": "{suffix}",
+      "analysis_role": "lab_maintained_original_ducs_reference",
+      "jvm_properties": {}
+    }
+  ],
+  "repetitions": 5,
+  "timeout_seconds": 1200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "upd128com_128",
+      "suffix": "UPD128COM_128"
+    },
+    {
+      "id": "upd128com_64com",
+      "suffix": "UPD128COM_64COM"
+    },
+    {
+      "id": "upd128_128com",
+      "suffix": "UPD128_128COM"
+    },
+    {
+      "id": "upd128_64",
+      "suffix": "UPD128_64"
+    },
+    {
+      "id": "upd64com_128com",
+      "suffix": "UPD64COM_128COM"
+    },
+    {
+      "id": "upd64com_64",
+      "suffix": "UPD64COM_64"
+    },
+    {
+      "id": "upd64_128",
+      "suffix": "UPD64_128"
+    },
+    {
+      "id": "upd64_64com",
+      "suffix": "UPD64_64COM"
+    },
+    {
+      "id": "update_controller",
+      "suffix": "UPDATE_CONTROLLER"
+    }
+  ],
+  "backend": "published_mtsa",
+  "experiment_id": "legacy-fidelity-published",
+  "models": [
+    {
+      "id": "gsm_supplied",
+      "path": "legacy-fidelity/inputs/published/GSM_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "GSM",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "gsm_empty",
+      "path": "legacy-fidelity/inputs/published/GSM_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "GSM",
+      "factors": {
+        "condition": "empty"
+      }
+    },
+    {
+      "id": "industry_supplied",
+      "path": "legacy-fidelity/inputs/published/Industry_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Industry",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "industry_empty",
+      "path": "legacy-fidelity/inputs/published/Industry_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Industry",
+      "factors": {
+        "condition": "empty"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd64_128",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd64_128"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd64_64com",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd64_64com"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd128_64",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd128_64"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd128_128com",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd128_128com"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd64com_64",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd64com_64"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd64com_128com",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd64com_128com"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd128com_128",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd128com_128"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "metasocket_supplied_upd128com_64com",
+      "path": "legacy-fidelity/inputs/published/MetaSocket_supplied.lts",
+      "target_ids": [
+        "upd128com_64com"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "MetaSocket",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "powerplant_supplied",
+      "path": "legacy-fidelity/inputs/published/PowerPlant_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "PowerPlant",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "productioncell_supplied",
+      "path": "legacy-fidelity/inputs/published/ProductionCell_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "ProductionCell",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "productioncell_empty",
+      "path": "legacy-fidelity/inputs/published/ProductionCell_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "ProductionCell",
+      "factors": {
+        "condition": "empty"
+      }
+    },
+    {
+      "id": "railcab_supplied",
+      "path": "legacy-fidelity/inputs/published/Railcab_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Railcab",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "railcab_empty",
+      "path": "legacy-fidelity/inputs/published/Railcab_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Railcab",
+      "factors": {
+        "condition": "empty"
+      }
+    },
+    {
+      "id": "surveillance_supplied",
+      "path": "legacy-fidelity/inputs/published/Surveillance_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Surveillance",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "surveillance_empty",
+      "path": "legacy-fidelity/inputs/published/Surveillance_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Surveillance",
+      "factors": {
+        "condition": "empty"
+      }
+    },
+    {
+      "id": "workflow_supplied",
+      "path": "legacy-fidelity/inputs/published/Workflow_supplied.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Workflow",
+      "factors": {
+        "condition": "supplied"
+      }
+    },
+    {
+      "id": "workflow_empty",
+      "path": "legacy-fidelity/inputs/published/Workflow_empty.lts",
+      "target_ids": [
+        "update_controller"
+      ],
+      "method_ids": [
+        "published_mtsa"
+      ],
+      "family": "Workflow",
+      "factors": {
+        "condition": "empty"
+      }
+    }
+  ],
+  "reference_campaign": true,
+  "required_classpath_sha256": "4ab198ba14c9f0f829c36808025aefc063e2a3a0836679490179cc407e6133e5",
+  "runner_classpath": "legacy-fidelity/cli/published-mtsa-runner.jar",
+  "required_runner_sha256": "a3310a60f4dd35f955b48f02f70942ac65dd9099df45bbf74040f892e1c4e091"
+}

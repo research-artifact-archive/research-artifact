@@ -1,0 +1,6 @@
+# main.tex uses xeCJK, so the project must be built with XeLaTeX.
+# Routing latexmk's PDF-LaTeX rule this way also works when a newly uploaded
+# Overleaf project is still set to its default compiler.
+$pdf_mode = 1;
+$pdflatex = 'xelatex %O %S';
+$bibtex = 'bibtex %O %S';

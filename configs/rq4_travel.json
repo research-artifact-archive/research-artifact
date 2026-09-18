@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "repetitions": 5,
+  "timeout_seconds": 1200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "64g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "backend": "lts",
+  "experiment_id": "fg-ducs-xeon-rq4_travel",
+  "models": [
+    {
+      "id": "travel_n01_k01",
+      "path": "inputs/travel/travel_agency_n01_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n01_k02",
+      "path": "inputs/travel/travel_agency_n01_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n01_k04",
+      "path": "inputs/travel/travel_agency_n01_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n01_k06",
+      "path": "inputs/travel/travel_agency_n01_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n01_k08",
+      "path": "inputs/travel/travel_agency_n01_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n01_k12",
+      "path": "inputs/travel/travel_agency_n01_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n01_k16",
+      "path": "inputs/travel/travel_agency_n01_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n01_k20",
+      "path": "inputs/travel/travel_agency_n01_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 1,
+        "K": 20
+      }
+    },
+    {
+      "id": "travel_n02_k01",
+      "path": "inputs/travel/travel_agency_n02_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n02_k02",
+      "path": "inputs/travel/travel_agency_n02_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n02_k04",
+      "path": "inputs/travel/travel_agency_n02_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n02_k06",
+      "path": "inputs/travel/travel_agency_n02_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n02_k08",
+      "path": "inputs/travel/travel_agency_n02_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n02_k12",
+      "path": "inputs/travel/travel_agency_n02_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n02_k16",
+      "path": "inputs/travel/travel_agency_n02_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n02_k20",
+      "path": "inputs/travel/travel_agency_n02_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 2,
+        "K": 20
+      }
+    },
+    {
+      "id": "travel_n04_k01",
+      "path": "inputs/travel/travel_agency_n04_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n04_k02",
+      "path": "inputs/travel/travel_agency_n04_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n04_k04",
+      "path": "inputs/travel/travel_agency_n04_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n04_k06",
+      "path": "inputs/travel/travel_agency_n04_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n04_k08",
+      "path": "inputs/travel/travel_agency_n04_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n04_k12",
+      "path": "inputs/travel/travel_agency_n04_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n04_k16",
+      "path": "inputs/travel/travel_agency_n04_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n04_k20",
+      "path": "inputs/travel/travel_agency_n04_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 4,
+        "K": 20
+      }
+    },
+    {
+      "id": "travel_n06_k01",
+      "path": "inputs/travel/travel_agency_n06_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n06_k02",
+      "path": "inputs/travel/travel_agency_n06_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n06_k04",
+      "path": "inputs/travel/travel_agency_n06_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n06_k06",
+      "path": "inputs/travel/travel_agency_n06_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n06_k08",
+      "path": "inputs/travel/travel_agency_n06_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n06_k12",
+      "path": "inputs/travel/travel_agency_n06_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n06_k16",
+      "path": "inputs/travel/travel_agency_n06_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n06_k20",
+      "path": "inputs/travel/travel_agency_n06_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 20
+      }
+    },
+    {
+      "id": "travel_n08_k01",
+      "path": "inputs/travel/travel_agency_n08_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n08_k02",
+      "path": "inputs/travel/travel_agency_n08_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n08_k04",
+      "path": "inputs/travel/travel_agency_n08_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n08_k06",
+      "path": "inputs/travel/travel_agency_n08_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n08_k08",
+      "path": "inputs/travel/travel_agency_n08_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n08_k12",
+      "path": "inputs/travel/travel_agency_n08_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n08_k16",
+      "path": "inputs/travel/travel_agency_n08_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n08_k20",
+      "path": "inputs/travel/travel_agency_n08_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 8,
+        "K": 20
+      }
+    },
+    {
+      "id": "travel_n12_k01",
+      "path": "inputs/travel/travel_agency_n12_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 1
+      }
+    },
+    {
+      "id": "travel_n12_k02",
+      "path": "inputs/travel/travel_agency_n12_k02.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 2
+      }
+    },
+    {
+      "id": "travel_n12_k04",
+      "path": "inputs/travel/travel_agency_n12_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 4
+      }
+    },
+    {
+      "id": "travel_n12_k06",
+      "path": "inputs/travel/travel_agency_n12_k06.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 6
+      }
+    },
+    {
+      "id": "travel_n12_k08",
+      "path": "inputs/travel/travel_agency_n12_k08.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 8
+      }
+    },
+    {
+      "id": "travel_n12_k12",
+      "path": "inputs/travel/travel_agency_n12_k12.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 12
+      }
+    },
+    {
+      "id": "travel_n12_k16",
+      "path": "inputs/travel/travel_agency_n12_k16.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 16
+      }
+    },
+    {
+      "id": "travel_n12_k20",
+      "path": "inputs/travel/travel_agency_n12_k20.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 12,
+        "K": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,317 @@
+\noindent\textbf{Windows Xeon campaign; all 27 instances and five methods retained.}\par
+\clearpage\noindent\textbf{Discovered states (first trial)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & 31 & 75 & 32 & 75 & --\\
+ & R1 & 34 & 114 & 34 & 115 & --\\
+ & R2 & 34 & 68 & 46 & 68 & --\\
+\addlinespace[2pt]
+Industry & BASE & 272 & 1.1e+05 & 2470 & 2.8e+05 & N/M\\
+ & R1 & 3.9e+04 & TO & 3.1e+04 & TO & N/M\\
+ & R2 & 7717 & 2.8e+04 & 2875 & 5.1e+04 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & 8 & 71 & 11 & 82 & --\\
+ & R1 & 8 & 88 & 11 & 95 & --\\
+ & R2 & 16 & 31 & 17 & 34 & --\\
+\addlinespace[2pt]
+PowerPlant & BASE & 73 & 5634 & 101 & 8168 & --\\
+ & R1 & 759 & 2.3e+04 & 911 & 2.4e+04 & --\\
+ & R2 & 1330 & 2810 & 600 & 3594 & --\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & 83 & 4.1e+05 & 6018 & 4.1e+05 & N/M\\
+ & R1 & 94 & 3.3e+06 & 2e+04 & TO & OOM\\
+ & R2 & 5.6e+04 & 1.6e+05 & 9304 & 1.6e+05 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & 2502 & TO & TO & TO & OOM\\
+ & R1 & 2433 & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & 171 & TO & 1.4e+04 & TO & OOM\\
+ & R1 & 1.3e+04 & TO & 3.7e+04 & TO & OOM\\
+ & R2 & 9.8e+04 & 3e+05 & 3.8e+04 & 3.2e+05 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & 5319 & TO & 1.4e+04 & TO & OOM\\
+ & R1 & 9.6e+04 & TO & 6.7e+05 & TO & OOM\\
+ & R2 & 1.8e+05 & TO & 1.2e+05 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & 151 & 4.3e+06 & 173 & TO & OOM\\
+ & R1 & 1098 & TO & 519 & TO & OOM\\
+ & R2 & 1.5e+05 & 2.9e+05 & 3.3e+04 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Successor queries (first trial)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & 27 & 658 & 31 & 658 & --\\
+ & R1 & 44 & 695 & 38 & 706 & --\\
+ & R2 & 78 & 352 & 44 & 352 & --\\
+\addlinespace[2pt]
+Industry & BASE & 3336 & 1.4e+06 & 3.1e+04 & 5.1e+06 & N/M\\
+ & R1 & 2.5e+05 & TO & 2.1e+05 & TO & N/M\\
+ & R2 & 5.3e+04 & 2.1e+05 & 1.8e+04 & 7.3e+05 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & 12 & 190 & 18 & 289 & --\\
+ & R1 & 12 & 201 & 18 & 257 & --\\
+ & R2 & 24 & 53 & 22 & 79 & --\\
+\addlinespace[2pt]
+PowerPlant & BASE & 165 & 2.7e+04 & 242 & 4.8e+04 & --\\
+ & R1 & 1927 & 6.4e+04 & 2619 & 6.6e+04 & --\\
+ & R2 & 3118 & 7528 & 1149 & 1.4e+04 & --\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & 840 & 2.5e+06 & 5.2e+04 & 3.8e+06 & N/M\\
+ & R1 & 852 & 1.2e+07 & 2e+05 & TO & OOM\\
+ & R2 & 3.5e+05 & 8.5e+05 & 5.9e+04 & 1.4e+06 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & 5e+04 & TO & TO & TO & OOM\\
+ & R1 & 4.4e+04 & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & 1575 & TO & 1.4e+05 & TO & OOM\\
+ & R1 & 9.8e+04 & TO & 3.7e+05 & TO & OOM\\
+ & R2 & 4.4e+05 & 1.4e+06 & 1.6e+05 & 2.8e+06 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & 3.8e+04 & TO & 1.1e+05 & TO & OOM\\
+ & R1 & 4.8e+05 & TO & 5.5e+06 & TO & OOM\\
+ & R2 & 8.8e+05 & TO & 5.8e+05 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & 1131 & 3e+07 & 1329 & TO & OOM\\
+ & R1 & 7142 & TO & 4499 & TO & OOM\\
+ & R2 & 5.9e+05 & 1.1e+06 & 1.2e+05 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Transition outcomes (first trial)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & 24 & 162 & 25 & 162 & --\\
+ & R1 & 28 & 170 & 28 & 172 & --\\
+ & R2 & 35 & 98 & 39 & 98 & --\\
+\addlinespace[2pt]
+Industry & BASE & 417 & 3.2e+05 & 5762 & 9.3e+05 & N/M\\
+ & R1 & 7e+04 & TO & 5.7e+04 & TO & N/M\\
+ & R2 & 1.2e+04 & 5e+04 & 4292 & 1.3e+05 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & 7 & 156 & 10 & 184 & --\\
+ & R1 & 7 & 163 & 10 & 177 & --\\
+ & R2 & 19 & 44 & 16 & 50 & --\\
+\addlinespace[2pt]
+PowerPlant & BASE & 105 & 2.1e+04 & 141 & 2.8e+04 & --\\
+ & R1 & 1441 & 4.9e+04 & 1753 & 5e+04 & --\\
+ & R2 & 2519 & 6024 & 873 & 7910 & --\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & 131 & 9.6e+05 & 1.6e+04 & 9.6e+05 & N/M\\
+ & R1 & 134 & 5.7e+06 & 5e+04 & TO & OOM\\
+ & R2 & 1.2e+05 & 3.4e+05 & 2e+04 & 3.4e+05 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & 5615 & TO & TO & TO & OOM\\
+ & R1 & 4987 & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & 216 & TO & 3.5e+04 & TO & OOM\\
+ & R1 & 2.7e+04 & TO & 8.2e+04 & TO & OOM\\
+ & R2 & 1.8e+05 & 5.7e+05 & 6.9e+04 & 6.2e+05 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & 1.2e+04 & TO & 3.1e+04 & TO & OOM\\
+ & R1 & 2.5e+05 & TO & 1.9e+06 & TO & OOM\\
+ & R2 & 4.5e+05 & TO & 2.5e+05 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & 149 & 1.2e+07 & 185 & TO & OOM\\
+ & R1 & 2197 & TO & 999 & TO & OOM\\
+ & R2 & 2.4e+05 & 4.6e+05 & 5.4e+04 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Solver time (seconds; five complete trials)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & \begin{tabular}[c]{@{}c@{}}W 0.0224\\[-3pt]\mbox{[0.0208, 0.0236]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0332\\[-3pt]\mbox{[0.0323, 0.0362]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0233\\[-3pt]\mbox{[0.0222, 0.0235]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0416\\[-3pt]\mbox{[0.0398, 0.0421]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.241\\[-3pt]\mbox{[0.234, 0.252]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.0228\\[-3pt]\mbox{[0.0216, 0.0232]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0348\\[-3pt]\mbox{[0.0315, 0.0357]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0243\\[-3pt]\mbox{[0.0233, 0.0249]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.045\\[-3pt]\mbox{[0.0438, 0.0472]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.306\\[-3pt]\mbox{[0.303, 0.309]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.0201\\[-3pt]\mbox{[0.0197, 0.0219]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0281\\[-3pt]\mbox{[0.0271, 0.0285]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0225\\[-3pt]\mbox{[0.0219, 0.0232]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0327\\[-3pt]\mbox{[0.0311, 0.0346]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.25\\[-3pt]\mbox{[0.234, 0.252]}\end{tabular}\\
+\addlinespace[2pt]
+Industry & BASE & \begin{tabular}[c]{@{}c@{}}W 0.19\\[-3pt]\mbox{[0.187, 0.201]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 14.5\\[-3pt]\mbox{[14.2, 14.7]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.542\\[-3pt]\mbox{[0.528, 0.566]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 154\\[-3pt]\mbox{[152, 166]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}L 562\\[-3pt]\mbox{[534, 566]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}L 461\\[-3pt]\mbox{[366, 512]}\end{tabular} & TO & N/M\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 1.15\\[-3pt]\mbox{[1.13, 1.17]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.96\\[-3pt]\mbox{[2.93, 3.12]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.455\\[-3pt]\mbox{[0.446, 0.463]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 28\\[-3pt]\mbox{[27.7, 28.3]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & \begin{tabular}[c]{@{}c@{}}W 0.0149\\[-3pt]\mbox{[0.0144, 0.0165]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0302\\[-3pt]\mbox{[0.027, 0.0308]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0165\\[-3pt]\mbox{[0.0154, 0.0183]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0408\\[-3pt]\mbox{[0.0392, 0.0423]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.323\\[-3pt]\mbox{[0.323, 0.324]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.0136\\[-3pt]\mbox{[0.013, 0.0158]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0278\\[-3pt]\mbox{[0.0264, 0.0298]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0147\\[-3pt]\mbox{[0.0146, 0.0153]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0426\\[-3pt]\mbox{[0.0392, 0.0441]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.443\\[-3pt]\mbox{[0.44, 0.45]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.0152\\[-3pt]\mbox{[0.0143, 0.0162]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.018\\[-3pt]\mbox{[0.0169, 0.0183]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.0154\\[-3pt]\mbox{[0.0145, 0.0161]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.024\\[-3pt]\mbox{[0.0234, 0.0291]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.29\\[-3pt]\mbox{[0.283, 0.29]}\end{tabular}\\
+\addlinespace[2pt]
+PowerPlant & BASE & \begin{tabular}[c]{@{}c@{}}W 0.0463\\[-3pt]\mbox{[0.0427, 0.0502]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.487\\[-3pt]\mbox{[0.483, 0.494]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.052\\[-3pt]\mbox{[0.0506, 0.053]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.85\\[-3pt]\mbox{[1.82, 1.87]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 18\\[-3pt]\mbox{[17.1, 25.7]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.125\\[-3pt]\mbox{[0.12, 0.147]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.08\\[-3pt]\mbox{[1.04, 1.1]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.152\\[-3pt]\mbox{[0.146, 0.155]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.51\\[-3pt]\mbox{[5.43, 5.58]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 896\\[-3pt]\mbox{[805, 910]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.18\\[-3pt]\mbox{[0.178, 0.18]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.251\\[-3pt]\mbox{[0.246, 0.259]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.114\\[-3pt]\mbox{[0.111, 0.117]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.01\\[-3pt]\mbox{[0.991, 1.03]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 8.25\\[-3pt]\mbox{[7.88, 8.31]}\end{tabular}\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & \begin{tabular}[c]{@{}c@{}}W 0.0741\\[-3pt]\mbox{[0.0678, 0.0754]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 26\\[-3pt]\mbox{[25.5, 27]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.886\\[-3pt]\mbox{[0.848, 0.912]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 157\\[-3pt]\mbox{[156, 159]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.0793\\[-3pt]\mbox{[0.0748, 0.0811]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 188\\[-3pt]\mbox{[185, 190]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.15\\[-3pt]\mbox{[3.05, 3.23]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 6.16\\[-3pt]\mbox{[6.06, 6.89]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 12.2\\[-3pt]\mbox{[12.1, 12.6]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.17\\[-3pt]\mbox{[1.16, 1.19]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 77.8\\[-3pt]\mbox{[77, 78.2]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & \begin{tabular}[c]{@{}c@{}}W 2.61\\[-3pt]\mbox{[2.49, 2.95]}\end{tabular} & TO & TO & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 2.6\\[-3pt]\mbox{[2.52, 2.78]}\end{tabular} & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & \begin{tabular}[c]{@{}c@{}}W 0.169\\[-3pt]\mbox{[0.164, 0.17]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 2.26\\[-3pt]\mbox{[2.25, 2.29]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 3.18\\[-3pt]\mbox{[3.12, 3.19]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 6.74\\[-3pt]\mbox{[6.64, 6.89]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 15.5\\[-3pt]\mbox{[15.5, 15.6]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 38.7\\[-3pt]\mbox{[38.6, 38.8]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 4.16\\[-3pt]\mbox{[4.13, 4.19]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 283\\[-3pt]\mbox{[279, 284]}\end{tabular} & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & \begin{tabular}[c]{@{}c@{}}W 2.01\\[-3pt]\mbox{[1.99, 2.03]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 2.63\\[-3pt]\mbox{[2.41, 2.71]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 18.6\\[-3pt]\mbox{[18.4, 18.8]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 126\\[-3pt]\mbox{[125, 130]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 37.1\\[-3pt]\mbox{[36.9, 37.5]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 16.1\\[-3pt]\mbox{[15.3, 16.4]}\end{tabular} & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & \begin{tabular}[c]{@{}c@{}}W 0.111\\[-3pt]\mbox{[0.108, 0.114]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 508\\[-3pt]\mbox{[491, 519]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.116\\[-3pt]\mbox{[0.114, 0.119]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.325\\[-3pt]\mbox{[0.323, 0.33]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 0.215\\[-3pt]\mbox{[0.212, 0.221]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 16.1\\[-3pt]\mbox{[15.7, 16.3]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 23.9\\[-3pt]\mbox{[23.4, 24.5]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.18\\[-3pt]\mbox{[3.11, 3.27]}\end{tabular} & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Sampled peak RSS (GiB; five complete trials)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & \begin{tabular}[c]{@{}c@{}}W 0.113\\[-3pt]\mbox{[0.112, 0.116]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.122\\[-3pt]\mbox{[0.115, 0.124]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.112\\[-3pt]\mbox{[0.11, 0.113]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.12\\[-3pt]\mbox{[0.116, 0.126]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.144\\[-3pt]\mbox{[0.143, 0.152]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.111\\[-3pt]\mbox{[0.108, 0.115]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.118\\[-3pt]\mbox{[0.115, 0.12]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.111\\[-3pt]\mbox{[0.11, 0.115]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.124\\[-3pt]\mbox{[0.121, 0.131]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.147\\[-3pt]\mbox{[0.145, 0.154]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.108\\[-3pt]\mbox{[0.107, 0.111]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.108\\[-3pt]\mbox{[0.107, 0.118]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.11\\[-3pt]\mbox{[0.109, 0.111]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.12\\[-3pt]\mbox{[0.115, 0.123]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.148\\[-3pt]\mbox{[0.141, 0.149]}\end{tabular}\\
+\addlinespace[2pt]
+Industry & BASE & \begin{tabular}[c]{@{}c@{}}W 0.509\\[-3pt]\mbox{[0.498, 0.529]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.94\\[-3pt]\mbox{[2.69, 3.1]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.703\\[-3pt]\mbox{[0.697, 0.79]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.77\\[-3pt]\mbox{[5.58, 6.4]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}L 1.48\\[-3pt]\mbox{[1.39, 1.93]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}L 1.6\\[-3pt]\mbox{[1.54, 1.6]}\end{tabular} & TO & N/M\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.881\\[-3pt]\mbox{[0.876, 0.906]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.47\\[-3pt]\mbox{[1.39, 1.6]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.649\\[-3pt]\mbox{[0.623, 0.659]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.98\\[-3pt]\mbox{[1.86, 2.03]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & \begin{tabular}[c]{@{}c@{}}W 0.102\\[-3pt]\mbox{[0.0995, 0.107]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.112\\[-3pt]\mbox{[0.107, 0.113]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.103\\[-3pt]\mbox{[0.102, 0.105]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.116\\[-3pt]\mbox{[0.112, 0.116]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.153\\[-3pt]\mbox{[0.146, 0.159]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.105\\[-3pt]\mbox{[0.102, 0.106]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.107\\[-3pt]\mbox{[0.107, 0.108]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.104\\[-3pt]\mbox{[0.101, 0.105]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.112\\[-3pt]\mbox{[0.111, 0.115]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.195\\[-3pt]\mbox{[0.19, 0.202]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.105\\[-3pt]\mbox{[0.103, 0.105]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.104\\[-3pt]\mbox{[0.102, 0.106]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.104\\[-3pt]\mbox{[0.101, 0.105]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.106\\[-3pt]\mbox{[0.105, 0.108]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.141\\[-3pt]\mbox{[0.14, 0.143]}\end{tabular}\\
+\addlinespace[2pt]
+PowerPlant & BASE & \begin{tabular}[c]{@{}c@{}}W 0.127\\[-3pt]\mbox{[0.124, 0.135]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.436\\[-3pt]\mbox{[0.426, 0.448]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.132\\[-3pt]\mbox{[0.13, 0.137]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.13\\[-3pt]\mbox{[1.08, 1.17]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.25\\[-3pt]\mbox{[3.05, 3.28]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.181\\[-3pt]\mbox{[0.175, 0.182]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.643\\[-3pt]\mbox{[0.601, 0.654]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.177\\[-3pt]\mbox{[0.171, 0.184]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.57\\[-3pt]\mbox{[1.56, 1.6]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 8.07\\[-3pt]\mbox{[7.89, 12.5]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.188\\[-3pt]\mbox{[0.185, 0.193]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.23\\[-3pt]\mbox{[0.228, 0.234]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.177\\[-3pt]\mbox{[0.165, 0.186]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.579\\[-3pt]\mbox{[0.572, 0.587]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.18\\[-3pt]\mbox{[2.16, 2.56]}\end{tabular}\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & \begin{tabular}[c]{@{}c@{}}W 0.145\\[-3pt]\mbox{[0.143, 0.15]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.74\\[-3pt]\mbox{[5.19, 6.01]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.528\\[-3pt]\mbox{[0.474, 0.562]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.37\\[-3pt]\mbox{[5.17, 5.51]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.146\\[-3pt]\mbox{[0.144, 0.151]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 22.6\\[-3pt]\mbox{[22, 23.7]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.07\\[-3pt]\mbox{[1.06, 1.14]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 1.65\\[-3pt]\mbox{[1.52, 1.75]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.08\\[-3pt]\mbox{[2.91, 3.16]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.448\\[-3pt]\mbox{[0.445, 0.458]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.27\\[-3pt]\mbox{[3.18, 3.34]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & \begin{tabular}[c]{@{}c@{}}W 7.26\\[-3pt]\mbox{[7.2, 7.47]}\end{tabular} & TO & TO & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 7.36\\[-3pt]\mbox{[7.19, 7.54]}\end{tabular} & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & \begin{tabular}[c]{@{}c@{}}W 0.794\\[-3pt]\mbox{[0.778, 0.806]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 0.932\\[-3pt]\mbox{[0.916, 0.942]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 1.47\\[-3pt]\mbox{[1.46, 1.5]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 1.6\\[-3pt]\mbox{[1.5, 1.62]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 2.86\\[-3pt]\mbox{[2.51, 2.95]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.26\\[-3pt]\mbox{[5.26, 5.29]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.65\\[-3pt]\mbox{[1.62, 1.68]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 5.47\\[-3pt]\mbox{[5.33, 5.58]}\end{tabular} & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & \begin{tabular}[c]{@{}c@{}}W 0.933\\[-3pt]\mbox{[0.928, 0.951]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 1.4\\[-3pt]\mbox{[1.13, 1.45]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 3\\[-3pt]\mbox{[2.86, 3.02]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 14.2\\[-3pt]\mbox{[14, 14.5]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 4.4\\[-3pt]\mbox{[4.37, 4.4]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 2.53\\[-3pt]\mbox{[2.49, 2.55]}\end{tabular} & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & \begin{tabular}[c]{@{}c@{}}W 1.54\\[-3pt]\mbox{[1.52, 1.63]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 42.3\\[-3pt]\mbox{[37.6, 45]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.53\\[-3pt]\mbox{[1.5, 1.61]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 1.54\\[-3pt]\mbox{[1.54, 1.55]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 1.57\\[-3pt]\mbox{[1.51, 1.62]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 2.54\\[-3pt]\mbox{[2.54, 2.64]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 3.74\\[-3pt]\mbox{[3.71, 3.97]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.61\\[-3pt]\mbox{[1.58, 1.62]}\end{tabular} & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Output policy states (first trial)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & 41 & 42 & 42 & 41 & 86\\
+ & R1 & 39 & 41 & 41 & 41 & 92\\
+ & R2 & 34 & 41 & 39 & 40 & 77\\
+\addlinespace[2pt]
+Industry & BASE & 459 & 475 & 476 & 459 & N/M\\
+ & R1 & -- & TO & -- & TO & N/M\\
+ & R2 & 441 & 460 & 458 & 438 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & 15 & 18 & 18 & 15 & 83\\
+ & R1 & 15 & 18 & 18 & 15 & 79\\
+ & R2 & 15 & 16 & 16 & 15 & 61\\
+\addlinespace[2pt]
+PowerPlant & BASE & 59 & 59 & 70 & 59 & 2434\\
+ & R1 & 32 & 61 & 53 & 65 & 945\\
+ & R2 & 58 & 59 & 46 & 53 & 1117\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & 62 & 78 & 70 & 61 & N/M\\
+ & R1 & 62 & 78 & 70 & TO & OOM\\
+ & R2 & 72 & 75 & 74 & 59 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & 625 & TO & TO & TO & OOM\\
+ & R1 & 625 & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & 206 & TO & 196 & TO & OOM\\
+ & R1 & 136 & TO & 186 & TO & OOM\\
+ & R2 & 203 & 221 & 212 & 204 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & 1260 & TO & 1522 & TO & OOM\\
+ & R1 & 376 & TO & 976 & TO & OOM\\
+ & R2 & 982 & TO & 829 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & 193 & 199 & 199 & TO & OOM\\
+ & R1 & 182 & TO & 194 & TO & OOM\\
+ & R2 & 164 & 198 & 147 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\clearpage\noindent\textbf{Output policy transitions (first trial)}\par\smallskip
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & 49 & 50 & 50 & 49 & 119\\
+ & R1 & 47 & 49 & 49 & 49 & 117\\
+ & R2 & 42 & 49 & 47 & 48 & 102\\
+\addlinespace[2pt]
+Industry & BASE & 1021 & 1037 & 1038 & 1021 & N/M\\
+ & R1 & -- & TO & -- & TO & N/M\\
+ & R2 & 1008 & 1022 & 1020 & 1000 & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & 21 & 24 & 24 & 21 & 156\\
+ & R1 & 21 & 24 & 24 & 21 & 143\\
+ & R2 & 21 & 22 & 22 & 21 & 107\\
+\addlinespace[2pt]
+PowerPlant & BASE & 78 & 78 & 89 & 78 & 7796\\
+ & R1 & 51 & 80 & 72 & 84 & 2303\\
+ & R2 & 77 & 78 & 65 & 72 & 3148\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & 80 & 96 & 88 & 79 & N/M\\
+ & R1 & 80 & 96 & 88 & TO & OOM\\
+ & R2 & 90 & 93 & 92 & 77 & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & 1360 & TO & TO & TO & OOM\\
+ & R1 & 1360 & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & 287 & TO & 276 & TO & OOM\\
+ & R1 & 215 & TO & 266 & TO & OOM\\
+ & R2 & 283 & 300 & 293 & 283 & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & 1638 & TO & 1900 & TO & OOM\\
+ & R1 & 754 & TO & 1354 & TO & OOM\\
+ & R2 & 1360 & TO & 1207 & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & 243 & 249 & 249 & TO & OOM\\
+ & R1 & 232 & TO & 244 & TO & OOM\\
+ & R2 & 214 & 248 & 197 & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+\par{\scriptsize W/L: winning/losing. Seconds: median [min, max] for five valid, consistent completions; ranges in S4. TO: 1,200 s timeout; OOM: out of memory. N/M (capture cap): author-side M9MtsSnapshot instrumentation stops before synthesis at its fixed 250,000-state cap; no evidence of Legacy capability or solver failure. Original operational interruptions are retained in S4. Legacy uses native semantics. Other incomplete groups show statuses, without medians.}

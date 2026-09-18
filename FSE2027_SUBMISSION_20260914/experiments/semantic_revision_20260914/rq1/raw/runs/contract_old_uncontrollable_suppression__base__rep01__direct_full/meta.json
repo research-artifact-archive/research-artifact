@@ -1,0 +1,176 @@
+{
+  "artifact_digests": {
+    "output": {
+      "bytes": 43697,
+      "exists": true,
+      "sha256": "62838666a7eddd84b97c750ed64a6b14d1a6c5b4f9b8481700b24d50d45c9f0d"
+    },
+    "stderr": {
+      "bytes": 39,
+      "exists": true,
+      "sha256": "3ccc5570c7f596163bf4594976c726f9bbbd47c547ddea1e1ff961f058f6948c"
+    },
+    "stdout": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions": {
+      "bytes": "",
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "artifacts": {
+    "output": "runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/output.txt",
+    "stderr": "runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/stderr.txt",
+    "stdout": "runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/stdout.txt",
+    "transitions": "runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/transitions.txt"
+  },
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=false",
+    "-Dmtsa.revised.otf.independentQueryLimit=10000000",
+    "-Dmtsa.revised.otf.independentStateLimit=1000000",
+    "-Dmtsa.revised.otf.independentVerification=true",
+    "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+    "-Dmtsa.revised.otf.solver=direct_full",
+    "-Xmx12g",
+    "-cp",
+    "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/contract_gate/Models/old_uncontrollable_suppression.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "command_text": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=false -Dmtsa.revised.otf.independentQueryLimit=10000000 -Dmtsa.revised.otf.independentStateLimit=1000000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.solver=direct_full -Xmx12g -cp 'Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar' ltsa.updatingControllers.cli.SingleCompositionRunner --lts 'Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/contract_gate/Models/old_uncontrollable_suppression.lts' --target UPDATE_CONTROLLER_OTF_FG --output 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/output.txt' --transitions 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq1/raw/runs/contract_old_uncontrollable_suppression__base__rep01__direct_full/transitions.txt' --transition-output summary",
+  "completed": true,
+  "config_sha256": "5a40ee27dd3154c7502dd95ae670db1ccb88cac0e4b63e3f663b8ad59f279b9c",
+  "cwd": ".",
+  "elapsed_monotonic_ns": 746200542,
+  "elapsed_monotonic_seconds": 0.746200542,
+  "evaluation_csv": {
+    "errors": [],
+    "found": true,
+    "header": [
+      "mode",
+      "result",
+      "solver_status",
+      "verification_status",
+      "run_verified",
+      "failure_reason",
+      "section",
+      "metric_key",
+      "metric_label",
+      "value",
+      "unit",
+      "formula",
+      "metric_schema_version",
+      "metric_description_id",
+      "section_readable_ja",
+      "metric_readable_ja",
+      "metric_category",
+      "artifact",
+      "phase",
+      "action",
+      "event",
+      "stat"
+    ],
+    "marker_count": 1,
+    "row_count": 132
+  },
+  "execution_environment_fingerprint_sha256": "f2b934ad383592519329ac3bf1725938ad9663752e294eefcf551236032a78ab",
+  "exit_code": 8,
+  "experiment_id": "fgducs-semantic-revision-20260914-rq1",
+  "finished_utc": "2026-09-14T07:29:14.721859+00:00",
+  "harness_error": "",
+  "harness_errors": [],
+  "harness_termination_action": "",
+  "input_model": {
+    "bytes": 1239,
+    "exists": true,
+    "sha256": "b53f94cda7bd3b295ec4f9e26e2ed08fce04cb95da63ea068ce2f115e98dc569"
+  },
+  "job": {
+    "analysis_role": "correctness_same_problem_comparator",
+    "block_id": "contract_old_uncontrollable_suppression__base__rep01",
+    "global_order_index": 50,
+    "job_id": "contract_old_uncontrollable_suppression__base__rep01__direct_full",
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "false",
+      "mtsa.revised.otf.independentQueryLimit": "10000000",
+      "mtsa.revised.otf.independentStateLimit": "1000000",
+      "mtsa.revised.otf.independentVerification": "true",
+      "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+      "mtsa.revised.otf.solver": "direct_full"
+    },
+    "method_base_order": [
+      "direct_full",
+      "fg_ducs_otf"
+    ],
+    "method_id": "direct_full",
+    "method_order": [
+      "direct_full",
+      "fg_ducs_otf"
+    ],
+    "method_order_index": 0,
+    "method_order_seed": 8449755565961006465,
+    "model_factors": {
+      "contract_case": "old_uncontrollable_suppression",
+      "contract_oracle": "uncontrollable_endpoint_action_preserved",
+      "expected_decision": "",
+      "expected_process_status": "INVALID_INPUT",
+      "expected_reason_fragment": "old endpoint disables uncontrollable action",
+      "model_sha256": "b53f94cda7bd3b295ec4f9e26e2ed08fce04cb95da63ea068ce2f115e98dc569",
+      "suite_manifest_sha256": "1b8e75a043e0046b50e3695f7946a44fcdc65227a5a29f984811bb460c73d14b"
+    },
+    "model_family": "contract_gate",
+    "model_id": "contract_old_uncontrollable_suppression",
+    "model_path": "Implementation/Experiment/FSE2027/results/macos24-paper-final-20260805g-correctness/inputs/contract_gate/Models/old_uncontrollable_suppression.lts",
+    "model_planned_repetitions": 1,
+    "repetition": 1,
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "unit_order_index": 25,
+    "unit_order_seed": 8816969980923002946
+  },
+  "meta_schema_version": 1,
+  "order_algorithm": "seeded-per-unit-permutation/cyclic-rotation/reverse-every-cycle-v1",
+  "peak_rss_bytes": 90701824,
+  "peak_rss_kib": 88576,
+  "plan_sha256": "36c769976c4e03121388101495708461e66426ace4aa46deb67347eea5567bf9",
+  "rss_measurement_kind": "darwin_proc_pid_rusage_resident",
+  "rss_measurement_status": "measured",
+  "rss_poll_interval_seconds": 0.05,
+  "rss_samples_attempted": 13,
+  "rss_samples_available": 13,
+  "spawn_error": "",
+  "started_utc": "2026-09-14T07:29:13.650175+00:00",
+  "status": "INVALID_INPUT",
+  "timed_out": false,
+  "timeout_seconds": 120.0,
+  "timeout_termination_action": "",
+  "transition_output_mode": "summary"
+}

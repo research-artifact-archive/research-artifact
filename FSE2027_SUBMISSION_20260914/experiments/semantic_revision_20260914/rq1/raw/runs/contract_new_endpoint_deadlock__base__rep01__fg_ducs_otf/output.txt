@@ -1,0 +1,233 @@
+comp.compile time : 40ms
+Compiled: OLD_COMPONENT
+Composition:OldEnvironment = OldEnvironment.OLD_COMPONENT
+State Space: 1 = 2 ** 0
+Composing...
+-- States: 1 Transitions: 1 Memory used: 19212K
+Composed in 7ms
+Composition:OldController = OldEnvironment
+State Space: 1 = 2 ** 0
+Composing...
+-- States: 1 Transitions: 1 Memory used: 19625K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 1
+Game states: 1
+Game transitions: 3
+Analysis time: 32ms.
+Controller [1] generated successfully.
+Composition:OldController = OldController
+State Space: 1 = 2 ** 0
+Composing...
+-- States: 1 Transitions: 1 Memory used: 20739K
+Composed in 5ms
+ - Synthesizing Mapping Environment from lists (size=1)...
+INFO: Auto-compiling dependency: NEW_COMPONENT
+Generating Mapping Environment: MAP_OLD_COMPONENT_NEW_COMPONENT
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Compiled: NEW_POLICY
+Composition:NewController = NEW_POLICY
+State Space: 1 = 2 ** 0
+Composing...
+  potential DEADLOCK
+-- States: 1 Transitions: 0 Memory used: 20775K
+Composed in 5ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 1
+ - Extracting New Safety Fluents and Building Look-up Tables...
+=========================================
+Mode: Revised OTF-DUCS (proof-producing strong synthesis)
+=========================================
+Revised OTF-DUCS input: INVALID (Invalid FG-DUCS endpoint contract: new closed loop is deadlocked at 0:[0]:{})
+
+================ EVALUATION ================
+Mode: Revised OTF-DUCS
+Result: EXCEPTION
+Solver status: invalid_input
+Verification status: unverified
+Run verified: false
+State/transition count overhead total: 0 ms
+Detailed metric report: omitted. Use -Dupdating.controller.evaluation.printDetailedReport=true to print the verbose human-readable report.
+====================================================
+
+================ EVALUATION DATA CSV ================
+mode,result,solver_status,verification_status,run_verified,failure_reason,section,metric_key,metric_label,value,unit,formula,metric_schema_version,metric_description_id,section_readable_ja,metric_readable_ja,metric_category,artifact,phase,action,event,stat
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,mode,mode,Revised OTF-DUCS,text,,2026-07-23,metric.mode.md_119301f4da1e9450,実行情報,mode,その他,,,,,mode
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,result,result,EXCEPTION,text,,2026-07-23,metric.result.md_e33889763e9441ae,実行情報,result,その他,,,,,result
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,solver_status,solver status,invalid_input,text,,2026-07-23,metric.solver_status.md_30f6a3b0cbda4da6,実行情報,solver status,その他,,,,,solver status
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,verification_status,verification status,unverified,text,,2026-07-23,metric.verification_status.md_e87a8d7360839024,実行情報,verification status,その他,,,,,verification status
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,run_verified,run verified,false,boolean,,2026-07-23,metric.boolean.md_6313e127a8d73bd6,実行情報,boolean,その他,,,,,boolean
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Run,failure_reason,failure reason,,text,,2026-07-23,metric.failure_reason.md_013d7d27e16ab465,実行情報,failure reason,その他,,,,,failure reason
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_36bd60e5_current_heap,合成開始時 / 現在ヒープ,17502680,B,,2026-07-23,memory.b.md_0abb824e30c686df,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_36bd60e5_peak_heap,合成開始時 / ピークヒープ,17502680,B,,2026-07-23,memory.b.md_7054bc0f5c347ac8,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_36bd60e5_delta_from_start,合成開始時 / 開始時からの増減,0,B,,2026-07-23,memory.b.md_390fc6fc93c1a051,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_36bd60e5_delta_from_previous,合成開始時 / 直前からの増減,0,B,,2026-07-23,memory.b.md_14978d10995a6fd7,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,parse_time,構文解析時間,40,ms,,2026-07-23,time.time.md_cd0a7dcdaf375231,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,old_controller_synthesis_time,Old Controller 合成時間,60,ms,,2026-07-23,time.time.md_1eb94856dacb260d,入力準備: 更新コントローラ定義の構築,旧コントローラ / 時間,時間,旧コントローラ,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,old_controller_states,Old Controller / States,1,states,,2026-07-23,states.states.md_840c98cfc0b8e7ed,入力規模: 事前合成されたコントローラ,旧コントローラ / 状態数,状態数,旧コントローラ,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,old_controller_transitions,Old Controller / Transitions,1,transitions,,2026-07-23,transitions.transitions.md_f1234914b27df5d8,入力規模: 事前合成されたコントローラ,旧コントローラ / 遷移数,遷移数,旧コントローラ,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,old_controller_count_time,Old Controller / CountTime,0,ms,,2026-07-23,time.count_time.md_c321c1331468401f,入力規模: 事前合成されたコントローラ,旧コントローラ / 評価用カウント時間,時間,旧コントローラ,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_459fabee_current_heap,Old Controller 合成後 / 現在ヒープ,20004360,B,,2026-07-23,memory.b.md_4c5f341258a94edb,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_459fabee_peak_heap,Old Controller 合成後 / ピークヒープ,27047768,B,,2026-07-23,memory.b.md_48c22221afaa3697,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_459fabee_delta_from_start,Old Controller 合成後 / 開始時からの増減,2501680,B,,2026-07-23,memory.b.md_d2dcce3b0b37396d,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_459fabee_delta_from_previous,Old Controller 合成後 / 直前からの増減,2501680,B,,2026-07-23,memory.b.md_c26ccb82099794fe,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,goal_and_controllable_set_time,Goal 定義と controllable action 集合生成時間,0,ms,,2026-07-23,time.time.md_ec8db379ca37477f,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,mapping_component_generation_time,Mapping Environment Component 合成時間,1,ms,,2026-07-23,time.time.md_5b9b5e3aed50345f,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_88189484_current_heap,Mapping Environment Component 生成後 / 現在ヒープ,20004360,B,,2026-07-23,memory.b.md_1d5fd5a69a5447ab,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_88189484_peak_heap,Mapping Environment Component 生成後 / ピークヒープ,27047768,B,,2026-07-23,memory.b.md_f23dc06b77761646,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_88189484_delta_from_start,Mapping Environment Component 生成後 / 開始時からの増減,2501680,B,,2026-07-23,memory.b.md_bd63007e82140f49,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_88189484_delta_from_previous,Mapping Environment Component 生成後 / 直前からの増減,0,B,,2026-07-23,memory.b.md_978e1477778158db,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,new_controller_states,New Controller / States,1,states,,2026-07-23,states.states.md_6a2484ea78256c92,入力規模: 事前合成されたコントローラ,新コントローラ / 状態数,状態数,新コントローラ,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,new_controller_transitions,New Controller / Transitions,0,transitions,,2026-07-23,transitions.transitions.md_3f8699aa38dfd104,入力規模: 事前合成されたコントローラ,新コントローラ / 遷移数,遷移数,新コントローラ,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / 事前合成,new_controller_count_time,New Controller / CountTime,0,ms,,2026-07-23,time.count_time.md_d17675f3fb7eceb5,入力規模: 事前合成されたコントローラ,新コントローラ / 評価用カウント時間,時間,新コントローラ,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,new_controller_synthesis_time,New Controller 合成時間,5,ms,,2026-07-23,time.time.md_92c3dad3e9fa5116,入力準備: 更新コントローラ定義の構築,新コントローラ / 時間,時間,新コントローラ,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_a3c2f55_current_heap,New Controller 合成後 / 現在ヒープ,20039840,B,,2026-07-23,memory.b.md_a7cfbdf2bdbb2707,メモリ使用量,新コントローラ / B,メモリ,新コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_a3c2f55_peak_heap,New Controller 合成後 / ピークヒープ,27083248,B,,2026-07-23,memory.b.md_68c3513e460e25ea,メモリ使用量,新コントローラ / B,メモリ,新コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_a3c2f55_delta_from_start,New Controller 合成後 / 開始時からの増減,2537160,B,,2026-07-23,memory.b.md_76d44a57e2e32d9c,メモリ使用量,新コントローラ / B,メモリ,新コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_a3c2f55_delta_from_previous,New Controller 合成後 / 直前からの増減,35480,B,,2026-07-23,memory.b.md_3857784990ba71e7,メモリ使用量,新コントローラ / B,メモリ,新コントローラ,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,auto_3b032819,Old Safety の tester 変換時間,0,ms,,2026-07-23,time.time.md_0f54dfc9a0b0934a,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,auto_33934240,New Safety の tester 変換時間,0,ms,,2026-07-23,time.time.md_e7576ce5c588620d,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,auto_a60cfe26,Transition Requirement の tester 変換時間,0,ms,,2026-07-23,time.time.md_96bd6ce3123e88af,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,safety_tester_conversion_total_time,Safety の tester 変換全体時間,0,ms,,2026-07-23,time.time.md_04a91c316c90a6da,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,new_safety_fluent_extraction_time,New Safety から Fluent を抽出する時間,0,ms,,2026-07-23,time.time.md_569b3fe40f7e15ac,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,otf_new_safety_fluents,OTF-DUC new safety fluent 数（重複排除後）,0,個,,2026-07-23,metric.value.md_801e349f57842f18,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_c3e56a04_current_heap,New Safety Fluent 抽出後 / 現在ヒープ,20039840,B,,2026-07-23,memory.b.md_8b62ab3a23adc51c,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_c3e56a04_peak_heap,New Safety Fluent 抽出後 / ピークヒープ,27083248,B,,2026-07-23,memory.b.md_95c50f68e879ee56,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_c3e56a04_delta_from_start,New Safety Fluent 抽出後 / 開始時からの増減,2537160,B,,2026-07-23,memory.b.md_ece12149df47ed5c,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_c3e56a04_delta_from_previous,New Safety Fluent 抽出後 / 直前からの増減,0,B,,2026-07-23,memory.b.md_dd64e6181f146c96,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,definition_prepare_total_time,compose の全体実行時間,73,ms,,2026-07-23,time.time.md_0722ee85dfddec93,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_old_env_components,old env component 数,1,個,,2026-07-23,metric.value.md_81ddce3018ec18c3,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_new_env_components,new env component 数,1,個,,2026-07-23,metric.value.md_9d3edb6c1e274d15,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_map_relations,map relation 数,1,個,,2026-07-23,metric.value.md_b62fe282481c055b,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_mapping_components,mapping component 数,1,個,,2026-07-23,metric.value.md_a9196d7ad9000b90,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Old Environment Component,input_old_env_component_0_states,Old Environment Component[0] OLD_COMPONENT / States,1,states,,2026-07-23,states.states.md_7652acb1909b1adb,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Old Environment Component,input_old_env_component_0_transitions,Old Environment Component[0] OLD_COMPONENT / Transitions,1,transitions,,2026-07-23,transitions.transitions.md_907a60ed8afdd4c4,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Old Environment Component,input_old_env_component_0_count_time,Old Environment Component[0] OLD_COMPONENT / CountTime,0,ms,,2026-07-23,time.count_time.md_6f5dca36e62030ad,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / New Environment Component,input_new_env_component_0_states,New Environment Component[0] NEW_COMPONENT / States,1,states,,2026-07-23,states.states.md_a152bec0feea59d0,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / New Environment Component,input_new_env_component_0_transitions,New Environment Component[0] NEW_COMPONENT / Transitions,1,transitions,,2026-07-23,transitions.transitions.md_2b9a7ab33da982e0,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / New Environment Component,input_new_env_component_0_count_time,New Environment Component[0] NEW_COMPONENT / CountTime,0,ms,,2026-07-23,time.count_time.md_8b027908ef9888f0,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Mapping Environment Component,input_mapping_component_0_states,Mapping Environment Component[0] MAP_OLD_COMPONENT_NEW_COMPONENT / States,2,states,,2026-07-23,states.states.md_588667ce84738a21,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Mapping Environment Component,input_mapping_component_0_transitions,Mapping Environment Component[0] MAP_OLD_COMPONENT_NEW_COMPONENT / Transitions,3,transitions,,2026-07-23,transitions.transitions.md_28757c0bd2a4dca3,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模 / Mapping Environment Component,input_mapping_component_0_count_time,Mapping Environment Component[0] MAP_OLD_COMPONENT_NEW_COMPONENT / CountTime,0,ms,,2026-07-23,time.count_time.md_e8f0cdbae49932c4,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_mapping_component_states_total,mapping component 状態数合計,2,states,,2026-07-23,states.states.md_ff910336634a449d,入力規模,状態数,状態数,,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_mapping_component_transitions_total,mapping component 遷移数合計,3,transitions,,2026-07-23,transitions.transitions.md_560d11a6213a0734,入力規模,遷移数,遷移数,,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_mapping_component_states_max,mapping component 最大状態数,2,states,,2026-07-23,states.states.md_1fee82a0a3a3bbaf,入力規模,状態数,状態数,,,,,状態数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_mapping_component_transitions_max,mapping component 最大遷移数,3,transitions,,2026-07-23,transitions.transitions.md_7cb4c482f6ffa3ff,入力規模,遷移数,遷移数,,,,,遷移数
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_old_safety,old safety 数,0,個,,2026-07-23,metric.value.md_cb0000c7bbca63a8,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_new_safety,new safety 数,0,個,,2026-07-23,metric.value.md_f3286458d5632a94,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_transition_requirements,transition requirement 数,0,個,,2026-07-23,transitions.value.md_883a0a1d3a28a09e,入力規模,個,遷移数,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_controllable_actions,controllable action 数,3,個,,2026-07-23,metric.value.md_73b39be905540c9e,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_total_actions,全 action 数（controllable + uncontrollable）,9,個,,2026-07-23,metric.value.md_52380e42d2dc7d38,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,入力規模,input_uncontrollable_actions,uncontrollable action 数,6,個,,2026-07-23,metric.value.md_eacff12a3a165127,入力規模,個,その他,,,,,個
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,input_scale_summary_time,入力規模集計時間,2,ms,,2026-07-23,time.time.md_dad7f7c531d10f97,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_e1170e2d_current_heap,UpdatingControllersDefinition compose 後 / 現在ヒープ,20039840,B,,2026-07-23,memory.b.md_c3d229d63eb01d94,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_e1170e2d_peak_heap,UpdatingControllersDefinition compose 後 / ピークヒープ,27083248,B,,2026-07-23,memory.b.md_a75213ca9637c330,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_e1170e2d_delta_from_start,UpdatingControllersDefinition compose 後 / 開始時からの増減,2537160,B,,2026-07-23,memory.b.md_07ad1e2154c8d4ee,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_e1170e2d_delta_from_previous,UpdatingControllersDefinition compose 後 / 直前からの増減,0,B,,2026-07-23,memory.b.md_6bd01a42b4123dda,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,traditional_gr_goal_generation_time,Traditional DUC grGoal 生成時間,0,ms,,2026-07-23,time.time.md_72fd7f0ad2d20789,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,traditional_safety_goal_generation_time,Traditional DUC safetyGoal 生成時間,0,ms,,2026-07-23,time.time.md_c395dbe6aa1fc490,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,UpdatingControllersDefinition,traditional_mapping_parallel_composition_time,Traditional DUC Mapping Environment Component 並列合成時間,0,ms,,2026-07-23,time.time.md_5604dd5be055aff2,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_input_target,Updating-controller target,ContractCase,text,,2026-07-23,metric.updating_controller_target.md_58f40ec7d7589112,Revised Identity,Updating-controller target,その他,,,,,Updating-controller target
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_method_id,Method ID,FG-OTF,text,,2026-07-23,metric.method_id.md_24bcf44c2cd8d46d,Revised Identity,Method ID,その他,,,,,Method ID
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_representation,Representation,direct_canonical_configuration,text,,2026-07-23,metric.representation.md_daacfacb0e8655b8,Revised Identity,Representation,その他,,,,,Representation
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_schedule,Exploration schedule,interleaved_lazy_complete_attractor,text,,2026-07-23,metric.exploration_schedule.md_06b71edf6142f4ad,Revised Identity,Exploration schedule,その他,,,,,Exploration schedule
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_controllable_action_order,Controllable action exploration order,endpoint_guided,text,,2026-07-23,metric.controllable_action_exploration_order.md_610ff3094a0cabbd,Revised Identity,Controllable action exploration order,その他,,,,,Controllable action exploration order
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_generic_baseline_hint_api_used,Generic-baseline state-dependent hint API used,not_applicable,text,,2026-07-23,states.generic_baseline_state_dependent_hint_api_used.md_d5f21673b9ba0b33,Revised Identity,Generic-baseline state-dependent hint API used,状態数,,,,,Generic-baseline state-dependent hint API used
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_implementation_variant,Implementation variant,revised_otf_ducs_direct_v1,text,,2026-07-23,metric.implementation_variant.md_cdefe31b25aa2af8,Revised Identity,Implementation variant,その他,,,,,Implementation variant
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_build_commit_id,Build commit ID,jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07,text,,2026-07-23,metric.build_commit_id.md_139b1b168b26f937,Revised Identity,Build commit ID,その他,,,,,Build commit ID
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_objective,Synthesis objective,strong_finite_completion,text,,2026-07-23,metric.synthesis_objective.md_4c367205a81240c3,Revised Identity,Synthesis objective,その他,,,,,Synthesis objective
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_scheduler_semantics,Scheduler semantics,all_maximal_traces_no_fairness,text,,2026-07-23,metric.scheduler_semantics.md_c655c3680295c743,Revised Identity,Scheduler semantics,その他,,,,,Scheduler semantics
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_update_policy_restriction,Update-policy restriction,full_fg,text,,2026-07-23,metric.update_policy_restriction.md_42f8995bf876731a,Revised Identity,Update-policy restriction,その他,,,,,Update-policy restriction
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_nondeterminism_semantics,Nondeterministic transfer semantics,all_outcomes_adversarial,text,,2026-07-23,metric.min_value.md_11dca28da8602877,Revised Identity,最小値,その他,,,,,最小値
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Completeness,revised_traditional_objective_compatibility,Traditional DUCS objective compatibility,not_established,text,Traditional implementation uses a GR(1) progress objective; this implementation requires a decreasing rank on every retained edge.,2026-07-23,metric.traditional_ducs_objective_compatibility.md_90b0da70b1726ccd,Revised Completeness,Traditional DUCS objective compatibility,その他,,,,,Traditional DUCS objective compatibility
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_java_version,Java version,17.0.19,text,,2026-07-23,metric.java_version.md_465354c93ce99156,Revised Identity,Java version,その他,,,,,Java version
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_jvm_name,JVM name,OpenJDK 64-Bit Server VM,text,,2026-07-23,metric.jvm_name.md_31a122a0e6f050af,Revised Identity,JVM name,その他,,,,,JVM name
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_jvm_vendor,JVM vendor,Homebrew,text,,2026-07-23,metric.jvm_vendor.md_0148008d87f17f3d,Revised Identity,JVM vendor,その他,,,,,JVM vendor
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_jvm_arguments,JVM arguments,-Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=true -Dmtsa.revised.otf.independentQueryLimit=10000000 -Dmtsa.revised.otf.independentStateLimit=1000000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.solver=otf -Xmx12g,text,,2026-07-23,metric.jvm_arguments.md_7a867a5506ebd771,Revised Identity,JVM arguments,その他,,,,,JVM arguments
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_os_name,Operating system,Mac OS X,text,,2026-07-23,metric.operating_system.md_7888aa1a02dd017b,Revised Identity,Operating system,その他,,,,,Operating system
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_os_version,Operating-system version,15.7.9,text,,2026-07-23,metric.operating_system_version.md_61f6b6177335d036,Revised Identity,Operating-system version,その他,,,,,Operating-system version
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_os_arch,Operating-system architecture,aarch64,text,,2026-07-23,metric.operating_system_architecture.md_818f5679a80fe8d0,Revised Identity,Operating-system architecture,その他,,,,,Operating-system architecture
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_available_processors,Available processors,8,processors,,2026-07-23,metric.processors.md_dc93f3dbf9340f8a,Revised Identity,processors,その他,,,,,processors
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_solver_thread_count,Solver thread count,1,threads,,2026-07-23,metric.threads.md_20c9f654783f9e6d,Revised Identity,threads,その他,,,,,threads
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_jvm_max_heap_bytes,JVM maximum heap,12884901888,B,,2026-07-23,metric.max_value.md_994c525fe4668e28,Revised Identity,最大値,その他,,,,,最大値
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_guided_state_limit,Guided-search state limit,0,states,,2026-07-23,states.states.md_abe6fa36608d49d1,Revised Identity,states,状態数,,,,,states
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_guided_query_limit,Guided-search oracle-query limit,0,calls,,2026-07-23,metric.calls.md_51cb0e923e784201,Revised Identity,calls,その他,,,,,calls
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Identity,revised_physical_closure_limit,Activation physical-closure limit,2000000,states,,2026-07-23,states.states.md_7871dc425c88c2ba,Revised Identity,states,状態数,,,,,states
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Correctness,revised_input_contract_status,FG-DUCS input contract status,invalid,text,,2026-07-23,metric.fg_ducs_input_contract_status.md_9f333b65eb4478bf,Revised Correctness,FG-DUCS input contract status,その他,,,,,FG-DUCS input contract status
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Revised Correctness,revised_input_contract_reason,FG-DUCS input contract reason,Invalid FG-DUCS endpoint contract: new closed loop is deadlocked at 0:[0]:{},text,,2026-07-23,metric.fg_ducs_input_contract_reason.md_02700c5b74407d5f,Revised Correctness,FG-DUCS input contract reason,その他,,,,,FG-DUCS input contract reason
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,synthesis_problem_preparation_time,合成問題準備時間,89,ms,,2026-07-23,time.time.md_09b74c0f46591e4c,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,失敗時メモリ,auto_77bbf4ca,現在のヒープ使用量,20039840,B,,2026-07-23,memory.b.md_eedd9a02080d2a47,失敗時メモリ,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,失敗時メモリ,auto_628cb6cd,ピークヒープ使用量,27083248,B,,2026-07-23,memory.b.md_6a540d3e1b06764c,失敗時メモリ,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,失敗時メモリ,auto_93d57a34,JVM 最大ヒープ,12884901888,B,,2026-07-23,memory.b.md_08422c7bbdc540e2,失敗時メモリ,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,失敗時メモリ,auto_953f2cf3,JVM totalMemory,117440512,B,,2026-07-23,memory.b.md_4f71760ff439f304,失敗時メモリ,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,失敗時メモリ,auto_deec693f,JVM freeMemory,93476808,B,,2026-07-23,memory.b.md_2092b0b1aae85fc4,失敗時メモリ,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,total_time,合成ボタンを押してから合成完了までの時間,170,ms,,2026-07-23,time.time.md_08e0b5ae6a5691f2,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,compile_if_change_total_time,compileIfChange 全体時間（参考）,138,ms,,2026-07-23,time.time.md_4be3eaae565910a4,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,update_controller_generation_time,update controller 生成時間,0,ms,,2026-07-23,time.time.md_ae877d3289a1c470,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,controller_synthesis_related_time,コントローラ合成時間,89,ms,,2026-07-23,time.time.md_698154c8c19a6a48,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,controller_draw_time,コントローラ描画時間,0,ms,,2026-07-23,time.time.md_bb895fce6603a5d6,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,controller_synthesis_base_memory,コントローラ合成のベースラインメモリ,17502680,B,,2026-07-23,memory.b.md_3ab68ddb7e92dc40,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,controller_synthesis_peak_memory,コントローラ合成全体のピークメモリ,27083248,B,,2026-07-23,memory.b.md_9050f85f9d9ce9db,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,共通 / HPWindow,controller_synthesis_memory_increase,コントローラ合成により増えたメモリ,9580568,B,,2026-07-23,memory.b.md_7ca77181c6132832,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_3660d981_current_heap,合成終了時 / 現在ヒープ,20039840,B,,2026-07-23,memory.b.md_5c4876a33facc9af,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_3660d981_peak_heap,合成終了時 / ピークヒープ,27083248,B,,2026-07-23,memory.b.md_58fe994d9e682f49,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_3660d981_delta_from_start,合成終了時 / 開始時からの増減,2537160,B,,2026-07-23,memory.b.md_764af3acd45ed7bf,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,メモリ使用量チェックポイント,auto_3660d981_delta_from_previous,合成終了時 / 直前からの増減,0,B,,2026-07-23,memory.b.md_cadb1c07f62cd4ec,メモリ使用量,B,メモリ,,,,,B
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,Evaluation Summary,state_transition_count_overhead_total,State/transition count overhead total,0,ms,,2026-07-23,time.time.md_b3b236c3f86923ad,評価サマリ,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力時間,evaluation_output_header_time,評価ヘッダ出力時間,0,ms,EVALUATION ヘッダ、手法、結果、カウントオーバーヘッド行を Output に出す時間。,2026-07-23,time.time.md_4c1ca747bff3a449,評価出力時間,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力時間,evaluation_output_detailed_report_time,詳細評価レポート出力時間,0,ms,詳細評価レポート本文を Output に出す時間。デフォルトでは省略メッセージのみ。,2026-07-23,time.time.md_ca01752a4ccab7fe,評価出力時間,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力準備時間,evaluation_output_summary_time,評価サマリ構築時間,0,ms,EVALUATION SUMMARY 本文をメモリ上に構築し、派生metricsを登録する時間。CSV後のOutputへの再生時間は含まない。,2026-07-23,time.time.md_9ecceb76391dadbb,評価出力準備時間,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力準備・出力時間,evaluation_output_overhead_before_csv,評価準備・出力時間（CSV出力前、SUMMARY再生除外）,0,ms,評価ヘッダ出力時間 + 詳細評価レポート出力時間 + 評価サマリ構築時間。CSV出力時間はCSV出力後に別途記録し、SUMMARYのOutput再生時間は含まない。,2026-07-23,time.time.md_3425d69908884bb8,評価出力準備・出力時間,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価用カウント時間 / 関数スコープ別,definition_prepare_total_time_scope_count_overhead_time,UpdatingControllersDefinition / compose の全体実行時間 / 評価用カウント時間,0,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_faff0746180a7ae9,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価用カウント時間 / 関数スコープ別,definition_prepare_total_time_time_without_scope_count_overhead,UpdatingControllersDefinition / compose の全体実行時間 / 評価用カウント時間除外後,73,ms,definition_prepare_total_time - definition_prepare_total_time_scope_count_overhead_time,2026-07-23,time.time.md_b52e85d1bb22b32c,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価用カウント時間 / 関数スコープ別,input_scale_summary_time_scope_count_overhead_time,UpdatingControllersDefinition / 入力規模集計時間 / 評価用カウント時間,0,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_b71ee0f74f85682d,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価用カウント時間 / 関数スコープ別,input_scale_summary_time_time_without_scope_count_overhead,UpdatingControllersDefinition / 入力規模集計時間 / 評価用カウント時間除外後,2,ms,input_scale_summary_time - input_scale_summary_time_scope_count_overhead_time,2026-07-23,time.time.md_2312f147b4433658,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力時間,evaluation_output_data_csv_time,評価CSV出力時間,31,ms,EVALUATION DATA CSV を Output に出す時間。末尾の追加計測行自身はほぼ含まない。,2026-07-23,time.time.md_8a527c219c4a5fcb,評価出力時間,時間,時間,,,,,時間
+Revised OTF-DUCS,EXCEPTION,invalid_input,unverified,false,,評価出力準備・出力時間,evaluation_output_overhead_total_including_csv,評価準備・出力時間合計（CSV含む、SUMMARY再生除外）,31,ms,評価ヘッダ出力時間 + 詳細評価レポート出力時間 + 評価サマリ構築時間 + 評価CSV出力時間。SUMMARYのOutput再生時間は含まない。,2026-07-23,time.time.md_c37b195292ceae08,評価出力準備・出力時間,時間,時間,,,,,時間
+=====================================================
+
+================ EVALUATION SUMMARY ================
+
+[Identity]
+Mode : Revised OTF-DUCS
+Updating-controller target [revised_input_target] : ContractCase
+Method ID [revised_method_id] : FG-OTF
+Representation [revised_representation] : direct_canonical_configuration
+Exploration schedule [revised_schedule] : interleaved_lazy_complete_attractor
+Controllable action exploration order [revised_controllable_action_order] : endpoint_guided
+Generic-baseline state-dependent hint API used [revised_generic_baseline_hint_api_used] : not_applicable
+Implementation variant [revised_implementation_variant] : revised_otf_ducs_direct_v1
+Build commit ID [revised_build_commit_id] : jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07
+Synthesis objective [revised_objective] : strong_finite_completion
+Scheduler semantics [revised_scheduler_semantics] : all_maximal_traces_no_fairness
+Update-policy restriction [revised_update_policy_restriction] : full_fg
+Nondeterministic transfer semantics [revised_nondeterminism_semantics] : all_outcomes_adversarial
+Java version [revised_java_version] : 17.0.19
+JVM name [revised_jvm_name] : OpenJDK 64-Bit Server VM
+JVM vendor [revised_jvm_vendor] : Homebrew
+JVM arguments [revised_jvm_arguments] : -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=true -Dmtsa.revised.otf.independentQueryLimit=10000000 -Dmtsa.revised.otf.independentStateLimit=1000000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.solver=otf -Xmx12g
+Operating system [revised_os_name] : Mac OS X
+Operating-system version [revised_os_version] : 15.7.9
+Operating-system architecture [revised_os_arch] : aarch64
+Available processors [revised_available_processors] : 8 processors
+Solver thread count [revised_solver_thread_count] : 1 threads
+JVM maximum heap [revised_jvm_max_heap_bytes] : 12884901888 B
+Guided-search state limit [revised_guided_state_limit] : 0 states
+Guided-search oracle-query limit [revised_guided_query_limit] : 0 calls
+Activation physical-closure limit [revised_physical_closure_limit] : 2000000 states
+
+[Outcome]
+Result : EXCEPTION
+Solver status : invalid_input
+Verification status : unverified
+Run verified : false
+
+[Correctness]
+FG-DUCS input contract status [revised_input_contract_status] : invalid
+FG-DUCS input contract reason [revised_input_contract_reason] : Invalid FG-DUCS endpoint contract: new closed loop is deadlocked at 0:[0]:{}
+
+[Completeness]
+Traditional DUCS objective compatibility [revised_traditional_objective_compatibility] : not_established
+  算出: Traditional implementation uses a GR(1) progress objective; this implementation requires a decreasing rank on every retained edge.
+====================================================
+

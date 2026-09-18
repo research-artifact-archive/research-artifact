@@ -1,0 +1,15 @@
+--- 2017-TSE-ProductionCell.lts
++++ ProductionCell_supplied.lts
+@@ -166,9 +166,9 @@
+ ||UPDATE_CONTROLLER = UpdCont.
+ 
+ // ---------------------------TEST AND RESULTS-----------------------------
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec,beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec,hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert S_OLD = (OLD_TOOL_ORDER  && OLD_OUT_IF_FINISHED && DRILL_ONCE && POLISH_ONCE && CLEAN_ONCE)
+ assert S_NEW = (NEW_TOOL_ORDER && NEW_OUT_IF_FINISHED && DRILL_ONCE && PAINT_ONCE && CLEAN_ONCE)

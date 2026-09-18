@@ -1,0 +1,170 @@
+{
+  "artifact_digests": {
+    "output": {
+      "bytes": 80850,
+      "exists": true,
+      "sha256": "2edc1f16f8c2678a79227e9f704b98dd4742ac67aaaf312047dbbf85ed704d4c"
+    },
+    "stderr": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions": {
+      "bytes": "",
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "artifacts": {
+    "output": "runs/branching_separation__base__rep01__fixed_script_b/output.txt",
+    "stderr": "runs/branching_separation__base__rep01__fixed_script_b/stderr.txt",
+    "stdout": "runs/branching_separation__base__rep01__fixed_script_b/stdout.txt",
+    "transitions": "runs/branching_separation__base__rep01__fixed_script_b/transitions.txt"
+  },
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentQueryLimit=1000000",
+    "-Dmtsa.revised.otf.independentStateLimit=100000",
+    "-Dmtsa.revised.otf.independentVerification=true",
+    "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+    "-Dmtsa.revised.otf.policyRestriction=full_fg",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx2g",
+    "-cp",
+    "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_separation.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG_FIXED_B",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq2/raw/runs/branching_separation__base__rep01__fixed_script_b/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq2/raw/runs/branching_separation__base__rep01__fixed_script_b/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "command_text": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Dmtsa.otf.controllableActionOrder=endpoint_guided -Dmtsa.otf.guidedQueryLimit=0 -Dmtsa.otf.guidedStateLimit=0 -Dmtsa.otf.lazyControllableBuckets=true -Dmtsa.revised.otf.independentQueryLimit=1000000 -Dmtsa.revised.otf.independentStateLimit=100000 -Dmtsa.revised.otf.independentVerification=true -Dmtsa.revised.otf.independentVerificationMode=exhaustive -Dmtsa.revised.otf.policyRestriction=full_fg -Dmtsa.revised.otf.solver=otf -Xmx2g -cp 'Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar' ltsa.updatingControllers.cli.SingleCompositionRunner --lts 'Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_separation.lts' --target UPDATE_CONTROLLER_OTF_FG_FIXED_B --output 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq2/raw/runs/branching_separation__base__rep01__fixed_script_b/output.txt' --transitions 'FSE2027_SUBMISSION_20260914/experiments/semantic_revision_20260914/rq2/raw/runs/branching_separation__base__rep01__fixed_script_b/transitions.txt' --transition-output summary",
+  "completed": true,
+  "config_sha256": "e0e3c73561c9ce8d8bef6deec07b5fb5c2d883de6186ea4263138e673d799cc6",
+  "cwd": ".",
+  "elapsed_monotonic_ns": 698378334,
+  "elapsed_monotonic_seconds": 0.698378334,
+  "evaluation_csv": {
+    "errors": [],
+    "found": true,
+    "header": [
+      "mode",
+      "result",
+      "solver_status",
+      "verification_status",
+      "run_verified",
+      "failure_reason",
+      "section",
+      "metric_key",
+      "metric_label",
+      "value",
+      "unit",
+      "formula",
+      "metric_schema_version",
+      "metric_description_id",
+      "section_readable_ja",
+      "metric_readable_ja",
+      "metric_category",
+      "artifact",
+      "phase",
+      "action",
+      "event",
+      "stat"
+    ],
+    "marker_count": 1,
+    "row_count": 217
+  },
+  "execution_environment_fingerprint_sha256": "f2b934ad383592519329ac3bf1725938ad9663752e294eefcf551236032a78ab",
+  "exit_code": 6,
+  "experiment_id": "fgducs-semantic-revision-20260914-rq2",
+  "finished_utc": "2026-09-14T07:30:36.271325+00:00",
+  "harness_error": "",
+  "harness_errors": [],
+  "harness_termination_action": "",
+  "input_model": {
+    "bytes": 2874,
+    "exists": true,
+    "sha256": "683fc02199c8e3f54dd20924cdd6e33ba6903f16f2bd6750d0f4716ef7c312ea"
+  },
+  "job": {
+    "analysis_role": "formal_fixed_script_head_b",
+    "block_id": "branching_separation__base__rep01",
+    "global_order_index": 2,
+    "job_id": "branching_separation__base__rep01__fixed_script_b",
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.revised.otf.independentQueryLimit": "1000000",
+      "mtsa.revised.otf.independentStateLimit": "100000",
+      "mtsa.revised.otf.independentVerification": "true",
+      "mtsa.revised.otf.independentVerificationMode": "exhaustive",
+      "mtsa.revised.otf.policyRestriction": "full_fg",
+      "mtsa.revised.otf.solver": "otf"
+    },
+    "method_base_order": [
+      "full_fg",
+      "fixed_script_a",
+      "fixed_script_b"
+    ],
+    "method_id": "fixed_script_b",
+    "method_order": [
+      "full_fg",
+      "fixed_script_a",
+      "fixed_script_b"
+    ],
+    "method_order_index": 2,
+    "method_order_seed": 8584042122843756706,
+    "model_family": "observation_dependent_policy",
+    "model_id": "branching_separation",
+    "model_path": "Implementation/Experiment/FSE2027/rq2-formal-witness/models/branching_separation.lts",
+    "repetition": 1,
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG_FIXED_B",
+    "unit_order_index": 0,
+    "unit_order_seed": 581315532417130810
+  },
+  "meta_schema_version": 1,
+  "order_algorithm": "seeded-per-unit-permutation/cyclic-rotation/reverse-every-cycle-v1",
+  "peak_rss_bytes": 91553792,
+  "peak_rss_kib": 89408,
+  "plan_sha256": "f9a8e0b1ae6c5f6ab2403c784aacceb2c6990f0a6fc6fabae2fa03ed004784fd",
+  "rss_measurement_kind": "darwin_proc_pid_rusage_resident",
+  "rss_measurement_status": "measured",
+  "rss_poll_interval_seconds": 0.05,
+  "rss_samples_attempted": 12,
+  "rss_samples_available": 12,
+  "spawn_error": "",
+  "started_utc": "2026-09-14T07:30:35.255242+00:00",
+  "status": "UNREALIZABLE",
+  "timed_out": false,
+  "timeout_seconds": 60.0,
+  "timeout_termination_action": "",
+  "transition_output_mode": "summary"
+}

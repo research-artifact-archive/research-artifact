@@ -1,0 +1,24 @@
+--- 2017-TSE-Workflow.lts
++++ Workflow_empty.lts
+@@ -90,9 +90,9 @@
+ 
+ //Fluents for updates
+ fluent EvalPending = <eval,{approve,reject}>
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec = <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec = <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ assert AnyAction = (initInventory || initCredit || endInventory || endCredit || eval || endShipping || endBilling 
+ 							|| initShipping || initBilling || archive || rollback || orderEntry || approve || reject)
+@@ -105,7 +105,7 @@
+ 	mapping = MappingEnvironment,
+     oldGoal = ConcurrentSpec,
+     newGoal = SequentialSpec,
+-//	transition = NO_TP,
++	transition = NO_TP,
+     nonblocking
+ }
+ 

@@ -1,0 +1,26 @@
+--- 2017-TSE-Industry.lts
++++ Industry_empty.lts
+@@ -95,9 +95,9 @@
+ // ---------------------------UPDATING CONTROLLER SPEC-----------------------------
+ //Updating controller fluents
+ fluent InTransition = <stopOldSpec, startNewSpec> 
+-fluent StopOldSpec = <stopOldSpec, beginUpdate>
+-fluent StartNewSpec= <startNewSpec, beginUpdate>
+-fluent Reconfigure = <reconfigure, beginUpdate>
++fluent StopOldSpec = <stopOldSpec, hotSwapIn>
++fluent StartNewSpec= <startNewSpec, hotSwapIn>
++fluent Reconfigure = <reconfigure, hotSwapIn>
+ 
+ fluent StartN = <startNewSpec, adjustGF1>
+ 
+@@ -113,8 +113,8 @@
+     oldGoal = OldSpec, 
+     newGoal = NewSpec,
+     // T = True is executed if no transition requirement is set
+-//	transition = T_Empty,
+-	transition = T,
++	transition = T_Empty,
++	//transition = T,
+ 	nonblocking
+ 
+ }
