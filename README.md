@@ -1,6 +1,6 @@
 # FG-DUCS: fine-grained dynamic update controller synthesis
 
-**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework.
+**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The bundled PDFs are a pre-submission snapshot. The manuscript’s planned `fse27-submission` tag has not been created; use the repository commit for this snapshot until the final submission version is fixed.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
