@@ -1,0 +1,189 @@
+{
+  "persistent_uc": {
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product": [
+      [
+        "N0",
+        "C0"
+      ]
+    ],
+    "selected_endpoint_indices": [
+      0
+    ],
+    "selected_load_targets": [
+      "N0"
+    ],
+    "initial_states": [
+      "OLD:O"
+    ],
+    "reachable_states": [
+      "NEW:N0",
+      "OLD:O"
+    ],
+    "goals": [],
+    "nonquiescent_matches_rejected": [
+      "NEW:N0"
+    ],
+    "buckets": {
+      "OLD:O": {
+        "idle": [
+          "OLD:O"
+        ],
+        "reconfigure_TEST": [
+          "NEW:N0"
+        ]
+      },
+      "NEW:N0": {
+        "idle": [
+          "NEW:N0"
+        ],
+        "spin": [
+          "NEW:N0"
+        ]
+      }
+    },
+    "ranks": {},
+    "losing_closure": [
+      "NEW:N0",
+      "OLD:O"
+    ],
+    "expected_decision": "LOSS"
+  },
+  "finite_uc_all_targets": {
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product": [
+      [
+        "N0",
+        "C0"
+      ],
+      [
+        "N1",
+        "C1"
+      ]
+    ],
+    "selected_endpoint_indices": [
+      0,
+      1
+    ],
+    "selected_load_targets": [
+      "N0",
+      "N1"
+    ],
+    "initial_states": [
+      "OLD:O"
+    ],
+    "reachable_states": [
+      "NEW:N0",
+      "NEW:N1",
+      "OLD:O"
+    ],
+    "goals": [
+      "NEW:N1"
+    ],
+    "nonquiescent_matches_rejected": [
+      "NEW:N0"
+    ],
+    "buckets": {
+      "OLD:O": {
+        "idle": [
+          "OLD:O"
+        ],
+        "reconfigure_TEST": [
+          "NEW:N0"
+        ]
+      },
+      "NEW:N0": {
+        "idle": [
+          "NEW:N0"
+        ],
+        "step": [
+          "NEW:N1"
+        ]
+      },
+      "NEW:N1": {}
+    },
+    "ranks": {
+      "NEW:N1": 0,
+      "NEW:N0": 1,
+      "OLD:O": 2
+    },
+    "losing_closure": [],
+    "expected_decision": "WIN"
+  },
+  "finite_uc_nonquiescent_target_only": {
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product": [
+      [
+        "N0",
+        "C0"
+      ],
+      [
+        "N1",
+        "C1"
+      ]
+    ],
+    "selected_endpoint_indices": [
+      0
+    ],
+    "selected_load_targets": [
+      "N0"
+    ],
+    "initial_states": [
+      "OLD:O"
+    ],
+    "reachable_states": [
+      "NEW:N0",
+      "NEW:N1",
+      "OLD:O"
+    ],
+    "goals": [],
+    "nonquiescent_matches_rejected": [
+      "NEW:N0"
+    ],
+    "buckets": {
+      "OLD:O": {
+        "idle": [
+          "OLD:O"
+        ],
+        "reconfigure_TEST": [
+          "NEW:N0"
+        ]
+      },
+      "NEW:N0": {
+        "idle": [
+          "NEW:N0"
+        ],
+        "step": [
+          "NEW:N1"
+        ]
+      },
+      "NEW:N1": {
+        "idle": [
+          "NEW:N1"
+        ]
+      }
+    },
+    "ranks": {},
+    "losing_closure": [
+      "NEW:N0",
+      "NEW:N1",
+      "OLD:O"
+    ],
+    "expected_decision": "LOSS"
+  }
+}

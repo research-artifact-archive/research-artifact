@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8",
+  "scope": "Independent follow-up on four preserved reviewer counterexamples and one genuine measured positive certificate; static diff confirms exact UC/no-C and exactly-one-C cardinality rules. This does not replace the root full182-trial audit.",
+  "checks": [
+    {
+      "counterexample": "counter_goal_outgoing.json",
+      "status": "REJECTED",
+      "reason": "Goal has a mid-mode transition"
+    },
+    {
+      "counterexample": "counter_extra_domain.json",
+      "status": "REJECTED",
+      "reason": "Rank domain differs from strategy-reachable states"
+    },
+    {
+      "counterexample": "counter_residual_noncommuting.json",
+      "status": "REJECTED",
+      "reason": "('availability', 'rho_1', 'rho_2', 'noncommuting residual')"
+    },
+    {
+      "counterexample": "counter_residual_original_language.json",
+      "status": "REJECTED",
+      "reason": "('availability', 'residual bad-prefix mismatch')"
+    }
+  ],
+  "original_measured_certificate": "PASS",
+  "input_validator_scope": "Finite JSON source already accepted by the fixed E1 frontend; v3 is not claimed to be a complete validator for arbitrary malformed JSON."
+}

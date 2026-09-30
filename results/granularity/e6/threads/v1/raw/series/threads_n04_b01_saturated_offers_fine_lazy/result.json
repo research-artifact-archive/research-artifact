@@ -1,0 +1,128 @@
+{
+  "id" : "threads_n04_b01_saturated_offers_fine",
+  "family" : "threads",
+  "parameters" : {
+    "n" : 4,
+    "B" : 1,
+    "regime" : "saturated_offers",
+    "group" : "fine"
+  },
+  "merge" : "none",
+  "generated_contract_mode" : "none",
+  "solver" : "lazy",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "java_version" : "17.0.19",
+  "decision" : "LOSS",
+  "states_discovered" : 32,
+  "states_expanded" : 32,
+  "successor_queries" : 160,
+  "materialized_transitions" : 96,
+  "enabled_buckets" : 96,
+  "enabled_buckets_definition" : "distinct queried state/action pairs with nonempty Post during synthesis, before certificate/Link diagnostics",
+  "preparation_seconds" : 0.025962667,
+  "solver_seconds" : 0.009201416,
+  "certificate_checker" : "PASS",
+  "endpoint_checker" : "PASS",
+  "worst_completion_rank" : null,
+  "root_ranks" : null,
+  "certificate_states" : 32,
+  "losing_region_states" : 32,
+  "link_checker" : "NOT_APPLICABLE_LOSS",
+  "loss_summary" : {
+    "scope" : "checked discovered-state losing certificate; sampled local root closure evidence, not a unique whole-game causal explanation",
+    "region_states" : 32,
+    "unsafe_region_states" : 0,
+    "safe_region_states" : 32,
+    "initial_states" : 32,
+    "losing_initial_states" : 32,
+    "initial_examples_limit" : 3,
+    "initial_examples" : [ {
+      "physical" : [ [ "OLD", "I_q0" ], [ "OLD", "I" ], [ "OLD", "I" ], [ "OLD", "I" ] ],
+      "testers" : { },
+      "pending" : [ "rho_1", "rho_2", "rho_3", "rho_4" ],
+      "enabled_action_buckets" : [ {
+        "action" : "arrival",
+        "controllable" : false,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      } ],
+      "safe" : true
+    }, {
+      "physical" : [ [ "OLD", "I_q1" ], [ "OLD", "I" ], [ "OLD", "I" ], [ "OLD", "I" ] ],
+      "testers" : { },
+      "pending" : [ "rho_1", "rho_2", "rho_3", "rho_4" ],
+      "enabled_action_buckets" : [ {
+        "action" : "arrival",
+        "controllable" : false,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "dispatch_1",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "dispatch_2",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "dispatch_3",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "dispatch_4",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      } ],
+      "safe" : true
+    }, {
+      "physical" : [ [ "OLD", "B_q0" ], [ "OLD", "I" ], [ "OLD", "I" ], [ "OLD", "I" ] ],
+      "testers" : { },
+      "pending" : [ "rho_1", "rho_2", "rho_3", "rho_4" ],
+      "enabled_action_buckets" : [ {
+        "action" : "arrival",
+        "controllable" : false,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "finish_1",
+        "controllable" : false,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      } ],
+      "safe" : true
+    } ]
+  },
+  "loss_reason" : "The checked discovered-state losing certificate contains 32 states (0 unsafe) and 32/32 initial states; its stored root buckets retain every adversarial outcome and identify the outcomes in this certificate (local closure evidence, not a unique causal explanation).",
+  "checking_and_link_seconds" : 0.018347709,
+  "input_sha256" : "ae7d9c62597fbd87c665c8e9023fa15559a8bf3bc187174a09c9b07790ded287",
+  "certificate_file" : "certificate.json",
+  "certificate_sha256" : "9837485d05c62fc385e6592b6ac58f06bf5d460001ffb04ed6c43e8254b15a63"
+}

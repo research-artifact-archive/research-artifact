@@ -1,0 +1,713 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "canary_controls_n04_m03_healthy_only_all",
+  "family": "canary_controls",
+  "parameters": {
+    "n": 4,
+    "m": 3,
+    "k": 4,
+    "control": "healthy_only"
+  },
+  "ordinary": [
+    "serve_1",
+    "reportH_1",
+    "reportB_1",
+    "restart_1",
+    "serve_2",
+    "reportH_2",
+    "reportB_2",
+    "restart_2",
+    "serve_3",
+    "reportH_3",
+    "reportB_3",
+    "restart_3",
+    "serve_4",
+    "reportH_4",
+    "reportB_4",
+    "restart_4"
+  ],
+  "controllable": [
+    "serve_1",
+    "restart_1",
+    "serve_2",
+    "restart_2",
+    "serve_3",
+    "restart_3",
+    "serve_4",
+    "restart_4"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_1",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_1",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_1",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_1",
+            "B"
+          ],
+          [
+            "B",
+            "restart_1",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "H": [
+          "HP"
+        ]
+      }
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_2",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_2",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_2",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_2",
+            "B"
+          ],
+          [
+            "B",
+            "restart_2",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "H": [
+          "HP"
+        ]
+      }
+    },
+    {
+      "id": "replica_3",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_3",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_3",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_3",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_3",
+            "B"
+          ],
+          [
+            "B",
+            "restart_3",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "H": [
+          "HP"
+        ]
+      }
+    },
+    {
+      "id": "replica_4",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_4",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_4",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_4",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_4",
+            "B"
+          ],
+          [
+            "B",
+            "restart_4",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "H": [
+          "HP"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "reported_availability",
+      "role": "interval",
+      "tester": {
+        "states": [
+          "b0000",
+          "b0001",
+          "b0010",
+          "b0100",
+          "b1000",
+          "ERR_HEALTH"
+        ],
+        "initial": "b0000",
+        "errors": [
+          "ERR_HEALTH"
+        ],
+        "alphabet": [
+          "serve_1",
+          "reportH_1",
+          "reportB_1",
+          "restart_1",
+          "serve_2",
+          "reportH_2",
+          "reportB_2",
+          "restart_2",
+          "serve_3",
+          "reportH_3",
+          "reportB_3",
+          "restart_3",
+          "serve_4",
+          "reportH_4",
+          "reportB_4",
+          "restart_4",
+          "ablation.merge.transfers"
+        ],
+        "changes": [
+          [
+            "b0000",
+            "reportB_1",
+            "b0001"
+          ],
+          [
+            "b0000",
+            "restart_1",
+            "b0000"
+          ],
+          [
+            "b0000",
+            "reportB_2",
+            "b0010"
+          ],
+          [
+            "b0000",
+            "restart_2",
+            "b0000"
+          ],
+          [
+            "b0000",
+            "reportB_3",
+            "b0100"
+          ],
+          [
+            "b0000",
+            "restart_3",
+            "b0000"
+          ],
+          [
+            "b0000",
+            "reportB_4",
+            "b1000"
+          ],
+          [
+            "b0000",
+            "restart_4",
+            "b0000"
+          ],
+          [
+            "b0001",
+            "reportB_1",
+            "b0001"
+          ],
+          [
+            "b0001",
+            "restart_1",
+            "b0000"
+          ],
+          [
+            "b0001",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0001",
+            "restart_2",
+            "b0001"
+          ],
+          [
+            "b0001",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0001",
+            "restart_3",
+            "b0001"
+          ],
+          [
+            "b0001",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0001",
+            "restart_4",
+            "b0001"
+          ],
+          [
+            "b0010",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0010",
+            "restart_1",
+            "b0010"
+          ],
+          [
+            "b0010",
+            "reportB_2",
+            "b0010"
+          ],
+          [
+            "b0010",
+            "restart_2",
+            "b0000"
+          ],
+          [
+            "b0010",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0010",
+            "restart_3",
+            "b0010"
+          ],
+          [
+            "b0010",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0010",
+            "restart_4",
+            "b0010"
+          ],
+          [
+            "b0100",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0100",
+            "restart_1",
+            "b0100"
+          ],
+          [
+            "b0100",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0100",
+            "restart_2",
+            "b0100"
+          ],
+          [
+            "b0100",
+            "reportB_3",
+            "b0100"
+          ],
+          [
+            "b0100",
+            "restart_3",
+            "b0000"
+          ],
+          [
+            "b0100",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b0100",
+            "restart_4",
+            "b0100"
+          ],
+          [
+            "b1000",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b1000",
+            "restart_1",
+            "b1000"
+          ],
+          [
+            "b1000",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b1000",
+            "restart_2",
+            "b1000"
+          ],
+          [
+            "b1000",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b1000",
+            "restart_3",
+            "b1000"
+          ],
+          [
+            "b1000",
+            "reportB_4",
+            "b1000"
+          ],
+          [
+            "b1000",
+            "restart_4",
+            "b0000"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "tester_state": "b0000",
+            "residual_state": "b0000"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ]
+        ]
+      },
+      "projection": {
+        "all_healthy": {
+          "physical": [
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ]
+        ]
+      },
+      "loadable": [
+        "all_healthy"
+      ],
+      "projection": {
+        "all_healthy": {
+          "physical": [
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "all_healthy"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "model_version": "v1_reports",
+    "physical_health": {
+      "H": true,
+      "HP": true,
+      "BP": false,
+      "B": false
+    },
+    "state_legend": {
+      "H": "healthy, report complete",
+      "HP": "healthy, report pending",
+      "BP": "broken, report pending",
+      "B": "broken, report complete"
+    },
+    "requirement_scope": "reported-health safety; physical safety checked independently on returned WIN certificate",
+    "anchor": "CrowdStrike 2024 preliminary review and technical RCA staged deployment/telemetry practice; not incident reproduction",
+    "restart_scope": "abstract controllable restoration, not a claim that a simple restart repaired the real incident",
+    "control": "healthy_only",
+    "reference_input": "reference/canary_n04_m03_all.json",
+    "reference_sha256": "6b341af88347127f2757f744bc801866a828db5e124ca81884581a9faca89bfa",
+    "expected_decision": "WIN",
+    "control_scope": "Only transfer outcome set changes."
+  },
+  "generated_contract_mode": "transfers"
+}

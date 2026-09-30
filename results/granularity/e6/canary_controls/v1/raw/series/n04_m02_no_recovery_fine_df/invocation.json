@@ -1,0 +1,37 @@
+{
+  "started_at": "2026-09-29T18:26:48.494074+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/canary_controls/v1/inputs/canary_controls_n04_m02_no_recovery_fine.json",
+    "--merge",
+    "none",
+    "--solver",
+    "direct_full",
+    "--output",
+    "${E6_ROOT}/canary_controls/v1/raw/series/n04_m02_no_recovery_fine_df/result.json"
+  ],
+  "job": {
+    "id": "n04_m02_no_recovery_fine_df",
+    "input": "inputs/canary_controls_n04_m02_no_recovery_fine.json",
+    "merge": "none",
+    "solver": "direct_full",
+    "expected_decision": "LOSS",
+    "parameters": {
+      "n": 4,
+      "m": 2,
+      "control": "no_recovery",
+      "k": 1
+    },
+    "variant": "fine_df"
+  },
+  "input_sha256": "ed11748c3c13b7ed75208a195372fa8f7b00a67dd699c47544c5fd2a24abbe9b",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "a2dbc8846933a5ef1af97f0d4ba439343a29409b82c15fa1ea41713cc10dbf09",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

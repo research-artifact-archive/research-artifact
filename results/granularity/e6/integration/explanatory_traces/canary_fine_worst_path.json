@@ -1,0 +1,310 @@
+{
+  "status": "PASS",
+  "provenance": {
+    "input": "canary/v1/inputs/canary_n02_m01_fine.json",
+    "input_sha256": "e9bab01aa35b95cd1850c2edabf403078527ee28eaa56bcd8193336b54955a44",
+    "certificate": "canary/v1/raw/series/n02_m01_fine_lazy/certificate.json",
+    "certificate_sha256": "ecbfad77538869c5694ad8cdfb3473f07ca88a6d69a2f56b4a6a3d4d6ce2e4b5",
+    "job": "n02_m01_fine_lazy",
+    "decision": "WIN",
+    "states_discovered": 21
+  },
+  "root_rank": 6,
+  "steps": 6,
+  "trace": [
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "H"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "rho_1",
+          "rho_2"
+        ],
+        "id": 8,
+        "initial": true,
+        "safe": true,
+        "goal": false,
+        "rank": 6
+      },
+      "action": "rho_1",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "BP"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 1,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 5
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "BP"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 1,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 5
+      },
+      "action": "reportB_1",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "B"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b01"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 0,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 4
+      },
+      "control": "UC"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "B"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b01"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 0,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 4
+      },
+      "action": "restart_1",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 6,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 3
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "rho_2"
+        ],
+        "id": 6,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 3
+      },
+      "action": "rho_2",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 2
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 2
+      },
+      "action": "reportB_2",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "NEW",
+            "B"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b10"
+        },
+        "pending": [],
+        "id": 2,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 1
+      },
+      "control": "UC"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "NEW",
+            "B"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b10"
+        },
+        "pending": [],
+        "id": 2,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 1
+      },
+      "action": "restart_2",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "H"
+          ],
+          [
+            "NEW",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [],
+        "id": 4,
+        "initial": false,
+        "safe": true,
+        "goal": true,
+        "rank": 0
+      },
+      "control": "C"
+    }
+  ],
+  "scope": "One maximal-rank successor trace of the full checked policy; all other adversarial branches remain in the original certificate.",
+  "extractor_sha256": "cf86e5619309eccc3de0799d3364f874f19ec96d6902b5af702d431822862dba",
+  "checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8"
+}

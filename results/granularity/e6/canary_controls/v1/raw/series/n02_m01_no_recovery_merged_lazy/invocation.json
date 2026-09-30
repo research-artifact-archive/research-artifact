@@ -1,0 +1,43 @@
+{
+  "started_at": "2026-09-29T18:26:24.674336+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/canary_controls/v1/inputs/canary_controls_n02_m01_no_recovery_fine.json",
+    "--merge",
+    "transfers",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/canary_controls/v1/raw/series/n02_m01_no_recovery_merged_lazy/result.json",
+    "--compare-input",
+    "${E6_ROOT}/canary_controls/v1/inputs/canary_controls_n02_m01_no_recovery_all.json",
+    "--compare-merge",
+    "none"
+  ],
+  "job": {
+    "id": "n02_m01_no_recovery_merged_lazy",
+    "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+    "merge": "transfers",
+    "solver": "lazy",
+    "expected_decision": "LOSS",
+    "parameters": {
+      "n": 2,
+      "m": 1,
+      "control": "no_recovery",
+      "k": 2
+    },
+    "variant": "merged_lazy",
+    "compare_input": "inputs/canary_controls_n02_m01_no_recovery_all.json",
+    "compare_merge": "none"
+  },
+  "input_sha256": "17e70761409436756b19e89585bd36dfd40441e28ce6ea3599faa21c565ff163",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "a2dbc8846933a5ef1af97f0d4ba439343a29409b82c15fa1ea41713cc10dbf09",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

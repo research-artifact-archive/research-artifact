@@ -1,0 +1,1129 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "canary_n06_m05_fine",
+  "family": "canary",
+  "parameters": {
+    "n": 6,
+    "m": 5,
+    "k": 1
+  },
+  "ordinary": [
+    "serve_1",
+    "reportH_1",
+    "reportB_1",
+    "restart_1",
+    "serve_2",
+    "reportH_2",
+    "reportB_2",
+    "restart_2",
+    "serve_3",
+    "reportH_3",
+    "reportB_3",
+    "restart_3",
+    "serve_4",
+    "reportH_4",
+    "reportB_4",
+    "restart_4",
+    "serve_5",
+    "reportH_5",
+    "reportB_5",
+    "restart_5",
+    "serve_6",
+    "reportH_6",
+    "reportB_6",
+    "restart_6"
+  ],
+  "controllable": [
+    "serve_1",
+    "restart_1",
+    "serve_2",
+    "restart_2",
+    "serve_3",
+    "restart_3",
+    "serve_4",
+    "restart_4",
+    "serve_5",
+    "restart_5",
+    "serve_6",
+    "restart_6"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_1",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_1",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_1",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_1",
+            "B"
+          ],
+          [
+            "B",
+            "restart_1",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_1",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_2",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_2",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_2",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_2",
+            "B"
+          ],
+          [
+            "B",
+            "restart_2",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_2",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    },
+    {
+      "id": "replica_3",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_3",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_3",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_3",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_3",
+            "B"
+          ],
+          [
+            "B",
+            "restart_3",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_3",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    },
+    {
+      "id": "replica_4",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_4",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_4",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_4",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_4",
+            "B"
+          ],
+          [
+            "B",
+            "restart_4",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_4",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    },
+    {
+      "id": "replica_5",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_5",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_5",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_5",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_5",
+            "B"
+          ],
+          [
+            "B",
+            "restart_5",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_5",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    },
+    {
+      "id": "replica_6",
+      "old": {
+        "states": [
+          "H"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_6",
+            "H"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "H",
+          "HP",
+          "BP",
+          "B"
+        ],
+        "initial": "H",
+        "edges": [
+          [
+            "H",
+            "serve_6",
+            "H"
+          ],
+          [
+            "HP",
+            "reportH_6",
+            "H"
+          ],
+          [
+            "BP",
+            "reportB_6",
+            "B"
+          ],
+          [
+            "B",
+            "restart_6",
+            "H"
+          ]
+        ]
+      },
+      "transfer_action": "rho_6",
+      "transfer": {
+        "H": [
+          "HP",
+          "BP"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "reported_availability",
+      "role": "interval",
+      "tester": {
+        "states": [
+          "b000000",
+          "b000001",
+          "b000010",
+          "b000100",
+          "b001000",
+          "b010000",
+          "b100000",
+          "ERR_HEALTH"
+        ],
+        "initial": "b000000",
+        "errors": [
+          "ERR_HEALTH"
+        ],
+        "alphabet": [
+          "serve_1",
+          "reportH_1",
+          "reportB_1",
+          "restart_1",
+          "serve_2",
+          "reportH_2",
+          "reportB_2",
+          "restart_2",
+          "serve_3",
+          "reportH_3",
+          "reportB_3",
+          "restart_3",
+          "serve_4",
+          "reportH_4",
+          "reportB_4",
+          "restart_4",
+          "serve_5",
+          "reportH_5",
+          "reportB_5",
+          "restart_5",
+          "serve_6",
+          "reportH_6",
+          "reportB_6",
+          "restart_6",
+          "rho_1",
+          "rho_2",
+          "rho_3",
+          "rho_4",
+          "rho_5",
+          "rho_6"
+        ],
+        "changes": [
+          [
+            "b000000",
+            "reportB_1",
+            "b000001"
+          ],
+          [
+            "b000000",
+            "restart_1",
+            "b000000"
+          ],
+          [
+            "b000000",
+            "reportB_2",
+            "b000010"
+          ],
+          [
+            "b000000",
+            "restart_2",
+            "b000000"
+          ],
+          [
+            "b000000",
+            "reportB_3",
+            "b000100"
+          ],
+          [
+            "b000000",
+            "restart_3",
+            "b000000"
+          ],
+          [
+            "b000000",
+            "reportB_4",
+            "b001000"
+          ],
+          [
+            "b000000",
+            "restart_4",
+            "b000000"
+          ],
+          [
+            "b000000",
+            "reportB_5",
+            "b010000"
+          ],
+          [
+            "b000000",
+            "restart_5",
+            "b000000"
+          ],
+          [
+            "b000000",
+            "reportB_6",
+            "b100000"
+          ],
+          [
+            "b000000",
+            "restart_6",
+            "b000000"
+          ],
+          [
+            "b000001",
+            "reportB_1",
+            "b000001"
+          ],
+          [
+            "b000001",
+            "restart_1",
+            "b000000"
+          ],
+          [
+            "b000001",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000001",
+            "restart_2",
+            "b000001"
+          ],
+          [
+            "b000001",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000001",
+            "restart_3",
+            "b000001"
+          ],
+          [
+            "b000001",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000001",
+            "restart_4",
+            "b000001"
+          ],
+          [
+            "b000001",
+            "reportB_5",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000001",
+            "restart_5",
+            "b000001"
+          ],
+          [
+            "b000001",
+            "reportB_6",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000001",
+            "restart_6",
+            "b000001"
+          ],
+          [
+            "b000010",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000010",
+            "restart_1",
+            "b000010"
+          ],
+          [
+            "b000010",
+            "reportB_2",
+            "b000010"
+          ],
+          [
+            "b000010",
+            "restart_2",
+            "b000000"
+          ],
+          [
+            "b000010",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000010",
+            "restart_3",
+            "b000010"
+          ],
+          [
+            "b000010",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000010",
+            "restart_4",
+            "b000010"
+          ],
+          [
+            "b000010",
+            "reportB_5",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000010",
+            "restart_5",
+            "b000010"
+          ],
+          [
+            "b000010",
+            "reportB_6",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000010",
+            "restart_6",
+            "b000010"
+          ],
+          [
+            "b000100",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000100",
+            "restart_1",
+            "b000100"
+          ],
+          [
+            "b000100",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000100",
+            "restart_2",
+            "b000100"
+          ],
+          [
+            "b000100",
+            "reportB_3",
+            "b000100"
+          ],
+          [
+            "b000100",
+            "restart_3",
+            "b000000"
+          ],
+          [
+            "b000100",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000100",
+            "restart_4",
+            "b000100"
+          ],
+          [
+            "b000100",
+            "reportB_5",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000100",
+            "restart_5",
+            "b000100"
+          ],
+          [
+            "b000100",
+            "reportB_6",
+            "ERR_HEALTH"
+          ],
+          [
+            "b000100",
+            "restart_6",
+            "b000100"
+          ],
+          [
+            "b001000",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b001000",
+            "restart_1",
+            "b001000"
+          ],
+          [
+            "b001000",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b001000",
+            "restart_2",
+            "b001000"
+          ],
+          [
+            "b001000",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b001000",
+            "restart_3",
+            "b001000"
+          ],
+          [
+            "b001000",
+            "reportB_4",
+            "b001000"
+          ],
+          [
+            "b001000",
+            "restart_4",
+            "b000000"
+          ],
+          [
+            "b001000",
+            "reportB_5",
+            "ERR_HEALTH"
+          ],
+          [
+            "b001000",
+            "restart_5",
+            "b001000"
+          ],
+          [
+            "b001000",
+            "reportB_6",
+            "ERR_HEALTH"
+          ],
+          [
+            "b001000",
+            "restart_6",
+            "b001000"
+          ],
+          [
+            "b010000",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b010000",
+            "restart_1",
+            "b010000"
+          ],
+          [
+            "b010000",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b010000",
+            "restart_2",
+            "b010000"
+          ],
+          [
+            "b010000",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b010000",
+            "restart_3",
+            "b010000"
+          ],
+          [
+            "b010000",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b010000",
+            "restart_4",
+            "b010000"
+          ],
+          [
+            "b010000",
+            "reportB_5",
+            "b010000"
+          ],
+          [
+            "b010000",
+            "restart_5",
+            "b000000"
+          ],
+          [
+            "b010000",
+            "reportB_6",
+            "ERR_HEALTH"
+          ],
+          [
+            "b010000",
+            "restart_6",
+            "b010000"
+          ],
+          [
+            "b100000",
+            "reportB_1",
+            "ERR_HEALTH"
+          ],
+          [
+            "b100000",
+            "restart_1",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "reportB_2",
+            "ERR_HEALTH"
+          ],
+          [
+            "b100000",
+            "restart_2",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "reportB_3",
+            "ERR_HEALTH"
+          ],
+          [
+            "b100000",
+            "restart_3",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "reportB_4",
+            "ERR_HEALTH"
+          ],
+          [
+            "b100000",
+            "restart_4",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "reportB_5",
+            "ERR_HEALTH"
+          ],
+          [
+            "b100000",
+            "restart_5",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "reportB_6",
+            "b100000"
+          ],
+          [
+            "b100000",
+            "restart_6",
+            "b000000"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "tester_state": "b000000",
+            "residual_state": "b000000"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_5",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_6",
+            "all_healthy"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_5",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_6",
+            "all_healthy"
+          ]
+        ]
+      },
+      "projection": {
+        "all_healthy": {
+          "physical": [
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ],
+            [
+              "OLD",
+              "H"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_5",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_6",
+            "all_healthy"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "all_healthy"
+        ],
+        "initial": "all_healthy",
+        "edges": [
+          [
+            "all_healthy",
+            "serve_1",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_2",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_3",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_4",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_5",
+            "all_healthy"
+          ],
+          [
+            "all_healthy",
+            "serve_6",
+            "all_healthy"
+          ]
+        ]
+      },
+      "loadable": [
+        "all_healthy"
+      ],
+      "projection": {
+        "all_healthy": {
+          "physical": [
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ],
+            [
+              "NEW",
+              "H"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "all_healthy"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "model_version": "v1_reports",
+    "physical_health": {
+      "H": true,
+      "HP": true,
+      "BP": false,
+      "B": false
+    },
+    "state_legend": {
+      "H": "healthy, report complete",
+      "HP": "healthy, report pending",
+      "BP": "broken, report pending",
+      "B": "broken, report complete"
+    },
+    "requirement_scope": "reported-health safety; physical safety checked independently on returned WIN certificate",
+    "anchor": "CrowdStrike 2024 preliminary review and technical RCA staged deployment/telemetry practice; not incident reproduction",
+    "restart_scope": "abstract controllable restoration, not a claim that a simple restart repaired the real incident"
+  }
+}

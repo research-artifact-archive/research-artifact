@@ -1,0 +1,44 @@
+% Generated from first-trial raw and the separate E2 JAR; no paper files modified.
+\begin{table}[t]
+\centering\small
+\caption{E2 discovered states. Lazy/Eager use on-the-fly exploration with UC pruning; Direct-Full uses full construction without UC pruning; Full+UC uses full construction with UC pruning. OTF without UC pruning is not implemented. Mac E2 timing is excluded.}
+\label{tab:abl-e2}
+\begin{tabular}{lrrrr}
+\toprule
+Contract & Lazy & Eager & Direct-Full & Full+UC \\
+\midrule
+GSM/Base & 31 & 75 & 75 & 75 \\
+GSM/R1 & 34 & 114 & 115 & 115 \\
+GSM/R2 & 34 & 68 & 68 & 68 \\
+Industry/Base & 272 & 109,726 & 282,709 & 109,726 \\
+Industry/R1 & 38,942 & TO & 110,825$^{\dagger}$ & 94,046 \\
+Industry/R2 & 7,717 & 27,752 & 51,096 & 27,752 \\
+MetaSocket/Base & 8 & 71 & 82 & 71 \\
+MetaSocket/R1 & 8 & 88 & 95 & 88 \\
+MetaSocket/R2 & 16 & 31 & 34 & 31 \\
+PowerPlant/Base & 73 & 5,634 & 8,168 & 5,634 \\
+PowerPlant/R1 & 759 & 23,352 & 23,686 & 23,408 \\
+PowerPlant/R2 & 1,330 & 2,810 & 3,594 & 2,810 \\
+PC1/Base & 83 & 407,019 & 407,019 & 407,019 \\
+PC1/R1 & 94 & 3,252,233 & 3,252,233$^{\dagger}$ & 3,252,233$^{\ddagger}$ \\
+PC1/R2 & 56,443 & 158,218 & 158,218 & 158,218 \\
+PC2/Base & 2,502 & TO & TO & TO$^{\ddagger}$ \\
+PC2/R1 & 2,433 & TO & TO & TO$^{\ddagger}$ \\
+PC2/R2 & TO & TO & TO & TO$^{\ddagger}$ \\
+Railcab/Base & 171 & TO & TO & TO$^{\ddagger}$ \\
+Railcab/R1 & 13,339 & TO & TO & TO$^{\ddagger}$ \\
+Railcab/R2 & 97,522 & 299,700 & 317,094 & 299,700 \\
+Surveillance/Base & 5,319 & TO & TO & TO$^{\ddagger}$ \\
+Surveillance/R1 & 96,301 & TO & TO & TO$^{\ddagger}$ \\
+Surveillance/R2 & 181,116 & TO & TO & TO$^{\ddagger}$ \\
+Workflow/Base & 151 & 4,292,588 & TO & TO$^{\ddagger}$ \\
+Workflow/R1 & 1,098 & TO & TO & TO$^{\ddagger}$ \\
+Workflow/R2 & 149,647 & 285,348 & INTERRUPTED\_NOT\_RETRIED & 285,348 \\
+\midrule
+\multicolumn{5}{l}{Reference only (outside the 27 E2 cells)} \\
+Travel(4,4)/Base & 13,757 & 25,628 & 412,688$^{\dagger}$ & NOT\_PLANNED \\
+Travel(4,6)/Base & 26,877 & 41,022 & 817,362$^{\dagger}$ & NOT\_PLANNED \\
+\bottomrule
+\end{tabular}
+\par\footnotesize $\dagger$: Direct-Full 7,200 s extended-budget single trial; only its state count is reused. $\ddagger$: Full+UC single 3,600 s second-pass trial after its 1,200 s first-pass TO, including a second-pass TO or pending outcome. Unmarked existing counts and Full+UC outcomes use the first 1,200 s trial. TO and missing trials are retained.
+\end{table}

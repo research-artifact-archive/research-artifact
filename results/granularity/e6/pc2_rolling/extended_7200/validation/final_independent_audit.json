@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "at": "2026-09-29T23:40:11.095849+09:00",
+  "scope": "Terminal preservation and table audit. Both new trials timed out; no completed decision, certificate, rank, discovered-state or query counts are inferred. No JVM was started by this audit.",
+  "new_frozen_files_verified": 6,
+  "original_protected_files_verified": 25,
+  "new_raw_files_verified": 10,
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "df251a9326e1a0b749cd9a965e76fe1c9bb3f7d43ddff06893ebb45dd4f42b2f",
+  "trials": [
+    {
+      "job_id": "lazy_transfers",
+      "status": "TO",
+      "pid": 63172,
+      "started_at": "2026-09-29T19:36:26.387046+09:00",
+      "finished_at": "2026-09-29T21:36:33.342551+09:00",
+      "whole_jvm_seconds": 7206.872930791986,
+      "timeout_seconds": 7200,
+      "heap": "32g",
+      "host": "mac",
+      "exit_code": -9,
+      "completion_sha256": "fa284426202c25d2d8103c21685c7708681f0edc661f431adfb31ab8b74907aa",
+      "raw_files_verified": 5,
+      "diagnostic_certificate_present": false,
+      "empty_incomplete_fields_verified": true
+    },
+    {
+      "job_id": "direct_full_none",
+      "status": "TO",
+      "pid": 67740,
+      "started_at": "2026-09-29T21:36:33.719811+09:00",
+      "finished_at": "2026-09-29T23:36:40.348231+09:00",
+      "whole_jvm_seconds": 7206.5634869999485,
+      "timeout_seconds": 7200,
+      "heap": "32g",
+      "host": "mac",
+      "exit_code": -9,
+      "completion_sha256": "69d32159e26809149263d09b8cbc94a5ebe17908235bc12d7ff670e2648e0ea4",
+      "raw_files_verified": 5,
+      "diagnostic_certificate_present": false,
+      "empty_incomplete_fields_verified": true
+    }
+  ],
+  "observed_rows": 5,
+  "row_statuses": [
+    "WIN",
+    "TO",
+    "TO",
+    "TO",
+    "TO"
+  ],
+  "new_rows": 2,
+  "old_1200_rows_unchanged": true,
+  "incomplete_fields": [
+    "raw_diagnostic_decision",
+    "states_discovered",
+    "successor_queries",
+    "materialized_transition_outcomes",
+    "enabled_buckets",
+    "worst_completion_rank",
+    "losing_region_states",
+    "certificate_states",
+    "safe_region_states",
+    "unsafe_region_states",
+    "initial_states",
+    "initial_states_in_certificate",
+    "native_certificate_checker",
+    "native_link_checker",
+    "preparation_seconds",
+    "solve_and_internal_check_seconds",
+    "diagnostic_seconds"
+  ],
+  "runner_and_measurement_jvms_absent": [
+    63078,
+    63172,
+    67740
+  ],
+  "runner_bound_awake_guard": "terminated with runner; no power setting changed",
+  "root_deadline_awake_guard": "untouched, parent-managed",
+  "derived_script_sha256": {
+    "analyze.py": "f5c5f43a9def9222db7f355b95466c77d636138f7a870031f73f772f92b30b5b",
+    "write_tables.py": "e462e9cefe7691536f4c91028da90ed4938677a05ccb952e21034d92f95a7322",
+    "finalize_when_done.py": "c222984ee14b8dc417ba95fd60b7a5823bf48dc054e6101a8b348ad9d9cf3e35"
+  },
+  "table_sha256": {
+    "results.csv": "144675a5aa1d159a4a3f7bd48ccbfc91ecf6955fabb6d1f89e60e08c01608e6e",
+    "host_budget_comparison.csv": "f2b043805d7614225fbe76d92f19a1a7950175e7cf32c0726657c3f936299293",
+    "xeon_plan.csv": "d8e458816d63388a1b1346a1d9ddaa8ab3c6cd88126edb4166c161512a2505f6",
+    "s4_pc2_extended_budget.tex": "cd1f76744b72459009e76d377e5605bb7ee9ccf2f975a6b146d8db0ded00df69",
+    "table_check.tex": "588a2e98b2e646b7046bfa8f5ad68b5addb140487166b5d763968a7d64c2558a"
+  },
+  "native_latex": {
+    "status": "PASS",
+    "compiler": "Codex desktop built-in compiler",
+    "source": "tables/table_check.tex",
+    "source_sha256": "588a2e98b2e646b7046bfa8f5ad68b5addb140487166b5d763968a7d64c2558a",
+    "scope": "Current final source compiled successfully; compiler returned no warning count."
+  },
+  "measurements_not_extrapolated": true,
+  "xeon_measurements": "NOT_COLLECTED; plan rows remain separate",
+  "fine_direct_full_vs_original_checked_lazy": "INCOMPLETE"
+}

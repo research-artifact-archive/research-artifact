@@ -1,0 +1,105 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "B" ], [ "NEW", "P" ], [ "NEW", "S" ] ],
+    "testers" : {
+      "ready_budget" : "2"
+    },
+    "pending" : [ ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "S" ], [ "NEW", "P" ], [ "NEW", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "OLD", "P" ], [ "NEW", "B" ], [ "OLD", "S" ] ],
+    "testers" : {
+      "ready_budget" : "2"
+    },
+    "pending" : [ "rho_1", "rho_3" ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 7
+  }, {
+    "physical" : [ [ "OLD", "P" ], [ "NEW", "S" ], [ "NEW", "B" ] ],
+    "testers" : {
+      "ready_budget" : "2"
+    },
+    "pending" : [ "rho_1" ],
+    "id" : 3,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 5
+  }, {
+    "physical" : [ [ "OLD", "P" ], [ "NEW", "S" ], [ "NEW", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ "rho_1" ],
+    "id" : 4,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "P" ], [ "NEW", "S" ], [ "OLD", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ "rho_1", "rho_3" ],
+    "id" : 5,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 6
+  }, {
+    "physical" : [ [ "OLD", "P" ], [ "OLD", "S" ], [ "OLD", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ "rho_1", "rho_2", "rho_3" ],
+    "id" : 6,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 8
+  }, {
+    "physical" : [ [ "OLD", "S" ], [ "NEW", "E" ], [ "NEW", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ "rho_1" ],
+    "id" : 7,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "S" ], [ "NEW", "P" ], [ "NEW", "S" ] ],
+    "testers" : {
+      "ready_budget" : "3"
+    },
+    "pending" : [ "rho_1" ],
+    "id" : 8,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  } ],
+  "strategy_edges" : [ [ 6, "rho_2", 2 ], [ 2, "ready_2", 5 ], [ 5, "rho_3", 3 ], [ 3, "ready_3", 4 ], [ 4, "stepdown_1_2", 7 ], [ 7, "elect_2", 8 ], [ 8, "rho_1", 0 ], [ 0, "ready_1", 1 ] ]
+}

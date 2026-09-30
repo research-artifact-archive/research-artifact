@@ -1,0 +1,145 @@
+{
+  "artifact_digests": {
+    "output": {
+      "bytes": 80001,
+      "exists": true,
+      "sha256": "fa2cc6829aa4d4db21d8871a844b639ed8234915cdf7abaee34ba1ac98ee9393"
+    },
+    "stderr": {
+      "bytes": 43,
+      "exists": true,
+      "sha256": "44dc056992775b106c9a00c93ddad8409ac6e273a5e41ee7b342aec73bd8f3a2"
+    },
+    "stdout": {
+      "bytes": 0,
+      "exists": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions": {
+      "bytes": "",
+      "exists": false,
+      "sha256": ""
+    }
+  },
+  "artifacts": {
+    "output": "runs\\workflow__base__rep01__legacy_ducs\\output.txt",
+    "stderr": "runs\\workflow__base__rep01__legacy_ducs\\stderr.txt",
+    "stdout": "runs\\workflow__base__rep01__legacy_ducs\\stdout.txt",
+    "transitions": "runs\\workflow__base__rep01__legacy_ducs\\transitions.txt"
+  },
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "command": [
+    "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.20.101-hotspot\\bin\\java.exe",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Xmx200g",
+    "-cp",
+    "C:\\fgducs\\fg-ducs-xeon-campaign\\Implementation\\Source Code\\maven-root\\mtsa\\target\\mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "C:\\fgducs\\fg-ducs-xeon-campaign\\Implementation\\Experiment\\Models\\Workflow_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_FG",
+    "--output",
+    "C:\\fgducs\\fg-ducs-xeon-campaign\\raw\\ext6_legacy_heap200\\runs\\workflow__base__rep01__legacy_ducs\\output.txt",
+    "--transitions",
+    "C:\\fgducs\\fg-ducs-xeon-campaign\\raw\\ext6_legacy_heap200\\runs\\workflow__base__rep01__legacy_ducs\\transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "command_text": "\"C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.20.101-hotspot\\bin\\java.exe\" -Djava.awt.headless=true -Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07 -Dmtsa.evaluation.enabled=true -Xmx200g -cp \"C:\\fgducs\\fg-ducs-xeon-campaign\\Implementation\\Source Code\\maven-root\\mtsa\\target\\mtsa-1.0-SNAPSHOT.jar\" ltsa.updatingControllers.cli.SingleCompositionRunner --lts C:\\fgducs\\fg-ducs-xeon-campaign\\Implementation\\Experiment\\Models\\Workflow_FG.lts --target UPDATE_CONTROLLER_FG --output C:\\fgducs\\fg-ducs-xeon-campaign\\raw\\ext6_legacy_heap200\\runs\\workflow__base__rep01__legacy_ducs\\output.txt --transitions C:\\fgducs\\fg-ducs-xeon-campaign\\raw\\ext6_legacy_heap200\\runs\\workflow__base__rep01__legacy_ducs\\transitions.txt --transition-output summary",
+  "completed": true,
+  "config_sha256": "c82499ff7124344e4370c80538cc2c61b2469f6110dec0ea5c603fc1ea9b6925",
+  "cwd": "C:\\fgducs\\fg-ducs-xeon-campaign",
+  "elapsed_monotonic_ns": 3541391709800,
+  "elapsed_monotonic_seconds": 3541.3917098,
+  "evaluation_csv": {
+    "errors": [],
+    "found": true,
+    "header": [
+      "mode",
+      "result",
+      "solver_status",
+      "verification_status",
+      "run_verified",
+      "failure_reason",
+      "section",
+      "metric_key",
+      "metric_label",
+      "value",
+      "unit",
+      "formula",
+      "metric_schema_version",
+      "metric_description_id",
+      "section_readable_ja",
+      "metric_readable_ja",
+      "metric_category",
+      "artifact",
+      "phase",
+      "action",
+      "event",
+      "stat"
+    ],
+    "marker_count": 1,
+    "row_count": 192
+  },
+  "execution_environment_fingerprint_sha256": "3a7ab124193e241de8bd3973659b482424d579b6a5247b26fbc70d79571950d0",
+  "exit_code": 5,
+  "experiment_id": "fg-ducs-xeon-ext6_legacy_heap200",
+  "finished_utc": "2026-09-29T01:24:44.925460+00:00",
+  "harness_error": "",
+  "harness_errors": [],
+  "harness_termination_action": "",
+  "input_model": {
+    "bytes": 22870,
+    "exists": true,
+    "sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1"
+  },
+  "job": {
+    "analysis_role": "prior_tool_on_fine_grained_input_legacy_semantics",
+    "block_id": "workflow__base__rep01",
+    "global_order_index": 1,
+    "job_id": "workflow__base__rep01__legacy_ducs",
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true"
+    },
+    "method_base_order": [
+      "legacy_ducs"
+    ],
+    "method_id": "legacy_ducs",
+    "method_order": [
+      "legacy_ducs"
+    ],
+    "method_order_index": 0,
+    "method_order_seed": 6981652207862324633,
+    "model_id": "workflow",
+    "model_path": "Implementation/Experiment/Models/Workflow_FG.lts",
+    "repetition": 1,
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_FG",
+    "unit_order_index": 1,
+    "unit_order_seed": 6694611020961240181
+  },
+  "meta_schema_version": 1,
+  "order_algorithm": "listed-units/listed-methods-v1",
+  "peak_rss_bytes": 222903013376,
+  "peak_rss_kib": 217678724,
+  "plan_sha256": "5efc753a425413be9bf8f94077906b961e7a9328cf27065445e3bb7a2e8e70d8",
+  "rss_measurement_kind": "windows_process_working_set",
+  "rss_measurement_status": "measured",
+  "rss_poll_interval_seconds": 0.1,
+  "rss_samples_attempted": 35155,
+  "rss_samples_available": 35155,
+  "spawn_error": "",
+  "started_utc": "2026-09-29T00:25:42.088098+00:00",
+  "status": "OOM",
+  "timed_out": false,
+  "timeout_seconds": 3600.0,
+  "timeout_termination_action": "",
+  "transition_output_mode": "summary"
+}

@@ -1,0 +1,27 @@
+% E5 constructed initial-state transfer-domain variants; all 18 input/requirement pairs.
+
+\begin{tabular}{llrrrrl}
+\toprule
+Input & Req. & Original & None & Transfers & DF none & Group \\
+\midrule
+GSM & Base & WIN / 31 & WIN / 18 & WIN / 18 & NR & null \\
+GSM & R1 & WIN / 34 & WIN / 33 & WIN / 33 & NR & null \\
+Industry & Base & WIN / 272 & LOSS / 13804 & LOSS / 13804 & NR & bothLOSS \\
+Industry & R1 & LOSS / 38942 & LOSS / 11865 & LOSS / 11865 & NR & bothLOSS \\
+MetaSocket & Base & WIN / 8 & LOSS / 37 & LOSS / 13 & NR & bothLOSS \\
+MetaSocket & R1 & WIN / 8 & LOSS / 47 & LOSS / 17 & NR & bothLOSS \\
+PowerPlant & Base & WIN / 73 & LOSS / 2724 & LOSS / 1412 & NR & bothLOSS \\
+PowerPlant & R1 & WIN / 759 & LOSS / 10809 & LOSS / 5859 & NR & bothLOSS \\
+PC1 & Base & WIN / 83 & TO & TO & NR & Incomplete \\
+PC1 & R1 & WIN / 94 & TO & TO & NR & Incomplete \\
+PC2 & Base & WIN / 2502 & TO & TO & NR & Incomplete \\
+PC2 & R1 & WIN / 2433 & TO & TO & NR & Incomplete \\
+Railcab & Base & WIN / 171 & TO & NR & NR & Incomplete \\
+Railcab & R1 & WIN / 13339 & NR & NR & NR & Incomplete \\
+Surveillance & Base & WIN / 5319 & NR & NR & NR & Incomplete \\
+Surveillance & R1 & WIN / 96301 & NR & NR & NR & Incomplete \\
+Workflow & Base & WIN / 151 & NR & NR & NR & Incomplete \\
+Workflow & R1 & WIN / 1098 & NR & NR & NR & Incomplete \\
+\bottomrule
+\end{tabular}
+{\par\smallskip\footnotesize Entries show decision / discovered states. Original uses the existing unmodified-contract Lazy first trial; the three new columns use initial-state restricted transfer relations. Each started cell uses one Mac trial with a 1,200\,s limit and 32\,GiB heap. TO and NR denote timeout and not started before the predeclared cutoff. No retries or substitutions.}

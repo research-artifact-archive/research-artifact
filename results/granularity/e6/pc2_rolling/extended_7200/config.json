@@ -1,0 +1,27 @@
+{
+  "schema": "pc2-extended-7200-v1",
+  "host": "mac",
+  "heap": "32g",
+  "timeout_seconds": 7200,
+  "trials": 1,
+  "java": "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "input_sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+  "diagnostic_class_sha256": "0314a378d0ba6c03605f483f1dd28c1aa386426fc15ec71df1aa440079d3b6ae",
+  "start_cutoff": "2026-09-30T07:59:50+09:00",
+  "final_report_deadline": "2026-09-30T10:00:00+09:00",
+  "jobs": [
+    {
+      "id": "lazy_transfers",
+      "solver": "otf",
+      "merge": "transfers",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "direct_full_none",
+      "solver": "direct_full",
+      "merge": "none",
+      "expected_decision": "WIN"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "completed": true,
+  "status": "TIMEOUT",
+  "started_utc": "2026-09-28T19:57:39.657583+00:00",
+  "job": {
+    "job_id": "surveillance__base__rep01__direct_full_ucpruned",
+    "model_id": "surveillance",
+    "model_path": "Implementation/Experiment/Models/Surveillance_FG.lts",
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "method_id": "direct_full_ucpruned",
+    "merge": "none",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "direct_full_ucpruned",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "false",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=5117ac36bd910067a9ee22152a3101e909eaf6d7",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=false",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=direct_full_ucpruned",
+    "-Xmx64g",
+    "-cp",
+    "ablation_20260928/jars/e2.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/Models/Surveillance_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "ablation_20260928\\raw\\e2_xeon\\pass1_1200s\\runs\\surveillance__base__rep01__direct_full_ucpruned\\output.txt",
+    "--transitions",
+    "ablation_20260928\\raw\\e2_xeon\\pass1_1200s\\runs\\surveillance__base__rep01__direct_full_ucpruned\\transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "64g",
+  "attempt": "pass1_1200s",
+  "jar_sha256": "4cc2a2f1ab403b239a281fa86c7bd15cdf59dc95068d6b85e864ffca8d437672",
+  "source_commit": "5117ac36bd910067a9ee22152a3101e909eaf6d7",
+  "input_sha256": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8",
+  "platform": "xeon",
+  "pid": 7220,
+  "finished_utc": "2026-09-28T20:17:45.967956+00:00",
+  "elapsed_monotonic_seconds": 1206.2955891,
+  "exit_code": 1,
+  "artifact_digests": {
+    "output": {
+      "sha256": "9c1ce2e835c4738fdb0f5a1e496d4e0e7cd8dc15da633a2069f6d75165632c2b",
+      "bytes": 12229
+    },
+    "stderr": {
+      "sha256": "501c2961696b8e2806b9f9d4177d2c62e9b1b445311fab14a65a1723b5a2acee",
+      "bytes": 86
+    },
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+}

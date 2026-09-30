@@ -1,0 +1,222 @@
+Process:
+	C_DRILL_POLISH_CLEAN
+States:
+	81
+Transitions:
+	C_DRILL_POLISH_CLEAN = Q0,
+	Q0	= (in[1] -> Q1
+		  |in[2] -> Q80),
+	Q1	= (drill[1] -> Q2
+		  |in[2] -> Q79),
+	Q2	= (drillNOk[1] -> Q1
+		  |in[2] -> Q3
+		  |drillOk[1] -> Q78),
+	Q3	= (drill[2] -> Q4
+		  |drillOk[1] -> Q77
+		  |drillNOk[1] -> Q79),
+	Q4	= (drillNOk[2] -> Q3
+		  |drillNOk[1] -> Q5
+		  |drillOk[2] -> Q75
+		  |drillOk[1] -> Q76),
+	Q5	= (drill[1] -> Q4
+		  |drillOk[2] -> Q6
+		  |drillNOk[2] -> Q79),
+	Q6	= (polish[2] -> Q7
+		  |drill[1] -> Q75),
+	Q7	= (polishNOk[2] -> Q6
+		  |drill[1] -> Q8
+		  |polishOk[2] -> Q74),
+	Q8	= (drillNOk[1] -> Q7
+		  |drillOk[1] -> Q9
+		  |polishOk[2] -> Q73
+		  |polishNOk[2] -> Q75),
+	Q9	= (polish[1] -> Q10
+		  |polishNOk[2] -> Q71
+		  |polishOk[2] -> Q72),
+	Q10	= (polishNOk[1] -> Q9
+		  |polishNOk[2] -> Q11
+		  |polishOk[1] -> Q69
+		  |polishOk[2] -> Q70),
+	Q11	= (polish[2] -> Q10
+		  |polishOk[1] -> Q12
+		  |polishNOk[1] -> Q71),
+	Q12	= (clean[1] -> Q13
+		  |polish[2] -> Q69),
+	Q13	= (cleanNOk[1] -> Q12
+		  |polish[2] -> Q14
+		  |cleanOk[1] -> Q68),
+	Q14	= (polishNOk[2] -> Q13
+		  |cleanOk[1] -> Q15
+		  |polishOk[2] -> Q67
+		  |cleanNOk[1] -> Q69),
+	Q15	= (polishOk[2] -> Q16
+		  |out[1] -> Q66
+		  |polishNOk[2] -> Q68),
+	Q16	= (clean[2] -> Q17
+		  |out[1] -> Q65),
+	Q17	= (cleanNOk[2] -> Q16
+		  |cleanOk[2] -> Q18
+		  |out[1] -> Q64),
+	Q18	= (out[1] -> Q19
+		  |out[2] -> Q63),
+	Q19	= (reset[1] -> Q20
+		  |out[2] -> Q62),
+	Q20	= (in[1] -> Q21
+		  |out[2] -> Q61),
+	Q21	= (drill[1] -> Q22
+		  |out[2] -> Q60),
+	Q22	= (drillNOk[1] -> Q21
+		  |drillOk[1] -> Q23
+		  |out[2] -> Q59),
+	Q23	= (polish[1] -> Q24
+		  |out[2] -> Q58),
+	Q24	= (polishNOk[1] -> Q23
+		  |polishOk[1] -> Q25
+		  |out[2] -> Q54),
+	Q25	= (clean[1] -> Q26
+		  |out[2] -> Q53),
+	Q26	= (cleanOk[1] -> Q18
+		  |cleanNOk[1] -> Q25
+		  |out[2] -> Q27),
+	Q27	= (reset[2] -> Q28
+		  |cleanNOk[1] -> Q53
+		  |cleanOk[1] -> Q63),
+	Q28	= (cleanNOk[1] -> Q29
+		  |in[2] -> Q50
+		  |cleanOk[1] -> Q51),
+	Q29	= (clean[1] -> Q28
+		  |in[2] -> Q30),
+	Q30	= (drill[2] -> Q31
+		  |clean[1] -> Q50),
+	Q31	= (drillOk[2] -> Q12
+		  |drillNOk[2] -> Q30
+		  |clean[1] -> Q32),
+	Q32	= (drillOk[2] -> Q13
+		  |cleanNOk[1] -> Q31
+		  |cleanOk[1] -> Q33
+		  |drillNOk[2] -> Q50),
+	Q33	= (drillNOk[2] -> Q34
+		  |out[1] -> Q36
+		  |drillOk[2] -> Q68),
+	Q34	= (drill[2] -> Q33
+		  |out[1] -> Q35),
+	Q35	= (drill[2] -> Q36
+		  |reset[1] -> Q80),
+	Q36	= (drillNOk[2] -> Q35
+		  |reset[1] -> Q37
+		  |drillOk[2] -> Q49),
+	Q37	= (in[1] -> Q5
+		  |drillOk[2] -> Q38
+		  |drillNOk[2] -> Q80),
+	Q38	= (in[1] -> Q6
+		  |polish[2] -> Q39),
+	Q39	= (in[1] -> Q7
+		  |polishNOk[2] -> Q38
+		  |polishOk[2] -> Q40),
+	Q40	= (clean[2] -> Q41
+		  |in[1] -> Q74),
+	Q41	= (cleanOk[2] -> Q20
+		  |cleanNOk[2] -> Q40
+		  |in[1] -> Q42),
+	Q42	= (cleanOk[2] -> Q21
+		  |drill[1] -> Q43
+		  |cleanNOk[2] -> Q74),
+	Q43	= (cleanOk[2] -> Q22
+		  |drillNOk[1] -> Q42
+		  |drillOk[1] -> Q44
+		  |cleanNOk[2] -> Q73),
+	Q44	= (cleanOk[2] -> Q23
+		  |polish[1] -> Q45
+		  |cleanNOk[2] -> Q72),
+	Q45	= (cleanOk[2] -> Q24
+		  |polishNOk[1] -> Q44
+		  |polishOk[1] -> Q46
+		  |cleanNOk[2] -> Q70),
+	Q46	= (cleanOk[2] -> Q25
+		  |clean[1] -> Q47
+		  |cleanNOk[2] -> Q48),
+	Q47	= (cleanOk[1] -> Q17
+		  |cleanOk[2] -> Q26
+		  |cleanNOk[1] -> Q46
+		  |cleanNOk[2] -> Q67),
+	Q48	= (clean[2] -> Q46
+		  |clean[1] -> Q67),
+	Q49	= (reset[1] -> Q38
+		  |polish[2] -> Q66),
+	Q50	= (cleanNOk[1] -> Q30
+		  |drill[2] -> Q32
+		  |cleanOk[1] -> Q34),
+	Q51	= (in[2] -> Q34
+		  |out[1] -> Q52),
+	Q52	= (reset[1] -> Q0
+		  |in[2] -> Q35),
+	Q53	= (clean[1] -> Q27
+		  |reset[2] -> Q29),
+	Q54	= (polishOk[1] -> Q53
+		  |reset[2] -> Q55
+		  |polishNOk[1] -> Q58),
+	Q55	= (polishOk[1] -> Q29
+		  |in[2] -> Q56
+		  |polishNOk[1] -> Q78),
+	Q56	= (polishOk[1] -> Q30
+		  |drill[2] -> Q57
+		  |polishNOk[1] -> Q77),
+	Q57	= (drillOk[2] -> Q11
+		  |polishOk[1] -> Q31
+		  |drillNOk[2] -> Q56
+		  |polishNOk[1] -> Q76),
+	Q58	= (polish[1] -> Q54
+		  |reset[2] -> Q78),
+	Q59	= (reset[2] -> Q2
+		  |drillOk[1] -> Q58
+		  |drillNOk[1] -> Q60),
+	Q60	= (reset[2] -> Q1
+		  |drill[1] -> Q59),
+	Q61	= (reset[2] -> Q0
+		  |in[1] -> Q60),
+	Q62	= (reset[2] -> Q52
+		  |reset[1] -> Q61),
+	Q63	= (reset[2] -> Q51
+		  |out[1] -> Q62),
+	Q64	= (cleanOk[2] -> Q19
+		  |reset[1] -> Q41
+		  |cleanNOk[2] -> Q65),
+	Q65	= (reset[1] -> Q40
+		  |clean[2] -> Q64),
+	Q66	= (reset[1] -> Q39
+		  |polishNOk[2] -> Q49
+		  |polishOk[2] -> Q65),
+	Q67	= (cleanOk[1] -> Q16
+		  |clean[2] -> Q47
+		  |cleanNOk[1] -> Q48),
+	Q68	= (polish[2] -> Q15
+		  |out[1] -> Q49),
+	Q69	= (polishNOk[2] -> Q12
+		  |clean[1] -> Q14
+		  |polishOk[2] -> Q48),
+	Q70	= (clean[2] -> Q45
+		  |polishOk[1] -> Q48
+		  |polishNOk[1] -> Q72),
+	Q71	= (polish[2] -> Q9
+		  |polish[1] -> Q11),
+	Q72	= (clean[2] -> Q44
+		  |polish[1] -> Q70),
+	Q73	= (clean[2] -> Q43
+		  |drillOk[1] -> Q72
+		  |drillNOk[1] -> Q74),
+	Q74	= (clean[2] -> Q42
+		  |drill[1] -> Q73),
+	Q75	= (drillNOk[1] -> Q6
+		  |polish[2] -> Q8
+		  |drillOk[1] -> Q71),
+	Q76	= (polish[1] -> Q57
+		  |drillOk[2] -> Q71
+		  |drillNOk[2] -> Q77),
+	Q77	= (polish[1] -> Q56
+		  |drill[2] -> Q76),
+	Q78	= (polish[1] -> Q55
+		  |in[2] -> Q77),
+	Q79	= (drill[1] -> Q3
+		  |drill[2] -> Q5),
+	Q80	= (drill[2] -> Q37
+		  |in[1] -> Q79)+{{stamp, stampOk}[1..2].

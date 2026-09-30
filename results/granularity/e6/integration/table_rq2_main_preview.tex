@@ -1,0 +1,43 @@
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+\setcopyright{none}
+\acmDOI{}
+\acmISBN{}
+\begin{document}
+\newsavebox{\rqtable}
+\newsavebox{\rqbody}
+\sbox{\rqbody}{\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}lllcclcc@{}}
+\toprule
+Family & Mechanism & Evidence & Fine & All & Threshold or control & E1 & v3 \\
+\midrule
+Cell$_n$ & M1 & L1,L3 & W & L & $n=2\ldots10$ (E4) & -- & -- \\
+Rolling$(n,m,k)$ & M2 & L1,L3 & W & L & W iff $k\le n-m$ & P & P \\
+Canary & M3 & L1,L2,L3 & W & L & set-valued; recovery & P & P \\
+Policy$(2)$ & M4 & boundary & W & L & opposing boundary orders & P & P \\
+DB-Rolling & M1,M2 & L1,L3 & W/L & L/L & $m=2/3$, respectively & P & P \\
+PC2-Rolling & M2 & pending & W & TO & merged cap: 7200\,s & -- & -- \\
+Threads (control) & M1* & control & W/L & W/L & backpressure/saturation & P & P \\
+\bottomrule
+\end{tabular}
+\endgroup}
+\ifdim\wd\rqbody>\textwidth
+\PackageError{e6}{Table exceeds text width}{Reduce column spacing without dropping results.}
+\fi
+\setbox\rqtable=\vbox{\hsize=\textwidth
+\centering
+\captionof{table}{Constructed comparisons, not prevalence estimates. Details: S1/S4.}
+\usebox{\rqbody}
+\par\vspace{2pt}{\scriptsize W/L: WIN/LOSS. All: transfers (Policy: boundaries). P: PASS; --: other validation scope (S1/S4). E1/v3: merge equivalence/independent game; *: idle/progress control. Rolling Fine/All: $k=1/n$.}
+}
+\ifdim\dimexpr\ht\rqtable+\dp\rqtable+12pt\relax>.25\textheight
+\PackageError{e6}{Table height \the\dimexpr\ht\rqtable+\dp\rqtable+12pt\relax exceeds quarter text page \the\dimexpr\textheight/4\relax}{Reduce the table layout without dropping results.}
+\fi
+\noindent\usebox{\rqtable}
+\par\medskip
+\footnotesize Width: \the\textwidth. Table height including 12pt allowance:
+\the\dimexpr\ht\rqtable+\dp\rqtable+12pt\relax.
+Quarter text height: \the\dimexpr\textheight/4\relax.
+\end{document}

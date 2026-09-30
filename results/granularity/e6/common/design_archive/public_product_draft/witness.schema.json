@@ -1,0 +1,480 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/fg-ducs-witness-v1.schema.json",
+  "title": "Finite FG-DUCS witness input",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "fg-ducs-witness-v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "ordinary": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "controllable": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/component"
+      },
+      "minItems": 1
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requirement"
+      },
+      "minItems": 0
+    },
+    "precedence": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 0
+    },
+    "endpoints": {
+      "type": "object",
+      "properties": {
+        "old": {
+          "$ref": "#/$defs/oldEndpoint"
+        },
+        "new": {
+          "$ref": "#/$defs/newEndpoint"
+        }
+      },
+      "required": [
+        "old",
+        "new"
+      ],
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema",
+    "id",
+    "family",
+    "parameters",
+    "ordinary",
+    "controllable",
+    "components",
+    "requirements",
+    "precedence",
+    "endpoints"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "lts": {
+      "type": "object",
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "initial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "states",
+        "initial",
+        "edges"
+      ],
+      "additionalProperties": false
+    },
+    "tester": {
+      "type": "object",
+      "properties": {
+        "states": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "initial": {
+          "type": "string",
+          "minLength": 1
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "alphabet": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "states",
+        "initial",
+        "errors",
+        "alphabet",
+        "changes"
+      ],
+      "additionalProperties": false
+    },
+    "physical": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "enum": [
+              "OLD",
+              "NEW"
+            ]
+          },
+          {
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 1
+    },
+    "testers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "activation": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "physical": {
+                "$ref": "#/$defs/physical"
+              },
+              "tester_state": {
+                "type": "string",
+                "minLength": 1
+              },
+              "residual_state": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "physical",
+              "tester_state",
+              "residual_state"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "residual": {
+          "$ref": "#/$defs/tester"
+        }
+      },
+      "required": [
+        "entries"
+      ],
+      "additionalProperties": false
+    },
+    "requirement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "old",
+            "new",
+            "interval"
+          ]
+        },
+        "tester": {
+          "$ref": "#/$defs/tester"
+        },
+        "update_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "activation": {
+          "$ref": "#/$defs/activation"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "tester"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "role": {
+                "const": "old"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "update_action"
+            ],
+            "not": {
+              "required": [
+                "activation"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "role": {
+                "const": "new"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "update_action",
+              "activation"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "role": {
+                "const": "interval"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "activation"
+            ],
+            "not": {
+              "required": [
+                "update_action"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "component": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "old": {
+          "$ref": "#/$defs/lts"
+        },
+        "new": {
+          "$ref": "#/$defs/lts"
+        },
+        "transfer_action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transfer": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        }
+      },
+      "required": [
+        "id",
+        "old",
+        "new",
+        "transfer_action",
+        "transfer"
+      ],
+      "additionalProperties": false
+    },
+    "oldProjection": {
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/$defs/physical"
+        },
+        "testers": {
+          "$ref": "#/$defs/testers"
+        }
+      },
+      "required": [
+        "physical",
+        "testers"
+      ],
+      "additionalProperties": false
+    },
+    "newProjection": {
+      "type": "object",
+      "properties": {
+        "physical": {
+          "$ref": "#/$defs/physical"
+        },
+        "testers": {
+          "$ref": "#/$defs/testers"
+        },
+        "goal_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "physical",
+        "testers",
+        "goal_id"
+      ],
+      "additionalProperties": false
+    },
+    "oldEndpoint": {
+      "type": "object",
+      "properties": {
+        "lts": {
+          "$ref": "#/$defs/lts"
+        },
+        "controller": {
+          "$ref": "#/$defs/lts"
+        },
+        "projection": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/oldProjection"
+          }
+        }
+      },
+      "required": [
+        "lts",
+        "controller",
+        "projection"
+      ],
+      "additionalProperties": false
+    },
+    "newEndpoint": {
+      "type": "object",
+      "properties": {
+        "lts": {
+          "$ref": "#/$defs/lts"
+        },
+        "controller": {
+          "$ref": "#/$defs/lts"
+        },
+        "projection": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/newProjection"
+          }
+        },
+        "loadable": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "lts",
+        "controller",
+        "projection",
+        "loadable"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

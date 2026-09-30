@@ -1,0 +1,254 @@
+{
+  "id" : "policy_2_coarse",
+  "family" : "Policy",
+  "parameters" : {
+    "requirement_pairs" : 2,
+    "boundary_grouping" : "all"
+  },
+  "merge" : "none",
+  "generated_contract_mode" : "boundaries",
+  "solver" : "lazy",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "java_version" : "17.0.19",
+  "decision" : "LOSS",
+  "states_discovered" : 16,
+  "states_expanded" : 4,
+  "successor_queries" : 30,
+  "materialized_transitions" : 30,
+  "enabled_buckets" : 30,
+  "enabled_buckets_definition" : "distinct queried state/action pairs with nonempty Post during synthesis, before certificate/Link diagnostics",
+  "preparation_seconds" : 0.018199,
+  "solver_seconds" : 0.002851375,
+  "certificate_checker" : "PASS",
+  "endpoint_checker" : "PASS",
+  "worst_completion_rank" : null,
+  "root_ranks" : null,
+  "certificate_states" : 16,
+  "losing_region_states" : 16,
+  "link_checker" : "NOT_APPLICABLE_LOSS",
+  "loss_summary" : {
+    "scope" : "checked discovered-state losing certificate; sampled local root closure evidence, not a unique whole-game causal explanation",
+    "region_states" : 16,
+    "unsafe_region_states" : 12,
+    "safe_region_states" : 4,
+    "initial_states" : 2,
+    "losing_initial_states" : 2,
+    "initial_examples_limit" : 3,
+    "initial_examples" : [ {
+      "physical" : [ [ "OLD", "running" ] ],
+      "testers" : {
+        "coverage_and_exclusion" : "1010",
+        "old_audit" : "unlogged",
+        "old_role" : "valid"
+      },
+      "pending" : [ "ablation.merge.starts", "ablation.merge.stops", "rho_runtime" ],
+      "enabled_action_buckets" : [ {
+        "action" : "ablation.merge.starts",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "ERROR",
+            "new_audit" : "unlogged",
+            "new_role" : "valid",
+            "old_audit" : "unlogged",
+            "old_role" : "valid"
+          },
+          "pending" : [ "ablation.merge.stops", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "rho_runtime",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "ablation.merge.stops",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "ERROR"
+          },
+          "pending" : [ "ablation.merge.starts", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "access_new",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "1010",
+            "old_audit" : "unlogged",
+            "old_role" : "ERROR"
+          },
+          "pending" : [ "ablation.merge.starts", "ablation.merge.stops", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "access_old",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "log_new",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "log_old",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "service",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "1010",
+            "old_audit" : "ERROR",
+            "old_role" : "valid"
+          },
+          "pending" : [ "ablation.merge.starts", "ablation.merge.stops", "rho_runtime" ]
+        } ]
+      } ],
+      "safe" : true
+    }, {
+      "physical" : [ [ "OLD", "running" ] ],
+      "testers" : {
+        "coverage_and_exclusion" : "1010",
+        "old_audit" : "logged",
+        "old_role" : "valid"
+      },
+      "pending" : [ "ablation.merge.starts", "ablation.merge.stops", "rho_runtime" ],
+      "enabled_action_buckets" : [ {
+        "action" : "ablation.merge.starts",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "ERROR",
+            "new_audit" : "unlogged",
+            "new_role" : "valid",
+            "old_audit" : "logged",
+            "old_role" : "valid"
+          },
+          "pending" : [ "ablation.merge.stops", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "rho_runtime",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "ablation.merge.stops",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "ERROR"
+          },
+          "pending" : [ "ablation.merge.starts", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "access_new",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 1,
+        "unsafe_outcome_examples" : [ {
+          "physical" : [ [ "OLD", "running" ] ],
+          "testers" : {
+            "coverage_and_exclusion" : "1010",
+            "old_audit" : "logged",
+            "old_role" : "ERROR"
+          },
+          "pending" : [ "ablation.merge.starts", "ablation.merge.stops", "rho_runtime" ]
+        } ]
+      }, {
+        "action" : "access_old",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "log_new",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "log_old",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "service",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      } ],
+      "safe" : true
+    } ]
+  },
+  "loss_reason" : "The checked discovered-state losing certificate contains 16 states (12 unsafe) and 2/2 initial states; its stored root buckets retain every adversarial outcome and identify the outcomes in this certificate (local closure evidence, not a unique causal explanation).",
+  "checking_and_link_seconds" : 0.012190167,
+  "input_sha256" : "e1064c8a4e269f505e8b2707844fe7d5a80c899a9b1ec72cb687ee8a0cc78667",
+  "game_equivalence" : {
+    "status" : "PASS",
+    "reachable_states" : 98,
+    "nonempty_buckets" : 637,
+    "outcomes" : 637
+  },
+  "certificate_file" : "certificate.json",
+  "certificate_sha256" : "254b7366a724f18d1abeed1b54c360cc72bd924bda4fdda25ca1fe5814e83c3e"
+}

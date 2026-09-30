@@ -1,0 +1,609 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "rolling_n05_m03_k05",
+  "family": "rolling",
+  "parameters": {
+    "n": 5,
+    "m": 3,
+    "k": 5
+  },
+  "ordinary": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "serve_4",
+    "serve_5",
+    "ready_1",
+    "ready_2",
+    "ready_3",
+    "ready_4",
+    "ready_5"
+  ],
+  "controllable": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "serve_4",
+    "serve_5"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_1",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_2",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_3",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_3",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_3",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_3",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_4",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_4",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_4",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_4",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_5",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_5",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_5",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_5",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "availability",
+      "role": "interval",
+      "tester": {
+        "states": [
+          "q3",
+          "q4",
+          "q5",
+          "ERR_AVAILABILITY"
+        ],
+        "initial": "q5",
+        "errors": [
+          "ERR_AVAILABILITY"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "serve_3",
+          "serve_4",
+          "serve_5",
+          "ready_1",
+          "ready_2",
+          "ready_3",
+          "ready_4",
+          "ready_5",
+          "ablation.merge.transfers"
+        ],
+        "changes": [
+          [
+            "q3",
+            "ablation.merge.transfers",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q3",
+            "ready_1",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_2",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_3",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_4",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_5",
+            "q4"
+          ],
+          [
+            "q4",
+            "ablation.merge.transfers",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q4",
+            "ready_1",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_2",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_3",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_4",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_5",
+            "q5"
+          ],
+          [
+            "q5",
+            "ablation.merge.transfers",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q5",
+            "ready_1",
+            "q5"
+          ],
+          [
+            "q5",
+            "ready_2",
+            "q5"
+          ],
+          [
+            "q5",
+            "ready_3",
+            "q5"
+          ],
+          [
+            "q5",
+            "ready_4",
+            "q5"
+          ],
+          [
+            "q5",
+            "ready_5",
+            "q5"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "q5",
+            "residual_state": "q5"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "O"
+        ],
+        "initial": "O",
+        "edges": [
+          [
+            "O",
+            "serve_1",
+            "O"
+          ],
+          [
+            "O",
+            "serve_2",
+            "O"
+          ],
+          [
+            "O",
+            "serve_3",
+            "O"
+          ],
+          [
+            "O",
+            "serve_4",
+            "O"
+          ],
+          [
+            "O",
+            "serve_5",
+            "O"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "serve_1",
+            "C"
+          ],
+          [
+            "C",
+            "serve_2",
+            "C"
+          ],
+          [
+            "C",
+            "serve_3",
+            "C"
+          ],
+          [
+            "C",
+            "serve_4",
+            "C"
+          ],
+          [
+            "C",
+            "serve_5",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "O": {
+          "physical": [
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "N"
+        ],
+        "initial": "N",
+        "edges": [
+          [
+            "N",
+            "serve_1",
+            "N"
+          ],
+          [
+            "N",
+            "serve_2",
+            "N"
+          ],
+          [
+            "N",
+            "serve_3",
+            "N"
+          ],
+          [
+            "N",
+            "serve_4",
+            "N"
+          ],
+          [
+            "N",
+            "serve_5",
+            "N"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "serve_1",
+            "C"
+          ],
+          [
+            "C",
+            "serve_2",
+            "C"
+          ],
+          [
+            "C",
+            "serve_3",
+            "C"
+          ],
+          [
+            "C",
+            "serve_4",
+            "C"
+          ],
+          [
+            "C",
+            "serve_5",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "N": {
+          "physical": [
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "all_ready"
+        }
+      },
+      "loadable": [
+        "N"
+      ]
+    }
+  },
+  "metadata": {
+    "mechanism": "M2",
+    "expected_decision": "LOSS",
+    "groups": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ],
+    "group_sizes": [
+      5
+    ],
+    "readiness_abstraction": "Each booting replica has one enabled uncontrollable ready event and no waiting self-loop; no fairness assumption.",
+    "endpoint_initial_note": "The fixed new endpoint starts ready; transfers enter its booting state.",
+    "interval_meaning": "At least m replicas are ready at every update state; transfer removes its group size from the count and each ready event restores one.",
+    "group_construction": "n physical components retained; shared transfer labels admitted only through the documented existing E1 generated-contract builder hook.",
+    "anchor": "Kubernetes Deployment maxUnavailable/maxSurge/readiness, not PDB enforcement of Deployment rolling updates.",
+    "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+  },
+  "generated_contract_mode": "transfers"
+}

@@ -1,0 +1,942 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "job_id": "n02_m01_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 5,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "rank_edges_checked": 4,
+      "reason": "All 5 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n02_m01_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 5,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "rank_edges_checked": 5,
+      "reason": "All 5 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n02_m01_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 5,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "rank_edges_checked": 5,
+      "reason": "All 5 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n02_m01_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 5,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "rank_edges_checked": 4,
+      "reason": "All 5 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n02_m01_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 18,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n02_m01_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 13,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n02_m01_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 13,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n02_m01_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 18,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m01_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 7,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 6,
+      "reason": "All 7 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m01_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 13,
+      "reason": "All 9 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m01_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 13,
+      "reason": "All 9 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m01_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 7,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 6,
+      "reason": "All 7 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m01_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 77,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m01_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 57,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m01_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 57,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m01_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 77,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m02_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 7,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 6,
+      "reason": "All 7 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m02_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 13,
+      "reason": "All 9 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m02_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 13,
+      "reason": "All 9 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m02_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 7,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "rank_edges_checked": 6,
+      "reason": "All 7 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n03_m02_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 70,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m02_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 56,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "BP",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m02_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 56,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "BP",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n03_m02_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 70,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m01_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m01_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m01_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m01_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 1 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m01_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 292,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m01_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 241,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m01_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 241,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m01_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 292,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m02_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m02_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m02_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m02_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 2 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m02_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 283,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m02_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 240,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m02_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 240,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m02_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 283,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m03_healthy_only_fine_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 3 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m03_healthy_only_merged_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 3 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m03_healthy_only_all_lazy",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 33,
+      "reason": "All 17 returned WIN-certificate states retain at least 3 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m03_healthy_only_fine_df",
+      "control": "healthy_only",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "rank_edges_checked": 8,
+      "reason": "All 9 returned WIN-certificate states retain at least 3 physically healthy replicas and every returned strategy edge decreases rank."
+    },
+    {
+      "job_id": "n04_m03_no_recovery_fine_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 227,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m03_no_recovery_merged_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 228,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "BP",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m03_no_recovery_all_lazy",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 228,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 3,
+          "local_state": "BP",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    },
+    {
+      "job_id": "n04_m03_no_recovery_fine_df",
+      "control": "no_recovery",
+      "decision": "LOSS",
+      "certificate_states": 227,
+      "status": "PASS",
+      "broken_state_examples": [
+        {
+          "state_id": 0,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 0,
+          "component": 2,
+          "local_state": "B",
+          "goal": false
+        },
+        {
+          "state_id": 1,
+          "component": 1,
+          "local_state": "B",
+          "goal": false
+        }
+      ],
+      "all_components_irreversible": true,
+      "reason": "The returned LOSS certificate contains a transferred BP/B state; its component cannot return to H in the no-recovery graph, whereas every loadable goal requires all components in H."
+    }
+  ],
+  "issues": []
+}

@@ -1,0 +1,633 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "db_n3_m2_all",
+  "family": "DB-Rolling",
+  "parameters": {
+    "n": 3,
+    "m": 2,
+    "k": 3
+  },
+  "ordinary": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "ready_1",
+    "ready_2",
+    "ready_3",
+    "elect_1",
+    "elect_2",
+    "elect_3",
+    "stepdown_1_2",
+    "stepdown_1_3",
+    "stepdown_2_1",
+    "stepdown_2_3",
+    "stepdown_3_1",
+    "stepdown_3_2"
+  ],
+  "controllable": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "stepdown_1_2",
+    "stepdown_1_3",
+    "stepdown_2_1",
+    "stepdown_2_3",
+    "stepdown_3_1",
+    "stepdown_3_2"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "initial": "P",
+        "states": [
+          "P",
+          "S",
+          "E"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_1",
+            "P"
+          ],
+          [
+            "S",
+            "serve_1",
+            "S"
+          ],
+          [
+            "E",
+            "serve_1",
+            "E"
+          ],
+          [
+            "E",
+            "elect_1",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_1_2",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_2_1",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_1_3",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_3_1",
+            "E"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "S",
+        "states": [
+          "P",
+          "S",
+          "E",
+          "B"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_1",
+            "P"
+          ],
+          [
+            "S",
+            "serve_1",
+            "S"
+          ],
+          [
+            "E",
+            "serve_1",
+            "E"
+          ],
+          [
+            "E",
+            "elect_1",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_1_2",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_2_1",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_1_3",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_3_1",
+            "E"
+          ],
+          [
+            "B",
+            "ready_1",
+            "S"
+          ]
+        ]
+      },
+      "transfer": {
+        "S": [
+          "B"
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers"
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "initial": "S",
+        "states": [
+          "P",
+          "S",
+          "E"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_2",
+            "P"
+          ],
+          [
+            "S",
+            "serve_2",
+            "S"
+          ],
+          [
+            "E",
+            "serve_2",
+            "E"
+          ],
+          [
+            "E",
+            "elect_2",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_2_1",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_1_2",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_2_3",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_3_2",
+            "E"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "P",
+        "states": [
+          "P",
+          "S",
+          "E",
+          "B"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_2",
+            "P"
+          ],
+          [
+            "S",
+            "serve_2",
+            "S"
+          ],
+          [
+            "E",
+            "serve_2",
+            "E"
+          ],
+          [
+            "E",
+            "elect_2",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_2_1",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_1_2",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_2_3",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_3_2",
+            "E"
+          ],
+          [
+            "B",
+            "ready_2",
+            "S"
+          ]
+        ]
+      },
+      "transfer": {
+        "S": [
+          "B"
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers"
+    },
+    {
+      "id": "replica_3",
+      "old": {
+        "initial": "S",
+        "states": [
+          "P",
+          "S",
+          "E"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_3",
+            "P"
+          ],
+          [
+            "S",
+            "serve_3",
+            "S"
+          ],
+          [
+            "E",
+            "serve_3",
+            "E"
+          ],
+          [
+            "E",
+            "elect_3",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_3_1",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_1_3",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_3_2",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_2_3",
+            "E"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "S",
+        "states": [
+          "P",
+          "S",
+          "E",
+          "B"
+        ],
+        "edges": [
+          [
+            "P",
+            "serve_3",
+            "P"
+          ],
+          [
+            "S",
+            "serve_3",
+            "S"
+          ],
+          [
+            "E",
+            "serve_3",
+            "E"
+          ],
+          [
+            "E",
+            "elect_3",
+            "P"
+          ],
+          [
+            "P",
+            "stepdown_3_1",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_1_3",
+            "E"
+          ],
+          [
+            "P",
+            "stepdown_3_2",
+            "S"
+          ],
+          [
+            "S",
+            "stepdown_2_3",
+            "E"
+          ],
+          [
+            "B",
+            "ready_3",
+            "S"
+          ]
+        ]
+      },
+      "transfer": {
+        "S": [
+          "B"
+        ]
+      },
+      "transfer_action": "ablation.merge.transfers"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "ready_budget",
+      "role": "interval",
+      "tester": {
+        "initial": "3",
+        "states": [
+          "2",
+          "3",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "serve_3",
+          "ready_1",
+          "ready_2",
+          "ready_3",
+          "elect_1",
+          "elect_2",
+          "elect_3",
+          "stepdown_1_2",
+          "stepdown_1_3",
+          "stepdown_2_1",
+          "stepdown_2_3",
+          "stepdown_3_1",
+          "stepdown_3_2",
+          "ablation.merge.transfers"
+        ],
+        "changes": [
+          [
+            "2",
+            "ablation.merge.transfers",
+            "ERROR"
+          ],
+          [
+            "2",
+            "ready_1",
+            "3"
+          ],
+          [
+            "2",
+            "ready_2",
+            "3"
+          ],
+          [
+            "2",
+            "ready_3",
+            "3"
+          ],
+          [
+            "3",
+            "ablation.merge.transfers",
+            "ERROR"
+          ],
+          [
+            "3",
+            "ready_1",
+            "3"
+          ],
+          [
+            "3",
+            "ready_2",
+            "3"
+          ],
+          [
+            "3",
+            "ready_3",
+            "3"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "P"
+              ],
+              [
+                "OLD",
+                "S"
+              ],
+              [
+                "OLD",
+                "S"
+              ]
+            ],
+            "tester_state": "3",
+            "residual_state": "3"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "initial": "q",
+        "states": [
+          "q"
+        ],
+        "edges": [
+          [
+            "q",
+            "serve_1",
+            "q"
+          ],
+          [
+            "q",
+            "serve_2",
+            "q"
+          ],
+          [
+            "q",
+            "serve_3",
+            "q"
+          ]
+        ]
+      },
+      "controller": {
+        "initial": "q",
+        "states": [
+          "q"
+        ],
+        "edges": [
+          [
+            "q",
+            "serve_1",
+            "q"
+          ],
+          [
+            "q",
+            "serve_2",
+            "q"
+          ],
+          [
+            "q",
+            "serve_3",
+            "q"
+          ]
+        ]
+      },
+      "projection": {
+        "q": {
+          "physical": [
+            [
+              "OLD",
+              "P"
+            ],
+            [
+              "OLD",
+              "S"
+            ],
+            [
+              "OLD",
+              "S"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "initial": "q",
+        "states": [
+          "q"
+        ],
+        "edges": [
+          [
+            "q",
+            "serve_1",
+            "q"
+          ],
+          [
+            "q",
+            "serve_2",
+            "q"
+          ],
+          [
+            "q",
+            "serve_3",
+            "q"
+          ]
+        ]
+      },
+      "controller": {
+        "initial": "q",
+        "states": [
+          "q"
+        ],
+        "edges": [
+          [
+            "q",
+            "serve_1",
+            "q"
+          ],
+          [
+            "q",
+            "serve_2",
+            "q"
+          ],
+          [
+            "q",
+            "serve_3",
+            "q"
+          ]
+        ]
+      },
+      "projection": {
+        "q": {
+          "physical": [
+            [
+              "NEW",
+              "S"
+            ],
+            [
+              "NEW",
+              "P"
+            ],
+            [
+              "NEW",
+              "S"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "replica2_primary"
+        }
+      },
+      "loadable": [
+        "q"
+      ]
+    }
+  },
+  "metadata": {
+    "mechanism": "M1+M2",
+    "contribution": "L1/L3",
+    "expected_decision": "LOSS",
+    "source": "https://www.mongodb.com/docs/v7.0/tutorial/upgrade-to-enterprise-replica-set/",
+    "scope": "constructed secondary-only maintenance contract; finite election/rejoin abstraction; no claim of uninterrupted writes"
+  },
+  "generated_contract_mode": "transfers"
+}

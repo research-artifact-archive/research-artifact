@@ -1,0 +1,61 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "H" ], [ "NEW", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "NEW", "H" ], [ "NEW", "HP" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "H" ], [ "OLD", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ "rho_2" ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "NEW", "HP" ], [ "OLD", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ "rho_2" ],
+    "id" : 3,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "H" ], [ "OLD", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 4,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  } ],
+  "strategy_edges" : [ [ 4, "rho_1", 3 ], [ 3, "reportH_1", 2 ], [ 2, "rho_2", 1 ], [ 1, "reportH_2", 0 ] ]
+}

@@ -1,0 +1,66 @@
+% Candidate-only figure; no manuscript is edited.
+% Requires tikz and arrows.meta. All diagram labels are 8 pt; no scaling.
+% Source: railcab_policy_demo/policy-fragment.json and handoff-bundle.json.
+% Full descendant subgraph of M69: 26 states, 25 edges. Exact contractions:
+% M30 -> M29 -> M28 -> M27 (3 transfers); M27 -> ... -> M20 (7 starts).
+% M19 -> M18 -> M17 -> M16 (3 transfers); M14 -> ... -> M7 (7 starts).
+% Transfer order: ANOTHER_REQUEST, REQUEST_ATOMIC, TURNS.
+% Start order: P_BRAKE_DURING_LASTBRAKE, P_BRAKE_IF_SOMETHING_BAD,
+% P_CHECK_STATUS_AFTER_APPROACHING_CROSSING,
+% P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE,
+% P_EBRAKE_DURING_ELASTBRAKE, P_EBRAKE_IF_SOMETHING_BAD, P_NEW_NOT_CRASH.
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[
+  x=1mm,y=1mm,
+  font=\fontsize{8}{9}\selectfont,
+  statebox/.style={draw,rounded corners=1.2pt,line width=.4pt,
+    align=center,inner xsep=1pt,inner ysep=2pt,minimum width=18mm},
+  goalbox/.style={statebox,fill=black!6,minimum width=20mm},
+  edge/.style={-{Latex[length=1.4mm,width=1mm]},line width=.45pt},
+  uc/.style={edge,dashed},
+  action/.style={align=center,inner sep=0pt}
+]
+\node[statebox,minimum width=18mm] (source) at (9,0)
+  {OLD\\ENDOFTS\\rank 13};
+\coordinate (fork) at (23,0);
+\node[action] at (11,12)
+  {\texttt{reconfigure\_}\\\texttt{MILESTONES} (C)};
+\draw[edge] (source.east) -- (fork);
+\fill (fork) circle (.55mm);
+
+% Both outcomes belong to the single controllable transfer above.
+\node[statebox] (upperA) at (35,12) {ENDOFTS\\rank 11};
+\node[statebox,minimum width=19mm] (upperB) at (64,12) {AC, T\\rank 10};
+\node[statebox,minimum width=19mm] (upperC) at (91,12) {AC, T\\rank 7};
+\node[goalbox] (upperGoal) at (119,12) {AC, T\\rank 0\\target 3};
+\draw[edge] (fork) -- (23,12) -- (upperA.west);
+\draw[uc] (upperA.east) -- (upperB.west);
+\node[action] at (49.5,22) {\texttt{approachingCrossing}\\(UC)};
+\draw[edge] (upperB.east) -- (upperC.west);
+\node[action] at (77.5,22) {3 transfers\\(C)};
+\draw[edge] (upperC.east) -- (upperGoal.west);
+\node[action] at (105,22) {7 starts\\(C)};
+
+\node[statebox,minimum width=19mm] (lowerA) at (35,-12) {AC, F\\rank 12};
+\node[statebox,minimum width=19mm] (lowerB) at (57,-12) {AC, F\\rank 9};
+\node[statebox,minimum width=16mm] (lowerC) at (77.5,-12) {initial\\rank 8};
+\node[statebox,minimum width=17mm] (lowerD) at (97.5,-12) {ENDOFTS\\rank 7};
+\node[goalbox] (lowerGoal) at (119,-12) {ENDOFTS\\rank 0\\target 1};
+\draw[edge] (fork) -- (23,-12) -- (lowerA.west);
+\draw[edge] (lowerA.east) -- (lowerB.west);
+\node[action] at (46,-2) {3 transfers\\(C)};
+\draw[edge] (lowerB.east) -- (lowerC.west);
+\node[action] at (67.25,-2) {\texttt{brake}\\(C)};
+\draw[uc] (lowerC.east) -- (lowerD.west);
+\node[action] at (87.5,-2) {\texttt{endOfTS}\\(UC)};
+\draw[edge] (lowerD.east) -- (lowerGoal.west);
+\node[action] at (108.25,-2) {7 starts\\(C)};
+
+\node[anchor=west,align=left,font=\fontsize{8}{9}\selectfont] at (0,-23)
+{C: controllable; UC: uncontrollable (dashed). Shaded boxes: handover targets.};
+\end{tikzpicture}
+\caption{Both outcomes of one Railcab/Base transfer after five old stops and before any new start. AC is approaching-crossing; T/F records whether that event occurred since \texttt{endOfTS}. Boxes show milestone state and rank; targets identify supplied new-controller states. Only single-path sequences of three transfers or seven starts are contracted. Every branch of this 26-state, 25-edge fragment is retained.}
+\Description{A controllable milestone transfer has two outcomes. One waits for approachingCrossing, completes transfers and starts, then hands control to controller state 3. The other transfers, brakes, waits for endOfTS, starts the monitors and hands control to state 1. Ranks decrease on every branch.}
+\label{fig:railcab-policy}
+\end{figure}

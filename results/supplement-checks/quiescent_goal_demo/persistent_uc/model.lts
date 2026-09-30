@@ -1,0 +1,32 @@
+// Qualitative quiescent-goal fixture; no monitors or dependencies.
+set ControllableActions = {idle}
+TEST_OLD = O,
+O = (idle -> O).
+TEST_NEW = N0,
+N0 = (idle -> N0 | spin -> N0).
+||OldEnvironment = (TEST_OLD).
+||NewEnvironment = (TEST_NEW).
+relation R_TEST_FG = {
+  O@TEST_OLD = reconfigure_TEST -> N0@TEST_NEW
+}
+OLD_C = (idle -> OLD_C).
+NEW_C = C0,
+C0 = (idle -> C0 | spin -> C0).
+||OldController = (OLD_C).
+||NewController = (NEW_C).
+controllerSpec OldSpec = { controllable = {ControllableActions} }
+controllerSpec NewSpec = { controllable = {ControllableActions} }
+updatingController QuiescentGoalCheck = {
+  oldController = OldController,
+  newController = NewController,
+  oldEnvironment = {TEST_OLD},
+  newEnvironment = {TEST_NEW},
+  mapRelation = {R_TEST_FG},
+  oldGoal = OldSpec,
+  newGoal = NewSpec,
+  loadable_new_states = {0},
+  nonblocking,
+  revised_on_the_fly,
+  fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG = QuiescentGoalCheck.

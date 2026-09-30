@@ -1,0 +1,90 @@
+{
+  "schema": "pc2-xeon-arrival-audit-v1",
+  "status": "PASS_WITH_PROVENANCE_LIMITATIONS",
+  "checks": "PASS",
+  "at": "2026-09-30T03:38:43.566060+09:00",
+  "archive_sha256": "57fea735d884d3a30587fb2677497d16d8c2ad3a1efe10553f678955d8352666",
+  "raw_files": 18,
+  "zip_entry_bytes_match": true,
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "input_sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+  "distributed_class_sha256": "0314a378d0ba6c03605f483f1dd28c1aa386426fc15ec71df1aa440079d3b6ae",
+  "runtime_class_sha256": null,
+  "distributed_package_sha256": "6d34ad9808841ab79c7c35e97cbd06a173a2e788661d4d187fca4294cba7e418",
+  "distributed_package_files": {
+    "ablation_20260928/jars/e1.jar": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+    "pc2_rolling_xeon/inputs/ProductionCell_Arms2_Calibration.lts": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+    "pc2_rolling_xeon/classes/ltsa/updatingControllers/cli/Pc2DiagnosticRunner.class": "0314a378d0ba6c03605f483f1dd28c1aa386426fc15ec71df1aa440079d3b6ae"
+  },
+  "launcher_sha256": "48598f064de260966b7e5e2b119234008098ff52d024ca4c4e915ec925ec4f27",
+  "analysis_source_sha256": "1930690519b2e853331e0c511413b090da6ad09728b9640ae298947011a2fb69",
+  "host": "xeon",
+  "heap": "200g",
+  "timeout_seconds": 7200,
+  "trials": 3,
+  "execution_order": [
+    "lazy_transfers",
+    "direct_full_none",
+    "lazy_none"
+  ],
+  "table_order": [
+    "lazy_none",
+    "lazy_transfers",
+    "direct_full_none"
+  ],
+  "statuses": {
+    "WIN": 1,
+    "TO": 2
+  },
+  "pending": 0,
+  "cells": [
+    {
+      "job_id": "lazy_none",
+      "status": "WIN",
+      "exit_code": null,
+      "timed_out": false,
+      "wall_seconds": 99.024,
+      "peak_rss_bytes": 33308110848,
+      "peak_rss_gib": 31.02
+    },
+    {
+      "job_id": "lazy_transfers",
+      "status": "TO",
+      "exit_code": null,
+      "timed_out": true,
+      "wall_seconds": 7208.433,
+      "peak_rss_bytes": 98649681920,
+      "peak_rss_gib": 91.87
+    },
+    {
+      "job_id": "direct_full_none",
+      "status": "TO",
+      "exit_code": null,
+      "timed_out": true,
+      "wall_seconds": 7214.119,
+      "peak_rss_bytes": 222905368576,
+      "peak_rss_gib": 207.6
+    }
+  ],
+  "mac_win_diagnostic_equal_except_diagnostic_seconds": true,
+  "mac_win_transition_export_equal_after_line_ending_normalization": true,
+  "rss_scope": "Maximum sampled Windows Process.WorkingSet64; 500-ms polling; GiB = bytes / 2^30.",
+  "limitations": [
+    "All three completion exit_code fields are null; no numerical exit code is inferred.",
+    "Runtime class digest was not recorded or verified by the Xeon launcher. The distributed class is byte-identical to the fixed Mac class; this does not attest the runtime class bytes.",
+    "JAR and input identities are recorded in environment/invocation and are checked by the supplied launcher; no new remote filesystem verification was performed.",
+    "Peak RSS is the maximum sampled working set, not an exact continuous maximum or a Java-heap measurement.",
+    "Xeon WIN is accepted from its recorded native certificate and Link passes plus returned diagnostic and transition export. No new synthesis or checker JVM was run; the full Mac validation export remains a separate artifact.",
+    "This arrival manifest hashes received bytes after receipt; it is not a retrospective pre-execution freeze."
+  ],
+  "prior_mac_comparison_sha256": "f2b043805d7614225fbe76d92f19a1a7950175e7cf32c0726657c3f936299293",
+  "table_sha256": {
+    "tables/results.csv": "4f382a9f27c3d76ad88424c7ccf0442c019bd0d495920cbfa70d49bbaaafc742",
+    "tables/host_budget_comparison.csv": "7010c1413b37e6d9f993d18d02f4ec78e395f5e9bef21b2280dba8d909f371b2"
+  },
+  "no_new_jvm": true,
+  "raw_unchanged": true,
+  "arrival_manifest_sha256": "648a044ac80620dcc1e4ca270c18dde83b5aeb950f6bf8c33bb2b24cc97785ed",
+  "raw_sha256_manifest": "validation/raw_sha256_manifest.json",
+  "raw_sha256_manifest_sha256": "76e10548ec08ba96e0b8cec64f23ca22ac4f34e79b1267981ee4fb55c4736b4b"
+}

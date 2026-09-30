@@ -1,0 +1,64 @@
+\clearpage\noindent\textbf{Censored JVM attempts and elapsed time}\par
+The 1,200 s cap covers the whole JVM invocation, including startup, frontend and endpoints, solving, checks and output. For each Direct-Full timeout with five consistent FG completions, $b=1200/\operatorname{median}(t_{\rm FG,elapsed})$ is a lower bound on that censored attempt relative to the FG elapsed median, not a Direct-Full median or a solver-only speedup. The last column records the $1200/\operatorname{median}(t_{\rm FG,solver})$ quotient for transparency; it has no solver-time lower-bound interpretation because the cap includes non-solver work. Displayed bounds are rounded downward.
+\begin{longtable}{@{}llrrrr@{}}\toprule
+Model & Target & FG elapsed (s) & FG solver (s) & $b$ ($\geq$) & Cap/solver\\\midrule\endhead
+Industry & r1 & 563.93 & 562.13 & 2.12 & 2.13\\
+PC Arms=1 & r1 & 1.32 & 0.08 & 910.06 & 15125.54\\
+PC Arms=2 & base & 19.36 & 2.61 & 61.99 & 459.89\\
+PC Arms=2 & r1 & 19.86 & 2.60 & 60.43 & 461.22\\
+Railcab & base & 2.23 & 0.17 & 539.14 & 7090.31\\
+Railcab & r1 & 5.25 & 3.18 & 228.62 & 377.56\\
+Surveillance & base & 4.34 & 2.01 & 276.32 & 596.89\\
+Surveillance & r1 & 21.16 & 18.64 & 56.71 & 64.37\\
+Surveillance & r2 & 39.89 & 37.07 & 30.08 & 32.38\\
+Workflow & base & 7.06 & 0.11 & 169.92 & 10810.32\\
+Workflow & r1 & 7.17 & 0.33 & 167.45 & 3688.87\\
+Workflow & r2 & 23.05 & 16.06 & 52.05 & 74.70\\
+\bottomrule\end{longtable}
+Workflow/R2 uses the authorized supplementary attempt; the original operational interruption remains in the provenance table. Industry/R1 compares an unresolved attempt with a completed LOSS decision. The table measures time to decide the supplied game, not time to return a controller.
+\clearpage\noindent\textbf{Total JVM elapsed seconds: five-run median [min, max]}\par
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Req. & FG lazy & Eager & Update-first & Direct-Full & Legacy\\
+\midrule
+GSM & BASE & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.913]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.912, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.916]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.11, 1.22]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.912, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 1.01]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.22, 1.22]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.912, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.914, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.12\\[-3pt]\mbox{[1.11, 1.22]}\end{tabular}\\
+\addlinespace[2pt]
+Industry & BASE & \begin{tabular}[c]{@{}c@{}}W 1.92\\[-3pt]\mbox{[1.92, 1.92]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 16.3\\[-3pt]\mbox{[16, 16.5]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.22\\[-3pt]\mbox{[2.22, 2.33]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 156\\[-3pt]\mbox{[154, 168]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}L 564\\[-3pt]\mbox{[536, 568]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}L 462\\[-3pt]\mbox{[368, 514]}\end{tabular} & TO & N/M\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 2.93\\[-3pt]\mbox{[2.93, 2.93]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 4.75\\[-3pt]\mbox{[4.74, 4.95]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.23\\[-3pt]\mbox{[2.22, 2.33]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 29.8\\[-3pt]\mbox{[29.5, 30.1]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+MetaSocket & BASE & \begin{tabular}[c]{@{}c@{}}W 0.912\\[-3pt]\mbox{[0.813, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.91, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.911, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.91, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.21, 1.32]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.913]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.914, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.912, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.912, 0.913]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.42\\[-3pt]\mbox{[1.42, 1.43]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.913\\[-3pt]\mbox{[0.913, 0.914]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.912, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 0.914\\[-3pt]\mbox{[0.913, 0.915]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.22, 1.22]}\end{tabular}\\
+\addlinespace[2pt]
+PowerPlant & BASE & \begin{tabular}[c]{@{}c@{}}W 1.01\\[-3pt]\mbox{[1.01, 1.02]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.62\\[-3pt]\mbox{[1.52, 1.62]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.01\\[-3pt]\mbox{[1.01, 1.02]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.83\\[-3pt]\mbox{[2.83, 2.83]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 19.2\\[-3pt]\mbox{[18.3, 27]}\end{tabular}\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 1.12\\[-3pt]\mbox{[1.12, 1.12]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.13\\[-3pt]\mbox{[2.02, 2.13]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.12, 1.22]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 6.56\\[-3pt]\mbox{[6.45, 6.66]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 898\\[-3pt]\mbox{[807, 912]}\end{tabular}\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.22, 1.22]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.32\\[-3pt]\mbox{[1.32, 1.32]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.21, 1.22]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.12\\[-3pt]\mbox{[2.02, 2.13]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 9.29\\[-3pt]\mbox{[8.88, 9.38]}\end{tabular}\\
+\addlinespace[2pt]
+PC Arms=1 & BASE & \begin{tabular}[c]{@{}c@{}}W 1.22\\[-3pt]\mbox{[1.21, 1.22]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 27.6\\[-3pt]\mbox{[27.2, 28.5]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.03\\[-3pt]\mbox{[2.02, 2.12]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 159\\[-3pt]\mbox{[157, 160]}\end{tabular} & N/M\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 1.32\\[-3pt]\mbox{[1.31, 1.32]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 191\\[-3pt]\mbox{[188, 193]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 4.43\\[-3pt]\mbox{[4.25, 4.55]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 7.56\\[-3pt]\mbox{[7.46, 8.27]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 13.6\\[-3pt]\mbox{[13.6, 14.1]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 2.43\\[-3pt]\mbox{[2.42, 2.53]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 79.4\\[-3pt]\mbox{[78.5, 79.6]}\end{tabular} & N/M\\
+\addlinespace[2pt]
+PC Arms=2 & BASE & \begin{tabular}[c]{@{}c@{}}W 19.4\\[-3pt]\mbox{[19.2, 19.9]}\end{tabular} & TO & TO & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 19.9\\[-3pt]\mbox{[19.7, 20.3]}\end{tabular} & TO & TO & TO & OOM\\
+ & R2 & TO & TO & TO & TO & OOM\\
+\addlinespace[2pt]
+Railcab & BASE & \begin{tabular}[c]{@{}c@{}}W 2.23\\[-3pt]\mbox{[2.22, 2.23]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 4.24\\[-3pt]\mbox{[4.24, 4.25]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 5.25\\[-3pt]\mbox{[5.24, 5.25]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 8.88\\[-3pt]\mbox{[8.76, 9.07]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 17.9\\[-3pt]\mbox{[17.8, 17.9]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 41.2\\[-3pt]\mbox{[41.2, 41.4]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 6.36\\[-3pt]\mbox{[6.35, 6.46]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 285\\[-3pt]\mbox{[282, 287]}\end{tabular} & OOM\\
+\addlinespace[2pt]
+Surveillance & BASE & \begin{tabular}[c]{@{}c@{}}W 4.34\\[-3pt]\mbox{[4.34, 4.44]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 5.15\\[-3pt]\mbox{[4.85, 5.25]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 21.2\\[-3pt]\mbox{[20.8, 21.3]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 129\\[-3pt]\mbox{[129, 134]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 39.9\\[-3pt]\mbox{[39.9, 40.4]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 18.8\\[-3pt]\mbox{[18, 19.1]}\end{tabular} & TO & OOM\\
+\addlinespace[2pt]
+Workflow & BASE & \begin{tabular}[c]{@{}c@{}}W 7.06\\[-3pt]\mbox{[6.96, 7.06]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 518\\[-3pt]\mbox{[501, 528]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 7.06\\[-3pt]\mbox{[7.06, 7.16]}\end{tabular} & TO & OOM\\
+ & R1 & \begin{tabular}[c]{@{}c@{}}W 7.17\\[-3pt]\mbox{[7.06, 7.26]}\end{tabular} & TO & \begin{tabular}[c]{@{}c@{}}W 7.06\\[-3pt]\mbox{[6.96, 7.17]}\end{tabular} & TO & OOM\\
+ & R2 & \begin{tabular}[c]{@{}c@{}}W 23.1\\[-3pt]\mbox{[22.8, 23.4]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 30.9\\[-3pt]\mbox{[30.4, 31.6]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}W 10.2\\[-3pt]\mbox{[10.1, 10.3]}\end{tabular} & TO$^{\ddagger}$ & OOM\\
+\addlinespace[2pt]
+\bottomrule
+\end{tabular}\endgroup
+
+Incomplete cells retain their original display statuses and receive no timing estimate. Elapsed time is measured by the harness monotonic clock; timeout termination overhead is excluded from the conservative 1,200 s numerator above.

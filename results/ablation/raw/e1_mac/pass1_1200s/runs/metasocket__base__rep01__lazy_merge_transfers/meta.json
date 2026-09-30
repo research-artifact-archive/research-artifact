@@ -1,0 +1,81 @@
+{
+  "completed": true,
+  "status": "SUCCESS",
+  "started_utc": "2026-09-29T01:13:30.388048+00:00",
+  "job": {
+    "job_id": "metasocket__base__rep01__lazy_merge_transfers",
+    "model_id": "metasocket",
+    "model_path": "Implementation/Experiment/Models/MetaSocket_FG.lts",
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "method_id": "lazy_merge_transfers",
+    "merge": "transfers",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "otf",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false",
+      "mtsa.otf.contractMerge": "transfers"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=50563fc45bd4d3870a48318944a83ccf2bcf4676",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.contractMerge=transfers",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/Models/MetaSocket_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e1_mac/pass1_1200s/runs/metasocket__base__rep01__lazy_merge_transfers/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e1_mac/pass1_1200s/runs/metasocket__base__rep01__lazy_merge_transfers/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "attempt": "pass1_1200s",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "source_commit": "50563fc45bd4d3870a48318944a83ccf2bcf4676",
+  "input_sha256": "3b8a500a0d3ab1b19141c226e29fad8c43de4d3e7fb890e7cd94eeaa570c9c5f",
+  "platform": "mac",
+  "pid": 23730,
+  "finished_utc": "2026-09-29T01:13:31.170066+00:00",
+  "elapsed_monotonic_seconds": 0.781386542,
+  "exit_code": 0,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "0ff633d6d1fa2d99e8b111524464c9221c6db2430b58fe69aa22dfd91174747e",
+      "bytes": 78
+    },
+    "transitions": {
+      "sha256": "785bed3dc1d62e78f6473bdaec80bc4fbffba873675111d23a8e81dc4fc330fe",
+      "bytes": 178
+    },
+    "output": {
+      "sha256": "3430d92b6ff9dcfc714758fb8e01991256f4f329c3e3173c727556443c86b9eb",
+      "bytes": 88779
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "reviewed_at": "2026-09-29T19:57:02.559314+09:00",
+  "scope": "Read-only source/index/raw/provenance/validation review; no Java, solver, existing generator, or compiler rerun. Only these two review files were created.",
+  "index_rows": 96,
+  "main_pairs": 55,
+  "main_classes": {
+    "witness": 33,
+    "both_loss": 11,
+    "both_win": 10,
+    "incomplete": 1
+  },
+  "all_index_classes": {
+    "witness": 62,
+    "both_loss": 17,
+    "both_win": 16,
+    "incomplete": 1
+  },
+  "populations": {
+    "core": 34,
+    "operational_control": 20,
+    "scale_extension": 20,
+    "assumption_control": 12,
+    "application_plant_attempt": 1,
+    "reference_e4": 9
+  },
+  "visible_table_rows": 7,
+  "visible_index_comparisons": 63,
+  "non_fsp_raw_results": 285,
+  "e4_referenced_raw_results": 27,
+  "raw_metric_values": 1391,
+  "jar_sha_values": 285,
+  "fine_input_sha_values": 95,
+  "rolling_threshold_results": 70,
+  "registered_trials": {
+    "trials": 395,
+    "WIN": 194,
+    "LOSS": 197,
+    "TO": 2,
+    "OOM": 0,
+    "ERROR": 0,
+    "INVALID": 0,
+    "NOT_RUN": 0,
+    "NOT_STARTED": 1,
+    "RUNNING": 1
+  },
+  "checks": {
+    "index_count": 1,
+    "unique_comparisons": 1,
+    "index_classes": 1,
+    "index_populations": 1,
+    "main_count": 1,
+    "row_class": 96,
+    "raw_value": 1391,
+    "raw_jar": 285,
+    "native_certificate": 285,
+    "native_link": 172,
+    "fine_input_sha": 95,
+    "e4_summary_input": 9,
+    "pc2_original_status": 3,
+    "pc2_current_budget": 3,
+    "pc2_source_table": 15,
+    "pc2_timeout_no_decision": 2,
+    "pc2_fine_raw": 1,
+    "independent_report_status": 96,
+    "complete_v3_scope": 66,
+    "scale_scope": 20,
+    "pc2_scope": 1,
+    "e4_scope": 9,
+    "threshold_count": 1,
+    "threshold_raw": 350,
+    "threshold_observed": 70,
+    "threshold_index": 15,
+    "table_rows": 1,
+    "table_index_comparisons": 1,
+    "provenance_population": 7,
+    "provenance_source": 7,
+    "visible_decisions": 7,
+    "visible_scope": 7,
+    "detail_file": 11,
+    "rolling_label_clarification": 1,
+    "table_validation_hash": 1,
+    "native_record_fresh": 1,
+    "native_assertions": 1,
+    "registered_trials": 1,
+    "status_counts": 1,
+    "trial_count_source": 10,
+    "total_trial_counts": 1,
+    "dynamic_budget_note": 1,
+    "review_snapshot_stable": 1
+  },
+  "issues": [],
+  "resolved_findings": [
+    {
+      "finding": "Three supplementary table paths did not exist in earlier draft.",
+      "resolution": "All current provenance detail paths exist, including rolling/results.tex, canary/table_canary.tex and threads/table_threads_states.tex."
+    },
+    {
+      "finding": "Rolling row did not explicitly define Fine versus All k.",
+      "resolution": "Current legend says Rolling Fine/All: k=1/n; threshold separately checks all 70 saved k results."
+    },
+    {
+      "finding": "Extended-comparison comments assumed a fixed 1200 s budget and no completed PC2 coarse/Full result.",
+      "resolution": "Current comments point to source budget and separate host/budget table; original 393 trials plus 2 registered extension trials are counted separately."
+    }
+  ],
+  "validation_scopes": {
+    "Cell_n": "9 rows: NOT_APPLICABLE_E4_SCHEMA; E4 native certificate/Link and endpoint/frozen-result audits are separately reported. No E6 v3 or independent generated-merge equality is claimed.",
+    "PC2-Rolling": "1 row: NOT_APPLICABLE_FSP / PASS_FINE_ONLY; pending 7200 s run does not replace prior TO or create a decision certificate.",
+    "Rolling-scale": "20 rows: PASS_CERTIFICATE_SCOPE; every saved certificate checked with v3 Post plus endpoint/Full-formula validation, without a complete independently enumerated Python game.",
+    "remaining_json_families": "66 rows have complete-game v3 checks covering each fine, coarse, and Direct-Full job."
+  },
+  "native_layout": "Parent native PASS record matches current preview SHA; actual caption/body/legend height plus 12pt and width assertions inspected. This independent review did not rerun compilation.",
+  "reviewed_files_sha256": {
+    "results_index.csv": "af097f01cbc87c46417ffa3e742223c5f0c31e342563b189136df09b8cb3d144",
+    "integration/index_additions.py": "7f667f1dfd9c0078413efd9df2d22352b136f236a6bc06de21af5f82554301ea",
+    "integration/build_campaign_index.py": "3e7fedcc922b919c222d90ab6a9e7adb67471274418028ea0dc2594253837503",
+    "integration/build_main_table.py": "ce1187c363965c38052326c06fdc5d544d6af487c9d2d9f72bc542f9196b2e1d",
+    "integration/table_rq2_main.tex": "5b717950372da5a762662ba511864f83cc4fe28ee53ac08cda11137a3978db7b",
+    "integration/table_rq2_main_provenance.csv": "7056bd2296c33af2078f70e01860d931bd93ac2beb68d5f747d9050972f76349",
+    "integration/table_rq2_main_validation.json": "1cb4583a01757678dbd70cf555a1bc2df4f3eb4e624bf5914f1375fb738cfb8f",
+    "integration/table_rq2_main_preview.tex": "6fda0f1bba66ce2a4228f44a9ab50cc22a3b2a5f0c793af07d5e607323a67311",
+    "integration/native_layout_checks.json": "73af0f3ae3ab48cb2ce179ddc6a0e59a071f41543369887c57c368383bf37ddb",
+    "integration/status.json": "34e1193c434357fe6fc738aa57dff478b0eec4e2c493ccfddf18d80b4f0f873b",
+    "integration/all_registered_run_counts.csv": "a6649ee01b8403d759b53d2287708d730e2633450d3d213e5ea9c6267466ad74",
+    "integration/main_comparison_extended.tex": "b8e6ef22f0f8399c4eea28027bafe7de4f659d6248c235ed64c025399abe983c"
+  },
+  "limitation": "This is a snapshot during the separately registered PC2 extended run. Any later terminal result requires refreshing the index, compact table, provenance, and native layout record; no eventual WIN/LOSS is predicted here."
+}

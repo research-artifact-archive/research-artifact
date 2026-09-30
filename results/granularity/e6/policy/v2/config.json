@@ -1,0 +1,78 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "Policy",
+  "version": "v2_endpoint_alphabet_correction",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "frozen_paths": [
+    "policy/v2/gen_policy.py",
+    "policy/v2/validate_policy.py",
+    "common/witness.schema.json",
+    "common/SCHEMA.md"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "policy/v2/validate_policy.py",
+      "--output",
+      "policy/v2/validation/preflight-independent.json"
+    ]
+  ],
+  "preflight_jobs": [
+    "policy_fine_none_lazy",
+    "policy_fine_boundaries_lazy",
+    "policy_generated_coarse_none_lazy"
+  ],
+  "jobs": [
+    {
+      "id": "policy_fine_none_lazy",
+      "input": "inputs/policy_2_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "compare_input": "reference_v1_inputs/policy_2_fine.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "policy_fine_transfers_lazy",
+      "input": "inputs/policy_2_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN"
+    },
+    {
+      "id": "policy_fine_boundaries_lazy",
+      "input": "inputs/policy_2_fine.json",
+      "merge": "boundaries",
+      "solver": "lazy",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "policy_fine_both_lazy",
+      "input": "inputs/policy_2_fine.json",
+      "merge": "both",
+      "solver": "lazy",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "policy_fine_none_direct_full",
+      "input": "inputs/policy_2_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN"
+    },
+    {
+      "id": "policy_generated_coarse_none_lazy",
+      "input": "inputs/policy_2_coarse.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "compare_input": "inputs/policy_2_fine.json",
+      "compare_merge": "boundaries"
+    }
+  ]
+}

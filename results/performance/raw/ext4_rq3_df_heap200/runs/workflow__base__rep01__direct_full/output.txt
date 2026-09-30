@@ -1,0 +1,198 @@
+INFO: Registered Map Environment: MAP_ENTRY
+INFO: Registered Map Environment: MAP_INVENTORY
+INFO: Registered Map Environment: MAP_CREDIT
+INFO: Registered Map Environment: MAP_SHIPPING
+INFO: Registered Map Environment: MAP_BILLING
+comp.compile time : 99ms
+Compiled: ENTRY_OLD
+Compiled: INVENTORY_OLD
+Compiled: CREDIT_OLD
+Compiled: SHIPPING_OLD
+Compiled: BILLING_OLD
+Composition:OldEnv = OldEnv.ENTRY_OLD || OldEnv.INVENTORY_OLD || OldEnv.CREDIT_OLD || OldEnv.SHIPPING_OLD || OldEnv.BILLING_OLD
+State Space: 4 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 64 Transitions: 176 Memory used: 10288K
+Composed in 20ms
+Formula !P_AVOID_ROLLBACK = (true U rollback)
+GBA 2 states 3 transitions
+Buchi automata:
+P_AVOID_ROLLBACK = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |rollback -> S1).
+Composition:P_AVOID_ROLLBACK = rollback || SYNC || P_AVOID_ROLLBACK
+State Space: 2 * 2 * 2 = 2 ** 3
+Composing...
+-- States: 5 Transitions: 8 Memory used: 11063K
+Composed in 10ms
+After Tau elimination = 3 state
+Tau reduction ON
+P_AVOID_ROLLBACK minimising..
+Minimised States: 2 in 1ms
+make DFA(P_AVOID_ROLLBACK)
+DFA(P_AVOID_ROLLBACK) has 1 states.
+Tau reduction ON
+P_AVOID_ROLLBACK minimising..
+Minimised States: 1 in 0ms
+Formula !P_EVAL_POLICY = (true U (eval & (!CreditFinished | !InventoryFinished)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_EVAL_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |eval&!CreditFinished -> S1 |eval&!InventoryFinished -> S1).
+Composition:P_EVAL_POLICY = InventoryFinished || CreditFinished || eval || SYNC || P_EVAL_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11041K
+Composed in 10ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_EVAL_POLICY minimising....
+Minimised States: 5 in 0ms
+make DFA(P_EVAL_POLICY)
+DFA(P_EVAL_POLICY) has 4 states.
+Tau reduction ON
+P_EVAL_POLICY minimising....
+Minimised States: 4 in 0ms
+Formula !P_ARCHIVE_POLICY = (true U (archive & (!BillingFinished | !ShippingFinished)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_ARCHIVE_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |archive&!BillingFinished -> S1 |archive&!ShippingFinished -> S1).
+Composition:P_ARCHIVE_POLICY = ShippingFinished || BillingFinished || archive || SYNC || P_ARCHIVE_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11021K
+Composed in 10ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_ARCHIVE_POLICY minimising....
+Minimised States: 5 in 0ms
+make DFA(P_ARCHIVE_POLICY)
+DFA(P_ARCHIVE_POLICY) has 4 states.
+Tau reduction ON
+P_ARCHIVE_POLICY minimising....
+Minimised States: 4 in 0ms
+Formula !P_INITS_POLICY = (true U ((!OrderApproved & initBilling) | ((initShipping & !OrderApproved) | ((!OrderArrived & initCredit) | (initInventory & !OrderArrived)))))
+GBA 2 states 6 transitions
+Buchi automata:
+P_INITS_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(!OrderApproved&initBilling -> S1 |!OrderArrived&initCredit -> S1 |true -> S0 |initInventory&!OrderArrived -> S1 |initShipping&!OrderApproved -> S1).
+Composition:P_INITS_POLICY = OrderArrived || OrderApproved || initInventory || initCredit || initShipping || initBilling || SYNC || P_INITS_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 8
+Composing...
+-- States: 80 Transitions: 448 Memory used: 11377K
+Composed in 9ms
+After Tau elimination = 40 state
+Tau reduction ON
+P_INITS_POLICY minimising...
+Minimised States: 5 in 1ms
+make DFA(P_INITS_POLICY)
+DFA(P_INITS_POLICY) has 4 states.
+Tau reduction ON
+P_INITS_POLICY minimising...
+Minimised States: 4 in 0ms
+Formula !P_DONT_INIT_TWICE = (true U ((BillingFinished & initBilling) | ((ShippingFinished & initShipping) | ((CreditFinished & initCredit) | (InventoryFinished & initInventory)))))
+GBA 2 states 6 transitions
+Buchi automata:
+P_DONT_INIT_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |BillingFinished&initBilling -> S1 |CreditFinished&initCredit -> S1 |InventoryFinished&initInventory -> S1 |ShippingFinished&initShipping -> S1).
+Composition:P_DONT_INIT_TWICE = InventoryFinished || CreditFinished || ShippingFinished || BillingFinished || initInventory || initCredit || initShipping || initBilling || SYNC || P_DONT_INIT_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 10
+Composing...
+-- States: 320 Transitions: 1792 Memory used: 14192K
+Composed in 18ms
+After Tau elimination = 160 state
+Tau reduction ON
+P_DONT_INIT_TWICE minimising...
+Minimised States: 17 in 5ms
+make DFA(P_DONT_INIT_TWICE)
+DFA(P_DONT_INIT_TWICE) has 16 states.
+Tau reduction ON
+P_DONT_INIT_TWICE minimising...
+Minimised States: 16 in 1ms
+Composition:OldController = OldEnv || P_AVOID_ROLLBACK || P_EVAL_POLICY || P_INITS_POLICY || P_ARCHIVE_POLICY || P_DONT_INIT_TWICE
+State Space: 64 * 1 * 4 * 4 * 4 * 16 = 2 ** 16
+Composing...
+-- States: 22 Transitions: 77 Memory used: 11991K
+Composed in 13ms
+Solving the LTS control problem.
+Environment states: 23
+Game states: 23
+Game transitions: 69
+Analysis time: 109ms.
+Controller [22] generated successfully.
+Composition:OldController = OldController || P_AVOID_ROLLBACK || P_EVAL_POLICY || P_INITS_POLICY || P_ARCHIVE_POLICY || P_DONT_INIT_TWICE
+State Space: 22 * 1 * 4 * 4 * 4 * 16 = 2 ** 15
+Composing...
+-- States: 22 Transitions: 31 Memory used: 14176K
+Composed in 33ms
+ - Synthesizing Mapping Environment from lists (size=5)...
+INFO: Auto-compiling dependency: ENTRY_NEW
+Generating Mapping Environment: MAP_ENTRY_OLD_ENTRY_NEW
+INFO: Auto-compiling dependency: INVENTORY_NEW
+Generating Mapping Environment: MAP_INVENTORY_OLD_INVENTORY_NEW
+INFO: Auto-compiling dependency: CREDIT_NEW
+Generating Mapping Environment: MAP_CREDIT_OLD_CREDIT_NEW
+INFO: Auto-compiling dependency: SHIPPING_NEW
+Generating Mapping Environment: MAP_SHIPPING_OLD_SHIPPING_NEW
+INFO: Auto-compiling dependency: BILLING_NEW
+Generating Mapping Environment: MAP_BILLING_OLD_BILLING_NEW
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_SEQUENTIAL = (true U ((ShippingInitiated | ShippingFinished) & !BillingFinished))
+GBA 2 states 4 transitions
+Buchi automata:
+P_SEQUENTIAL = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |ShippingFinished&!BillingFinished -> S1 |ShippingInitiated&!BillingFinished -> S1).
+Composition:P_SEQUENTIAL = ShippingInitiated || ShippingFinished || BillingFinished || SYNC || P_SEQUENTIAL
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 13768K
+Composed in 28ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_SEQUENTIAL minimising...
+Minimised States: 3 in 1ms
+make DFA(P_SEQUENTIAL)
+DFA(P_SEQUENTIAL) has 2 states.
+Tau reduction ON
+P_SEQUENTIAL minimising...
+Minimised States: 2 in 0ms
+Composition:NewEnv = NewEnv.ENTRY_NEW || NewEnv.INVENTORY_NEW || NewEnv.CREDIT_NEW || NewEnv.SHIPPING_NEW || NewEnv.BILLING_NEW
+State Space: 4 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 64 Transitions: 176 Memory used: 13956K
+Composed in 27ms
+Composition:NewController = NewEnv || P_AVOID_ROLLBACK || P_INITS_POLICY || P_DONT_INIT_TWICE || P_SEQUENTIAL || P_ARCHIVE_POLICY || P_EVAL_POLICY
+State Space: 64 * 1 * 4 * 16 * 2 * 4 * 4 = 2 ** 17
+Composing...
+-- States: 18 Transitions: 61 Memory used: 14746K
+Composed in 36ms
+Solving the LTS control problem.
+Environment states: 19
+Game states: 19
+Game transitions: 57
+Analysis time: 30ms.
+Controller [18] generated successfully.
+Composition:NewController = NewController || P_AVOID_ROLLBACK || P_INITS_POLICY || P_DONT_INIT_TWICE || P_SEQUENTIAL || P_ARCHIVE_POLICY || P_EVAL_POLICY
+State Space: 18 * 1 * 4 * 16 * 2 * 4 * 4 = 2 ** 16
+Composing...
+-- States: 18 Transitions: 23 Memory used: 16009K
+Composed in 18ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 18
+ - Extracting New Safety Fluents and Building Look-up Tables...
+=========================================
+Mode: Revised OTF-DUCS (proof-producing strong synthesis)
+=========================================
+ - Components: 5
+ - Requirements: old=5, new=6, update-time=0
+ - Initial endpoint embeddings: 28
+ - Loadable new endpoint signatures: 21 / 21
+ - Controllable action order: endpoint_guided
+ - Solver implementation: direct_full
+ - Update-policy restriction: full_fg (unrestricted_fine_grained_update_choices)

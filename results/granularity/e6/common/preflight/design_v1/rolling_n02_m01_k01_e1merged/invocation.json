@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx2g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/rolling/v1/inputs/rolling_n02_m01_k01.json",
+    "--merge",
+    "transfers",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/common/preflight/design_v1/rolling_n02_m01_k01_e1merged/result.json",
+    "--compare-input",
+    "${E6_ROOT}/rolling/v1/inputs/rolling_n02_m01_k02.json",
+    "--compare-merge",
+    "none"
+  ],
+  "scope": "design test before measurement freeze",
+  "expected": "LOSS"
+}

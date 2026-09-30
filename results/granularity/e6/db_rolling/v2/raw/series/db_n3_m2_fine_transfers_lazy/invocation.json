@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-09-29T16:49:20.037331+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/db_rolling/v2/inputs/db_n3_m2_fine.json",
+    "--merge",
+    "transfers",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/db_rolling/v2/raw/series/db_n3_m2_fine_transfers_lazy/result.json"
+  ],
+  "job": {
+    "id": "db_n3_m2_fine_transfers_lazy",
+    "input": "inputs/db_n3_m2_fine.json",
+    "merge": "transfers",
+    "solver": "lazy",
+    "expected_decision": "LOSS"
+  },
+  "input_sha256": "39efa85e5c5f61cd038f3dcbeb361eaf73da975cb054e6e5317033919bba1353",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "8cc238f2dbe70a5fc5bdd0b73114af078a9f34a6297bfe165182f621c748d0a9",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

@@ -1,0 +1,143 @@
+{
+  "status": "INTERIM",
+  "generated_at": "2026-09-29T21:40:00.293689+09:00",
+  "indexed_pairs": 96,
+  "main_pair_counts": {
+    "witness": 33,
+    "both_loss": 11,
+    "both_win": 10,
+    "incomplete": 1,
+    "unexpected": 0
+  },
+  "by_population": {
+    "core": {
+      "witness": 33,
+      "both_loss": 1,
+      "both_win": 0,
+      "incomplete": 0,
+      "unexpected": 0
+    },
+    "operational_control": {
+      "witness": 0,
+      "both_loss": 10,
+      "both_win": 10,
+      "incomplete": 0,
+      "unexpected": 0
+    },
+    "scale_extension": {
+      "witness": 20,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0,
+      "unexpected": 0
+    },
+    "assumption_control": {
+      "witness": 0,
+      "both_loss": 6,
+      "both_win": 6,
+      "incomplete": 0,
+      "unexpected": 0
+    },
+    "application_plant_attempt": {
+      "witness": 0,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 1,
+      "unexpected": 0
+    },
+    "reference_e4": {
+      "witness": 9,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0,
+      "unexpected": 0
+    }
+  },
+  "sources": [
+    {
+      "path": "rolling/v1/summary.csv",
+      "sha256": "faf39632cd7decc90b5500068b098b355c00405b138495c85abd6c1dfc5b2950",
+      "rows": 100
+    },
+    {
+      "path": "canary/v1/summary.csv",
+      "sha256": "d4418cd664951171cc734142c82638dc12f48161ec2dd836895ddea650ff6903",
+      "rows": 60
+    },
+    {
+      "path": "policy/v2/summary.csv",
+      "sha256": "7a6de7174f604341efe7f2e9a7914a0f4eeb680f50dddfeb82951a399978069e",
+      "rows": 6
+    },
+    {
+      "path": "db_rolling/v2/summary.csv",
+      "sha256": "20eb94df79a7ad11ae10901303adbfda7a53b8bc1ccd1d81fd9966a1ab5f30a9",
+      "rows": 8
+    },
+    {
+      "path": "rolling_audit/v1/summary.csv",
+      "sha256": "1a738f31c45ccd39d6a1bd187a82b043993eedec84dbc5151b16c3c6327e11d4",
+      "rows": 8
+    },
+    {
+      "path": "threads/v1/summary.csv",
+      "sha256": "9d375e1c460f7d7ec4a4fd539e8ca422c39e6d32758937431804663ba45e826a"
+    },
+    {
+      "path": "rolling_scale/v1/summary.csv",
+      "sha256": "fb78f517304fd43e9fbbeb6fbe2c8910e0071fa87500b262fd50cfdef091610a"
+    },
+    {
+      "path": "canary_controls/v1/summary.csv",
+      "sha256": "86c621002bfa0ddf25b53590f616d6c256baee28c694d6b5b4f84950efb5eea7"
+    },
+    {
+      "path": "pc2_rolling/v2/tables/results.csv",
+      "sha256": "a637979d53e22db80b255ecf103dc4687ed15cacec5471b60d3925ee371dd3a1"
+    },
+    {
+      "path": "../e4_2_corrected/summary_wide.csv",
+      "sha256": "e6bdca47493d4663632a895de91bf946eed3fdbf4086334c064606405787ed64"
+    },
+    {
+      "path": "pc2_rolling/extended_7200/tables/results.csv",
+      "sha256": "e26d092e378eaf4c8d7dde867a37c47ee42286f87f80f08e583b39ad0a05ea8f"
+    },
+    {
+      "path": "independent/attempt03_strict_original.json",
+      "sha256": "b8f257a111124091a1018662c0edcd67e589b76d6e3c519621583d3a36f62caa"
+    },
+    {
+      "path": "independent/threads_strict_v3.json",
+      "sha256": "88ab7286d1b7cd8ea23116bdc5b60873bc89cace49a7c050d70f85808a309704"
+    },
+    {
+      "path": "independent/canary_controls_strict_v3.json",
+      "sha256": "072bee8dbb95d69ac36b5c2464e4e44a86a3af546e4a573e3032f8d029c837e2"
+    },
+    {
+      "path": "common/independent_checks/rolling_scale_final_review.json",
+      "sha256": "8507c1b14b6f934d758ed87bd52e5ab97312e7cd179be7ba12df1a2810fdba9a"
+    },
+    {
+      "path": "rolling/v1/tables/threshold.csv",
+      "sha256": "9c72a0eb263e2646c4562bd49226bc390552f3bf56c1b9d2de219b9446f04093"
+    }
+  ],
+  "counting": "Core plus Threads controls and PC2 attempt form main comparisons. Scale, Canary assumption controls, and nine E4 Cell_n reference comparisons are separate populations. A terminal PC2 extended-budget result is used once with explicit host/budget/campaign; original 1200 s statuses are retained. Incomplete cells never enter a measured decision category. E4 references add no E6 trials; original E1/E5 and retained earlier versions are not counted.",
+  "registered_trial_counts": {
+    "trials": 395,
+    "WIN": 194,
+    "LOSS": 197,
+    "TO": 3,
+    "OOM": 0,
+    "ERROR": 0,
+    "INVALID_CERTIFICATE": 0,
+    "INVALID_INPUT": 0,
+    "NOT_RUN": 0,
+    "NOT_STARTED": 0,
+    "RUNNING": 1
+  },
+  "original_nine_series_trials": 393,
+  "pc2_extension_trials": 2
+}

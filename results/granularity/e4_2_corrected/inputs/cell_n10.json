@@ -1,0 +1,2037 @@
+{
+  "schema": "fg-ducs-full-cell-ring-v1",
+  "n": 10,
+  "stations": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+  ],
+  "ordinary": [
+    "m_A",
+    "m_B",
+    "m_C",
+    "m_D",
+    "m_E",
+    "m_F",
+    "m_G",
+    "m_H",
+    "m_I",
+    "m_J",
+    "j_B",
+    "j_C",
+    "j_D",
+    "j_E",
+    "j_F",
+    "j_G",
+    "j_H",
+    "j_I",
+    "j_J"
+  ],
+  "controllable": [
+    "m_A",
+    "m_B",
+    "m_C",
+    "m_D",
+    "m_E",
+    "m_F",
+    "m_G",
+    "m_H",
+    "m_I",
+    "m_J",
+    "j_B",
+    "j_C",
+    "j_D",
+    "j_E",
+    "j_F",
+    "j_G",
+    "j_H",
+    "j_I",
+    "j_J"
+  ],
+  "components": [
+    {
+      "id": "A",
+      "old": {
+        "initial": "h",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "h",
+            "m_B",
+            "e"
+          ],
+          [
+            "e",
+            "m_A",
+            "h"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "h",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "h",
+            "m_B",
+            "e"
+          ],
+          [
+            "e",
+            "m_A",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_A",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "B",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_B",
+            "h"
+          ],
+          [
+            "h",
+            "m_C",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_B",
+            "h"
+          ],
+          [
+            "h",
+            "m_C",
+            "e"
+          ],
+          [
+            "h",
+            "j_B",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_B",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "C",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_C",
+            "h"
+          ],
+          [
+            "h",
+            "m_D",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_C",
+            "h"
+          ],
+          [
+            "h",
+            "m_D",
+            "e"
+          ],
+          [
+            "h",
+            "j_C",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_C",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "D",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_D",
+            "h"
+          ],
+          [
+            "h",
+            "m_E",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_D",
+            "h"
+          ],
+          [
+            "h",
+            "m_E",
+            "e"
+          ],
+          [
+            "h",
+            "j_D",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_D",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "E",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_E",
+            "h"
+          ],
+          [
+            "h",
+            "m_F",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_E",
+            "h"
+          ],
+          [
+            "h",
+            "m_F",
+            "e"
+          ],
+          [
+            "h",
+            "j_E",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_E",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "F",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_F",
+            "h"
+          ],
+          [
+            "h",
+            "m_G",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_F",
+            "h"
+          ],
+          [
+            "h",
+            "m_G",
+            "e"
+          ],
+          [
+            "h",
+            "j_F",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_F",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "G",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_G",
+            "h"
+          ],
+          [
+            "h",
+            "m_H",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_G",
+            "h"
+          ],
+          [
+            "h",
+            "m_H",
+            "e"
+          ],
+          [
+            "h",
+            "j_G",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_G",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "H",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_H",
+            "h"
+          ],
+          [
+            "h",
+            "m_I",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_H",
+            "h"
+          ],
+          [
+            "h",
+            "m_I",
+            "e"
+          ],
+          [
+            "h",
+            "j_H",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_H",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "I",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_I",
+            "h"
+          ],
+          [
+            "h",
+            "m_J",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_I",
+            "h"
+          ],
+          [
+            "h",
+            "m_J",
+            "e"
+          ],
+          [
+            "h",
+            "j_I",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_I",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "J",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_J",
+            "h"
+          ],
+          [
+            "h",
+            "m_A",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_J",
+            "h"
+          ],
+          [
+            "h",
+            "m_A",
+            "e"
+          ],
+          [
+            "h",
+            "j_J",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_J",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    }
+  ],
+  "requirements": {
+    "old": {
+      "initial": "k",
+      "states": [
+        "k",
+        "E"
+      ],
+      "alphabet": [
+        "j_B",
+        "j_C",
+        "j_D",
+        "j_E",
+        "j_F",
+        "j_G",
+        "j_H",
+        "j_I",
+        "j_J"
+      ],
+      "error": "E",
+      "changes": [
+        [
+          "k",
+          "j_B",
+          "E"
+        ],
+        [
+          "k",
+          "j_C",
+          "E"
+        ],
+        [
+          "k",
+          "j_D",
+          "E"
+        ],
+        [
+          "k",
+          "j_E",
+          "E"
+        ],
+        [
+          "k",
+          "j_F",
+          "E"
+        ],
+        [
+          "k",
+          "j_G",
+          "E"
+        ],
+        [
+          "k",
+          "j_H",
+          "E"
+        ],
+        [
+          "k",
+          "j_I",
+          "E"
+        ],
+        [
+          "k",
+          "j_J",
+          "E"
+        ]
+      ],
+      "omitted_transitions": "stutter; E absorbs every alphabet event"
+    },
+    "inspect": {
+      "initial": "c",
+      "states": [
+        "c",
+        "d_B",
+        "d_C",
+        "d_D",
+        "d_E",
+        "d_F",
+        "d_G",
+        "d_H",
+        "d_I",
+        "d_J",
+        "E"
+      ],
+      "alphabet": [
+        "m_A",
+        "m_B",
+        "m_C",
+        "m_D",
+        "m_E",
+        "m_F",
+        "m_G",
+        "m_H",
+        "m_I",
+        "m_J",
+        "j_B",
+        "j_C",
+        "j_D",
+        "j_E",
+        "j_F",
+        "j_G",
+        "j_H",
+        "j_I",
+        "j_J"
+      ],
+      "error": "E",
+      "changes": [
+        [
+          "c",
+          "m_B",
+          "d_B"
+        ],
+        [
+          "d_B",
+          "j_B",
+          "c"
+        ],
+        [
+          "d_B",
+          "m_C",
+          "E"
+        ],
+        [
+          "c",
+          "m_C",
+          "d_C"
+        ],
+        [
+          "d_C",
+          "j_C",
+          "c"
+        ],
+        [
+          "d_C",
+          "m_D",
+          "E"
+        ],
+        [
+          "c",
+          "m_D",
+          "d_D"
+        ],
+        [
+          "d_D",
+          "j_D",
+          "c"
+        ],
+        [
+          "d_D",
+          "m_E",
+          "E"
+        ],
+        [
+          "c",
+          "m_E",
+          "d_E"
+        ],
+        [
+          "d_E",
+          "j_E",
+          "c"
+        ],
+        [
+          "d_E",
+          "m_F",
+          "E"
+        ],
+        [
+          "c",
+          "m_F",
+          "d_F"
+        ],
+        [
+          "d_F",
+          "j_F",
+          "c"
+        ],
+        [
+          "d_F",
+          "m_G",
+          "E"
+        ],
+        [
+          "c",
+          "m_G",
+          "d_G"
+        ],
+        [
+          "d_G",
+          "j_G",
+          "c"
+        ],
+        [
+          "d_G",
+          "m_H",
+          "E"
+        ],
+        [
+          "c",
+          "m_H",
+          "d_H"
+        ],
+        [
+          "d_H",
+          "j_H",
+          "c"
+        ],
+        [
+          "d_H",
+          "m_I",
+          "E"
+        ],
+        [
+          "c",
+          "m_I",
+          "d_I"
+        ],
+        [
+          "d_I",
+          "j_I",
+          "c"
+        ],
+        [
+          "d_I",
+          "m_J",
+          "E"
+        ],
+        [
+          "c",
+          "m_J",
+          "d_J"
+        ],
+        [
+          "d_J",
+          "j_J",
+          "c"
+        ],
+        [
+          "d_J",
+          "m_A",
+          "E"
+        ]
+      ],
+      "omitted_transitions": "stutter; E absorbs every alphabet event"
+    },
+    "one": {
+      "initial": "A",
+      "states": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "ERR_ONE"
+      ],
+      "alphabet": [
+        "m_A",
+        "m_B",
+        "m_C",
+        "m_D",
+        "m_E",
+        "m_F",
+        "m_G",
+        "m_H",
+        "m_I",
+        "m_J"
+      ],
+      "error": "ERR_ONE",
+      "changes": [
+        [
+          "A",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_B",
+          "B"
+        ],
+        [
+          "A",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "A",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_C",
+          "C"
+        ],
+        [
+          "B",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "B",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_D",
+          "D"
+        ],
+        [
+          "C",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "C",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_E",
+          "E"
+        ],
+        [
+          "D",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "D",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_F",
+          "F"
+        ],
+        [
+          "E",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "E",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_G",
+          "G"
+        ],
+        [
+          "F",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "F",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_H",
+          "H"
+        ],
+        [
+          "G",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "G",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "H",
+          "m_I",
+          "I"
+        ],
+        [
+          "H",
+          "m_J",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_A",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "I",
+          "m_J",
+          "J"
+        ],
+        [
+          "J",
+          "m_A",
+          "A"
+        ],
+        [
+          "J",
+          "m_B",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_C",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_D",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_E",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_F",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_G",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_H",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_I",
+          "ERR_ONE"
+        ],
+        [
+          "J",
+          "m_J",
+          "ERR_ONE"
+        ]
+      ],
+      "omitted_transitions": "stutter; ERR_ONE absorbs every alphabet event"
+    }
+  },
+  "boundaries": {
+    "start": "s",
+    "stop": "t",
+    "precedence": [
+      [
+        "s",
+        "t"
+      ]
+    ]
+  },
+  "activation": {
+    "inspect_domain": "all versioned physical products (4^n entries)",
+    "inspect_initializer": "d_i for the least-index non-A holding station i, otherwise c",
+    "unreachable_completion": "For n=2 the zero/multiple-holder completion equals the preexisting Java fixture. S1 specifies the 8 one-product versioned tuples; the Java initializer contains 16 entries. Conservation excludes the additional tuples from every reachable Post state, so their completion cannot affect decision/rank.",
+    "one_domain": "all-old physical states with exactly one holder",
+    "one_initializer": "holder station name",
+    "residual": "explicit total DFA over common alphabet, same transition function/error set as tester"
+  },
+  "controllers": {
+    "old": {
+      "initial": "c_o",
+      "states": [
+        "c_o"
+      ],
+      "edges": [
+        [
+          "c_o",
+          "m_A",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_B",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_C",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_D",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_E",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_F",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_G",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_H",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_I",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_J",
+          "c_o"
+        ]
+      ]
+    },
+    "new": {
+      "initial": "c_0",
+      "states": [
+        "c_0",
+        "c_1",
+        "c_2",
+        "c_3",
+        "c_4",
+        "c_5",
+        "c_6",
+        "c_7",
+        "c_8",
+        "c_9"
+      ],
+      "edges": [
+        [
+          "c_0",
+          "m_A",
+          "c_0"
+        ],
+        [
+          "c_0",
+          "m_B",
+          "c_1"
+        ],
+        [
+          "c_0",
+          "j_B",
+          "c_0"
+        ],
+        [
+          "c_1",
+          "j_B",
+          "c_0"
+        ],
+        [
+          "c_1",
+          "m_B",
+          "c_1"
+        ],
+        [
+          "c_0",
+          "m_C",
+          "c_2"
+        ],
+        [
+          "c_0",
+          "j_C",
+          "c_0"
+        ],
+        [
+          "c_2",
+          "j_C",
+          "c_0"
+        ],
+        [
+          "c_2",
+          "m_C",
+          "c_2"
+        ],
+        [
+          "c_0",
+          "m_D",
+          "c_3"
+        ],
+        [
+          "c_0",
+          "j_D",
+          "c_0"
+        ],
+        [
+          "c_3",
+          "j_D",
+          "c_0"
+        ],
+        [
+          "c_3",
+          "m_D",
+          "c_3"
+        ],
+        [
+          "c_0",
+          "m_E",
+          "c_4"
+        ],
+        [
+          "c_0",
+          "j_E",
+          "c_0"
+        ],
+        [
+          "c_4",
+          "j_E",
+          "c_0"
+        ],
+        [
+          "c_4",
+          "m_E",
+          "c_4"
+        ],
+        [
+          "c_0",
+          "m_F",
+          "c_5"
+        ],
+        [
+          "c_0",
+          "j_F",
+          "c_0"
+        ],
+        [
+          "c_5",
+          "j_F",
+          "c_0"
+        ],
+        [
+          "c_5",
+          "m_F",
+          "c_5"
+        ],
+        [
+          "c_0",
+          "m_G",
+          "c_6"
+        ],
+        [
+          "c_0",
+          "j_G",
+          "c_0"
+        ],
+        [
+          "c_6",
+          "j_G",
+          "c_0"
+        ],
+        [
+          "c_6",
+          "m_G",
+          "c_6"
+        ],
+        [
+          "c_0",
+          "m_H",
+          "c_7"
+        ],
+        [
+          "c_0",
+          "j_H",
+          "c_0"
+        ],
+        [
+          "c_7",
+          "j_H",
+          "c_0"
+        ],
+        [
+          "c_7",
+          "m_H",
+          "c_7"
+        ],
+        [
+          "c_0",
+          "m_I",
+          "c_8"
+        ],
+        [
+          "c_0",
+          "j_I",
+          "c_0"
+        ],
+        [
+          "c_8",
+          "j_I",
+          "c_0"
+        ],
+        [
+          "c_8",
+          "m_I",
+          "c_8"
+        ],
+        [
+          "c_0",
+          "m_J",
+          "c_9"
+        ],
+        [
+          "c_0",
+          "j_J",
+          "c_0"
+        ],
+        [
+          "c_9",
+          "j_J",
+          "c_0"
+        ],
+        [
+          "c_9",
+          "m_J",
+          "c_9"
+        ]
+      ]
+    }
+  },
+  "endpoints": {
+    "old": {
+      "initial": "x_A",
+      "states": [
+        {
+          "id": "x_A",
+          "holder": 0,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_B",
+          "holder": 1,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_C",
+          "holder": 2,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_D",
+          "holder": 3,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_E",
+          "holder": 4,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_F",
+          "holder": 5,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_G",
+          "holder": 6,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_H",
+          "holder": 7,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_I",
+          "holder": 8,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_J",
+          "holder": 9,
+          "controller": "c_o",
+          "old": "k"
+        }
+      ],
+      "edges": [
+        [
+          "x_A",
+          "m_B",
+          "x_B"
+        ],
+        [
+          "x_B",
+          "m_C",
+          "x_C"
+        ],
+        [
+          "x_C",
+          "m_D",
+          "x_D"
+        ],
+        [
+          "x_D",
+          "m_E",
+          "x_E"
+        ],
+        [
+          "x_E",
+          "m_F",
+          "x_F"
+        ],
+        [
+          "x_F",
+          "m_G",
+          "x_G"
+        ],
+        [
+          "x_G",
+          "m_H",
+          "x_H"
+        ],
+        [
+          "x_H",
+          "m_I",
+          "x_I"
+        ],
+        [
+          "x_I",
+          "m_J",
+          "x_J"
+        ],
+        [
+          "x_J",
+          "m_A",
+          "x_A"
+        ]
+      ]
+    },
+    "new": {
+      "initial": "z_A",
+      "states": [
+        {
+          "id": "z_A",
+          "holder": 0,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_B",
+          "holder": 1,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_C",
+          "holder": 2,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_D",
+          "holder": 3,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_E",
+          "holder": 4,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_F",
+          "holder": 5,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_G",
+          "holder": 6,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_H",
+          "holder": 7,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_I",
+          "holder": 8,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_J",
+          "holder": 9,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "y_B",
+          "holder": 1,
+          "controller": "c_1",
+          "inspect": "d_B"
+        },
+        {
+          "id": "y_C",
+          "holder": 2,
+          "controller": "c_2",
+          "inspect": "d_C"
+        },
+        {
+          "id": "y_D",
+          "holder": 3,
+          "controller": "c_3",
+          "inspect": "d_D"
+        },
+        {
+          "id": "y_E",
+          "holder": 4,
+          "controller": "c_4",
+          "inspect": "d_E"
+        },
+        {
+          "id": "y_F",
+          "holder": 5,
+          "controller": "c_5",
+          "inspect": "d_F"
+        },
+        {
+          "id": "y_G",
+          "holder": 6,
+          "controller": "c_6",
+          "inspect": "d_G"
+        },
+        {
+          "id": "y_H",
+          "holder": 7,
+          "controller": "c_7",
+          "inspect": "d_H"
+        },
+        {
+          "id": "y_I",
+          "holder": 8,
+          "controller": "c_8",
+          "inspect": "d_I"
+        },
+        {
+          "id": "y_J",
+          "holder": 9,
+          "controller": "c_9",
+          "inspect": "d_J"
+        }
+      ],
+      "edges": [
+        [
+          "z_A",
+          "m_B",
+          "y_B"
+        ],
+        [
+          "z_B",
+          "m_C",
+          "y_C"
+        ],
+        [
+          "y_B",
+          "j_B",
+          "z_B"
+        ],
+        [
+          "z_B",
+          "j_B",
+          "z_B"
+        ],
+        [
+          "z_C",
+          "m_D",
+          "y_D"
+        ],
+        [
+          "y_C",
+          "j_C",
+          "z_C"
+        ],
+        [
+          "z_C",
+          "j_C",
+          "z_C"
+        ],
+        [
+          "z_D",
+          "m_E",
+          "y_E"
+        ],
+        [
+          "y_D",
+          "j_D",
+          "z_D"
+        ],
+        [
+          "z_D",
+          "j_D",
+          "z_D"
+        ],
+        [
+          "z_E",
+          "m_F",
+          "y_F"
+        ],
+        [
+          "y_E",
+          "j_E",
+          "z_E"
+        ],
+        [
+          "z_E",
+          "j_E",
+          "z_E"
+        ],
+        [
+          "z_F",
+          "m_G",
+          "y_G"
+        ],
+        [
+          "y_F",
+          "j_F",
+          "z_F"
+        ],
+        [
+          "z_F",
+          "j_F",
+          "z_F"
+        ],
+        [
+          "z_G",
+          "m_H",
+          "y_H"
+        ],
+        [
+          "y_G",
+          "j_G",
+          "z_G"
+        ],
+        [
+          "z_G",
+          "j_G",
+          "z_G"
+        ],
+        [
+          "z_H",
+          "m_I",
+          "y_I"
+        ],
+        [
+          "y_H",
+          "j_H",
+          "z_H"
+        ],
+        [
+          "z_H",
+          "j_H",
+          "z_H"
+        ],
+        [
+          "z_I",
+          "m_J",
+          "y_J"
+        ],
+        [
+          "y_I",
+          "j_I",
+          "z_I"
+        ],
+        [
+          "z_I",
+          "j_I",
+          "z_I"
+        ],
+        [
+          "z_J",
+          "m_A",
+          "z_A"
+        ],
+        [
+          "y_J",
+          "j_J",
+          "z_J"
+        ],
+        [
+          "z_J",
+          "j_J",
+          "z_J"
+        ]
+      ]
+    },
+    "loadable": [
+      "z_A",
+      "z_B",
+      "z_C",
+      "z_D",
+      "z_E",
+      "z_F",
+      "z_G",
+      "z_H",
+      "z_I",
+      "z_J"
+    ],
+    "goal_ids": [
+      "z_A",
+      "z_B",
+      "z_C",
+      "z_D",
+      "z_E",
+      "z_F",
+      "z_G",
+      "z_H",
+      "z_I",
+      "z_J"
+    ]
+  },
+  "scope": "constructed witness, not an application benchmark or prevalence estimate"
+}

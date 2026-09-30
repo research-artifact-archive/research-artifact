@@ -1,0 +1,19 @@
+{
+  "status": "NOT_CONSTRUCTED",
+  "checked_at": "2026-09-29T17:34:27.523598+09:00",
+  "source_path": "Implementation/Experiment/Models/Surveillance_FG.lts",
+  "sha256": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8",
+  "old_components": [
+    "MISSION",
+    "BATTERY_COUNTER"
+  ],
+  "new_components": [
+    "NEW_MISSION",
+    "NEW_BATTERY_COUNTER"
+  ],
+  "interpretation": "Two exchangeable software components of one aircraft, not two independently available aircraft.",
+  "reason": "A two-aircraft surveillance-coverage model requires adding or duplicating a physical mission/battery plant. The E6 FSP-route rule keeps the application plant unchanged; interpreting mission and battery components as separate UAVs would be misleading.",
+  "generated_inputs": 0,
+  "solver_jobs": 0,
+  "scope": "Read-only suitability assessment; no experimental attempt, endpoint claim, or result inferred."
+}

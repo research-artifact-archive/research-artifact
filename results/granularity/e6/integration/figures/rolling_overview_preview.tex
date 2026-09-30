@@ -1,0 +1,45 @@
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+\setcopyright{none}
+\acmDOI{}
+\acmISBN{}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\begin{document}
+% Importable Figure 1 alternative; no manuscript file is modified.
+% Events and ranks: rolling/v1/validation/me_path.json (checked certificate).
+\begin{figure}[!htbp]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[>=Stealth,event/.style={font=\footnotesize,align=center}]
+  \node[event,anchor=east] at (-.5,-.2) {two old\\replicas ready};
+  \draw[->,thick] (-.3,-.2) -- (10.55,-.2);
+  \foreach \x/\event/\r/\q in {1/{$\rho_1$}/3/1,3.7/{$\mathit{ready}_1$}/2/2,6.4/{$\rho_2$}/1/1,9.1/{$\mathit{ready}_2$}/0/2} {
+    \draw[gray] (\x,-.08) -- (\x,-.28);
+    \node[event,anchor=south] at (\x,.15) {\event};
+    \node[event,anchor=north] at (\x,-.46) {rank $\r$\\$\q$ ready};
+  }
+  \node[event,anchor=east] at (-.5,-.75) {rank $4$};
+  \node[event,anchor=west] at (10.6,-.2) {two new\\replicas ready};
+  \node[event,anchor=south] at (1,.65) {replace 1};
+  \node[event,anchor=south] at (3.7,.65) {startup 1};
+  \node[event,anchor=south] at (6.4,.65) {replace 2};
+  \node[event,anchor=south] at (9.1,.65) {startup 2};
+
+  \node[event,anchor=east] at (-.5,-2.1) {simultaneous\\replacement};
+  \draw[->,thick] (-.3,-2.1) -- (3.7,-2.1);
+  \draw[gray] (1,-1.98) -- (1,-2.18);
+  \node[event,anchor=south] at (1,-1.8) {$\rho_{\{1,2\}}$};
+  \node[event,anchor=north] at (1,-2.36) {both booting};
+  \node[event,anchor=west] at (3.8,-2.1) {$0$ ready: interval violation};
+
+  \node[event,anchor=east] at (-.5,-3.25) {interval};
+  \draw[gray!65,line width=4pt] (-.3,-3.25) -- (10.45,-3.25);
+  \node[event,anchor=south] at (5.05,-3.14) {at least one ready replica throughout the update};
+\end{tikzpicture}
+}%
+\caption{Rolling$(2,1)$: a checked four-event completion path and the unsafe simultaneous transfer. Replacement is controllable; readiness is uncontrollable. The ranks are the returned certificate values, and the bar denotes the interval requirement's lifetime, not elapsed time. Both transfers are total: losing availability after transfer causes the simultaneous failure.}
+\Description{The fine update replaces the first replica, waits for its readiness, replaces the second replica, and waits for its readiness. Ready counts are two, one, two, one, two and ranks decrease from four to zero. Replacing both replicas at once leaves zero ready replicas and violates the interval requirement.}
+\label{fig:rolling-overview-candidate}
+\end{figure}
+
+\end{document}

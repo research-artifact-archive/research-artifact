@@ -1,0 +1,7 @@
+{
+  "status": "AUDIT_FIXTURE_ERROR",
+  "stage": "endpoint projection normalization before any result assertion",
+  "error": "TypeError: unhashable type: list",
+  "cause": "Independent audit incorrectly treated tagged [version,state] physical entries as untagged strings.",
+  "correction": "Read the local-state entry and assert its expected version; no input/raw/solver modification."
+}

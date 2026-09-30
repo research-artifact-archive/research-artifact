@@ -1,0 +1,214 @@
+{
+  "status": "PASS",
+  "provenance": {
+    "input": "canary/v1/inputs/canary_n02_m01_fine.json",
+    "input_sha256": "e9bab01aa35b95cd1850c2edabf403078527ee28eaa56bcd8193336b54955a44",
+    "certificate": "canary/v1/raw/series/n02_m01_merged_lazy/certificate.json",
+    "certificate_sha256": "ca10d6a17542a0bfe0b6bd021badb7208d36e6b9e5f9a5dca54f259612d64843",
+    "job": "n02_m01_merged_lazy",
+    "decision": "LOSS",
+    "states_discovered": 17
+  },
+  "steps": 3,
+  "transfer_outcomes": [
+    {
+      "physical": [
+        [
+          "NEW",
+          "BP"
+        ],
+        [
+          "NEW",
+          "BP"
+        ]
+      ],
+      "testers": {
+        "reported_availability": "b00"
+      }
+    },
+    {
+      "physical": [
+        [
+          "NEW",
+          "BP"
+        ],
+        [
+          "NEW",
+          "HP"
+        ]
+      ],
+      "testers": {
+        "reported_availability": "b00"
+      }
+    },
+    {
+      "physical": [
+        [
+          "NEW",
+          "HP"
+        ],
+        [
+          "NEW",
+          "BP"
+        ]
+      ],
+      "testers": {
+        "reported_availability": "b00"
+      }
+    },
+    {
+      "physical": [
+        [
+          "NEW",
+          "HP"
+        ],
+        [
+          "NEW",
+          "HP"
+        ]
+      ],
+      "testers": {
+        "reported_availability": "b00"
+      }
+    }
+  ],
+  "trace": [
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "H"
+          ],
+          [
+            "OLD",
+            "H"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [
+          "ablation.merge.transfers"
+        ],
+        "id": 4,
+        "initial": true,
+        "safe": true,
+        "goal": false
+      },
+      "action": "ablation.merge.transfers",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "BP"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "BP"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b00"
+        },
+        "pending": [],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false
+      },
+      "action": "reportB_1",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "B"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b01"
+        },
+        "pending": [],
+        "id": 1,
+        "initial": false,
+        "safe": true,
+        "goal": false
+      },
+      "control": "UC"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "B"
+          ],
+          [
+            "NEW",
+            "BP"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "b01"
+        },
+        "pending": [],
+        "id": 1,
+        "initial": false,
+        "safe": true,
+        "goal": false
+      },
+      "action": "reportB_2",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "B"
+          ],
+          [
+            "NEW",
+            "B"
+          ]
+        ],
+        "testers": {
+          "reported_availability": "ERR_HEALTH"
+        },
+        "pending": [],
+        "id": 0,
+        "initial": false,
+        "safe": false,
+        "goal": false
+      },
+      "control": "UC"
+    }
+  ],
+  "scope": "A path retained in the checked losing certificate. The full certificate closure, not this path alone, proves loss against all controller choices.",
+  "extractor_sha256": "cf86e5619309eccc3de0799d3364f874f19ec96d6902b5af702d431822862dba",
+  "checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8"
+}

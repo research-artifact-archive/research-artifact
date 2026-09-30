@@ -1,0 +1,97 @@
+comp.compile time : 91ms
+Compiled: OLD_AGENCY
+Compiled: OLD_SERVICE_00
+Compiled: OLD_SERVICE_01
+Compiled: OLD_SERVICE_02
+Compiled: OLD_SERVICE_03
+Composition:OldEnvironment = OldEnvironment.OLD_AGENCY || OldEnvironment.OLD_SERVICE_00 || OldEnvironment.OLD_SERVICE_01 || OldEnvironment.OLD_SERVICE_02 || OldEnvironment.OLD_SERVICE_03
+State Space: 2 * 15 * 15 * 15 * 14 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 53124 Memory used: 41633K
+-- States: 20000 Transitions: 109847 Memory used: 56566K
+-- States: 30000 Transitions: 171460 Memory used: 71381K
+-- States: 40000 Transitions: 250672 Memory used: 78377K
+-- States: 47251 Transitions: 298803 Memory used: 113661K
+Composed in 371ms
+Composition:OldController = OldEnvironment
+State Space: 47251 = 2 ** 16
+Composing...
+-- States: 10000 Transitions: 53124 Memory used: 137567K
+-- States: 20000 Transitions: 109847 Memory used: 157984K
+-- States: 30000 Transitions: 171460 Memory used: 179530K
+-- States: 40000 Transitions: 250672 Memory used: 202049K
+-- States: 47251 Transitions: 298803 Memory used: 162797K
+Composed in 339ms
+Solving the LTS control problem.
+Environment states: 47251
+Game states: 47251
+Game transitions: 141753
+Analysis time: 5184ms.
+Controller [47251] generated successfully.
+Composition:OldController = OldController
+State Space: 47251 = 2 ** 16
+Composing...
+-- States: 10000 Transitions: 52114 Memory used: 942084K
+-- States: 20000 Transitions: 110670 Memory used: 975639K
+-- States: 30000 Transitions: 165433 Memory used: 1009193K
+-- States: 40000 Transitions: 251829 Memory used: 1042748K
+-- States: 47251 Transitions: 298803 Memory used: 1109857K
+Composed in 435ms
+ - Synthesizing Mapping Environment from lists (size=5)...
+INFO: Auto-compiling dependency: NEW_AGENCY
+Generating Mapping Environment: MAP_OLD_AGENCY_NEW_AGENCY
+INFO: Auto-compiling dependency: NEW_SERVICE_00
+Generating Mapping Environment: MAP_OLD_SERVICE_00_NEW_SERVICE_00
+INFO: Auto-compiling dependency: NEW_SERVICE_01
+Generating Mapping Environment: MAP_OLD_SERVICE_01_NEW_SERVICE_01
+INFO: Auto-compiling dependency: NEW_SERVICE_02
+Generating Mapping Environment: MAP_OLD_SERVICE_02_NEW_SERVICE_02
+INFO: Auto-compiling dependency: NEW_SERVICE_03
+Generating Mapping Environment: MAP_OLD_SERVICE_03_NEW_SERVICE_03
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Composition:NewEnvironment = NewEnvironment.NEW_AGENCY || NewEnvironment.NEW_SERVICE_00 || NewEnvironment.NEW_SERVICE_01 || NewEnvironment.NEW_SERVICE_02 || NewEnvironment.NEW_SERVICE_03
+State Space: 2 * 15 * 15 * 15 * 14 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 47876 Memory used: 674952K
+-- States: 20000 Transitions: 102310 Memory used: 708507K
+-- States: 30000 Transitions: 162320 Memory used: 734041K
+-- States: 40000 Transitions: 239722 Memory used: 775615K
+-- States: 47251 Transitions: 285978 Memory used: 842724K
+Composed in 379ms
+Composition:NewController = NewEnvironment
+State Space: 47251 = 2 ** 16
+Composing...
+-- States: 10000 Transitions: 47876 Memory used: 772707K
+-- States: 20000 Transitions: 102310 Memory used: 793495K
+-- States: 30000 Transitions: 162320 Memory used: 806262K
+-- States: 40000 Transitions: 239722 Memory used: 839816K
+-- States: 47251 Transitions: 285978 Memory used: 894158K
+Composed in 322ms
+Solving the LTS control problem.
+Environment states: 47251
+Game states: 47251
+Game transitions: 141753
+Analysis time: 5037ms.
+Controller [47251] generated successfully.
+Composition:NewController = NewController
+State Space: 47251 = 2 ** 16
+Composing...
+-- States: 10000 Transitions: 43069 Memory used: 1203412K
+-- States: 20000 Transitions: 92001 Memory used: 1236966K
+-- States: 30000 Transitions: 159627 Memory used: 1270521K
+-- States: 40000 Transitions: 240765 Memory used: 1304075K
+-- States: 47251 Transitions: 285978 Memory used: 1371184K
+Composed in 464ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 47251
+ - Extracting New Safety Fluents and Building Look-up Tables...
+=========================================
+Mode: Revised OTF-DUCS (proof-producing strong synthesis)
+=========================================
+ - Components: 5
+ - Requirements: old=0, new=0, update-time=0
+ - Initial endpoint embeddings: 47251
+ - Loadable new endpoint signatures: 47251 / 47251
+ - Controllable action order: endpoint_guided
+ - Solver implementation: direct_full
+ - Update-policy restriction: full_fg (unrestricted_fine_grained_update_choices)

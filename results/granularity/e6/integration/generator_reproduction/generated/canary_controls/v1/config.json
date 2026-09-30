@@ -1,0 +1,751 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "canary_controls",
+  "version": "v1",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "jobs": [
+    {
+      "id": "n02_m01_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n02_m01_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 2
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n02_m01_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n02_m01_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 2
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n02_m01_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n02_m01_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n02_m01_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 2
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n02_m01_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n02_m01_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 2
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n02_m01_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m01_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n03_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m01_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n03_m01_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n03_m01_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m01_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n03_m01_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m01_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n03_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m01_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n03_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m01_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n03_m01_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n03_m01_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m01_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n03_m01_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m01_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n03_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m02_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n03_m02_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m02_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n03_m02_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n03_m02_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m02_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n03_m02_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m02_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n03_m02_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m02_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n03_m02_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m02_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n03_m02_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n03_m02_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m02_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n03_m02_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m02_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n03_m02_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m01_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n04_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m01_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n04_m01_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m01_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m01_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n04_m01_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m01_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n04_m01_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m01_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n04_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m01_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n04_m01_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m01_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m01_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n04_m01_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m01_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n04_m01_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m02_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n04_m02_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m02_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n04_m02_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m02_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m02_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n04_m02_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m02_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n04_m02_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m02_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n04_m02_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m02_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n04_m02_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m02_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m02_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n04_m02_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m02_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n04_m02_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m03_healthy_only_fine_lazy",
+      "input": "inputs/canary_controls_n04_m03_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m03_healthy_only_merged_lazy",
+      "input": "inputs/canary_controls_n04_m03_healthy_only_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m03_healthy_only_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m03_healthy_only_all_lazy",
+      "input": "inputs/canary_controls_n04_m03_healthy_only_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "healthy_only",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m03_healthy_only_fine_df",
+      "input": "inputs/canary_controls_n04_m03_healthy_only_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "healthy_only",
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m03_no_recovery_fine_lazy",
+      "input": "inputs/canary_controls_n04_m03_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m03_no_recovery_merged_lazy",
+      "input": "inputs/canary_controls_n04_m03_no_recovery_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_controls_n04_m03_no_recovery_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m03_no_recovery_all_lazy",
+      "input": "inputs/canary_controls_n04_m03_no_recovery_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "no_recovery",
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m03_no_recovery_fine_df",
+      "input": "inputs/canary_controls_n04_m03_no_recovery_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "control": "no_recovery",
+        "k": 1
+      },
+      "variant": "fine_df"
+    }
+  ],
+  "frozen_paths": [
+    "canary_controls/gen_controls.py",
+    "canary_controls/validate_controls.py",
+    "canary_controls/analyze_controls.py",
+    "canary_controls/README.md",
+    "rolling/validate_endpoints.py",
+    "common/SCHEMA.md",
+    "common/witness.schema.json",
+    "canary_controls/v1/reference/canary_n02_m01_fine.json",
+    "canary_controls/v1/reference/canary_n02_m01_all.json",
+    "canary_controls/v1/reference/canary_n03_m01_fine.json",
+    "canary_controls/v1/reference/canary_n03_m01_all.json",
+    "canary_controls/v1/reference/canary_n03_m02_fine.json",
+    "canary_controls/v1/reference/canary_n03_m02_all.json",
+    "canary_controls/v1/reference/canary_n04_m01_fine.json",
+    "canary_controls/v1/reference/canary_n04_m01_all.json",
+    "canary_controls/v1/reference/canary_n04_m02_fine.json",
+    "canary_controls/v1/reference/canary_n04_m02_all.json",
+    "canary_controls/v1/reference/canary_n04_m03_fine.json",
+    "canary_controls/v1/reference/canary_n04_m03_all.json"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "canary_controls/validate_controls.py",
+      "canary_controls/v1"
+    ]
+  ],
+  "preflight_jobs": [
+    "n02_m01_healthy_only_fine_lazy",
+    "n02_m01_healthy_only_merged_lazy",
+    "n02_m01_no_recovery_fine_lazy",
+    "n02_m01_no_recovery_merged_lazy"
+  ],
+  "analysis_commands": [
+    [
+      "python3",
+      "-B",
+      "canary_controls/analyze_controls.py",
+      "canary_controls/v1"
+    ]
+  ]
+}

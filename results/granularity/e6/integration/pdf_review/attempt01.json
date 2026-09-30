@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "source": "integration/review_pdf_anonymity_v0.py",
+  "reason": "A pattern occurred by chance in the two identical 16-byte PDF document IDs. pypdf represented those binary IDs as TextStringObject. No page/metadata identity was found.",
+  "correction": "Exclude only the standard trailer /ID array after validating its two 16-byte entries. All other parsed strings remain scanned. Source PDF unchanged."
+}

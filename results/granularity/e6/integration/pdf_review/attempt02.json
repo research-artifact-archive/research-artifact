@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "source": "integration/review_pdf_anonymity_v1.py",
+  "reason": "The standard binary trailer ID is duplicated in the /Type /XRef stream dictionary. The first correction covered only the trailer object.",
+  "correction": "Recognize the two 16-byte entries only under trailer or /XRef, require exact agreement with trailer IDs; scan every other string."
+}

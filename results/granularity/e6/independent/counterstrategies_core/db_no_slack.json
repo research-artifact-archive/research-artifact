@@ -1,0 +1,521 @@
+{
+  "status": "PASS",
+  "family": "db_rolling/v2",
+  "job": "db_n3_m3_fine_none_lazy",
+  "decision": "LOSS",
+  "input": "db_rolling/v2/inputs/db_n3_m3_fine.json",
+  "input_sha256": "7e571e3c88ad38b823a832248471e2a164787c8fe4530edd4f0db60784c2cac2",
+  "certificate": "db_rolling/v2/raw/series/db_n3_m3_fine_none_lazy/certificate.json",
+  "certificate_sha256": "04214bc742c9c38dfafcf88513dac5d5812c899b34a184778f0165b72e89dd5e",
+  "extractor_sha256": "88885744d6c2b87b82a70a28a7eef573f358ea6c9d0c24e825b67f3dd538334b",
+  "independent_checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8",
+  "rule": "At a UC state choose one enabled uncontrollable event/outcome retained in the losing region. Otherwise give a retained outcome for every enabled controllable event. All retained states exclude goal.",
+  "selection": "Prefer an unsafe successor when available, then sort action and original certificate-state ID; no input or measured policy is changed.",
+  "scope": "An extracted adversarial response graph checked against independent Post and the original E1 loss certificate. A path alone is not used as proof. Without fairness, finite executions either reach unsafe/deadlock or continue forever outside goal.",
+  "certificate_states": 12,
+  "initial_states_in_region": [
+    5
+  ],
+  "states": [
+    {
+      "physical": [
+        [
+          "NEW",
+          "B"
+        ],
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 0,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "NEW",
+          "B"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 1,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "E"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 2,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "NEW",
+          "B"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_1",
+        "rho_3"
+      ],
+      "id": 3,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "NEW",
+          "B"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 4,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 5,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "NEW",
+          "B"
+        ],
+        [
+          "OLD",
+          "P"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_1",
+        "rho_3"
+      ],
+      "id": 6,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "E"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 7,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "NEW",
+          "B"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "ERROR"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 8,
+      "initial": false,
+      "safe": false,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 9,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "E"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 10,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "rho_1",
+        "rho_2",
+        "rho_3"
+      ],
+      "id": 11,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    }
+  ],
+  "responses": [
+    {
+      "source": 2,
+      "action": "elect_1",
+      "target": 5,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 5,
+      "action": "rho_2",
+      "target": 3,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "rho_3",
+      "target": 4,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "serve_1",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "serve_2",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "serve_3",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "stepdown_1_2",
+      "target": 7,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "stepdown_1_3",
+      "target": 10,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 7,
+      "action": "elect_2",
+      "target": 9,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 9,
+      "action": "rho_1",
+      "target": 0,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "rho_3",
+      "target": 8,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "serve_1",
+      "target": 9,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "serve_2",
+      "target": 9,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "serve_3",
+      "target": 9,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "stepdown_2_1",
+      "target": 2,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 9,
+      "action": "stepdown_2_3",
+      "target": 10,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 10,
+      "action": "elect_3",
+      "target": 11,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 11,
+      "action": "rho_1",
+      "target": 1,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "rho_2",
+      "target": 6,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "serve_1",
+      "target": 11,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "serve_2",
+      "target": 11,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "serve_3",
+      "target": 11,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "stepdown_3_1",
+      "target": 2,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 11,
+      "action": "stepdown_3_2",
+      "target": 7,
+      "kind": "response_to_controller_event"
+    }
+  ],
+  "safe_deadlock_states": [],
+  "response_reachable_states": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "unsafe_states": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    8
+  ],
+  "response_reachable_safe_states_without_any_unsafe_path": []
+}

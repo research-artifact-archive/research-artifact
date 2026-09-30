@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "scope": "Source-level structural obstruction, NOT a completed E1 decision or a persisted E1 LOSS certificate",
+  "input_sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+  "checks": [
+    {
+      "initial": [
+        false,
+        true
+      ],
+      "rho1_then_rho2": "ERROR",
+      "rho2_then_rho1": "ERROR"
+    },
+    {
+      "initial": [
+        true,
+        false
+      ],
+      "rho1_then_rho2": "ERROR",
+      "rho2_then_rho1": "ERROR"
+    },
+    {
+      "initial": [
+        true,
+        true
+      ],
+      "rho1_then_rho2": "ERROR",
+      "rho2_then_rho1": "ERROR"
+    }
+  ],
+  "argument": [
+    "Before the unique merged transfer both physical components remain OLD, so their active old LTSs cannot execute calibrated or beginCalibration.",
+    "The interval starts with both ready bits true. Old ordinary actions and stop/start events do not change these bits.",
+    "The merged transfer applies both local mappings, entering two CAL states, and both transfer observations set the interval ready bits false. Either observation order reaches absorbing safety error.",
+    "Strong completion requires the pending transfer to be completed; the all-new goal cannot be reached without this unsafe event."
+  ],
+  "measurement_separation": "A measured timeout remains TO even when this source-level argument holds."
+}

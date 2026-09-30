@@ -1,0 +1,83 @@
+{
+  "completed": true,
+  "status": "SUCCESS",
+  "started_utc": "2026-09-29T01:46:01.751565+00:00",
+  "job": {
+    "job_id": "pc_neutral_global_product__base__rep01__lazy_merge_both",
+    "model_id": "pc_neutral_global_product",
+    "model_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_neutral_global_product.lts",
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "method_id": "lazy_merge_both",
+    "merge": "both",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "otf",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false",
+      "mtsa.otf.contractMerge": "both",
+      "mtsa.revised.otf.policyRestriction": "full_fg"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=50563fc45bd4d3870a48318944a83ccf2bcf4676",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.contractMerge=both",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.policyRestriction=full_fg",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_neutral_global_product.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/raw/single_1200s/runs/pc_neutral_global_product__base__rep01__lazy_merge_both/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/raw/single_1200s/runs/pc_neutral_global_product__base__rep01__lazy_merge_both/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "attempt": "single_1200s",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "source_commit": "50563fc45bd4d3870a48318944a83ccf2bcf4676",
+  "input_sha256": "9728bfc84f3d2cc390e0aad410c3e6ff6b83f480333b1f033e6d611debbdc4f5",
+  "platform": "mac",
+  "pid": 25491,
+  "finished_utc": "2026-09-29T01:46:02.481181+00:00",
+  "elapsed_monotonic_seconds": 0.729286625,
+  "exit_code": 0,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "04ecad3c8c906c067ebdd5843b3a59e5ea7438fc3c13fc25b286ae426d187403",
+      "bytes": 78
+    },
+    "transitions": {
+      "sha256": "f4c42feb1b72405ebd51a463705db42ed6dab4d6bf56d997865ad83a269541ab",
+      "bytes": 176
+    },
+    "output": {
+      "sha256": "c802eb70c6dbb40273dfeb3941d239e8f0da51093a92e2eec9b1270ef7ec6bea",
+      "bytes": 81122
+    }
+  }
+}

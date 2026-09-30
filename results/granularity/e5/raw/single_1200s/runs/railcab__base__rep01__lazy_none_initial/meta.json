@@ -1,0 +1,80 @@
+{
+  "completed": true,
+  "status": "TIMEOUT",
+  "started_utc": "2026-09-29T06:31:02.006241+00:00",
+  "job": {
+    "job_id": "railcab__base__rep01__lazy_none_initial",
+    "model_id": "railcab",
+    "model_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Railcab_FG.lts",
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "method_id": "lazy_none_initial",
+    "merge": "none",
+    "solver": "otf",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "otf",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false",
+      "mtsa.otf.contractMerge": "none",
+      "mtsa.otf.transferDomain": "initial"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.contractMerge=none",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.otf.transferDomain=initial",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Railcab_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw/single_1200s/runs/railcab__base__rep01__lazy_none_initial/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw/single_1200s/runs/railcab__base__rep01__lazy_none_initial/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "attempt": "single_1200s",
+  "jar_sha256": "00221f6a91f382179186286a70ea99474ae50d07f0ad241212324b0430ad08da",
+  "source_commit": "5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+  "input_sha256": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a",
+  "platform": "mac",
+  "pid": 42900,
+  "finished_utc": "2026-09-29T06:51:02.734560+00:00",
+  "elapsed_monotonic_seconds": 1200.742075,
+  "exit_code": 143,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "b8429687cbfc7e6fec27847407ec56e9c0590483592c876ad393498c2c7b8bc2",
+      "bytes": 82
+    },
+    "output": {
+      "sha256": "0b8b5b8f71b54a513b23d2274c505f2488ff9a135a94eaa7584af9703c39796b",
+      "bytes": 11651
+    }
+  }
+}

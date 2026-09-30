@@ -1,0 +1,762 @@
+Process:
+	C_CLEAN_PAINT_DRILL_CAL
+States:
+	243
+Transitions:
+	C_CLEAN_PAINT_DRILL_CAL = Q0,
+	Q0	= (beginCalibration[2] -> Q1
+		  |beginCalibration[1] -> Q240
+		  |in[1] -> Q241
+		  |in[2] -> Q242),
+	Q1	= (calibrated[2] -> Q0
+		  |in[1] -> Q2),
+	Q2	= (clean[1] -> Q3
+		  |calibrated[2] -> Q241),
+	Q3	= (cleanNOk[1] -> Q2
+		  |calibrated[2] -> Q4
+		  |cleanOk[1] -> Q239),
+	Q4	= (beginCalibration[2] -> Q3
+		  |beginCalibration[1] -> Q5
+		  |in[2] -> Q237
+		  |cleanOk[1] -> Q238
+		  |cleanNOk[1] -> Q241),
+	Q5	= (calibrated[1] -> Q4
+		  |in[2] -> Q6),
+	Q6	= (clean[2] -> Q7
+		  |calibrated[1] -> Q237),
+	Q7	= (cleanNOk[2] -> Q6
+		  |calibrated[1] -> Q8
+		  |cleanOk[2] -> Q236),
+	Q8	= (beginCalibration[1] -> Q7
+		  |beginCalibration[2] -> Q9
+		  |cleanNOk[1] -> Q233
+		  |cleanOk[2] -> Q234
+		  |cleanOk[1] -> Q235
+		  |cleanNOk[2] -> Q237),
+	Q9	= (calibrated[2] -> Q8
+		  |cleanNOk[1] -> Q10
+		  |cleanOk[1] -> Q11),
+	Q10	= (clean[1] -> Q9
+		  |calibrated[2] -> Q233),
+	Q11	= (paint[1] -> Q12
+		  |calibrated[2] -> Q235),
+	Q12	= (paintNOk[1] -> Q11
+		  |calibrated[2] -> Q13
+		  |paintOk[1] -> Q232),
+	Q13	= (beginCalibration[2] -> Q12
+		  |beginCalibration[1] -> Q14
+		  |paintOk[1] -> Q229
+		  |cleanNOk[2] -> Q230
+		  |cleanOk[2] -> Q231
+		  |paintNOk[1] -> Q235),
+	Q14	= (calibrated[1] -> Q13
+		  |cleanNOk[2] -> Q15
+		  |cleanOk[2] -> Q16),
+	Q15	= (clean[2] -> Q14
+		  |calibrated[1] -> Q230),
+	Q16	= (paint[2] -> Q17
+		  |calibrated[1] -> Q231),
+	Q17	= (paintNOk[2] -> Q16
+		  |calibrated[1] -> Q18
+		  |paintOk[2] -> Q228),
+	Q18	= (beginCalibration[1] -> Q17
+		  |beginCalibration[2] -> Q19
+		  |paintOk[1] -> Q225
+		  |paintOk[2] -> Q226
+		  |paintNOk[1] -> Q227
+		  |paintNOk[2] -> Q231),
+	Q19	= (calibrated[2] -> Q18
+		  |paintOk[1] -> Q20
+		  |paintNOk[1] -> Q224),
+	Q20	= (drill[1] -> Q21
+		  |calibrated[2] -> Q225),
+	Q21	= (drillNOk[1] -> Q20
+		  |calibrated[2] -> Q22
+		  |drillOk[1] -> Q223),
+	Q22	= (beginCalibration[2] -> Q21
+		  |beginCalibration[1] -> Q23
+		  |paintOk[2] -> Q220
+		  |paintNOk[2] -> Q221
+		  |drillOk[1] -> Q222
+		  |drillNOk[1] -> Q225),
+	Q23	= (calibrated[1] -> Q22
+		  |paintOk[2] -> Q24
+		  |paintNOk[2] -> Q219),
+	Q24	= (drill[2] -> Q25
+		  |calibrated[1] -> Q220),
+	Q25	= (drillNOk[2] -> Q24
+		  |calibrated[1] -> Q26
+		  |drillOk[2] -> Q218),
+	Q26	= (beginCalibration[1] -> Q25
+		  |beginCalibration[2] -> Q27
+		  |drillNOk[1] -> Q215
+		  |drillOk[2] -> Q216
+		  |drillOk[1] -> Q217
+		  |drillNOk[2] -> Q220),
+	Q27	= (calibrated[2] -> Q26
+		  |drillNOk[1] -> Q28
+		  |drillOk[1] -> Q29),
+	Q28	= (drill[1] -> Q27
+		  |calibrated[2] -> Q215),
+	Q29	= (out[1] -> Q30
+		  |calibrated[2] -> Q217),
+	Q30	= (calibrated[2] -> Q31
+		  |reset[1] -> Q214),
+	Q31	= (beginCalibration[2] -> Q30
+		  |reset[1] -> Q32
+		  |beginCalibration[1] -> Q210
+		  |drillNOk[2] -> Q212
+		  |drillOk[2] -> Q213),
+	Q32	= (beginCalibration[1] -> Q33
+		  |drillNOk[2] -> Q207
+		  |in[1] -> Q208
+		  |drillOk[2] -> Q209
+		  |beginCalibration[2] -> Q214),
+	Q33	= (calibrated[1] -> Q32
+		  |drillNOk[2] -> Q34
+		  |drillOk[2] -> Q35),
+	Q34	= (drill[2] -> Q33
+		  |calibrated[1] -> Q207),
+	Q35	= (out[2] -> Q36
+		  |calibrated[1] -> Q209),
+	Q36	= (calibrated[1] -> Q37
+		  |reset[2] -> Q240),
+	Q37	= (reset[2] -> Q0
+		  |beginCalibration[1] -> Q36
+		  |beginCalibration[2] -> Q38
+		  |in[1] -> Q206),
+	Q38	= (calibrated[2] -> Q37
+		  |in[1] -> Q39),
+	Q39	= (clean[1] -> Q40
+		  |calibrated[2] -> Q206),
+	Q40	= (cleanNOk[1] -> Q39
+		  |calibrated[2] -> Q41
+		  |cleanOk[1] -> Q205),
+	Q41	= (reset[2] -> Q4
+		  |beginCalibration[2] -> Q40
+		  |beginCalibration[1] -> Q42
+		  |cleanOk[1] -> Q43
+		  |cleanNOk[1] -> Q206),
+	Q42	= (reset[2] -> Q5
+		  |calibrated[1] -> Q41),
+	Q43	= (beginCalibration[1] -> Q44
+		  |paint[1] -> Q203
+		  |beginCalibration[2] -> Q205
+		  |reset[2] -> Q238),
+	Q44	= (calibrated[1] -> Q43
+		  |reset[2] -> Q45),
+	Q45	= (in[2] -> Q46
+		  |calibrated[1] -> Q238),
+	Q46	= (calibrated[1] -> Q47
+		  |clean[2] -> Q202),
+	Q47	= (beginCalibration[1] -> Q46
+		  |beginCalibration[2] -> Q48
+		  |paint[1] -> Q230
+		  |clean[2] -> Q235),
+	Q48	= (calibrated[2] -> Q47
+		  |paint[1] -> Q49),
+	Q49	= (paintNOk[1] -> Q48
+		  |paintOk[1] -> Q50
+		  |calibrated[2] -> Q230),
+	Q50	= (calibrated[2] -> Q51
+		  |drill[1] -> Q201),
+	Q51	= (beginCalibration[2] -> Q50
+		  |beginCalibration[1] -> Q52
+		  |drill[1] -> Q200
+		  |clean[2] -> Q229),
+	Q52	= (calibrated[1] -> Q51
+		  |clean[2] -> Q53),
+	Q53	= (cleanNOk[2] -> Q52
+		  |cleanOk[2] -> Q54
+		  |calibrated[1] -> Q229),
+	Q54	= (calibrated[1] -> Q55
+		  |paint[2] -> Q199),
+	Q55	= (beginCalibration[1] -> Q54
+		  |beginCalibration[2] -> Q56
+		  |drill[1] -> Q221
+		  |paint[2] -> Q225),
+	Q56	= (calibrated[2] -> Q55
+		  |drill[1] -> Q57),
+	Q57	= (drillNOk[1] -> Q56
+		  |drillOk[1] -> Q58
+		  |calibrated[2] -> Q221),
+	Q58	= (calibrated[2] -> Q59
+		  |out[1] -> Q198),
+	Q59	= (beginCalibration[2] -> Q58
+		  |beginCalibration[1] -> Q60
+		  |out[1] -> Q197
+		  |paint[2] -> Q222),
+	Q60	= (calibrated[1] -> Q59
+		  |paint[2] -> Q61),
+	Q61	= (paintNOk[2] -> Q60
+		  |paintOk[2] -> Q62
+		  |calibrated[1] -> Q222),
+	Q62	= (calibrated[1] -> Q63
+		  |drill[2] -> Q196),
+	Q63	= (beginCalibration[1] -> Q62
+		  |beginCalibration[2] -> Q64
+		  |out[1] -> Q212
+		  |drill[2] -> Q217),
+	Q64	= (calibrated[2] -> Q63
+		  |out[1] -> Q65),
+	Q65	= (reset[1] -> Q66
+		  |calibrated[2] -> Q212),
+	Q66	= (in[1] -> Q67
+		  |calibrated[2] -> Q207),
+	Q67	= (calibrated[2] -> Q68
+		  |clean[1] -> Q195),
+	Q68	= (beginCalibration[2] -> Q67
+		  |beginCalibration[1] -> Q69
+		  |clean[1] -> Q194
+		  |drill[2] -> Q208),
+	Q69	= (calibrated[1] -> Q68
+		  |drill[2] -> Q70),
+	Q70	= (drillNOk[2] -> Q69
+		  |drillOk[2] -> Q71
+		  |calibrated[1] -> Q208),
+	Q71	= (calibrated[1] -> Q72
+		  |out[2] -> Q192),
+	Q72	= (beginCalibration[1] -> Q71
+		  |beginCalibration[2] -> Q73
+		  |clean[1] -> Q191
+		  |out[2] -> Q206),
+	Q73	= (calibrated[2] -> Q72
+		  |clean[1] -> Q74),
+	Q74	= (cleanNOk[1] -> Q73
+		  |cleanOk[1] -> Q75
+		  |calibrated[2] -> Q191),
+	Q75	= (calibrated[2] -> Q76
+		  |paint[1] -> Q190),
+	Q76	= (out[2] -> Q43
+		  |beginCalibration[2] -> Q75
+		  |beginCalibration[1] -> Q77
+		  |paint[1] -> Q78),
+	Q77	= (out[2] -> Q44
+		  |calibrated[1] -> Q76),
+	Q78	= (paintNOk[1] -> Q76
+		  |beginCalibration[1] -> Q79
+		  |paintOk[1] -> Q182
+		  |beginCalibration[2] -> Q190
+		  |out[2] -> Q203),
+	Q79	= (calibrated[1] -> Q78
+		  |out[2] -> Q80),
+	Q80	= (reset[2] -> Q81
+		  |calibrated[1] -> Q203),
+	Q81	= (in[2] -> Q15
+		  |calibrated[1] -> Q82),
+	Q82	= (beginCalibration[1] -> Q81
+		  |beginCalibration[2] -> Q83
+		  |paintOk[1] -> Q181
+		  |in[2] -> Q230
+		  |paintNOk[1] -> Q238),
+	Q83	= (calibrated[2] -> Q82
+		  |paintOk[1] -> Q84
+		  |paintNOk[1] -> Q239),
+	Q84	= (drill[1] -> Q85
+		  |calibrated[2] -> Q181),
+	Q85	= (drillNOk[1] -> Q84
+		  |calibrated[2] -> Q86
+		  |drillOk[1] -> Q180),
+	Q86	= (beginCalibration[2] -> Q85
+		  |beginCalibration[1] -> Q87
+		  |drillOk[1] -> Q179
+		  |drillNOk[1] -> Q181
+		  |in[2] -> Q200),
+	Q87	= (calibrated[1] -> Q86
+		  |in[2] -> Q88),
+	Q88	= (clean[2] -> Q89
+		  |calibrated[1] -> Q200),
+	Q89	= (cleanNOk[2] -> Q88
+		  |calibrated[1] -> Q90
+		  |cleanOk[2] -> Q219),
+	Q90	= (beginCalibration[1] -> Q89
+		  |beginCalibration[2] -> Q91
+		  |drillOk[1] -> Q178
+		  |cleanNOk[2] -> Q200
+		  |cleanOk[2] -> Q221
+		  |drillNOk[1] -> Q229),
+	Q91	= (calibrated[2] -> Q90
+		  |drillOk[1] -> Q92
+		  |drillNOk[1] -> Q232),
+	Q92	= (out[1] -> Q93
+		  |calibrated[2] -> Q178),
+	Q93	= (calibrated[2] -> Q94
+		  |reset[1] -> Q177),
+	Q94	= (beginCalibration[2] -> Q93
+		  |reset[1] -> Q95
+		  |beginCalibration[1] -> Q170
+		  |cleanNOk[2] -> Q176
+		  |cleanOk[2] -> Q197),
+	Q95	= (beginCalibration[1] -> Q96
+		  |cleanOk[2] -> Q168
+		  |beginCalibration[2] -> Q177
+		  |in[1] -> Q233
+		  |cleanNOk[2] -> Q242),
+	Q96	= (calibrated[1] -> Q95
+		  |cleanNOk[2] -> Q97
+		  |cleanOk[2] -> Q98),
+	Q97	= (clean[2] -> Q96
+		  |calibrated[1] -> Q242),
+	Q98	= (paint[2] -> Q99
+		  |calibrated[1] -> Q168),
+	Q99	= (paintOk[2] -> Q34
+		  |paintNOk[2] -> Q98
+		  |calibrated[1] -> Q100),
+	Q100	= (beginCalibration[1] -> Q99
+		  |beginCalibration[2] -> Q101
+		  |in[1] -> Q167
+		  |paintNOk[2] -> Q168
+		  |paintOk[2] -> Q207),
+	Q101	= (calibrated[2] -> Q100
+		  |in[1] -> Q102),
+	Q102	= (clean[1] -> Q103
+		  |calibrated[2] -> Q167),
+	Q103	= (cleanNOk[1] -> Q102
+		  |calibrated[2] -> Q104
+		  |cleanOk[1] -> Q224),
+	Q104	= (beginCalibration[2] -> Q103
+		  |beginCalibration[1] -> Q105
+		  |cleanNOk[1] -> Q167
+		  |paintOk[2] -> Q194
+		  |cleanOk[1] -> Q227
+		  |paintNOk[2] -> Q234),
+	Q105	= (calibrated[1] -> Q104
+		  |paintOk[2] -> Q106
+		  |paintNOk[2] -> Q236),
+	Q106	= (drill[2] -> Q107
+		  |calibrated[1] -> Q194),
+	Q107	= (drillNOk[2] -> Q106
+		  |calibrated[1] -> Q108
+		  |drillOk[2] -> Q166),
+	Q108	= (beginCalibration[1] -> Q107
+		  |beginCalibration[2] -> Q109
+		  |cleanOk[1] -> Q115
+		  |drillOk[2] -> Q191
+		  |drillNOk[2] -> Q194
+		  |cleanNOk[1] -> Q208),
+	Q109	= (calibrated[2] -> Q108
+		  |cleanNOk[1] -> Q110
+		  |cleanOk[1] -> Q111),
+	Q110	= (clean[1] -> Q109
+		  |calibrated[2] -> Q208),
+	Q111	= (paint[1] -> Q112
+		  |calibrated[2] -> Q115),
+	Q112	= (paintOk[1] -> Q28
+		  |paintNOk[1] -> Q111
+		  |calibrated[2] -> Q113),
+	Q113	= (drillOk[2] -> Q78
+		  |beginCalibration[2] -> Q112
+		  |beginCalibration[1] -> Q114
+		  |paintNOk[1] -> Q115
+		  |paintOk[1] -> Q215
+		  |drillNOk[2] -> Q226),
+	Q114	= (drillOk[2] -> Q79
+		  |calibrated[1] -> Q113
+		  |drillNOk[2] -> Q228),
+	Q115	= (drillOk[2] -> Q76
+		  |beginCalibration[2] -> Q111
+		  |paint[1] -> Q113
+		  |beginCalibration[1] -> Q116
+		  |drillNOk[2] -> Q118),
+	Q116	= (drillOk[2] -> Q77
+		  |calibrated[1] -> Q115
+		  |drillNOk[2] -> Q117),
+	Q117	= (drill[2] -> Q116
+		  |calibrated[1] -> Q118),
+	Q118	= (drill[2] -> Q115
+		  |beginCalibration[1] -> Q117
+		  |beginCalibration[2] -> Q119
+		  |paint[1] -> Q226),
+	Q119	= (calibrated[2] -> Q118
+		  |paint[1] -> Q120),
+	Q120	= (paintNOk[1] -> Q119
+		  |paintOk[1] -> Q121
+		  |calibrated[2] -> Q226),
+	Q121	= (calibrated[2] -> Q122
+		  |drill[1] -> Q165),
+	Q122	= (beginCalibration[2] -> Q121
+		  |beginCalibration[1] -> Q123
+		  |drill[2] -> Q215
+		  |drill[1] -> Q220),
+	Q123	= (calibrated[1] -> Q122
+		  |drill[2] -> Q124),
+	Q124	= (drillNOk[2] -> Q123
+		  |drillOk[2] -> Q125
+		  |calibrated[1] -> Q215),
+	Q125	= (out[2] -> Q126
+		  |calibrated[1] -> Q182),
+	Q126	= (calibrated[1] -> Q127
+		  |reset[2] -> Q164),
+	Q127	= (beginCalibration[1] -> Q126
+		  |beginCalibration[2] -> Q128
+		  |drill[1] -> Q162
+		  |reset[2] -> Q181),
+	Q128	= (calibrated[2] -> Q127
+		  |drill[1] -> Q129),
+	Q129	= (drillNOk[1] -> Q128
+		  |drillOk[1] -> Q130
+		  |calibrated[2] -> Q162),
+	Q130	= (calibrated[2] -> Q131
+		  |out[1] -> Q161),
+	Q131	= (beginCalibration[2] -> Q130
+		  |beginCalibration[1] -> Q132
+		  |out[1] -> Q155
+		  |reset[2] -> Q179),
+	Q132	= (calibrated[1] -> Q131
+		  |reset[2] -> Q133),
+	Q133	= (in[2] -> Q134
+		  |calibrated[1] -> Q179),
+	Q134	= (calibrated[1] -> Q135
+		  |clean[2] -> Q154),
+	Q135	= (beginCalibration[1] -> Q134
+		  |beginCalibration[2] -> Q136
+		  |out[1] -> Q176
+		  |clean[2] -> Q178),
+	Q136	= (calibrated[2] -> Q135
+		  |out[1] -> Q137),
+	Q137	= (reset[1] -> Q138
+		  |calibrated[2] -> Q176),
+	Q138	= (in[1] -> Q139
+		  |calibrated[2] -> Q242),
+	Q139	= (calibrated[2] -> Q140
+		  |clean[1] -> Q153),
+	Q140	= (beginCalibration[2] -> Q139
+		  |beginCalibration[1] -> Q141
+		  |clean[2] -> Q233
+		  |clean[1] -> Q237),
+	Q141	= (calibrated[1] -> Q140
+		  |clean[2] -> Q142),
+	Q142	= (cleanNOk[2] -> Q141
+		  |cleanOk[2] -> Q143
+		  |calibrated[1] -> Q233),
+	Q143	= (calibrated[1] -> Q144
+		  |paint[2] -> Q152),
+	Q144	= (beginCalibration[1] -> Q143
+		  |beginCalibration[2] -> Q145
+		  |paint[2] -> Q167
+		  |clean[1] -> Q234),
+	Q145	= (calibrated[2] -> Q144
+		  |clean[1] -> Q146),
+	Q146	= (cleanNOk[1] -> Q145
+		  |cleanOk[1] -> Q147
+		  |calibrated[2] -> Q234),
+	Q147	= (calibrated[2] -> Q148
+		  |paint[1] -> Q151),
+	Q148	= (beginCalibration[2] -> Q147
+		  |beginCalibration[1] -> Q149
+		  |paint[2] -> Q227
+		  |paint[1] -> Q231),
+	Q149	= (calibrated[1] -> Q148
+		  |paint[2] -> Q150),
+	Q150	= (paintOk[2] -> Q117
+		  |paintNOk[2] -> Q149
+		  |calibrated[1] -> Q227),
+	Q151	= (paintOk[1] -> Q56
+		  |paintNOk[1] -> Q147
+		  |calibrated[2] -> Q231),
+	Q152	= (paintOk[2] -> Q69
+		  |paintNOk[2] -> Q143
+		  |calibrated[1] -> Q167),
+	Q153	= (cleanOk[1] -> Q48
+		  |cleanNOk[1] -> Q139
+		  |calibrated[2] -> Q237),
+	Q154	= (cleanOk[2] -> Q60
+		  |cleanNOk[2] -> Q134
+		  |calibrated[1] -> Q178),
+	Q155	= (reset[1] -> Q37
+		  |reset[2] -> Q156
+		  |beginCalibration[1] -> Q160
+		  |beginCalibration[2] -> Q161),
+	Q156	= (reset[1] -> Q0
+		  |beginCalibration[2] -> Q157
+		  |beginCalibration[1] -> Q158
+		  |in[2] -> Q176),
+	Q157	= (reset[1] -> Q1
+		  |calibrated[2] -> Q156),
+	Q158	= (calibrated[1] -> Q156
+		  |in[2] -> Q159),
+	Q159	= (clean[2] -> Q170
+		  |calibrated[1] -> Q176),
+	Q160	= (calibrated[1] -> Q155
+		  |reset[2] -> Q158),
+	Q161	= (reset[1] -> Q38
+		  |calibrated[2] -> Q155),
+	Q162	= (reset[2] -> Q86
+		  |drillNOk[1] -> Q127
+		  |beginCalibration[2] -> Q129
+		  |drillOk[1] -> Q131
+		  |beginCalibration[1] -> Q163),
+	Q163	= (reset[2] -> Q87
+		  |calibrated[1] -> Q162),
+	Q164	= (in[2] -> Q52
+		  |calibrated[1] -> Q181),
+	Q165	= (drillOk[1] -> Q64
+		  |drillNOk[1] -> Q121
+		  |calibrated[2] -> Q220),
+	Q166	= (out[2] -> Q42
+		  |calibrated[1] -> Q191),
+	Q167	= (paintOk[2] -> Q68
+		  |beginCalibration[2] -> Q102
+		  |clean[1] -> Q104
+		  |paintNOk[2] -> Q144
+		  |beginCalibration[1] -> Q152),
+	Q168	= (beginCalibration[1] -> Q98
+		  |paint[2] -> Q100
+		  |in[1] -> Q144
+		  |beginCalibration[2] -> Q169),
+	Q169	= (in[1] -> Q145
+		  |calibrated[2] -> Q168),
+	Q170	= (calibrated[1] -> Q94
+		  |cleanNOk[2] -> Q159
+		  |cleanOk[2] -> Q171),
+	Q171	= (paint[2] -> Q172
+		  |calibrated[1] -> Q197),
+	Q172	= (paintNOk[2] -> Q171
+		  |calibrated[1] -> Q173
+		  |paintOk[2] -> Q175),
+	Q173	= (reset[1] -> Q100
+		  |beginCalibration[1] -> Q172
+		  |beginCalibration[2] -> Q174
+		  |paintNOk[2] -> Q197
+		  |paintOk[2] -> Q212),
+	Q174	= (reset[1] -> Q101
+		  |calibrated[2] -> Q173),
+	Q175	= (drill[2] -> Q210
+		  |calibrated[1] -> Q212),
+	Q176	= (clean[2] -> Q94
+		  |beginCalibration[2] -> Q137
+		  |beginCalibration[1] -> Q159
+		  |reset[1] -> Q242),
+	Q177	= (in[1] -> Q10
+		  |calibrated[2] -> Q95),
+	Q178	= (cleanOk[2] -> Q59
+		  |beginCalibration[2] -> Q92
+		  |out[1] -> Q94
+		  |cleanNOk[2] -> Q135
+		  |beginCalibration[1] -> Q154),
+	Q179	= (beginCalibration[1] -> Q133
+		  |in[2] -> Q135
+		  |out[1] -> Q156
+		  |beginCalibration[2] -> Q180),
+	Q180	= (out[1] -> Q157
+		  |calibrated[2] -> Q179),
+	Q181	= (in[2] -> Q51
+		  |beginCalibration[2] -> Q84
+		  |drill[1] -> Q86
+		  |beginCalibration[1] -> Q164),
+	Q182	= (beginCalibration[1] -> Q125
+		  |out[2] -> Q127
+		  |beginCalibration[2] -> Q183
+		  |drill[1] -> Q216),
+	Q183	= (calibrated[2] -> Q182
+		  |drill[1] -> Q184),
+	Q184	= (drillNOk[1] -> Q183
+		  |drillOk[1] -> Q185
+		  |calibrated[2] -> Q216),
+	Q185	= (calibrated[2] -> Q186
+		  |out[1] -> Q188),
+	Q186	= (out[2] -> Q131
+		  |beginCalibration[2] -> Q185
+		  |beginCalibration[1] -> Q187
+		  |out[1] -> Q213),
+	Q187	= (out[2] -> Q132
+		  |calibrated[1] -> Q186),
+	Q188	= (reset[1] -> Q189
+		  |calibrated[2] -> Q213),
+	Q189	= (in[1] -> Q73
+		  |calibrated[2] -> Q209),
+	Q190	= (paintNOk[1] -> Q75
+		  |calibrated[2] -> Q78
+		  |paintOk[1] -> Q183),
+	Q191	= (out[2] -> Q41
+		  |cleanNOk[1] -> Q72
+		  |beginCalibration[2] -> Q74
+		  |cleanOk[1] -> Q76
+		  |beginCalibration[1] -> Q166),
+	Q192	= (reset[2] -> Q193
+		  |calibrated[1] -> Q206),
+	Q193	= (in[2] -> Q141
+		  |calibrated[1] -> Q241),
+	Q194	= (cleanNOk[1] -> Q68
+		  |beginCalibration[1] -> Q106
+		  |drill[2] -> Q108
+		  |cleanOk[1] -> Q118
+		  |beginCalibration[2] -> Q195),
+	Q195	= (cleanNOk[1] -> Q67
+		  |cleanOk[1] -> Q119
+		  |calibrated[2] -> Q194),
+	Q196	= (drillNOk[2] -> Q62
+		  |drillOk[2] -> Q187
+		  |calibrated[1] -> Q217),
+	Q197	= (reset[1] -> Q168
+		  |beginCalibration[1] -> Q171
+		  |paint[2] -> Q173
+		  |beginCalibration[2] -> Q198),
+	Q198	= (reset[1] -> Q169
+		  |calibrated[2] -> Q197),
+	Q199	= (paintNOk[2] -> Q54
+		  |paintOk[2] -> Q123
+		  |calibrated[1] -> Q225),
+	Q200	= (drillNOk[1] -> Q51
+		  |beginCalibration[1] -> Q88
+		  |clean[2] -> Q90
+		  |drillOk[1] -> Q135
+		  |beginCalibration[2] -> Q201),
+	Q201	= (drillNOk[1] -> Q50
+		  |drillOk[1] -> Q136
+		  |calibrated[2] -> Q200),
+	Q202	= (cleanNOk[2] -> Q46
+		  |cleanOk[2] -> Q149
+		  |calibrated[1] -> Q235),
+	Q203	= (paintNOk[1] -> Q43
+		  |beginCalibration[1] -> Q80
+		  |reset[2] -> Q82
+		  |paintOk[1] -> Q127
+		  |beginCalibration[2] -> Q204),
+	Q204	= (paintOk[1] -> Q128
+		  |calibrated[2] -> Q203
+		  |paintNOk[1] -> Q205),
+	Q205	= (calibrated[2] -> Q43
+		  |paint[1] -> Q204),
+	Q206	= (beginCalibration[2] -> Q39
+		  |clean[1] -> Q41
+		  |beginCalibration[1] -> Q192
+		  |reset[2] -> Q241),
+	Q207	= (drill[2] -> Q32
+		  |beginCalibration[1] -> Q34
+		  |beginCalibration[2] -> Q66
+		  |in[1] -> Q68),
+	Q208	= (drillNOk[2] -> Q68
+		  |beginCalibration[1] -> Q70
+		  |drillOk[2] -> Q72
+		  |clean[1] -> Q108
+		  |beginCalibration[2] -> Q110),
+	Q209	= (beginCalibration[1] -> Q35
+		  |out[2] -> Q37
+		  |in[1] -> Q72
+		  |beginCalibration[2] -> Q189),
+	Q210	= (calibrated[1] -> Q31
+		  |drillNOk[2] -> Q175
+		  |drillOk[2] -> Q211),
+	Q211	= (out[2] -> Q160
+		  |calibrated[1] -> Q213),
+	Q212	= (drill[2] -> Q31
+		  |beginCalibration[2] -> Q65
+		  |beginCalibration[1] -> Q175
+		  |reset[1] -> Q207),
+	Q213	= (out[2] -> Q155
+		  |beginCalibration[2] -> Q188
+		  |reset[1] -> Q209
+		  |beginCalibration[1] -> Q211),
+	Q214	= (calibrated[2] -> Q32
+		  |in[1] -> Q110),
+	Q215	= (drill[1] -> Q26
+		  |beginCalibration[2] -> Q28
+		  |drillNOk[2] -> Q122
+		  |beginCalibration[1] -> Q124
+		  |drillOk[2] -> Q182),
+	Q216	= (out[2] -> Q162
+		  |drillNOk[1] -> Q182
+		  |beginCalibration[2] -> Q184
+		  |drillOk[1] -> Q186
+		  |beginCalibration[1] -> Q218),
+	Q217	= (beginCalibration[2] -> Q29
+		  |out[1] -> Q31
+		  |drillNOk[2] -> Q63
+		  |drillOk[2] -> Q186
+		  |beginCalibration[1] -> Q196),
+	Q218	= (out[2] -> Q163
+		  |calibrated[1] -> Q216),
+	Q219	= (paint[2] -> Q23
+		  |calibrated[1] -> Q221),
+	Q220	= (beginCalibration[1] -> Q24
+		  |drill[2] -> Q26
+		  |drillOk[1] -> Q63
+		  |drillNOk[1] -> Q122
+		  |beginCalibration[2] -> Q165),
+	Q221	= (paint[2] -> Q22
+		  |drillNOk[1] -> Q55
+		  |beginCalibration[2] -> Q57
+		  |drillOk[1] -> Q59
+		  |beginCalibration[1] -> Q219),
+	Q222	= (paintNOk[2] -> Q59
+		  |beginCalibration[1] -> Q61
+		  |paintOk[2] -> Q63
+		  |out[1] -> Q173
+		  |beginCalibration[2] -> Q223),
+	Q223	= (out[1] -> Q174
+		  |calibrated[2] -> Q222),
+	Q224	= (paint[1] -> Q19
+		  |calibrated[2] -> Q227),
+	Q225	= (beginCalibration[2] -> Q20
+		  |drill[1] -> Q22
+		  |paintNOk[2] -> Q55
+		  |paintOk[2] -> Q122
+		  |beginCalibration[1] -> Q199),
+	Q226	= (drill[2] -> Q113
+		  |paintNOk[1] -> Q118
+		  |beginCalibration[2] -> Q120
+		  |paintOk[1] -> Q122
+		  |beginCalibration[1] -> Q228),
+	Q227	= (paint[1] -> Q18
+		  |paintOk[2] -> Q118
+		  |paintNOk[2] -> Q148
+		  |beginCalibration[1] -> Q150
+		  |beginCalibration[2] -> Q224),
+	Q228	= (drill[2] -> Q114
+		  |calibrated[1] -> Q226),
+	Q229	= (cleanNOk[2] -> Q51
+		  |beginCalibration[1] -> Q53
+		  |cleanOk[2] -> Q55
+		  |drill[1] -> Q90
+		  |beginCalibration[2] -> Q232),
+	Q230	= (clean[2] -> Q13
+		  |beginCalibration[1] -> Q15
+		  |paintNOk[1] -> Q47
+		  |beginCalibration[2] -> Q49
+		  |paintOk[1] -> Q51),
+	Q231	= (beginCalibration[1] -> Q16
+		  |paint[2] -> Q18
+		  |paintOk[1] -> Q55
+		  |paintNOk[1] -> Q148
+		  |beginCalibration[2] -> Q151),
+	Q232	= (drill[1] -> Q91
+		  |calibrated[2] -> Q229),
+	Q233	= (clean[1] -> Q8
+		  |beginCalibration[2] -> Q10
+		  |cleanNOk[2] -> Q140
+		  |beginCalibration[1] -> Q142
+		  |cleanOk[2] -> Q144),
+	Q234	= (paint[2] -> Q104
+		  |cleanNOk[1] -> Q144
+		  |beginCalibration[2] -> Q146
+		  |cleanOk[1] -> Q148
+		  |beginCalibration[1] -> Q236),
+	Q235	= (beginCalibration[2] -> Q11
+		  |paint[1] -> Q13
+		  |cleanNOk[2] -> Q47
+		  |cleanOk[2] -> Q148
+		  |beginCalibration[1] -> Q202),
+	Q236	= (paint[2] -> Q105
+		  |calibrated[1] -> Q234),
+	Q237	= (beginCalibration[1] -> Q6
+		  |clean[2] -> Q8
+		  |cleanOk[1] -> Q47
+		  |cleanNOk[1] -> Q140
+		  |beginCalibration[2] -> Q153),
+	Q238	= (beginCalibration[1] -> Q45
+		  |in[2] -> Q47
+		  |paint[1] -> Q82
+		  |beginCalibration[2] -> Q239),
+	Q239	= (paint[1] -> Q83
+		  |calibrated[2] -> Q238),
+	Q240	= (calibrated[1] -> Q0
+		  |in[2] -> Q97),
+	Q241	= (beginCalibration[2] -> Q2
+		  |clean[1] -> Q4
+		  |in[2] -> Q140
+		  |beginCalibration[1] -> Q193),
+	Q242	= (clean[2] -> Q95
+		  |beginCalibration[1] -> Q97
+		  |beginCalibration[2] -> Q138
+		  |in[1] -> Q140)+{{stamp, stampOk}[1..2].

@@ -1,0 +1,108 @@
+% Generated from extended-budget configs and returned evidence.
+\providecommand{\ExtBudgetPlanned}{27}
+\providecommand{\ExtBudgetChecked}{8}
+\providecommand{\ExtBudgetTimeout}{16}
+\providecommand{\ExtBudgetOOM}{1}
+\providecommand{\ExtBudgetSkipped}{2}
+\providecommand{\ExtBudgetPending}{0}
+\providecommand{\ExtBudgetReceived}{27}
+\providecommand{\ExtBudgetTimeCap}{7{,}200}
+\providecommand{\ExtBudgetInitialHeap}{64}
+\providecommand{\ExtBudgetExpandedHeap}{200}
+\providecommand{\ExtBudgetWins}{7}
+\providecommand{\ExtBudgetLosses}{1}
+\providecommand{\ExtTravelFourFourDFSeconds}{1{,}872}
+\providecommand{\ExtTravelFourFourDFSolverSeconds}{1{,}814}
+\providecommand{\ExtTravelFourFourDFStates}{412{,}688}
+\providecommand{\ExtTravelFourFourDFRSS}{7}
+\providecommand{\ExtTravelFourSixDFSeconds}{6{,}990}
+\providecommand{\ExtTravelFourSixDFSolverSeconds}{6{,}768}
+\providecommand{\ExtTravelFourSixDFStates}{817{,}362}
+\providecommand{\ExtTravelFourSixDFRSS}{13}
+\providecommand{\ExtTravelFourEightLazySeconds}{1{,}636}
+\providecommand{\ExtTravelFourEightLazySolverSeconds}{756}
+\providecommand{\ExtTravelFourEightLazyStates}{47{,}829}
+\providecommand{\ExtTravelFourEightLazyRSS}{16}
+\providecommand{\ExtTravelFourEightUpdateFirstSeconds}{1{,}655}
+\providecommand{\ExtTravelFourEightUpdateFirstSolverSeconds}{718}
+\providecommand{\ExtTravelFourEightUpdateFirstStates}{47{,}829}
+\providecommand{\ExtTravelFourEightUpdateFirstRSS}{19}
+\providecommand{\ExtTravelFourEightEagerSeconds}{2{,}036}
+\providecommand{\ExtTravelFourEightEagerSolverSeconds}{961}
+\providecommand{\ExtTravelFourEightEagerStates}{64{,}248}
+\providecommand{\ExtTravelFourEightEagerRSS}{17}
+\providecommand{\ExtIndustryDFSeconds}{1{,}695}
+\providecommand{\ExtIndustryDFSolverSeconds}{1{,}693}
+\providecommand{\ExtIndustryDFStates}{110{,}825}
+\providecommand{\ExtIndustryDFRSS}{3}
+\providecommand{\ExtPCOneDFSeconds}{2{,}220}
+\providecommand{\ExtPCOneDFSolverSeconds}{2{,}216}
+\providecommand{\ExtPCOneDFStates}{3{,}252{,}233}
+\providecommand{\ExtPCOneDFRSS}{25}
+\providecommand{\ExtWorkflowDFSeconds}{1{,}387}
+\providecommand{\ExtWorkflowDFSolverSeconds}{1{,}378}
+\providecommand{\ExtWorkflowDFStates}{1{,}774{,}711}
+\providecommand{\ExtWorkflowDFRSS}{24}
+\providecommand{\ExtSurveillanceDFOOMSeconds}{5{,}271}
+\providecommand{\ExtSurveillanceDFOOMSolverSeconds}{--}
+\providecommand{\ExtSurveillanceDFOOMStates}{--}
+\providecommand{\ExtSurveillanceDFOOMRSS}{211}
+\providecommand{\ExtPCTwoLazySeconds}{7{,}205}
+\providecommand{\ExtPCTwoLazySolverSeconds}{--}
+\providecommand{\ExtPCTwoLazyStates}{--}
+\providecommand{\ExtPCTwoLazyRSS}{187}
+\providecommand{\ExtTravelSixOneLazySeconds}{7{,}205}
+\providecommand{\ExtTravelSixOneLazySolverSeconds}{--}
+\providecommand{\ExtTravelSixOneLazyStates}{--}
+\providecommand{\ExtTravelSixOneLazyRSS}{79}
+\providecommand{\ExtTravelSixOneDFSeconds}{7{,}205}
+\providecommand{\ExtTravelSixOneDFSolverSeconds}{--}
+\providecommand{\ExtTravelSixOneDFStates}{--}
+\providecommand{\ExtTravelSixOneDFRSS}{79}
+\providecommand{\ExtFixedMatches}{5}
+\providecommand{\ExtFixedComparable}{5}
+\providecommand{\ExtFixedUncompared}{3}
+\providecommand{\ExtDFHeapFailures}{10}
+\providecommand{\ExtDFHeapTimeouts}{9}
+\providecommand{\ExtDFHeapTimeoutRSSMin}{159}
+\providecommand{\ExtDFHeapTimeoutRSSMax}{213}
+\providecommand{\ExtDFPriorRSSMin}{65}
+\providecommand{\ExtDFPriorRSSMax}{69}
+\providecommand{\ExtDFBothUnresolved}{10}
+\providecommand{\ExtLazyHeapPairs}{9}
+\providecommand{\ExtLazyHeapSolverUpper}{37.1}
+\providecommand{\ExtLazyHeapRSSUpper}{7.4}
+
+\begingroup\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}llrrrrrrrr@{}}
+\caption{Extended-budget single trials (separate from the fixed-budget campaign).}\label{tab:ext-budget}\\
+\toprule Cell / campaign & Method & GiB & Cap (s) & Status & JVM (s) & Solver (s) & RSS (GiB) & States & JVM ratio\\\midrule\endhead
+Travel(4,4)/base [ext1] & DF & 64 & 7200 & WIN & 1.87e+03 & 1.81e+03 & 7.36 & 412688 & 15.7\\
+Travel(4,6)/base [ext1] & DF & 64 & 7200 & WIN & 6.99e+03 & 6.77e+03 & 12.7 & 817362 & 13.4\\
+Travel(4,8)/base [ext1] & Lazy & 64 & 7200 & WIN & 1.64e+03 & 756 & 15.9 & 47829 & --\\
+Travel(4,8)/base [ext1] & Update-first & 64 & 7200 & WIN & 1.66e+03 & 718 & 19.2 & 47829 & --\\
+Industry/r1 [ext2] & DF & 64 & 7200 & LOSS & 1.7e+03 & 1.69e+03 & 2.79 & 110825 & 3.01\\
+PC1/r1 [ext2] & DF & 64 & 7200 & WIN & 2.22e+03 & 2.22e+03 & 25.1 & 3252233 & 1.68e+03\\
+Travel(4,8)/base [ext3] & DF & 64 & 7200 & TO & 7.2e+03 & -- & 17.2 & -- & --\\
+Travel(4,8)/base [ext3] & Eager & 64 & 7200 & WIN & 2.04e+03 & 961 & 17.2 & 64248 & --\\
+Travel(4,12)/base [ext3] & Lazy & 64 & 7200 & TO & 7.2e+03 & -- & 32 & -- & --\\
+Travel(6,1)/base [ext3] & Lazy & 64 & 7200 & TO & 7.2e+03 & -- & 47 & -- & --\\
+Travel(6,1)/base [ext3] & DF & 64 & 7200 & TO & 7.2e+03 & -- & 48.6 & -- & --\\
+Railcab/base [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 190 & -- & --\\
+Surveillance/base [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 213 & -- & --\\
+Workflow/base [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 191 & -- & --\\
+Workflow/r1 [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 192 & -- & --\\
+Railcab/r1 [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 212 & -- & --\\
+PC2/base [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 210 & -- & --\\
+PC2/r1 [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 209 & -- & --\\
+Surveillance/r1 [ext4] & DF & 200 & 7200 & OOM & 5.27e+03 & -- & 211 & -- & --\\
+Workflow/r2 [ext4] & DF & 200 & 7200 & WIN & 1.39e+03 & 1.38e+03 & 23.6 & 1774711 & 60.1\\
+Surveillance/r2 [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 159 & -- & --\\
+PC2/r2 [ext4] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 209 & -- & --\\
+PC2/r2 [ext4] & Lazy & 200 & 7200 & TO & 7.21e+03 & -- & 187 & -- & --\\
+Travel(6,1)/base [ext5] & Lazy & 200 & 7200 & TO & 7.21e+03 & -- & 78.6 & -- & --\\
+Travel(6,1)/base [ext5] & DF & 200 & 7200 & TO & 7.21e+03 & -- & 78.9 & -- & --\\
+Travel(6,4)/base [ext5] & Lazy & 200 & 7200 & SKIP & -- & -- & -- & -- & --\\
+Travel(6,4)/base [ext5] & DF & 200 & 7200 & SKIP & -- & -- & -- & -- & --\\
+\bottomrule\end{longtable}\endgroup
+Each row has one planned trial. WIN/LOSS display SUCCESS/UNREALIZABLE; TO is timeout at the stated cap. NOT\_RUN/INCOMPLETE means no completed return; -- means unmeasured or ineligible, never zero. SKIP displays SKIPPED\_MONOTONE, a scheduling exclusion, not a measured resource failure or an inferred losing decision; reasons are in the CSV. ! marks a provenance/check failure; the raw status is retained. The ratio uses total JVM elapsed time divided by the same cell's fixed-budget, five-valid-trial Lazy median (1,200 s, 64 GiB), only for matching checked decisions. It differs from the main paper's solver-time ratios. The CSV separately reports solver-time ratios; timeouts have no ratio. An extended trial is never treated as a five-run median. RSS measures process memory, not heap occupancy.

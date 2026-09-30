@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-09-29T17:07:11.477390+09:00",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "rolling_audit/validate_rolling_audit.py",
+        "rolling_audit/v1"
+      ],
+      "exit_code": 0,
+      "output": "{\"status\": \"PASS\", \"at\": \"2026-09-29T08:07:11.496052+00:00\", \"issues\": [], \"endpoints\": {\"old\": {\"states\": 2, \"edges\": 3, \"uncontrollable_closed\": true, \"nonblocking\": true, \"safe\": true}, \"new\": {\"states\": 2, \"edges\": 3, \"uncontrollable_closed\": true, \"nonblocking\": true, \"safe\": true}}, \"generated_grouping\": [{\"mode\": \"transfers\", \"status\": \"PASS\", \"boundary_only_is_renaming\": false}, {\"mode\": \"boundaries\", \"status\": \"PASS\", \"boundary_only_is_renaming\": true}, {\"mode\": \"both\", \"status\": \"PASS\", \"boundary_only_is_renaming\": false}], \"scope\": \"Independent endpoint synchronous products, declared append-only log extension, full nine-state initializer, interval/audit requirements, and generated event groups; no synthesis.\"}\n"
+    },
+    {
+      "job": "fine_none_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "fine_transfers_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "fine_boundaries_lazy",
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "finished_at": "2026-09-29T17:07:13.256644+09:00",
+  "status": "PASS"
+}

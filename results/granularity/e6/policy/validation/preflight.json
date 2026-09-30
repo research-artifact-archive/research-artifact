@@ -1,0 +1,31 @@
+{
+  "started_at": "2026-09-29T16:39:25.444709+09:00",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "policy/validate_policy.py",
+        "--output",
+        "policy/validation/preflight-independent.json"
+      ],
+      "exit_code": 0,
+      "output": "{\"status\": \"PASS\", \"endpoint_checks\": {\"old\": {\"status\": \"PASS\", \"states\": 2, \"edges\": 4, \"nonblocking\": true, \"uncontrollable_closed\": true, \"safety\": true}, \"new\": {\"status\": \"PASS\", \"states\": 2, \"edges\": 4, \"nonblocking\": true, \"uncontrollable_closed\": true, \"safety\": true}}, \"method\": \"Independent Python explicit synchronous product and all boundary permutations; does not import generator or Java solver.\"}\n"
+    },
+    {
+      "job": "policy_fine_none_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "policy_fine_boundaries_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "policy_generated_coarse_none_lazy",
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "finished_at": "2026-09-29T16:39:27.214828+09:00",
+  "status": "PASS"
+}

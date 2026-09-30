@@ -1,0 +1,31 @@
+Process:
+	PC2_NEW_CALIBRATION_1
+States:
+	14
+Transitions:
+	PC2_NEW_CALIBRATION_1 = Q0,
+	Q0	= (in[1] -> Q1
+		  |beginCalibration[1] -> Q13),
+	Q1	= (clean[1] -> Q2
+		  |paint[1] -> Q4
+		  |beginCalibration[1] -> Q6
+		  |drill[1] -> Q7
+		  |stamp[1] -> Q9
+		  |out[1] -> Q11),
+	Q2	= ({cleanNOk, cleanOk}[1] -> Q1
+		  |beginCalibration[1] -> Q3),
+	Q3	= (calibrated[1] -> Q2),
+	Q4	= ({paintNOk, paintOk}[1] -> Q1
+		  |beginCalibration[1] -> Q5),
+	Q5	= (calibrated[1] -> Q4),
+	Q6	= (calibrated[1] -> Q1),
+	Q7	= ({drillNOk, drillOk}[1] -> Q1
+		  |beginCalibration[1] -> Q8),
+	Q8	= (calibrated[1] -> Q7),
+	Q9	= (stampOk[1] -> Q1
+		  |beginCalibration[1] -> Q10),
+	Q10	= (calibrated[1] -> Q9),
+	Q11	= (reset[1] -> Q0
+		  |beginCalibration[1] -> Q12),
+	Q12	= (calibrated[1] -> Q11),
+	Q13	= (calibrated[1] -> Q0).

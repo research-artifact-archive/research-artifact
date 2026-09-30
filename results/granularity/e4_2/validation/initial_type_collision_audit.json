@@ -1,0 +1,73 @@
+{
+  "timing": "after first-series errors; no inputs changed",
+  "cause": "Normal holder E and the one-monitor error state E share one name at n>=5; invalid contracts are rejected before solver entry.",
+  "static_check_gap": "The first static checker tested product conservation and primitive n2 equality but omitted uniqueness/disjointness of monitor state identifiers.",
+  "checks": [
+    {
+      "n": 2,
+      "duplicate_one_states": [],
+      "holder_error_collision": false,
+      "initialization_all_holder_states_safe": true
+    },
+    {
+      "n": 3,
+      "duplicate_one_states": [],
+      "holder_error_collision": false,
+      "initialization_all_holder_states_safe": true
+    },
+    {
+      "n": 4,
+      "duplicate_one_states": [],
+      "holder_error_collision": false,
+      "initialization_all_holder_states_safe": true
+    },
+    {
+      "n": 5,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    },
+    {
+      "n": 6,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    },
+    {
+      "n": 7,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    },
+    {
+      "n": 8,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    },
+    {
+      "n": 9,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    },
+    {
+      "n": 10,
+      "duplicate_one_states": [
+        "E"
+      ],
+      "holder_error_collision": true,
+      "initialization_all_holder_states_safe": false
+    }
+  ]
+}

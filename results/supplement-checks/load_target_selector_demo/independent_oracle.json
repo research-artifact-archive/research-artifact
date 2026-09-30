@@ -1,0 +1,192 @@
+{
+  "all_targets": {
+    "source_input": "all_targets/model.lts",
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product_in_bfs_order": [
+      [
+        "N0",
+        "C0"
+      ],
+      [
+        "N1",
+        "C1"
+      ]
+    ],
+    "selected_eligible_endpoint_states": [
+      "N0",
+      "N1"
+    ],
+    "independent_full_graph": {
+      "O": {
+        "idle": [
+          "O"
+        ],
+        "reconfigure_TEST": [
+          "N1"
+        ]
+      },
+      "N0": {
+        "idle": [
+          "N0"
+        ],
+        "move": [
+          "N1"
+        ]
+      },
+      "N1": {
+        "idle": [
+          "N1"
+        ]
+      }
+    },
+    "independent_winning_states": [
+      "N0",
+      "N1",
+      "O"
+    ],
+    "independent_rank": {
+      "N0": 0,
+      "N1": 0,
+      "O": 1
+    },
+    "reachable_update_states": [
+      "N1",
+      "O"
+    ],
+    "reachable_goal_states": [
+      "N1"
+    ],
+    "expected_decision": "WIN",
+    "exported_graph_exact_match": true,
+    "scope": "monitor-free functional selector check; no initializer, UC, dependency, performance, or runtime claim"
+  },
+  "reachable_transfer_target": {
+    "source_input": "reachable_transfer_target/model.lts",
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product_in_bfs_order": [
+      [
+        "N0",
+        "C0"
+      ],
+      [
+        "N1",
+        "C1"
+      ]
+    ],
+    "selected_eligible_endpoint_states": [
+      "N1"
+    ],
+    "independent_full_graph": {
+      "O": {
+        "idle": [
+          "O"
+        ],
+        "reconfigure_TEST": [
+          "N1"
+        ]
+      },
+      "N0": {
+        "idle": [
+          "N0"
+        ],
+        "move": [
+          "N1"
+        ]
+      },
+      "N1": {
+        "idle": [
+          "N1"
+        ]
+      }
+    },
+    "independent_winning_states": [
+      "N0",
+      "N1",
+      "O"
+    ],
+    "independent_rank": {
+      "N1": 0,
+      "N0": 1,
+      "O": 1
+    },
+    "reachable_update_states": [
+      "N1",
+      "O"
+    ],
+    "reachable_goal_states": [
+      "N1"
+    ],
+    "expected_decision": "WIN",
+    "exported_graph_exact_match": true,
+    "scope": "monitor-free functional selector check; no initializer, UC, dependency, performance, or runtime claim"
+  },
+  "unreachable_load_target": {
+    "source_input": "unreachable_load_target/model.lts",
+    "old_endpoint_product": [
+      [
+        "O",
+        "OLD_C"
+      ]
+    ],
+    "new_endpoint_product_in_bfs_order": [
+      [
+        "N0",
+        "C0"
+      ],
+      [
+        "N1",
+        "C1"
+      ]
+    ],
+    "selected_eligible_endpoint_states": [
+      "N0"
+    ],
+    "independent_full_graph": {
+      "O": {
+        "idle": [
+          "O"
+        ],
+        "reconfigure_TEST": [
+          "N1"
+        ]
+      },
+      "N0": {
+        "idle": [
+          "N0"
+        ],
+        "move": [
+          "N1"
+        ]
+      },
+      "N1": {
+        "idle": [
+          "N1"
+        ]
+      }
+    },
+    "independent_winning_states": [
+      "N0"
+    ],
+    "independent_rank": {
+      "N0": 0
+    },
+    "reachable_update_states": [
+      "N1",
+      "O"
+    ],
+    "reachable_goal_states": [],
+    "expected_decision": "LOSS",
+    "exported_graph_exact_match": true,
+    "scope": "monitor-free functional selector check; no initializer, UC, dependency, performance, or runtime claim"
+  }
+}

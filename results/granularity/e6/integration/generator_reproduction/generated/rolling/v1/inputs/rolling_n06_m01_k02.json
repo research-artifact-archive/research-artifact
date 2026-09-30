@@ -1,0 +1,879 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "rolling_n06_m01_k02",
+  "family": "rolling",
+  "parameters": {
+    "n": 6,
+    "m": 1,
+    "k": 2
+  },
+  "ordinary": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "serve_4",
+    "serve_5",
+    "serve_6",
+    "ready_1",
+    "ready_2",
+    "ready_3",
+    "ready_4",
+    "ready_5",
+    "ready_6"
+  ],
+  "controllable": [
+    "serve_1",
+    "serve_2",
+    "serve_3",
+    "serve_4",
+    "serve_5",
+    "serve_6"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_1",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_1",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_2",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_1",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_3",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_3",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_3",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_3",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_2",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_4",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_4",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_4",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_4",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_2",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_5",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_5",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_5",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_5",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_3",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_6",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_6",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_6",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_6",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_3",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "availability",
+      "role": "interval",
+      "tester": {
+        "states": [
+          "q1",
+          "q2",
+          "q3",
+          "q4",
+          "q5",
+          "q6",
+          "ERR_AVAILABILITY"
+        ],
+        "initial": "q6",
+        "errors": [
+          "ERR_AVAILABILITY"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "serve_3",
+          "serve_4",
+          "serve_5",
+          "serve_6",
+          "ready_1",
+          "ready_2",
+          "ready_3",
+          "ready_4",
+          "ready_5",
+          "ready_6",
+          "rho_1",
+          "rho_2",
+          "rho_3"
+        ],
+        "changes": [
+          [
+            "q1",
+            "rho_1",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q1",
+            "rho_2",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q1",
+            "rho_3",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q1",
+            "ready_1",
+            "q2"
+          ],
+          [
+            "q1",
+            "ready_2",
+            "q2"
+          ],
+          [
+            "q1",
+            "ready_3",
+            "q2"
+          ],
+          [
+            "q1",
+            "ready_4",
+            "q2"
+          ],
+          [
+            "q1",
+            "ready_5",
+            "q2"
+          ],
+          [
+            "q1",
+            "ready_6",
+            "q2"
+          ],
+          [
+            "q2",
+            "rho_1",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q2",
+            "rho_2",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q2",
+            "rho_3",
+            "ERR_AVAILABILITY"
+          ],
+          [
+            "q2",
+            "ready_1",
+            "q3"
+          ],
+          [
+            "q2",
+            "ready_2",
+            "q3"
+          ],
+          [
+            "q2",
+            "ready_3",
+            "q3"
+          ],
+          [
+            "q2",
+            "ready_4",
+            "q3"
+          ],
+          [
+            "q2",
+            "ready_5",
+            "q3"
+          ],
+          [
+            "q2",
+            "ready_6",
+            "q3"
+          ],
+          [
+            "q3",
+            "rho_1",
+            "q1"
+          ],
+          [
+            "q3",
+            "rho_2",
+            "q1"
+          ],
+          [
+            "q3",
+            "rho_3",
+            "q1"
+          ],
+          [
+            "q3",
+            "ready_1",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_2",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_3",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_4",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_5",
+            "q4"
+          ],
+          [
+            "q3",
+            "ready_6",
+            "q4"
+          ],
+          [
+            "q4",
+            "rho_1",
+            "q2"
+          ],
+          [
+            "q4",
+            "rho_2",
+            "q2"
+          ],
+          [
+            "q4",
+            "rho_3",
+            "q2"
+          ],
+          [
+            "q4",
+            "ready_1",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_2",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_3",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_4",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_5",
+            "q5"
+          ],
+          [
+            "q4",
+            "ready_6",
+            "q5"
+          ],
+          [
+            "q5",
+            "rho_1",
+            "q3"
+          ],
+          [
+            "q5",
+            "rho_2",
+            "q3"
+          ],
+          [
+            "q5",
+            "rho_3",
+            "q3"
+          ],
+          [
+            "q5",
+            "ready_1",
+            "q6"
+          ],
+          [
+            "q5",
+            "ready_2",
+            "q6"
+          ],
+          [
+            "q5",
+            "ready_3",
+            "q6"
+          ],
+          [
+            "q5",
+            "ready_4",
+            "q6"
+          ],
+          [
+            "q5",
+            "ready_5",
+            "q6"
+          ],
+          [
+            "q5",
+            "ready_6",
+            "q6"
+          ],
+          [
+            "q6",
+            "rho_1",
+            "q4"
+          ],
+          [
+            "q6",
+            "rho_2",
+            "q4"
+          ],
+          [
+            "q6",
+            "rho_3",
+            "q4"
+          ],
+          [
+            "q6",
+            "ready_1",
+            "q6"
+          ],
+          [
+            "q6",
+            "ready_2",
+            "q6"
+          ],
+          [
+            "q6",
+            "ready_3",
+            "q6"
+          ],
+          [
+            "q6",
+            "ready_4",
+            "q6"
+          ],
+          [
+            "q6",
+            "ready_5",
+            "q6"
+          ],
+          [
+            "q6",
+            "ready_6",
+            "q6"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "q6",
+            "residual_state": "q6"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "O"
+        ],
+        "initial": "O",
+        "edges": [
+          [
+            "O",
+            "serve_1",
+            "O"
+          ],
+          [
+            "O",
+            "serve_2",
+            "O"
+          ],
+          [
+            "O",
+            "serve_3",
+            "O"
+          ],
+          [
+            "O",
+            "serve_4",
+            "O"
+          ],
+          [
+            "O",
+            "serve_5",
+            "O"
+          ],
+          [
+            "O",
+            "serve_6",
+            "O"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "serve_1",
+            "C"
+          ],
+          [
+            "C",
+            "serve_2",
+            "C"
+          ],
+          [
+            "C",
+            "serve_3",
+            "C"
+          ],
+          [
+            "C",
+            "serve_4",
+            "C"
+          ],
+          [
+            "C",
+            "serve_5",
+            "C"
+          ],
+          [
+            "C",
+            "serve_6",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "O": {
+          "physical": [
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "N"
+        ],
+        "initial": "N",
+        "edges": [
+          [
+            "N",
+            "serve_1",
+            "N"
+          ],
+          [
+            "N",
+            "serve_2",
+            "N"
+          ],
+          [
+            "N",
+            "serve_3",
+            "N"
+          ],
+          [
+            "N",
+            "serve_4",
+            "N"
+          ],
+          [
+            "N",
+            "serve_5",
+            "N"
+          ],
+          [
+            "N",
+            "serve_6",
+            "N"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "serve_1",
+            "C"
+          ],
+          [
+            "C",
+            "serve_2",
+            "C"
+          ],
+          [
+            "C",
+            "serve_3",
+            "C"
+          ],
+          [
+            "C",
+            "serve_4",
+            "C"
+          ],
+          [
+            "C",
+            "serve_5",
+            "C"
+          ],
+          [
+            "C",
+            "serve_6",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "N": {
+          "physical": [
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "all_ready"
+        }
+      },
+      "loadable": [
+        "N"
+      ]
+    }
+  },
+  "metadata": {
+    "mechanism": "M2",
+    "expected_decision": "WIN",
+    "groups": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "group_sizes": [
+      2,
+      2,
+      2
+    ],
+    "readiness_abstraction": "Each booting replica has one enabled uncontrollable ready event and no waiting self-loop; no fairness assumption.",
+    "endpoint_initial_note": "The fixed new endpoint starts ready; transfers enter its booting state.",
+    "interval_meaning": "At least m replicas are ready at every update state; transfer removes its group size from the count and each ready event restores one.",
+    "group_construction": "n physical components retained; shared transfer labels admitted only through the documented existing E1 generated-contract builder hook.",
+    "anchor": "Kubernetes Deployment maxUnavailable/maxSurge/readiness, not PDB enforcement of Deployment rolling updates.",
+    "source_url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+  },
+  "generated_contract_mode": "transfers"
+}

@@ -1,0 +1,41 @@
+{
+  "started_at": "2026-09-29T17:53:13.553250+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/rolling_scale/v1/inputs/rolling_n09_m08_k01.json",
+    "--merge",
+    "transfers",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/rolling_scale/v1/raw/series/n09_m08_merged_lazy/result.json",
+    "--compare-input",
+    "${E6_ROOT}/rolling_scale/v1/inputs/rolling_n09_m08_k09.json",
+    "--compare-merge",
+    "none"
+  ],
+  "job": {
+    "id": "n09_m08_merged_lazy",
+    "input": "inputs/rolling_n09_m08_k01.json",
+    "merge": "transfers",
+    "solver": "lazy",
+    "expected_decision": "LOSS",
+    "parameters": {
+      "n": 9,
+      "m": 8,
+      "k": 9
+    },
+    "compare_input": "inputs/rolling_n09_m08_k09.json",
+    "compare_merge": "none"
+  },
+  "input_sha256": "c63f07ac9ee4812f1f1b6aea7ababa2ffebe12a645b7b77eac2e05cc5b72fe5a",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "b08475469555ba6a59418d02dc8ecdc0ee5c0d870689abebf3648f8c4d30eb97",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

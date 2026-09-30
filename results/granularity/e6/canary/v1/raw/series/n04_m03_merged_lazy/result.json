@@ -1,0 +1,99 @@
+{
+  "id" : "canary_n04_m03_fine",
+  "family" : "canary",
+  "parameters" : {
+    "n" : 4,
+    "m" : 3,
+    "k" : 1
+  },
+  "merge" : "transfers",
+  "generated_contract_mode" : "none",
+  "solver" : "lazy",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "java_version" : "17.0.19",
+  "decision" : "LOSS",
+  "states_discovered" : 244,
+  "states_expanded" : 189,
+  "successor_queries" : 1519,
+  "materialized_transitions" : 456,
+  "enabled_buckets" : 441,
+  "enabled_buckets_definition" : "distinct queried state/action pairs with nonempty Post during synthesis, before certificate/Link diagnostics",
+  "preparation_seconds" : 0.020154875,
+  "solver_seconds" : 0.017086541,
+  "certificate_checker" : "PASS",
+  "endpoint_checker" : "PASS",
+  "worst_completion_rank" : null,
+  "root_ranks" : null,
+  "certificate_states" : 164,
+  "losing_region_states" : 164,
+  "link_checker" : "NOT_APPLICABLE_LOSS",
+  "loss_summary" : {
+    "scope" : "checked discovered-state losing certificate; sampled local root closure evidence, not a unique whole-game causal explanation",
+    "region_states" : 164,
+    "unsafe_region_states" : 54,
+    "safe_region_states" : 110,
+    "initial_states" : 1,
+    "losing_initial_states" : 1,
+    "initial_examples_limit" : 3,
+    "initial_examples" : [ {
+      "physical" : [ [ "OLD", "H" ], [ "OLD", "H" ], [ "OLD", "H" ], [ "OLD", "H" ] ],
+      "testers" : {
+        "reported_availability" : "b0000"
+      },
+      "pending" : [ "ablation.merge.transfers" ],
+      "enabled_action_buckets" : [ {
+        "action" : "ablation.merge.transfers",
+        "controllable" : true,
+        "update" : true,
+        "outcomes" : 16,
+        "outcomes_in_certificate_region" : 11,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "serve_1",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "serve_2",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "serve_3",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      }, {
+        "action" : "serve_4",
+        "controllable" : true,
+        "update" : false,
+        "outcomes" : 1,
+        "outcomes_in_certificate_region" : 1,
+        "unsafe_outcomes" : 0,
+        "unsafe_outcome_examples" : [ ]
+      } ],
+      "safe" : true
+    } ]
+  },
+  "loss_reason" : "The checked discovered-state losing certificate contains 164 states (54 unsafe) and 1/1 initial states; its stored root buckets retain every adversarial outcome and identify the outcomes in this certificate (local closure evidence, not a unique causal explanation).",
+  "checking_and_link_seconds" : 0.023346917,
+  "input_sha256" : "17329da8a6ded46b42c7632731f62539040e7f4c581bef4bcc3f536d747ac5b6",
+  "game_equivalence" : {
+    "status" : "PASS",
+    "reachable_states" : 366,
+    "nonempty_buckets" : 1465,
+    "outcomes" : 1480
+  },
+  "certificate_file" : "certificate.json",
+  "certificate_sha256" : "3fd07e7639b821a69058b6f423754282c640e9a94552a953e8316b1e26976ac7"
+}

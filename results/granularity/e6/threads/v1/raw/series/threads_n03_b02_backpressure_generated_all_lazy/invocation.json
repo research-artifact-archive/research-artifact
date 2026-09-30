@@ -1,0 +1,36 @@
+{
+  "started_at": "2026-09-29T17:52:11.196866+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/threads/v1/inputs/threads_n03_b02_backpressure_all.json",
+    "--merge",
+    "none",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/threads/v1/raw/series/threads_n03_b02_backpressure_generated_all_lazy/result.json"
+  ],
+  "job": {
+    "id": "threads_n03_b02_backpressure_generated_all_lazy",
+    "input": "inputs/threads_n03_b02_backpressure_all.json",
+    "merge": "none",
+    "solver": "lazy",
+    "expected_decision": "WIN",
+    "parameters": {
+      "n": 3,
+      "B": 2,
+      "regime": "backpressure",
+      "group": "all"
+    }
+  },
+  "input_sha256": "d1cc4f9aa4cdd22c2a8d6c7415d5be6d602d65a412f45121663ba5c4128b63f3",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "60d7486e196f034c55e69df3219d58fe7fc987a87f047e1e750b8e35c733faf3",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

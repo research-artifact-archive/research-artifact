@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering\small
+\caption{E4-1: unchanged RQ2 fixtures under automatic contract merging. Entries are decisions (discovered states). T merges transfers; B merges stop events together and start events together; T+B applies both.}
+\begin{tabular}{lrrrr}
+\toprule
+Fixture & None (existing) & T & B & T+B \\
+\midrule
+Cell separation/local & WIN (8) & LOSS (2) & WIN (8) & LOSS (2) \\
+Cell separation/product & LOSS (2) & LOSS (2) & LOSS (2) & LOSS (2) \\
+Cell neutral/local & WIN (6) & WIN (4) & WIN (6) & WIN (4) \\
+Cell neutral/product & WIN (4) & WIN (4) & WIN (4) & WIN (4) \\
+Branch separation & WIN (7) & WIN (7) & WIN (7) & WIN (7) \\
+Branch neutral & WIN (7) & WIN (7) & WIN (7) & WIN (7) \\
+Boundary separation & WIN (6) & WIN (6) & WIN (6) & WIN (6) \\
+Boundary neutral & WIN (9) & WIN (9) & WIN (9) & WIN (9) \\
+\bottomrule
+\end{tabular}
+\par\footnotesize New merges use the fixed E1 JAR, 32 GiB, one trial, and a 1,200 s cap. None reuses the validated original full\_fg trial (original JAR, 2 GiB, 60 s cap); no timing comparison is made. The boundary fixtures have one stop and one start, so their gap remains. Rank and returned losing-certificate size are in the CSV.
+\end{table}

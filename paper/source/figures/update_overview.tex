@@ -1,0 +1,34 @@
+% Two retained paths. Ranks are the remaining path lengths in cell_paths.tex.
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,event/.style={font=\footnotesize,align=center}]
+\foreach \dy/\holder/\target/\rank in {0/A/B/6,-1.9/B/A/5}{
+ \node[event,anchor=east] at (-.5,\dy-.2) {From $\holder$\\rank \rank};
+ \draw[->] (-.3,\dy-.2)--(10.55,\dy-.2);
+ \node[event,anchor=west] at (10.6,\dy-.2) {$\target$ holds};
+}
+\foreach \x/\label/\rk in {.4/{replace $B$}/5,2.3/{move to $B$}/4,4.2/{start new}/3,6.1/{stop old}/2,8/{inspect}/1,9.9/{replace $A$}/0}{
+ \node[event] at (\x,.15) {\label};\draw[gray] (\x,-.08)--(\x,-.28);
+ \node[event] at (\x,-.46) {\rk};
+}
+\foreach \x/\label/\rk in {.4/{replace $A$}/4,2.3/{move to $A$}/3,4.2/{start new}/2,6.1/{stop old}/1,9.9/{replace $B$}/0}{
+ \node[event] at (\x,-1.75) {\label};\draw[gray] (\x,-1.98)--(\x,-2.18);
+ \node[event] at (\x,-2.36) {\rk};
+}
+\node[event,anchor=south] at (4.2,.65) {$B$ holds the workpiece: inspection pending};
+\draw[->] (4.2,.64)--(4.2,.32);
+\node[event,anchor=south] at (4.2,-1.22) {$B$ empty: no inspection needed};
+\draw[->] (4.2,-1.24)--(4.2,-1.59);
+\node[event,anchor=east] at (-.5,-3) {old\\requirement};
+\node[event,anchor=east] at (-.5,-3.65) {new\\requirement};
+\node[event,anchor=east] at (-.5,-4.3) {interval\\requirement};
+\draw[line width=4pt,blue!60!black] (-.3,-3)--(6.1,-3);
+\draw[line width=4pt,orange!75!black] (4.2,-3.65)--(10.45,-3.65);
+\draw[line width=4pt,gray!65] (-.3,-4.3)--(10.45,-4.3);
+\draw[densely dotted] (4.2,-2.55)--(4.2,-3.85);
+\draw[densely dotted] (6.1,-2.55)--(6.1,-3.85);
+\end{tikzpicture}
+\caption{A completing policy from both starting situations. Start/stop concern the new/old requirement. Annotations describe requirement activation; numbers below events give the remaining-step ranks after those events. Bars show requirement lifetimes, not elapsed time. Both paths finish with no inspection pending.}
+\Description{From A holding: replace B, move to B, start the new requirement with inspection pending, stop the old requirement, inspect, replace A; ranks go from six to zero. From B holding: replace A, move to A, start the new requirement with B empty, stop the old requirement, replace B; ranks go from five to zero. The new requirement starts before the old one stops; the interval requirement remains active.}
+\label{fig:update-overview}
+\end{figure}

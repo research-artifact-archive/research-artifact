@@ -1,0 +1,37 @@
+{
+  "started_at": "2026-09-29T18:26:27.900752+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/canary_controls/v1/inputs/canary_controls_n03_m01_healthy_only_all.json",
+    "--merge",
+    "none",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/canary_controls/v1/raw/series/n03_m01_healthy_only_all_lazy/result.json"
+  ],
+  "job": {
+    "id": "n03_m01_healthy_only_all_lazy",
+    "input": "inputs/canary_controls_n03_m01_healthy_only_all.json",
+    "merge": "none",
+    "solver": "lazy",
+    "expected_decision": "WIN",
+    "parameters": {
+      "n": 3,
+      "m": 1,
+      "control": "healthy_only",
+      "k": 3
+    },
+    "variant": "all_lazy"
+  },
+  "input_sha256": "adcb45f4465fa750235dad811069b1d4fc3b31f04c33fdd21c02cac113c669d5",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "a2dbc8846933a5ef1af97f0d4ba439343a29409b82c15fa1ea41713cc10dbf09",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

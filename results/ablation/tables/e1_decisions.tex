@@ -1,0 +1,31 @@
+% Generated E1 table; R2 is excluded because it refers to individual boundaries.
+\begin{table}[t]
+\centering\small
+\caption{E1 contract merging under unchanged Post/goal semantics. T merges transfers, B merges stop/start boundaries, and T+B applies both. Entries are decisions with discovered-state counts in parentheses.}
+\label{tab:abl-e1}
+\begin{tabular}{lllll}
+\toprule
+Contract & Original & T & B & T+B \\
+\midrule
+GSM/Base & WIN & WIN (31) & WIN (31) & WIN (31) \\
+GSM/R1 & WIN & WIN (34) & WIN (34) & WIN (34) \\
+Industry/Base & WIN & WIN (240) & WIN (222) & WIN (190) \\
+Industry/R1 & LOSS & LOSS (10,411) & LOSS (1,129) & LOSS (402) \\
+MetaSocket/Base & WIN & WIN (7) & WIN (8) & WIN (7) \\
+MetaSocket/R1 & WIN & WIN (7) & WIN (8) & WIN (7) \\
+PowerPlant/Base & WIN & WIN (63) & WIN (41) & WIN (31) \\
+PowerPlant/R1 & WIN & WIN (452) & WIN (95) & WIN (54) \\
+PC1/Base & WIN & WIN (83) & WIN (31) & WIN (31) \\
+PC1/R1 & WIN & WIN (94) & WIN (34) & WIN (34) \\
+PC2/Base & WIN & WIN (2,394) & WIN (491) & WIN (358) \\
+PC2/R1 & WIN & WIN (2,311) & WIN (440) & WIN (323) \\
+Railcab/Base & WIN & WIN (82) & WIN (103) & WIN (48) \\
+Railcab/R1 & WIN & WIN (3,266) & WIN (783) & WIN (187) \\
+Surveillance/Base & WIN & WIN (4,705) & WIN (1,729) & WIN (1,133) \\
+Surveillance/R1 & WIN & WIN (59,624) & WIN (3,389) & WIN (1,568) \\
+Workflow/Base & WIN & WIN (119) & WIN (84) & WIN (52) \\
+Workflow/R1 & WIN & WIN (252) & WIN (200) & WIN (59) \\
+\bottomrule
+\end{tabular}
+\par\footnotesize Each merged contract is one Lazy trial with a 1,200 s cap and 32 GiB heap. R2 is excluded because it refers to individual stop/start events. Rank and losing-region size are provided in the accompanying CSV.
+\end{table}

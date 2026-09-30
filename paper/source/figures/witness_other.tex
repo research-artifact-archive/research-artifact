@@ -1,0 +1,66 @@
+\begin{figure*}[!htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,every node/.style={font=\footnotesize},
+ st/.style={circle,draw,minimum size=4.5mm,inner sep=1pt}]
+\tikzset{labelpos/.store in=\FGpos}
+\newcommand{\FGedge}[5]{\def\FGpos{.5}\draw[->,#5] (#1-#2) to node[pos=\FGpos,font=\footnotesize,fill=white,inner sep=.4pt] {$#3$} (#1-#4);}
+\node[font=\footnotesize\bfseries] at (3.3,1.9) {$\mathcal W_b$: observed branching};
+\node[st] (BrO-w) at (.5,0) {$w$};
+\node[st] (BrO-a0) at (2.3,.65) {$a_0$};\node[st] (BrO-b0) at (2.3,-.65) {$b_0$};
+\node[st] (BrO-a1) at (4.35,.65) {$a_1$};\node[st] (BrO-b1) at (4.35,-.65) {$b_1$};
+\node[st] (BrN-x) at (6.4,.65) {$x$};\node[st] (BrN-y) at (6.4,-.65) {$y$};
+\draw[->] (-.05,0)--(BrO-w); \draw[->] (5.85,.65)--(BrN-x);
+\FGedge{BrO}{w}{u}{a0}{}
+\FGedge{BrO}{w}{u}{b0}{}
+\FGedge{BrO}{a0}{a}{a1}{}
+\FGedge{BrO}{b0}{b}{b1}{}
+\FGedge{BrO}{a1}{d_A}{w}{bend right=42,labelpos=.2}
+\FGedge{BrO}{b1}{d_B}{w}{bend left=42,labelpos=.2}
+\FGedge{BrO}{w}{idle}{w}{loop above}
+\FGedge{BrO}{a0}{idle}{a0}{loop above}
+\FGedge{BrO}{b0}{idle}{b0}{loop below}
+\FGedge{BrO}{a1}{idle}{a1}{loop above}
+\FGedge{BrO}{b1}{idle}{b1}{loop below}
+\FGedge{BrN}{x}{d_A}{y}{bend left=20}
+\FGedge{BrN}{y}{d_B}{x}{bend left=20}
+\FGedge{BrN}{x}{idle}{x}{loop right}
+\FGedge{BrN}{y}{idle}{y}{loop right}
+\draw[->,dashed] (BrO-a1)--node[above] {$g$}(BrN-x);
+\draw[->,dashed] (BrO-b1)--node[below] {$g$}(BrN-y);
+\node at (2.3,-1.55) {old component};\node at (6.4,-1.55) {new};
+\draw[gray!45] (7.55,1.9)--(7.55,-1.7);
+\node[font=\footnotesize\bfseries] at (10.45,1.9) {$\mathcal W_r$: requirement boundaries};
+\node[st] (ReqO-w) at (8.3,.4) {$w$};\node[st] (ReqO-r) at (10.2,.4) {$r$};\node[st] (ReqN-n) at (12.2,.4) {$n$};
+\draw[->] (7.8,.4)--(ReqO-w);\draw[->] (11.7,.4)--(ReqN-n);
+\FGedge{ReqO}{w}{align}{r}{}
+\FGedge{ReqO}{w}{idle}{w}{loop above}
+\FGedge{ReqO}{r}{idle}{r}{loop above}
+\FGedge{ReqN}{n}{idle}{n}{loop above}
+\draw[->,dashed] (ReqO-r)--node[above] {$g$}(ReqN-n);
+\node at (9.25,-.1) {old};\node at (12.2,-.1) {new};
+\node[st] (ReqM-k) at (9.1,-1.15) {$k$};\node[st] (ReqM-E) at (11.2,-1.15) {$E$};
+\FGedge{ReqM}{k}{align}{E}{}
+\FGedge{ReqM}{E}{\Sigma}{E}{loop right}
+\node at (9.9,-1.75) {each monitor $r_o,r_n$; initial $k$};
+\end{tikzpicture}
+\par\smallskip
+{\footnotesize
+\begin{tabular}{@{}p{.475\linewidth}p{.475\linewidth}@{}}\toprule
+\textbf{Observed branching $\mathcal W_b$} & \textbf{Requirement boundaries $\mathcal W_r$}\\\midrule
+Only $u$ is uncontrollable; requirements are empty. $\SigmaU=\{\rho\}$ and $g=\{(a_1,x),(b_1,y)\}$.
+& All events are controllable. $\SigmaU=\{\rho,\mathsf{stop},\mathsf{start}\}$, $\mathsf{stop}=\ustop{r_o}$, $\mathsf{start}=\ustart{r_n}$ and $g=\{(r,n)\}$.\\
+One-state $C^o$ loops on all six ordinary labels; one-state $C^n$ loops on $idle,d_A,d_B$.
+& One-state $C^o$ has alphabet $\{idle,align\}$ but only an $idle$ loop; $C^n$ has only that loop. Both monitors start at $k$.\\
+Entries admit each old state $w,a_0,b_0,a_1,b_1$ through $\Init$; targets are $(x,c_n),(y,c_n)$.
+& The only entry admits old $w$ through $\Init$; the target is $(n,c_n,k)$. There are no interval requirements.\\
+$\iota$ is empty.
+& $\operatorname{dom}\iota_{r_n}=\{(o,r),(n,n)\}$ and $\iota_{r_n}=k$. The history interpretation erases pre-activation ordinary events and forbids $align$ afterward (exact RS).\\\bottomrule
+\end{tabular}
+\par\smallskip
+Both contracts have no precedence edges. Arrows into states mark initials; dashed edges are transfers $g$. Unlisted plant/controller transitions are absent; unlisted non-error monitor transitions self-loop, and $E$ absorbs $\Sigma$. The four $\Post$ rules supply update transitions. Goals have no pending events and match the specified new states and monitors; $\kappa$ supplies the one-state new controller's state $c_n$.
+}
+
+\caption{Finite witnesses for observation-dependent control and requirement boundaries. All ordinary transitions are shown; both contracts use the four $\Post$ rules.}
+\Description{Branching witness has five old states and two new states, with all idle, uncontrollable branch and return transitions. Requirement witness has two old states and one new state; both monitors reject align. Legends specify all remaining inputs.}
+\label{fig:other-witnesses}
+\end{figure*}

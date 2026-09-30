@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering\small
+\caption{Manual restrictions are compared separately from constraint correspondence. Automatic columns are T/B/T+B decisions; agreement alone does not establish equal constraints.}
+\begin{tabular}{llll}
+\toprule
+Fixture & Automatic & Manual reference & Constraint relation \\
+\midrule
+Cell separation/local & LOSS/WIN/LOSS & Product: LOSS & T,T+B: product; B: mismatch \\
+Cell separation/product & LOSS/LOSS/LOSS & Product: LOSS & Already-global control \\
+Cell neutral/local & WIN/WIN/WIN & Product: WIN & T,T+B: product; B: mismatch \\
+Cell neutral/product & WIN/WIN/WIN & Product: WIN & Already-global control \\
+Branch separation & WIN/WIN/WIN & Fixed A/B: LOSS/LOSS & Not applicable \\
+Branch neutral & WIN/WIN/WIN & Fixed A/B: WIN/WIN & Not applicable \\
+Boundary separation & WIN/WIN/WIN & Block: LOSS & Mismatch: gap retained \\
+Boundary neutral & WIN/WIN/WIN & Block: WIN & Mismatch: gap retained \\
+\bottomrule
+\end{tabular}
+\par\footnotesize Cell correspondence concerns the product transfer restriction and its decision, not a proof of full-game isomorphism. Requirement-block additionally constrains the stop/start gap; B does not. Fixed scripts restrict observation-dependent choices, which contract merging does not restrict. Manual decisions reuse the semantic-revision RQ2 raw. All provenance and per-mode relations are in the CSV.
+\end{table}

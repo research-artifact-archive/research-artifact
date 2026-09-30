@@ -1,0 +1,148 @@
+{
+  "schema": "e6-v4-independent-audit-v1",
+  "at": "2026-09-30T03:42:00.277993+09:00",
+  "mode": "source_preparation",
+  "auditor_sha256": "3da1fe0f74c6b1e3ea142712c35ff5530d0c37595694dd48ab0c28f11f7e55c8",
+  "no_jvm": true,
+  "no_copy_created": true,
+  "measurements": {
+    "trials": 398,
+    "statuses": {
+      "WIN": 195,
+      "LOSS": 197,
+      "TO": 6
+    },
+    "pending_measurements": 0,
+    "series": [
+      {
+        "family": "rolling/v1",
+        "trials": 100,
+        "statuses": {
+          "WIN": 50,
+          "LOSS": 50
+        }
+      },
+      {
+        "family": "canary/v1",
+        "trials": 60,
+        "statuses": {
+          "WIN": 30,
+          "LOSS": 30
+        }
+      },
+      {
+        "family": "policy/v2",
+        "trials": 6,
+        "statuses": {
+          "WIN": 3,
+          "LOSS": 3
+        }
+      },
+      {
+        "family": "db_rolling/v2",
+        "trials": 8,
+        "statuses": {
+          "WIN": 2,
+          "LOSS": 6
+        }
+      },
+      {
+        "family": "rolling_audit/v1",
+        "trials": 8,
+        "statuses": {
+          "WIN": 4,
+          "LOSS": 4
+        }
+      },
+      {
+        "family": "threads/v1",
+        "trials": 80,
+        "statuses": {
+          "WIN": 40,
+          "LOSS": 40
+        }
+      },
+      {
+        "family": "rolling_scale/v1",
+        "trials": 80,
+        "statuses": {
+          "WIN": 40,
+          "LOSS": 40
+        }
+      },
+      {
+        "family": "canary_controls/v1",
+        "trials": 48,
+        "statuses": {
+          "WIN": 24,
+          "LOSS": 24
+        }
+      },
+      {
+        "family": "pc2_rolling/v2",
+        "trials": 3,
+        "statuses": {
+          "WIN": 1,
+          "TO": 2
+        }
+      },
+      {
+        "family": "pc2_rolling/extended_7200",
+        "trials": 2,
+        "statuses": {
+          "TO": 2
+        }
+      },
+      {
+        "family": "pc2_rolling/xeon_20260929_2344",
+        "trials": 3,
+        "statuses": {
+          "WIN": 1,
+          "TO": 2
+        }
+      }
+    ],
+    "mac_trials": 395,
+    "mac_statuses": {
+      "WIN": 194,
+      "LOSS": 197,
+      "TO": 4
+    },
+    "received_xeon": {
+      "trials": 3,
+      "statuses": {
+        "WIN": 1,
+        "TO": 2
+      },
+      "pending": 0,
+      "raw_digest_references": 18,
+      "combined_host_budget_rows": 8,
+      "exit_codes": "All unrecorded/null; preserved as empty CSV values.",
+      "runtime_class_sha256": null,
+      "distributed_class_sha256": "0314a378d0ba6c03605f483f1dd28c1aa386426fc15ec71df1aa440079d3b6ae",
+      "acceptance": "PASS_WITH_PROVENANCE_LIMITATIONS"
+    },
+    "canonical_freeze_references": 395,
+    "freeze_maps": {
+      "rolling/v1/build/frozen_manifest.json:files": 84,
+      "canary/v1/build/frozen_manifest.json:files": 47,
+      "policy/v2/build/frozen_manifest.json:files": 17,
+      "db_rolling/v2/build/frozen_manifest.json:files": 19,
+      "rolling_audit/v1/build/frozen_manifest.json:files": 21,
+      "threads/v1/build/frozen_manifest.json:files": 57,
+      "rolling_scale/v1/build/frozen_manifest.json:files": 57,
+      "canary_controls/v1/build/frozen_manifest.json:files": 53,
+      "pc2_rolling/v2/build/frozen_manifest.json:files": 6,
+      "pc2_rolling/validation_export/frozen_manifest.json:files": 3,
+      "pc2_rolling/extended_7200/build/frozen_manifest.json:files": 6,
+      "pc2_rolling/extended_7200/build/frozen_manifest.json:original_pc2_files": 25
+    },
+    "extended_to_trials": 2,
+    "protected_original_pc2_files": 25,
+    "new_frozen_files": 6,
+    "host_budget_rows": 5,
+    "extended_native_latex": "PASS"
+  },
+  "scope": "Read-only source preparation; v3 was not read and v4 has not been audited.",
+  "status": "PASS"
+}

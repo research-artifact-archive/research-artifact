@@ -1,0 +1,86 @@
+{
+  "source": "raw/series/fine_none_lazy/certificate.json",
+  "sha256": "fa7d378a61efb9499f301bcbae368afc66c7a3090175effb54b542e23a2db70b",
+  "initial_root": "old endpoint unlogged",
+  "events": 6,
+  "path": [
+    {
+      "step": 0,
+      "event": "initial",
+      "state_id": 7,
+      "physical": "[[\"OLD\", \"ready\"], [\"OLD\", \"ready\"]]",
+      "audit_old": "unlogged",
+      "audit_new": "inactive",
+      "interval": "ready2_old1_new0",
+      "rank": 6,
+      "goal": false
+    },
+    {
+      "step": 1,
+      "event": "start_audit_new",
+      "state_id": 4,
+      "physical": "[[\"OLD\", \"ready\"], [\"OLD\", \"ready\"]]",
+      "audit_old": "unlogged",
+      "audit_new": "unlogged",
+      "interval": "ready2_old1_new1",
+      "rank": 5,
+      "goal": false
+    },
+    {
+      "step": 2,
+      "event": "stop_audit_old",
+      "state_id": 5,
+      "physical": "[[\"OLD\", \"ready\"], [\"OLD\", \"ready\"]]",
+      "audit_old": "inactive",
+      "audit_new": "unlogged",
+      "interval": "ready2_old0_new1",
+      "rank": 4,
+      "goal": false
+    },
+    {
+      "step": 3,
+      "event": "rho_1",
+      "state_id": 0,
+      "physical": "[[\"NEW\", \"booting\"], [\"OLD\", \"ready\"]]",
+      "audit_old": "inactive",
+      "audit_new": "unlogged",
+      "interval": "ready1_old0_new1",
+      "rank": 3,
+      "goal": false
+    },
+    {
+      "step": 4,
+      "event": "ready_1",
+      "state_id": 3,
+      "physical": "[[\"NEW\", \"ready\"], [\"OLD\", \"ready\"]]",
+      "audit_old": "inactive",
+      "audit_new": "unlogged",
+      "interval": "ready2_old0_new1",
+      "rank": 2,
+      "goal": false
+    },
+    {
+      "step": 5,
+      "event": "rho_2",
+      "state_id": 1,
+      "physical": "[[\"NEW\", \"ready\"], [\"NEW\", \"booting\"]]",
+      "audit_old": "inactive",
+      "audit_new": "unlogged",
+      "interval": "ready1_old0_new1",
+      "rank": 1,
+      "goal": false
+    },
+    {
+      "step": 6,
+      "event": "ready_2",
+      "state_id": 2,
+      "physical": "[[\"NEW\", \"ready\"], [\"NEW\", \"ready\"]]",
+      "audit_old": "inactive",
+      "audit_new": "unlogged",
+      "interval": "ready2_old0_new1",
+      "rank": 0,
+      "goal": true
+    }
+  ],
+  "note": "An exact six-step path in the measured Lazy certificate from the unlogged old endpoint; its other initial root has a returned seven-step bound. Direct-Full returns bound six from both initial roots."
+}

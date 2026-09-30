@@ -1,0 +1,305 @@
+{
+  "status": "PASS",
+  "family": "db_rolling/v2",
+  "job": "db_n3_m2_fine_transfers_lazy",
+  "decision": "LOSS",
+  "input": "db_rolling/v2/inputs/db_n3_m2_fine.json",
+  "input_sha256": "39efa85e5c5f61cd038f3dcbeb361eaf73da975cb054e6e5317033919bba1353",
+  "certificate": "db_rolling/v2/raw/series/db_n3_m2_fine_transfers_lazy/certificate.json",
+  "certificate_sha256": "6557a4f2d47c797a39a0a25572e0a1aafefc67e3d87556c8b877b4e3fbce6c0f",
+  "extractor_sha256": "498234a227d21b7661525ddace2ae2e4249f32f5d7da7e87312e765b0b255fc0",
+  "independent_checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8",
+  "rule": "At a UC state choose one enabled uncontrollable event/outcome retained in the losing region. Otherwise give a retained outcome for every enabled controllable event. All retained states exclude goal.",
+  "selection": "Prefer an unsafe successor when available, then sort action and original certificate-state ID; no input or measured policy is changed.",
+  "scope": "An extracted adversarial response graph checked against independent Post and the original E1 loss certificate. A path alone is not used as proof. Every maximal response execution either reaches unsafe or a non-goal deadlock, or is infinite and remains outside goal; no fairness is assumed.",
+  "certificate_states": 6,
+  "initial_states_in_region": [
+    1
+  ],
+  "states": [
+    {
+      "physical": [
+        [
+          "OLD",
+          "E"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 0,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 1,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "E"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 2,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ],
+        [
+          "OLD",
+          "S"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 3,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "E"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 4,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "S"
+        ],
+        [
+          "OLD",
+          "P"
+        ]
+      ],
+      "testers": {
+        "ready_budget": "3"
+      },
+      "pending": [
+        "ablation.merge.transfers"
+      ],
+      "id": 5,
+      "initial": false,
+      "safe": true,
+      "goal": false
+    }
+  ],
+  "responses": [
+    {
+      "source": 0,
+      "action": "elect_1",
+      "target": 1,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 1,
+      "action": "serve_1",
+      "target": 1,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 1,
+      "action": "serve_2",
+      "target": 1,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 1,
+      "action": "serve_3",
+      "target": 1,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 1,
+      "action": "stepdown_1_2",
+      "target": 2,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 1,
+      "action": "stepdown_1_3",
+      "target": 4,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 2,
+      "action": "elect_2",
+      "target": 3,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 3,
+      "action": "serve_1",
+      "target": 3,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 3,
+      "action": "serve_2",
+      "target": 3,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 3,
+      "action": "serve_3",
+      "target": 3,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 3,
+      "action": "stepdown_2_1",
+      "target": 0,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 3,
+      "action": "stepdown_2_3",
+      "target": 4,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 4,
+      "action": "elect_3",
+      "target": 5,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 5,
+      "action": "serve_1",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "serve_2",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "serve_3",
+      "target": 5,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "stepdown_3_1",
+      "target": 0,
+      "kind": "response_to_controller_event"
+    },
+    {
+      "source": 5,
+      "action": "stepdown_3_2",
+      "target": 2,
+      "kind": "response_to_controller_event"
+    }
+  ],
+  "safe_deadlock_states": [],
+  "response_reachable_states": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "unsafe_states": [],
+  "response_reachable_safe_states_without_any_unsafe_path": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

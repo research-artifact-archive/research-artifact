@@ -1,0 +1,314 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "job_id": "fine_none_lazy",
+      "decision": "WIN",
+      "status": "PASS",
+      "low_availability_ids": [],
+      "audit_gap_ids": [],
+      "certificate_states": 8,
+      "reason": "Every returned WIN-certificate state has a ready replica and at least one active audit rule; the checked old/new testers enforce matching log-before-serve."
+    },
+    {
+      "job_id": "fine_transfers_lazy",
+      "decision": "LOSS",
+      "status": "PASS",
+      "unsafe_merged_transfer_buckets": [
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "unlogged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "start_audit_new",
+                "stop_audit_old"
+              ]
+            }
+          ]
+        },
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "logged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "start_audit_new",
+                "stop_audit_old"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "A merged transfer puts both replicas into booting and reaches the interval error immediately; an audit handoff cannot restore the availability already lost."
+    },
+    {
+      "job_id": "fine_boundaries_lazy",
+      "decision": "WIN",
+      "status": "PASS",
+      "low_availability_ids": [],
+      "audit_gap_ids": [],
+      "certificate_states": 8,
+      "reason": "Every returned WIN-certificate state has a ready replica and at least one active audit rule; the checked old/new testers enforce matching log-before-serve."
+    },
+    {
+      "job_id": "fine_both_lazy",
+      "decision": "LOSS",
+      "status": "PASS",
+      "unsafe_merged_transfer_buckets": [
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "unlogged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "ablation.merge.starts",
+                "ablation.merge.stops"
+              ]
+            }
+          ]
+        },
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "logged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "ablation.merge.starts",
+                "ablation.merge.stops"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "A merged transfer puts both replicas into booting and reaches the interval error immediately; an audit handoff cannot restore the availability already lost."
+    },
+    {
+      "job_id": "fine_none_df",
+      "decision": "WIN",
+      "status": "PASS",
+      "low_availability_ids": [],
+      "audit_gap_ids": [],
+      "certificate_states": 13,
+      "reason": "Every returned WIN-certificate state has a ready replica and at least one active audit rule; the checked old/new testers enforce matching log-before-serve."
+    },
+    {
+      "job_id": "generated_transfers_lazy",
+      "decision": "LOSS",
+      "status": "PASS",
+      "unsafe_merged_transfer_buckets": [
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "unlogged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "start_audit_new",
+                "stop_audit_old"
+              ]
+            }
+          ]
+        },
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "logged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "start_audit_new",
+                "stop_audit_old"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "A merged transfer puts both replicas into booting and reaches the interval error immediately; an audit handoff cannot restore the availability already lost."
+    },
+    {
+      "job_id": "generated_boundaries_lazy",
+      "decision": "WIN",
+      "status": "PASS",
+      "low_availability_ids": [],
+      "audit_gap_ids": [],
+      "certificate_states": 8,
+      "reason": "Every returned WIN-certificate state has a ready replica and at least one active audit rule; the checked old/new testers enforce matching log-before-serve."
+    },
+    {
+      "job_id": "generated_both_lazy",
+      "decision": "LOSS",
+      "status": "PASS",
+      "unsafe_merged_transfer_buckets": [
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "unlogged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "ablation.merge.starts",
+                "ablation.merge.stops"
+              ]
+            }
+          ]
+        },
+        {
+          "action": "ablation.merge.transfers",
+          "controllable": true,
+          "update": true,
+          "outcomes": 1,
+          "outcomes_in_certificate_region": 1,
+          "unsafe_outcomes": 1,
+          "unsafe_outcome_examples": [
+            {
+              "physical": [
+                [
+                  "NEW",
+                  "booting"
+                ],
+                [
+                  "NEW",
+                  "booting"
+                ]
+              ],
+              "testers": {
+                "audit_old": "logged",
+                "availability_audit_coverage": "ERR_INTERVAL"
+              },
+              "pending": [
+                "ablation.merge.starts",
+                "ablation.merge.stops"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "A merged transfer puts both replicas into booting and reaches the interval error immediately; an audit handoff cannot restore the availability already lost."
+    }
+  ],
+  "issues": []
+}

@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "at": "2026-09-29T19:37:45.962588+09:00",
+  "zip_path": "experiments/rq3_xeon/fg-ducs-xeon-campaign-pc2rolling.zip",
+  "zip_sha256": "6d34ad9808841ab79c7c35e97cbd06a173a2e788661d4d187fca4294cba7e418",
+  "zip_bytes": 698992874,
+  "zip_mtime_ns_unchanged": true,
+  "entries": [
+    {
+      "zip_entry": "ablation_20260928/jars/e1.jar",
+      "bytes": 698977203,
+      "sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+      "matches_v2_fixed_source": true
+    },
+    {
+      "zip_entry": "pc2_rolling_xeon/inputs/ProductionCell_Arms2_Calibration.lts",
+      "bytes": 39627,
+      "sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+      "matches_v2_fixed_source": true
+    },
+    {
+      "zip_entry": "pc2_rolling_xeon/classes/ltsa/updatingControllers/cli/Pc2DiagnosticRunner.class",
+      "bytes": 9248,
+      "sha256": "0314a378d0ba6c03605f483f1dd28c1aa386426fc15ec71df1aa440079d3b6ae",
+      "matches_v2_fixed_source": true
+    }
+  ],
+  "launcher_sha256": "48598f064de260966b7e5e2b119234008098ff52d024ca4c4e915ec925ec4f27",
+  "launcher_identical_to_existing_file": true,
+  "selected_cells": [
+    "lazy_transfers",
+    "direct_full_none"
+  ],
+  "xeon_selected_invocation": ".\\run-pc2rolling.ps1 -Cells @('lazy_transfers','direct_full_none')",
+  "existing_xeon_defaults": {
+    "heap": "200g",
+    "timeout_seconds": 7200
+  },
+  "mac_extension": {
+    "heap": "32g",
+    "timeout_seconds": 7200
+  },
+  "scope": "Read-only zip streaming and byte/digest checks. Archive and launcher unmodified; no Xeon process or machine operation."
+}

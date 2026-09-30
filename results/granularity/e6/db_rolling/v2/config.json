@@ -1,0 +1,93 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "DB-Rolling",
+  "version": "v2",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "frozen_paths": [
+    "db_rolling/gen_db_rolling.py",
+    "db_rolling/validate_db_rolling.py",
+    "rolling/validate_endpoints.py",
+    "common/witness.schema.json",
+    "common/SCHEMA.md"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "db_rolling/validate_db_rolling.py",
+      "--output",
+      "db_rolling/v2/validation/preflight-independent.json"
+    ]
+  ],
+  "preflight_jobs": [
+    "db_n3_m2_fine_none_lazy",
+    "db_n3_m2_all_none_lazy",
+    "db_n3_m3_fine_none_lazy"
+  ],
+  "jobs": [
+    {
+      "id": "db_n3_m2_fine_none_lazy",
+      "input": "inputs/db_n3_m2_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN"
+    },
+    {
+      "id": "db_n3_m2_fine_transfers_lazy",
+      "input": "inputs/db_n3_m2_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "db_n3_m2_all_none_lazy",
+      "input": "inputs/db_n3_m2_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "compare_input": "inputs/db_n3_m2_fine.json",
+      "compare_merge": "transfers"
+    },
+    {
+      "id": "db_n3_m2_fine_none_direct_full",
+      "input": "inputs/db_n3_m2_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN"
+    },
+    {
+      "id": "db_n3_m3_fine_none_lazy",
+      "input": "inputs/db_n3_m3_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "db_n3_m3_fine_transfers_lazy",
+      "input": "inputs/db_n3_m3_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS"
+    },
+    {
+      "id": "db_n3_m3_all_none_lazy",
+      "input": "inputs/db_n3_m3_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "compare_input": "inputs/db_n3_m3_fine.json",
+      "compare_merge": "transfers"
+    },
+    {
+      "id": "db_n3_m3_fine_none_direct_full",
+      "input": "inputs/db_n3_m3_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "LOSS"
+    }
+  ]
+}

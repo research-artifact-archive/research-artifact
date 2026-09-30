@@ -1,0 +1,1437 @@
+{
+  "status": "PASS",
+  "input_sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+  "controller_export_sha256": "d383019c77f4f2fb486d41f900d7d61d84e9b013aee854e373c617798a29320a",
+  "script_sha256": "46f54e6e7865cfa8bbc1ebc000607172ba3e53ffef914cbdc47ddcd79ab333d0",
+  "local_plant_source": "PRODUCTION_CELL_OLD(I=1), expanded directly from frozen FSP at K=1 for each arm",
+  "controller_source": "SingleCompositionRunner target C_DRILL_POLISH_CLEAN; a synthesized endpoint controller with closed-loop behavior, not a separately supplied raw physical-plant graph",
+  "noncircular_scope": "The physical LTS is independently parsed from FSP and synchronized with every exported controller transition. This validates the physical projection and reachability of the provided endpoint controller; it does not independently re-synthesize that controller or use E1 Post.",
+  "controller_declared_alphabet_extension": [
+    "stampOk[1]",
+    "stampOk[2]",
+    "stamp[1]",
+    "stamp[2]"
+  ],
+  "controller_alphabet": [
+    "cleanNOk[1]",
+    "cleanNOk[2]",
+    "cleanOk[1]",
+    "cleanOk[2]",
+    "clean[1]",
+    "clean[2]",
+    "drillNOk[1]",
+    "drillNOk[2]",
+    "drillOk[1]",
+    "drillOk[2]",
+    "drill[1]",
+    "drill[2]",
+    "in[1]",
+    "in[2]",
+    "out[1]",
+    "out[2]",
+    "polishNOk[1]",
+    "polishNOk[2]",
+    "polishOk[1]",
+    "polishOk[2]",
+    "polish[1]",
+    "polish[2]",
+    "reset[1]",
+    "reset[2]",
+    "stampOk[1]",
+    "stampOk[2]",
+    "stamp[1]",
+    "stamp[2]"
+  ],
+  "plant_alphabet": [
+    "cleanNOk[1]",
+    "cleanNOk[2]",
+    "cleanOk[1]",
+    "cleanOk[2]",
+    "clean[1]",
+    "clean[2]",
+    "drillNOk[1]",
+    "drillNOk[2]",
+    "drillOk[1]",
+    "drillOk[2]",
+    "drill[1]",
+    "drill[2]",
+    "in[1]",
+    "in[2]",
+    "out[1]",
+    "out[2]",
+    "polishNOk[1]",
+    "polishNOk[2]",
+    "polishOk[1]",
+    "polishOk[2]",
+    "polish[1]",
+    "polish[2]",
+    "reset[1]",
+    "reset[2]",
+    "stampOk[1]",
+    "stampOk[2]",
+    "stamp[1]",
+    "stamp[2]"
+  ],
+  "plant_alphabet_contained_in_controller": true,
+  "enabled_uc_compatibility_checks": 144,
+  "synchronous_semantics": "Each event is owned by its arm and controller; the other arm stutters. All physical event labels belong to the declared controller alphabet, so absent controller edges disable actions rather than permitting controller stutter. Every physically enabled UC action remains enabled with the same synchronized physical successor.",
+  "local_states": 7,
+  "domain_sizes": [
+    7,
+    7
+  ],
+  "reachable_product_states": 81,
+  "reachable_product_edges": 216,
+  "controller_states": 81,
+  "reachable_physical_tuples": 36,
+  "both_domain_states": 81,
+  "uc_quiescent_states": 16,
+  "both_domain_and_uc_quiescent_states": 16,
+  "augmented_root_caution": "The original update run records 126 initial embeddings. This 81-state census contains only endpoint-controller and raw physical coordinates, not adapter fluent/residual observations. No bijection to the 126 augmented roots is established by this check; the counts have different state signatures.",
+  "conclusion": "Both raw transfer domains hold at every reachable old product state. This refutes an empty-joint-domain explanation; UC eligibility and safety of the joint CAL outcome remain separate questions.",
+  "records": [
+    {
+      "controller_state": 0,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]",
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 1,
+      "physical": [
+        "ARM",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 2,
+      "physical": [
+        "DRILLED[1]",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]",
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 3,
+      "physical": [
+        "DRILLED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 4,
+      "physical": [
+        "DRILLED[1]",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillNOk[2]",
+        "drillOk[1]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 5,
+      "physical": [
+        "ARM",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 6,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 7,
+      "physical": [
+        "ARM",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 8,
+      "physical": [
+        "DRILLED[1]",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]",
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 9,
+      "physical": [
+        "ARM",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 10,
+      "physical": [
+        "POLISHED[1]",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishNOk[2]",
+        "polishOk[1]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 11,
+      "physical": [
+        "POLISHED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 12,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 13,
+      "physical": [
+        "CLEANED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 14,
+      "physical": [
+        "CLEANED[1]",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]",
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 15,
+      "physical": [
+        "ARM",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 16,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 17,
+      "physical": [
+        "ARM",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 18,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 19,
+      "physical": [
+        "OUT",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 20,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 21,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 22,
+      "physical": [
+        "DRILLED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 23,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 24,
+      "physical": [
+        "POLISHED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 25,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 26,
+      "physical": [
+        "CLEANED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 27,
+      "physical": [
+        "CLEANED[1]",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]",
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 28,
+      "physical": [
+        "CLEANED[1]",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]",
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 29,
+      "physical": [
+        "ARM",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 30,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 31,
+      "physical": [
+        "ARM",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 32,
+      "physical": [
+        "CLEANED[1]",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]",
+        "drillNOk[2]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 33,
+      "physical": [
+        "ARM",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 34,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 35,
+      "physical": [
+        "OUT",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 36,
+      "physical": [
+        "OUT",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]",
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 37,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]",
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 38,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 39,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]",
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 40,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 41,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]",
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 42,
+      "physical": [
+        "ARM",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 43,
+      "physical": [
+        "DRILLED[1]",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]",
+        "drillNOk[1]",
+        "drillOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 44,
+      "physical": [
+        "ARM",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 45,
+      "physical": [
+        "POLISHED[1]",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]",
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 46,
+      "physical": [
+        "ARM",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 47,
+      "physical": [
+        "CLEANED[1]",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanNOk[2]",
+        "cleanOk[1]",
+        "cleanOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 48,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 49,
+      "physical": [
+        "OUT",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 50,
+      "physical": [
+        "CLEANED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 51,
+      "physical": [
+        "ARM",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 52,
+      "physical": [
+        "OUT",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]",
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 53,
+      "physical": [
+        "ARM",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 54,
+      "physical": [
+        "POLISHED[1]",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishOk[1]",
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 55,
+      "physical": [
+        "POLISHED[1]",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]",
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 56,
+      "physical": [
+        "POLISHED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 57,
+      "physical": [
+        "POLISHED[1]",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]",
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 58,
+      "physical": [
+        "ARM",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 59,
+      "physical": [
+        "DRILLED[1]",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]",
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 60,
+      "physical": [
+        "ARM",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 61,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]",
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 62,
+      "physical": [
+        "OUT",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[1]",
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 63,
+      "physical": [
+        "ARM",
+        "OUT"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 64,
+      "physical": [
+        "OUT",
+        "CLEANED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[2]",
+        "cleanOk[2]",
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 65,
+      "physical": [
+        "OUT",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 66,
+      "physical": [
+        "OUT",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[2]",
+        "polishOk[2]",
+        "reset[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 67,
+      "physical": [
+        "CLEANED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "cleanNOk[1]",
+        "cleanOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 68,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 69,
+      "physical": [
+        "ARM",
+        "POLISHED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[2]",
+        "polishOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 70,
+      "physical": [
+        "POLISHED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "polishNOk[1]",
+        "polishOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 71,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 72,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 73,
+      "physical": [
+        "DRILLED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 74,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 75,
+      "physical": [
+        "DRILLED[1]",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[1]",
+        "drillOk[1]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 76,
+      "physical": [
+        "ARM",
+        "DRILLED[1]"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "drillNOk[2]",
+        "drillOk[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 77,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 78,
+      "physical": [
+        "ARM",
+        "PRODUCTION_CELL_OLD"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[2]"
+      ],
+      "uc_quiescent": false
+    },
+    {
+      "controller_state": 79,
+      "physical": [
+        "ARM",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [],
+      "uc_quiescent": true
+    },
+    {
+      "controller_state": 80,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "ARM"
+      ],
+      "component_domain_membership": [
+        true,
+        true
+      ],
+      "both_domains": true,
+      "enabled_uc": [
+        "in[1]"
+      ],
+      "uc_quiescent": false
+    }
+  ]
+}

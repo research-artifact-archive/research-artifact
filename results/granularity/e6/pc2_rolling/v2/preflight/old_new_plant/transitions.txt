@@ -1,0 +1,17 @@
+Process:
+	PC2_NEW_ORIGINAL_1
+States:
+	7
+Transitions:
+	PC2_NEW_ORIGINAL_1 = Q0,
+	Q0	= (in[1] -> Q1),
+	Q1	= (clean[1] -> Q2
+		  |paint[1] -> Q3
+		  |drill[1] -> Q4
+		  |stamp[1] -> Q5
+		  |out[1] -> Q6),
+	Q2	= ({cleanNOk, cleanOk}[1] -> Q1),
+	Q3	= ({paintNOk, paintOk}[1] -> Q1),
+	Q4	= ({drillNOk, drillOk}[1] -> Q1),
+	Q5	= (stampOk[1] -> Q1),
+	Q6	= (reset[1] -> Q0).

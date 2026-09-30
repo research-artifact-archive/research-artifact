@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "stage": "independent endpoint validation before any JVM",
+  "error": "AssertionError: ('disabled UC', 'old', 'ready_1')",
+  "cause": "The imported endpoint checker did not skip normal events with no active physical owner. Separate code review also found that absent controller labels stutter in LTS composition, so the intended fixed-role controller needs an explicit alphabet for blocked handoff actions.",
+  "resolution": "Use the independently implemented Rolling product validator and add an unreachable controller state that declares blocked normal labels, keeping only service enabled at the reachable controller state. Preserve v1; generate v2 inputs. No solver results have been observed for either DB model."
+}

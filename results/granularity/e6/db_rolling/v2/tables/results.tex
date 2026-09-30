@@ -1,0 +1,16 @@
+\begin{longtable}{llrrrrl}
+\toprule
+Parameters & Variant & Decision & States & Queries & Rank/$|L|$ & Expected \\
+\midrule
+\endhead
+ & none/lazy & WIN & 12 & 70 & 8 & PASS \\
+ & transfers/lazy & LOSS & 6 & 48 & 6 & PASS \\
+ & none/lazy & LOSS & 6 & 48 & 6 & PASS \\
+ & none/direct\_full & WIN & 96 & 1425 & 8 & PASS \\
+ & none/lazy & LOSS & 12 & 54 & 12 & PASS \\
+ & transfers/lazy & LOSS & 6 & 48 & 6 & PASS \\
+ & none/lazy & LOSS & 6 & 48 & 6 & PASS \\
+ & none/direct\_full & LOSS & 12 & 90 & 12 & PASS \\
+\bottomrule
+\end{longtable}
+{\par\smallskip\footnotesize Single trials, 32\,GiB heap, whole-JVM 1,200\,s cap. WIN reports the returned policy rank bound; LOSS reports the returned discovered losing-certificate size. NR denotes not started before the fixed cutoff. Expected values are preregistered hypotheses and never substitute for measurements.}

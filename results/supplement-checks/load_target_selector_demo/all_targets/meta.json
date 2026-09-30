@@ -1,0 +1,83 @@
+{
+  "purpose": "functional selector test only; excluded from all performance statistics",
+  "attempt": 1,
+  "case": "all_targets",
+  "selector_indices": [
+    0,
+    1
+  ],
+  "jar": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+  "input": "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/model.lts",
+  "input_sha256": "5b174297db2ce44e7d3231cfd1c4175b768c7535ad545dc72019a1859564794f",
+  "java_version": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)",
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "command": [
+    "/opt/homebrew/opt/openjdk@17/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentVerification=true",
+    "-Dmtsa.revised.otf.independentVerificationMode=exhaustive",
+    "-Dmtsa.revised.otf.independentStateLimit=1000",
+    "-Dmtsa.revised.otf.independentQueryLimit=10000",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx512m",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/model.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/transitions.txt",
+    "--transition-output",
+    "full",
+    "--deployment-output",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/handoff-bundle.json",
+    "--game-output",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/load_target_selector_demo/all_targets/independent-game-bundle.json"
+  ],
+  "timeout_seconds": 60,
+  "started_at_utc": "2026-09-22T05:22:43.943216+00:00",
+  "status": "finished",
+  "exit_code": 0,
+  "elapsed_context_only_not_performance_data": 0.7702396659879014,
+  "finished_at_utc": "2026-09-22T05:22:44.713832+00:00",
+  "saved_files": {
+    "handoff-bundle.json": {
+      "bytes": 1320,
+      "sha256": "d4772024a8a8d463bf55ceae2c352a64f2447bf6dc6b2c13fdbb1d3d0ca7b9cd"
+    },
+    "independent-game-bundle.json": {
+      "bytes": 784,
+      "sha256": "661ce868bb479760a7e40470f7defe2003a31fe5c42d836adee2e6738d760151"
+    },
+    "model.lts": {
+      "bytes": 988,
+      "sha256": "5b174297db2ce44e7d3231cfd1c4175b768c7535ad545dc72019a1859564794f"
+    },
+    "output.txt": {
+      "bytes": 83020,
+      "sha256": "9a070eeb4c08a9f5f3f91c83a43131885c49aab67cc2cd8a5f476012c977735a"
+    },
+    "stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions.txt": {
+      "bytes": 190,
+      "sha256": "49b11310238547597d0ad6d71531fa8ff53bb5f77b20a5a94005bf84855fe22b"
+    }
+  }
+}

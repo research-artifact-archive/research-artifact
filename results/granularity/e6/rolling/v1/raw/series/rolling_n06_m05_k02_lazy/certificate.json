@@ -1,0 +1,45 @@
+{
+  "decision" : "LOSS",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "booting" ], [ "NEW", "booting" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ] ],
+    "testers" : {
+      "availability" : "ERR_AVAILABILITY"
+    },
+    "pending" : [ "rho_2", "rho_3" ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : false,
+    "goal" : false
+  }, {
+    "physical" : [ [ "OLD", "ready" ], [ "OLD", "ready" ], [ "NEW", "booting" ], [ "NEW", "booting" ], [ "OLD", "ready" ], [ "OLD", "ready" ] ],
+    "testers" : {
+      "availability" : "ERR_AVAILABILITY"
+    },
+    "pending" : [ "rho_1", "rho_3" ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : false,
+    "goal" : false
+  }, {
+    "physical" : [ [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "NEW", "booting" ], [ "NEW", "booting" ] ],
+    "testers" : {
+      "availability" : "ERR_AVAILABILITY"
+    },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : false,
+    "goal" : false
+  }, {
+    "physical" : [ [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ], [ "OLD", "ready" ] ],
+    "testers" : {
+      "availability" : "q6"
+    },
+    "pending" : [ "rho_1", "rho_2", "rho_3" ],
+    "id" : 3,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false
+  } ]
+}

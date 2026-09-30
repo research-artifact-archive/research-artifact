@@ -1,0 +1,16 @@
+\begin{table}[!htbp]
+\caption{One policy from both entries. Each tuple is (versions of $A,B$; holder; old/new monitors); the holder also determines the interval monitor. A dash means inactive. Each column block is one path; successive rows give its six or five edges and remaining-step rank.}
+\label{tab:cell-paths}
+\centering\small
+\begin{tabular}{@{}lcr@{\qquad}lcr@{}}\toprule
+\multicolumn{3}{c}{$A$-holding entry} & \multicolumn{3}{c}{$B$-holding entry}\\
+Incoming step & State & Rank & Incoming step & State & Rank\\\midrule
+entry & $(oo;A;k{-})$ & 6 & entry & $(oo;B;k{-})$ & 5\\
+$\rho_B$ & $(on;A;k{-})$ & 5 & $\rho_A$ & $(no;B;k{-})$ & 4\\
+$m_B$ & $(on;B;k{-})$ & 4 & $m_A$ & $(no;A;k{-})$ & 3\\
+$\mathsf{start}$ & $(on;B;kd)$ & 3 & $\mathsf{start}$ & $(no;A;kc)$ & 2\\
+$\mathsf{stop}$ & $(on;B;{-}d)$ & 2 & $\mathsf{stop}$ & $(no;A;{-}c)$ & 1\\
+$j$ & $(on;B;{-}c)$ & 1 & $\rho_B$ & $(nn;A;{-}c)$ & 0\\
+$\rho_A$ & $(nn;B;{-}c)$ & 0 & & & \\\bottomrule
+\end{tabular}
+\end{table}

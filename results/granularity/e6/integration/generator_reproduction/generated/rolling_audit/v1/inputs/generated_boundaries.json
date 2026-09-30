@@ -1,0 +1,831 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "rolling_audit_literal_generated_boundaries",
+  "family": "rolling_audit",
+  "parameters": {
+    "n": 2,
+    "m": 1,
+    "k": 1,
+    "audit_pairs": 1
+  },
+  "ordinary": [
+    "serve_1",
+    "serve_2",
+    "ready_1",
+    "ready_2",
+    "log_old",
+    "log_new"
+  ],
+  "controllable": [
+    "serve_1",
+    "serve_2",
+    "log_old",
+    "log_new"
+  ],
+  "components": [
+    {
+      "id": "replica_1",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_old",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_new",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_1",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_1",
+            "ready"
+          ],
+          [
+            "booting",
+            "log_old",
+            "booting"
+          ],
+          [
+            "booting",
+            "log_new",
+            "booting"
+          ],
+          [
+            "ready",
+            "log_old",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_new",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_1",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    },
+    {
+      "id": "replica_2",
+      "old": {
+        "states": [
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_old",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_new",
+            "ready"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "booting",
+          "ready"
+        ],
+        "initial": "ready",
+        "edges": [
+          [
+            "booting",
+            "ready_2",
+            "ready"
+          ],
+          [
+            "ready",
+            "serve_2",
+            "ready"
+          ],
+          [
+            "booting",
+            "log_old",
+            "booting"
+          ],
+          [
+            "booting",
+            "log_new",
+            "booting"
+          ],
+          [
+            "ready",
+            "log_old",
+            "ready"
+          ],
+          [
+            "ready",
+            "log_new",
+            "ready"
+          ]
+        ]
+      },
+      "transfer_action": "rho_2",
+      "transfer": {
+        "ready": [
+          "booting"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "availability_audit_coverage",
+      "role": "interval",
+      "tester": {
+        "states": [
+          "ready1_old1_new0",
+          "ready1_old1_new1",
+          "ready1_old0_new1",
+          "ready2_old1_new0",
+          "ready2_old1_new1",
+          "ready2_old0_new1",
+          "ERR_INTERVAL"
+        ],
+        "initial": "ready2_old1_new0",
+        "errors": [
+          "ERR_INTERVAL"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "ready_1",
+          "ready_2",
+          "log_old",
+          "log_new",
+          "rho_1",
+          "rho_2",
+          "ablation.merge.stops",
+          "ablation.merge.starts"
+        ],
+        "changes": [
+          [
+            "ready1_old1_new0",
+            "ready_1",
+            "ready2_old1_new0"
+          ],
+          [
+            "ready1_old1_new0",
+            "ready_2",
+            "ready2_old1_new0"
+          ],
+          [
+            "ready1_old1_new0",
+            "rho_1",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old1_new0",
+            "rho_2",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old1_new0",
+            "ablation.merge.stops",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old1_new0",
+            "ablation.merge.starts",
+            "ready1_old1_new1"
+          ],
+          [
+            "ready1_old1_new1",
+            "ready_1",
+            "ready2_old1_new1"
+          ],
+          [
+            "ready1_old1_new1",
+            "ready_2",
+            "ready2_old1_new1"
+          ],
+          [
+            "ready1_old1_new1",
+            "rho_1",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old1_new1",
+            "rho_2",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old1_new1",
+            "ablation.merge.stops",
+            "ready1_old0_new1"
+          ],
+          [
+            "ready1_old0_new1",
+            "ready_1",
+            "ready2_old0_new1"
+          ],
+          [
+            "ready1_old0_new1",
+            "ready_2",
+            "ready2_old0_new1"
+          ],
+          [
+            "ready1_old0_new1",
+            "rho_1",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready1_old0_new1",
+            "rho_2",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready2_old1_new0",
+            "rho_1",
+            "ready1_old1_new0"
+          ],
+          [
+            "ready2_old1_new0",
+            "rho_2",
+            "ready1_old1_new0"
+          ],
+          [
+            "ready2_old1_new0",
+            "ablation.merge.stops",
+            "ERR_INTERVAL"
+          ],
+          [
+            "ready2_old1_new0",
+            "ablation.merge.starts",
+            "ready2_old1_new1"
+          ],
+          [
+            "ready2_old1_new1",
+            "rho_1",
+            "ready1_old1_new1"
+          ],
+          [
+            "ready2_old1_new1",
+            "rho_2",
+            "ready1_old1_new1"
+          ],
+          [
+            "ready2_old1_new1",
+            "ablation.merge.stops",
+            "ready2_old0_new1"
+          ],
+          [
+            "ready2_old0_new1",
+            "rho_1",
+            "ready1_old0_new1"
+          ],
+          [
+            "ready2_old0_new1",
+            "rho_2",
+            "ready1_old0_new1"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "ready2_old1_new0",
+            "residual_state": "ready2_old1_new0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "audit_old",
+      "role": "old",
+      "tester": {
+        "states": [
+          "unlogged",
+          "logged",
+          "ERR_AUDIT"
+        ],
+        "initial": "unlogged",
+        "errors": [
+          "ERR_AUDIT"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "ready_1",
+          "ready_2",
+          "log_old",
+          "log_new",
+          "rho_1",
+          "rho_2",
+          "ablation.merge.stops",
+          "ablation.merge.starts"
+        ],
+        "changes": [
+          [
+            "unlogged",
+            "serve_1",
+            "ERR_AUDIT"
+          ],
+          [
+            "unlogged",
+            "serve_2",
+            "ERR_AUDIT"
+          ],
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ]
+        ]
+      },
+      "update_action": "ablation.merge.stops"
+    },
+    {
+      "id": "audit_new",
+      "role": "new",
+      "tester": {
+        "states": [
+          "unlogged",
+          "logged",
+          "ERR_AUDIT"
+        ],
+        "initial": "unlogged",
+        "errors": [
+          "ERR_AUDIT"
+        ],
+        "alphabet": [
+          "serve_1",
+          "serve_2",
+          "ready_1",
+          "ready_2",
+          "log_old",
+          "log_new",
+          "rho_1",
+          "rho_2",
+          "ablation.merge.stops",
+          "ablation.merge.starts"
+        ],
+        "changes": [
+          [
+            "unlogged",
+            "serve_1",
+            "ERR_AUDIT"
+          ],
+          [
+            "unlogged",
+            "serve_2",
+            "ERR_AUDIT"
+          ],
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ]
+        ]
+      },
+      "update_action": "ablation.merge.starts",
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "NEW",
+                "booting"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "OLD",
+                "ready"
+              ],
+              [
+                "NEW",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "booting"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "booting"
+              ],
+              [
+                "NEW",
+                "booting"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "booting"
+              ],
+              [
+                "NEW",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "ready"
+              ],
+              [
+                "OLD",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "ready"
+              ],
+              [
+                "NEW",
+                "booting"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "ready"
+              ],
+              [
+                "NEW",
+                "ready"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "initial": "unlogged",
+        "edges": [
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "unlogged",
+          "logged",
+          "alphabet_only"
+        ],
+        "initial": "unlogged",
+        "edges": [
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ],
+          [
+            "alphabet_only",
+            "serve_1",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "serve_2",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "ready_1",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "ready_2",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "log_old",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "log_new",
+            "alphabet_only"
+          ]
+        ]
+      },
+      "projection": {
+        "unlogged": {
+          "physical": [
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ]
+          ],
+          "testers": {
+            "audit_old": "unlogged"
+          }
+        },
+        "logged": {
+          "physical": [
+            [
+              "OLD",
+              "ready"
+            ],
+            [
+              "OLD",
+              "ready"
+            ]
+          ],
+          "testers": {
+            "audit_old": "logged"
+          }
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "initial": "unlogged",
+        "edges": [
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "unlogged",
+          "logged",
+          "alphabet_only"
+        ],
+        "initial": "unlogged",
+        "edges": [
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "serve_1",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "serve_2",
+            "unlogged"
+          ],
+          [
+            "alphabet_only",
+            "serve_1",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "serve_2",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "ready_1",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "ready_2",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "log_old",
+            "alphabet_only"
+          ],
+          [
+            "alphabet_only",
+            "log_new",
+            "alphabet_only"
+          ]
+        ]
+      },
+      "projection": {
+        "unlogged": {
+          "physical": [
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ]
+          ],
+          "testers": {
+            "audit_new": "unlogged"
+          },
+          "goal_id": "new_unlogged"
+        },
+        "logged": {
+          "physical": [
+            [
+              "NEW",
+              "ready"
+            ],
+            [
+              "NEW",
+              "ready"
+            ]
+          ],
+          "testers": {
+            "audit_new": "logged"
+          },
+          "goal_id": "new_logged"
+        }
+      },
+      "loadable": [
+        "unlogged",
+        "logged"
+      ]
+    }
+  },
+  "metadata": {
+    "model_version": "literal_v1",
+    "base_input": "rolling/v1/inputs/rolling_n02_m01_k01.json",
+    "base_sha256": "2dd8467eaa6e8bdb0ee5762a22199a1673843c68a5fbe7430469b56dca11736e",
+    "physical_plant": "Rolling local states and existing transitions retained; global log_old/log_new self-loops added at every local state as external log-sink action abstractions.",
+    "audit_semantics": "One old/new audit pair, each requiring its matching log before the next serve; one availability x audit-coverage interval tester forbids both rules being inactive.",
+    "audit_scope": "Finite event-order and activation-coverage contract; no claim about persisted log delivery or a particular logging implementation.",
+    "initializer": "Uniform unlogged on all nine versioned physical products; no additional activation guard.",
+    "boundary_merge_expectation": "One start and one stop are only renamed; no boundary-granularity witness is expected.",
+    "expected_decision": "WIN",
+    "mechanism": "M2 plus one audit coverage handoff",
+    "anchor": "Rolling availability practice plus explicitly constructed audit activation coverage."
+  },
+  "generated_contract_mode": "boundaries"
+}

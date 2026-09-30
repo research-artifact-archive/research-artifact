@@ -1,0 +1,21 @@
+% Measured cells only; unfinished statuses are displayed, never replaced by predictions.
+\begin{tabular}{llrrrrl}
+\toprule
+Family & Parameters & Lazy & Full & Merged & Rank & Fine / merged \\
+\midrule
+Rolling & $n=2,m=1$ & 5 & 8 & 2 & 4 & WIN / LOSS \\
+Rolling & $n=6,m=1$ & 13 & 256 & 2 & 12 & WIN / LOSS \\
+Canary & $n=2,m=1$ & 21 & 21 & 17 & 6 & WIN / LOSS \\
+Canary & $n=6,m=1$ & 293 & 3645 & 4097 & 18 & WIN / LOSS \\
+Policy & 2 rule pairs & 24 & 129 & 16 & 6 & WIN / LOSS \\
+DB-Rolling & $n=3,m=2$ & 12 & 96 & 6 & 8 & WIN / LOSS \\
+DB-Rolling & $n=3,m=3$ & 12 & 12 & 6 & -- & LOSS / LOSS \\
+Rolling+Audit & $n=2,m=1$ & 30 & 107 & 22 & 7 & WIN / LOSS \\
+Threads: backpressure & $n=6,B=2$ & 198 & 12097 & 193 & 14 & WIN / WIN \\
+Threads: saturated & $n=6,B=2$ & 192 & 192 & 192 & -- & LOSS / LOSS \\
+PC2-Rolling & 2 arms & 6639 & TO & TO & 37 & WIN / TO \\
+\bottomrule
+\end{tabular}
+% Lazy, Full, and Merged columns report discovered states. Rank is the returned fine Lazy bound.
+% Policy uses boundaries merge; other rows use transfers. Timeouts retain their explicit source budget in results_index.csv.
+% PC2 original/extended/host rows remain separate in pc2_rolling/extended_7200/tables/host_budget_comparison.csv. Scale and assumption controls have separate tables.

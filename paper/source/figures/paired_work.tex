@@ -1,0 +1,35 @@
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.18}
+\definecolor{baseblue}{HTML}{16689C}
+\definecolor{r1orange}{HTML}{A34D15}
+\definecolor{r2green}{HTML}{29774B}
+\begin{document}
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=1.3cm},width=7cm,height=4.7cm,xmode=log,ymode=log,xmin=4,ymin=4,xlabel={Lazy},ylabel={Direct-Full},title style={font=\small},tick label style={font=\scriptsize},label style={font=\small},legend style={font=\scriptsize,draw=none,at={(.98,.02)},anchor=south east},grid=major,grid style={gray!20},minor tick num=0]
+
+\nextgroupplot[title={Discovered states},xmax=1000000,ymax=1000000]
+\addplot[gray,dashed,no marks,forget plot] coordinates {(4,4) (1000000,1000000)};
+\addplot[only marks,mark=o,mark size=2.4pt,thick,color=baseblue,mark options={fill=white}] coordinates {(31,75) (272,282709) (8,82) (73,8168) (83,407019)};
+\addlegendentry{Base}
+\addplot[only marks,mark=square,mark size=2.4pt,thick,color=r1orange,mark options={fill=white}] coordinates {(34,115) (8,95) (759,23686)};
+\addlegendentry{R1}
+\addplot[only marks,mark=triangle,mark size=2.4pt,thick,color=r2green,mark options={fill=white}] coordinates {(34,68) (7717,51096) (16,34) (1330,3594) (56443,158218) (97522,317094)};
+\addlegendentry{R2}
+\draw[gray,thin] (axis cs:9,650000) -- (axis cs:83,407019);
+\node[anchor=west,font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:9,650000) {PC1/Base};
+\draw[gray,thin] (axis cs:550,110000) -- (axis cs:272,282709);
+\node[anchor=west,font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:550,110000) {Industry/Base};
+\nextgroupplot[title={Successor queries},xmax=10000000,ymax=10000000]
+\addplot[gray,dashed,no marks,forget plot] coordinates {(4,4) (10000000,10000000)};
+\addplot[only marks,mark=o,mark size=2.4pt,thick,color=baseblue,mark options={fill=white}] coordinates {(27,658) (3336,5058452) (12,289) (165,47618) (840,3842690)};
+\addplot[only marks,mark=square,mark size=2.4pt,thick,color=r1orange,mark options={fill=white}] coordinates {(44,706) (12,257) (1927,66394)};
+\addplot[only marks,mark=triangle,mark size=2.4pt,thick,color=r2green,mark options={fill=white}] coordinates {(78,352) (52919,725391) (24,79) (3118,13512) (354259,1363292) (437383,2842593)};
+\draw[gray,thin] (axis cs:20,700000) -- (axis cs:840,3842690);
+\node[anchor=west,font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:20,700000) {PC1/Base};
+\draw[gray,thin] (axis cs:5000,250000) -- (axis cs:3336,5058452);
+\node[anchor=west,font=\scriptsize,fill=white,inner sep=1pt] at (axis cs:5000,250000) {Industry/Base};
+\end{groupplot}
+\end{tikzpicture}
+\end{document}

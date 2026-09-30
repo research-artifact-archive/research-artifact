@@ -1,0 +1,19 @@
+% Initial frozen series: n>=5 input type errors are retained.
+\begin{tabular}{r|rrr|rr|rr|rrr}
+\toprule
+$n$ & \multicolumn{3}{c|}{None, Lazy} & \multicolumn{2}{c|}{Transfers, Lazy} & \multicolumn{2}{c|}{Both, Lazy} & \multicolumn{3}{c}{None, Direct-Full} \\
+ & Result & States & Rank & Result & States & Result & States & Result & States & Rank \\
+\midrule
+2 & WIN & 15 & 7 & LOSS & 8 & LOSS & 8 & WIN & 38 & 6 \\
+3 & WIN & 34 & 7 & LOSS & 13 & LOSS & 13 & WIN & 128 & 7 \\
+4 & WIN & 59 & 9 & LOSS & 18 & LOSS & 18 & WIN & 360 & 8 \\
+5 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+6 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+7 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+8 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+9 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+10 & ERROR & -- & -- & ERROR & -- & ERROR & -- & ERROR & -- & -- \\
+\bottomrule
+\end{tabular}
+% Boundaries/ Lazy is identical to None/Lazy for n=2..4; all n>=5 cells are ERROR.
+% ERROR: normal holder E collides with the interval error state E; rejected before solver entry.

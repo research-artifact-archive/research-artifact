@@ -1,0 +1,96 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0100",
+      "new_audit" : "unlogged"
+    },
+    "pending" : [ "start_role" ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0101",
+      "new_audit" : "unlogged",
+      "new_role" : "valid"
+    },
+    "pending" : [ ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0100",
+      "new_audit" : "unlogged"
+    },
+    "pending" : [ "rho_runtime", "start_role" ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0110",
+      "new_audit" : "unlogged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_role", "stop_role" ],
+    "id" : 3,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1010",
+      "old_audit" : "logged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit", "stop_role" ],
+    "id" : 4,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 6
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1010",
+      "old_audit" : "unlogged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit", "stop_role" ],
+    "id" : 5,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 5
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1110",
+      "new_audit" : "unlogged",
+      "old_audit" : "unlogged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_role", "stop_audit", "stop_role" ],
+    "id" : 6,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  } ],
+  "strategy_edges" : [ [ 5, "start_audit", 6 ], [ 4, "service", 5 ], [ 6, "stop_audit", 3 ], [ 3, "stop_role", 2 ], [ 2, "rho_runtime", 0 ], [ 0, "start_role", 1 ] ]
+}

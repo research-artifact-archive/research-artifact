@@ -1,0 +1,80 @@
+{
+  "completed": true,
+  "status": "UNREALIZABLE",
+  "started_utc": "2026-09-29T03:48:59.508905+00:00",
+  "job": {
+    "job_id": "industry__base__rep01__lazy_transfers_initial",
+    "model_id": "industry",
+    "model_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Industry_FG.lts",
+    "target_id": "base",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG",
+    "method_id": "lazy_transfers_initial",
+    "merge": "transfers",
+    "solver": "otf",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "otf",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false",
+      "mtsa.otf.contractMerge": "transfers",
+      "mtsa.otf.transferDomain": "initial"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.contractMerge=transfers",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.otf.transferDomain=initial",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Industry_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw/single_1200s/runs/industry__base__rep01__lazy_transfers_initial/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw/single_1200s/runs/industry__base__rep01__lazy_transfers_initial/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "attempt": "single_1200s",
+  "jar_sha256": "00221f6a91f382179186286a70ea99474ae50d07f0ad241212324b0430ad08da",
+  "source_commit": "5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+  "input_sha256": "d8bd82a0ad6eeedc4986a688076fe4646f03a665a41a8c6c5f6cbfbd3b2506dd",
+  "platform": "mac",
+  "pid": 31069,
+  "finished_utc": "2026-09-29T03:49:26.846484+00:00",
+  "elapsed_monotonic_seconds": 27.337697334,
+  "exit_code": 6,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "56cfc543c0efeda8b84e0f3a649492ec291b9b7a4ee65360e08a750e959c5f81",
+      "bytes": 82
+    },
+    "output": {
+      "sha256": "957b5add3e80d3261a8a8c76f14df25c2c2ae2f282bb810d104aa982036e3ddb",
+      "bytes": 107111
+    }
+  }
+}

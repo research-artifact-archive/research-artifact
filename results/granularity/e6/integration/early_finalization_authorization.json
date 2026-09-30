@@ -1,0 +1,23 @@
+{
+  "schema": "e6-early-finalization-authorization-v1",
+  "status": "AUTHORIZED_BY_EXPLICIT_USER_INSTRUCTION",
+  "campaign": "E6",
+  "authorized_at_jst": "2026-09-30T03:35:24.778069+09:00",
+  "original_deadline_jst": "2026-09-30T10:00:00+09:00",
+  "reason": "Explicit PI/user instruction to finalize now rather than wait until 10:00; all measurements are terminal.",
+  "scope": "Only finalization eligibility and importing received Xeon rows change; measured raw, original cells, comparison classifications and existing table numbers remain unchanged.",
+  "received_xeon_path": "pc2_rolling/xeon_20260929_2344/raw",
+  "required_sequence": [
+    "verify received raw",
+    "final index",
+    "new anonymous v4 and validation",
+    "daily and final report",
+    "pause heartbeat"
+  ],
+  "original_guard_sources": {
+    "build_campaign_index.py": "a04ae39e44b3421c6341454677938c2adddaaf321aca357734eab2ebd2f3b8b6",
+    "build_current_prose.py": "4286135253e80e062c5e5a72deee916197cf16a4ed416011fd7563ead960dd22",
+    "index_additions.py": "e0a21350014dbb1ffed5a65e60af1c0a2efedc83ae5098845a22d0ca691dcf08",
+    "build_main_table.py": "9e2bedd033cd4cd1aaa8178aa7c460ff0a4ffb8b3e4033e6b51d30be8575a98c"
+  }
+}

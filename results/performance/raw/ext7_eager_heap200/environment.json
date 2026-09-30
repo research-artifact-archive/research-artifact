@@ -1,0 +1,78 @@
+{
+  "classpath": {
+    "bytes": 698961879,
+    "exists": true,
+    "sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+  },
+  "distribution_redaction": {
+    "changed_fields": [
+      "python_executable"
+    ],
+    "kind": "personal_paths_only",
+    "source_sha256": "58e390c57b28b526bcfc03069f24999b8572c7fbe80d688e9cc050e7030c0f1d"
+  },
+  "free_disk_bytes": 153834344448,
+  "free_disk_measurement": "shutil_disk_usage",
+  "java_executable": {
+    "digest": {
+      "bytes": 50296,
+      "exists": true,
+      "sha256": "1977f302375adbb920d41dac65c7e22eb9c2ed8e1e8d6258964154ff16f14406"
+    },
+    "resolved_path": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.20.101-hotspot\\bin\\java.exe"
+  },
+  "java_home": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.20.101-hotspot\\",
+  "java_version_probe": {
+    "command": [
+      "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.20.101-hotspot\\bin\\java.exe",
+      "-version"
+    ],
+    "exit_code": 0,
+    "stderr": "openjdk version \"17.0.20.1\" 2026-08-18\nOpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)\nOpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)",
+    "stdout": ""
+  },
+  "locale": {
+    "LANG": "",
+    "LC_ALL": ""
+  },
+  "logical_cpu_count": 24,
+  "machine": "AMD64",
+  "model_input_bytes": {
+    "Implementation/Experiment/Models/Industry_FG.lts": "d8bd82a0ad6eeedc4986a688076fe4646f03a665a41a8c6c5f6cbfbd3b2506dd",
+    "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+    "Implementation/Experiment/Models/Railcab_FG.lts": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a",
+    "Implementation/Experiment/Models/Surveillance_FG.lts": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8",
+    "Implementation/Experiment/Models/Workflow_FG.lts": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1"
+  },
+  "physical_memory_bytes": "",
+  "physical_memory_bytes_portable": 274539106304,
+  "physical_memory_measurement": "unavailable",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "process_memory_probe_kind": "windows_process_working_set",
+  "processor": "Intel64 Family 6 Model 85 Stepping 7, GenuineIntel",
+  "python_executable": "<USER_HOME>\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "python_version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
+  "release": "10",
+  "system": "Windows",
+  "windows_cim_probe": {
+    "command": [
+      "powershell.exe",
+      "-NoProfile",
+      "-NonInteractive",
+      "-Command",
+      "$cpu = Get-CimInstance Win32_Processor | Select-Object Name,Manufacturer,NumberOfCores,NumberOfLogicalProcessors,MaxClockSpeed; $computer = Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer,Model,TotalPhysicalMemory,NumberOfProcessors,SystemType; $operatingSystem = Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,BuildNumber,OSArchitecture,LastBootUpTime,LocalDateTime; $disk = Get-CimInstance Win32_LogicalDisk -Filter \"DriveType=3\" | Select-Object DeviceID,Size,FreeSpace; $timeZone = Get-TimeZone | Select-Object Id,DisplayName; [PSCustomObject]@{cpu=$cpu;computer=$computer;operating_system=$operatingSystem;local_disks=$disk;time_zone=$timeZone} | ConvertTo-Json -Compress -Depth 5"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "{\"cpu\":{\"Name\":\"Intel(R) Xeon(R) W-2265 CPU @ 3.50GHz\",\"Manufacturer\":\"GenuineIntel\",\"NumberOfCores\":12,\"NumberOfLogicalProcessors\":24,\"MaxClockSpeed\":3504},\"computer\":{\"Manufacturer\":\"System manufacturer\",\"Model\":\"System Product Name\",\"TotalPhysicalMemory\":274539106304,\"NumberOfProcessors\":1,\"SystemType\":\"x64-based PC\"},\"operating_system\":{\"Caption\":\"Microsoft Windows 10 Pro\",\"Version\":\"10.0.19045\",\"BuildNumber\":\"19045\",\"OSArchitecture\":\"64 �r�b�g\",\"LastBootUpTime\":\"\\/Date(1789428248191)\\/\",\"LocalDateTime\":\"\\/Date(1790693183293)\\/\"},\"local_disks\":{\"DeviceID\":\"C:\",\"Size\":999502299136,\"FreeSpace\":153834344448},\"time_zone\":{\"Id\":\"Tokyo Standard Time\",\"DisplayName\":\"(UTC+09:00) ���A�D�y�A����\"}}"
+  },
+  "windows_power_plan_probe": {
+    "command": [
+      "powercfg.exe",
+      "/GETACTIVESCHEME"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "�d���ݒ�� GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (���p�t�H�[�}���X)"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "java": "java",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "models": [
+    {
+      "id": "pc_separation_local_fg",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_separation_local_fg.lts",
+      "family": "production_cell_granularity"
+    },
+    {
+      "id": "pc_separation_global_product",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_separation_global_product.lts",
+      "family": "production_cell_granularity"
+    },
+    {
+      "id": "pc_neutral_local_fg",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_neutral_local_fg.lts",
+      "family": "production_cell_granularity"
+    },
+    {
+      "id": "pc_neutral_global_product",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/pc_neutral_global_product.lts",
+      "family": "production_cell_granularity"
+    },
+    {
+      "id": "branching_separation",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/branching_separation.lts",
+      "family": "observation_dependent_policy"
+    },
+    {
+      "id": "branching_neutral",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/branching_neutral.lts",
+      "family": "observation_dependent_policy"
+    },
+    {
+      "id": "requirement_boundary_separation",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/requirement_boundary_separation.lts",
+      "family": "requirement_boundary"
+    },
+    {
+      "id": "requirement_boundary_neutral",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/inputs/models/requirement_boundary_neutral.lts",
+      "family": "requirement_boundary"
+    }
+  ],
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "experiment_id": "fg-ducs-witness-20260929-e4-1-mac",
+  "repetitions": 1,
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "platform": "mac",
+  "parallel_trials": 1,
+  "source_config": "Implementation/Experiment/FSE2027/configs/rq2_formal_witness.json",
+  "deadline": "2026-09-29T18:00:00+09:00",
+  "classpath": "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+  "jar_metadata": "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.json",
+  "results_root": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e4_1/raw",
+  "series": "e4_1",
+  "methods": [
+    {
+      "id": "lazy_merge_transfers",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "transfers",
+        "mtsa.revised.otf.policyRestriction": "full_fg"
+      },
+      "merge": "transfers"
+    },
+    {
+      "id": "lazy_merge_boundaries",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "boundaries",
+        "mtsa.revised.otf.policyRestriction": "full_fg"
+      },
+      "merge": "boundaries"
+    },
+    {
+      "id": "lazy_merge_both",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "both",
+        "mtsa.revised.otf.policyRestriction": "full_fg"
+      },
+      "merge": "both"
+    }
+  ],
+  "baseline_source": "semantic_revision_20260914/rq2/raw",
+  "none_policy": "Reuse all eight validated existing full_fg first trials; no new none trial is necessary.",
+  "expected_merge_trials": 24
+}

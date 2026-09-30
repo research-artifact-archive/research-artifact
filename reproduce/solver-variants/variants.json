@@ -1,0 +1,59 @@
+{
+  "schema": "fg-ducs-source-variants-v1",
+  "baseline_source_commit": "f5ef1528cdd1c102a45cea4b903b8f0b7034f75c",
+  "baseline_check": "Local baseline Git tree is clean at this commit; every pre-existing patch target also equals its public baseline source bytes. Maven repository ordering may differ in the public POM; none of these patches changes dependencies or POM.",
+  "apply_from": "Maven source root containing mtsa/pom.xml",
+  "application": "Apply exactly one patch to a fresh baseline source copy, for example: git apply /path/to/e1.patch. Patches are complete differences from the baseline, not sequential.",
+  "build": "mvn -B -f mtsa/pom.xml package -DskipTests -Djacoco.skip=true",
+  "prerequisites": "JDK 17, Maven, and baseline upstream dependencies obtained with the artifact dependency fetcher. No JAR is distributed.",
+  "rebuilt_binary": "A source-built JAR has its own SHA-256 and is not asserted byte-identical to the original measured JAR. Use a fresh output directory and record the actual hash for every replication.",
+  "variants": {
+    "e1": {
+      "source_commit": "50563fc45bd4d3870a48318944a83ccf2bcf4676",
+      "purpose": "Atomic contract event merging; solver and semantics used by E1, E4, and E6. Includes E2 implementation.",
+      "patch": "e1.patch",
+      "changed_files": [
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/ContractMerge.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeTest.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java"
+      ],
+      "measured_jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5"
+    },
+    "e2": {
+      "source_commit": "5117ac36bd910067a9ee22152a3101e909eaf6d7",
+      "purpose": "Full reachable construction with uncontrollable-priority pruning (E2 ablation).",
+      "patch": "e2.patch",
+      "changed_files": [
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java"
+      ],
+      "measured_jar_sha256": "4cc2a2f1ab403b239a281fa86c7bd15cdf59dc95068d6b85e864ffca8d437672"
+    },
+    "e5": {
+      "source_commit": "5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+      "purpose": "Physical-initial transfer-domain preprocessing and losing-certificate diagnostics (E5). Includes E1/E2.",
+      "patch": "e5.patch",
+      "changed_files": [
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/ContractMerge.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/LosingCertificateDiagnostics.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java",
+        "mtsa/src/main/java/ltsa/updatingControllers/otf/TransferDomainRestriction.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeIndependentAuditTest.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeTest.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java",
+        "mtsa/src/test/java/ltsa/updatingControllers/otf/TransferDomainRestrictionTest.java"
+      ],
+      "measured_jar_sha256": "00221f6a91f382179186286a70ea99474ae50d07f0ad241212324b0430ad08da"
+    }
+  }
+}

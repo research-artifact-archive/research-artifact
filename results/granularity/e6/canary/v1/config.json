@@ -1,0 +1,852 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "canary",
+  "version": "v1_reports",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "jobs": [
+    {
+      "id": "n02_m01_fine_lazy",
+      "input": "inputs/canary_n02_m01_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n02_m01_merged_lazy",
+      "input": "inputs/canary_n02_m01_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "k": 2
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n02_m01_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n02_m01_all_lazy",
+      "input": "inputs/canary_n02_m01_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "k": 2
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n02_m01_fine_df",
+      "input": "inputs/canary_n02_m01_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m01_fine_lazy",
+      "input": "inputs/canary_n03_m01_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m01_merged_lazy",
+      "input": "inputs/canary_n03_m01_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n03_m01_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m01_all_lazy",
+      "input": "inputs/canary_n03_m01_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m01_fine_df",
+      "input": "inputs/canary_n03_m01_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n03_m02_fine_lazy",
+      "input": "inputs/canary_n03_m02_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n03_m02_merged_lazy",
+      "input": "inputs/canary_n03_m02_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "k": 3
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n03_m02_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n03_m02_all_lazy",
+      "input": "inputs/canary_n03_m02_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "k": 3
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n03_m02_fine_df",
+      "input": "inputs/canary_n03_m02_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 3,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m01_fine_lazy",
+      "input": "inputs/canary_n04_m01_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m01_merged_lazy",
+      "input": "inputs/canary_n04_m01_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n04_m01_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m01_all_lazy",
+      "input": "inputs/canary_n04_m01_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m01_fine_df",
+      "input": "inputs/canary_n04_m01_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m02_fine_lazy",
+      "input": "inputs/canary_n04_m02_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m02_merged_lazy",
+      "input": "inputs/canary_n04_m02_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n04_m02_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m02_all_lazy",
+      "input": "inputs/canary_n04_m02_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m02_fine_df",
+      "input": "inputs/canary_n04_m02_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n04_m03_fine_lazy",
+      "input": "inputs/canary_n04_m03_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n04_m03_merged_lazy",
+      "input": "inputs/canary_n04_m03_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "k": 4
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n04_m03_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n04_m03_all_lazy",
+      "input": "inputs/canary_n04_m03_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "k": 4
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n04_m03_fine_df",
+      "input": "inputs/canary_n04_m03_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 4,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n05_m01_fine_lazy",
+      "input": "inputs/canary_n05_m01_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n05_m01_merged_lazy",
+      "input": "inputs/canary_n05_m01_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 1,
+        "k": 5
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n05_m01_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n05_m01_all_lazy",
+      "input": "inputs/canary_n05_m01_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 1,
+        "k": 5
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n05_m01_fine_df",
+      "input": "inputs/canary_n05_m01_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n05_m02_fine_lazy",
+      "input": "inputs/canary_n05_m02_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n05_m02_merged_lazy",
+      "input": "inputs/canary_n05_m02_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 2,
+        "k": 5
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n05_m02_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n05_m02_all_lazy",
+      "input": "inputs/canary_n05_m02_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 2,
+        "k": 5
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n05_m02_fine_df",
+      "input": "inputs/canary_n05_m02_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n05_m03_fine_lazy",
+      "input": "inputs/canary_n05_m03_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n05_m03_merged_lazy",
+      "input": "inputs/canary_n05_m03_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 3,
+        "k": 5
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n05_m03_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n05_m03_all_lazy",
+      "input": "inputs/canary_n05_m03_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 3,
+        "k": 5
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n05_m03_fine_df",
+      "input": "inputs/canary_n05_m03_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n05_m04_fine_lazy",
+      "input": "inputs/canary_n05_m04_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 4,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n05_m04_merged_lazy",
+      "input": "inputs/canary_n05_m04_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 4,
+        "k": 5
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n05_m04_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n05_m04_all_lazy",
+      "input": "inputs/canary_n05_m04_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 5,
+        "m": 4,
+        "k": 5
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n05_m04_fine_df",
+      "input": "inputs/canary_n05_m04_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 5,
+        "m": 4,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n06_m01_fine_lazy",
+      "input": "inputs/canary_n06_m01_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n06_m01_merged_lazy",
+      "input": "inputs/canary_n06_m01_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 1,
+        "k": 6
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n06_m01_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n06_m01_all_lazy",
+      "input": "inputs/canary_n06_m01_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 1,
+        "k": 6
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n06_m01_fine_df",
+      "input": "inputs/canary_n06_m01_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 1,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n06_m02_fine_lazy",
+      "input": "inputs/canary_n06_m02_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n06_m02_merged_lazy",
+      "input": "inputs/canary_n06_m02_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 2,
+        "k": 6
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n06_m02_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n06_m02_all_lazy",
+      "input": "inputs/canary_n06_m02_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 2,
+        "k": 6
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n06_m02_fine_df",
+      "input": "inputs/canary_n06_m02_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 2,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n06_m03_fine_lazy",
+      "input": "inputs/canary_n06_m03_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n06_m03_merged_lazy",
+      "input": "inputs/canary_n06_m03_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 3,
+        "k": 6
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n06_m03_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n06_m03_all_lazy",
+      "input": "inputs/canary_n06_m03_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 3,
+        "k": 6
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n06_m03_fine_df",
+      "input": "inputs/canary_n06_m03_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 3,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n06_m04_fine_lazy",
+      "input": "inputs/canary_n06_m04_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 4,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n06_m04_merged_lazy",
+      "input": "inputs/canary_n06_m04_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 4,
+        "k": 6
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n06_m04_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n06_m04_all_lazy",
+      "input": "inputs/canary_n06_m04_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 4,
+        "k": 6
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n06_m04_fine_df",
+      "input": "inputs/canary_n06_m04_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 4,
+        "k": 1
+      },
+      "variant": "fine_df"
+    },
+    {
+      "id": "n06_m05_fine_lazy",
+      "input": "inputs/canary_n06_m05_fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 5,
+        "k": 1
+      },
+      "variant": "fine_lazy"
+    },
+    {
+      "id": "n06_m05_merged_lazy",
+      "input": "inputs/canary_n06_m05_fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 5,
+        "k": 6
+      },
+      "variant": "merged_lazy",
+      "compare_input": "inputs/canary_n06_m05_all.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n06_m05_all_lazy",
+      "input": "inputs/canary_n06_m05_all.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 6,
+        "m": 5,
+        "k": 6
+      },
+      "variant": "all_lazy"
+    },
+    {
+      "id": "n06_m05_fine_df",
+      "input": "inputs/canary_n06_m05_fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 6,
+        "m": 5,
+        "k": 1
+      },
+      "variant": "fine_df"
+    }
+  ],
+  "frozen_paths": [
+    "canary/gen_canary.py",
+    "canary/validate_canary.py",
+    "canary/analyze_canary.py",
+    "canary/design/v0_literal_unimplemented/README.md",
+    "canary/design/v1_reports/README.md",
+    "common/SCHEMA.md",
+    "common/witness.schema.json"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "canary/validate_canary.py",
+      "canary/v1"
+    ]
+  ],
+  "preflight_jobs": [
+    "n02_m01_fine_lazy",
+    "n02_m01_merged_lazy",
+    "n02_m01_all_lazy"
+  ],
+  "analysis_commands": [
+    [
+      "python3",
+      "-B",
+      "canary/analyze_canary.py",
+      "canary/v1"
+    ]
+  ]
+}

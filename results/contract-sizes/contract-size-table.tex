@@ -1,0 +1,19 @@
+\begin{table}[!htbp]
+\centering\small
+\caption{Declared contract sizes of the nine adapted inputs.}
+\label{tab:contract-size}
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Input & $C$ & $T$ & $U$ & Old/New & Interval B/R1/R2\\\midrule
+GSM & \ContractGSMComponents & \ContractGSMTransferPairs & \ContractGSMUpdates & \ContractGSMOld/\ContractGSMNew & \ContractGSMBase/\ContractGSMROne/\ContractGSMRTwo\\
+Industry & \ContractIndustryComponents & \ContractIndustryTransferPairs & \ContractIndustryUpdates & \ContractIndustryOld/\ContractIndustryNew & \ContractIndustryBase/\ContractIndustryROne/\ContractIndustryRTwo\\
+MetaSocket & \ContractMetaSocketComponents & \ContractMetaSocketTransferPairs & \ContractMetaSocketUpdates & \ContractMetaSocketOld/\ContractMetaSocketNew & \ContractMetaSocketBase/\ContractMetaSocketROne/\ContractMetaSocketRTwo\\
+PowerPlant & \ContractPowerPlantComponents & \ContractPowerPlantTransferPairs & \ContractPowerPlantUpdates & \ContractPowerPlantOld/\ContractPowerPlantNew & \ContractPowerPlantBase/\ContractPowerPlantROne/\ContractPowerPlantRTwo\\
+PC Arms=1 & \ContractPCOneComponents & \ContractPCOneTransferPairs & \ContractPCOneUpdates & \ContractPCOneOld/\ContractPCOneNew & \ContractPCOneBase/\ContractPCOneROne/\ContractPCOneRTwo\\
+PC Arms=2 & \ContractPCTwoComponents & \ContractPCTwoTransferPairs & \ContractPCTwoUpdates & \ContractPCTwoOld/\ContractPCTwoNew & \ContractPCTwoBase/\ContractPCTwoROne/\ContractPCTwoRTwo\\
+Railcab & \ContractRailcabComponents & \ContractRailcabTransferPairs & \ContractRailcabUpdates & \ContractRailcabOld/\ContractRailcabNew & \ContractRailcabBase/\ContractRailcabROne/\ContractRailcabRTwo\\
+Surveillance & \ContractSurveillanceComponents & \ContractSurveillanceTransferPairs & \ContractSurveillanceUpdates & \ContractSurveillanceOld/\ContractSurveillanceNew & \ContractSurveillanceBase/\ContractSurveillanceROne/\ContractSurveillanceRTwo\\
+Workflow & \ContractWorkflowComponents & \ContractWorkflowTransferPairs & \ContractWorkflowUpdates & \ContractWorkflowOld/\ContractWorkflowNew & \ContractWorkflowBase/\ContractWorkflowROne/\ContractWorkflowRTwo\\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize
+$C$: component pairs; $T$: declared local source--target transfer pairs, after expanding finite ranges and before observer augmentation; $U$: transfer, old-stop and new-start commands. Counts are shared across Base/R1/R2 except interval requirements. These are input-description counts, not reachable-game sizes. Only Railcab has a branching declared transfer source (two outcomes).
+\end{table}

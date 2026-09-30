@@ -1,0 +1,5 @@
+{
+  "failed_report": "v4_independent_preparation02_xeon.json",
+  "cause": "The historical Mac completion schema has a files digest map; received Xeon completion has none. The helper incorrectly indexed that missing key before reaching the separate 18-file receipt manifest check.",
+  "correction": "Use optional completion.files, while requiring the complete Xeon raw_sha256_manifest and original ZIP entry byte checks. No raw or measured values are changed."
+}

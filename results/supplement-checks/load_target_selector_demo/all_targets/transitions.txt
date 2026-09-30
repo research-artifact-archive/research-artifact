@@ -1,0 +1,10 @@
+Process:
+	UPDATE_CONTROLLER_OTF_FG
+States:
+	3
+Transitions:
+	UPDATE_CONTROLLER_OTF_FG = Q0,
+	Q0	= (idle -> Q0
+		  |hotSwapIn -> Q1),
+	Q1	= (reconfigure_TEST -> Q2),
+	Q2	= (idle -> Q2)+{move.

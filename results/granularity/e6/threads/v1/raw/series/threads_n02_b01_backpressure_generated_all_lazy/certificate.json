@@ -1,0 +1,87 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "I_q1" ], [ "NEW", "I" ] ],
+    "testers" : { },
+    "pending" : [ ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "OLD", "B_q0" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 1,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "B_q0" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 2,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "B_q1" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 3,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "B_q1" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 4,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "I_q0" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 5,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "I_q0" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 6,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "I_q1" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 7,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "I_q1" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 8,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  } ],
+  "strategy_edges" : [ [ 6, "arrival", 8 ], [ 8, "ablation.merge.transfers", 0 ], [ 5, "arrival", 7 ], [ 5, "finish_2", 6 ], [ 7, "finish_2", 8 ], [ 2, "arrival", 4 ], [ 2, "finish_1", 6 ], [ 4, "finish_1", 8 ], [ 1, "arrival", 3 ], [ 1, "finish_1", 5 ], [ 1, "finish_2", 2 ], [ 3, "finish_1", 7 ], [ 3, "finish_2", 4 ] ]
+}

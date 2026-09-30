@@ -1,0 +1,702 @@
+{
+  "status": "COMPLETE",
+  "selection": "n=2,m=1; both controls; fine and E1 merged Lazy, fixed before measurement.",
+  "extractor_sha256": "7041fadfb751971e22954cef31ef19c80aa469944c2989fc2e5d41d6c21e1b80",
+  "independent_checker_sha256": "b8dad398a71b905ac82dc748682235214fa7d6488072b1d19403400a7e776780",
+  "reports": [
+    {
+      "job": "n02_m01_healthy_only_fine_lazy",
+      "status": "TRACE_FOUND",
+      "decision": "WIN",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_fine.json",
+      "input_sha256": "7104d8f8b066073031235cfe47d1f920995ba7ad3e069dd9e482e0942b05fc0a",
+      "certificate": "raw/series/n02_m01_healthy_only_fine_lazy/certificate.json",
+      "certificate_sha256": "8c4f8db940a983e3fc7e3592be792531f81326da93e83f17503cd3088eba6ebb",
+      "steps": 4,
+      "trace": [
+        {
+          "source": {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_1",
+              "rho_2"
+            ],
+            "id": 4,
+            "initial": true,
+            "safe": true,
+            "goal": false,
+            "rank": 4
+          },
+          "action": "rho_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "HP"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 3
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "HP"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 3
+          },
+          "action": "reportH_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 2,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 2
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 2,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 2
+          },
+          "action": "rho_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 1,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 1
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 1,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 1
+          },
+          "action": "reportH_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 0,
+            "initial": false,
+            "safe": true,
+            "goal": true,
+            "rank": 0
+          }
+        }
+      ],
+      "scope": "A maximal returned-rank path; full certificate, not this path alone, establishes WIN."
+    },
+    {
+      "job": "n02_m01_healthy_only_merged_lazy",
+      "status": "TRACE_FOUND",
+      "decision": "WIN",
+      "input": "inputs/canary_controls_n02_m01_healthy_only_fine.json",
+      "input_sha256": "7104d8f8b066073031235cfe47d1f920995ba7ad3e069dd9e482e0942b05fc0a",
+      "certificate": "raw/series/n02_m01_healthy_only_merged_lazy/certificate.json",
+      "certificate_sha256": "636b25fdf6c295f0dc8b1accaaac733619eac9ff7238f42b5b980adbf33d26e9",
+      "steps": 3,
+      "trace": [
+        {
+          "source": {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "ablation.merge.transfers"
+            ],
+            "id": 4,
+            "initial": true,
+            "safe": true,
+            "goal": false,
+            "rank": 3
+          },
+          "action": "ablation.merge.transfers",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "HP"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 2
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "HP"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 2
+          },
+          "action": "reportH_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 1,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 1
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 1,
+            "initial": false,
+            "safe": true,
+            "goal": false,
+            "rank": 1
+          },
+          "action": "reportH_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "H"
+              ],
+              [
+                "NEW",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 0,
+            "initial": false,
+            "safe": true,
+            "goal": true,
+            "rank": 0
+          }
+        }
+      ],
+      "scope": "A maximal returned-rank path; full certificate, not this path alone, establishes WIN."
+    },
+    {
+      "job": "n02_m01_no_recovery_fine_lazy",
+      "status": "TRACE_FOUND",
+      "decision": "LOSS",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+      "input_sha256": "17e70761409436756b19e89585bd36dfd40441e28ce6ea3599faa21c565ff163",
+      "certificate": "raw/series/n02_m01_no_recovery_fine_lazy/certificate.json",
+      "certificate_sha256": "a9a859d72e3318c00036059d775e18905766d98f368a05e987bab0497d133d8b",
+      "steps": 4,
+      "trace": [
+        {
+          "source": {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_1",
+              "rho_2"
+            ],
+            "id": 17,
+            "initial": true,
+            "safe": true,
+            "goal": false
+          },
+          "action": "rho_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "BP"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 7,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "BP"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 7,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          },
+          "action": "reportB_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 4,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [
+              "rho_2"
+            ],
+            "id": 4,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          },
+          "action": "rho_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          },
+          "action": "reportH_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 2,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        }
+      ],
+      "scope": "A path in the returned losing region to safe all-new B/H with no pending transfer; H-only goal remains unreachable from permanent B. Its absence would not refute the checked LOSS certificate."
+    },
+    {
+      "job": "n02_m01_no_recovery_merged_lazy",
+      "status": "TRACE_FOUND",
+      "decision": "LOSS",
+      "input": "inputs/canary_controls_n02_m01_no_recovery_fine.json",
+      "input_sha256": "17e70761409436756b19e89585bd36dfd40441e28ce6ea3599faa21c565ff163",
+      "certificate": "raw/series/n02_m01_no_recovery_merged_lazy/certificate.json",
+      "certificate_sha256": "999cbe03c2c87ead2aff7b9dcc00c2cdb768d70af8a0c78714ee8e4d6de1b1f6",
+      "steps": 3,
+      "trace": [
+        {
+          "source": {
+            "physical": [
+              [
+                "OLD",
+                "H"
+              ],
+              [
+                "OLD",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [
+              "ablation.merge.transfers"
+            ],
+            "id": 12,
+            "initial": true,
+            "safe": true,
+            "goal": false
+          },
+          "action": "ablation.merge.transfers",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "BP"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 7,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "BP"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b00"
+            },
+            "pending": [],
+            "id": 7,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          },
+          "action": "reportB_1",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        },
+        {
+          "source": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "HP"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 3,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          },
+          "action": "reportH_2",
+          "target": {
+            "physical": [
+              [
+                "NEW",
+                "B"
+              ],
+              [
+                "NEW",
+                "H"
+              ]
+            ],
+            "testers": {
+              "reported_availability": "b01"
+            },
+            "pending": [],
+            "id": 2,
+            "initial": false,
+            "safe": true,
+            "goal": false
+          }
+        }
+      ],
+      "scope": "A path in the returned losing region to safe all-new B/H with no pending transfer; H-only goal remains unreachable from permanent B. Its absence would not refute the checked LOSS certificate."
+    }
+  ]
+}

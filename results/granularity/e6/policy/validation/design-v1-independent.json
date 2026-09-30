@@ -1,0 +1,414 @@
+{
+  "status": "PASS",
+  "endpoint_checks": {
+    "old": {
+      "status": "PASS",
+      "states": 2,
+      "edges": 4,
+      "nonblocking": true,
+      "uncontrollable_closed": true,
+      "safety": true
+    },
+    "new": {
+      "status": "PASS",
+      "states": 2,
+      "edges": 4,
+      "nonblocking": true,
+      "uncontrollable_closed": true,
+      "safety": true
+    }
+  },
+  "boundaries": {
+    "status": "PASS",
+    "commuting_checks": 40,
+    "fine_safe_orders": [
+      {
+        "actions": [
+          "start_audit",
+          "stop_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "0110",
+          "0100",
+          "0101"
+        ]
+      },
+      {
+        "actions": [
+          "start_audit",
+          "stop_role",
+          "stop_audit",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "1100",
+          "0100",
+          "0101"
+        ]
+      },
+      {
+        "actions": [
+          "start_audit",
+          "stop_role",
+          "start_role",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "1100",
+          "1101",
+          "0101"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "start_audit",
+          "stop_audit",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "1100",
+          "0100",
+          "0101"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "start_audit",
+          "start_role",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "1100",
+          "1101",
+          "0101"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "start_role",
+          "start_audit",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "1001",
+          "1101",
+          "0101"
+        ]
+      }
+    ],
+    "fine_unsafe_orders": [
+      {
+        "actions": [
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_audit",
+          "start_audit",
+          "start_role",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_audit",
+          "stop_role",
+          "start_audit",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_audit",
+          "stop_role",
+          "start_role",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_audit",
+          "start_role",
+          "start_audit",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_audit",
+          "start_role",
+          "stop_role",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_audit",
+          "stop_audit",
+          "start_role",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "0110",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_audit",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_audit",
+          "start_role",
+          "stop_role",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "1110",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "stop_audit",
+          "start_audit",
+          "start_role"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "stop_audit",
+          "start_role",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "stop_role",
+          "start_role",
+          "stop_audit",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "1000",
+          "1001",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "stop_audit",
+          "start_audit",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "stop_audit",
+          "stop_role",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "start_audit",
+          "stop_audit",
+          "stop_role"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "start_audit",
+          "stop_role",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "stop_role",
+          "stop_audit",
+          "start_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "start_role",
+          "stop_role",
+          "start_audit",
+          "stop_audit"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR",
+          "ERROR",
+          "ERROR"
+        ]
+      }
+    ],
+    "merged_orders": [
+      {
+        "actions": [
+          "ablation.merge.stops",
+          "ablation.merge.starts"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR"
+        ]
+      },
+      {
+        "actions": [
+          "ablation.merge.starts",
+          "ablation.merge.stops"
+        ],
+        "states": [
+          "1010",
+          "ERROR",
+          "ERROR"
+        ]
+      }
+    ]
+  },
+  "method": "Independent Python explicit synchronous product and all boundary permutations; does not import generator or Java solver."
+}

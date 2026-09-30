@@ -1,0 +1,44 @@
+% Generated queries: extended-budget Direct-Full queries are not reused.
+\begin{table}[t]
+\centering\small
+\caption{E2 successor-oracle calls. Lazy/Eager use on-the-fly exploration with UC pruning; Direct-Full uses full construction without UC pruning; Full+UC uses full construction with UC pruning. Existing methods use their first fixed-budget trial.}
+\label{tab:abl-e2-queries}
+\begin{tabular}{lrrrr}
+\toprule
+Contract & Lazy & Eager & Direct-Full & Full+UC \\
+\midrule
+GSM/Base & 27 & 658 & 658 & 658 \\
+GSM/R1 & 44 & 695 & 706 & 706 \\
+GSM/R2 & 78 & 352 & 352 & 352 \\
+Industry/Base & 3,336 & 1,405,432 & 5,058,452 & 1,405,432 \\
+Industry/R1 & 253,829 & TO & TO & 635,100 \\
+Industry/R2 & 52,919 & 205,588 & 725,391 & 205,588 \\
+MetaSocket/Base & 12 & 190 & 289 & 190 \\
+MetaSocket/R1 & 12 & 201 & 257 & 201 \\
+MetaSocket/R2 & 24 & 53 & 79 & 53 \\
+PowerPlant/Base & 165 & 26,554 & 47,618 & 26,554 \\
+PowerPlant/R1 & 1,927 & 64,138 & 66,394 & 64,790 \\
+PowerPlant/R2 & 3,118 & 7,528 & 13,512 & 7,528 \\
+PC1/Base & 840 & 2,457,947 & 3,842,690 & 2,457,947 \\
+PC1/R1 & 852 & 12,167,099 & TO & 12,167,099$^{\ddagger}$ \\
+PC1/R2 & 354,259 & 853,980 & 1,363,292 & 853,980 \\
+PC2/Base & 49,749 & TO & TO & TO$^{\ddagger}$ \\
+PC2/R1 & 43,687 & TO & TO & TO$^{\ddagger}$ \\
+PC2/R2 & TO & TO & TO & TO$^{\ddagger}$ \\
+Railcab/Base & 1,575 & TO & TO & TO$^{\ddagger}$ \\
+Railcab/R1 & 98,093 & TO & TO & TO$^{\ddagger}$ \\
+Railcab/R2 & 437,383 & 1,357,305 & 2,842,593 & 1,357,305 \\
+Surveillance/Base & 38,215 & TO & TO & TO$^{\ddagger}$ \\
+Surveillance/R1 & 482,736 & TO & TO & TO$^{\ddagger}$ \\
+Surveillance/R2 & 884,624 & TO & TO & TO$^{\ddagger}$ \\
+Workflow/Base & 1,131 & 29,921,182 & TO & TO$^{\ddagger}$ \\
+Workflow/R1 & 7,142 & TO & TO & TO$^{\ddagger}$ \\
+Workflow/R2 & 589,947 & 1,093,048 & INT & 1,093,048 \\
+\midrule
+\multicolumn{5}{l}{Reference only (outside the 27 E2 cells)} \\
+Travel(4,4)/Base & 605,535 & 1,130,999 & TO & -- \\
+Travel(4,6)/Base & 1,397,625 & 2,131,455 & TO & -- \\
+\bottomrule
+\end{tabular}
+\par\footnotesize TO: timed out; INT: first trial was interrupted; NR: not yet run; Pending: in progress; --: E2 was not planned for this reference input. $\ddagger$: Full+UC single 3,600 s second-pass trial after its 1,200 s first-pass TO, including a second-pass TO or pending outcome. Unmarked existing and Full+UC trials have a 1,200 s cap. Extended-budget Direct-Full trials supply state counts only; their queries are not reused, so those Direct-Full entries remain TO here. Missing or partial counts are not estimated.
+\end{table}

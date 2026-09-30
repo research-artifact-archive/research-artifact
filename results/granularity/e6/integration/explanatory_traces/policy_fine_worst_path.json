@@ -1,0 +1,315 @@
+{
+  "status": "PASS",
+  "provenance": {
+    "input": "policy/v2/inputs/policy_2_fine.json",
+    "input_sha256": "b40bb52e09f351cf2f105f4f0c63d60964841000dd949421cc336b9b98c94e5f",
+    "certificate": "policy/v2/raw/series/policy_fine_none_lazy/certificate.json",
+    "certificate_sha256": "8d3f2ea13cb1a50b60b84b54136f809461406efe9065fb49ce70c5b1928eba6d",
+    "job": "policy_fine_none_lazy",
+    "decision": "WIN",
+    "states_discovered": 24
+  },
+  "root_rank": 6,
+  "steps": 6,
+  "trace": [
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "1010",
+          "old_audit": "logged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_audit",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "id": 4,
+        "initial": true,
+        "safe": true,
+        "goal": false,
+        "rank": 6
+      },
+      "action": "service",
+      "target": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "1010",
+          "old_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_audit",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "id": 5,
+        "initial": true,
+        "safe": true,
+        "goal": false,
+        "rank": 5
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "1010",
+          "old_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_audit",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "id": 5,
+        "initial": true,
+        "safe": true,
+        "goal": false,
+        "rank": 5
+      },
+      "action": "start_audit",
+      "target": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "1110",
+          "new_audit": "unlogged",
+          "old_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "id": 6,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 4
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "1110",
+          "new_audit": "unlogged",
+          "old_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role",
+          "stop_audit",
+          "stop_role"
+        ],
+        "id": 6,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 4
+      },
+      "action": "stop_audit",
+      "target": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0110",
+          "new_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role",
+          "stop_role"
+        ],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 3
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0110",
+          "new_audit": "unlogged",
+          "old_role": "valid"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role",
+          "stop_role"
+        ],
+        "id": 3,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 3
+      },
+      "action": "stop_role",
+      "target": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0100",
+          "new_audit": "unlogged"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role"
+        ],
+        "id": 2,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 2
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "OLD",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0100",
+          "new_audit": "unlogged"
+        },
+        "pending": [
+          "rho_runtime",
+          "start_role"
+        ],
+        "id": 2,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 2
+      },
+      "action": "rho_runtime",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0100",
+          "new_audit": "unlogged"
+        },
+        "pending": [
+          "start_role"
+        ],
+        "id": 0,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 1
+      },
+      "control": "C"
+    },
+    {
+      "source": {
+        "physical": [
+          [
+            "NEW",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0100",
+          "new_audit": "unlogged"
+        },
+        "pending": [
+          "start_role"
+        ],
+        "id": 0,
+        "initial": false,
+        "safe": true,
+        "goal": false,
+        "rank": 1
+      },
+      "action": "start_role",
+      "target": {
+        "physical": [
+          [
+            "NEW",
+            "running"
+          ]
+        ],
+        "testers": {
+          "coverage_and_exclusion": "0101",
+          "new_audit": "unlogged",
+          "new_role": "valid"
+        },
+        "pending": [],
+        "id": 1,
+        "initial": false,
+        "safe": true,
+        "goal": true,
+        "rank": 0
+      },
+      "control": "C"
+    }
+  ],
+  "scope": "One maximal-rank successor trace of the full checked policy; all other adversarial branches remain in the original certificate.",
+  "extractor_sha256": "cf86e5619309eccc3de0799d3364f874f19ec96d6902b5af702d431822862dba",
+  "checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8"
+}

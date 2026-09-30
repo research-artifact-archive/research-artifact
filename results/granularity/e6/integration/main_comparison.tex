@@ -1,0 +1,17 @@
+% Derived from completed E6 raw. Mac timings deliberately omitted.
+\begin{tabular}{llrrrrl}
+\toprule
+Family & Parameters & Lazy states & Full states & Merge states & Rank & Fine / merged \\
+\midrule
+Rolling & n=2, m=1 & 5 & 8 & 2 & 4 & WIN / LOSS \\
+Rolling & n=6, m=1 & 13 & 256 & 2 & 12 & WIN / LOSS \\
+Canary & n=2, m=1 & 21 & 21 & 17 & 6 & WIN / LOSS \\
+Canary & n=6, m=1 & 293 & 3645 & 4097 & 18 & WIN / LOSS \\
+Policy & rule\_pairs=2 & 24 & 129 & 16 & 6 & WIN / LOSS \\
+DB-Rolling & n=3, m=2 & 12 & 96 & 6 & 8 & WIN / LOSS \\
+DB-Rolling & n=3, m=3 & 12 & 12 & 6 & -- & LOSS / LOSS \\
+Rolling+Audit & n=2, m=1, audit\_pairs=1 & 30 & 107 & 22 & 7 & WIN / LOSS \\
+\bottomrule
+\end{tabular}
+% Rank is the returned Lazy certificate bound; loss-region sizes are in results_index.csv.
+% Policy uses boundaries merge; the other rows use transfers merge.

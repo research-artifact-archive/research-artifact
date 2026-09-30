@@ -1,0 +1,81 @@
+{
+  "completed": true,
+  "status": "SUCCESS",
+  "started_utc": "2026-09-29T01:14:43.690129+00:00",
+  "job": {
+    "job_id": "productioncell_arms2__r1__rep01__lazy_merge_boundaries",
+    "model_id": "productioncell_arms2",
+    "model_path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+    "target_id": "r1",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG_R1",
+    "method_id": "lazy_merge_boundaries",
+    "merge": "boundaries",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "otf",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "true",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false",
+      "mtsa.otf.contractMerge": "boundaries"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=50563fc45bd4d3870a48318944a83ccf2bcf4676",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.contractMerge=boundaries",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG_R1",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e1_mac/pass1_1200s/runs/productioncell_arms2__r1__rep01__lazy_merge_boundaries/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e1_mac/pass1_1200s/runs/productioncell_arms2__r1__rep01__lazy_merge_boundaries/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "attempt": "pass1_1200s",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "source_commit": "50563fc45bd4d3870a48318944a83ccf2bcf4676",
+  "input_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+  "platform": "mac",
+  "pid": 23883,
+  "finished_utc": "2026-09-29T01:14:56.840545+00:00",
+  "elapsed_monotonic_seconds": 13.150154791,
+  "exit_code": 0,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "f3f1f19cc766a60f98bc3a2e54298a99139e5bfbbc94113195a9e7ca1c8872fb",
+      "bytes": 82
+    },
+    "transitions": {
+      "sha256": "13a35dfff980e2d435272afff7b9a6fd3ff9063d0f1290fa3c8a44c51c9f2a3e",
+      "bytes": 184
+    },
+    "output": {
+      "sha256": "68617dd37dfc2c061211f7cbe4985cccbf140d94c772b1122d3e583dba17e8b1",
+      "bytes": 132942
+    }
+  }
+}

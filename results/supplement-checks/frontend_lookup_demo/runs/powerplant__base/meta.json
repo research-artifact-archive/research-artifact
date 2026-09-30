@@ -1,0 +1,45 @@
+{
+  "case": "powerplant__base",
+  "model": "powerplant",
+  "target": "base",
+  "attempt": 1,
+  "status": "EXPORTED",
+  "input": "Implementation/Experiment/Models/PowerPlant_FG.lts",
+  "input_sha256": "580c2eeb4589d83a4e8177f5339c43d1186707a8ad3601628cb66bf983f1201e",
+  "jar": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+  "java_version": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)",
+  "exporter_sha256": "979556a698754c468553072f588bad96bea715295b6b00c29355f4147577a3a2",
+  "command": [
+    "/opt/homebrew/opt/openjdk@17/bin/java",
+    "-Xmx2g",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.evaluation.enabled=false",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/frontend_lookup_demo/classes:FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.lts.FrontendLookupExport",
+    "Implementation/Experiment/Models/PowerPlant_FG.lts",
+    "UpdCont_OTF_FG",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/frontend_lookup_demo/runs/powerplant__base/lookup.json"
+  ],
+  "timeout_seconds": 120,
+  "aggregate_deadline_utc": "2026-09-22T09:25:00+00:00",
+  "started_at_utc": "2026-09-22T08:44:25.764225+00:00",
+  "exit_code": 0,
+  "elapsed_context_only_not_performance_data": 0.73197370901471,
+  "finished_at_utc": "2026-09-22T08:44:26.496653+00:00",
+  "saved_files": {
+    "lookup.json": {
+      "bytes": 9959,
+      "sha256": "95c7102ae5141ae2b85eef2d81dd056220d43863771a7c1d5ef19ea676262681"
+    },
+    "stderr.txt": {
+      "bytes": 78,
+      "sha256": "60aa7c60f598db2563322c1a609d2cc3f51c4e87864750e07543ab52fb2bbe09"
+    },
+    "stdout.txt": {
+      "bytes": 6744,
+      "sha256": "4a4b249835e68db2f1a672c8aa9696f29340acea66b8d5a09ab8c1277caf24a5"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-09-29T16:43:13.147703+09:00",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "canary/validate_canary.py",
+        "canary/v1"
+      ],
+      "exit_code": 0,
+      "output": "{\"status\": \"PASS\", \"inputs\": 30, \"issues\": []}\n"
+    },
+    {
+      "job": "n02_m01_fine_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "n02_m01_merged_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "n02_m01_all_lazy",
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "finished_at": "2026-09-29T16:43:14.988738+09:00",
+  "status": "PASS"
+}

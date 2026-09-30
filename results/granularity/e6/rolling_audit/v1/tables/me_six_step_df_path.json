@@ -1,0 +1,155 @@
+{
+  "source": "raw/series/fine_none_df/certificate.json",
+  "sha256": "6c2b9db8f891f325509bc1dff8a8968b7e84f8c586681c74b4ce90bebf57e2b1",
+  "events": 6,
+  "path": [
+    {
+      "step": 0,
+      "event": "initial",
+      "state_id": 11,
+      "physical": [
+        [
+          "OLD",
+          "ready"
+        ],
+        [
+          "OLD",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready2_old1_new0"
+      },
+      "rank": 6,
+      "goal": false
+    },
+    {
+      "step": 1,
+      "event": "rho_1",
+      "state_id": 0,
+      "physical": [
+        [
+          "NEW",
+          "booting"
+        ],
+        [
+          "OLD",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready1_old1_new0"
+      },
+      "rank": 5,
+      "goal": false
+    },
+    {
+      "step": 2,
+      "event": "ready_1",
+      "state_id": 9,
+      "physical": [
+        [
+          "NEW",
+          "ready"
+        ],
+        [
+          "OLD",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready2_old1_new0"
+      },
+      "rank": 4,
+      "goal": false
+    },
+    {
+      "step": 3,
+      "event": "rho_2",
+      "state_id": 2,
+      "physical": [
+        [
+          "NEW",
+          "ready"
+        ],
+        [
+          "NEW",
+          "booting"
+        ]
+      ],
+      "testers": {
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready1_old1_new0"
+      },
+      "rank": 3,
+      "goal": false
+    },
+    {
+      "step": 4,
+      "event": "ready_2",
+      "state_id": 7,
+      "physical": [
+        [
+          "NEW",
+          "ready"
+        ],
+        [
+          "NEW",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready2_old1_new0"
+      },
+      "rank": 2,
+      "goal": false
+    },
+    {
+      "step": 5,
+      "event": "start_audit_new",
+      "state_id": 4,
+      "physical": [
+        [
+          "NEW",
+          "ready"
+        ],
+        [
+          "NEW",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_new": "unlogged",
+        "audit_old": "logged",
+        "availability_audit_coverage": "ready2_old1_new1"
+      },
+      "rank": 1,
+      "goal": false
+    },
+    {
+      "step": 6,
+      "event": "stop_audit_old",
+      "state_id": 6,
+      "physical": [
+        [
+          "NEW",
+          "ready"
+        ],
+        [
+          "NEW",
+          "ready"
+        ]
+      ],
+      "testers": {
+        "audit_new": "unlogged",
+        "availability_audit_coverage": "ready2_old0_new1"
+      },
+      "rank": 0,
+      "goal": true
+    }
+  ]
+}

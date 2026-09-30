@@ -1,0 +1,35 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=11in,paperheight=8.5in,margin=0.6in]{geometry}
+\usepackage{booktabs,array}
+\usepackage[T1]{fontenc}
+\pagestyle{empty}
+\begin{document}
+\section*{E6 completed-core comparison (interim)}
+All entries are observed in the fixed E1 campaign. Each row is a selected illustrative parameter tuple; the complete rows and all outcomes are preserved in the family CSVs. Policy uses boundary merging; other rows use transfer merging. These are constructed examples inspired by operational procedures, not production reproductions.
+
+\bigskip
+\noindent
+% Derived from completed E6 raw. Mac timings deliberately omitted.
+\begin{tabular}{llrrrrl}
+\toprule
+Family & Parameters & Lazy states & Full states & Merge states & Rank & Fine / merged \\
+\midrule
+Rolling & n=2, m=1 & 5 & 8 & 2 & 4 & WIN / LOSS \\
+Rolling & n=6, m=1 & 13 & 256 & 2 & 12 & WIN / LOSS \\
+Canary & n=2, m=1 & 21 & 21 & 17 & 6 & WIN / LOSS \\
+Canary & n=6, m=1 & 293 & 3645 & 4097 & 18 & WIN / LOSS \\
+Policy & rule_pairs=2 & 24 & 129 & 16 & 6 & WIN / LOSS \\
+DB-Rolling & n=3, m=2 & 12 & 96 & 6 & 8 & WIN / LOSS \\
+DB-Rolling & n=3, m=3 & 12 & 12 & 6 & -- & LOSS / LOSS \\
+Rolling+Audit & n=2, m=1, audit_pairs=1 & 30 & 107 & 22 & 7 & WIN / LOSS \\
+\bottomrule
+\end{tabular}
+% Rank is the returned Lazy certificate bound; loss-region sizes are in results_index.csv.
+% Policy uses boundaries merge; the other rows use transfers merge.
+
+\bigskip
+The rank column is the returned Lazy certificate bound. Direct-Full returns rank~5 for Policy and rank~6 for Rolling+Audit. A losing-certificate size is not the maximal losing region. The no-slack DB row is retained as a negative control. Mac timings are omitted from this compact table.
+
+\medskip
+The current complete main comparisons comprise 33 WIN/LOSS witnesses, 1 LOSS/LOSS control, and 0 WIN/WIN pairs. The distinct Policy-transfer and Audit-boundary WIN/WIN controls are reported separately. The index counts one main comparison per family and parameter tuple, rather than counting generated-coarse duplicates or solver runs as independent examples.
+\end{document}

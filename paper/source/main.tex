@@ -1,0 +1,691 @@
+% !TeX program = xelatex
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+
+\setcopyright{none}
+\copyrightyear{2027}
+\acmYear{2027}
+\acmDOI{}
+\acmConference[FSE 2027]
+  {The ACM International Conference on the Foundations of Software Engineering}
+  {July 12--16, 2027}
+  {Shenzhen, China}
+\acmISBN{}
+% acmsmall conference mode: match upstream acmConference header/footer selection.
+% Compatibility for installed acmart 2.19; no journal volume/article is assigned.
+\makeatletter
+\@ACM@journal@bibstrip@or@togfalse
+\makeatother
+\settopmatter{printfolios=true}
+
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{array}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning,arrows.meta}
+\vbadness=10000
+
+\usepackage{iftex}
+\ifXeTeX\else
+  \PackageError{main}{This manuscript requires XeLaTeX}%
+    {Select XeLaTeX as the compiler, or keep the supplied latexmkrc file.}
+\fi
+\AtBeginDocument{%
+  \providecommand\BibTeX{{Bib\TeX}}}
+
+\newcommand{\Post}{\mathsf{Post}}
+\newcommand{\Safe}{\mathsf{Safe}}
+\newcommand{\Goal}{Q_{\mathrm{goal}}}
+\newcommand{\rank}{\mathsf{rk}}
+\newcommand{\ActT}{\mathsf{ActiveM}}
+\newcommand{\Init}{\mathsf{Init}}
+\newcommand{\Reach}{\mathsf{Reach}}
+\newcommand{\SuccSet}{\mathsf{Succ}}
+\newcommand{\En}{\mathsf{En}}
+\newcommand{\Cand}{\mathsf{Next}}
+\newcommand{\Sigmauc}{\Sigma_{\mathrm{uc}}}
+\newcommand{\Sigmac}{\Sigma_{\mathrm{c}}}
+\newcommand{\SigmaN}{\Sigma_{\mathrm{N}}}
+\newcommand{\SigmaU}{\Sigma_{\mathrm{upd}}}
+\newcommand{\CLnew}{\mathsf{CL}^{\mathrm{new}}}
+\newcommand{\ustart}[1]{\mathsf{start}(#1)}
+\newcommand{\ustop}[1]{\mathsf{stop}(#1)}
+
+\input{build/generated/rq3-ad-numbers.tex}
+\input{build/generated/legacy-fidelity-stats.tex}
+\input{build/generated/rq3-censored-stats.tex}
+\input{build/generated/rs-counts.tex}
+\input{build/generated/editorial-numbers.tex}
+\input{build/generated/legacy-reference-numbers.tex}
+\input{build/generated/travel-editorial-numbers.tex}
+\input{build/generated/contract-size-macros.tex}
+\input{build/generated/ext-budget-macros.tex}
+\input{build/generated/base-v3-evidence-macros.tex}
+\input{build/generated/base-v3-fixed-macros.tex}
+\input{build/generated/base-v3-ext-seven-macros.tex}
+\begin{document}
+\title{Fine-Grained Dynamic Update Controller Synthesis}
+
+\author{Anonymous Author(s)}
+\renewcommand{\shortauthors}{Anonymous Author(s)}
+
+\begin{abstract}
+Verified old and new controllers leave their connecting update unchecked. Components may change at different times, under requirements with different lifetimes. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) expresses these choices as a contract between fixed controllers. A finite reachability game and lazy exploration return a policy, progress rank and handover targets, or a losing-region certificate. On \ApplicationContracts{} contracts from \ApplicationModels{} DUCS-derived inputs, lazy exploration decides \LazyDecisions{} within a 1,200~s tool-run limit and 64~GiB Java heap; full-graph exploration in the same implementation decides \DirectFullDecisions{}. Witnesses separate local from simultaneous transfer and lazy from full-graph exploration. Alternative priorities can be faster and one contract is unrealizable. All three on-the-fly variants decide only \TravelOTFDecisions{}/\TravelSettings{} Travel settings, versus \TravelFullDecisions{} for full-graph exploration. Guarantees cover the supplied game; execution and requirement interpretation have separate assumptions.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10011007.10011074.10011092</concept_id>
+  <concept_desc>Software and its engineering~Software evolution</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Software evolution}
+\keywords{dynamic software updating, discrete-event controller synthesis, supervisory control, on-the-fly synthesis}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}\label{sec:example}
+Updating software while it remains in service must preserve work already in progress~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. A production cell may need new station software while a workpiece is in the line; a workflow engine may need new requirements while cases are running. Stopping and emptying the system would interrupt that work. Verifying the old and new controllers separately leaves their connecting update unchecked: components change at different times, requirements begin or expire, and the update can be requested in any state reached during normal operation.
+
+Kubernetes rollouts and MongoDB's Community-to-Enterprise replica-set migration replace replicas in stages, waiting for readiness or rejoining~\cite{e6_kubernetes_deployments,e6_mongodb_enterprise_replica_set}.
+These practices motivate contracts that distinguish local replacement, possible outcomes and requirement lifetimes; Section~\ref{sec:rq2} tests constructed abstractions of these mechanisms.
+
+Dynamic Update Controller Synthesis (DUCS) synthesizes update and subsequent control~\cite{Nahabedian2016SEAMS,Nahabedian2020}. Its inputs relate old to new environment states and stop/start whole requirement sets; intermediate stages can be encoded in the new environment. FG-DUCS instead takes local component changes (transfers) and individual requirement lifetimes, and synthesizes their interleaving with normal operations.
+
+Old and chosen new controllers remain fixed. The engineer supplies allowed transfers and outcomes, requirements before/during/after transfer, permitted boundary orders and handover targets. FG-DUCS returns a policy selecting operations from the current state, or evidence that no policy satisfies this contract. Every reachable old state and every possible outcome must finish safely.
+
+Our contributions are this contract and finite reachability game; a terminating, sound and complete lazy procedure with success/failure evidence checkable relative to shared successor and endpoint predicates; and checks and measurements addressing the obstacles below. On \ApplicationContracts{} contracts from \ApplicationModels{} adapted inputs, lazy exploration decides \LazyDecisions{} within budget, versus \DirectFullDecisions{} for full construction; failures and faster alternatives remain reported. Game guarantees concern active monitors and finite completion; requirement interpretation and execution need Section~\ref{sec:interpretation-execution}'s additional conditions.
+
+\FloatBarrier
+\section{Motivating Example}
+\label{sec:mechanism-boundary}
+Consider a production cell with two stations, $A$ and $B$, passing one workpiece between them~\cite{Lewerentz1995ProductionCell,Nahabedian2020}. Both stations receive new versions, with inspection added at $B$. The old requirement (rule) forbids inspection; the new quality requirement requires inspection before the workpiece leaves $B$. The upgrade must continue the work in progress, from either station holding the workpiece.
+
+Each station is replaceable only while empty. Both are never empty together, so replacing everything at once has no safe moment. The policy in Figure~\ref{fig:update-overview} replaces the empty station first and uses ordinary movement to free the other. It shows one way to finish from either starting situation.
+
+The contract requires the new requirement to start before the old one stops, leaving no gap. On the upper path, $B$ holds the workpiece when the new requirement starts: inspection becomes pending. Moving the workpiece out would violate the new requirement; inspecting it would violate the old requirement. Replacing the empty $A$ remains possible, but cannot clear this inspection obligation. The shown policy stops the old requirement, inspects, then finishes replacement. On the lower path, the workpiece leaves $B$ before the new requirement starts, so the policy finishes without inspection. Handover---passing control to the new controller---requires no inspection to be pending.
+
+\input{figures/update_overview.tex}
+
+Inspection leaves the workpiece at $B$ and remains enabled after it has been inspected. Repeating it forever would obey both currently active requirements but never complete replacement. A correct policy must choose a finite route to handover, not just avoid requirement violations. Other finite routes are possible: ordinary movements permit either fixed replacement order.
+
+The engineer provides the verified controllers, both station versions and the conditions below; FG-DUCS returns the missing policy or evidence that none exists. Section~\ref{sec:cell-finite} checks the policy; S1 gives the finite LTSs.
+\begin{center}\small
+\begin{tabular}{@{}lp{.73\linewidth}@{}}\toprule
+Replacement & Replace a station only when empty.\\
+Old requirement & Forbid inspection until this requirement stops.\\
+New requirement & Inspect before leaving $B$; start this requirement before stopping the old one.\\
+Interval requirement & Keep exactly one workpiece throughout the update.\\
+Handover & Finish all changes with no inspection pending and a matching new-controller state.\\\bottomrule
+\end{tabular}
+\end{center}
+
+Three obstacles organize the rest of the paper. \textbf{L1: local changes may succeed when simultaneous replacement cannot}; Section~\ref{sec:cell-finite} proves this existence result and RQ2 checks granularity witnesses. \textbf{L2: every starting state and outcome must finish safely}; Theorem~\ref{thm:correctness} proves the policy guarantee and RQ1 checks its implementation. \textbf{L3: additional components can multiply the intermediate version combinations}; Section~\ref{thm:lazy-separation} proves an exploration gap on a constructed family, and RQ3 measures savings and limits on the adapted models and scaling families.
+
+The cell's events are all controllable. Adversarial outcomes in L2 appear in Railcab's transfers (Section~\ref{sec:railcab-policy}); the scaling cost in L3 appears in Section~\ref{thm:lazy-separation}'s component family, not in this cell.
+
+\FloatBarrier
+\section{Defining an Update Contract}
+\label{sec:formalization}
+
+An update contract fixes the component transfers, active requirements and handover conditions. The game makes every permitted event and its outcomes explicit.
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}\toprule
+Notation & Meaning\\\midrule
+$g_i,\;\rho_i$ & Local transfer relation and its one-shot transfer event\\
+$R^{\rm old},R^{\rm new},R^{\rm upd}$ & Old, new and interval requirements\\
+$\iota_r,\;Z_{\rm load}$ & Monitor initializer and supplied handover targets\\
+$Q_0,\;\Post,\;\Goal$ & All entry states, complete successors and goals\\
+$\sigma,\;\rank,\;\kappa$ & Policy, progress rank and handover map\\\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsection{Supplied Choices}
+
+\paragraph{Finite LTSs and safety monitors.}
+An LTS $\mathcal L=(S,\Sigma_{\mathcal L},\delta,s^0)$ has nondeterministic transitions $\delta:S\times\Sigma_{\mathcal L}\to2^S$. Partition events as $\Sigma=\Sigmauc\uplus\Sigmac$: controllers may disable controllables but cannot select outcomes or suppress uncontrollable (UC) events. A synchronous-product event requires a transition in every component whose alphabet contains it; other components retain their state~\cite{MageeKramer2006}.
+A monitor is an automaton that checks a requirement as events occur. Requirement $r$ has a total deterministic monitor $t_r=(M_r,\Sigma,\eta_r,m_r^0,F_r)$ with absorbing errors for violating prefixes~\cite{AlpernSchneider1985,KupfermanVardi2001}. The empty monitor product has one non-error state. Monitors observe labels; policies also observe successor component states.
+
+\label{def:fg-inputs}
+\label{def:update_plan}
+\paragraph{Components and transfers.}
+For each $i\in I$, let $e_i^{\mathrm{old}},e_i^{\mathrm{new}}$ be the pre-update and post-update components and let $g_i\subseteq S_{e_i^{\mathrm{old}}}\times S_{e_i^{\mathrm{new}}}$ be their state-transfer relation.
+  Define $g_i(s)=\{s'\mid(s,s')\in g_i\}$. The supplied $g_i$ includes every modeled transformation outcome. Let $E^v=\mathop{\parallel}_{i\in I}e_i^v$.
+
+\paragraph{Requirements and activation.}
+Let pairwise-disjoint $R^{\mathrm{old}},R^{\mathrm{new}},R^{\mathrm{upd}}$ contain the pre-update, post-update, and update-interval safety requirements, respectively.
+For each $r\in R^{\mathrm{new}}\cup R^{\mathrm{upd}}$, the input supplies a partial \emph{monitor-initialization map} $\iota_r$ from version-tagged component tuples to $M_r\setminus F_r$. Its domain specifies where activation is allowed; in the cell, initialization records whether inspection is pending.
+Residual soundness (RS, Section~\ref{sec:monitor-meaning}) relates the installed state's continuations to the declared activation histories. For $r\in R^{\mathrm{upd}}$, $\operatorname{dom}\iota_r$ includes every reachable old component state.
+
+\paragraph{Endpoints and handover targets.}
+\label{def:endpoint_controllers}
+For $v\in\{\mathrm{old},\mathrm{new}\}$, the supplied finite controller $C^v$ preserves uncontrollables and makes $E^v\parallel C^v$ deadlock-free and satisfy $R^v$. Hiding controller auxiliary events leaves observation alphabet $\bigcup_i\Sigma_{e_i^v}$; the union over both versions is the ordinary alphabet $\SigmaN$. Write $\Reach$ for initial-state reachability and
+\[
+\mathsf{CL}^v=E^v\parallel C^v\parallel\mathop{\parallel}_{r\in R^v}t_r.
+\]
+Monitors are passive: every endpoint transition originates in $E^v\parallel C^v$; a monitor only updates on that label and adds no enabled event.
+The input supplies nonempty, checked targets $Z_{\mathrm{load}}\subseteq\Reach(\CLnew)$ with component, controller and new-monitor states. FG-DUCS keeps the supplied new controller fixed; the evaluation admits as targets all of $\Reach(\CLnew)$. For a supplied maximally permissive controller this is its reachable winning region, equal to the full region only if all winning states are represented and reachable.
+
+\paragraph{Update commands and order.}
+The set of update events, each executed exactly once, is
+  \begin{equation}
+  \SigmaU=
+    \{\rho_i\mid i\in I\}
+    \cup\{\ustop{r}\mid r\in R^{\mathrm{old}}\}
+    \cup\{\ustart{r}\mid r\in R^{\mathrm{new}}\}.
+  \end{equation}
+These distinct controllable events transfer a component, stop an old monitor or start a new one, respectively. They are disjoint from ordinary events $\SigmaN$:
+$\Sigma=\SigmaN\uplus\SigmaU$ and $\SigmaU\subseteq\Sigmac$. Each transfer event $\rho_i$ is one atomic model transition: the controller chooses the update, but cannot choose its $g_i$ outcome.
+They require uncontrollable quiescence (Section~\ref{sec:game-rules}).
+
+An optional strict partial order $\prec\ \subseteq\SigmaU\times\SigmaU$ expresses precedence among update operations. For a pending-event set $P$, event $a$ is order-enabled exactly when $a\in P$ and every $a'\prec a$ has left $P$.
+Monitors self-loop on update events that they do not specify.
+\paragraph{Eligible contracts.}
+Eligibility requires finite, consistently typed states/events and consistent controllability; total deterministic monitors with absorbing errors; well-typed transfers and non-error initializers covering every interval entry; and strict partial-order dependencies. Both endpoints must be safe, deadlock-free and uncontrollable-preserving, with controller alphabets containing every environment label; handover targets must be nonempty and reachable. Separately, the modeler declares admissible activation histories $\mathsf H_r(\xi)$ and justifies RS (Section~\ref{sec:monitor-meaning}). Histories parameterize interpretation, not the game solver; eligibility does not check their completeness. Interval-wide obligations belong to $R^{\mathrm{upd}}$ and post-handover obligations to $R^{\mathrm{new}}$; $\ustart{r^{\mathrm{new}}}\prec\ustop{r^{\mathrm{old}}}$ enforces overlap.
+
+\Needspace{4\baselineskip}
+\subsection{States, Transitions, and Completion}
+\label{sec:game-rules}
+
+\paragraph{The induced game.}
+\label{def:configuration}
+\label{def:init}
+\emph{States and all entry states.}
+An update state $q=(\xi,\mu,P)$ records each component's version/state $\xi(i)=(v,s)$ with $s\in S_{e_i^v}$, each monitor's state $\mu(t_r)\in M_r\cup\{\bot\}$ ($\bot$ means inactive), and pending commands $P\subseteq\SigmaU$.
+Here $\rho_i\in P$ exactly when component $i$ is old. Old monitors remain active until their stop leaves $P$; new monitors become active when their start leaves $P$; update monitors are always active. 
+
+Admission $\Init(z)$ inherits $z$'s component and old-monitor states, initializes update monitors through $\iota_r(\xi)$, leaves new monitors inactive and sets $P=\SigmaU$. The policy replaces $C^{\mathrm{old}}$ and discards its internal state and scheduling restrictions. Old monitors remain until their stops; undeclared objectives, including old liveness, are not preserved. The entry set is
+\begin{equation}
+ Q_0=\{\Init(z)\mid
+ z\in\Reach(\mathsf{CL}^{\mathrm{old}})\}.
+\label{eq:initial}
+\end{equation}
+Requiring all reachable old states makes admission independent of waiting for a favorable old state. Selecting an admission predicate would be a different contract. In the cell, $Q_0=\{q_A^0,q_B^0\}$ distinguishes the two holders.
+\par\noindent\emph{Four kinds of induced transitions.}
+\label{def:successor}
+For $\xi(i)=(v,s)$, component $i$ uses $e_i^v$. The active-component product determines enabled ordinary uncontrollables $U(q)$, including those with unsafe outcomes, independently of updates and goals. For every $a\in\SigmaU$, impose
+\begin{equation}
+ U(q)\ne\emptyset\quad\Longrightarrow\quad\Post(q,a)=\emptyset.
+ \label{eq:nonpreemption}
+\end{equation}
+Here, \emph{uncontrollable quiescence} means that no modeled uncontrollable event is enabled. It differs from transaction-based quiescence~\cite{KramerMagee1990Quiescence} and tranquility~\cite{VandewoudeEtAl2007Tranquility}; Section~\ref{sec:runtime-boundary} states the additional execution assumptions. Global quiescence is an explicit modeling restriction, not a consequence of local state transfer. This precondition restricts update events only. Ordinary controllables may still coexist with uncontrollables, although suppressing them preserves winning decisions (Lemma~\ref{lem:uc-priority}). $\Post(q,a)$ contains exactly the successors below; unmentioned coordinates remain unchanged. ``Advance'' applies $\mu'(t_r)=\eta_r(\mu(t_r),a)$ to the specified active monitors.
+
+\begin{description}
+  \item[Ordinary event $a\in\SigmaN$.]
+  If $a$ belongs to the local event set of at least one active component and every active component having $a$ can transition, take every synchronous-product outcome and advance every active monitor.
+
+  \item[Component update $\rho_i$.]
+  If $U(q)=\emptyset$, order-enabled, and $\xi(i)=(\mathrm{old},s)$, set $\xi'(i)=(\mathrm{new},s')$ for each $s'\in g_i(s)$, delete $\rho_i$ from $P$, and advance every active monitor.
+
+  \item[Requirement deactivation $\ustop{r}$.]
+  If $U(q)=\emptyset$ and order-enabled, advance every active monitor except $t_r$, retain inactive monitors at $\bot$, set $\mu'(t_r)=\bot$, and delete $\ustop{r}$ from $P$; $t_r$ does not observe it.
+
+  \item[Requirement activation $\ustart{r}$.]
+  If $U(q)=\emptyset$, order-enabled, and $\xi\in\operatorname{dom}\iota_r$, advance every active monitor, retain other inactive monitors at $\bot$, install $\mu'(t_r)=\iota_r(\xi)$, and delete $\ustart{r}$ from $P$; $t_r$ begins online observation afterward.
+\end{description}
+On the upper cell path, $\mathsf{start}$ preserves old/empty $A$ and new/holding $B$, installs inspection-pending in the new monitor and removes itself from $P$. The old and interval monitors stay active.
+
+If a precondition is false, the successor set is empty; every nondeterministic outcome is included and environment-chosen.
+Let $\mathcal Q$ contain every state reachable from $Q_0$ through these transitions. 
+\par\noindent\emph{Safety and handover-ready goals.}
+\label{def:safe_goal}
+An update state $q=(\xi,\mu,P)$ is safe, written $\Safe(q)$, exactly when every active monitor is outside its error states.
+For $P=\emptyset$ and $z\in Z_{\mathrm{load}}$, write $q\sim z$ when component states (without version tags) and all new-monitor states agree. The handover map $\kappa$ selects such a full endpoint state $z$. Goals are
+\begin{equation}
+\Goal=\{q=(\xi,\mu,\emptyset)\in\mathcal Q\mid
+\Safe(q)\land U(q)=\emptyset\land\exists z\in Z_{\mathrm{load}}:q\sim z\}.
+\label{eq:goal}
+\end{equation}
+At completion, all components and active endpoint monitors are new. Interval obligations end at the goal; new monitors continue after handover and must match. Compatible targets can differ in later behavior while satisfying the endpoint assumptions. At a quiescent goal, handover disables ordinary controllables and installs the controller state in $\kappa(q)$, outside $\Sigma$ and the update rank; no uncontrollable can compete. A matching state with an enabled uncontrollable is not yet a goal.
+\par\noindent\emph{State-dependent policies and finite completion.}
+\label{def:strategy}
+A memoryless update policy is a function
+$\sigma:\mathcal Q\setminus\Goal\to2^{\Sigmac}$ selecting only events with nonempty successor sets.
+
+The possible next states under this policy are
+\begin{equation}
+ \SuccSet_\sigma(q)=
+ \bigcup_{u\in U(q)}\Post(q,u)
+ \ \cup\
+ \bigcup_{a\in\sigma(q)}\Post(q,a).
+\label{eq:strategy-successors}
+\end{equation}
+The environment chooses any uncontrollable and any permitted-event outcome. An uncontrollable self-loop blocks updates by Equation~\eqref{eq:nonpreemption} and permits a losing infinite run. The returned policy retains one controllable at a quiescent state.
+
+Let $\Reach_\sigma(Q_0)$ be the policy closure from $Q_0$, stopping at goals. 
+
+\emph{Runs, winning, and witnesses.}
+A run follows the policy successors and stops at a goal. It is \emph{maximal} if infinite or ending at a goal or a state without successors. A single policy $\sigma$ is winning for an FG-DUCS instance if, from every $q_0\in Q_0$,
+(i) every reachable update state is safe, (ii) every reachable non-goal state has a successor, and
+(iii) every maximal update run reaches $\Goal$ after finitely many events.
+This \emph{finite completion} counts observed transitions and assumes no fairness.
+
+A \emph{progress-ranking function} for a winning policy is $\rank:\Reach_\sigma(Q_0)\to\mathbb N$, with value 0 at goal states and satisfying $\rank(q')<\rank(q)$ for every non-goal state $q$ and every
+$q'\in \SuccSet_\sigma(q)$.
+
+\paragraph{The FG-DUCS problem.}
+The input is an eligible contract: fixed endpoints, paired components and local transfers, safety monitors and initializers, update precedence and handover targets. Decide whether one policy safely completes the induced game from every entry state under every permitted event and outcome. Return $(\sigma,\rank,\kappa)$ covering all $Q_0$, or a losing-region certificate.
+
+
+\subsection{Checking the Cell}
+\label{sec:cell-finite}
+S1 tabulates the complete component, controller and monitor LTSs and the policy: ordinary events $m_A,m_B,j$ move to $A$, move to $B$ and inspect at $B$, and all events, including the one-shot transfers $\rho_A,\rho_B$ and requirement boundaries $\mathsf{start}\prec\mathsf{stop}$, are controllable.
+With empty-only transfers $g_A=g_B=\{(e,e)\}$ and exactly one workpiece, the two paths $\rho_B;m_B;\mathsf{start};\mathsf{stop};j;\rho_A$ from $A$ holding and $\rho_A;m_A;\mathsf{start};\mathsf{stop};\rho_B$ from $B$ holding have safe singleton outcomes: start installs inspection-pending if $B$ holds and inspection-clear otherwise, stop removes the inspection ban, and both paths finish with new versions and clear inspection at matching supplied targets.
+Their remaining lengths $6,\ldots,0$ and $5,\ldots,0$ strictly decrease, proving finite completion from both reachable old states (13 policy states and 11 edges).
+Replacing the two transfer commands by one with relation $g_A\times g_B$, with endpoints and requirements fixed, requires both stations empty, but every ordinary move, inspection and requirement boundary preserves exactly one workpiece; that command can never execute, stays pending and makes every goal unreachable.
+
+Section~\ref{sec:algorithm} proves game guarantees; Section~\ref{sec:interpretation-execution} states additional interpretation and execution assumptions.
+
+\section{Certifying On-the-Fly Synthesis}
+Lazy (FG-DUCS-OTF) avoids constructing the entire reachable game, while retaining every outcome of each queried event and every uncontrollable choice. It combines finite reachability reasoning with on-the-fly product exploration~\cite{Cimatti1998StrongPlanning,TripakisAltisen1999,CiolekEtAl2023OTFDCS}.
+\label{sec:algorithm}
+
+A \emph{bucket} contains every outcome in $\Post(q,a)$; emptiness means the event is disabled. With uncontrollables enabled, every UC outcome must win. Otherwise, one nonempty controllable bucket suffices if all its outcomes win. Lazy generation postpones other choices; Lemma~\ref{lem:uc-priority} permits omitting controllable queries at UC-enabled states.
+
+
+\subsection{Lazy Successor Generation}
+
+Algorithm~\ref{alg:otf} builds a reachability attractor on the fly~\cite{CassezEtAl2005TimedGames}. It tracks discovered states $V$, states with all UC candidates queried $X\subseteq V$, and proved winners $W$. States in $X$ may retain unqueried controls; $W$ need not contain all winners.
+
+\paragraph{Discover.}
+Queries add every outcome to $V$. Goals enter $W$ at rank zero; safe non-goals enter $\mathsf{Open}$, served before retries.
+
+\paragraph{Expand or retry.}
+Expansion queries all UC candidates first. If none is enabled, it queries controls through the next nonempty bucket or exhaustion, retaining an unfinished cursor in $\mathsf{Retry}$. Candidates include local events and order-enabled pending commands, covering every enabled event; any fixed finite order is correct.
+
+\paragraph{Promote.}
+An expanded safe state's \emph{proving set} is the complete UC-successor union if UC is enabled, or one nonempty control bucket at quiescence. When this nonempty set lies in $W$, the state wins with fixed rank one above its maximum successor rank. Reverse incidences notify predecessors of new winners and trigger reconsideration of recorded buckets. Failure requires exhausted candidates and a promotion fixed point.
+
+On the cell's $A$-holding path, promotion works backward from the rank-zero goal. Inspection self-loops provide no lower-rank successor; nondeterministic buckets require every outcome to win.
+
+Once all entries win, extraction retains one lower-rank control bucket at each reached quiescent non-goal and no controls elsewhere. Its choice can differ from promotion and need not yield shortest paths.
+
+
+
+\par
+
+\SetAlgoNlRelativeSize{-1}
+\SetAlgoRefRelativeSize{-1}
+\begin{algorithm}[!htbp]
+\caption{Lazy}
+\label{alg:otf}
+\footnotesize
+\KwIn{Typed update contract (Section~\ref{sec:formalization})}
+\KwOut{$(\sigma,\rank,\kappa)$ or $(\textnormal{no solution},L)$}
+$V\leftarrow Q_0$; $X,\mathsf{Retry}\leftarrow\emptyset$; $W\leftarrow V\cap\Goal$\;
+$\mathsf{Open}\leftarrow\{q\in Q_0\mid\Safe(q)\land q\notin\Goal\}$; set $\rank(q)\leftarrow0$ for $q\in W$\;
+\While{true}{
+  Insert queued goals into $W$ with rank zero, once per goal\;
+  \While{some safe $q\in X\setminus W$ has a nonempty proving set $S\subseteq W$ as defined under Promote}{
+    Retain $S$; set $\rank(q)\leftarrow1+\max_{s\in S}\rank(s)$; add $q$ to $W$ and remove it from $\mathsf{Retry}$\;
+    Update reverse-incidence counters and reconsider affected predecessors\;
+  }
+  \lIf{$Q_0\subseteq W$}{\Return $(\sigma,\rank|_{\Reach_\sigma(Q_0)},\kappa)$ constructed from the goal witnesses and retained lower-rank choices}
+  \eIf{$\mathsf{Open}\neq\emptyset$}{
+    Remove $q$ from $\mathsf{Open}$, add it to $X$, and query all uncontrollable candidates\;
+    \eIf{a nonempty uncontrollable successor set exists}{
+      Clear $q$\textnormal{\textquotesingle}s controllable cursor\;
+    }{
+      Initialize $q$\textnormal{\textquotesingle}s controllable cursor; query to the next nonempty bucket or exhaustion\;
+    }
+    Insert $q$ into $\mathsf{Retry}$ iff $q\notin W$ and its cursor has remaining candidates\;
+  }{
+    \lIf{$\mathsf{Retry}=\emptyset$}{\Return $(\textnormal{no solution},L\leftarrow V\setminus W)$}
+    Remove $q$ from $\mathsf{Retry}$; query to the next nonempty bucket or exhaustion; reinsert iff $q\notin W$ and its cursor has remaining candidates\;
+  }
+  Queue newly discovered goals for rank-zero insertion; put newly discovered safe non-goals in $\mathsf{Open}$\;
+}
+\end{algorithm}
+\SetAlgoNlRelativeSize{-2}
+\SetAlgoRefRelativeSize{-2}
+
+\FloatBarrier
+\begin{lemma}[UC priority]
+\label{lem:uc-priority}
+Disabling controllable events at UC-enabled states preserves the existence of a policy for finite safe completion.
+\end{lemma}
+\begin{proof}
+A winning policy must handle every UC outcome. Disabling optional controls removes runs and creates no deadlock while a UC event remains enabled. Every surviving maximal run was already a maximal run of that policy, so it still completes safely. Conversely, the reduced policy is admissible in the original game because controllers may disable those events.
+\end{proof}
+
+\begin{lemma}[Search coverage]
+\label{lem:search-coverage}
+At loop boundaries, every state in $X$ has all UC candidates queried; every expanded unproved quiescent safe non-goal with candidates left is in $\mathsf{Retry}$; and every discovered safe non-goal outside $X$ is in $\mathsf{Open}$.
+\end{lemma}
+\begin{proof}
+Initialization at entry states establishes coverage. Discovery queues each new safe non-goal; only expansion removes it, after querying all UC candidates. At quiescence, expansion and retries consume the cursor through a nonempty bucket or exhaustion, retaining every nonwinner with candidates left. Promotion removes only winners. These are the only changes to those sets; finite propagation drains before either return.
+\end{proof}
+
+
+
+\FloatBarrier
+\subsection{Correctness and Certificates}
+The state records versions, monitor memory and pending commands.
+
+\paragraph{Lemma (memoryless policies suffice).}
+If any history-dependent policy wins this finite game, a state-based policy wins.
+\emph{Proof.} Starting with goals, attractor layers add safe states whose nonempty proving sets lie in previous layers. Choosing those sets gives a state-based policy with decreasing layer index. Outside the fixed point, the environment can keep an outcome outside after every history, or force an unsafe state or deadlock, defeating any history-dependent policy (S2).
+
+\paragraph{Lemma (monitor intervals).}
+Along every update prefix, each active monitor is its inherited or initialized state advanced over exactly the labels in its declared active interval.
+\emph{Proof.} Entry inherits old states and initializes interval monitors. Ordinary events and transfers advance all active monitors once. Stop removes its monitor before observation, while others advance. Start advances existing monitors and installs the new one after its boundary. Pending commands enforce one-shot execution and consistent versions/activity. Induction gives the stated interval; safety makes it non-error, and goal matching preserves new-monitor states into the endpoint.
+
+
+
+
+\begin{theorem}[Termination, soundness, and completeness]
+\label{thm:correctness}
+\label{thm:termination}
+\label{thm:soundness}
+\label{thm:completeness}
+For every eligible finite FG-DUCS instance with Equation~\eqref{eq:nonpreemption} and quiescent goals in Equation~\eqref{eq:goal}, Algorithm~\ref{alg:otf} terminates. A returned $(\sigma,\rank,\kappa)$ keeps every active monitor non-error, preserves every uncontrollable event and every outcome of each policy event, reaches $\Goal$ finitely without deadlock, and gives each reached goal a compatible target in $Z_{\mathrm{load}}$ for the supplied game. It returns no solution iff no winning policy covers $Q_0$ in that supplied game.
+\end{theorem}
+
+\begin{proof}
+\emph{Termination.} The finite input induces finitely many states and candidates. Each state is discovered and expanded at most once; each retry consumes a new candidate, and each promotion adds a state to $W$ once. Reverse incidences are processed on those promotions, so every worklist drain is finite. Eventually all entries win or both exploration queues empty.
+
+\emph{Soundness.} Induction on promotions gives complete successor sets with smaller retained ranks: expansion supplies all uncontrollables, or the selected nonempty controllable bucket supplies all outcomes. A queried bucket never changes, and ranks are fixed on first promotion, so this evidence persists. If all entries win, their policy closure is safe and every non-goal has a successor. Strict decrease of the natural-number rank excludes infinite runs; nonempty successors exclude non-goal sinks. Thus every maximal run reaches a goal within its initial rank many events. Goal recognition uses modeled uncontrollable quiescence and supplies each compatible $\kappa(q)$.
+
+The monitor-interval lemma above supplies the interval invariant; goal matching preserves components and new-monitor states into the verified endpoint.
+
+\emph{Completeness.} At failure, promotion has reached its fixed point. An entry lies in $L=V\setminus W$, and $L$ contains no goal. By Lemma~\ref{lem:search-coverage}, empty $\mathsf{Open}$ ensures every safe non-goal in $L$ was expanded. With uncontrollables, complete expansion and exhausted propagation imply an uncontrollable outcome in $L$; otherwise promotion would apply. Without uncontrollables, empty $\mathsf{Retry}$ gives every enabled controllable bucket, each with an outcome in $L$ for the same reason. Against any policy, the environment keeps choosing these outcomes; permitting no event produces a deadlock. The resulting run reaches an unsafe state, deadlocks outside a goal, or remains in $L$ forever. Each contradicts winning. Hence a winning policy rules out failure; termination then forces success. 
+
+The losing-region strategy defeats history-dependent policies after every history; success supplies a ranked state-based policy. Lemma~\ref{lem:uc-priority} preserves winning in the original supplied game.
+\end{proof}
+
+\paragraph{Checking the returned evidence.}
+For WIN, let $D_\sigma=\Reach_\sigma(Q_0)$. The checker requires exactly $D_\sigma$ as the rank domain, safety throughout it and, at every non-goal, enabled selected controls, nonempty successor sets inside it, and strict rank decrease for every outcome. At goals it checks rank zero, UC quiescence and compatible $\kappa(q)\in Z_{\rm load}$, with $\operatorname{dom}\kappa=D_\sigma\cap\Goal$; omitted policy entries are empty.
+
+For LOSS, $L\subseteq\mathcal Q$ must include an entry state and exclude all goals. Every safe $q\in L$ must have some UC outcome in $L$ when UC is enabled; otherwise every enabled controllable must have an outcome in $L$. Unsafe states and non-goal deadlocks lose. These conditions certify search relative to shared $\Post$ and endpoint predicates~\cite{HofmannEtAl2016MuCertificates}; Section~\ref{sec:evaluation} states the implementation trust boundary.
+
+
+\subsection{Exploration Cost and Independent Updates}
+
+With indexed predicates, output-sensitive successors and constant-time bookkeeping, work is linear in discovered states, queried candidates and returned outcomes. Each state is discovered, expanded and promoted at most once; each candidate is queried once and each outcome incidence is processed on promotion. Endpoint preprocessing is excluded. Java also sorts transitions and scans entries (cost model in S2). Direct-Full constructs the same terminalized game first. Worst-case exploration reaches the entire game, potentially exponential in component input.
+
+Every discovered state and nonempty bucket belongs to the Direct-Full game. Both constructions share entries, candidates, $\Post$ and terminal predicates. Inductively, a lazy query starts at a shared nonterminal state and returns exactly outcomes that Direct-Full also generates. Neither expands unsafe states or goals; empty queries add no stored bucket. The next family gives a strict exploration gap, without implying a gap against symbolic representations.
+
+\paragraph{An exponential separation family.}
+\label{thm:lazy-separation}
+For $n\geq1$, take $n$ components, each with one old and one new state and a singleton transfer. Every version and its endpoint controller admit a controllable $tick$ self-loop, making both endpoints deadlock-free. There are no monitors, dependencies or uncontrollables; the unique new endpoint is available for handover. These inputs are eligible. Each update state is the subset of transferred components, and all $2^n$ subsets are reachable; Direct-Full discovers them all.
+
+Under Lazy's default order, pending transfers precede ordinary events in this family, so expansion follows one $n$-step chain. Because $\mathsf{Open}$ precedes $\mathsf{Retry}$, it reaches the sole goal after discovering exactly $n+1$ states. Backward propagation then assigns ranks $0,\ldots,n$ and proves the entry state before any alternative query. The ordinary self-loops are losing choices under finite completion; both methods use the same terminal goal. Thus the separation concerns exploration of one supplied game.
+
+\FloatBarrier
+\section{Interpreting and Executing a Checked Policy}
+\label{sec:interpretation-execution}
+\subsection{Interpreting Requirement Initializers}
+\label{sec:monitor-meaning}
+A requirement initializer assigns monitor memory when that requirement starts. Residual soundness connects this memory to the intended history before activation. Let $\mathsf{SafePref}_r$ be the prefix-closed language of requirement $r$, and let $\mathsf H_r(\xi)$ contain all admissible activation histories consistent with the observed component state $\xi$. A new requirement's history includes start once; its initialized monitor reads only later events. Residual-sound initialization means
+\[
+ \underbrace{\{w:\eta_r^*(\iota_r(\xi),w)\notin F_r\}}_{\text{continuations accepted by the initialized monitor}}
+ \ \subseteq\
+ \underbrace{\bigcap_{h\in\mathsf H_r(\xi)}\{w:hw\in\mathsf{SafePref}_r\}}_{\text{continuations safe after every admitted history}}
+ \tag{RS}\label{eq:residual-soundness}
+\]
+for every $\xi\in\operatorname{dom}\iota_r$. Equality is exact; strict inclusion is conservative and may exclude feasible updates. An empty history set makes the right side universal. Synthesis checks initializer states and domains, but neither infers histories nor establishes their completeness.
+
+\paragraph{Deriving RS in the cell.}
+The declared pre-activation observation retains only $\mathsf{start}$, so $\mathsf H_{r_{\rm inspect}}(\xi)=\{\mathsf{start}\}$ for every admissible cell tuple. The reference monitor starts at $c$, unchanged by start; the right-hand side of RS is therefore its non-error continuation language from $c$. If $B$ is empty, initialization at $c$ gives equality. If $B$ holds, initialization at $d$ is conservative: before the first $j$ or $m_B$, $d$ additionally forbids $m_A$; either $j$ or $m_B$ brings the two initial states to the same state. Thus every word safe from $d$ is safe from $c$, while the single event $m_A$ witnesses strict inclusion. This is a proof for the declared observation scope, not recovery of pre-activation history.
+
+A Boolean event-history variable, or \emph{fluent}, records setting/resetting labels. For initially true $p$, a history making $p$ false then true and the empty history end at the same value but differ under $\Box p$. The evaluation distinguishes three history scopes:
+\par\noindent\textbf{A (activation-safe), for new requirements (NEW):} restrict $\mathsf H_r(\xi)$ to safe pre-activation histories.
+\par\noindent\textbf{E (entry-scoped), for interval requirements (UPD):} start the reference at update entry.
+\par\noindent\textbf{H (history-inclusive, counting pre-activation violations):} count pre-activation violations too; this scope is not claimed. Each chosen scope must match the intended requirement (S3); synthesis alone does not establish that interpretation.
+
+\subsection{Conditions for Execution}
+\label{sec:proof}
+\label{sec:runtime-boundary}
+
+An execution adapter connects the policy to a running system through the following observations and operations.
+
+\paragraph{Linking the phases.}
+\label{def:link}
+The linked model connects disjoint old/update/new phases by entry $z\mapsto\Init(z)$, policy edges $\SuccSet_\sigma$ and handover $q\mapsto\kappa(q)$. Entry and handover add no game event. 
+
+Let $\alpha$ be a phase-disjoint observation map.
+
+\noindent\textbf{A1 (endpoints):} actual endpoint observations map to same-labeled edges of $\mathsf{CL}^v$ and preserve its component and monitor states.
+\par\noindent\textbf{A2 (update observations and progress):} at a non-goal, filtering the complete environment event set disables every controllable event outside $\sigma(q)$ and disables no uncontrollable event; every remaining event/outcome maps into $\Post(q,a)$ and is reported with its successor identity. The resulting set is nonempty and a next event is eventually observed. This progress premise assumes no fairness among event choices.
+\par\noindent\textbf{A3 (commands and observation):} each command starts at uncontrollable quiescence, finishes atomically and failure-free in finite time, and reports one modeled transfer or monitor-lifecycle transition with its successor identity. Internal $\tau$ steps, unobservable outcomes and divergence are outside the model.
+\par\noindent\textbf{A4 (boundaries):} entry atomically observes the actual reachable old state $z$ and switches to $\Init(z)$; at a quiescent goal, ordinary controllables are disabled and handover installs its selected controller state and switches control. Each boundary is a finite, failure-free linearizable operation preserving the specified component and monitor states~\cite{HerlihyWing1990}.
+
+\begin{theorem}[Conditional trace lifting]
+\label{thm:realization}
+For a returned WIN certificate $(\sigma,\rank,\kappa)$ of an eligible contract, every execution satisfying A1--A4 maps through $\alpha$ to the linked model. From an observed entry $\alpha(x_0)=\Init(z)\in Q_0$, the update reaches quiescent handover within $\rank(\Init(z))$ observed game events and then hands control to the compatible endpoint. With complete activation histories as in Section~\ref{sec:monitor-meaning} and RS for the supplied initializers, each declared active interval satisfies its requirement/residual interpretation. Agreement with application intent remains an input obligation.
+\end{theorem}
+\begin{proof}
+A1 maps the old prefix into its monitored endpoint, and A4 maps entry into $Q_0$. A2 preserves every UC move, disables controls outside the policy and maps each report to a complete $\Post$ bucket; A3 makes each command one finite observed step. Induction keeps observations in the safe certificate domain with strictly decreasing rank. A2 excludes stalling, so at most the initial rank many events reach a goal. A4 then hands control to its endpoint finitely; A1 maps the new continuation. Theorem~\ref{thm:correctness} preserves each initialized monitor, and RS makes its continuations legal after every admitted activation history.
+\end{proof}
+
+This execution guarantee requires an adapter satisfying A1--A4; we have not evaluated such an adapter.
+
+
+
+
+
+\section{Evaluation}
+\label{sec:evaluation}
+Base imposes no interval requirement; R1 restricts actions between requirement boundaries; R2 relates those boundaries to component transfers.
+\textbf{RQ1 addresses L2:} do independent reconstruction and certificate/Link checks validate safe finite completion? \textbf{RQ2 addresses L1:} when do local transfer and requirement boundaries enable completion that a global step prevents? \textbf{RQ3 addresses L3:} how much exploration does Lazy save, and where do savings stop as the game grows?
+
+
+\paragraph{Implementation.}
+Our MTSA extension~\cite{paper:MTSA2008} checks certificates~\cite{McConnellEtAl2011Certifying} relative to its parser, $\Post$, monitors, transfers and endpoints. Link checks abstract old--update--new composition, entries and selected targets. The explicit checker builds successors separately but shares frontend and endpoint/goal code; the restricted raw-LTS oracle also parses independently. All implementations share authorship and AI assistance. None validates runtime conformance.
+
+\paragraph{Constructing the benchmark inputs.}
+Nine adapted inputs come from eight DUCS sources; two PC sizes share one. We declare paired components, transfers, endpoint formulas and Base/R1/R2 intervals. The frontend derives boundaries and initializers; each JVM verifies and fixes endpoints with MTSA's GR backend. NEW uses fluent lookup, UPD post-entry constants; all reachable new closed-loop states are handover targets. Railcab retains both transfer outcomes; PC changes tool-result controllability; Surveillance changes battery transitions/safety; GSM/R2 constrains decode boundaries before ENV transfer. Table~\ref{tab:input-structure} and S4 retain counts and mappings. Source-problem equivalence is unestablished.
+
+\begin{table}[!htbp]
+\caption{The nine adapted inputs. Old/new requirements are shared across variants; interval counts are Base/R1/R2.}
+\label{tab:input-structure}
+\centering\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Input & Comp. & Entries & Old/New & Interval B/R1/R2 & $T$ & $U$\\\midrule
+GSM & \ContractGSMComponents{} & \FixedGSMEntries{} & \ContractGSMOld{}/\ContractGSMNew{} & \ContractGSMBase{}/\ContractGSMROne{}/\ContractGSMRTwo{} & \ContractGSMTransferPairs{} & \ContractGSMUpdates{}\\
+Industry & \ContractIndustryComponents{} & \FixedIndustryEntries{} & \ContractIndustryOld{}/\ContractIndustryNew{} & \ContractIndustryBase{}/\ContractIndustryROne{}/\ContractIndustryRTwo{} & \ContractIndustryTransferPairs{} & \ContractIndustryUpdates{}\\
+MetaSocket & \ContractMetaSocketComponents{} & \FixedMetaSocketEntries{} & \ContractMetaSocketOld{}/\ContractMetaSocketNew{} & \ContractMetaSocketBase{}/\ContractMetaSocketROne{}/\ContractMetaSocketRTwo{} & \ContractMetaSocketTransferPairs{} & \ContractMetaSocketUpdates{}\\
+PowerPlant & \ContractPowerPlantComponents{} & \FixedPowerPlantEntries{} & \ContractPowerPlantOld{}/\ContractPowerPlantNew{} & \ContractPowerPlantBase{}/\ContractPowerPlantROne{}/\ContractPowerPlantRTwo{} & \ContractPowerPlantTransferPairs{} & \ContractPowerPlantUpdates{}\\
+PC Arms=1 & \ContractPCOneComponents{} & \FixedPCOneEntries{} & \ContractPCOneOld{}/\ContractPCOneNew{} & \ContractPCOneBase{}/\ContractPCOneROne{}/\ContractPCOneRTwo{} & \ContractPCOneTransferPairs{} & \ContractPCOneUpdates{}\\
+PC Arms=2 & \ContractPCTwoComponents{} & \FixedPCTwoEntries{} & \ContractPCTwoOld{}/\ContractPCTwoNew{} & \ContractPCTwoBase{}/\ContractPCTwoROne{}/\ContractPCTwoRTwo{} & \ContractPCTwoTransferPairs{} & \ContractPCTwoUpdates{}\\
+Railcab & \ContractRailcabComponents{} & \FixedRailcabEntries{} & \ContractRailcabOld{}/\ContractRailcabNew{} & \ContractRailcabBase{}/\ContractRailcabROne{}/\ContractRailcabRTwo{} & \ContractRailcabTransferPairs{} & \ContractRailcabUpdates{}\\
+Surveillance & \ContractSurveillanceComponents{} & \FixedSurveillanceEntries{} & \ContractSurveillanceOld{}/\ContractSurveillanceNew{} & \ContractSurveillanceBase{}/\ContractSurveillanceROne{}/\ContractSurveillanceRTwo{} & \ContractSurveillanceTransferPairs{} & \ContractSurveillanceUpdates{}\\
+Workflow & \ContractWorkflowComponents{} & \FixedWorkflowEntries{} & \ContractWorkflowOld{}/\ContractWorkflowNew{} & \ContractWorkflowBase{}/\ContractWorkflowROne{}/\ContractWorkflowRTwo{} & \ContractWorkflowTransferPairs{} & \ContractWorkflowUpdates{}\\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize $T$ counts declared transfer pairs before fluent observers; $U$ counts transfer, stop and start commands. Entries agree across completed variants; PC Arms=2/R2 times out and its requirement counts come from its input log. Only Railcab has branching transfers. These nine inputs declare no explicit precedence; the separate cell witness requires $\mathsf{start}\prec\mathsf{stop}$; R2 uses interval monitors.
+\end{table}
+
+\paragraph{Fixed exploration variants.}
+All variants share entries, Post/goal and checks; unsafe/goal states are terminal. At UC-enabled states OTF omits controllable buckets, while Direct-Full constructs them but applies the same UC-prioritized winning condition (Lemma~\ref{lem:uc-priority}). Otherwise Lazy queries one controllable bucket at a time and stops when all entries win; Update-first prioritizes all updates; Eager queries all controllable buckets on expansion. Direct-Full builds the whole reachable game first.
+
+Lazy's default order is stop--transfer--ordinary while stops remain, then transfer--ordinary while transfers remain, with other updates last. Otherwise, start comes first only when a handover target matches the components and current or initialized new-monitor states. Neither order minimizes exploration in general.
+
+State priority uses endpoint mismatch and pending-command counts; LIFO exploration precedes FIFO retries (tie-breaking in S2). Direct-Full is our same-game implementation, not an external solver. Order sensitivity appears in the saved trials: Update-first decides \UpdateFirstDecisions{} inputs and is faster than Lazy on \UpdateFirstFaster{}/\UpdateFirstPairs{} completed pairs; Eager decides \EagerDecisions{}. The separation family in Section~\ref{thm:lazy-separation} is constructed for Lazy's default order. Randomized orders and objective-preserving translations to external solvers have not been evaluated.
+
+\paragraph{Design and measures.}
+RQ3 retains all 27 instances (nine models, Base/R1/R2), comparing the four same-game variants above and the separate Legacy reference below.
+
+Trials run sequentially on Windows~10, Xeon W-2265, 256~GB RAM, Temurin~17.0.20.1, with a 64~GiB heap and 1,200~s limit. Each of 135 instance--method cells runs once; valid decisions receive four more trials. Failures are not repeated. Medians and min--max require five consistent completions. Table~\ref{tab:xeon-rq3} retains original interruptions and separate timeout follow-ups.
+
+We measure states, queries, transitions, solver time, sampled peak process working set and policy size. Same-game solver time includes checking but excludes frontend, startup and endpoint preparation; Legacy uses its native timer. Total JVM time includes those costs; endpoint time is also recorded separately. Mac pilot times are excluded.
+
+\subsection{RQ1: Model-Level Validation}
+\label{sec:rq1}
+\textbf{Answer.} Lazy and Direct-Full agree with all independent raw-LTS expectations. Table~\ref{tab:validation-scope} separates units and trust boundaries.
+\begin{table}[!htbp]
+\caption{Model-level checks and trust boundaries. The jobs share \FixedRQOneFixtures{} fixtures; they are not independent applications.}
+\label{tab:validation-scope}
+\centering\small
+\begin{tabular}{@{}p{.21\linewidth}p{.32\linewidth}p{.40\linewidth}@{}}\toprule
+Check & Result and unit & Separate implementation / remaining boundary\\\midrule
+Raw-LTS fixtures & $\FixedRQOneFixtures{}\times\FixedRQOneMethods{}=\FixedRQOneJobs{}$ jobs: \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS, \FixedRQOneInvalid{} invalid & Python separately parses and constructs graphs, ranks and losing closure. Invalid inputs omit events, deadlock or suppress UC.\\[3pt]
+Certificates and links & All \FixedRQOneEligible{} eligible jobs pass certificate and exhaustive checks; all \FixedRQOneWin{} WIN pass Link & Separate explicit successors; shared frontend and endpoint/goal code.\\[3pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\FixedTargetQuiescenceFixturesWord{} target/quiescence fixtures also match the raw-LTS reconstruction. All \FixedLookupMonitors{} frontend lookup exports match \FixedLookupEntries{} reconstructed entries (\FixedLookupNonerror{} non-error, \FixedLookupError{} ERROR). These qualitative checks are outside performance statistics.
+
+Under Section~\ref{sec:monitor-meaning}'s scopes, independent exploration of monitors and observers with one-shot updates checks all \RSNewOccurrences{} NEW occurrences. Equal fluent vectors yield equal continuation languages and agree with frontend lookup. Every admitted safe history reaches such a pair, proving RS inclusion. Exactness additionally needs nonempty actual safe histories, which remain unverified.
+
+UPD starts a fresh reference with actual entry fluent values, consuming one entry marker (not a game event). The \VThreeRSRTwoEntry{} R2 initializers reference only update-stage fluents whose commands cannot precede entry. The \VThreeRSROneInvariant{} R1 occurrences have $\Box(G\Rightarrow\neg A)$: $G$ starts false and changes only on excluded pre-entry update commands, while ordinary-action predicates reset at entry. Thus entry valuations accept the same continuation language as the constant initializer. Static formula, label, reset and DFA checks establish exact entry-scoped RS for these \VThreeRSUpdExact{} UPD occurrences; S3--S4 retain derivations. A1--A4 remain unvalidated.
+
+\subsection{RQ2: Can Local Choices Change Feasibility?}
+\label{sec:rq2}
+\textbf{Answer.} \FixedRQTwoFilesWord{} files yield \FixedRQTwoWinWord{} WIN/\FixedRQTwoLossWord{} LOSS, matching independent expectations: the cell separates local/joint transfer, an observed-branch witness requires both continuations, and a boundary witness needs alignment between stop/start. Their neutral controls win both ways (finite contracts in S1). These establish existence, not separation from arbitrary encodings.
+
+\paragraph{Merging inherited contracts.}
+Merging transfers, requirement boundaries, or both changes \VThreeEOneChanged{}/\VThreeEOneTrials{} Base and R1 decisions (E1); R2 requirements name individual events and are excluded. Inherited raw transfers are total and omit the constructed examples' explicit startup/calibration phase; totality alone does not imply safe joint transfer. States decrease in \VThreeEOneStatesReduced{} comparisons and stay equal in \VThreeEOneStatesEqual{}.
+The transformations reproduce the cell's transfer LOSS, but boundary merging still permits the ordinary gap forbidden by the blocked fixture (E4-1). Corrected Cell$_n$, $n=\VThreeCellNMin{},\ldots,\VThreeCellNMax{}$, wins locally/with merged boundaries and loses with merged transfers/both (E4-2).
+Initial-state-only transfers yield \VThreeEFiveWitness{} fine WIN / merged LOSS, \VThreeEFiveBothLoss{} both-LOSS and \VThreeEFiveBothWin{} both-WIN pairs, with \VThreeEFiveIncomplete{}/\VThreeEFivePairs{} incomplete (E5): enabled UC requests can prevent quiescent transfer. These are contract diagnostics, not DUCS encodings (S4).
+
+\paragraph{Constructed update mechanisms.}
+Across \VThreeESixMainPairs{} main constructed comparisons, fine and merged contracts yield \VThreeESixWitness{} WIN/LOSS, \VThreeESixBothLoss{} LOSS / LOSS and \VThreeESixBothWin{} WIN / WIN pairs, with \VThreeESixIncomplete{} unresolved PC2 comparison; these counts establish existence, not prevalence.
+All \VThreeESixRollingThresholdCells{} Rolling cells satisfy WIN iff $k\le n-m$, where $k$ replicas restart together and at least $m$ of $n$ must remain ready; all \VThreeESixCanaryPairs{} Canary pairs separate recoverable local transfers from a product transfer with adversarial outcomes.
+Policy separates requirement-specific boundaries and DB-Rolling separates secondary-first from joint replacement, whereas singleton-boundary Rolling+Audit and backpressure Threads retain their null results (Table~\ref{tab:rq2-constructed}).
+These mechanisms supplement E1's unchanged decisions; S4 keeps scale extensions, assumption controls and earlier failed inputs separate from the main comparison population.
+
+\begin{table}[!htbp]
+\caption{Constructed mechanisms. W/L means WIN/LOSS; comparisons hold each pair's remaining contract fixed. Parameters and all controls are in S4.}
+\label{tab:rq2-constructed}
+\centering\small
+\begin{tabular}{@{}lp{.38\linewidth}ll@{}}\toprule
+Family & Changed operation & Fine & Merged\\\midrule
+Cell$_n$ & Joint transfer & W & L\\
+Rolling & Restart all replicas & W & L\\
+Canary & Joint transfer with all outcomes & W & L\\
+Policy & Joint requirement boundaries & W & L\\
+DB-Rolling & Joint transfer; no-slack control & W / L & L / L\\
+Rolling+Audit & Transfer / boundary merging & W / W & L / W\\
+Threads & Backpressure / saturation & W / L & W / L\\
+PC2-Rolling & Joint transfer & W & TO$^*$\\\bottomrule
+\end{tabular}
+\par\smallskip\footnotesize Rolling compares single-replica with all-replica restart where the former can win; the threshold above also includes losing batch sizes. $^*$A separate invariant establishes joint-transfer impossibility; the solver remains unresolved.
+\end{table}
+
+\paragraph{PC2-Rolling: distinct evidence.}
+Fine-grained Lazy returns WIN for the supplied recalibrating two-arm plant.
+All checked reachable old states admit both raw transfers, but their joint successor calibrates both arms and immediately violates interval availability, proving joint-transfer impossibility.
+The merged solver and fine Direct-Full nevertheless time out at \VThreeESixPCTwoCap{}~s/\VThreeESixPCTwoHeap{}~GiB; these are not losing decisions.
+
+\paragraph{Following an application policy.}\label{sec:railcab-policy}
+Figure~\ref{fig:railcab-policy} retains both outcomes of a Railcab Base transfer with different continuations and targets. R1 bans braking after old stops; saved policies instead brake earlier or complete without braking. Both exports cover all entries and pass certificate/Link checks. The illustrated monitor permits crossing checks only after approach without a last emergency brake: the branches initialize different memories and match different endpoint states. S4 gives the full tuples; these qualitative exports add no timing or runtime validation.
+
+\input{figures/railcab_policy_fragment.tex}
+
+
+\paragraph{What a losing contract means.}\label{sec:contract-case}
+Industry/R1 loses at \FixedIndustryLosingEntries{} of \FixedIndustryEntries{} entries by independent exhaustive checking. Figure~\ref{fig:industry-trap} shows a reachable safe quiescent state with no supplied target: GF1/TOR validation violates NEW; the safe DSD1 validation admits a rejection cycle, while disabling it deadlocks. The full losing fixed point, not this one path, excludes every update order.
+R1 forbids validation between old stop and new start. DUCS instead synthesizes continued new-specification control~\cite[Defs.~4.1--4.3]{Nahabedian2020}; its original build and aligned fork win on the source model. FG LOSS depends on supplied initializers, requirements and targets. Exempting GF1 from R1 makes all \FixedIndustryVariantWinningEntries{} entries WIN via earlier paths before DSD1/TOR activation, not escape from the displayed trap; this separate Mac contract variant supplies no timing data.
+
+\input{figures/industry_trap.tex}
+
+\subsection{RQ3: Exploration Savings and Limits}
+\label{sec:rq3}
+
+
+\textbf{Answer.} Lazy avoids states and successor queries in all \FixedDirectFullPairs{} completed Direct-Full pairs. Within the fixed implementation and budget, it decides \FixedLazyDecisions{} inputs, Eager \FixedEagerDecisions{} and Direct-Full \FixedDirectFullDecisions{} (Table~\ref{tab:xeon-rq3}). Priorities remain mixed: update-first has lower median solver time on \FixedUpdateFirstFaster{}/\FixedUpdateFirstPairs{} completed pairs but has \FixedUpdateFirstAdditionalTOWord{} additional timeouts. All paired decisions agree. Lazy returns LOSS on Industry/R1 and times out on PC Arms=2/R2. The latter also times out at 3,600~s; its limiting resource remains unknown. Solver and total-JVM ratios measure different costs.
+
+\begin{table}[!htbp]
+\caption{All \ApplicationContracts{} instances per method. TO denotes one capped trial, not a timing median. Ratios summarize heterogeneous completed pairs; values above one favor Lazy.}
+\label{tab:xeon-rq3}\label{tab:paired-costs}
+\centering\small
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Method & WIN/LOSS/TO & Pairs & Faster than Lazy & Solver ratio & Total JVM ratio\\\midrule
+Lazy & \FixedLazyOutcomes{} & --- & --- & --- & ---\\
+Eager & \FixedEagerOutcomes{} & \FixedEagerPairs{} & \FixedEagerFaster{} & \FixedEagerSolverRatio{} & \FixedEagerJVMRatio{}\\
+Update-first & \FixedUpdateFirstOutcomes{} & \FixedUpdateFirstPairs{} & \FixedUpdateFirstFaster{} & \FixedUpdateFirstSolverRatio{} & \FixedUpdateFirstJVMRatio{}\\
+Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullPairs{} & \FixedDirectFullFaster{} & \FixedDirectFullSolverRatio{} & \FixedDirectFullJVMRatio{}\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize TO: timeout; no OOM or unmeasured case for these four methods. $\dagger$ Workflow/R2 includes a separate same-setting timeout after its original interruption; both remain in S4. Ratios are comparator/Lazy: median [min--max] across completed pairs using five-run medians. Pairs counts completed pairs; Faster counts those with lower comparator solver time. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs receive no ratio.}
+\end{table}
+
+Full per-input solver medians remain in S4; the ranges below retain absolute cost scale.
+
+
+For \FixedCensoredPairs{} capped Direct-Full attempts, timeout/Lazy-median total-JVM ratios are \FixedCensoredMin{}--\FixedCensoredMax{} (median \FixedCensoredMedian{}), including Workflow/R2's separate follow-up; the interruption and both-timeout PC case are excluded. These single-attempt lower bounds are not solver ratios or Direct-Full medians. Across \FixedDirectFullPairs{} completed pairs, first-trial state/query ratios have medians \FixedDFStatesRatioMedian{}/\FixedDFQueriesRatioMedian{}. Lazy solver medians span \FixedLazySolverMin{}--\FixedLazySolverMax{}~s (full absolute counts/times in S4).
+
+\paragraph{Separating construction choices.}
+E2 uses a separate build to add full construction with UC pruning, preserving Post/goal. The two factors are construction (full/OTF) and pruning (off/on): Direct-Full is full/off, E2 full/on, Eager/Lazy OTF/on; OTF/off is unimplemented.
+Mac E2 yields \VThreeETwoMacWin{} WIN, \VThreeETwoMacLoss{} LOSS and \VThreeETwoMacTO{} TO; states decrease against Direct-Full in \VThreeETwoStateSmaller{}/\VThreeETwoComparableDF{} comparable cells. Eager counts agree in \VThreeETwoEagerStateEqual{}/\VThreeETwoComparableEager{}; GSM/R1 and PowerPlant/R1 differ.
+On PC1/Base, Eager and E2 both discover \VThreeETwoPCOneBaseStatesFullUC{} states, versus Lazy's \VThreeETwoPCOneBaseStatesLazy{}; separate Xeon solve-plus-check times are \VThreeETwoPCOneBaseXeonEagerMedianSec{}~s (Eager, five-run median) and \VThreeETwoPCOneBaseXeonFullUCSec{}~s (E2, one trial).
+Xeon E2 yields \VThreeETwoXeonWin{} WIN/\VThreeETwoXeonTO{} TO, including Industry/R1 despite Mac's LOSS. S4 keeps the state/time tables and budgets separate; this incomplete comparison establishes neither equal state sets nor a factorial causal decomposition.
+
+\paragraph{Memory and returned policies.}
+Lazy's completed five-run median peak working sets span \FixedLazyRSSMin{}--\FixedLazyRSSMax{}~GiB (median \FixedLazyRSSMedian{}). Sampled process memory includes JVM/native overhead; it establishes no heap or general memory dominance, and Eager/Update-first sometimes use less (S4). The \FixedPolicies{} WIN policies have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} states (median \FixedPolicyStatesMedian{}) and maximum ranks \FixedRankMin{}--\FixedRankMax{} (median \FixedRankMedian{}), bounding events rather than downtime or optimal length. Counts agree over five repeats; LOSS/TO returns no winning policy.
+
+\paragraph{Separate Legacy reference.}
+This fork's DUCS path uses a GR objective without fixed-endpoint handover: \LegacyNativeWins{} matching WIN, \LegacyNativeOOM{} OOM, \LegacyCaptureNM{} snapshot-cap cases (N/M).
+On original-source inputs, the lab build and fork return \LFConditions{} and \LFForkWins{} controllers: \LFSizeMatches{} first-trial sizes match, \FixedLegacySizeMismatchesWord{} differs; \LFUnmeasured{} inputs fail in parsing or instrumentation. S4 retains repetition variation.
+At \VThreeExtSixHeap{}~GiB and \VThreeExtSixCap{}~s, all \VThreeExtSixTrials{} separate single trials remain undecided (\VThreeExtSixOOM{} OOM, \VThreeExtSixNM{} author-instrumentation resource-profile stops), so the original heap cap alone does not explain the absence of decisions.
+Logged intermediate products before the profile stops reach about \VThreeExtSixPeakStatesMinMillions{}--\VThreeExtSixPeakStatesMaxMillions{} million states; these are neither returned controllers nor evidence of Legacy's inability to solve its different objective (S4).
+
+\paragraph{Scaling limits.}
+\label{sec:rq4} All four methods finish the independent-update family for $n=\FixedIndependentNMin{},\ldots,\FixedIndependentNMax{}$. At $n=\FixedIndependentNMax{}$, lazy and update-first discover \FixedIndependentLazyStates{} states, eager \FixedIndependentEagerStates{}, and Direct-Full $\FixedIndependentFullStatesMath{}$. Their five-run median solver times are respectively \FixedIndependentLazySeconds{}, \FixedIndependentUpdateFirstSeconds{}, \FixedIndependentEagerSeconds{} and \FixedIndependentDirectFullSeconds{}~s. This constructed family exhibits the predicted gap; the Travel family below exposes limits.
+
+Controlled families vary fanout, transfer outcomes, UC events/outcomes, requirement count or precedence. All four methods agree on \FixedControlledWin{} WIN and \FixedControlledLossWord{} LOSS across \FixedControlledInputs{} inputs (\FixedControlledJobs{} single-run jobs). They cover broader features than the applications, but each family may change multiple graph measures; S4 gives their definitions and counts.
+
+Travel has an agency and $N$ amenities. Each amenity's $K$ UC choices lead to $0$--$K-1$ selection steps, coupling branching, length and size. Adaptations use direct/reserved purchasing, controllable admission, idle-only transfers and omitted source monitors; no trace equivalence is claimed. 
+\input{figures/travel_outcome_matrix.tex}
+
+Figure~\ref{tab:travel-outcome-matrix} retains all outcomes. Lazy, Eager and Update-first each decide \TravelOTFDecisions{} of \TravelSettings{} settings; Direct-Full decides \TravelFullDecisions{}. The OTF variants share all resource outcomes. Only $(N,K)=\FixedTravelAdditionalSettingsMath{}$ extend their budget-decided range over Direct-Full, which times out on both. On \FixedTravelPairs{} completed pairs, Lazy/Direct-Full state ratios are \FixedTravelStatesMinPercent{}--\FixedTravelStatesMaxPercent{}\%; Direct-Full/Lazy ratios of five-run median solver times are \FixedTravelSolverRatioMin{}--\FixedTravelSolverRatioMax{} (median \FixedTravelSolverRatioMedian{}). Travel $(6,1)$ still times out for Lazy and Direct-Full at \ExtBudgetExpandedHeap{}~GiB and \ExtBudgetTimeCap{}~s (about \ExtTravelSixOneDFRSS{}~GiB peak RSS), so its limit is not solely the original heap cap.
+
+
+
+
+\paragraph{Extended-budget trials.}
+At \ExtBudgetTimeCap{}~s on the same Xeon/JAR, \ExtBudgetPlanned{} planned single trials (\ExtBudgetInitialHeap{}/\ExtBudgetExpandedHeap{}~GiB) yield \ExtBudgetWins{} WIN, \ExtBudgetLosses{} LOSS, \ExtBudgetTimeout{} TO, \ExtBudgetOOM{} OOM and \ExtBudgetSkipped{} skips.
+All \ExtFixedComparable{} comparable Direct-Full decisions match fixed-budget Lazy (Industry/R1 LOSS; PC1/R1 and Workflow/R2 WIN included); \ExtFixedUncompared{} further WIN concern Travel $(4,8)$, unresolved under the fixed budget.
+There, JVM/solver seconds are \ExtTravelFourEightLazySeconds{}/\ExtTravelFourEightLazySolverSeconds{} for Lazy, \ExtTravelFourEightUpdateFirstSeconds{}/\ExtTravelFourEightUpdateFirstSolverSeconds{} for Update-first and \ExtTravelFourEightEagerSeconds{}/\ExtTravelFourEightEagerSolverSeconds{} for Eager.
+Workflow/R2 Direct-Full finishes in \ExtWorkflowDFSeconds{}~s with \ExtWorkflowDFStates{} states.
+At \ExtBudgetExpandedHeap{}~GiB, \ExtDFHeapTimeouts{} Direct-Full application cells time out (peak RSS \ExtDFHeapTimeoutRSSMin{}--\ExtDFHeapTimeoutRSSMax{}~GiB) and Surveillance/R1 exhausts its Java heap after \ExtSurveillanceDFOOMSeconds{}~s; all \ExtDFBothUnresolved{} were unresolved at \ExtBudgetInitialHeap{}~GiB too.
+Fixed-budget Lazy decides \ExtLazyHeapPairs{} of these, with five-run medians $\leq\ExtLazyHeapSolverUpper$ solver seconds and \mbox{$\leq\ExtLazyHeapRSSUpper$~GiB} peak RSS.
+Lazy's PC2/R2 remains TO (\ExtPCTwoLazyRSS{}~GiB RSS).
+Both methods time out at Travel $(6,1)$; the preregistered monotone rule skips $(6,4)$.
+RSS measures process memory, not reachable-state cardinality or heap occupancy.
+S4 reports all outcomes and timing definitions.
+
+\input{build/generated/ext-seven-pending-main.tex}
+
+\subsection{Threats to Validity}
+\label{sec:threats}
+Shared authorship, AI assistance and semantics permit correlated faults; the independent parser handles restricted FSP. Application decoding/history completeness and A1--A4 remain unvalidated. A permanent UC loop can block update/handover. Completeness is relative to the supplied game; new-controller resynthesis and contract repair are outside scope.
+
+Inherited inputs show no E1 separation; E5/Threads retain null and both-LOSS cases. Operationally motivated witnesses assume finite startup, reporting, recovery and election and establish existence, not prevalence. PC2's joint-transfer invariant and solver TO are distinct evidence. E2 lacks OTF without UC pruning and does not isolate every runtime cost. Legacy has a different objective; original-source comparison retains \LFUnmeasured{} unprocessed conditions, Railcab size disagreement and repetition variation, while capture-profile stops are author instrumentation.
+
+Completed-pair ratios exclude unresolved costs; S4 preserves every cell, interruption and follow-up. Faster Update-first cases, Industry's contract sensitivity and unresolved Travel/PC settings limit the advantage. Sampling may miss memory peaks. Related fixtures/models/generators and repetitions are not independent applications; one machine limits generalization. Applications have no explicit precedence and only Railcab has branching transfers. Direct-Full is an in-house same-game comparator. External objective-preserving, compositional/symbolic and randomized-order comparisons remain unevaluated; the separation applies to Lazy's default order.
+
+\paragraph{Use of generative AI}
+Generative AI use on this project began on June 26, 2026, with the OpenAI Codex desktop app; no earlier use occurred. Codex assisted result aggregation and Python/LaTeX tooling (June 26--29), Maven build repair (June 29), translation and terminology unification of an earlier draft (July 1), drafting of this manuscript (from July 15), OTF implementation fixes, tests, experiments and analysis (July 22--August 15) and scaling-experiment scripts (August 28); logged model identifiers are \texttt{gpt-5.5} (June 26--July 1) and \texttt{gpt-5.6-sol} (July 15--August 28). From September 14, Codex with GPT-6 Astra (\texttt{gpt-6-astra}) assisted contract design, implementation, experiments, analysis, figures and prose, and desktop Claude Fable 5.1 assisted planning, the Windows driver/runbook, initial raw/source inspection and, later, the introduction/example draft; Claude wrote neither Java nor the renderer. Solely as writing and editing aids, Codex produced one mock review of an earlier draft (August 7, \texttt{gpt-5.6-sol}) and structure candidates with reviews of them (September 20), while ChatGPT (6 Pro, as shown in its interface; September 18--28) and Claude produced mock reviews, reading-comprehension checks and side-by-side comparisons of anonymous drafts; these are neither human-subject studies nor evidence of validity. Tests, certificates, raw-LTS oracles, primary sources and author review provide validation, with correlated faults possible. Experiment data were processed locally; anonymous manuscripts went to external services. Numbers use saved outputs, not initial AI readings. No generative AI was used beyond these systems and purposes; individual sessions are not itemized. Authors retain responsibility.
+
+\FloatBarrier
+\section{Related Work}
+\label{sec:related}
+\label{sec:expressiveness}
+DUCS combines global transfers and requirement-set boundaries to synthesize update and subsequent control~\cite[Defs.~4.1--4.3]{Nahabedian2020}; its new environment can encode intermediate stages~\cite[Sec.~4.2]{Nahabedian2020}. FG-DUCS generates a fixed-endpoint game from local transfers and individual boundaries. DUCS re-encoding effort and equivalence remain unevaluated. O-DUCS adds update priority and phase-separated analysis; evaluation remains future work~\cite{HiranoEtAl2024ODUCS}.
+
+The GR(1) bridge preserves old then new safety under new-environment safety assumptions; new justice guarantees depend on new justice assumptions~\cite{Amram2022GR1DynamicUpdate}. Live Synthesis carries unfinished obligations forward~\cite{FinkbeinerEtAl2022LiveSynthesis}. Before/after/between scopes~\cite{Dwyer1999Patterns} and event-wise residual rewriting~\cite{RosuHavelund2005Rewriting} precede RS, which quantifies over compatible histories.
+
+State attraction completes a task and reaches configuration startup states within bounded transitions under weak invariance~\cite{NooruldeenSchmidt2015}. Dynamic-feature~\cite{ThuijsmanReniers2024DynamicFeature} and compositional synthesis~\cite{MohajeraniMalikFabian2014Compositional} produce maximally permissive, controllable, nonblocking supervisors for one specification; modular control decomposes its restrictions~\cite{WonhamRamadge1988Modular}. Nonblockingness requires a completing continuation from every reachable state. FG-DUCS connects fixed endpoints and requires every maximal update run to finish.
+OTF-DCS requires a marked extension of every controlled finite trace~\cite[Sec.~3]{CiolekEtAl2023OTFDCS}; FG-DUCS requires finite quiescent handover without fairness. Comparing solvers requires an objective-preserving translation.
+
+\FloatBarrier
+\section{Conclusion}
+\label{sec:conclusion}
+FG-DUCS synthesizes model-level policies between fixed controllers from local transfers, requirement lifetimes and handover targets. Lazy exploration saves construction subject to order, contract and resource limits. Execution adapters, relaxed quiescence and same-contract symbolic comparisons remain future work.
+
+\clearpage
+\paragraph{Data Availability.}
+The anonymous repository~\cite{FGDUCSAnonymousArtifact} provides the complete MTSA-derived source tree with FG-DUCS extensions, models, experiment and analysis scripts, generated results, the split raw-output archive and supplementary material. Third-party dependencies are retrieved from official upstream sources by the supplied scripts. The README links each claim to its evidence and explains unresolved outcomes, raw-output packages, source builds and reproduction tiers. The tag \texttt{fse27-submission} identifies the submitted version.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

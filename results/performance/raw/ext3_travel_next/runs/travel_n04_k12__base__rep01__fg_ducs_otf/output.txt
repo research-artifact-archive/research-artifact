@@ -1,0 +1,145 @@
+comp.compile time : 92ms
+Compiled: OLD_AGENCY
+Compiled: OLD_SERVICE_00
+Compiled: OLD_SERVICE_01
+Compiled: OLD_SERVICE_02
+Compiled: OLD_SERVICE_03
+Composition:OldEnvironment = OldEnvironment.OLD_AGENCY || OldEnvironment.OLD_SERVICE_00 || OldEnvironment.OLD_SERVICE_01 || OldEnvironment.OLD_SERVICE_02 || OldEnvironment.OLD_SERVICE_03
+State Space: 2 * 19 * 19 * 19 * 18 = 2 ** 21
+Composing...
+-- States: 10000 Transitions: 49868 Memory used: 42481K
+-- States: 20000 Transitions: 105880 Memory used: 39236K
+-- States: 30000 Transitions: 154641 Memory used: 69235K
+-- States: 40000 Transitions: 221726 Memory used: 72446K
+-- States: 50000 Transitions: 277931 Memory used: 91497K
+-- States: 60000 Transitions: 332677 Memory used: 103224K
+-- States: 70000 Transitions: 386415 Memory used: 134148K
+-- States: 80000 Transitions: 440139 Memory used: 138119K
+-- States: 90000 Transitions: 518161 Memory used: 166662K
+-- States: 100000 Transitions: 656575 Memory used: 235328K
+-- States: 110000 Transitions: 731489 Memory used: 275240K
+-- States: 120000 Transitions: 802944 Memory used: 282817K
+-- States: 123463 Transitions: 824519 Memory used: 350161K
+Composed in 827ms
+Composition:OldController = OldEnvironment
+State Space: 123463 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 49868 Memory used: 382034K
+-- States: 20000 Transitions: 105880 Memory used: 406559K
+-- States: 30000 Transitions: 154641 Memory used: 426566K
+-- States: 40000 Transitions: 221726 Memory used: 449143K
+-- States: 50000 Transitions: 277931 Memory used: 474715K
+-- States: 60000 Transitions: 332677 Memory used: 493675K
+-- States: 70000 Transitions: 386415 Memory used: 516252K
+-- States: 80000 Transitions: 440139 Memory used: 536261K
+-- States: 90000 Transitions: 518161 Memory used: 560784K
+-- States: 100000 Transitions: 656575 Memory used: 434157K
+-- States: 110000 Transitions: 731489 Memory used: 457552K
+-- States: 120000 Transitions: 802944 Memory used: 483161K
+-- States: 123463 Transitions: 824519 Memory used: 617378K
+Composed in 709ms
+Solving the LTS control problem.
+Environment states: 123463
+Game states: 123463
+Game transitions: 370389
+Analysis time: 15368ms.
+Controller [123463] generated successfully.
+Composition:OldController = OldController
+State Space: 123463 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 50667 Memory used: 2523361K
+-- States: 20000 Transitions: 105199 Memory used: 2556916K
+-- States: 30000 Transitions: 152527 Memory used: 2590470K
+-- States: 40000 Transitions: 202552 Memory used: 2624024K
+-- States: 50000 Transitions: 265983 Memory used: 2657579K
+-- States: 60000 Transitions: 324935 Memory used: 2691133K
+-- States: 70000 Transitions: 407353 Memory used: 2741465K
+-- States: 80000 Transitions: 473744 Memory used: 2775020K
+-- States: 90000 Transitions: 552843 Memory used: 2808574K
+-- States: 100000 Transitions: 662075 Memory used: 2858905K
+-- States: 110000 Transitions: 731125 Memory used: 2892460K
+-- States: 120000 Transitions: 805594 Memory used: 2959569K
+-- States: 123463 Transitions: 824519 Memory used: 3093787K
+Composed in 1249ms
+ - Synthesizing Mapping Environment from lists (size=5)...
+INFO: Auto-compiling dependency: NEW_AGENCY
+Generating Mapping Environment: MAP_OLD_AGENCY_NEW_AGENCY
+INFO: Auto-compiling dependency: NEW_SERVICE_00
+Generating Mapping Environment: MAP_OLD_SERVICE_00_NEW_SERVICE_00
+INFO: Auto-compiling dependency: NEW_SERVICE_01
+Generating Mapping Environment: MAP_OLD_SERVICE_01_NEW_SERVICE_01
+INFO: Auto-compiling dependency: NEW_SERVICE_02
+Generating Mapping Environment: MAP_OLD_SERVICE_02_NEW_SERVICE_02
+INFO: Auto-compiling dependency: NEW_SERVICE_03
+Generating Mapping Environment: MAP_OLD_SERVICE_03_NEW_SERVICE_03
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Composition:NewEnvironment = NewEnvironment.NEW_AGENCY || NewEnvironment.NEW_SERVICE_00 || NewEnvironment.NEW_SERVICE_01 || NewEnvironment.NEW_SERVICE_02 || NewEnvironment.NEW_SERVICE_03
+State Space: 2 * 19 * 19 * 19 * 18 = 2 ** 21
+Composing...
+-- States: 10000 Transitions: 46633 Memory used: 1812691K
+-- States: 20000 Transitions: 94981 Memory used: 1846246K
+-- States: 30000 Transitions: 140620 Memory used: 1879800K
+-- States: 40000 Transitions: 199325 Memory used: 1913355K
+-- States: 50000 Transitions: 268700 Memory used: 1946909K
+-- States: 60000 Transitions: 334091 Memory used: 1980464K
+-- States: 70000 Transitions: 395434 Memory used: 2022407K
+-- States: 80000 Transitions: 449673 Memory used: 2064350K
+-- States: 90000 Transitions: 517686 Memory used: 2097904K
+-- States: 100000 Transitions: 629553 Memory used: 2148236K
+-- States: 110000 Transitions: 709166 Memory used: 2198567K
+-- States: 120000 Transitions: 779551 Memory used: 2232122K
+-- States: 123463 Transitions: 798166 Memory used: 2399894K
+Composed in 1140ms
+Composition:NewController = NewEnvironment
+State Space: 123463 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 46633 Memory used: 2156047K
+-- States: 20000 Transitions: 94981 Memory used: 2172824K
+-- States: 30000 Transitions: 140620 Memory used: 2189601K
+-- States: 40000 Transitions: 199325 Memory used: 2206379K
+-- States: 50000 Transitions: 268700 Memory used: 2239933K
+-- States: 60000 Transitions: 334091 Memory used: 2256710K
+-- States: 70000 Transitions: 395434 Memory used: 2290264K
+-- States: 80000 Transitions: 449673 Memory used: 2307042K
+-- States: 90000 Transitions: 517686 Memory used: 2323819K
+-- States: 100000 Transitions: 629553 Memory used: 2357373K
+-- States: 110000 Transitions: 709166 Memory used: 2374150K
+-- States: 120000 Transitions: 779551 Memory used: 2407705K
+-- States: 123463 Transitions: 798166 Memory used: 2525145K
+Composed in 684ms
+Solving the LTS control problem.
+Environment states: 123463
+Game states: 123463
+Game transitions: 370389
+Analysis time: 15124ms.
+Controller [123463] generated successfully.
+Composition:NewController = NewController
+State Space: 123463 = 2 ** 17
+Composing...
+-- States: 10000 Transitions: 47742 Memory used: 3253887K
+-- States: 20000 Transitions: 94622 Memory used: 3287441K
+-- States: 30000 Transitions: 142709 Memory used: 3320995K
+-- States: 40000 Transitions: 195073 Memory used: 3337773K
+-- States: 50000 Transitions: 269710 Memory used: 3388104K
+-- States: 60000 Transitions: 335242 Memory used: 3421659K
+-- States: 70000 Transitions: 401817 Memory used: 3455213K
+-- States: 80000 Transitions: 463758 Memory used: 3488768K
+-- States: 90000 Transitions: 523822 Memory used: 3522322K
+-- States: 100000 Transitions: 583846 Memory used: 3555877K
+-- States: 110000 Transitions: 708626 Memory used: 3606208K
+-- States: 120000 Transitions: 780996 Memory used: 3639763K
+-- States: 123463 Transitions: 798166 Memory used: 3807535K
+Composed in 1346ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 123463
+ - Extracting New Safety Fluents and Building Look-up Tables...
+=========================================
+Mode: Revised OTF-DUCS (proof-producing strong synthesis)
+=========================================
+ - Components: 5
+ - Requirements: old=0, new=0, update-time=0
+ - Initial endpoint embeddings: 123463
+ - Loadable new endpoint signatures: 123463 / 123463
+ - Controllable action order: endpoint_guided
+ - Solver implementation: otf
+ - Update-policy restriction: full_fg (unrestricted_fine_grained_update_choices)

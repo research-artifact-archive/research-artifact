@@ -1,0 +1,231 @@
+{
+  "backend": "lts",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "experiment_id": "fg-ducs-xeon-ext7_eager_heap200",
+  "extended_budget": true,
+  "java": "java",
+  "java_heap": "200g",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "master_seed": 2027080504,
+  "methods": [
+    {
+      "analysis_role": "primary_target",
+      "id": "fg_ducs_otf",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.revised.otf.solver": "otf"
+      },
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}"
+    },
+    {
+      "analysis_role": "same_problem_comparator",
+      "id": "direct_full",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.revised.otf.solver": "direct_full"
+      },
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}"
+    },
+    {
+      "analysis_role": "lazy_expansion_ablation",
+      "id": "fg_ducs_otf_eager_controllable",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.revised.otf.solver": "otf"
+      },
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}"
+    },
+    {
+      "analysis_role": "action_order_ablation",
+      "id": "fg_ducs_otf_update_first",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.revised.otf.solver": "otf"
+      },
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}"
+    },
+    {
+      "analysis_role": "prior_tool_on_fine_grained_input_legacy_semantics",
+      "id": "legacy_ducs",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true"
+      },
+      "target_template": "UPDATE_CONTROLLER_FG{suffix}"
+    }
+  ],
+  "minimum_free_disk_gib": 50,
+  "minimum_physical_memory_gib": 240,
+  "models": [
+    {
+      "id": "industry",
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "path": "Implementation/Experiment/Models/Industry_FG.lts",
+      "target_ids": [
+        "r1"
+      ]
+    },
+    {
+      "id": "railcab",
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "path": "Implementation/Experiment/Models/Railcab_FG.lts",
+      "target_ids": [
+        "base",
+        "r1"
+      ]
+    },
+    {
+      "id": "workflow",
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "path": "Implementation/Experiment/Models/Workflow_FG.lts",
+      "target_ids": [
+        "r1"
+      ]
+    },
+    {
+      "id": "surveillance",
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "path": "Implementation/Experiment/Models/Surveillance_FG.lts",
+      "target_ids": [
+        "base",
+        "r1",
+        "r2"
+      ]
+    },
+    {
+      "id": "productioncell_arms2",
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+      "target_ids": [
+        "base",
+        "r1",
+        "r2"
+      ]
+    }
+  ],
+  "monotone_skip": false,
+  "parallel_trials": 1,
+  "repetitions": 1,
+  "required_classpath_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+  "results_root": "raw",
+  "rss_poll_interval_seconds": 0.1,
+  "schema_version": 1,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    },
+    {
+      "id": "r1",
+      "suffix": "_R1"
+    },
+    {
+      "id": "r2",
+      "suffix": "_R2"
+    }
+  ],
+  "timeout_seconds": 7200,
+  "transition_output_mode": "summary",
+  "unit_order": "listed",
+  "unit_sequence": [
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "industry",
+      "target_id": "r1"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "railcab",
+      "target_id": "base"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "workflow",
+      "target_id": "r1"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "surveillance",
+      "target_id": "base"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "railcab",
+      "target_id": "r1"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "surveillance",
+      "target_id": "r1"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "surveillance",
+      "target_id": "r2"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "productioncell_arms2",
+      "target_id": "base"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "productioncell_arms2",
+      "target_id": "r1"
+    },
+    {
+      "method_ids": [
+        "fg_ducs_otf_eager_controllable"
+      ],
+      "model_id": "productioncell_arms2",
+      "target_id": "r2"
+    }
+  ]
+}

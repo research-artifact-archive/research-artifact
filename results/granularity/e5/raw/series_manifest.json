@@ -1,0 +1,269 @@
+{
+  "config": {
+    "schema_version": 1,
+    "java": "java",
+    "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "transition_output_mode": "summary",
+    "models": [
+      {
+        "id": "gsm",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/GSM_FG.lts"
+      },
+      {
+        "id": "industry",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Industry_FG.lts"
+      },
+      {
+        "id": "metasocket",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/MetaSocket_FG.lts"
+      },
+      {
+        "id": "powerplant",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/PowerPlant_FG.lts"
+      },
+      {
+        "id": "productioncell_arms1",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=1_FG.lts"
+      },
+      {
+        "id": "productioncell_arms2",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=2_FG.lts"
+      },
+      {
+        "id": "railcab",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Railcab_FG.lts"
+      },
+      {
+        "id": "surveillance",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Surveillance_FG.lts"
+      },
+      {
+        "id": "workflow",
+        "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Workflow_FG.lts"
+      }
+    ],
+    "targets": [
+      {
+        "id": "base",
+        "suffix": ""
+      },
+      {
+        "id": "r1",
+        "suffix": "_R1"
+      }
+    ],
+    "experiment_id": "fg-ducs-witness-20260929-e5-mac",
+    "repetitions": 1,
+    "timeout_seconds": 1200,
+    "java_heap": "32g",
+    "platform": "mac",
+    "parallel_trials": 1,
+    "source_config": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/configs/rq3.json",
+    "deadline": "2026-09-29T16:00:00+09:00",
+    "classpath": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.jar",
+    "jar_metadata": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.json",
+    "results_root": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw",
+    "series": "e5",
+    "excluded_targets": {
+      "r2": "Individual stop/start references make this target outside the predeclared merge experiment."
+    },
+    "methods": [
+      {
+        "id": "lazy_none_initial",
+        "merge": "none",
+        "solver": "otf",
+        "jvm_properties": {
+          "mtsa.evaluation.enabled": "true",
+          "mtsa.revised.otf.solver": "otf",
+          "mtsa.otf.guidedStateLimit": "0",
+          "mtsa.otf.guidedQueryLimit": "0",
+          "mtsa.otf.lazyControllableBuckets": "true",
+          "mtsa.otf.controllableActionOrder": "endpoint_guided",
+          "mtsa.revised.otf.independentVerification": "false",
+          "mtsa.otf.contractMerge": "none",
+          "mtsa.otf.transferDomain": "initial"
+        }
+      },
+      {
+        "id": "lazy_transfers_initial",
+        "merge": "transfers",
+        "solver": "otf",
+        "jvm_properties": {
+          "mtsa.evaluation.enabled": "true",
+          "mtsa.revised.otf.solver": "otf",
+          "mtsa.otf.guidedStateLimit": "0",
+          "mtsa.otf.guidedQueryLimit": "0",
+          "mtsa.otf.lazyControllableBuckets": "true",
+          "mtsa.otf.controllableActionOrder": "endpoint_guided",
+          "mtsa.revised.otf.independentVerification": "false",
+          "mtsa.otf.contractMerge": "transfers",
+          "mtsa.otf.transferDomain": "initial"
+        }
+      },
+      {
+        "id": "df_none_initial",
+        "merge": "none",
+        "solver": "direct_full",
+        "jvm_properties": {
+          "mtsa.evaluation.enabled": "true",
+          "mtsa.revised.otf.solver": "direct_full",
+          "mtsa.otf.guidedStateLimit": "0",
+          "mtsa.otf.guidedQueryLimit": "0",
+          "mtsa.otf.lazyControllableBuckets": "false",
+          "mtsa.otf.controllableActionOrder": "endpoint_guided",
+          "mtsa.revised.otf.independentVerification": "false",
+          "mtsa.otf.contractMerge": "none",
+          "mtsa.otf.transferDomain": "initial"
+        }
+      }
+    ],
+    "start_cutoff": "2026-09-29T15:39:00+09:00",
+    "expected_trials": 54,
+    "schedule": "36 Lazy cells in original model/target order, none then transfers; 18 Direct-Full none cells in the same model/target order"
+  },
+  "jar": {
+    "source_commit": "5603a4366f3fe5237d2a7ef34cb9cc40f184bbf3",
+    "source_base_commit": "c7294d6e0c834b03430fc66e4055eb5b2d0342fb",
+    "e1_production_commit": "50563fc45bd4d3870a48318944a83ccf2bcf4676",
+    "base_vs_e1_production": "Only ContractMergeIndependentAuditTest.java added; production byte sources unchanged",
+    "jar_sha256": "00221f6a91f382179186286a70ea99474ae50d07f0ad241212324b0430ad08da",
+    "jar_bytes": 698983140,
+    "build_jdk": "OpenJDK 17.0.19",
+    "maven": "3.9.16",
+    "build_command": "JAVA_HOME=<JDK17> mvn -B -f source/mtsa/pom.xml package -DskipTests -Djacoco.skip=true",
+    "test_result": "76 tests passed in 12 related classes, including 9 new E5 tests",
+    "first_test_attempt": "8 tests; 7 pass, 1 test assertion failure because unmodifiable Collection wrappers use identity equality. Fixed assertion compares contents and each Requirement reference; initial log/reports retained.",
+    "preprocessing_order": [
+      "construct original contract/endpoints/initializers",
+      "transferDomain",
+      "contractMerge",
+      "solve/check/link"
+    ],
+    "transfer_domain_initial_cli_definition": "source raw physical state equals the raw old initial state, retaining all augmented observer copies and original targets",
+    "transfer_domain_initial_generic_api_definition": "old local state equality; a projection overload is used by the CLI",
+    "post_goal_solver_endpoint_implementations_changed": false,
+    "cell_literal_result": "Original fixed Cell WIN; initial filter empties A (old initial h; g_A only e), keeps B (old initial e), so filtered none and transfers are LOSS. No fixture exception.",
+    "e1_jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5"
+  },
+  "inputs": [
+    {
+      "model_id": "gsm",
+      "source_path": "Implementation/Experiment/Models/GSM_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/GSM_FG.lts",
+      "source_sha256": "5f4af5b4eafda24516f0653b194f7296799036fc9fe873ac0ce100e0009ae7f4",
+      "copy_sha256": "5f4af5b4eafda24516f0653b194f7296799036fc9fe873ac0ce100e0009ae7f4"
+    },
+    {
+      "model_id": "industry",
+      "source_path": "Implementation/Experiment/Models/Industry_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Industry_FG.lts",
+      "source_sha256": "d8bd82a0ad6eeedc4986a688076fe4646f03a665a41a8c6c5f6cbfbd3b2506dd",
+      "copy_sha256": "d8bd82a0ad6eeedc4986a688076fe4646f03a665a41a8c6c5f6cbfbd3b2506dd"
+    },
+    {
+      "model_id": "metasocket",
+      "source_path": "Implementation/Experiment/Models/MetaSocket_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/MetaSocket_FG.lts",
+      "source_sha256": "3b8a500a0d3ab1b19141c226e29fad8c43de4d3e7fb890e7cd94eeaa570c9c5f",
+      "copy_sha256": "3b8a500a0d3ab1b19141c226e29fad8c43de4d3e7fb890e7cd94eeaa570c9c5f"
+    },
+    {
+      "model_id": "powerplant",
+      "source_path": "Implementation/Experiment/Models/PowerPlant_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/PowerPlant_FG.lts",
+      "source_sha256": "580c2eeb4589d83a4e8177f5339c43d1186707a8ad3601628cb66bf983f1201e",
+      "copy_sha256": "580c2eeb4589d83a4e8177f5339c43d1186707a8ad3601628cb66bf983f1201e"
+    },
+    {
+      "model_id": "productioncell_arms1",
+      "source_path": "Implementation/Experiment/Models/ProductionCell_Arms=1_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=1_FG.lts",
+      "source_sha256": "4134c3c40a8bfbfc5794e0f9cafdfc9ac2a733f7b91a38a0c6cc908c8dc0bdeb",
+      "copy_sha256": "4134c3c40a8bfbfc5794e0f9cafdfc9ac2a733f7b91a38a0c6cc908c8dc0bdeb"
+    },
+    {
+      "model_id": "productioncell_arms2",
+      "source_path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=2_FG.lts",
+      "source_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+      "copy_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43"
+    },
+    {
+      "model_id": "railcab",
+      "source_path": "Implementation/Experiment/Models/Railcab_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Railcab_FG.lts",
+      "source_sha256": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a",
+      "copy_sha256": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a"
+    },
+    {
+      "model_id": "surveillance",
+      "source_path": "Implementation/Experiment/Models/Surveillance_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Surveillance_FG.lts",
+      "source_sha256": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8",
+      "copy_sha256": "e33b056d19dda9ca03c2ba1be51f5663ac9419b065354e66ddf0a06f4868b2e8"
+    },
+    {
+      "model_id": "workflow",
+      "source_path": "Implementation/Experiment/Models/Workflow_FG.lts",
+      "copy_path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Workflow_FG.lts",
+      "source_sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1",
+      "copy_sha256": "ee6733295443ca86b9035f093aad699434ba1228e67d0d2d49ed9c9e1956e8a1"
+    }
+  ],
+  "schedule": [
+    "gsm__base__rep01__lazy_none_initial",
+    "gsm__base__rep01__lazy_transfers_initial",
+    "gsm__r1__rep01__lazy_none_initial",
+    "gsm__r1__rep01__lazy_transfers_initial",
+    "industry__base__rep01__lazy_none_initial",
+    "industry__base__rep01__lazy_transfers_initial",
+    "industry__r1__rep01__lazy_none_initial",
+    "industry__r1__rep01__lazy_transfers_initial",
+    "metasocket__base__rep01__lazy_none_initial",
+    "metasocket__base__rep01__lazy_transfers_initial",
+    "metasocket__r1__rep01__lazy_none_initial",
+    "metasocket__r1__rep01__lazy_transfers_initial",
+    "powerplant__base__rep01__lazy_none_initial",
+    "powerplant__base__rep01__lazy_transfers_initial",
+    "powerplant__r1__rep01__lazy_none_initial",
+    "powerplant__r1__rep01__lazy_transfers_initial",
+    "productioncell_arms1__base__rep01__lazy_none_initial",
+    "productioncell_arms1__base__rep01__lazy_transfers_initial",
+    "productioncell_arms1__r1__rep01__lazy_none_initial",
+    "productioncell_arms1__r1__rep01__lazy_transfers_initial",
+    "productioncell_arms2__base__rep01__lazy_none_initial",
+    "productioncell_arms2__base__rep01__lazy_transfers_initial",
+    "productioncell_arms2__r1__rep01__lazy_none_initial",
+    "productioncell_arms2__r1__rep01__lazy_transfers_initial",
+    "railcab__base__rep01__lazy_none_initial",
+    "railcab__base__rep01__lazy_transfers_initial",
+    "railcab__r1__rep01__lazy_none_initial",
+    "railcab__r1__rep01__lazy_transfers_initial",
+    "surveillance__base__rep01__lazy_none_initial",
+    "surveillance__base__rep01__lazy_transfers_initial",
+    "surveillance__r1__rep01__lazy_none_initial",
+    "surveillance__r1__rep01__lazy_transfers_initial",
+    "workflow__base__rep01__lazy_none_initial",
+    "workflow__base__rep01__lazy_transfers_initial",
+    "workflow__r1__rep01__lazy_none_initial",
+    "workflow__r1__rep01__lazy_transfers_initial",
+    "gsm__base__rep01__df_none_initial",
+    "gsm__r1__rep01__df_none_initial",
+    "industry__base__rep01__df_none_initial",
+    "industry__r1__rep01__df_none_initial",
+    "metasocket__base__rep01__df_none_initial",
+    "metasocket__r1__rep01__df_none_initial",
+    "powerplant__base__rep01__df_none_initial",
+    "powerplant__r1__rep01__df_none_initial",
+    "productioncell_arms1__base__rep01__df_none_initial",
+    "productioncell_arms1__r1__rep01__df_none_initial",
+    "productioncell_arms2__base__rep01__df_none_initial",
+    "productioncell_arms2__r1__rep01__df_none_initial",
+    "railcab__base__rep01__df_none_initial",
+    "railcab__r1__rep01__df_none_initial",
+    "surveillance__base__rep01__df_none_initial",
+    "surveillance__r1__rep01__df_none_initial",
+    "workflow__base__rep01__df_none_initial",
+    "workflow__r1__rep01__df_none_initial"
+  ]
+}

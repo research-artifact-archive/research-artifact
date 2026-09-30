@@ -1,0 +1,725 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "policy_2_fine",
+  "family": "Policy",
+  "parameters": {
+    "requirement_pairs": 2,
+    "boundary_grouping": "individual"
+  },
+  "ordinary": [
+    "log_old",
+    "log_new",
+    "service",
+    "access_old",
+    "access_new"
+  ],
+  "controllable": [
+    "log_old",
+    "log_new",
+    "service",
+    "access_old",
+    "access_new"
+  ],
+  "components": [
+    {
+      "id": "runtime",
+      "old": {
+        "initial": "running",
+        "states": [
+          "running"
+        ],
+        "edges": [
+          [
+            "running",
+            "log_old",
+            "running"
+          ],
+          [
+            "running",
+            "log_new",
+            "running"
+          ],
+          [
+            "running",
+            "service",
+            "running"
+          ],
+          [
+            "running",
+            "access_old",
+            "running"
+          ],
+          [
+            "running",
+            "access_new",
+            "running"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "running",
+        "states": [
+          "running"
+        ],
+        "edges": [
+          [
+            "running",
+            "log_old",
+            "running"
+          ],
+          [
+            "running",
+            "log_new",
+            "running"
+          ],
+          [
+            "running",
+            "service",
+            "running"
+          ],
+          [
+            "running",
+            "access_old",
+            "running"
+          ],
+          [
+            "running",
+            "access_new",
+            "running"
+          ]
+        ]
+      },
+      "transfer_action": "rho_runtime",
+      "transfer": {
+        "running": [
+          "running"
+        ]
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "old_audit",
+      "role": "old",
+      "tester": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "log_old",
+          "log_new",
+          "service",
+          "access_old",
+          "access_new",
+          "rho_runtime",
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "changes": [
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "service",
+            "ERROR"
+          ]
+        ]
+      },
+      "update_action": "stop_audit"
+    },
+    {
+      "id": "old_role",
+      "role": "old",
+      "tester": {
+        "initial": "valid",
+        "states": [
+          "valid",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "log_old",
+          "log_new",
+          "service",
+          "access_old",
+          "access_new",
+          "rho_runtime",
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "changes": [
+          [
+            "valid",
+            "access_new",
+            "ERROR"
+          ]
+        ]
+      },
+      "update_action": "stop_role"
+    },
+    {
+      "id": "new_audit",
+      "role": "new",
+      "tester": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "log_old",
+          "log_new",
+          "service",
+          "access_old",
+          "access_new",
+          "rho_runtime",
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "changes": [
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "service",
+            "ERROR"
+          ]
+        ]
+      },
+      "update_action": "start_audit",
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "running"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "running"
+              ]
+            ],
+            "tester_state": "unlogged",
+            "residual_state": "unlogged"
+          }
+        ]
+      }
+    },
+    {
+      "id": "new_role",
+      "role": "new",
+      "tester": {
+        "initial": "valid",
+        "states": [
+          "valid",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "log_old",
+          "log_new",
+          "service",
+          "access_old",
+          "access_new",
+          "rho_runtime",
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "changes": [
+          [
+            "valid",
+            "access_old",
+            "ERROR"
+          ]
+        ]
+      },
+      "update_action": "start_role",
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "running"
+              ]
+            ],
+            "tester_state": "valid",
+            "residual_state": "valid"
+          },
+          {
+            "physical": [
+              [
+                "NEW",
+                "running"
+              ]
+            ],
+            "tester_state": "valid",
+            "residual_state": "valid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "coverage_and_exclusion",
+      "role": "interval",
+      "tester": {
+        "initial": "1010",
+        "states": [
+          "0100",
+          "0101",
+          "0110",
+          "1000",
+          "1001",
+          "1010",
+          "1100",
+          "1101",
+          "1110",
+          "ERROR"
+        ],
+        "errors": [
+          "ERROR"
+        ],
+        "alphabet": [
+          "log_old",
+          "log_new",
+          "service",
+          "access_old",
+          "access_new",
+          "rho_runtime",
+          "stop_audit",
+          "start_audit",
+          "stop_role",
+          "start_role"
+        ],
+        "changes": [
+          [
+            "0100",
+            "stop_audit",
+            "0100"
+          ],
+          [
+            "0100",
+            "start_audit",
+            "0100"
+          ],
+          [
+            "0100",
+            "stop_role",
+            "0100"
+          ],
+          [
+            "0100",
+            "start_role",
+            "0101"
+          ],
+          [
+            "0101",
+            "stop_audit",
+            "0101"
+          ],
+          [
+            "0101",
+            "start_audit",
+            "0101"
+          ],
+          [
+            "0101",
+            "stop_role",
+            "0101"
+          ],
+          [
+            "0101",
+            "start_role",
+            "0101"
+          ],
+          [
+            "0110",
+            "stop_audit",
+            "0110"
+          ],
+          [
+            "0110",
+            "start_audit",
+            "0110"
+          ],
+          [
+            "0110",
+            "stop_role",
+            "0100"
+          ],
+          [
+            "0110",
+            "start_role",
+            "ERROR"
+          ],
+          [
+            "1000",
+            "stop_audit",
+            "ERROR"
+          ],
+          [
+            "1000",
+            "start_audit",
+            "1100"
+          ],
+          [
+            "1000",
+            "stop_role",
+            "1000"
+          ],
+          [
+            "1000",
+            "start_role",
+            "1001"
+          ],
+          [
+            "1001",
+            "stop_audit",
+            "ERROR"
+          ],
+          [
+            "1001",
+            "start_audit",
+            "1101"
+          ],
+          [
+            "1001",
+            "stop_role",
+            "1001"
+          ],
+          [
+            "1001",
+            "start_role",
+            "1001"
+          ],
+          [
+            "1010",
+            "stop_audit",
+            "ERROR"
+          ],
+          [
+            "1010",
+            "start_audit",
+            "1110"
+          ],
+          [
+            "1010",
+            "stop_role",
+            "1000"
+          ],
+          [
+            "1010",
+            "start_role",
+            "ERROR"
+          ],
+          [
+            "1100",
+            "stop_audit",
+            "0100"
+          ],
+          [
+            "1100",
+            "start_audit",
+            "1100"
+          ],
+          [
+            "1100",
+            "stop_role",
+            "1100"
+          ],
+          [
+            "1100",
+            "start_role",
+            "1101"
+          ],
+          [
+            "1101",
+            "stop_audit",
+            "0101"
+          ],
+          [
+            "1101",
+            "start_audit",
+            "1101"
+          ],
+          [
+            "1101",
+            "stop_role",
+            "1101"
+          ],
+          [
+            "1101",
+            "start_role",
+            "1101"
+          ],
+          [
+            "1110",
+            "stop_audit",
+            "0110"
+          ],
+          [
+            "1110",
+            "start_audit",
+            "1110"
+          ],
+          [
+            "1110",
+            "stop_role",
+            "1100"
+          ],
+          [
+            "1110",
+            "start_role",
+            "ERROR"
+          ]
+        ]
+      },
+      "activation": {
+        "entries": [
+          {
+            "physical": [
+              [
+                "OLD",
+                "running"
+              ]
+            ],
+            "tester_state": "1010",
+            "residual_state": "1010"
+          }
+        ]
+      }
+    }
+  ],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "edges": [
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "access_old",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "access_old",
+            "logged"
+          ]
+        ]
+      },
+      "controller": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "edges": [
+          [
+            "unlogged",
+            "log_old",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "access_old",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "access_old",
+            "logged"
+          ]
+        ]
+      },
+      "projection": {
+        "unlogged": {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "old_audit": "unlogged",
+            "old_role": "valid"
+          }
+        },
+        "logged": {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "old_audit": "logged",
+            "old_role": "valid"
+          }
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "edges": [
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "access_new",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "access_new",
+            "logged"
+          ]
+        ]
+      },
+      "controller": {
+        "initial": "unlogged",
+        "states": [
+          "unlogged",
+          "logged"
+        ],
+        "edges": [
+          [
+            "unlogged",
+            "log_new",
+            "logged"
+          ],
+          [
+            "logged",
+            "service",
+            "unlogged"
+          ],
+          [
+            "unlogged",
+            "access_new",
+            "unlogged"
+          ],
+          [
+            "logged",
+            "access_new",
+            "logged"
+          ]
+        ]
+      },
+      "projection": {
+        "unlogged": {
+          "physical": [
+            [
+              "NEW",
+              "running"
+            ]
+          ],
+          "testers": {
+            "new_audit": "unlogged",
+            "new_role": "valid"
+          },
+          "goal_id": "new_unlogged"
+        },
+        "logged": {
+          "physical": [
+            [
+              "NEW",
+              "running"
+            ]
+          ],
+          "testers": {
+            "new_audit": "logged",
+            "new_role": "valid"
+          },
+          "goal_id": "new_logged"
+        }
+      },
+      "loadable": [
+        "unlogged",
+        "logged"
+      ]
+    }
+  },
+  "metadata": {
+    "mechanism": "M4",
+    "contribution": "boundary",
+    "scope": "constructed operationally motivated contract; not a product reproduction",
+    "expected_decision": "WIN"
+  }
+}

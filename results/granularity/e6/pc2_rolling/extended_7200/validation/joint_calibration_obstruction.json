@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "at": "2026-09-29T19:45:32.283054+09:00",
+  "input_sha256": "ef731ff57935d5a880fb23cdef264c034378bf4954c1345d6b2fb5431c866a86",
+  "scope": "Independent source-level finite fluent argument, separate from the pending extended synthesis verdict. No E1 Post called.",
+  "transfer_pairs": [
+    {
+      "component": 1,
+      "pairs": [
+        {
+          "old": "PRODUCTION_CELL_OLD",
+          "new": "CAL_INITIAL"
+        },
+        {
+          "old": "ARM",
+          "new": "CAL_ARM"
+        },
+        {
+          "old": "OUT",
+          "new": "CAL_OUT"
+        },
+        {
+          "old": "TRASHED",
+          "new": "CAL_TRASHED"
+        },
+        {
+          "old": "DRILLED[1]",
+          "new": "CAL_DRILLED[1]"
+        },
+        {
+          "old": "POLISHED[1]",
+          "new": "CAL_ARM"
+        },
+        {
+          "old": "CLEANED[1]",
+          "new": "CAL_CLEANED[1]"
+        }
+      ]
+    },
+    {
+      "component": 2,
+      "pairs": [
+        {
+          "old": "PRODUCTION_CELL_OLD",
+          "new": "CAL_INITIAL"
+        },
+        {
+          "old": "ARM",
+          "new": "CAL_ARM"
+        },
+        {
+          "old": "OUT",
+          "new": "CAL_OUT"
+        },
+        {
+          "old": "TRASHED",
+          "new": "CAL_TRASHED"
+        },
+        {
+          "old": "DRILLED[1]",
+          "new": "CAL_DRILLED[1]"
+        },
+        {
+          "old": "POLISHED[1]",
+          "new": "CAL_ARM"
+        },
+        {
+          "old": "CLEANED[1]",
+          "new": "CAL_CLEANED[1]"
+        }
+      ]
+    }
+  ],
+  "all_49_raw_tuple_outcomes_have_two_calibration_states": true,
+  "concrete_old_controller_path": [
+    {
+      "controller": 0,
+      "physical": [
+        "PRODUCTION_CELL_OLD",
+        "PRODUCTION_CELL_OLD"
+      ]
+    },
+    {
+      "action": "in[1]",
+      "controller": 1,
+      "physical": [
+        "ARM",
+        "PRODUCTION_CELL_OLD"
+      ]
+    },
+    {
+      "action": "in[2]",
+      "controller": 79,
+      "physical": [
+        "ARM",
+        "ARM"
+      ]
+    }
+  ],
+  "before_transfer": {
+    "controller_state": 79,
+    "both_domains": true,
+    "enabled_uc": [],
+    "ready_bits": [
+      true,
+      true
+    ]
+  },
+  "joint_transfer": {
+    "targets": [
+      "CAL_ARM",
+      "CAL_ARM"
+    ],
+    "ready_bits": [
+      false,
+      false
+    ],
+    "interval_safety": false
+  },
+  "logical_argument": [
+    "Both transfer source domains are all seven old local states.",
+    "All seven targets for each component are CAL states.",
+    "Each transfer observation sets its own CalReady bit false; both observations commute on the readiness valuation.",
+    "Before the merged transfer both components are OLD and cannot execute calibrated or beginCalibration, so these bits remain initially true.",
+    "The interval requirement is always active and requires at least one ready bit. The joint transfer enters its absorbing safety error.",
+    "All-new completion requires executing the still-pending transfer; this source-level obstruction is not a replacement for a completed solver LOSS certificate."
+  ],
+  "measurement_caution": "Keep measured TO as TO if no native solver result is returned at 7200 seconds."
+}

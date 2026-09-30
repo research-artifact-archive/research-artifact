@@ -1,0 +1,240 @@
+INFO: Registered Map Environment: MAP_TOR
+INFO: Registered Map Environment: MAP_DSD1
+INFO: Registered Map Environment: MAP_GATEFORM1
+Compiled: TOR_OLD
+Compiled: DSD1_OLD
+Compiled: GATEFORM1_OLD
+Composition:OldEnvironment = OldEnvironment.TOR_OLD || OldEnvironment.DSD1_OLD || OldEnvironment.GATEFORM1_OLD
+State Space: 5 * 8 * 3 = 2 ** 8
+Composing...
+-- States: 120 Transitions: 494 Memory used: 9498K
+Composed in 6ms
+Formula !P_TOR_POLICY = (true U ((validateDSD1 | validateGF1) & !TORDone))
+GBA 2 states 4 transitions
+Buchi automata:
+P_TOR_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |validateDSD1&!TORDone -> S1 |validateGF1&!TORDone -> S1).
+Composition:P_TOR_POLICY = TORDone || validateDSD1 || validateGF1 || SYNC || P_TOR_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 24 Transitions: 86 Memory used: 9738K
+Composed in 2ms
+After Tau elimination = 12 state
+Tau reduction ON
+P_TOR_POLICY minimising...
+Minimised States: 3 in 0ms
+make DFA(P_TOR_POLICY)
+DFA(P_TOR_POLICY) has 2 states.
+Tau reduction ON
+P_TOR_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_DSD1_POLICY = (true U ((DSD1Done & validateTOR) | (validateGF1 & !DSD1Done)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_DSD1_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |DSD1Done&validateTOR -> S1 |validateGF1&!DSD1Done -> S1).
+Composition:P_DSD1_POLICY = DSD1Done || validateGF1 || validateTOR || SYNC || P_DSD1_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 24 Transitions: 98 Memory used: 9780K
+Composed in 2ms
+After Tau elimination = 12 state
+Tau reduction ON
+P_DSD1_POLICY minimising...
+Minimised States: 3 in 0ms
+make DFA(P_DSD1_POLICY)
+DFA(P_DSD1_POLICY) has 2 states.
+Tau reduction ON
+P_DSD1_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_DO_NOT_SEND_TWICE = (true U ((Finished & validateGF1) | ((DSD1Done & validateDSD1) | (TORDone & validateTOR))))
+GBA 2 states 5 transitions
+Buchi automata:
+P_DO_NOT_SEND_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |DSD1Done&validateDSD1 -> S1 |Finished&validateGF1 -> S1 |TORDone&validateTOR -> S1).
+Composition:P_DO_NOT_SEND_TWICE = TORDone || DSD1Done || Finished || validateTOR || validateDSD1 || validateGF1 || SYNC || P_DO_NOT_SEND_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 8
+Composing...
+-- States: 80 Transitions: 404 Memory used: 10336K
+Composed in 2ms
+After Tau elimination = 40 state
+Tau reduction ON
+P_DO_NOT_SEND_TWICE minimising...
+Minimised States: 5 in 1ms
+make DFA(P_DO_NOT_SEND_TWICE)
+DFA(P_DO_NOT_SEND_TWICE) has 4 states.
+Tau reduction ON
+P_DO_NOT_SEND_TWICE minimising...
+Minimised States: 4 in 0ms
+Composition:OldController = OldEnvironment || P_TOR_POLICY || P_DO_NOT_SEND_TWICE || P_DSD1_POLICY
+State Space: 120 * 2 * 4 * 2 = 2 ** 11
+Composing...
+-- States: 64 Transitions: 212 Memory used: 9944K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 65
+Game states: 65
+Game transitions: 195
+Analysis time: 41ms.
+Controller [64] generated successfully.
+Composition:OldController = OldController || P_TOR_POLICY || P_DO_NOT_SEND_TWICE || P_DSD1_POLICY
+State Space: 64 * 2 * 4 * 2 = 2 ** 10
+Composing...
+-- States: 64 Transitions: 148 Memory used: 11872K
+Composed in 5ms
+ - Synthesizing Mapping Environment from lists (size=3)...
+INFO: Auto-compiling dependency: TOR_NEW
+Generating Mapping Environment: MAP_TOR_OLD_TOR_NEW
+INFO: Auto-compiling dependency: DSD1_NEW
+Generating Mapping Environment: MAP_DSD1_OLD_DSD1_NEW
+INFO: Auto-compiling dependency: GATEFORM1_NEW
+Generating Mapping Environment: MAP_GATEFORM1_OLD_GATEFORM1_NEW
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_NEW_TOR_POLICY = (true U (validateGF1 & !NewTORDone))
+GBA 2 states 3 transitions
+Buchi automata:
+P_NEW_TOR_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |validateGF1&!NewTORDone -> S1).
+Composition:P_NEW_TOR_POLICY = NewTORDone || validateGF1 || SYNC || P_NEW_TOR_POLICY
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 57 Memory used: 11454K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_NEW_TOR_POLICY minimising...
+Minimised States: 3 in 0ms
+make DFA(P_NEW_TOR_POLICY)
+DFA(P_NEW_TOR_POLICY) has 2 states.
+Tau reduction ON
+P_NEW_TOR_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_NEW_DSD1_POLICY = (true U ((validateTOR | validateGF1) & !DSD1Done))
+GBA 2 states 4 transitions
+Buchi automata:
+P_NEW_DSD1_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |validateGF1&!DSD1Done -> S1 |validateTOR&!DSD1Done -> S1).
+Composition:P_NEW_DSD1_POLICY = DSD1Done || validateTOR || validateGF1 || SYNC || P_NEW_DSD1_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 24 Transitions: 98 Memory used: 11307K
+Composed in 3ms
+After Tau elimination = 12 state
+Tau reduction ON
+P_NEW_DSD1_POLICY minimising...
+Minimised States: 3 in 0ms
+make DFA(P_NEW_DSD1_POLICY)
+DFA(P_NEW_DSD1_POLICY) has 2 states.
+Tau reduction ON
+P_NEW_DSD1_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !P_NEW_DO_NOT_SEND_TWICE = (true U ((Finished & validateGF1) | ((DSD1Done & validateDSD1) | (NewTORDone & validateTOR))))
+GBA 2 states 5 transitions
+Buchi automata:
+P_NEW_DO_NOT_SEND_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |DSD1Done&validateDSD1 -> S1 |Finished&validateGF1 -> S1 |NewTORDone&validateTOR -> S1).
+Composition:P_NEW_DO_NOT_SEND_TWICE = NewTORDone || DSD1Done || Finished || validateTOR || validateDSD1 || validateGF1 || SYNC || P_NEW_DO_NOT_SEND_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 8
+Composing...
+-- States: 80 Transitions: 404 Memory used: 11633K
+Composed in 4ms
+After Tau elimination = 40 state
+Tau reduction ON
+P_NEW_DO_NOT_SEND_TWICE minimising...
+Minimised States: 5 in 0ms
+make DFA(P_NEW_DO_NOT_SEND_TWICE)
+DFA(P_NEW_DO_NOT_SEND_TWICE) has 4 states.
+Tau reduction ON
+P_NEW_DO_NOT_SEND_TWICE minimising...
+Minimised States: 4 in 0ms
+Composition:NewEnvironment = NewEnvironment.TOR_NEW || NewEnvironment.DSD1_NEW || NewEnvironment.GATEFORM1_NEW
+State Space: 5 * 8 * 3 = 2 ** 8
+Composing...
+-- States: 120 Transitions: 494 Memory used: 11613K
+Composed in 3ms
+Composition:NewController = NewEnvironment || P_NEW_DO_NOT_SEND_TWICE || P_NEW_TOR_POLICY || P_NEW_DSD1_POLICY
+State Space: 120 * 4 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 64 Transitions: 212 Memory used: 11976K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 65
+Game states: 65
+Game transitions: 195
+Analysis time: 9ms.
+Controller [64] generated successfully.
+Composition:NewController = NewController || P_NEW_DO_NOT_SEND_TWICE || P_NEW_TOR_POLICY || P_NEW_DSD1_POLICY
+State Space: 64 * 4 * 2 * 2 = 2 ** 10
+Composing...
+-- States: 64 Transitions: 148 Memory used: 13098K
+Composed in 3ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 64
+Formula !R1_P_NEW_TOR_POLICY = (true U (AfterStopBeforeStart_P_NEW_TOR_POLICY & (((((((validateTOR | validateDSD1) | validateQA) | validateGF1) | reviewTOR) | reviewDSD1) | readyTOR) | readyDSD1)))
+GBA 2 states 10 transitions
+Buchi automata:
+R1_P_NEW_TOR_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |AfterStopBeforeStart_P_NEW_TOR_POLICY&readyDSD1 -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&readyTOR -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&reviewDSD1 -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&reviewTOR -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&validateDSD1 -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&validateGF1 -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&validateQA -> S1 |AfterStopBeforeStart_P_NEW_TOR_POLICY&validateTOR -> S1).
+Composition:R1_P_NEW_TOR_POLICY = AfterStopBeforeStart_P_NEW_TOR_POLICY || validateTOR || validateDSD1 || validateQA || validateGF1 || reviewTOR || reviewDSD1 || readyTOR || readyDSD1 || SYNC || R1_P_NEW_TOR_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 72 Transitions: 512 Memory used: 14683K
+Composed in 7ms
+After Tau elimination = 36 state
+Tau reduction ON
+R1_P_NEW_TOR_POLICY minimising...
+Minimised States: 3 in 2ms
+make DFA(R1_P_NEW_TOR_POLICY)
+DFA(R1_P_NEW_TOR_POLICY) has 2 states.
+Tau reduction ON
+R1_P_NEW_TOR_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !R1_P_NEW_DSD1_POLICY = (true U (AfterStopBeforeStart_P_NEW_DSD1_POLICY & (((((((validateTOR | validateDSD1) | validateQA) | validateGF1) | reviewTOR) | reviewDSD1) | readyTOR) | readyDSD1)))
+GBA 2 states 10 transitions
+Buchi automata:
+R1_P_NEW_DSD1_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&readyDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&readyTOR -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&reviewDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&reviewTOR -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&validateDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&validateGF1 -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&validateQA -> S1 |AfterStopBeforeStart_P_NEW_DSD1_POLICY&validateTOR -> S1).
+Composition:R1_P_NEW_DSD1_POLICY = AfterStopBeforeStart_P_NEW_DSD1_POLICY || validateTOR || validateDSD1 || validateQA || validateGF1 || reviewTOR || reviewDSD1 || readyTOR || readyDSD1 || SYNC || R1_P_NEW_DSD1_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 72 Transitions: 512 Memory used: 16289K
+Composed in 6ms
+After Tau elimination = 36 state
+Tau reduction ON
+R1_P_NEW_DSD1_POLICY minimising...
+Minimised States: 3 in 1ms
+make DFA(R1_P_NEW_DSD1_POLICY)
+DFA(R1_P_NEW_DSD1_POLICY) has 2 states.
+Tau reduction ON
+R1_P_NEW_DSD1_POLICY minimising...
+Minimised States: 2 in 0ms
+Formula !R1_P_NEW_DO_NOT_SEND_TWICE = (true U (AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE & (((((((validateTOR | validateDSD1) | validateQA) | validateGF1) | reviewTOR) | reviewDSD1) | readyTOR) | readyDSD1)))
+GBA 2 states 10 transitions
+Buchi automata:
+R1_P_NEW_DO_NOT_SEND_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&readyDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&readyTOR -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&reviewDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&reviewTOR -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&validateDSD1 -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&validateGF1 -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&validateQA -> S1 |AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE&validateTOR -> S1).
+Composition:R1_P_NEW_DO_NOT_SEND_TWICE = AfterStopBeforeStart_P_NEW_DO_NOT_SEND_TWICE || validateTOR || validateDSD1 || validateQA || validateGF1 || reviewTOR || reviewDSD1 || readyTOR || readyDSD1 || SYNC || R1_P_NEW_DO_NOT_SEND_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 72 Transitions: 512 Memory used: 17535K
+Composed in 5ms
+After Tau elimination = 36 state
+Tau reduction ON
+R1_P_NEW_DO_NOT_SEND_TWICE minimising...
+Minimised States: 3 in 0ms
+make DFA(R1_P_NEW_DO_NOT_SEND_TWICE)
+DFA(R1_P_NEW_DO_NOT_SEND_TWICE) has 2 states.
+Tau reduction ON
+R1_P_NEW_DO_NOT_SEND_TWICE minimising...
+Minimised States: 2 in 0ms
+ - Extracting New Safety Fluents and Building Look-up Tables...
+FRONTEND_LOOKUP_EXPORT_COMPLETE requirements=3 fg_solver=false physical_closure=false activation_spec=false

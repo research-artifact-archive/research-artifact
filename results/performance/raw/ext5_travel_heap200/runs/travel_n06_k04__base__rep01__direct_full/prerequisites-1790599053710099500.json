@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "any_of": [
+        {
+          "observed_status": "TIMEOUT",
+          "prerequisite": {
+            "campaign": "ext3_travel_next",
+            "method_id": "direct_full",
+            "model_id": "travel_n06_k01",
+            "requires": "SUCCESS",
+            "target_id": "base"
+          },
+          "reason": "observed terminal TIMEOUT",
+          "satisfied": false,
+          "verified_success": false
+        },
+        {
+          "observed_status": "TIMEOUT",
+          "prerequisite": {
+            "campaign": "ext5_travel_heap200",
+            "method_id": "direct_full",
+            "model_id": "travel_n06_k01",
+            "requires": "SUCCESS",
+            "target_id": "base"
+          },
+          "reason": "observed terminal TIMEOUT",
+          "satisfied": false,
+          "verified_success": false
+        }
+      ],
+      "prerequisite": {
+        "any_of": [
+          {
+            "campaign": "ext3_travel_next",
+            "method_id": "direct_full",
+            "model_id": "travel_n06_k01",
+            "requires": "SUCCESS",
+            "target_id": "base"
+          },
+          {
+            "campaign": "ext5_travel_heap200",
+            "method_id": "direct_full",
+            "model_id": "travel_n06_k01",
+            "requires": "SUCCESS",
+            "target_id": "base"
+          }
+        ]
+      },
+      "satisfied": false
+    }
+  ],
+  "job_id": "travel_n06_k04__base__rep01__direct_full"
+}

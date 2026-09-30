@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage[margin=18mm]{geometry}
+\usepackage{booktabs}
+\begin{document}
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Variant & Result & States & Queries & Rank & $|L|$ & Solve+check (s) \\
+\midrule
+Lazy / fine & WIN & 6,639 & 134,128 & 37 & -- & 9.660 \\
+Lazy / merged transfers & TO & -- & -- & -- & -- & -- \\
+Direct-Full / fine & TO & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{PC2 calibration-setting variant, preserving the original 12 old and 12 new safety requirements and ordinary plant transitions. A new endpoint availability requirement and an update-interval availability requirement allow at most one arm in the added calibration state. Each fixed-E1 run has a 1,200\,s whole-JVM limit and 32\,GB heap. Time includes the internal certificate checker and is a Mac reference value only. TO is retained as an incomplete decision; unavailable counters are not inferred. Rank is the maximum returned certificate rank; $L$ is the discovered-state losing certificate.}
+\label{tab:e6-pc2-calibration}
+\end{table}
+
+\noindent The fixed CLI reports generated transition outcomes, but does not directly instrument distinct enabled buckets. Full-certificate export replays are validation only and are excluded from this performance table.
+\end{document}

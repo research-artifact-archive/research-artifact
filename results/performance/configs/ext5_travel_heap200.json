@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "master_seed": 2027080504,
+  "java": "java",
+  "classpath": "Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "methods": [
+    {
+      "id": "fg_ducs_otf",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "primary_target",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "direct_full",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_eager_controllable",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "lazy_expansion_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    },
+    {
+      "id": "fg_ducs_otf_update_first",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "action_order_ablation",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "update_first",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "repetitions": 1,
+  "timeout_seconds": 7200,
+  "rss_poll_interval_seconds": 0.1,
+  "java_heap": "200g",
+  "results_root": "raw",
+  "parallel_trials": 1,
+  "minimum_physical_memory_gib": 240,
+  "minimum_free_disk_gib": 50,
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    }
+  ],
+  "backend": "lts",
+  "experiment_id": "fg-ducs-xeon-ext5_travel_heap200",
+  "models": [
+    {
+      "id": "travel_n06_k01",
+      "path": "inputs/travel/travel_agency_n06_k01.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 1
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full"
+      ],
+      "prerequisites_by_method": {
+        "fg_ducs_otf": [
+          {
+            "campaign": "ext3_travel_next",
+            "model_id": "travel_n06_k01",
+            "target_id": "base",
+            "method_id": "fg_ducs_otf",
+            "requires": "not_SUCCESS"
+          }
+        ],
+        "direct_full": [
+          {
+            "campaign": "ext3_travel_next",
+            "model_id": "travel_n06_k01",
+            "target_id": "base",
+            "method_id": "direct_full",
+            "requires": "not_SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "id": "travel_n06_k04",
+      "path": "inputs/travel/travel_agency_n06_k04.lts",
+      "family": "travel_derived",
+      "factors": {
+        "N": 6,
+        "K": 4
+      },
+      "method_ids": [
+        "fg_ducs_otf",
+        "direct_full"
+      ],
+      "prerequisites_by_method": {
+        "fg_ducs_otf": [
+          {
+            "any_of": [
+              {
+                "campaign": "ext3_travel_next",
+                "model_id": "travel_n06_k01",
+                "target_id": "base",
+                "method_id": "fg_ducs_otf",
+                "requires": "SUCCESS"
+              },
+              {
+                "campaign": "ext5_travel_heap200",
+                "model_id": "travel_n06_k01",
+                "target_id": "base",
+                "method_id": "fg_ducs_otf",
+                "requires": "SUCCESS"
+              }
+            ]
+          }
+        ],
+        "direct_full": [
+          {
+            "any_of": [
+              {
+                "campaign": "ext3_travel_next",
+                "model_id": "travel_n06_k01",
+                "target_id": "base",
+                "method_id": "direct_full",
+                "requires": "SUCCESS"
+              },
+              {
+                "campaign": "ext5_travel_heap200",
+                "model_id": "travel_n06_k01",
+                "target_id": "base",
+                "method_id": "direct_full",
+                "requires": "SUCCESS"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "extended_budget": true,
+  "unit_order": "listed",
+  "monotone_skip": true,
+  "required_classpath_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07"
+}

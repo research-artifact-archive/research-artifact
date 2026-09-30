@@ -1,0 +1,1339 @@
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/ContractMerge.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/ContractMerge.java
+new file mode 100644
+index 0000000..4900d36
+--- /dev/null
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/ContractMerge.java
+@@ -0,0 +1,109 @@
++package ltsa.updatingControllers.otf;
++
++import java.util.*;
++import java.util.function.BiFunction;
++
++/** Contract preprocessing for the E1 ablation. No search/goal rule is changed. */
++final class ContractMerge {
++    private ContractMerge() { }
++
++    static <S, M> FineGrainedUpdateProblem<S, M> apply(
++            FineGrainedUpdateProblem<S, M> source, String mode) {
++        if ("none".equals(mode)) return source;
++        boolean transfers = "transfers".equals(mode) || "both".equals(mode);
++        boolean boundaries = "boundaries".equals(mode) || "both".equals(mode);
++        if (!transfers && !boundaries) throw new IllegalArgumentException(
++                "mtsa.otf.contractMerge must be none, transfers, boundaries, or both: " + mode);
++        if (!"none".equals(source.contractMerge())) throw new IllegalArgumentException("Already merged contract");
++        Map<String, String> labels = new LinkedHashMap<>();
++        for (String a : source.commonAlphabet()) labels.put(a, a);
++        if (transfers) for (VersionedComponent<S> c : source.components())
++            labels.put(c.reconfigureAction(), "ablation.merge.transfers");
++        if (boundaries) for (Requirement<S, M> r : source.requirements()) {
++            if (r.role() == RequirementRole.OLD) labels.put(r.stopAction().get(), "ablation.merge.stops");
++            if (r.role() == RequirementRole.NEW) labels.put(r.startAction().get(), "ablation.merge.starts");
++        }
++        for (String a : labels.keySet()) if (!a.equals(labels.get(a)) && source.commonAlphabet().contains(labels.get(a)))
++            throw new IllegalArgumentException("Merged label collides with original alphabet: " + labels.get(a));
++        Map<String, List<String>> groups = new LinkedHashMap<>();
++        for (String a : labels.keySet()) groups.computeIfAbsent(labels.get(a), k -> new ArrayList<>()).add(a);
++        FineGrainedUpdateProblem.Builder<S, M> b = FineGrainedUpdateProblem.<S, M>builder()
++                .normalActions(source.normalActions()).controllableNormalActions(source.controllableNormalActions())
++                .hotSwapActions(source.hotSwapInAction(), source.hotSwapOutAction())
++                .mergedContract(mode, source.hasExhaustiveEndpointCoverage());
++        for (VersionedComponent<S> c : source.components()) b.addComponent(new VersionedComponent<S>(
++                c.id(), c.oldLts(), c.newLts(), c.transferRelation(), labels.get(c.reconfigureAction()),
++                c.oldEnvironmentActions(), c.newEnvironmentActions()));
++        for (Requirement<S, M> r : source.requirements()) {
++            SafetyTester<M> t = tester(r.tester(), groups);
++            if (r.role() == RequirementRole.OLD) b.addRequirement(Requirement.oldRequirement(
++                    r.id(), t, labels.get(r.stopAction().get())));
++            else {
++                ActivationSpec<S, M> a = activation(r.requiredActivationSpec(), groups);
++                b.addRequirement(r.role() == RequirementRole.NEW
++                        ? Requirement.newRequirement(r.id(), t, a, labels.get(r.startAction().get()))
++                        : Requirement.updateTimeRequirement(r.id(), t, a));
++            }
++        }
++        // Retain strict precedence. A collapsed self-edge or induced cycle is
++        // an invalid transformed contract, never silently deleted.
++        for (String after : source.updateActions()) for (String before : source.directPredecessors(after))
++            b.addPrecedence(labels.get(before), labels.get(after));
++        for (CanonicalUpdateConfiguration<S, M> q : source.initialConfigurations()) {
++            Map<String, M> old = new LinkedHashMap<>();
++            for (String id : source.oldRequirementIds()) old.put(id, q.activeTesterStates().get(id));
++            b.addInitialSnapshot(new InitialSnapshot<S, M>(q.physicalState(), old));
++        }
++        for (GoalSignature<S, M> goal : source.goalSignatures()) b.addGoalSignature(goal);
++        return b.build();
++    }
++
++    private static <M> SafetyTester<M> tester(SafetyTester<M> t, Map<String, List<String>> groups) {
++        // Simultaneous observation is well-defined only when member updates
++        // commute. Check all states, not just the states visited by synthesis.
++        checkCommuting(t.states(), groups, t::stepOrStutter);
++        SafetyTester.Builder<M> b = SafetyTester.<M>builder().initialState(t.initialState()).addStates(t.states());
++        for (M error : t.errorStates()) b.addErrorState(error);
++        for (Map.Entry<String, List<String>> g : groups.entrySet()) {
++            if (Collections.disjoint(g.getValue(), t.alphabet())) continue;
++            for (M q : t.states()) b.addTransition(q, g.getKey(), step(q, g.getValue(), t::stepOrStutter));
++        }
++        return b.build();
++    }
++
++    private static <T> T step(T q, List<String> members, BiFunction<T, String, T> step) {
++        for (String a : members) q = step.apply(q, a);
++        return q;
++    }
++
++    private static <T> void checkCommuting(Set<T> states, Map<String, List<String>> groups,
++            BiFunction<T, String, T> step) {
++        for (List<String> members : groups.values()) for (int i = 0; i < members.size(); i++)
++            for (int j = i + 1; j < members.size(); j++) for (T q : states) {
++                String a = members.get(i), b = members.get(j);
++                if (!Objects.equals(step.apply(step.apply(q, a), b), step.apply(step.apply(q, b), a)))
++                    throw new IllegalArgumentException("Noncommuting monitor observations in merged event: " + a + ", " + b);
++            }
++    }
++
++    private static <S, M> ActivationSpec<S, M> activation(ActivationSpec<S, M> a,
++            Map<String, List<String>> groups) {
++        return activationTyped(a, a.residualLanguage(), groups);
++    }
++
++    @SuppressWarnings("unchecked") // The state belongs to this activation's original residual automaton.
++    private static <S, M, R> ActivationSpec<S, M> activationTyped(ActivationSpec<S, M> a,
++            final ResidualLanguage<R> old, final Map<String, List<String>> groups) {
++        checkCommuting(old.states(), groups, old::step);
++        ResidualLanguage<R> residual = new ResidualLanguage<R>() {
++            public Set<R> states() { return old.states(); }
++            public Set<String> alphabet() { return Collections.unmodifiableSet(groups.keySet()); }
++            public R initialState() { return old.initialState(); }
++            public boolean isError(R q) { return old.isError(q); }
++            public R step(R q, String action) { return ContractMerge.step(q, groups.get(action), old::step); }
++        };
++        ActivationSpec.Builder<S, M, R> b = ActivationSpec.builder(residual);
++        for (PhysicalState<S> p : a.domain()) b.put(p, a.activate(p), (R) a.residualStateAt(p).get());
++        return b.build();
++    }
++}
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
+index 1891ff3..811839b 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
+@@ -32,12 +32,20 @@ public final class DirectFullStrongSolver<Q, A, G> {
+ 
+     private final ImplicitStrongGame<Q, A, G> game;
+     private Statistics statistics;
++    private final boolean pruneControllableAtUncontrollable;
+ 
+     public DirectFullStrongSolver(ImplicitStrongGame<Q, A, G> game) {
++        this(game, false);
++    }
++
++    /** Full construction with optional UC-priority pruning; Post is unchanged. */
++    public DirectFullStrongSolver(ImplicitStrongGame<Q, A, G> game,
++            boolean pruneControllableAtUncontrollable) {
+         if (game == null) {
+             throw new IllegalArgumentException("game must not be null");
+         }
+         this.game = game;
++        this.pruneControllableAtUncontrollable = pruneControllableAtUncontrollable;
+     }
+ 
+     public OtfDucsResult<Q, A, G> synthesize() {
+@@ -152,8 +160,24 @@ public final class DirectFullStrongSolver<Q, A, G> {
+ 
+             Map<A, Set<Q>> byAction =
+                     new LinkedHashMap<A, Set<Q>>();
+-            for (A action : sortedActions(
+-                    state, game.candidateActions(state))) {
++            List<A> actions = sortedActions(state, game.candidateActions(state));
++            if (pruneControllableAtUncontrollable) {
++                // Stable partition: determine all enabled UC buckets before
++                // considering any controllable candidate. Empty UC candidates
++                // do not justify pruning. No fixed point is computed here.
++                List<A> ordered = new ArrayList<A>();
++                for (A action : actions) {
++                    if (!game.isControllable(action)) ordered.add(action);
++                }
++                for (A action : actions) {
++                    if (game.isControllable(action)) ordered.add(action);
++                }
++                actions = ordered;
++            }
++            boolean uncontrollableEnabled = false;
++            for (A action : actions) {
++                if (pruneControllableAtUncontrollable && uncontrollableEnabled
++                        && game.isControllable(action)) continue;
+                 explicit.queriedStateActionPairs++;
+                 Set<Q> rawOutcomes = game.post(state, action);
+                 if (rawOutcomes == null) {
+@@ -164,6 +188,7 @@ public final class DirectFullStrongSolver<Q, A, G> {
+                 if (rawOutcomes.isEmpty()) {
+                     continue;
+                 }
++                if (!game.isControllable(action)) uncontrollableEnabled = true;
+                 LinkedHashSet<Q> outcomes =
+                         new LinkedHashSet<Q>(sortedStates(rawOutcomes));
+                 byAction.put(action, outcomes);
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java
+index 096bd05..03b69df 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedSuccessorOracle.java
+@@ -206,6 +206,8 @@ public final class FineGrainedSuccessorOracle<S, M>
+             return Collections.emptySet();
+         }
+ 
++        if (!"none".equals(problem.contractMerge())) return postMergedUpdate(state, action);
++
+         OptionalInt componentIndex = problem.componentIndexForReconfigure(action);
+         if (componentIndex.isPresent()) {
+             return postReconfigure(state, action, componentIndex.getAsInt());
+@@ -455,6 +457,52 @@ public final class FineGrainedSuccessorOracle<S, M>
+         return immutableResults(results);
+     }
+ 
++    /** Atomic product relation for a preprocessed update event. */
++    private Set<CanonicalUpdateConfiguration<S, M>> postMergedUpdate(
++            CanonicalUpdateConfiguration<S, M> state, String action) {
++        List<Integer> indices = problem.componentIndicesForReconfigure(action);
++        List<Requirement<S, M>> boundaries = problem.requirementsForUpdateAction(action);
++        List<PhysicalState<S>> physicalOutcomes = new ArrayList<>();
++        if (!indices.isEmpty()) {
++            List<List<TaggedState<S>>> choices = new ArrayList<>();
++            for (int i = 0; i < problem.components().size(); i++) {
++                TaggedState<S> current = state.physicalState().component(i);
++                List<TaggedState<S>> targets = new ArrayList<>();
++                if (indices.contains(i)) {
++                    if (!current.isOld()) return Collections.emptySet();
++                    for (S q : problem.components().get(i).transferFrom(current.state()))
++                        targets.add(TaggedState.newState(q));
++                    if (targets.isEmpty()) return Collections.emptySet();
++                } else targets.add(current);
++                choices.add(targets);
++            }
++            cartesianPhysical(choices, 0, new ArrayList<TaggedState<S>>(), physicalOutcomes);
++        } else if (!boundaries.isEmpty()) physicalOutcomes.add(state.physicalState());
++        else return Collections.emptySet();
++
++        Map<String, M> testers = new LinkedHashMap<>();
++        Set<String> stopped = new LinkedHashSet<>();
++        for (Requirement<S, M> r : boundaries) {
++            if (r.role() == RequirementRole.OLD) {
++                if (!state.isTesterActive(r.id())) return Collections.emptySet();
++                stopped.add(r.id());
++            } else if (state.isTesterActive(r.id()) || !r.requiredActivationSpec().isDefinedAt(state.physicalState()))
++                return Collections.emptySet();
++        }
++        for (Map.Entry<String, M> active : state.activeTesterStates().entrySet())
++            if (!stopped.contains(active.getKey())) testers.put(active.getKey(),
++                    problem.requirementsById().get(active.getKey()).tester().stepOrStutter(active.getValue(), action));
++        // All initializers read the same pre-event physical state. Newly
++        // activated testers do not observe their own shared start boundary.
++        for (Requirement<S, M> r : boundaries) if (r.role() == RequirementRole.NEW)
++            testers.put(r.id(), r.requiredActivationSpec().activate(state.physicalState()));
++        Set<String> pending = without(state.pendingActions(), action);
++        Set<CanonicalUpdateConfiguration<S, M>> result = new LinkedHashSet<>();
++        for (PhysicalState<S> physical : physicalOutcomes)
++            result.add(CanonicalUpdateConfiguration.of(physical, testers, pending));
++        return immutableResults(result);
++    }
++
+     private Set<CanonicalUpdateConfiguration<S, M>> postReconfigure(
+             CanonicalUpdateConfiguration<S, M> state,
+             String action,
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java
+index 28090fb..2438097 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/FineGrainedUpdateProblem.java
+@@ -29,6 +29,7 @@ public final class FineGrainedUpdateProblem<S, M> {
+     public static final String DEFAULT_HOT_SWAP_IN = "hotSwapIn";
+     public static final String DEFAULT_HOT_SWAP_OUT = "hotSwapOut";
+ 
++    private final String contractMerge;
+     private final List<VersionedComponent<S>> components;
+     private final List<Map<S, Integer>> oldComponentStateOrder;
+     private final List<Map<S, Integer>> newComponentStateOrder;
+@@ -55,6 +56,7 @@ public final class FineGrainedUpdateProblem<S, M> {
+     private final boolean newEndpointExhaustivelyEnumerated;
+ 
+     private FineGrainedUpdateProblem(Builder<S, M> builder) {
++        this.contractMerge = builder.contractMerge;
+         this.components = immutableList(builder.components, "components");
+         if (components.isEmpty()) {
+             throw new IllegalArgumentException("At least one versioned component is required");
+@@ -160,14 +162,40 @@ public final class FineGrainedUpdateProblem<S, M> {
+         List<InitialSnapshot<S, M>> snapshots = immutableList(builder.initialSnapshots, "initialSnapshots");
+         this.initialConfigurations = buildInitialConfigurations(snapshots);
+         this.goalSignatures = validateGoalSignatures(builder.goalSignatures);
+-        this.oldEndpointExhaustivelyEnumerated = builder.initialSnapshotsEnumerated;
+-        this.newEndpointExhaustivelyEnumerated = builder.goalSignaturesEnumerated;
++        this.oldEndpointExhaustivelyEnumerated = builder.initialSnapshotsEnumerated || builder.mergedEndpointCoverage;
++        this.newEndpointExhaustivelyEnumerated = builder.goalSignaturesEnumerated || builder.mergedEndpointCoverage;
+     }
+ 
+     public static <S, M> Builder<S, M> builder() {
+         return new Builder<>();
+     }
+ 
++    /** Apply E5 source-domain filtering before any E1 contract event merging. */
++    public FineGrainedUpdateProblem<S, M> withTransferDomain(String mode) {
++        return TransferDomainRestriction.apply(this, mode).problem();
++    }
++
++    /** Apply E1 event merging before constructing the implicit game. */
++    public FineGrainedUpdateProblem<S, M> withContractMerge(String mode) {
++        return ContractMerge.apply(this, Objects.requireNonNull(mode, "mode").trim());
++    }
++
++    public String contractMerge() { return contractMerge; }
++
++    public List<Integer> componentIndicesForReconfigure(String action) {
++        List<Integer> indices = new ArrayList<>();
++        for (int i = 0; i < components.size(); i++)
++            if (components.get(i).reconfigureAction().equals(action)) indices.add(i);
++        return indices;
++    }
++
++    public List<Requirement<S, M>> requirementsForUpdateAction(String action) {
++        List<Requirement<S, M>> result = new ArrayList<>();
++        for (Requirement<S, M> r : requirements())
++            if (r.updateAction().isPresent() && r.updateAction().get().equals(action)) result.add(r);
++        return result;
++    }
++
+     public List<VersionedComponent<S>> components() {
+         return components;
+     }
+@@ -667,13 +695,14 @@ public final class FineGrainedUpdateProblem<S, M> {
+         return Collections.unmodifiableList(result);
+     }
+ 
+-    private static void registerUpdateAction(
++    private void registerUpdateAction(
+             String action,
+             UpdateEventKind kind,
+             Set<String> allActions,
+             Map<String, UpdateEventKind> kinds) {
+         action = nonBlank(action, "update action");
+         if (!allActions.add(action)) {
++            if (!"none".equals(contractMerge) && kinds.get(action) == kind) return;
+             throw new IllegalArgumentException("Every concrete update action must be unique: " + action);
+         }
+         kinds.put(action, kind);
+@@ -737,6 +766,15 @@ public final class FineGrainedUpdateProblem<S, M> {
+     }
+ 
+     public static final class Builder<S, M> {
++        private String contractMerge = "none";
++        private boolean mergedEndpointCoverage;
++
++        Builder<S, M> mergedContract(String mode, boolean exhaustive) {
++            this.contractMerge = mode;
++            this.mergedEndpointCoverage = exhaustive;
++            return this;
++        }
++
+         private final List<VersionedComponent<S>> components = new ArrayList<>();
+         private final List<Requirement<S, M>> requirements = new ArrayList<>();
+         private final Set<String> normalActions = new LinkedHashSet<>();
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java
+index 1f68d1c..5eb1452 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/IndependentFineGrainedSemantics.java
+@@ -100,6 +100,8 @@ public final class IndependentFineGrainedSemantics<S, M> {
+             return Collections.emptySet();
+         }
+ 
++        if (!"none".equals(problem.contractMerge())) return mergedSuccessors(state, action);
++
+         OptionalInt componentIndex =
+                 problem.componentIndexForReconfigure(action);
+         if (componentIndex.isPresent()) {
+@@ -118,6 +120,46 @@ public final class IndependentFineGrainedSemantics<S, M> {
+         return Collections.emptySet();
+     }
+ 
++    // Separately enumerate the product by iterative tuple extension, without
++    // invoking the production successor implementation.
++    private Set<CanonicalUpdateConfiguration<S, M>> mergedSuccessors(
++            CanonicalUpdateConfiguration<S, M> state, String action) {
++        Set<PhysicalState<S>> physical = new LinkedHashSet<>();
++        physical.add(state.physicalState());
++        boolean known = false;
++        for (int i = 0; i < problem.components().size(); i++) {
++            VersionedComponent<S> c = problem.components().get(i);
++            if (!c.reconfigureAction().equals(action)) continue;
++            known = true;
++            TaggedState<S> old = state.physicalState().component(i);
++            if (!old.isOld()) return Collections.emptySet();
++            Set<PhysicalState<S>> next = new LinkedHashSet<>();
++            for (PhysicalState<S> p : physical) for (S target : c.transferFrom(old.state()))
++                next.add(p.withComponent(i, TaggedState.newState(target)));
++            physical = next;
++        }
++        Map<String, M> testers = new LinkedHashMap<>();
++        for (Requirement<S, M> r : problem.requirements()) {
++            boolean boundary = r.updateAction().isPresent() && r.updateAction().get().equals(action);
++            if (boundary) known = true;
++            if (boundary && r.role() == RequirementRole.OLD) {
++                if (!state.isTesterActive(r.id())) return Collections.emptySet();
++            } else if (boundary && r.role() == RequirementRole.NEW) {
++                ActivationSpec<S, M> a = r.requiredActivationSpec();
++                if (state.isTesterActive(r.id()) || !a.isDefinedAt(state.physicalState())) return Collections.emptySet();
++                testers.put(r.id(), a.activate(state.physicalState()));
++            } else if (state.isTesterActive(r.id())) {
++                testers.put(r.id(), r.tester().stepOrStutter(state.activeTesterStates().get(r.id()), action));
++            }
++        }
++        if (!known) return Collections.emptySet();
++        Set<String> remaining = new LinkedHashSet<>(state.pendingActions());
++        remaining.remove(action);
++        Set<CanonicalUpdateConfiguration<S, M>> result = new LinkedHashSet<>();
++        for (PhysicalState<S> p : physical) result.add(CanonicalUpdateConfiguration.of(p, testers, remaining));
++        return immutableResults(result);
++    }
++
+     // Enumerate ordinary successors independently of the production guard.
+     private boolean hasEnabledUncontrollable(
+             CanonicalUpdateConfiguration<S, M> state) {
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/LosingCertificateDiagnostics.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/LosingCertificateDiagnostics.java
+new file mode 100644
+index 0000000..2593dfd
+--- /dev/null
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/LosingCertificateDiagnostics.java
+@@ -0,0 +1,50 @@
++package ltsa.updatingControllers.otf;
++
++import java.util.*;
++
++/** Bounded, descriptive evidence from a checked losing certificate; not a causal diagnosis. */
++public final class LosingCertificateDiagnostics {
++    private LosingCertificateDiagnostics() { }
++    public static <Q,A,G> Map<String,Object> summarize(
++            ImplicitStrongGame<Q,A,G> game, OtfDucsResult<Q,A,G> result) {
++        return summarize(game, result, q -> Collections.<String,Object>emptyMap());
++    }
++    public static <Q,A,G> Map<String,Object> summarize(
++            ImplicitStrongGame<Q,A,G> game, OtfDucsResult<Q,A,G> result,
++            java.util.function.Function<Q,Map<String,Object>> additionalRootEvidence) {
++        if (result.isWinning()) throw new IllegalArgumentException("A losing certificate is required");
++        Set<Q> losing=result.losingCertificate().losingStates();
++        long unsafe=0, initial=0;
++        for(Q q:losing) if(!game.isSafe(q)) unsafe++;
++        List<Object> examples=new ArrayList<>();
++        for(Q q:game.initialStates()) if(losing.contains(q)) {
++            initial++;
++            if(examples.size()>=3) continue;
++            Map<String,Object> root=new LinkedHashMap<>();
++            root.put("state",String.valueOf(q));root.putAll(additionalRootEvidence.apply(q));
++            if(!game.isSafe(q)) root.put("local_obstruction","unsafe_initial_state");
++            else {
++                List<Object> actions=new ArrayList<>(); int enabled=0, uc=0, updates=0;
++                for(A action:game.candidateActions(q)) {
++                    Set<Q> targets=game.post(q,action); if(targets.isEmpty()) continue;
++                    enabled++; if(!game.isControllable(action)) uc++; if(game.isUpdateAction(action)) updates++;
++                    long bad=0; for(Q target:targets) if(losing.contains(target)) bad++;
++                    Map<String,Object> bucket=new LinkedHashMap<>();
++                    bucket.put("action",String.valueOf(action));bucket.put("controllable",game.isControllable(action));
++                    bucket.put("outcomes",targets.size());bucket.put("outcomes_in_certificate_region",bad);actions.add(bucket);
++                }
++                root.put("local_obstruction",uc>0?"enabled_uncontrollable_with_losing_outcome":
++                        enabled==0?"safe_non_goal_deadlock":"each_enabled_controllable_choice_has_losing_outcome");
++                root.put("enabled_uncontrollable_buckets",uc);root.put("enabled_update_buckets",updates);
++                root.put("enabled_action_buckets",actions);
++            }
++            examples.add(root);
++        }
++        Map<String,Object> summary=new LinkedHashMap<>();
++        summary.put("scope","checked discovered-state losing certificate; local root closure evidence, not a maximal whole-game region or causal explanation");
++        summary.put("region_states",losing.size());summary.put("unsafe_region_states",unsafe);summary.put("safe_region_states",losing.size()-unsafe);
++        summary.put("initial_states",game.initialStates().size());summary.put("losing_initial_states",initial);
++        summary.put("initial_examples_limit",3);summary.put("initial_examples",examples);
++        return Collections.unmodifiableMap(summary);
++    }
++}
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
+index 57ec921..dd374d6 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
+@@ -137,6 +137,9 @@ public final class MtsaRevisedOtfDucsAdapter {
+                 "valid", "text");
+         long preparationNanos = System.nanoTime() - preparationStart;
+         recordPreparedInput(prepared, preparationNanos);
++        recordTransferDomain(prepared.transferDomain);
++        metric("revised_contract_merge", "Revised Identity", "Contract event merge",
++                prepared.problem.contractMerge(), "text");
+         UpdatePolicyRestriction<LocalState, Long> policyRestriction =
+                 new UpdatePolicyRestriction<LocalState, Long>(
+                         prepared.problem, policyRestrictionMode);
+@@ -169,7 +172,7 @@ public final class MtsaRevisedOtfDucsAdapter {
+         RestrictedFineGrainedGame<LocalState, Long> game =
+                 new RestrictedFineGrainedGame<LocalState, Long>(
+                         baseGame, policyRestriction);
+-        if ("direct_full".equals(solverMode)) {
++        if (isDirectFull(solverMode)) {
+             DirectFullStrongSolver<
+                     CanonicalUpdateConfiguration<LocalState, Long>,
+                     String,
+@@ -177,7 +180,8 @@ public final class MtsaRevisedOtfDucsAdapter {
+                     new DirectFullStrongSolver<
+                             CanonicalUpdateConfiguration<LocalState, Long>,
+                             String,
+-                            GoalSignature<LocalState, Long>>(game);
++                            GoalSignature<LocalState, Long>>(game,
++                                    "direct_full_ucpruned".equals(solverMode));
+             result = directFull.synthesize();
+             new OtfDucsCertificateChecker<
+                     CanonicalUpdateConfiguration<LocalState, Long>,
+@@ -236,6 +240,14 @@ public final class MtsaRevisedOtfDucsAdapter {
+                     + "(same successor semantics): passed");
+             printStatistics(result, output);
+             recordLosingCertificate(result);
++            long diagnosticStart = System.nanoTime();
++            metric("revised_losing_certificate_summary", "Revised Correctness",
++                    "Losing certificate local closure evidence",
++                    jsonText(LosingCertificateDiagnostics.summarize(game, result,
++                            q -> losingRootTransferEvidence(prepared.problem, q))), "json");
++            metric("revised_losing_certificate_diagnostic_time", "Revised Time / Memory",
++                    "Post-verification losing certificate diagnostic time",
++                    millisText(System.nanoTime() - diagnosticStart), "ms");
+             recordEvaluationCompleteness(independent);
+             Outcome outcome = new Outcome(prepared, result, null);
+             source.recordRevisedOtfDucsOutcome(outcome);
+@@ -494,10 +506,12 @@ public final class MtsaRevisedOtfDucsAdapter {
+         String schedule;
+         String methodId;
+         String implementationVariant;
+-        if ("direct_full".equals(solverMode)) {
++        if (isDirectFull(solverMode)) {
+             schedule = "exhaustive_reachable_game_then_explicit_fixed_point";
+-            methodId = "Direct-Full";
+-            implementationVariant = "revised_direct_full_v1";
++            methodId = "direct_full_ucpruned".equals(solverMode)
++                    ? "Direct-Full-UCPruned" : "Direct-Full";
++            implementationVariant = "direct_full_ucpruned".equals(solverMode)
++                    ? "revised_direct_full_ucpruned_v1" : "revised_direct_full_v1";
+         } else if ("generic_lazy".equals(solverMode)) {
+             schedule = "opaque_hash_order_batched_materialization_and_fixed_point";
+             methodId = "Generic-Lazy";
+@@ -875,7 +889,7 @@ public final class MtsaRevisedOtfDucsAdapter {
+         metric("revised_early_success", "Revised Workload / Search",
+                 "Early success", Boolean.toString(statistics.earlySuccess()),
+                 "boolean");
+-        String searchMode = "direct_full".equals(solverMode)
++        String searchMode = isDirectFull(solverMode)
+                 ? "exhaustive_reachable_game_then_explicit_fixed_point"
+                 : ("generic_lazy".equals(solverMode)
+                         ? "opaque_hash_order_batched_materialization_and_fixed_point"
+@@ -1008,18 +1022,58 @@ public final class MtsaRevisedOtfDucsAdapter {
+                 millisText(statistics.certificateNanoseconds()), "ms");
+     }
+ 
++    private static boolean isDirectFull(String mode) {
++        return "direct_full".equals(mode) || "direct_full_ucpruned".equals(mode);
++    }
++
+     private static String configuredSolverMode() {
+         String value = System.getProperty(
+                 "mtsa.revised.otf.solver", "otf").trim();
+-        if ("otf".equals(value) || "direct_full".equals(value)
++        if ("otf".equals(value) || isDirectFull(value)
+                 || "generic_lazy".equals(value)) {
+             return value;
+         }
+         throw new IllegalArgumentException(
+-                "mtsa.revised.otf.solver must be otf, generic_lazy, or direct_full: "
++                "mtsa.revised.otf.solver must be otf, generic_lazy, direct_full, or direct_full_ucpruned: "
+                         + value);
+     }
+ 
++    private static Map<String,Object> losingRootTransferEvidence(
++            FineGrainedUpdateProblem<LocalState,Long> problem,
++            CanonicalUpdateConfiguration<LocalState,Long> q) {
++        List<Object> disabled = new ArrayList<>();
++        for (int i=0;i<problem.components().size();i++) {
++            VersionedComponent<LocalState> c=problem.components().get(i);
++            TaggedState<LocalState> local=q.physicalState().component(i);
++            if(q.isPending(c.reconfigureAction()) && local.isOld() && c.transferFrom(local.state()).isEmpty()) {
++                Map<String,Object> entry=new LinkedHashMap<>();
++                entry.put("component_id",c.id());entry.put("local_state",String.valueOf(local.state()));
++                entry.put("old_initial_state",String.valueOf(c.oldLts().initialState()));disabled.add(entry);
++            }
++        }
++        Map<String,Object> evidence=new LinkedHashMap<>();
++        evidence.put("pending_actions",q.pendingActions());
++        evidence.put("pending_transfer_disabled_by_local_domain",disabled);
++        return evidence;
++    }
++
++    private static String jsonText(Object value) {
++        try { return new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(value); }
++        catch (com.fasterxml.jackson.core.JsonProcessingException error) {
++            throw new IllegalStateException("Unable to serialize experiment evidence", error);
++        }
++    }
++
++    private static void recordTransferDomain(TransferDomainRestriction.Result<LocalState, Long> restriction) {
++        metric("revised_transfer_domain", "Revised Identity", "Transfer source-domain restriction", restriction.mode(), "text");
++        metric("revised_transfer_domain_components", "Revised Input", "Per-component transfer restriction census",
++                jsonText(restriction.components()), "json");
++        for (String field : new String[]{"original_pairs", "retained_pairs", "original_domain_states", "retained_domain_states",
++                "original_physical_domain_states", "retained_physical_domain_states", "original_physical_pairs", "retained_physical_pairs"})
++            metric("revised_transfer_domain_" + field, "Revised Input", "Transfer restriction " + field,
++                    restriction.total(field), "count");
++    }
++
+     private static void recordLosingCertificate(
+             OtfDucsResult<CanonicalUpdateConfiguration<LocalState, Long>, String,
+                     GoalSignature<LocalState, Long>> result) {
+@@ -1364,11 +1418,15 @@ public final class MtsaRevisedOtfDucsAdapter {
+ 
+         addProtocolPrecedence(protocol, builder);
+ 
+-        FineGrainedUpdateProblem<LocalState, Long> problem = builder.build();
++        TransferDomainRestriction.Result<LocalState, Long> transferDomain = TransferDomainRestriction.apply(
++                builder.build(), System.getProperty(TransferDomainRestriction.PROPERTY, "none"),
++                LocalState::rawState, "raw_physical_initial");
++        FineGrainedUpdateProblem<LocalState, Long> problem = transferDomain.problem().withContractMerge(
++                System.getProperty("mtsa.otf.contractMerge", "none"));
+         InputCensus census = InputCensus.from(
+                 rawOld, rawNew, rawTransfers, problem, reachablePhysical.size());
+         return new PreparedInput(
+-                problem, oldEndpoint, newEndpoint, newEndpointIds, census);
++                problem, oldEndpoint, newEndpoint, newEndpointIds, census, transferDomain);
+     }
+ 
+     static Set<EndpointState> selectLoadableNewEndpointStates(
+@@ -2399,19 +2457,22 @@ public final class MtsaRevisedOtfDucsAdapter {
+         private final FiniteLts<EndpointState> newEndpoint;
+         private final Map<EndpointState, String> newEndpointIds;
+         private final InputCensus census;
++        private final TransferDomainRestriction.Result<LocalState, Long> transferDomain;
+ 
+         private PreparedInput(
+                 FineGrainedUpdateProblem<LocalState, Long> problem,
+                 FiniteLts<EndpointState> oldEndpoint,
+                 FiniteLts<EndpointState> newEndpoint,
+                 Map<EndpointState, String> newEndpointIds,
+-                InputCensus census) {
++                InputCensus census,
++                TransferDomainRestriction.Result<LocalState, Long> transferDomain) {
+             this.problem = problem;
+             this.oldEndpoint = oldEndpoint;
+             this.newEndpoint = newEndpoint;
+             this.newEndpointIds = Collections.unmodifiableMap(
+                     new LinkedHashMap<>(newEndpointIds));
+             this.census = Objects.requireNonNull(census, "census");
++            this.transferDomain = Objects.requireNonNull(transferDomain, "transferDomain");
+         }
+     }
+ 
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/TransferDomainRestriction.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/TransferDomainRestriction.java
+new file mode 100644
+index 0000000..d5648a0
+--- /dev/null
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/TransferDomainRestriction.java
+@@ -0,0 +1,110 @@
++package ltsa.updatingControllers.otf;
++
++import java.util.*;
++
++/** E5 contract preprocessing: retain transfer pairs whose source is the old initial state. */
++public final class TransferDomainRestriction {
++    public static final String PROPERTY = "mtsa.otf.transferDomain";
++    private TransferDomainRestriction() { }
++
++    public static <S, M> Result<S, M> apply(FineGrainedUpdateProblem<S, M> source, String configured) {
++        return apply(source, configured, java.util.function.Function.identity(), "old_local_initial_state");
++    }
++
++    /** The frontend may erase implementation-only observer coordinates for the physical-state comparison. */
++    public static <S, M> Result<S, M> apply(FineGrainedUpdateProblem<S, M> source, String configured,
++            java.util.function.Function<? super S, ?> physicalState, String comparisonScope) {
++        Objects.requireNonNull(source, "source");
++        Objects.requireNonNull(physicalState, "physicalState");
++        Objects.requireNonNull(comparisonScope, "comparisonScope");
++        String mode = Objects.requireNonNull(configured, "mode").trim();
++        if (!"none".equals(mode) && !"initial".equals(mode))
++            throw new IllegalArgumentException(PROPERTY + " must be none or initial: " + configured);
++        if (!"none".equals(mode) && !"none".equals(source.contractMerge()))
++            throw new IllegalArgumentException("Transfer-domain restriction must precede contract merging");
++        List<VersionedComponent<S>> components = new ArrayList<>();
++        List<Map<String, Object>> census = new ArrayList<>();
++        for (VersionedComponent<S> c : source.components()) {
++            Map<S, Set<S>> retained = c.transferRelation();
++            if ("initial".equals(mode)) {
++                retained = new LinkedHashMap<>();
++                Object initialPhysical = physicalState.apply(c.oldLts().initialState());
++                for (Map.Entry<S,Set<S>> pair : c.transferRelation().entrySet())
++                    if (Objects.equals(initialPhysical, physicalState.apply(pair.getKey())) && !pair.getValue().isEmpty())
++                        retained.put(pair.getKey(), pair.getValue());
++            }
++            VersionedComponent<S> filtered = "none".equals(mode) ? c : new VersionedComponent<>(
++                    c.id(), c.oldLts(), c.newLts(), retained, c.reconfigureAction(),
++                    c.oldEnvironmentActions(), c.newEnvironmentActions());
++            components.add(filtered);
++            Map<String, Object> row = new LinkedHashMap<>();
++            row.put("component_id", c.id());
++            row.put("old_initial_state", String.valueOf(c.oldLts().initialState()));
++            row.put("old_initial_physical_state", String.valueOf(physicalState.apply(c.oldLts().initialState())));
++            row.put("comparison_scope", comparisonScope);
++            row.put("old_states", c.oldLts().states().size());
++            Set<Object> physicalStates = new LinkedHashSet<>();
++            for (S q : c.oldLts().states()) physicalStates.add(physicalState.apply(q));
++            row.put("old_physical_states", physicalStates.size());
++            row.put("original_domain_states", domain(c.transferRelation()));
++            row.put("retained_domain_states", domain(retained));
++            row.put("original_pairs", pairs(c.transferRelation()));
++            row.put("retained_pairs", pairs(retained));
++            row.put("original_physical_domain_states", physicalDomain(c.transferRelation(), physicalState));
++            row.put("retained_physical_domain_states", physicalDomain(retained, physicalState));
++            row.put("original_physical_pairs", physicalPairs(c.transferRelation(), physicalState));
++            row.put("retained_physical_pairs", physicalPairs(retained, physicalState));
++            census.add(Collections.unmodifiableMap(row));
++        }
++        if ("none".equals(mode)) return new Result<>(source, mode, census);
++        FineGrainedUpdateProblem.Builder<S, M> b = FineGrainedUpdateProblem.<S, M>builder()
++                .components(components).requirements(source.requirements())
++                .normalActions(source.normalActions()).controllableNormalActions(source.controllableNormalActions())
++                .commonAlphabet(source.commonAlphabet()).hotSwapActions(source.hotSwapInAction(), source.hotSwapOutAction())
++                .mergedContract("none", source.hasExhaustiveEndpointCoverage());
++        for (String after : source.updateActions()) for (String before : source.directPredecessors(after))
++            b.addPrecedence(before, after);
++        for (CanonicalUpdateConfiguration<S, M> q : source.initialConfigurations()) {
++            Map<String, M> old = new LinkedHashMap<>();
++            for (String id : source.oldRequirementIds()) old.put(id, q.activeTesterStates().get(id));
++            b.addInitialSnapshot(new InitialSnapshot<>(q.physicalState(), old));
++        }
++        for (GoalSignature<S, M> goal : source.goalSignatures()) b.addGoalSignature(goal);
++        return new Result<>(b.build(), mode, census);
++    }
++
++    private static <S> long physicalDomain(Map<S,Set<S>> relation, java.util.function.Function<? super S,?> project) {
++        Set<Object> values = new LinkedHashSet<>();
++        for (Map.Entry<S,Set<S>> pair : relation.entrySet()) if (!pair.getValue().isEmpty()) values.add(project.apply(pair.getKey()));
++        return values.size();
++    }
++    private static <S> long physicalPairs(Map<S,Set<S>> relation, java.util.function.Function<? super S,?> project) {
++        Set<List<Object>> values = new LinkedHashSet<>();
++        for (Map.Entry<S,Set<S>> pair : relation.entrySet()) for (S target : pair.getValue())
++            values.add(Arrays.<Object>asList(project.apply(pair.getKey()), project.apply(target)));
++        return values.size();
++    }
++    private static long domain(Map<?, ? extends Set<?>> relation) {
++        long count = 0; for (Set<?> targets : relation.values()) if (!targets.isEmpty()) count++; return count;
++    }
++    private static long pairs(Map<?, ? extends Set<?>> relation) {
++        long count = 0; for (Set<?> targets : relation.values()) count += targets.size(); return count;
++    }
++    public static final class Result<S, M> {
++        private final FineGrainedUpdateProblem<S, M> problem;
++        private final String mode;
++        private final List<Map<String, Object>> components;
++        private Result(FineGrainedUpdateProblem<S, M> problem, String mode, List<Map<String, Object>> census) {
++            this.problem = problem; this.mode = mode;
++            this.components = Collections.unmodifiableList(new ArrayList<>(census));
++        }
++        public FineGrainedUpdateProblem<S, M> problem() { return problem; }
++        public String mode() { return mode; }
++        public List<Map<String, Object>> components() { return components; }
++        public long total(String field) {
++            long total = 0;
++            for (Map<String, Object> c : components) total += ((Number) c.get(field)).longValue();
++            return total;
++        }
++    }
++}
+diff --git a/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeIndependentAuditTest.java b/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeIndependentAuditTest.java
+new file mode 100644
+index 0000000..16eaae2
+--- /dev/null
++++ b/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeIndependentAuditTest.java
+@@ -0,0 +1,141 @@
++package ltsa.updatingControllers.otf;
++
++import org.testng.annotations.Test;
++import java.util.*;
++import static org.junit.Assert.*;
++
++/** Small independent audit cases: UC guards, all-member observation and Link. */
++public class ContractMergeIndependentAuditTest {
++    @Test public void mergedTransferObservesEveryMemberAndPreservesNormalPost() {
++        FineGrainedUpdateProblem<String,Integer> p = transfers(true, false);
++        FineGrainedUpdateProblem<String,Integer> m = p.withContractMerge("transfers");
++        FineGrainedSuccessorOracle<String,Integer> plain = FineGrainedOtfDucs.game(p);
++        FineGrainedSuccessorOracle<String,Integer> merged = FineGrainedOtfDucs.game(m);
++        CanonicalUpdateConfiguration<String,Integer> q = m.initialConfigurations().get(0);
++        assertTrue("An enabled UC event must still block merged update", merged.post(q,"ablation.merge.transfers").isEmpty());
++        CanonicalUpdateConfiguration<String,Integer> a = only(plain.post(p.initialConfigurations().get(0),"u"));
++        CanonicalUpdateConfiguration<String,Integer> b = only(merged.post(q,"u"));
++        assertEquals(a.physicalState(), b.physicalState());
++        assertEquals(a.activeTesterStates(), b.activeTesterStates());
++        assertEquals(only(plain.post(a,"c")).physicalState(), only(merged.post(b,"c")).physicalState());
++        CanonicalUpdateConfiguration<String,Integer> goal = only(merged.post(b,"ablation.merge.transfers"));
++        assertEquals(Integer.valueOf(3),goal.activeTesterStates().get("interval"));
++        assertTrue(merged.isGoal(goal));
++        assertEquals("Raw ordinary Post remains defined at goals; the solver terminalizes them",Collections.singleton(goal),merged.post(goal,"c"));
++        assertEquals(m.commonAlphabet(),m.requirementsById().get("interval").requiredActivationSpec().residualLanguage().alphabet());
++        assertTrue(FineGrainedOtfDucs.verify(m,FineGrainedOtfDucs.synthesizeTrustedEndpointProjections(m)).isValid());
++    }
++
++    @Test public void mergedGoalStillRequiresUncontrollableQuiescence() {
++        FineGrainedUpdateProblem<String,Integer> m = transfers(false,true).withContractMerge("transfers");
++        FineGrainedSuccessorOracle<String,Integer> game = FineGrainedOtfDucs.game(m);
++        CanonicalUpdateConfiguration<String,Integer> q = only(game.post(m.initialConfigurations().get(0),"ablation.merge.transfers"));
++        assertTrue(q.pendingActions().isEmpty());
++        assertTrue(q.physicalState().allNew());
++        assertFalse(game.isGoal(q));
++        assertEquals(Collections.singleton(q),game.post(q,"u"));
++        OtfDucsResult<?,?,?> result = FineGrainedOtfDucs.synthesizeTrustedEndpointProjections(m);
++        assertFalse(result.isWinning());
++    }
++
++    @Test public void mergedTransferProducesCheckedAtomicLink() {
++        FineGrainedUpdateProblem.Builder<String,Integer> builder=FineGrainedUpdateProblem.<String,Integer>builder().controllableNormalActions(set("c"));
++        for(int i=0;i<2;i++)builder.addComponent(new VersionedComponent<>("c"+i,
++                FiniteLts.<String>builder("o").addTransition("o","c","o").build(),
++                FiniteLts.<String>builder("n").addTransition("n","c","n").build(),Collections.singletonMap("o",set("n")),"rho"+i));
++        SafetyTester<Integer> observer=recorder(Arrays.asList("rho0","rho1"));
++        FineGrainedUpdateProblem<String,Integer> m=builder.addRequirement(Requirement.updateTimeRequirement("interval",observer,
++                activation(observer,set("c","rho0","rho1"),Collections.singletonList(physical(false,"o")))))
++                .addInitialSnapshot(new InitialSnapshot<>(physical(false,"o"),Collections.emptyMap()))
++                .addGoalSignature(new GoalSignature<>("g",physical(true,"n"),Collections.emptyMap())).build().withContractMerge("transfers");
++        OtfDucsResult<CanonicalUpdateConfiguration<String,Integer>,String,GoalSignature<String,Integer>> result =
++                FineGrainedOtfDucs.synthesizeTrustedEndpointProjections(m);
++        assertTrue(result.isWinning());
++        LinkedOtfDucsController<String,String,Integer,String> linked = LinkedOtfDucsController.link(
++                FiniteLts.<String>builder("old").addTransition("old","c","old").build(),
++                FiniteLts.<String>builder("new").addTransition("new","c","new").build(),m,result,
++                ignored -> new InitialSnapshot<>(physical(false,"o"),Collections.emptyMap()),
++                ignored -> m.goalSignatures().get(0));
++        assertFalse(linked.lts().alphabet().contains("rho0"));
++        assertFalse(linked.lts().alphabet().contains("rho1"));
++        assertTrue(linked.lts().alphabet().contains("ablation.merge.transfers"));
++        assertEquals(1,linked.quotientTargets().size());
++    }
++
++    @Test public void intervalsObserveAllSimultaneousBoundaries() {
++        Set<String> alphabet = set("rho","s0","s1","t0","t1");
++        SafetyTester<Integer> recorder = recorder(Arrays.asList("s0","s1","t0","t1"));
++        SafetyTester<Integer> safe = SafetyTester.<Integer>builder().initialState(0).build();
++        PhysicalState<String> old = PhysicalState.of(TaggedState.oldState("o"));
++        PhysicalState<String> fresh = PhysicalState.of(TaggedState.newState("n"));
++        ActivationSpec<String,Integer> newActivation = activation(safe,alphabet,Arrays.asList(old,fresh));
++        FineGrainedUpdateProblem.Builder<String,Integer> b = FineGrainedUpdateProblem.<String,Integer>builder()
++                .addComponent(new VersionedComponent<>("c",FiniteLts.<String>builder("o").build(),FiniteLts.<String>builder("n").build(),Collections.singletonMap("o",set("n")),"rho"))
++                .addRequirement(Requirement.updateTimeRequirement("interval",recorder,activation(recorder,alphabet,Collections.singletonList(old))))
++                .addInitialSnapshot(new InitialSnapshot<>(old,map("old0",0,"old1",0)))
++                .addGoalSignature(new GoalSignature<>("g",fresh,map("new0",0,"new1",0)));
++        for(int i=0;i<2;i++) b.addRequirement(Requirement.oldRequirement("old"+i,safe,"t"+i))
++                .addRequirement(Requirement.newRequirement("new"+i,safe,newActivation,"s"+i));
++        FineGrainedUpdateProblem<String,Integer> m=b.build().withContractMerge("boundaries");
++        FineGrainedSuccessorOracle<String,Integer> g=FineGrainedOtfDucs.game(m);
++        CanonicalUpdateConfiguration<String,Integer> q=only(g.post(m.initialConfigurations().get(0),"ablation.merge.starts"));
++        assertEquals(Integer.valueOf(3),q.activeTesterStates().get("interval"));
++        q=only(g.post(q,"ablation.merge.stops"));
++        assertEquals(Integer.valueOf(15),q.activeTesterStates().get("interval"));
++        assertEquals(set("interval","new0","new1"),q.activeTesterStates().keySet());
++        assertTrue(g.isGoal(only(g.post(q,"rho"))));
++    }
++
++    @Test(expectedExceptions=IllegalArgumentException.class)
++    public void rejectsNoncommutingResidualEvenWhenLanguagesAreEquivalent() {
++        SafetyTester<Integer> safe=SafetyTester.<Integer>builder().initialState(0).build();
++        final Set<String> alphabet=set("rho0","rho1");
++        ResidualLanguage<Integer> residual=new ResidualLanguage<Integer>() {
++            public Set<Integer> states(){return new LinkedHashSet<>(Arrays.asList(0,1,2));}
++            public Set<String> alphabet(){return alphabet;}
++            public Integer initialState(){return 0;}
++            public boolean isError(Integer q){return false;}
++            public Integer step(Integer q,String a){return q==0?0:(a.equals("rho0")?1:2);}
++        };
++        ActivationSpec<String,Integer> activation=ActivationSpec.<String,Integer,Integer>builder(residual).put(physical(false,"o"),0,0).build();
++        base(false,false).addRequirement(Requirement.updateTimeRequirement("interval",safe,activation)).build().withContractMerge("transfers");
++    }
++
++    private static FineGrainedUpdateProblem<String,Integer> transfers(boolean oldNormal,boolean newUc) {
++        SafetyTester<Integer> recorder=recorder(Arrays.asList("rho0","rho1"));
++        Set<String> alphabet=set("rho0","rho1"); if(oldNormal) alphabet.addAll(set("u","c")); if(newUc) alphabet.add("u");
++        List<PhysicalState<String>> domain=new ArrayList<>();domain.add(physical(false,"o")); if(oldNormal)domain.add(physical(false,"q"));
++        return base(oldNormal,newUc).addRequirement(Requirement.updateTimeRequirement("interval",recorder,activation(recorder,alphabet,domain))).build();
++    }
++    private static FineGrainedUpdateProblem.Builder<String,Integer> base(boolean oldNormal,boolean newUc) {
++        FineGrainedUpdateProblem.Builder<String,Integer> b=FineGrainedUpdateProblem.builder();
++        for(int i=0;i<2;i++) {
++            FiniteLts.Builder<String> old=FiniteLts.builder("o"), fresh=FiniteLts.builder("n");
++            Map<String,Set<String>> transfer=new LinkedHashMap<>();transfer.put("o",set("n"));
++            if(oldNormal){old.addTransition("o","u","q").addTransition("q","c","q");fresh.addTransition("n","c","n");transfer.put("q",set("n"));}
++            if(newUc)fresh.addTransition("n","u","n");
++            b.addComponent(new VersionedComponent<>("c"+i,old.build(),fresh.build(),transfer,"rho"+i));
++        }
++        if(oldNormal)b.controllableNormalActions(set("c"));
++        return b.addInitialSnapshot(new InitialSnapshot<>(physical(false,"o"),Collections.emptyMap()))
++                .addGoalSignature(new GoalSignature<>("g",physical(true,"n"),Collections.emptyMap()));
++    }
++    private static SafetyTester<Integer> recorder(List<String> actions) {
++        SafetyTester.Builder<Integer> b=SafetyTester.<Integer>builder().initialState(0);
++        for(int q=0;q<(1<<actions.size());q++)for(int i=0;i<actions.size();i++)b.addTransition(q,actions.get(i),q|(1<<i));
++        return b.build();
++    }
++    private static ActivationSpec<String,Integer> activation(final SafetyTester<Integer> tester, final Set<String> alphabet,List<PhysicalState<String>> domain) {
++        ResidualLanguage<Integer> residual=new ResidualLanguage<Integer>() {
++            public Set<Integer> states(){return tester.states();} public Set<String> alphabet(){return alphabet;}
++            public Integer initialState(){return tester.initialState();} public boolean isError(Integer q){return tester.isError(q);}
++            public Integer step(Integer q,String a){return tester.stepOrStutter(q,a);}
++        };
++        ActivationSpec.Builder<String,Integer,Integer> b=ActivationSpec.builder(residual);
++        for(PhysicalState<String> p:domain)b.put(p,0,0);return b.build();
++    }
++    private static PhysicalState<String> physical(boolean fresh,String q){return PhysicalState.of(TaggedState.of(fresh?ComponentVersion.NEW:ComponentVersion.OLD,q),TaggedState.of(fresh?ComponentVersion.NEW:ComponentVersion.OLD,q));}
++    private static <T>T only(Set<T> values){assertEquals(1,values.size());return values.iterator().next();}
++    private static Set<String> set(String...values){return new LinkedHashSet<>(Arrays.asList(values));}
++    private static Map<String,Integer> map(Object...values){Map<String,Integer> r=new LinkedHashMap<>();for(int i=0;i<values.length;i+=2)r.put((String)values[i],(Integer)values[i+1]);return r;}
++}
+diff --git a/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeTest.java b/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeTest.java
+new file mode 100644
+index 0000000..addd368
+--- /dev/null
++++ b/mtsa/src/test/java/ltsa/updatingControllers/otf/ContractMergeTest.java
+@@ -0,0 +1,185 @@
++package ltsa.updatingControllers.otf;
++
++import org.testng.annotations.Test;
++import java.util.*;
++import static org.junit.Assert.*;
++
++public class ContractMergeTest {
++    @Test public void exactPaperCellHasWinningFineAndLosingBulkTransfers() {
++        FineGrainedUpdateProblem<String, String> p = cell();
++        assertTrue(solve(p).isWinning());
++        FineGrainedUpdateProblem<String, String> merged = p.withContractMerge("transfers");
++        assertFalse(solve(merged).isWinning());
++        for (CanonicalUpdateConfiguration<String, String> root : merged.initialConfigurations())
++            assertTrue(FineGrainedOtfDucs.game(merged).post(root, "ablation.merge.transfers").isEmpty());
++        checkEveryPost(merged);
++    }
++
++    @Test public void noneIsIdentityIncludingStatesAndQueries() {
++        FineGrainedUpdateProblem<String, String> p = cell();
++        assertSame(p, p.withContractMerge("none"));
++        OtfDucsResult<?, ?, ?> a = solve(p), b = solve(p.withContractMerge("none"));
++        assertEquals(a.isWinning(), b.isWinning());
++        assertEquals(a.statistics().discoveredStates(), b.statistics().discoveredStates());
++        assertEquals(a.statistics().queriedStateActionPairs(), b.statistics().queriedStateActionPairs());
++    }
++
++    @Test public void oneComponentPreservesDecisionAndFullStateCount() {
++        FineGrainedUpdateProblem<String, String> p = simple(1, false);
++        FineGrainedUpdateProblem<String, String> merged = p.withContractMerge("transfers");
++        assertEquals(solve(p).isWinning(), solve(merged).isWinning());
++        assertEquals(new DirectFullStrongSolver<>(FineGrainedOtfDucs.game(p)).synthesize().statistics().discoveredStates(),
++                new DirectFullStrongSolver<>(FineGrainedOtfDucs.game(merged)).synthesize().statistics().discoveredStates());
++        checkEveryPost(merged);
++    }
++
++    @Test public void simultaneousTransferKeepsAllCartesianOutcomes() {
++        FineGrainedUpdateProblem<String, String> p = simple(2, false).withContractMerge("transfers");
++        Set<CanonicalUpdateConfiguration<String, String>> outcomes = FineGrainedOtfDucs.game(p)
++                .post(p.initialConfigurations().get(0), "ablation.merge.transfers");
++        assertEquals(4, outcomes.size());
++        for (CanonicalUpdateConfiguration<String, String> q : outcomes) {
++            assertTrue(q.physicalState().allNew()); assertTrue(q.pendingActions().isEmpty());
++        }
++        // Only all-good is a goal; the adversarial bad outcomes must not disappear.
++        assertFalse(solve(p).isWinning());
++        checkEveryPost(p);
++    }
++
++    @Test public void mergedStartsInitializeTogetherAndStopsRemoveTogether() {
++        FineGrainedUpdateProblem<String, String> p = boundaries().withContractMerge("both");
++        FineGrainedSuccessorOracle<String, String> g = FineGrainedOtfDucs.game(p);
++        CanonicalUpdateConfiguration<String, String> q = p.initialConfigurations().get(0);
++        q = g.post(q, "ablation.merge.starts").iterator().next();
++        assertEquals("k", q.activeTesterStates().get("new1"));
++        assertEquals("k", q.activeTesterStates().get("new2"));
++        assertTrue(p.isSafe(q));
++        q = g.post(q, "ablation.merge.stops").iterator().next();
++        assertFalse(q.isTesterActive("old1")); assertFalse(q.isTesterActive("old2"));
++        assertTrue(solve(p).isWinning());
++        checkEveryPost(p);
++    }
++
++    @Test(expectedExceptions = IllegalArgumentException.class)
++    public void collapsedStrictPrecedenceIsRejected() {
++        simple(2, true).withContractMerge("transfers");
++    }
++
++    @Test(expectedExceptions = IllegalArgumentException.class)
++    public void invalidModeIsRejected() { cell().withContractMerge("typo"); }
++
++    private static OtfDucsResult<CanonicalUpdateConfiguration<String, String>, String, GoalSignature<String, String>>
++            solve(FineGrainedUpdateProblem<String, String> p) {
++        OtfDucsResult<CanonicalUpdateConfiguration<String, String>, String, GoalSignature<String, String>> result =
++                FineGrainedOtfDucs.synthesizeTrustedEndpointProjections(p);
++        assertTrue(FineGrainedOtfDucs.verify(p, result).isValid());
++        return result;
++    }
++
++    private static void checkEveryPost(FineGrainedUpdateProblem<String, String> p) {
++        FineGrainedSuccessorOracle<String, String> actual = FineGrainedOtfDucs.game(p);
++        IndependentFineGrainedSemantics<String, String> reference = new IndependentFineGrainedSemantics<>(p);
++        Set<CanonicalUpdateConfiguration<String, String>> seen = new HashSet<>(p.initialConfigurations());
++        Deque<CanonicalUpdateConfiguration<String, String>> queue = new ArrayDeque<>(seen);
++        while (!queue.isEmpty()) {
++            CanonicalUpdateConfiguration<String, String> q = queue.remove();
++            assertEquals(reference.isGoal(q), actual.isGoal(q));
++            for (String action : p.commonAlphabet()) {
++                Set<CanonicalUpdateConfiguration<String, String>> successors = actual.post(q, action);
++                assertEquals(reference.post(q, action), successors);
++                for (CanonicalUpdateConfiguration<String, String> r : successors) if (seen.add(r)) queue.add(r);
++            }
++        }
++    }
++
++    private static FineGrainedUpdateProblem<String, String> simple(int n, boolean precedence) {
++        FineGrainedUpdateProblem.Builder<String, String> b = FineGrainedUpdateProblem.builder();
++        List<TaggedState<String>> old = new ArrayList<>(), fresh = new ArrayList<>();
++        for (int i = 0; i < n; i++) {
++            b.addComponent(new VersionedComponent<>("c"+i, FiniteLts.<String>builder("o").build(),
++                    FiniteLts.<String>builder("g").addState("b").build(),
++                    Collections.singletonMap("o", set("g","b")), "rho"+i));
++            old.add(TaggedState.oldState("o")); fresh.add(TaggedState.newState("g"));
++        }
++        if (precedence) b.addPrecedence("rho0", "rho1");
++        return b.addInitialSnapshot(new InitialSnapshot<>(PhysicalState.of(old), Collections.emptyMap()))
++                .addGoalSignature(new GoalSignature<>("g", PhysicalState.of(fresh), Collections.emptyMap())).build();
++    }
++
++    private static FineGrainedUpdateProblem<String, String> boundaries() {
++        Set<String> alphabet = set("rho", "stop1", "stop2", "start1", "start2");
++        SafetyTester<String> safe = SafetyTester.<String>builder().initialState("k").build();
++        SafetyTester<String> starts = tester(new String[]{"k","E"}, new String[]{"start1","start2"},
++                new String[][]{{"k","start1","E"},{"k","start2","E"}});
++        PhysicalState<String> old = PhysicalState.of(TaggedState.oldState("o"));
++        PhysicalState<String> fresh = PhysicalState.of(TaggedState.newState("n"));
++        ActivationSpec.Builder<String,String,String> activation = ActivationSpec.builder(residual(starts, alphabet));
++        activation.put(old,"k","k").put(fresh,"k","k");
++        return FineGrainedUpdateProblem.<String,String>builder()
++                .addComponent(new VersionedComponent<>("c", FiniteLts.<String>builder("o").build(),
++                        FiniteLts.<String>builder("n").build(), Collections.singletonMap("o", set("n")), "rho"))
++                .addRequirement(Requirement.oldRequirement("old1",safe,"stop1"))
++                .addRequirement(Requirement.oldRequirement("old2",safe,"stop2"))
++                .addRequirement(Requirement.newRequirement("new1",starts,activation.build(),"start1"))
++                .addRequirement(Requirement.newRequirement("new2",starts,activation.build(),"start2"))
++                .addInitialSnapshot(new InitialSnapshot<>(old, map("old1","k","old2","k")))
++                .addGoalSignature(new GoalSignature<>("g",fresh,map("new1","k","new2","k"))).build();
++    }
++
++    /** Exact finite primitives from paper S1 / check_witnesses.py cell(False). */
++    private static FineGrainedUpdateProblem<String,String> cell() {
++        FiniteLts<String> a = FiniteLts.<String>builder("h").addTransition("h","m_B","e").addTransition("e","m_A","h").build();
++        FiniteLts<String> bo = FiniteLts.<String>builder("e").addTransition("e","m_B","h").addTransition("h","m_A","e").build();
++        FiniteLts<String> bn = FiniteLts.<String>builder("e").addTransition("e","m_B","h").addTransition("h","m_A","e").addTransition("h","j","h").build();
++        SafetyTester<String> one = tester(new String[]{"A","B","E"}, new String[]{"m_A","m_B"},
++                new String[][]{{"A","m_B","B"},{"B","m_A","A"},{"A","m_A","E"},{"B","m_B","E"}});
++        SafetyTester<String> old = tester(new String[]{"k","E"}, new String[]{"j"}, new String[][]{{"k","j","E"}});
++        SafetyTester<String> inspect = tester(new String[]{"c","d","E"}, new String[]{"m_A","m_B","j"},
++                new String[][]{{"c","m_B","d"},{"d","j","c"},{"d","m_A","E"}});
++        Set<String> alphabet = set("m_A","m_B","j","rho_A","rho_B","s","t");
++        ActivationSpec.Builder<String,String,String> ia = ActivationSpec.builder(residual(inspect,alphabet));
++        ActivationSpec.Builder<String,String,String> oa = ActivationSpec.builder(residual(one,alphabet));
++        for (ComponentVersion va : ComponentVersion.values()) for (ComponentVersion vb : ComponentVersion.values())
++            for (String x : set("h","e")) for (String y : set("h","e")) {
++                PhysicalState<String> p = PhysicalState.of(TaggedState.of(va,x),TaggedState.of(vb,y));
++                String q = y.equals("h")?"d":"c"; ia.put(p,q,q);
++                if (va==ComponentVersion.OLD && vb==ComponentVersion.OLD && !x.equals(y)) {
++                    String holder=x.equals("h")?"A":"B"; oa.put(p,holder,holder);
++                }
++            }
++        FineGrainedUpdateProblem.Builder<String,String> b = FineGrainedUpdateProblem.<String,String>builder()
++                .addComponent(new VersionedComponent<>("A",a,a,Collections.singletonMap("e",set("e")),"rho_A"))
++                .addComponent(new VersionedComponent<>("B",bo,bn,Collections.singletonMap("e",set("e")),"rho_B"))
++                .controllableNormalActions(set("m_A","m_B","j"))
++                .addRequirement(Requirement.oldRequirement("old",old,"t"))
++                .addRequirement(Requirement.newRequirement("inspect",inspect,ia.build(),"s"))
++                .addRequirement(Requirement.updateTimeRequirement("one",one,oa.build())).addPrecedence("s","t");
++        for (String x : set("h","e")) {
++            String y=x.equals("h")?"e":"h";
++            b.addInitialSnapshot(new InitialSnapshot<>(PhysicalState.of(TaggedState.oldState(x),TaggedState.oldState(y)),map("old","k")))
++             .addGoalSignature(new GoalSignature<>(x,PhysicalState.of(TaggedState.newState(x),TaggedState.newState(y)),map("inspect","c")));
++        }
++        return b.build();
++    }
++
++    private static SafetyTester<String> tester(String[] states,String[] actions,String[][] changes) {
++        SafetyTester.Builder<String> b=SafetyTester.<String>builder().initialState(states[0]).addErrorState("E");
++        for(String q:states) for(String a:actions) {
++            String next=q;
++            for(String[] e:changes) if(e[0].equals(q)&&e[1].equals(a)) next=e[2];
++            b.addTransition(q,a,next);
++        }
++        return b.build();
++    }
++    private static ResidualLanguage<String> residual(final SafetyTester<String> t, final Set<String> alphabet) {
++        return new ResidualLanguage<String>() {
++            public Set<String> states(){return t.states();}
++            public Set<String> alphabet(){return alphabet;}
++            public String initialState(){return t.initialState();}
++            public String step(String q,String a){return t.stepOrStutter(q,a);}
++            public boolean isError(String q){return t.isError(q);}
++        };
++    }
++    private static Set<String> set(String...values){return new LinkedHashSet<>(Arrays.asList(values));}
++    private static Map<String,String> map(String...values){Map<String,String> r=new LinkedHashMap<>(); for(int i=0;i<values.length;i+=2)r.put(values[i],values[i+1]);return r;}
++}
+diff --git a/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java b/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
+index e121e46..882d2d5 100644
+--- a/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
++++ b/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
+@@ -20,6 +20,47 @@ import static org.junit.Assert.assertTrue;
+ 
+ public class DirectFullStrongSolverTest {
+ 
++    @Test
++    public void ucPruningSkipsControllableDetourWithoutEarlyTermination() {
++        GraphGame game = new GraphGame("root").goal("goal")
++                .controllable("a-detour", "finish", "loop")
++                .edge("root", "a-detour", "unused")
++                .edge("root", "u", "middle")
++                .edge("middle", "finish", "goal")
++                .edge("unused", "loop", "unused");
++        DirectFullStrongSolver<String, String, String> full =
++                new DirectFullStrongSolver<String, String, String>(game);
++        DirectFullStrongSolver<String, String, String> pruned =
++                new DirectFullStrongSolver<String, String, String>(game, true);
++        OtfDucsResult<String, String, String> a = full.synthesize();
++        OtfDucsResult<String, String, String> b = pruned.synthesize();
++        assertEquals(a.isWinning(), b.isWinning());
++        assertEquals(new OtfDucsSynthesizer<String, String, String>(game, 0, 0)
++                .synthesize().isWinning(), b.isWinning());
++        assertEquals(4L, full.statistics().enumeratedStates());
++        assertEquals(3L, pruned.statistics().enumeratedStates());
++        assertEquals(2L, pruned.statistics().enabledActionBuckets());
++        assertFalse(b.statistics().earlySuccess());
++        assertValid(game, b);
++    }
++
++    @Test
++    public void noUncontrollablesPreservesFullConstruction() {
++        GraphGame game = new GraphGame("root").goal("goal")
++                .controllable("finish", "detour", "loop")
++                .edge("root", "finish", "goal")
++                .edge("root", "detour", "trap")
++                .edge("trap", "loop", "trap");
++        DirectFullStrongSolver<String, String, String> full =
++                new DirectFullStrongSolver<String, String, String>(game);
++        DirectFullStrongSolver<String, String, String> pruned =
++                new DirectFullStrongSolver<String, String, String>(game, true);
++        assertEquals(full.synthesize().isWinning(), pruned.synthesize().isWinning());
++        assertEquals(full.statistics().enumeratedStates(), pruned.statistics().enumeratedStates());
++        assertEquals(full.statistics().queriedStateActionPairs(), pruned.statistics().queriedStateActionPairs());
++        assertEquals(3L, pruned.statistics().enumeratedStates());
++    }
++
+     @Test
+     public void exhaustivelyBuildsRepresentationBeforeSolving() {
+         GraphGame game = new GraphGame("root")
+@@ -142,6 +183,12 @@ public class DirectFullStrongSolverTest {
+             assertValid(game, direct);
+             assertValid(game, otf);
+             assertValid(game, genericLazy);
++            OtfDucsResult<String, String, String> pruned =
++                    new DirectFullStrongSolver<String, String, String>(game, true).synthesize();
++            assertEquals("UC-pruned mismatch in random graph " + sample,
++                    direct.isWinning(), pruned.isWinning());
++            assertTrue(pruned.statistics().discoveredStates() <= direct.statistics().discoveredStates());
++            assertValid(game, pruned);
+         }
+     }
+ 
+diff --git a/mtsa/src/test/java/ltsa/updatingControllers/otf/TransferDomainRestrictionTest.java b/mtsa/src/test/java/ltsa/updatingControllers/otf/TransferDomainRestrictionTest.java
+new file mode 100644
+index 0000000..78ef5d8
+--- /dev/null
++++ b/mtsa/src/test/java/ltsa/updatingControllers/otf/TransferDomainRestrictionTest.java
+@@ -0,0 +1,186 @@
++package ltsa.updatingControllers.otf;
++
++import java.util.*;
++import org.testng.annotations.Test;
++import static org.junit.Assert.*;
++
++public class TransferDomainRestrictionTest {
++    @Test public void noneIsE1IdentityIncludingDecisionStatesQueriesAndRank() {
++        FineGrainedUpdateProblem<String,String> p=cell();
++        FineGrainedUpdateProblem<String,String> identity=p.withTransferDomain("none");assertSame(p,identity);
++        OtfDucsResult<?,?,?> before=solve(p),after=solve(identity);
++        assertEquals(before.isWinning(),after.isWinning());
++        assertEquals(before.statistics().discoveredStates(),after.statistics().discoveredStates());
++        assertEquals(before.statistics().queriedStateActionPairs(),after.statistics().queriedStateActionPairs());
++        assertEquals(before.winningCertificate().ranks(),after.winningCertificate().ranks());
++    }
++    @Test public void singleComponentRetainsAllInitialOutcomesOnlyAndAccurateCensus() {
++        FineGrainedUpdateProblem<String,String> p=example(1,false);
++        TransferDomainRestriction.Result<String,String> r=TransferDomainRestriction.apply(p,"initial");
++        VersionedComponent<String> c=r.problem().components().get(0);
++        assertEquals(set("x","y"),c.transferFrom("idle"));assertTrue(c.transferFrom("busy").isEmpty());
++        assertSame(p.components().get(0).oldLts(),c.oldLts());assertSame(p.components().get(0).newLts(),c.newLts());
++        assertEquals(p.initialConfigurations(),r.problem().initialConfigurations());
++        assertEquals(p.goalSignatures(),r.problem().goalSignatures());
++        assertEquals(3L,r.total("original_pairs"));assertEquals(2L,r.total("retained_pairs"));
++        assertEquals(2L,r.total("original_domain_states"));assertEquals(1L,r.total("retained_domain_states"));
++        assertEquals("idle",r.components().get(0).get("old_initial_state"));
++        assertTrue(solve(r.problem()).isWinning());checkEveryPost(r.problem());
++    }
++    @Test public void alreadyInitialOnlyFixtureIsUnchangedInRelationAndOutcome() {
++        FineGrainedUpdateProblem<String,String> p=example(1,true),q=p.withTransferDomain("initial");
++        assertEquals(p.components().get(0).transferRelation(),q.components().get(0).transferRelation());
++        assertEquals(solve(p).statistics().discoveredStates(),solve(q).statistics().discoveredStates());
++        assertEquals(solve(p).isWinning(),solve(q).isWinning());
++    }
++    @Test public void filteringBeforeMergingRetainsTheCompleteCartesianProduct() {
++        FineGrainedUpdateProblem<String,String> p=example(2,false).withTransferDomain("initial").withContractMerge("transfers");
++        FineGrainedSuccessorOracle<String,String> game=FineGrainedOtfDucs.game(p);
++        assertEquals(4,game.post(p.initialConfigurations().get(0),"ablation.merge.transfers").size());
++        CanonicalUpdateConfiguration<String,String> busy=CanonicalUpdateConfiguration.of(
++                PhysicalState.of(TaggedState.oldState("busy"),TaggedState.oldState("idle")),Collections.emptyMap(),p.updateActions());
++        assertTrue(game.post(busy,"ablation.merge.transfers").isEmpty());
++        assertTrue(solve(p).isWinning());checkEveryPost(p);
++    }
++    @Test public void literalCellRuleEmptiesAInsteadOfInventingAnEmptyInitialState() {
++        FineGrainedUpdateProblem<String,String> p=cell(),q=p.withTransferDomain("initial");
++        assertEquals("h",p.components().get(0).oldLts().initialState());
++        assertEquals(Collections.singletonMap("e",set("e")),p.components().get(0).transferRelation());
++        assertTrue(q.components().get(0).transferRelation().isEmpty());
++        assertEquals(p.components().get(1).transferRelation(),q.components().get(1).transferRelation());
++        assertTrue(solve(p).isWinning());assertFalse(solve(q).isWinning());
++        assertFalse(solve(q.withContractMerge("transfers")).isWinning());
++        assertEquals(new ArrayList<>(p.requirements()),new ArrayList<>(q.requirements()));
++        for(Requirement<String,String> requirement:p.requirements())assertSame(requirement,q.requirement(requirement.id()).get());assertEquals(p.goalSignatures(),q.goalSignatures());
++        assertEquals(p.initialConfigurations(),q.initialConfigurations());
++        for(String event:p.updateActions())assertEquals(p.directPredecessors(event),q.directPredecessors(event));
++        checkEveryPost(q);
++    }
++    @Test public void frontendProjectionKeepsAllInitialPhysicalObserverCopies() {
++        MtsaRevisedOtfDucsAdapter.LocalState a=new MtsaRevisedOtfDucsAdapter.LocalState(0L,Arrays.asList(0L));
++        MtsaRevisedOtfDucsAdapter.LocalState b=new MtsaRevisedOtfDucsAdapter.LocalState(0L,Arrays.asList(1L));
++        MtsaRevisedOtfDucsAdapter.LocalState c=new MtsaRevisedOtfDucsAdapter.LocalState(1L,Arrays.asList(0L));
++        MtsaRevisedOtfDucsAdapter.LocalState x=new MtsaRevisedOtfDucsAdapter.LocalState(2L,Arrays.asList(0L));
++        MtsaRevisedOtfDucsAdapter.LocalState y=new MtsaRevisedOtfDucsAdapter.LocalState(2L,Arrays.asList(1L));
++        Map<MtsaRevisedOtfDucsAdapter.LocalState,Set<MtsaRevisedOtfDucsAdapter.LocalState>> relation=new LinkedHashMap<>();
++        relation.put(a,Collections.singleton(x));relation.put(b,Collections.singleton(y));relation.put(c,Collections.singleton(x));
++        FineGrainedUpdateProblem<MtsaRevisedOtfDucsAdapter.LocalState,String> p=FineGrainedUpdateProblem.<MtsaRevisedOtfDucsAdapter.LocalState,String>builder()
++                .addComponent(new VersionedComponent<>("augmented",FiniteLts.builder(a).addState(b).addState(c).build(),
++                        FiniteLts.builder(x).addState(y).build(),relation,"rho"))
++                .addInitialSnapshot(new InitialSnapshot<>(PhysicalState.of(TaggedState.oldState(a)),Collections.emptyMap()))
++                .addGoalSignature(new GoalSignature<>("g",PhysicalState.of(TaggedState.newState(x)),Collections.emptyMap())).build();
++        TransferDomainRestriction.Result<MtsaRevisedOtfDucsAdapter.LocalState,String> r=TransferDomainRestriction.apply(
++                p,"initial",MtsaRevisedOtfDucsAdapter.LocalState::rawState,"raw_physical_initial");
++        VersionedComponent<MtsaRevisedOtfDucsAdapter.LocalState> filtered=r.problem().components().get(0);
++        assertEquals(Collections.singleton(x),filtered.transferFrom(a));assertEquals(Collections.singleton(y),filtered.transferFrom(b));
++        assertTrue(filtered.transferFrom(c).isEmpty());assertEquals(2L,r.total("retained_pairs"));
++        assertEquals(2L,r.total("retained_domain_states"));assertEquals(1L,r.total("retained_physical_domain_states"));
++        assertEquals(1L,r.total("retained_physical_pairs"));
++        assertEquals(1, p.withTransferDomain("initial").components().get(0).transferRelation().size());
++    }
++
++    @Test public void lossSummaryReportsCheckedLocalClosureWithoutInventedCause() {
++        FineGrainedUpdateProblem<String,String> p=cell().withTransferDomain("initial");
++        OtfDucsResult<CanonicalUpdateConfiguration<String,String>,String,GoalSignature<String,String>> r=solve(p);
++        Map<String,Object> diagnostic=LosingCertificateDiagnostics.summarize(FineGrainedOtfDucs.game(p),r);
++        assertEquals(r.losingCertificate().losingStates().size(),diagnostic.get("region_states"));
++        assertEquals(2L,diagnostic.get("losing_initial_states"));
++        assertFalse(((List<?>)diagnostic.get("initial_examples")).isEmpty());
++        for(Object value:(List<?>)diagnostic.get("initial_examples")) {
++            Map<?,?> root=(Map<?,?>)value;
++            assertEquals("each_enabled_controllable_choice_has_losing_outcome",root.get("local_obstruction"));
++            for(Object item:(List<?>)root.get("enabled_action_buckets"))assertTrue(((Number)((Map<?,?>)item).get("outcomes_in_certificate_region")).longValue()>0);
++        }
++    }
++    @Test(expectedExceptions=IllegalArgumentException.class)
++    public void invalidModeIsRejected(){example(1,false).withTransferDomain("idle");}
++    @Test(expectedExceptions=IllegalArgumentException.class)
++    public void filterAfterMergeIsRejected(){example(2,false).withContractMerge("transfers").withTransferDomain("initial");}
++
++    private static FineGrainedUpdateProblem<String,String> example(int n,boolean alreadyInitial) {
++        FineGrainedUpdateProblem.Builder<String,String> b=FineGrainedUpdateProblem.builder();
++        List<TaggedState<String>> old=new ArrayList<>();
++        List<List<TaggedState<String>>> goals=new ArrayList<>();goals.add(new ArrayList<>());
++        for(int i=0;i<n;i++) {
++            Map<String,Set<String>> relation=new LinkedHashMap<>();relation.put("idle",set("x","y"));
++            if(!alreadyInitial)relation.put("busy",set("y"));
++            b.addComponent(new VersionedComponent<>("c"+i,FiniteLts.<String>builder("idle").addState("busy").build(),
++                    FiniteLts.<String>builder("x").addState("y").build(),relation,"rho"+i));
++            old.add(TaggedState.oldState("idle"));List<List<TaggedState<String>>> expanded=new ArrayList<>();
++            for(List<TaggedState<String>> prefix:goals)for(String q:set("x","y")){List<TaggedState<String>> tuple=new ArrayList<>(prefix);tuple.add(TaggedState.newState(q));expanded.add(tuple);}goals=expanded;
++        }
++        b.addInitialSnapshot(new InitialSnapshot<>(PhysicalState.of(old),Collections.emptyMap()));
++        for(int i=0;i<goals.size();i++)b.addGoalSignature(new GoalSignature<>("g"+i,PhysicalState.of(goals.get(i)),Collections.emptyMap()));
++        return b.build();
++    }
++    private static OtfDucsResult<CanonicalUpdateConfiguration<String,String>,String,GoalSignature<String,String>> solve(FineGrainedUpdateProblem<String,String> p) {
++        OtfDucsResult<CanonicalUpdateConfiguration<String,String>,String,GoalSignature<String,String>> r=new DirectFullStrongSolver<>(FineGrainedOtfDucs.game(p)).synthesize();
++        FineGrainedOtfDucs.verify(p,r).throwIfInvalid();return r;
++    }
++    private static void checkEveryPost(FineGrainedUpdateProblem<String,String> p) {
++        FineGrainedSuccessorOracle<String,String> game=FineGrainedOtfDucs.game(p);
++        IndependentFineGrainedSemantics<String,String> reference=new IndependentFineGrainedSemantics<>(p);
++        Set<CanonicalUpdateConfiguration<String,String>> seen=new HashSet<>(p.initialConfigurations());
++        Deque<CanonicalUpdateConfiguration<String,String>> queue=new ArrayDeque<>(seen);
++        while(!queue.isEmpty()) {
++            CanonicalUpdateConfiguration<String,String> q=queue.remove();assertEquals(reference.isGoal(q),game.isGoal(q));
++            for(String a:p.commonAlphabet()){Set<CanonicalUpdateConfiguration<String,String>> next=game.post(q,a);assertEquals(reference.post(q,a),next);for(CanonicalUpdateConfiguration<String,String> t:next)if(seen.add(t))queue.add(t);}
++        }
++    }
++    /** Exact finite primitives from paper S1 / check_witnesses.py cell(False). */
++    private static FineGrainedUpdateProblem<String,String> cell() {
++        FiniteLts<String> a = FiniteLts.<String>builder("h").addTransition("h","m_B","e").addTransition("e","m_A","h").build();
++        FiniteLts<String> bo = FiniteLts.<String>builder("e").addTransition("e","m_B","h").addTransition("h","m_A","e").build();
++        FiniteLts<String> bn = FiniteLts.<String>builder("e").addTransition("e","m_B","h").addTransition("h","m_A","e").addTransition("h","j","h").build();
++        SafetyTester<String> one = tester(new String[]{"A","B","E"}, new String[]{"m_A","m_B"},
++                new String[][]{{"A","m_B","B"},{"B","m_A","A"},{"A","m_A","E"},{"B","m_B","E"}});
++        SafetyTester<String> old = tester(new String[]{"k","E"}, new String[]{"j"}, new String[][]{{"k","j","E"}});
++        SafetyTester<String> inspect = tester(new String[]{"c","d","E"}, new String[]{"m_A","m_B","j"},
++                new String[][]{{"c","m_B","d"},{"d","j","c"},{"d","m_A","E"}});
++        Set<String> alphabet = set("m_A","m_B","j","rho_A","rho_B","s","t");
++        ActivationSpec.Builder<String,String,String> ia = ActivationSpec.builder(residual(inspect,alphabet));
++        ActivationSpec.Builder<String,String,String> oa = ActivationSpec.builder(residual(one,alphabet));
++        for (ComponentVersion va : ComponentVersion.values()) for (ComponentVersion vb : ComponentVersion.values())
++            for (String x : set("h","e")) for (String y : set("h","e")) {
++                PhysicalState<String> p = PhysicalState.of(TaggedState.of(va,x),TaggedState.of(vb,y));
++                String q = y.equals("h")?"d":"c"; ia.put(p,q,q);
++                if (va==ComponentVersion.OLD && vb==ComponentVersion.OLD && !x.equals(y)) {
++                    String holder=x.equals("h")?"A":"B"; oa.put(p,holder,holder);
++                }
++            }
++        FineGrainedUpdateProblem.Builder<String,String> b = FineGrainedUpdateProblem.<String,String>builder()
++                .addComponent(new VersionedComponent<>("A",a,a,Collections.singletonMap("e",set("e")),"rho_A"))
++                .addComponent(new VersionedComponent<>("B",bo,bn,Collections.singletonMap("e",set("e")),"rho_B"))
++                .controllableNormalActions(set("m_A","m_B","j"))
++                .addRequirement(Requirement.oldRequirement("old",old,"t"))
++                .addRequirement(Requirement.newRequirement("inspect",inspect,ia.build(),"s"))
++                .addRequirement(Requirement.updateTimeRequirement("one",one,oa.build())).addPrecedence("s","t");
++        for (String x : set("h","e")) {
++            String y=x.equals("h")?"e":"h";
++            b.addInitialSnapshot(new InitialSnapshot<>(PhysicalState.of(TaggedState.oldState(x),TaggedState.oldState(y)),map("old","k")))
++             .addGoalSignature(new GoalSignature<>(x,PhysicalState.of(TaggedState.newState(x),TaggedState.newState(y)),map("inspect","c")));
++        }
++        return b.build();
++    }
++
++    private static SafetyTester<String> tester(String[] states,String[] actions,String[][] changes) {
++        SafetyTester.Builder<String> b=SafetyTester.<String>builder().initialState(states[0]).addErrorState("E");
++        for(String q:states) for(String a:actions) {
++            String next=q;
++            for(String[] e:changes) if(e[0].equals(q)&&e[1].equals(a)) next=e[2];
++            b.addTransition(q,a,next);
++        }
++        return b.build();
++    }
++    private static ResidualLanguage<String> residual(final SafetyTester<String> t, final Set<String> alphabet) {
++        return new ResidualLanguage<String>() {
++            public Set<String> states(){return t.states();}
++            public Set<String> alphabet(){return alphabet;}
++            public String initialState(){return t.initialState();}
++            public String step(String q,String a){return t.stepOrStutter(q,a);}
++            public boolean isError(String q){return t.isError(q);}
++        };
++    }
++    private static Set<String> set(String...values){return new LinkedHashSet<>(Arrays.asList(values));}
++    private static Map<String,String> map(String...values){Map<String,String> r=new LinkedHashMap<>(); for(int i=0;i<values.length;i+=2)r.put(values[i],values[i+1]);return r;}
++}

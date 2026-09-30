@@ -1,0 +1,96 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "I_q1" ], [ "NEW", "I" ] ],
+    "testers" : { },
+    "pending" : [ ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "NEW", "I_q1" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "rho_2" ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "OLD", "B_q0" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 2,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 5
+  }, {
+    "physical" : [ [ "OLD", "B_q0" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 3,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "B_q1" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 4,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "B_q1" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 5,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "I_q0" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 6,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "I_q0" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 7,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "I_q1" ], [ "OLD", "B" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 8,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "OLD", "I_q1" ], [ "OLD", "I" ] ],
+    "testers" : { },
+    "pending" : [ "rho_1", "rho_2" ],
+    "id" : 9,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  } ],
+  "strategy_edges" : [ [ 7, "arrival", 9 ], [ 9, "rho_1", 1 ], [ 6, "arrival", 8 ], [ 6, "finish_2", 7 ], [ 8, "finish_2", 9 ], [ 3, "arrival", 5 ], [ 3, "finish_1", 7 ], [ 5, "finish_1", 9 ], [ 2, "arrival", 4 ], [ 2, "finish_1", 6 ], [ 2, "finish_2", 3 ], [ 4, "finish_1", 8 ], [ 4, "finish_2", 5 ], [ 1, "rho_2", 0 ] ]
+}

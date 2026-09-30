@@ -1,0 +1,268 @@
+{
+  "status": "PASS",
+  "family": "threads/v1",
+  "job": "threads_n02_b01_saturated_offers_fine_lazy",
+  "decision": "LOSS",
+  "input": "threads/v1/inputs/threads_n02_b01_saturated_offers_fine.json",
+  "input_sha256": "b677a192fd7f3880aeca9ff221ad21abc466698ebc1b64c95e6b11aa4d5fce1b",
+  "certificate": "threads/v1/raw/series/threads_n02_b01_saturated_offers_fine_lazy/certificate.json",
+  "certificate_sha256": "cac2aefe0ee393c693a8d265164a24bcdb4648bd97936912ece833fd46dc522c",
+  "extractor_sha256": "498234a227d21b7661525ddace2ae2e4249f32f5d7da7e87312e765b0b255fc0",
+  "independent_checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8",
+  "rule": "At a UC state choose one enabled uncontrollable event/outcome retained in the losing region. Otherwise give a retained outcome for every enabled controllable event. All retained states exclude goal.",
+  "selection": "Prefer an unsafe successor when available, then sort action and original certificate-state ID; no input or measured policy is changed.",
+  "scope": "An extracted adversarial response graph checked against independent Post and the original E1 loss certificate. A path alone is not used as proof. Every maximal response execution either reaches unsafe or a non-goal deadlock, or is infinite and remains outside goal; no fairness is assumed.",
+  "certificate_states": 8,
+  "initial_states_in_region": [
+    0,
+    6,
+    5,
+    4,
+    3,
+    7,
+    2,
+    1
+  ],
+  "states": [
+    {
+      "physical": [
+        [
+          "OLD",
+          "B_q0"
+        ],
+        [
+          "OLD",
+          "B"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 0,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "B_q0"
+        ],
+        [
+          "OLD",
+          "I"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 1,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "B_q1"
+        ],
+        [
+          "OLD",
+          "B"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 2,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "B_q1"
+        ],
+        [
+          "OLD",
+          "I"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 3,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "I_q0"
+        ],
+        [
+          "OLD",
+          "B"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 4,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "I_q0"
+        ],
+        [
+          "OLD",
+          "I"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 5,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "I_q1"
+        ],
+        [
+          "OLD",
+          "B"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 6,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    },
+    {
+      "physical": [
+        [
+          "OLD",
+          "I_q1"
+        ],
+        [
+          "OLD",
+          "I"
+        ]
+      ],
+      "testers": {},
+      "pending": [
+        "rho_1",
+        "rho_2"
+      ],
+      "id": 7,
+      "initial": true,
+      "safe": true,
+      "goal": false
+    }
+  ],
+  "responses": [
+    {
+      "source": 0,
+      "action": "arrival",
+      "target": 2,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 1,
+      "action": "arrival",
+      "target": 3,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 2,
+      "action": "arrival",
+      "target": 2,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 3,
+      "action": "arrival",
+      "target": 3,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 4,
+      "action": "arrival",
+      "target": 6,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 5,
+      "action": "arrival",
+      "target": 7,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 6,
+      "action": "arrival",
+      "target": 6,
+      "kind": "environment_chooses_UC"
+    },
+    {
+      "source": 7,
+      "action": "arrival",
+      "target": 7,
+      "kind": "environment_chooses_UC"
+    }
+  ],
+  "safe_deadlock_states": [],
+  "response_reachable_states": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "unsafe_states": [],
+  "response_reachable_safe_states_without_any_unsafe_path": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
+}

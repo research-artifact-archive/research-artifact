@@ -1,0 +1,365 @@
+{
+  "schema": "fg-ducs-full-cell-ring-v1",
+  "n": 2,
+  "stations": [
+    "A",
+    "B"
+  ],
+  "ordinary": [
+    "m_A",
+    "m_B",
+    "j"
+  ],
+  "controllable": [
+    "m_A",
+    "m_B",
+    "j"
+  ],
+  "components": [
+    {
+      "id": "A",
+      "old": {
+        "initial": "h",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "h",
+            "m_B",
+            "e"
+          ],
+          [
+            "e",
+            "m_A",
+            "h"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "h",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "h",
+            "m_B",
+            "e"
+          ],
+          [
+            "e",
+            "m_A",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_A",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    },
+    {
+      "id": "B",
+      "old": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_B",
+            "h"
+          ],
+          [
+            "h",
+            "m_A",
+            "e"
+          ]
+        ]
+      },
+      "new": {
+        "initial": "e",
+        "states": [
+          "h",
+          "e"
+        ],
+        "edges": [
+          [
+            "e",
+            "m_B",
+            "h"
+          ],
+          [
+            "h",
+            "m_A",
+            "e"
+          ],
+          [
+            "h",
+            "j",
+            "h"
+          ]
+        ]
+      },
+      "transfer_action": "rho_B",
+      "transfer": {
+        "e": [
+          "e"
+        ]
+      }
+    }
+  ],
+  "requirements": {
+    "old": {
+      "initial": "k",
+      "states": [
+        "k",
+        "E"
+      ],
+      "alphabet": [
+        "j"
+      ],
+      "error": "E",
+      "changes": [
+        [
+          "k",
+          "j",
+          "E"
+        ]
+      ],
+      "omitted_transitions": "stutter; E absorbs every alphabet event"
+    },
+    "inspect": {
+      "initial": "c",
+      "states": [
+        "c",
+        "d",
+        "E"
+      ],
+      "alphabet": [
+        "m_A",
+        "m_B",
+        "j"
+      ],
+      "error": "E",
+      "changes": [
+        [
+          "c",
+          "m_B",
+          "d"
+        ],
+        [
+          "d",
+          "j",
+          "c"
+        ],
+        [
+          "d",
+          "m_A",
+          "E"
+        ]
+      ],
+      "omitted_transitions": "stutter; E absorbs every alphabet event"
+    },
+    "one": {
+      "initial": "A",
+      "states": [
+        "A",
+        "B",
+        "E"
+      ],
+      "alphabet": [
+        "m_A",
+        "m_B"
+      ],
+      "error": "E",
+      "changes": [
+        [
+          "A",
+          "m_A",
+          "E"
+        ],
+        [
+          "A",
+          "m_B",
+          "B"
+        ],
+        [
+          "B",
+          "m_A",
+          "A"
+        ],
+        [
+          "B",
+          "m_B",
+          "E"
+        ]
+      ],
+      "omitted_transitions": "stutter; E absorbs every alphabet event"
+    }
+  },
+  "boundaries": {
+    "start": "s",
+    "stop": "t",
+    "precedence": [
+      [
+        "s",
+        "t"
+      ]
+    ]
+  },
+  "activation": {
+    "inspect_domain": "all versioned physical products (4^n entries)",
+    "inspect_initializer": "d_i for the least-index non-A holding station i, otherwise c",
+    "unreachable_completion": "For n=2 the zero/multiple-holder completion equals the preexisting Java fixture. S1 specifies the 8 one-product versioned tuples; the Java initializer contains 16 entries. Conservation excludes the additional tuples from every reachable Post state, so their completion cannot affect decision/rank.",
+    "one_domain": "all-old physical states with exactly one holder",
+    "one_initializer": "holder station name",
+    "residual": "explicit total DFA over common alphabet, same transition function/error set as tester"
+  },
+  "controllers": {
+    "old": {
+      "initial": "c_o",
+      "states": [
+        "c_o"
+      ],
+      "edges": [
+        [
+          "c_o",
+          "m_A",
+          "c_o"
+        ],
+        [
+          "c_o",
+          "m_B",
+          "c_o"
+        ]
+      ]
+    },
+    "new": {
+      "initial": "c_0",
+      "states": [
+        "c_0",
+        "c_1"
+      ],
+      "edges": [
+        [
+          "c_0",
+          "m_A",
+          "c_0"
+        ],
+        [
+          "c_0",
+          "m_B",
+          "c_1"
+        ],
+        [
+          "c_0",
+          "j",
+          "c_0"
+        ],
+        [
+          "c_1",
+          "j",
+          "c_0"
+        ],
+        [
+          "c_1",
+          "m_B",
+          "c_1"
+        ]
+      ]
+    }
+  },
+  "endpoints": {
+    "old": {
+      "initial": "x_A",
+      "states": [
+        {
+          "id": "x_A",
+          "holder": 0,
+          "controller": "c_o",
+          "old": "k"
+        },
+        {
+          "id": "x_B",
+          "holder": 1,
+          "controller": "c_o",
+          "old": "k"
+        }
+      ],
+      "edges": [
+        [
+          "x_A",
+          "m_B",
+          "x_B"
+        ],
+        [
+          "x_B",
+          "m_A",
+          "x_A"
+        ]
+      ]
+    },
+    "new": {
+      "initial": "z_A",
+      "states": [
+        {
+          "id": "z_A",
+          "holder": 0,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "z_B",
+          "holder": 1,
+          "controller": "c_0",
+          "inspect": "c"
+        },
+        {
+          "id": "y_B",
+          "holder": 1,
+          "controller": "c_1",
+          "inspect": "d"
+        }
+      ],
+      "edges": [
+        [
+          "z_A",
+          "m_B",
+          "y_B"
+        ],
+        [
+          "z_B",
+          "m_A",
+          "z_A"
+        ],
+        [
+          "y_B",
+          "j",
+          "z_B"
+        ],
+        [
+          "z_B",
+          "j",
+          "z_B"
+        ]
+      ]
+    },
+    "loadable": [
+      "z_A",
+      "z_B"
+    ],
+    "goal_ids": [
+      "h",
+      "e"
+    ]
+  },
+  "scope": "constructed witness, not an application benchmark or prevalence estimate"
+}

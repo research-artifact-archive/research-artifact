@@ -1,0 +1,56 @@
+\begin{longtable}{llrrrrl}
+\toprule
+Parameters & Variant & Decision & States & Queries & Rank/$|L|$ & Expected \\
+\midrule
+\endhead
+control=healthy\_only, k=1, m=1, n=2 & none/lazy & WIN & 5 & 10 & 4 & PASS \\
+control=healthy\_only, k=2, m=1, n=2 & transfers/lazy & WIN & 5 & 13 & 3 & PASS \\
+control=healthy\_only, k=2, m=1, n=2 & none/lazy & WIN & 5 & 13 & 3 & PASS \\
+control=healthy\_only, k=1, m=1, n=2 & none/direct\_full & WIN & 8 & 44 & 4 & PASS \\
+control=no\_recovery, k=1, m=1, n=2 & none/lazy & LOSS & 21 & 76 & 18 & PASS \\
+control=no\_recovery, k=2, m=1, n=2 & transfers/lazy & LOSS & 17 & 63 & 13 & PASS \\
+control=no\_recovery, k=2, m=1, n=2 & none/lazy & LOSS & 17 & 63 & 13 & PASS \\
+control=no\_recovery, k=1, m=1, n=2 & none/direct\_full & LOSS & 21 & 104 & 18 & PASS \\
+control=healthy\_only, k=1, m=1, n=3 & none/lazy & WIN & 7 & 21 & 6 & PASS \\
+control=healthy\_only, k=3, m=1, n=3 & transfers/lazy & WIN & 9 & 43 & 4 & PASS \\
+control=healthy\_only, k=3, m=1, n=3 & none/lazy & WIN & 9 & 43 & 4 & PASS \\
+control=healthy\_only, k=1, m=1, n=3 & none/direct\_full & WIN & 20 & 180 & 6 & PASS \\
+control=no\_recovery, k=1, m=1, n=3 & none/lazy & LOSS & 81 & 450 & 77 & PASS \\
+control=no\_recovery, k=3, m=1, n=3 & transfers/lazy & LOSS & 65 & 394 & 57 & PASS \\
+control=no\_recovery, k=3, m=1, n=3 & none/lazy & LOSS & 65 & 394 & 57 & PASS \\
+control=no\_recovery, k=1, m=1, n=3 & none/direct\_full & LOSS & 81 & 648 & 77 & PASS \\
+control=healthy\_only, k=1, m=2, n=3 & none/lazy & WIN & 7 & 21 & 6 & PASS \\
+control=healthy\_only, k=3, m=2, n=3 & transfers/lazy & WIN & 9 & 43 & 4 & PASS \\
+control=healthy\_only, k=3, m=2, n=3 & none/lazy & WIN & 9 & 43 & 4 & PASS \\
+control=healthy\_only, k=1, m=2, n=3 & none/direct\_full & WIN & 20 & 180 & 6 & PASS \\
+control=no\_recovery, k=1, m=2, n=3 & none/lazy & LOSS & 74 & 363 & 70 & PASS \\
+control=no\_recovery, k=3, m=2, n=3 & transfers/lazy & LOSS & 64 & 331 & 56 & PASS \\
+control=no\_recovery, k=3, m=2, n=3 & none/lazy & LOSS & 64 & 331 & 56 & PASS \\
+control=no\_recovery, k=1, m=2, n=3 & none/direct\_full & LOSS & 74 & 543 & 70 & PASS \\
+control=healthy\_only, k=1, m=1, n=4 & none/lazy & WIN & 9 & 36 & 8 & PASS \\
+control=healthy\_only, k=4, m=1, n=4 & transfers/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=4, m=1, n=4 & none/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=1, m=1, n=4 & none/direct\_full & WIN & 48 & 592 & 8 & PASS \\
+control=no\_recovery, k=1, m=1, n=4 & none/lazy & LOSS & 297 & 2136 & 292 & PASS \\
+control=no\_recovery, k=4, m=1, n=4 & transfers/lazy & LOSS & 257 & 2093 & 241 & PASS \\
+control=no\_recovery, k=4, m=1, n=4 & none/lazy & LOSS & 257 & 2093 & 241 & PASS \\
+control=no\_recovery, k=1, m=1, n=4 & none/direct\_full & LOSS & 297 & 3216 & 292 & PASS \\
+control=healthy\_only, k=1, m=2, n=4 & none/lazy & WIN & 9 & 36 & 8 & PASS \\
+control=healthy\_only, k=4, m=2, n=4 & transfers/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=4, m=2, n=4 & none/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=1, m=2, n=4 & none/direct\_full & WIN & 48 & 592 & 8 & PASS \\
+control=no\_recovery, k=1, m=2, n=4 & none/lazy & LOSS & 288 & 1980 & 283 & PASS \\
+control=no\_recovery, k=4, m=2, n=4 & transfers/lazy & LOSS & 256 & 1981 & 240 & PASS \\
+control=no\_recovery, k=4, m=2, n=4 & none/lazy & LOSS & 256 & 1981 & 240 & PASS \\
+control=no\_recovery, k=1, m=2, n=4 & none/direct\_full & LOSS & 288 & 3028 & 283 & PASS \\
+control=healthy\_only, k=1, m=3, n=4 & none/lazy & WIN & 9 & 36 & 8 & PASS \\
+control=healthy\_only, k=4, m=3, n=4 & transfers/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=4, m=3, n=4 & none/lazy & WIN & 17 & 121 & 5 & PASS \\
+control=healthy\_only, k=1, m=3, n=4 & none/direct\_full & WIN & 48 & 592 & 8 & PASS \\
+control=no\_recovery, k=1, m=3, n=4 & none/lazy & LOSS & 232 & 1380 & 227 & PASS \\
+control=no\_recovery, k=4, m=3, n=4 & transfers/lazy & LOSS & 244 & 1525 & 228 & PASS \\
+control=no\_recovery, k=4, m=3, n=4 & none/lazy & LOSS & 244 & 1525 & 228 & PASS \\
+control=no\_recovery, k=1, m=3, n=4 & none/direct\_full & LOSS & 232 & 2212 & 227 & PASS \\
+\bottomrule
+\end{longtable}
+{\par\smallskip\footnotesize Single trials, 32\,GiB heap, whole-JVM 1,200\,s cap. WIN reports the returned policy rank bound; LOSS reports the returned discovered losing-certificate size. NR denotes not started before the fixed cutoff. Expected values are preregistered hypotheses and never substitute for measurements.}

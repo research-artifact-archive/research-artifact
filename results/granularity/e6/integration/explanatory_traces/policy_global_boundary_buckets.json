@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "provenance": {
+    "input": "policy/v2/inputs/policy_2_fine.json",
+    "input_sha256": "b40bb52e09f351cf2f105f4f0c63d60964841000dd949421cc336b9b98c94e5f",
+    "certificate": "policy/v2/raw/series/policy_fine_boundaries_lazy/certificate.json",
+    "certificate_sha256": "254b7366a724f18d1abeed1b54c360cc72bd924bda4fdda25ca1fe5814e83c3e",
+    "job": "policy_fine_boundaries_lazy",
+    "decision": "LOSS",
+    "states_discovered": 16
+  },
+  "buckets": [
+    {
+      "root_physical": [
+        [
+          "OLD",
+          "running"
+        ]
+      ],
+      "root_testers": {
+        "coverage_and_exclusion": "1010",
+        "old_audit": "logged",
+        "old_role": "valid"
+      },
+      "action": "ablation.merge.starts",
+      "outcomes": [
+        {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "coverage_and_exclusion": "ERROR",
+            "new_audit": "unlogged",
+            "new_role": "valid",
+            "old_audit": "logged",
+            "old_role": "valid"
+          },
+          "safe": false
+        }
+      ]
+    },
+    {
+      "root_physical": [
+        [
+          "OLD",
+          "running"
+        ]
+      ],
+      "root_testers": {
+        "coverage_and_exclusion": "1010",
+        "old_audit": "logged",
+        "old_role": "valid"
+      },
+      "action": "ablation.merge.stops",
+      "outcomes": [
+        {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "coverage_and_exclusion": "ERROR"
+          },
+          "safe": false
+        }
+      ]
+    },
+    {
+      "root_physical": [
+        [
+          "OLD",
+          "running"
+        ]
+      ],
+      "root_testers": {
+        "coverage_and_exclusion": "1010",
+        "old_audit": "unlogged",
+        "old_role": "valid"
+      },
+      "action": "ablation.merge.starts",
+      "outcomes": [
+        {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "coverage_and_exclusion": "ERROR",
+            "new_audit": "unlogged",
+            "new_role": "valid",
+            "old_audit": "unlogged",
+            "old_role": "valid"
+          },
+          "safe": false
+        }
+      ]
+    },
+    {
+      "root_physical": [
+        [
+          "OLD",
+          "running"
+        ]
+      ],
+      "root_testers": {
+        "coverage_and_exclusion": "1010",
+        "old_audit": "unlogged",
+        "old_role": "valid"
+      },
+      "action": "ablation.merge.stops",
+      "outcomes": [
+        {
+          "physical": [
+            [
+              "OLD",
+              "running"
+            ]
+          ],
+          "testers": {
+            "coverage_and_exclusion": "ERROR"
+          },
+          "safe": false
+        }
+      ]
+    }
+  ],
+  "scope": "Both initial audit-history roots have unsafe global starts and unsafe global stops. Ordinary events and identity transfer cannot change the interval activation bits; the complete losing certificate also checks their closure.",
+  "extractor_sha256": "cf86e5619309eccc3de0799d3364f874f19ec96d6902b5af702d431822862dba",
+  "checker_sha256": "f7f155357699e15aeae6657b6f02849ade82da14c6015ffa8c674ce49d15b0f8"
+}

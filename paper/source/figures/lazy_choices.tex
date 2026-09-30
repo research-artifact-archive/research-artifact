@@ -1,0 +1,27 @@
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, font=\small,
+ state/.style={circle,draw,minimum size=6mm,inner sep=1pt},
+ result/.style={rounded corners,draw,inner sep=3pt},
+ lab/.style={font=\footnotesize,fill=white,inner sep=1pt}]
+\node[anchor=west,font=\small\bfseries] at (-.8,1.35) {Uncontrollable enabled};
+\node[state] (u) at (0,0) {$q$};
+\node[result] (u1) at (2,.65) {in $W$};
+\node[result] (u2) at (2,-.65) {in $W$};
+\draw[->,thick] (u) -- node[lab,above] {$u_1$} (u1);
+\draw[->,thick] (u) -- node[lab,below] {$u_2$} (u2);
+\node[align=center,font=\footnotesize] at (1,-1.35) {Every uncontrollable outcome\\must already be winning.};
+\node[anchor=west,font=\small\bfseries] at (4,1.35) {No uncontrollable enabled};
+\node[state] (c) at (4.8,0) {$q$};
+\node[result] (c1) at (7,.65) {in $W$};
+\node[result] (c2) at (7,0) {in $W$};
+\node[result,dashed] (c3) at (7,-.85) {not queried};
+\draw[->,thick] (c) -- node[lab,above] {$a$} (c1);
+\draw[->,thick] (c) -- node[lab,below] {$a$} (c2);
+\draw[->,dashed] (c) -- node[lab,below] {$b$} (c3);
+\node[align=center,font=\footnotesize] at (6.15,-1.65) {One control event suffices,\\but all of its outcomes must win.};
+\end{tikzpicture}
+\caption{Safe promotion to $W$. The two $a$ edges are nondeterministic outcomes of one control event, not two selectable actions. Other control buckets may be postponed.}
+\Description{At an uncontrollable state all outgoing outcomes must be winning. At a quiescent state both outcomes of one controllable event are winning; another event remains unqueried.}
+\label{fig:lazy-choices}
+\end{figure}

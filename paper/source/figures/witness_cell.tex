@@ -1,0 +1,55 @@
+% Complete W_cell, as a transition inventory rather than repeated local automata.
+\begin{figure*}[!htbp]
+\centering
+{\footnotesize
+\begin{tabular}{@{}p{.16\linewidth}p{.20\linewidth}p{.58\linewidth}@{}}\toprule
+Object & States (initial) & Ordinary transitions\\\midrule
+$A^o,A^n$ & $h,e$ ($h$) & $h\xrightarrow{m_B}e$, $e\xrightarrow{m_A}h$\\
+$B^o$ & $h,e$ ($e$) & $e\xrightarrow{m_B}h$, $h\xrightarrow{m_A}e$\\
+$B^n$ & $h,e$ ($e$) & $e\xrightarrow{m_B}h$, $h\xrightarrow{m_A}e$, $h\xrightarrow{j}h$\\
+$C^o$ & $c_o$ ($c_o$) & $c_o\xrightarrow{m_A,m_B}c_o$\\
+$C^n$ & $c,d$ ($c$) & $c\xrightarrow{m_A,j}c$, $c\xrightarrow{m_B}d$, $d\xrightarrow{j}c$, $d\xrightarrow{m_B}d$\\\midrule
+$r_{\rm one}$ & $A,B,E$ ($A$) & $A\xrightarrow{m_B}B$, $B\xrightarrow{m_A}A$, $A\xrightarrow{m_A}E$, $B\xrightarrow{m_B}E$\\
+$r_{\rm old}$ & $k,E$ ($k$) & $k\xrightarrow{j}E$\\
+$r_{\rm inspect}$ & $c,d,E$ ($c$) & $c\xrightarrow{m_B}d$, $d\xrightarrow{j}c$, $d\xrightarrow{m_A}E$\\\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{tabular}{@{}llcccccr@{}}\toprule
+Entry & Event just taken & $A$ version & $B$ version & Holder & Old monitor & New monitor & Rank\\\midrule
+$A$ holds & entry & $o$ & $o$ & $A$ & $k$ & -- & 6\\
+& $\rho_B$ & $o$ & $n$ & $A$ & $k$ & -- & 5\\
+& $m_B$ & $o$ & $n$ & $B$ & $k$ & -- & 4\\
+& $\mathsf{start}$ & $o$ & $n$ & $B$ & $k$ & $d$ & 3\\
+& $\mathsf{stop}$ & $o$ & $n$ & $B$ & -- & $d$ & 2\\
+& $j$ & $o$ & $n$ & $B$ & -- & $c$ & 1\\
+& $\rho_A$ & $n$ & $n$ & $B$ & -- & $c$ & 0\\\midrule
+$B$ holds & entry & $o$ & $o$ & $B$ & $k$ & -- & 5\\
+& $\rho_A$ & $n$ & $o$ & $B$ & $k$ & -- & 4\\
+& $m_A$ & $n$ & $o$ & $A$ & $k$ & -- & 3\\
+& $\mathsf{start}$ & $n$ & $o$ & $A$ & $k$ & $c$ & 2\\
+& $\mathsf{stop}$ & $n$ & $o$ & $A$ & -- & $c$ & 1\\
+& $\rho_B$ & $n$ & $n$ & $A$ & -- & $c$ & 0\\\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\linewidth}
+\textbf{Events and state notation.} $m_A/m_B/j=$ move to $A$/move to $B$/inspect; $o/n=$ old/new, $h/e=$ holding/empty, $k/c/d/E/-=$ ok/clear/pending/error/inactive.
+Each policy row gives both versions, holder (also the $r_{one}$ state), monitor states and rank.
+Its pending set consists of each old component's transfer, start while the new monitor is inactive, and stop while the old monitor is active.
+$\SigmaN=\{m_A,m_B,j\}$, $\SigmaU=\{\rho_A,\rho_B,\mathsf{start},\mathsf{stop}\}$, $\Sigmauc=\emptyset$ and $\mathsf{start}=\ustart{r_{inspect}}\prec\mathsf{stop}=\ustop{r_{old}}$.
+
+\textbf{Transfers and monitoring.} $g_i=\{(e_i^o,e_i^n)\}$; bulk $g_A\times g_B$ requires unreachable $(A_e^o,B_e^o)$.
+$R^{old/new/upd}=\{r_{old}\}/\{r_{inspect}\}/\{r_{one}\}$.
+$\operatorname{dom}\iota_{one}$ is the two old one-product states; $\iota_{one}$ is the holder, with move-preserving observation (exact RS).
+$\operatorname{dom}\iota_{inspect}$ is all eight tagged one-product states; $\iota_{inspect}=d$ at $B_h$, otherwise $c$.
+Section~\ref{sec:monitor-meaning} specifies its activation-history interpretation and RS.
+
+\textbf{Endpoints and policy.} The reachable old states are $x_A=(A_h^o,B_e^o,c_o,k)$ and $x_B=(A_e^o,B_h^o,c_o,k)$; the reachable new states are $z_A=(A_h^n,B_e^n,c,c)$, $y_B=(A_e^n,B_h^n,d,d)$ and $z_B=(A_e^n,B_h^n,c,c)$.
+The initial endpoint states are $x_A,z_A$ and $Z_{load}=\{z_A,z_B\}$.
+The displayed paths define one policy from $Q_0=\{\Init(x_A),\Init(x_B)\}$, empty elsewhere, with 13 states and 11 edges. Their last states map to $z_B,z_A$, respectively.
+
+\textbf{Completion of the specification.} Local alphabets are the displayed outgoing labels over all states. Unlisted plant/controller transitions are absent; unlisted non-error monitor transitions self-loop; $E$ absorbs every label. Comma-separated labels are separate edges. The four $\Post$ rules determine every update successor; S1 tabulates the unsafe-inclusive closure.
+\end{minipage}}
+\caption{Complete cell witness $\mathcal W_{\rm cell}$. The transition inventory defines the local automata once; the two execution paths show every decision, active monitor state and decreasing rank.}
+\Description{A complete table of component, controller and monitor transitions, followed by two policy paths and all transfer, initialization and endpoint data.}
+\label{fig:wcell-complete}
+\end{figure*}

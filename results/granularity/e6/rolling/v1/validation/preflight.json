@@ -1,0 +1,34 @@
+{
+  "started_at": "2026-09-29T16:41:14.411239+09:00",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "rolling/validate_endpoints.py",
+        "rolling/v1"
+      ],
+      "exit_code": 0,
+      "output": "{\"status\": \"PASS\", \"inputs\": 70, \"endpoint_products\": 140, \"json_schema_checked\": false}\n"
+    },
+    {
+      "job": "rolling_n02_m01_k01_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "rolling_n02_m01_k02_lazy",
+      "status": "PASS"
+    },
+    {
+      "job": "rolling_n02_m01_k01_df",
+      "status": "PASS"
+    },
+    {
+      "job": "rolling_n02_m01_k01_e1merged",
+      "status": "PASS"
+    }
+  ],
+  "issues": [],
+  "finished_at": "2026-09-29T16:41:16.726415+09:00",
+  "status": "PASS"
+}

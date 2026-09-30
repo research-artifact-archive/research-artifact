@@ -1,0 +1,48 @@
+{
+  "reviewed_sha256": "b8dad398a71b905ac82dc748682235214fa7d6488072b1d19403400a7e776780",
+  "status": "LIMITATIONS_CONFIRMED",
+  "current_data_explicit_residual_automata": 0,
+  "findings": [
+    {
+      "id": "goal_outgoing",
+      "reproducer": "Added goal serve_1 self-loop to actual Rolling WIN certificate; checker accepts despite rank 0 goal needing no outgoing mid edge",
+      "python_result": {
+        "status": "PASS",
+        "certificate_states": 5,
+        "strategy_edges": 5
+      },
+      "fixed_E1_rule": "OtfDucsCertificateChecker.java:70 rejects Goal has a mid-mode transition"
+    },
+    {
+      "id": "certificate_exact_domain",
+      "reproducer": "Locally decreasing certificate on all 8 independent winning states is accepted, but selected root-reachable policy has only 5 states",
+      "nodes": 8,
+      "strategy_reachable": 5,
+      "python_result": {
+        "status": "PASS",
+        "certificate_states": 8,
+        "strategy_edges": 7
+      },
+      "fixed_E1_rule": "OtfDucsCertificateChecker.java:132 requires exact strategy-reachable rank domain"
+    },
+    {
+      "id": "exact_bucket_policy_shape",
+      "reproducer": "Code uses UC subset and permits several C buckets; fixed E1 requires exactly all UC and no C, or exactly one C when UC absent",
+      "demonstration": "static source comparison; current solver proofs already obey E1 canonical shape"
+    },
+    {
+      "id": "residual_commutation",
+      "reproducer": "Explicit residual has same bad-prefix language as tester but two safe latent resets do not commute; independent Model accepts transfers while E1 ContractMerge rejects all-state residual noncommutation",
+      "rho1_then_rho2": "ERR_AVAILABILITY|1",
+      "rho2_then_rho1": "ERR_AVAILABILITY|0",
+      "current_campaign_impact": "No explicit residual automata in the five audited families; default residual equals tester, whose commutation is checked"
+    }
+  ],
+  "positive_checks": [
+    "Atomic group stop removal precedes remaining-tester observation; all starts use pre-event physical initializer and do not observe own start.",
+    "Goal correctly excludes physically enabled UC before monitor safety/terminalization.",
+    "Ordinary alphabet ownership, nonowner stutter, synchronization blocking and set-valued Cartesian transfer semantics agree for the finite JSON frontend.",
+    "LOSS closure correctly requires some losing UC outcome, or a losing outcome in every C bucket; root intersection is sufficient for global multi-root LOSS.",
+    "The full independent attractor is separate from certificate validation, so these certificate strictness gaps do not establish any wrong reported decision."
+  ]
+}

@@ -1,0 +1,19 @@
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[>=Stealth,font=\small,
+  statebox/.style={draw,rounded corners=2pt,align=center,minimum width=2.6cm,minimum height=.65cm},
+  every edge/.style={draw,->},lab/.style={font=\scriptsize,align=center,fill=white,inner sep=2pt}]
+\node[statebox] (a) at (0,0) {validation ready};
+\node[statebox] (b) at (5.5,0) {await response};
+\node[statebox] (c) at (5.5,-1.8) {await review};
+\node[statebox] (d) at (0,-1.8) {await receipt};
+\node[align=center,font=\scriptsize] (other) at (9,0) {other response\\retained in game};
+\path (a) edge node[lab,above] {C: \texttt{validateDSD1}} (b)
+ (b) edge node[lab,right] {UC: \texttt{dsd1Ok.0}} (c)
+ (c) edge node[lab,below] {C: \texttt{reviewDSD1}} (d)
+ (d) edge node[lab,left] {UC: \texttt{receiveDSD1}} (a)
+ (b) edge[dashed] node[lab,above] {UC: \texttt{dsd1Ok.1}} (other);
+\end{tikzpicture}
+\caption{The safe core of a losing region in Industry/R1 after all updates. The solid cycle combines the only safe control choices with an environment choice that can repeat rejection forever. At each of the four safe states, the other controllable events, \texttt{validateGF1} and \texttt{validateTOR}, lead to monitor error. C/UC denote controllable/uncontrollable events. The dashed UC outcome is retained; the environment need not choose it. The changed contract enables an earlier update path, not an escape from this region.}
+\Description{Four safe states form a directed cycle: validation, an uncontrollable rejection, review, and receipt. A second uncontrollable response leaves the illustrated cycle. At all four states, the two alternative control events cause monitor error.}\label{fig:industry-trap}
+\end{figure}

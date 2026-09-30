@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "graph_and_metrics_unchanged": true,
+  "cases": [
+    "canary_no_recovery.json",
+    "canary_product.json",
+    "db_joint_secondary.json",
+    "db_no_slack.json",
+    "policy_global_boundaries.json",
+    "threads_saturated.json"
+  ],
+  "differences": [
+    {
+      "case": "canary_no_recovery.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope"
+      ]
+    },
+    {
+      "case": "canary_product.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope"
+      ]
+    },
+    {
+      "case": "db_joint_secondary.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope"
+      ]
+    },
+    {
+      "case": "db_no_slack.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope"
+      ]
+    },
+    {
+      "case": "policy_global_boundaries.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope"
+      ]
+    },
+    {
+      "case": "threads_saturated.json",
+      "different_fields": [
+        "extractor_sha256",
+        "scope",
+        "initial_states_in_region"
+      ]
+    }
+  ],
+  "normalization": "Sort initial_states_in_region, a set-valued root list; process hash randomization can change list order. All graph edges, state records and numeric metrics otherwise compare exactly.",
+  "change": "Only explanatory wording and extractor source digest differ, apart from root-list order. Original source and reports retained.",
+  "new_source_sha256": "498234a227d21b7661525ddace2ae2e4249f32f5d7da7e87312e765b0b255fc0"
+}

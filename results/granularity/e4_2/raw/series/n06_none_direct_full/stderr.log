@@ -1,0 +1,11 @@
+Exception in thread "main" java.lang.IllegalArgumentException: Invalid activation specification for requirement one: Activation must point to a non-error tester state at [OLD(e), OLD(e), OLD(e), OLD(e), OLD(h), OLD(e)]
+	at ltsa.updatingControllers.otf.FineGrainedUpdateProblem.validateRequirementsAndActivations(FineGrainedUpdateProblem.java:546)
+	at ltsa.updatingControllers.otf.FineGrainedUpdateProblem.<init>(FineGrainedUpdateProblem.java:155)
+	at ltsa.updatingControllers.otf.FineGrainedUpdateProblem.<init>(FineGrainedUpdateProblem.java:27)
+	at ltsa.updatingControllers.otf.FineGrainedUpdateProblem$Builder.build(FineGrainedUpdateProblem.java:985)
+	at CellRingDriver.load(CellRingDriver.java:123)
+	at CellRingDriver.main(CellRingDriver.java:39)
+Caused by: java.lang.IllegalArgumentException: Activation must point to a non-error tester state at [OLD(e), OLD(e), OLD(e), OLD(e), OLD(h), OLD(e)]
+	at ltsa.updatingControllers.otf.ActivationSpec.validateLanguageEquivalence(ActivationSpec.java:96)
+	at ltsa.updatingControllers.otf.FineGrainedUpdateProblem.validateRequirementsAndActivations(FineGrainedUpdateProblem.java:542)
+	... 5 more

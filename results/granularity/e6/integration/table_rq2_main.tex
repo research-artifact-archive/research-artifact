@@ -1,0 +1,25 @@
+% Generated from results_index.csv; no timings are compared across hosts.
+\begin{table}[t]
+\centering
+\caption{Constructed comparisons, not prevalence estimates. Details: S1/S4.}
+\label{tab:rq2-constructed}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2.1pt}
+\renewcommand{\arraystretch}{1.04}
+\begin{tabular}{@{}lllcclcc@{}}
+\toprule
+Family & Mechanism & Evidence & Fine & All & Threshold or control & E1 & v3 \\
+\midrule
+Cell$_n$ & M1 & L1,L3 & W & L & $n=2\ldots10$ (E4) & -- & -- \\
+Rolling$(n,m,k)$ & M2 & L1,L3 & W & L & W iff $k\le n-m$ & P & P \\
+Canary & M3 & L1,L2,L3 & W & L & set-valued; recovery & P & P \\
+Policy$(2)$ & M4 & boundary & W & L & opposing boundary orders & P & P \\
+DB-Rolling & M1,M2 & L1,L3 & W/L & L/L & $m=2/3$, respectively & P & P \\
+PC2-Rolling & M2 & pending & W & TO & merged cap: 7200\,s & -- & -- \\
+Threads (control) & M1* & control & W/L & W/L & backpressure/saturation & P & P \\
+\bottomrule
+\end{tabular}
+\endgroup
+\par\vspace{2pt}{\scriptsize W/L: WIN/LOSS. All: transfers (Policy: boundaries). P: PASS; --: other validation scope (S1/S4). E1/v3: merge equivalence/independent game; *: idle/progress control. Rolling Fine/All: $k=1/n$.}
+\end{table}

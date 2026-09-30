@@ -1,0 +1,68 @@
+\begin{longtable}{llrrrrl}
+\toprule
+Parameters & Variant & Decision & States & Queries & Rank/$|L|$ & Expected \\
+\midrule
+\endhead
+k=1, m=1, n=2 & none/lazy & WIN & 21 & 66 & 6 & PASS \\
+k=2, m=1, n=2 & transfers/lazy & LOSS & 17 & 62 & 5 & PASS \\
+k=2, m=1, n=2 & none/lazy & LOSS & 17 & 62 & 5 & PASS \\
+k=1, m=1, n=2 & none/direct\_full & WIN & 21 & 132 & 6 & PASS \\
+k=1, m=1, n=3 & none/lazy & WIN & 45 & 212 & 9 & PASS \\
+k=3, m=1, n=3 & transfers/lazy & LOSS & 65 & 386 & 9 & PASS \\
+k=3, m=1, n=3 & none/lazy & LOSS & 65 & 386 & 9 & PASS \\
+k=1, m=1, n=3 & none/direct\_full & WIN & 81 & 822 & 9 & PASS \\
+k=1, m=2, n=3 & none/lazy & WIN & 62 & 257 & 9 & PASS \\
+k=3, m=2, n=3 & transfers/lazy & LOSS & 64 & 328 & 32 & PASS \\
+k=3, m=2, n=3 & none/lazy & LOSS & 64 & 328 & 32 & PASS \\
+k=1, m=2, n=3 & none/direct\_full & WIN & 74 & 684 & 9 & PASS \\
+k=1, m=1, n=4 & none/lazy & WIN & 85 & 546 & 12 & PASS \\
+k=4, m=1, n=4 & transfers/lazy & LOSS & 257 & 2062 & 17 & PASS \\
+k=4, m=1, n=4 & none/lazy & LOSS & 257 & 2062 & 17 & PASS \\
+k=1, m=1, n=4 & none/direct\_full & WIN & 297 & 4072 & 12 & PASS \\
+k=1, m=2, n=4 & none/lazy & WIN & 137 & 803 & 12 & PASS \\
+k=4, m=2, n=4 & transfers/lazy & LOSS & 256 & 1961 & 80 & PASS \\
+k=4, m=2, n=4 & none/lazy & LOSS & 256 & 1961 & 80 & PASS \\
+k=1, m=2, n=4 & none/direct\_full & WIN & 288 & 3824 & 12 & PASS \\
+k=1, m=3, n=4 & none/lazy & WIN & 174 & 898 & 12 & PASS \\
+k=4, m=3, n=4 & transfers/lazy & LOSS & 244 & 1519 & 164 & PASS \\
+k=4, m=3, n=4 & none/lazy & LOSS & 244 & 1519 & 164 & PASS \\
+k=1, m=3, n=4 & none/direct\_full & WIN & 232 & 2768 & 12 & PASS \\
+k=1, m=1, n=5 & none/lazy & WIN & 157 & 1304 & 15 & PASS \\
+k=5, m=1, n=5 & transfers/lazy & LOSS & 1025 & 10282 & 33 & PASS \\
+k=5, m=1, n=5 & none/lazy & LOSS & 1025 & 10282 & 33 & PASS \\
+k=1, m=1, n=5 & none/direct\_full & WIN & 1053 & 18050 & 15 & PASS \\
+k=1, m=2, n=5 & none/lazy & WIN & 252 & 1920 & 15 & PASS \\
+k=5, m=2, n=5 & transfers/lazy & LOSS & 1024 & 10126 & 192 & PASS \\
+k=5, m=2, n=5 & none/lazy & LOSS & 1024 & 10126 & 192 & PASS \\
+k=1, m=2, n=5 & none/direct\_full & WIN & 1042 & 17660 & 15 & PASS \\
+k=1, m=3, n=5 & none/lazy & WIN & 386 & 2669 & 15 & PASS \\
+k=5, m=3, n=5 & transfers/lazy & LOSS & 1009 & 9211 & 497 & PASS \\
+k=5, m=3, n=5 & none/lazy & LOSS & 1009 & 9211 & 497 & PASS \\
+k=1, m=3, n=5 & none/direct\_full & WIN & 952 & 15420 & 15 & PASS \\
+k=1, m=4, n=5 & none/lazy & WIN & 427 & 2568 & 15 & PASS \\
+k=5, m=4, n=5 & transfers/lazy & LOSS & 919 & 6491 & 727 & PASS \\
+k=5, m=4, n=5 & none/lazy & LOSS & 919 & 6491 & 727 & PASS \\
+k=1, m=4, n=5 & none/direct\_full & WIN & 672 & 9740 & 15 & PASS \\
+k=1, m=1, n=6 & none/lazy & WIN & 293 & 3022 & 18 & PASS \\
+k=6, m=1, n=6 & transfers/lazy & LOSS & 4097 & 49254 & 65 & PASS \\
+k=6, m=1, n=6 & none/lazy & LOSS & 4097 & 49254 & 65 & PASS \\
+k=1, m=1, n=6 & none/direct\_full & WIN & 3645 & 74796 & 18 & PASS \\
+k=1, m=2, n=6 & none/lazy & WIN & 439 & 4176 & 18 & PASS \\
+k=6, m=2, n=6 & transfers/lazy & LOSS & 4096 & 49031 & 448 & PASS \\
+k=6, m=2, n=6 & none/lazy & LOSS & 4096 & 49031 & 448 & PASS \\
+k=1, m=2, n=6 & none/direct\_full & WIN & 3632 & 74232 & 18 & PASS \\
+k=1, m=3, n=6 & none/lazy & WIN & 718 & 6282 & 18 & PASS \\
+k=6, m=3, n=6 & transfers/lazy & LOSS & 4078 & 47390 & 1390 & PASS \\
+k=6, m=3, n=6 & none/lazy & LOSS & 4078 & 47390 & 1390 & PASS \\
+k=1, m=3, n=6 & none/direct\_full & WIN & 3500 & 70152 & 18 & PASS \\
+k=1, m=4, n=6 & none/lazy & WIN & 1023 & 8066 & 18 & PASS \\
+k=6, m=4, n=6 & transfers/lazy & LOSS & 3943 & 40875 & 2535 & PASS \\
+k=6, m=4, n=6 & none/lazy & LOSS & 3943 & 40875 & 2535 & PASS \\
+k=1, m=4, n=6 & none/direct\_full & WIN & 2960 & 56232 & 18 & PASS \\
+k=1, m=5, n=6 & none/lazy & WIN & 988 & 6782 & 18 & PASS \\
+k=6, m=5, n=6 & transfers/lazy & LOSS & 3403 & 26260 & 2955 & PASS \\
+k=6, m=5, n=6 & none/lazy & LOSS & 3403 & 26260 & 2955 & PASS \\
+k=1, m=5, n=6 & none/direct\_full & WIN & 1840 & 31272 & 18 & PASS \\
+\bottomrule
+\end{longtable}
+{\par\smallskip\footnotesize Single trials, 32\,GiB heap, whole-JVM 1,200\,s cap. WIN reports the returned policy rank bound; LOSS reports the returned discovered losing-certificate size. NR denotes not started before the fixed cutoff. Expected values are preregistered hypotheses and never substitute for measurements.}

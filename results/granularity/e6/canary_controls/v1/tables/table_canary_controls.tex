@@ -1,0 +1,19 @@
+\begin{tabular}{rrlccrrrr}
+\toprule
+$n$ & $m$ & Control & Fine & All & Fine states & All states & Fine rank/$|L|$ & DF states \\
+\midrule
+2 & 1 & Healthy only & WIN & WIN & 5 & 5 & 4 & 8 \\
+2 & 1 & No recovery & LOSS & LOSS & 21 & 17 & 18 & 21 \\
+3 & 1 & Healthy only & WIN & WIN & 7 & 9 & 6 & 20 \\
+3 & 1 & No recovery & LOSS & LOSS & 81 & 65 & 77 & 81 \\
+3 & 2 & Healthy only & WIN & WIN & 7 & 9 & 6 & 20 \\
+3 & 2 & No recovery & LOSS & LOSS & 74 & 64 & 70 & 74 \\
+4 & 1 & Healthy only & WIN & WIN & 9 & 17 & 8 & 48 \\
+4 & 1 & No recovery & LOSS & LOSS & 297 & 257 & 292 & 297 \\
+4 & 2 & Healthy only & WIN & WIN & 9 & 17 & 8 & 48 \\
+4 & 2 & No recovery & LOSS & LOSS & 288 & 256 & 283 & 288 \\
+4 & 3 & Healthy only & WIN & WIN & 9 & 17 & 8 & 48 \\
+4 & 3 & No recovery & LOSS & LOSS & 232 & 244 & 227 & 232 \\
+\bottomrule
+\end{tabular}
+{\par\smallskip\footnotesize Fine and All use Lazy; All is E1 transfer merging, also checked against generated all-group input. Original Canary has fine WIN / all LOSS at every listed point. Healthy only removes broken transfer outcomes; No recovery removes only B-to-H restoration edges. One trial, 32\,GiB, 1,200\,s cap. Rank is a returned bound and $|L|$ a discovered losing-certificate region. Mac times are not Xeon comparisons.}

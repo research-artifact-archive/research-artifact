@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "audits": [
+    {
+      "status": "PASS",
+      "job": "db_n3_m2_fine_none_lazy",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "independently_checked_edges": 8,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m2_fine_transfers_lazy",
+      "decision": "LOSS",
+      "certificate_states": 6,
+      "independently_checked_edges": 27,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m2_all_none_lazy",
+      "decision": "LOSS",
+      "certificate_states": 6,
+      "independently_checked_edges": 27,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m2_fine_none_direct_full",
+      "decision": "WIN",
+      "certificate_states": 9,
+      "independently_checked_edges": 8,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m3_fine_none_lazy",
+      "decision": "LOSS",
+      "certificate_states": 12,
+      "independently_checked_edges": 0,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m3_fine_transfers_lazy",
+      "decision": "LOSS",
+      "certificate_states": 6,
+      "independently_checked_edges": 27,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m3_all_none_lazy",
+      "decision": "LOSS",
+      "certificate_states": 6,
+      "independently_checked_edges": 27,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    },
+    {
+      "status": "PASS",
+      "job": "db_n3_m3_fine_none_direct_full",
+      "decision": "LOSS",
+      "certificate_states": 12,
+      "independently_checked_edges": 0,
+      "leader_or_candidate_invariant": true,
+      "physical_ready_budget_for_safe_states": true
+    }
+  ],
+  "comparisons": [
+    {
+      "family": "DB-Rolling",
+      "n": 3,
+      "m": 2,
+      "fine_decision": "WIN",
+      "merged_decision": "LOSS",
+      "classification": "witness",
+      "fine_states": 12,
+      "direct_full_states": 96,
+      "merged_states": 6,
+      "fine_rank": 8,
+      "merged_losing_region": 6,
+      "generated_merge_equality": "PASS",
+      "all_post_equality": "PASS",
+      "loss_reason": "The simultaneous secondary-only transfer is disabled throughout the closed losing region because exactly one old member is primary or election candidate."
+    },
+    {
+      "family": "DB-Rolling",
+      "n": 3,
+      "m": 3,
+      "fine_decision": "LOSS",
+      "merged_decision": "LOSS",
+      "classification": "both_LOSS",
+      "fine_states": 12,
+      "direct_full_states": 12,
+      "merged_states": 6,
+      "fine_rank": null,
+      "merged_losing_region": 6,
+      "generated_merge_equality": "PASS",
+      "all_post_equality": "PASS",
+      "loss_reason": "Requiring all three members ready makes every individual transfer unsafe; simultaneous transfer is also disabled by the leader/candidate invariant."
+    }
+  ]
+}

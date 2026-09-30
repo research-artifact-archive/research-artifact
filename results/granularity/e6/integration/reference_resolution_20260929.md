@@ -1,0 +1,27 @@
+# Primary-reference resolution recheck — 2026-09-29
+
+Checked at 2026-09-29T19:35:37+09:00. The original `primary_sources.bib` was read only; SHA-256 `8dceeb49753ddf181c88b3e153fb265a92fe2d409f66e71ea15371c922fa41f9`. All ten entries and both DOI fields were resolved, giving eleven distinct bibliographic endpoints because the Kitsune URL is itself its DOI.
+
+Nine direct official URLs returned HTTP 200. Both DOI resolvers redirected to ACM publisher pages, which returned HTTP 403 in this environment. This is an access restriction, not evidence that the works or DOIs do not exist. Publisher-deposited Crossref records, the NIST publication record, and the Kitsune author page/manuscript provide the independent metadata/content routes below. No bibliography correction was identified and no field was changed.
+
+| BibTeX key | URL/DOI result | Identity/scope check |
+|---|---|---|
+| `e6_kubernetes_deployments` | [HTTP 200](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) | Official title matches; rollout availability/surge settings support the practice anchor, not this finite LTS or its completion theorem. |
+| `e6_kubernetes_disruptions` | [HTTP 200](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) | Official title matches; Deployment/StatefulSet rolling upgrades are not constrained by PDBs, matching the scope correction. |
+| `e6_crowdstrike_pir2024` | [HTTP 200](https://www.crowdstrike.com/en-us/blog/falcon-content-update-preliminary-post-incident-report/) | Official heading/date match: published July 24, 2024 and updated July 25 at 19:00 UTC; canary/staged telemetry is a proposed deployment practice. |
+| `e6_crowdstrike_rca2024` | [HTTP 200](https://www.crowdstrike.com/wp-content/uploads/2024/08/Channel-File-291-Incident-Root-Cause-Analysis-08.06.2024.pdf) | 12-page official PDF; title and explicit August 6, 2024 date match. Section 6 on printed page 6 covers staged rings, telemetry, and rollback. |
+| `e6_mongodb_enterprise_replica_set` | [HTTP 200](https://www.mongodb.com/docs/v7.0/tutorial/upgrade-to-enterprise-replica-set/) | Versioned v7.0 page matches Community-to-Enterprise migration, not an upgrade to another release. |
+| `e6_mongodb_replsetstepdown` | [HTTP 200](https://www.mongodb.com/docs/v7.0/reference/command/replsetstepdown/) | Versioned v7.0 command title matches; documented election/failed-write interval limits uninterrupted-write claims. |
+| `e6_aws_cloudtrail_stop_logging` | [HTTP 200](https://docs.aws.amazon.com/cli/latest/reference/cloudtrail/stop-logging.html) | Official command title matches. Page permits updating without stopping; do not infer a required stop/start deployment protocol. |
+| `e6_kuhn1997_mutual_exclusion` | [HTTP 200](https://csrc.nist.gov/pubs/conference/1997/11/07/mutual-exclusion-of-roles-to-implement-separation/final); DOI 403 after 302,301,301 redirects | NIST title, 1997-11-07 record, RBAC97 and pp.23–30 match; Crossref confirms author D. Richard Kuhn, ACM Press, year and DOI. |
+| `e6_hayden2014_kitsune` | [HTTP 403](https://doi.org/10.1145/2629460); DOI 403 after 302 redirects | Crossref confirms title/subtitle, five authors, TOPLAS36(4), 2014-10-28 and 38 pages; author page supplies article13. Manuscript front-page placeholder fields are not authoritative bibliography. |
+| `e6_ur_resetting_calibration` | [HTTP 200](https://www.universal-robots.com/manuals/EN/HTML/SW5_19/Content/prod-rck/rck-resetting-the-calibration.htm) | Official title matches; reboot applies calibration edits. It does not establish that every software update requires calibration. |
+
+## Preserved access limitations and fallback evidence
+
+- [Kuhn DOI](https://doi.org/10.1145/266741.266749): 302 to the legacy `portal.acm.org` HTTP citation route, 301 to HTTPS, then 301 to `dl.acm.org/citation.cfm?doid=266741.266749`, ending in 403. The web tool separately reported inaccessible without an HTTP code. [NIST](https://csrc.nist.gov/pubs/conference/1997/11/07/mutual-exclusion-of-roles-to-implement-separation/final) and the [publisher-deposited Crossref record](https://api.crossref.org/works/10.1145/266741.266749) returned 200.
+- [Kitsune DOI](https://doi.org/10.1145/2629460): 302 to `https://dl.acm.org/doi/10.1145/2629460`, ending in 403. Both web and direct HTTP access observed that restriction. The [Crossref record](https://api.crossref.org/works/10.1145/2629460), [author publication page](https://www.cs.umd.edu/~mwh/papers/hayden14kitsune-journal.html), and [38-page manuscript](https://www.cs.umd.edu/~mwh/papers/kitsune-journal.pdf) returned 200.
+- The web tool could not fetch either Crossref API record; direct normal HTTPS GET retrieved and parsed both. These are distinct observed access paths, both retained in `reference_resolution_20260929.json`.
+- AWS latest documentation has a moving version label: the web tool returned CLI2.36.45, while direct retrieval returned CLI2.37.5. The entry intentionally cites the command reference without a CLI release or inferred publication year; the cited command semantics agree.
+
+Resolution is not a deployment validation. The model limitations in `primary_source_scope.md` still apply. No publication year is inferred from URL paths, software versions, copyright, or retrieval time. The HTTP script used normal redirects with no authentication/cookies and 20-second per-request timeouts; it read an HTML/PDF prefix for access identity and complete registry JSON for metadata. The web tool separately read the primary text/PDF relevant passages.

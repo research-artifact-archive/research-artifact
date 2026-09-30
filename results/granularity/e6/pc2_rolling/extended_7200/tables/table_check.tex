@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[a4paper,landscape,margin=16mm]{geometry}
+\usepackage{booktabs}
+\begin{document}
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{llrlrrrrr}
+\toprule
+Host / heap & Variant & Budget (s) & Result & States & Queries & Rank & $|L|$ & Solve+check (s) \\
+\midrule
+Mac / 32g & Lazy / fine & 1,200 & WIN & 6,639 & 134,128 & 37 & -- & 9.660 \\
+Mac / 32g & Lazy / merged & 1,200 & TO & -- & -- & -- & -- & -- \\
+Mac / 32g & Full / fine & 1,200 & TO & -- & -- & -- & -- & -- \\
+Mac / 32g & Lazy / merged & 7,200 & TO & -- & -- & -- & -- & -- \\
+Mac / 32g & Full / fine & 7,200 & TO & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{PC2 calibration-setting variant with separate single-trial budgets. The original 1,200\,s rows are retained unchanged; the two 7,200\,s rows are newly authorized trials in fixed order. Full/fine uses Direct-Full with no contract merge. Each timeout applies to the whole JVM, while the reported time is solve plus internal certificate checking. Missing completion counters remain blank. Rank is the maximum returned WIN-certificate rank and $L$ is the returned discovered-state LOSS certificate, not necessarily the full losing region. Mac times are reference values. No Xeon measurements are represented.}
+\label{tab:pc2-extended-budget}
+\end{table}
+
+\noindent The fixed solver JAR, diagnostic class and input are byte-identical across these Mac rows. The new campaign changes the budget and output directory only. The existing Xeon plan has a separate 200g heap and is recorded as NOT\_COLLECTED outside this observed table.
+\end{document}

@@ -1,0 +1,512 @@
+INFO: Registered Map Environment: MAP_ENTRY
+INFO: Registered Map Environment: MAP_INVENTORY
+INFO: Registered Map Environment: MAP_CREDIT
+INFO: Registered Map Environment: MAP_SHIPPING
+INFO: Registered Map Environment: MAP_BILLING
+comp.compile time : 93ms
+Compiled: ENTRY_OLD
+Compiled: INVENTORY_OLD
+Compiled: CREDIT_OLD
+Compiled: SHIPPING_OLD
+Compiled: BILLING_OLD
+Composition:OldEnv = OldEnv.ENTRY_OLD || OldEnv.INVENTORY_OLD || OldEnv.CREDIT_OLD || OldEnv.SHIPPING_OLD || OldEnv.BILLING_OLD
+State Space: 4 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 64 Transitions: 176 Memory used: 10288K
+Composed in 19ms
+Formula !P_AVOID_ROLLBACK = (true U rollback)
+GBA 2 states 3 transitions
+Buchi automata:
+P_AVOID_ROLLBACK = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |rollback -> S1).
+Composition:P_AVOID_ROLLBACK = rollback || SYNC || P_AVOID_ROLLBACK
+State Space: 2 * 2 * 2 = 2 ** 3
+Composing...
+-- States: 5 Transitions: 8 Memory used: 11063K
+Composed in 9ms
+After Tau elimination = 3 state
+Tau reduction ON
+P_AVOID_ROLLBACK minimising..
+Minimised States: 2 in 1ms
+make DFA(P_AVOID_ROLLBACK)
+DFA(P_AVOID_ROLLBACK) has 1 states.
+Tau reduction ON
+P_AVOID_ROLLBACK minimising..
+Minimised States: 1 in 0ms
+Formula !P_EVAL_POLICY = (true U (eval & (!CreditFinished | !InventoryFinished)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_EVAL_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |eval&!CreditFinished -> S1 |eval&!InventoryFinished -> S1).
+Composition:P_EVAL_POLICY = InventoryFinished || CreditFinished || eval || SYNC || P_EVAL_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11041K
+Composed in 10ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_EVAL_POLICY minimising....
+Minimised States: 5 in 0ms
+make DFA(P_EVAL_POLICY)
+DFA(P_EVAL_POLICY) has 4 states.
+Tau reduction ON
+P_EVAL_POLICY minimising....
+Minimised States: 4 in 0ms
+Formula !P_ARCHIVE_POLICY = (true U (archive & (!BillingFinished | !ShippingFinished)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_ARCHIVE_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |archive&!BillingFinished -> S1 |archive&!ShippingFinished -> S1).
+Composition:P_ARCHIVE_POLICY = ShippingFinished || BillingFinished || archive || SYNC || P_ARCHIVE_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11020K
+Composed in 8ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_ARCHIVE_POLICY minimising....
+Minimised States: 5 in 0ms
+make DFA(P_ARCHIVE_POLICY)
+DFA(P_ARCHIVE_POLICY) has 4 states.
+Tau reduction ON
+P_ARCHIVE_POLICY minimising....
+Minimised States: 4 in 0ms
+Formula !P_INITS_POLICY = (true U ((!OrderApproved & initBilling) | ((initShipping & !OrderApproved) | ((!OrderArrived & initCredit) | (initInventory & !OrderArrived)))))
+GBA 2 states 6 transitions
+Buchi automata:
+P_INITS_POLICY = S0,
+S1@ =(true -> S1),
+S0 =(!OrderApproved&initBilling -> S1 |!OrderArrived&initCredit -> S1 |true -> S0 |initInventory&!OrderArrived -> S1 |initShipping&!OrderApproved -> S1).
+Composition:P_INITS_POLICY = OrderArrived || OrderApproved || initInventory || initCredit || initShipping || initBilling || SYNC || P_INITS_POLICY
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 8
+Composing...
+-- States: 80 Transitions: 448 Memory used: 11376K
+Composed in 9ms
+After Tau elimination = 40 state
+Tau reduction ON
+P_INITS_POLICY minimising...
+Minimised States: 5 in 2ms
+make DFA(P_INITS_POLICY)
+DFA(P_INITS_POLICY) has 4 states.
+Tau reduction ON
+P_INITS_POLICY minimising...
+Minimised States: 4 in 0ms
+Formula !P_DONT_INIT_TWICE = (true U ((BillingFinished & initBilling) | ((ShippingFinished & initShipping) | ((CreditFinished & initCredit) | (InventoryFinished & initInventory)))))
+GBA 2 states 6 transitions
+Buchi automata:
+P_DONT_INIT_TWICE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |BillingFinished&initBilling -> S1 |CreditFinished&initCredit -> S1 |InventoryFinished&initInventory -> S1 |ShippingFinished&initShipping -> S1).
+Composition:P_DONT_INIT_TWICE = InventoryFinished || CreditFinished || ShippingFinished || BillingFinished || initInventory || initCredit || initShipping || initBilling || SYNC || P_DONT_INIT_TWICE
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 10
+Composing...
+-- States: 320 Transitions: 1792 Memory used: 14151K
+Composed in 17ms
+After Tau elimination = 160 state
+Tau reduction ON
+P_DONT_INIT_TWICE minimising...
+Minimised States: 17 in 5ms
+make DFA(P_DONT_INIT_TWICE)
+DFA(P_DONT_INIT_TWICE) has 16 states.
+Tau reduction ON
+P_DONT_INIT_TWICE minimising...
+Minimised States: 16 in 1ms
+Composition:OldController = OldEnv || P_AVOID_ROLLBACK || P_EVAL_POLICY || P_INITS_POLICY || P_ARCHIVE_POLICY || P_DONT_INIT_TWICE
+State Space: 64 * 1 * 4 * 4 * 4 * 16 = 2 ** 16
+Composing...
+-- States: 22 Transitions: 77 Memory used: 11991K
+Composed in 12ms
+Solving the LTS control problem.
+Environment states: 23
+Game states: 23
+Game transitions: 69
+Analysis time: 67ms.
+Controller [22] generated successfully.
+Composition:OldController = OldController || P_AVOID_ROLLBACK || P_EVAL_POLICY || P_INITS_POLICY || P_ARCHIVE_POLICY || P_DONT_INIT_TWICE
+State Space: 22 * 1 * 4 * 4 * 4 * 16 = 2 ** 15
+Composing...
+-- States: 22 Transitions: 31 Memory used: 14167K
+Composed in 17ms
+Compiled: OldController
+Composition:OldEnv = OldEnv.ENTRY_OLD || OldEnv.INVENTORY_OLD || OldEnv.CREDIT_OLD || OldEnv.SHIPPING_OLD || OldEnv.BILLING_OLD
+State Space: 4 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 64 Transitions: 176 Memory used: 12853K
+Composed in 12ms
+ - Synthesizing Mapping Environment from lists (size=5)...
+INFO: Auto-compiling dependency: ENTRY_NEW
+Generating Mapping Environment: MAP_ENTRY_OLD_ENTRY_NEW
+INFO: Auto-compiling dependency: INVENTORY_NEW
+Generating Mapping Environment: MAP_INVENTORY_OLD_INVENTORY_NEW
+INFO: Auto-compiling dependency: CREDIT_NEW
+Generating Mapping Environment: MAP_CREDIT_OLD_CREDIT_NEW
+INFO: Auto-compiling dependency: SHIPPING_NEW
+Generating Mapping Environment: MAP_SHIPPING_OLD_SHIPPING_NEW
+INFO: Auto-compiling dependency: BILLING_NEW
+Generating Mapping Environment: MAP_BILLING_OLD_BILLING_NEW
+Mode: Traditional Updating Controller Synthesis
+Composition:MAPPING_ENV = MAP_ENTRY_OLD_ENTRY_NEW || MAP_INVENTORY_OLD_INVENTORY_NEW || MAP_CREDIT_OLD_CREDIT_NEW || MAP_SHIPPING_OLD_SHIPPING_NEW || MAP_BILLING_OLD_BILLING_NEW
+State Space: 8 * 4 * 4 * 4 * 4 = 2 ** 11
+Composing...
+-- States: 2048 Transitions: 10752 Memory used: 20140K
+Composed in 23ms
+=========================================
+Mode: Traditional DUC (fine-grained update events)
+=========================================
+Processing formula for update: P_AVOID_ROLLBACK_UPD_OLD
+Processing formula for update: P_EVAL_POLICY_UPD_OLD
+Processing formula for update: P_ARCHIVE_POLICY_UPD_OLD
+Processing formula for update: P_INITS_POLICY_UPD_OLD
+Processing formula for update: P_DONT_INIT_TWICE_UPD_OLD
+Processing formula for update: P_SEQUENTIAL_UPD_NEW
+Processing formula for update: P_AVOID_ROLLBACK_UPD_NEW
+Processing formula for update: P_EVAL_POLICY_UPD_NEW
+Processing formula for update: P_ARCHIVE_POLICY_UPD_NEW
+Processing formula for update: P_INITS_POLICY_UPD_NEW
+Processing formula for update: P_DONT_INIT_TWICE_UPD_NEW
+Processing formula for update: R2_StopOldSpec_P_AVOID_ROLLBACK
+Processing formula for update: R2_StopOldSpec_P_EVAL_POLICY
+Processing formula for update: R2_StopOldSpec_P_ARCHIVE_POLICY
+Processing formula for update: R2_StopOldSpec_P_INITS_POLICY
+Processing formula for update: R2_StopOldSpec_P_DONT_INIT_TWICE
+Processing formula for update: R2_StartNewSpec_P_SEQUENTIAL
+Processing formula for update: R2_StartNewSpec_P_AVOID_ROLLBACK
+Processing formula for update: R2_StartNewSpec_P_EVAL_POLICY
+Processing formula for update: R2_StartNewSpec_P_ARCHIVE_POLICY
+Processing formula for update: R2_StartNewSpec_P_INITS_POLICY
+Processing formula for update: R2_StartNewSpec_P_DONT_INIT_TWICE
+
+================ EVALUATION ================
+Mode: Traditional DUC
+Result: OUT_OF_MEMORY
+Failure reason: Java heap space
+State/transition count overhead total: 5 ms
+Detailed metric report: omitted. Use -Dupdating.controller.evaluation.printDetailedReport=true to print the verbose human-readable report.
+====================================================
+
+================ EVALUATION DATA CSV ================
+mode,result,solver_status,verification_status,run_verified,failure_reason,section,metric_key,metric_label,value,unit,formula,metric_schema_version,metric_description_id,section_readable_ja,metric_readable_ja,metric_category,artifact,phase,action,event,stat
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,mode,mode,Traditional DUC,text,,2026-07-23,metric.mode.md_119301f4da1e9450,実行情報,mode,その他,,,,,mode
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,result,result,OUT_OF_MEMORY,text,,2026-07-23,metric.result.md_e33889763e9441ae,実行情報,result,その他,,,,,result
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,solver_status,solver status,OOM,text,,2026-07-23,metric.solver_status.md_30f6a3b0cbda4da6,実行情報,solver status,その他,,,,,solver status
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,verification_status,verification status,unverified,text,,2026-07-23,metric.verification_status.md_e87a8d7360839024,実行情報,verification status,その他,,,,,verification status
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,run_verified,run verified,false,boolean,,2026-07-23,metric.boolean.md_6313e127a8d73bd6,実行情報,boolean,その他,,,,,boolean
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Run,failure_reason,failure reason,Java heap space,text,,2026-07-23,metric.failure_reason.md_013d7d27e16ab465,実行情報,failure reason,その他,,,,,failure reason
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_36bd60e5_current_heap,合成開始時 / 現在ヒープ,6691648,B,,2026-07-23,memory.b.md_0abb824e30c686df,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_36bd60e5_peak_heap,合成開始時 / ピークヒープ,6691648,B,,2026-07-23,memory.b.md_7054bc0f5c347ac8,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_36bd60e5_delta_from_start,合成開始時 / 開始時からの増減,0,B,,2026-07-23,memory.b.md_390fc6fc93c1a051,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_36bd60e5_delta_from_previous,合成開始時 / 直前からの増減,0,B,,2026-07-23,memory.b.md_14978d10995a6fd7,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,parse_time,構文解析時間,93,ms,,2026-07-23,time.time.md_cd0a7dcdaf375231,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,old_controller_synthesis_time,Old Controller 合成時間,279,ms,,2026-07-23,time.time.md_1eb94856dacb260d,入力準備: 更新コントローラ定義の構築,旧コントローラ / 時間,時間,旧コントローラ,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_459fabee_current_heap,Old Controller 合成後 / 現在ヒープ,11924968,B,,2026-07-23,memory.b.md_4c5f341258a94edb,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_459fabee_peak_heap,Old Controller 合成後 / ピークヒープ,26192768,B,,2026-07-23,memory.b.md_48c22221afaa3697,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_459fabee_delta_from_start,Old Controller 合成後 / 開始時からの増減,5233320,B,,2026-07-23,memory.b.md_d2dcce3b0b37396d,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_459fabee_delta_from_previous,Old Controller 合成後 / 直前からの増減,5233320,B,,2026-07-23,memory.b.md_c26ccb82099794fe,メモリ使用量,旧コントローラ / B,メモリ,旧コントローラ,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,goal_and_controllable_set_time,Goal 定義と controllable action 集合生成時間,2,ms,,2026-07-23,time.time.md_ec8db379ca37477f,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,mapping_component_generation_time,Mapping Environment Component 合成時間,4,ms,,2026-07-23,time.time.md_5b9b5e3aed50345f,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_88189484_current_heap,Mapping Environment Component 生成後 / 現在ヒープ,11924968,B,,2026-07-23,memory.b.md_1d5fd5a69a5447ab,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_88189484_peak_heap,Mapping Environment Component 生成後 / ピークヒープ,26192768,B,,2026-07-23,memory.b.md_f23dc06b77761646,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_88189484_delta_from_start,Mapping Environment Component 生成後 / 開始時からの増減,5233320,B,,2026-07-23,memory.b.md_bd63007e82140f49,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_88189484_delta_from_previous,Mapping Environment Component 生成後 / 直前からの増減,0,B,,2026-07-23,memory.b.md_978e1477778158db,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,traditional_gr_goal_generation_time,Traditional DUC grGoal 生成時間,3,ms,,2026-07-23,time.time.md_72fd7f0ad2d20789,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,traditional_safety_goal_generation_time,Traditional DUC safetyGoal 生成時間,3,ms,,2026-07-23,time.time.md_c395dbe6aa1fc490,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,traditional_mapping_parallel_composition_time,Traditional DUC Mapping Environment Component 並列合成時間,24,ms,,2026-07-23,time.time.md_5604dd5be055aff2,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Traditional Mapping Environment,traditional_mapping_environment_states,Traditional Mapping Environment / States,2048,states,,2026-07-23,states.states.md_b2037635877d9320,入力規模 / Traditional Mapping Environment,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Traditional Mapping Environment,traditional_mapping_environment_transitions,Traditional Mapping Environment / Transitions,10752,transitions,,2026-07-23,transitions.transitions.md_d666b0c8b9caed17,入力規模 / Traditional Mapping Environment,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Traditional Mapping Environment,traditional_mapping_environment_count_time,Traditional Mapping Environment / CountTime,0,ms,,2026-07-23,time.count_time.md_b78b4e7ba30e4463,入力規模 / Traditional Mapping Environment,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_b1991ac6_current_heap,Traditional Mapping Environment 並列合成後 / 現在ヒープ,12926368,B,,2026-07-23,memory.b.md_6b88ebc1c45f2135,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_b1991ac6_peak_heap,Traditional Mapping Environment 並列合成後 / ピークヒープ,26192768,B,,2026-07-23,memory.b.md_6ab9ba34c6983ef9,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_b1991ac6_delta_from_start,Traditional Mapping Environment 並列合成後 / 開始時からの増減,6234720,B,,2026-07-23,memory.b.md_c53fbcadf3f8da15,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_b1991ac6_delta_from_previous,Traditional Mapping Environment 並列合成後 / 直前からの増減,1001400,B,,2026-07-23,memory.b.md_0ec262b6238e8774,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,definition_prepare_total_time,compose の全体実行時間,324,ms,,2026-07-23,time.time.md_0722ee85dfddec93,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_old_env_components,old env component 数,5,個,,2026-07-23,metric.value.md_81ddce3018ec18c3,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_new_env_components,new env component 数,5,個,,2026-07-23,metric.value.md_9d3edb6c1e274d15,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_map_relations,map relation 数,5,個,,2026-07-23,metric.value.md_b62fe282481c055b,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_mapping_components,mapping component 数,5,個,,2026-07-23,metric.value.md_a9196d7ad9000b90,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_0_states,Old Environment Component[0] ENTRY_OLD / States,4,states,,2026-07-23,states.states.md_5569326d37521b89,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_0_transitions,Old Environment Component[0] ENTRY_OLD / Transitions,15,transitions,,2026-07-23,transitions.transitions.md_2ed8259e77eff31b,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_0_count_time,Old Environment Component[0] ENTRY_OLD / CountTime,0,ms,,2026-07-23,time.count_time.md_88365b860bdcb216,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_1_states,Old Environment Component[1] INVENTORY_OLD / States,2,states,,2026-07-23,states.states.md_a3d83b4f66f786f3,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_1_transitions,Old Environment Component[1] INVENTORY_OLD / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_1d947b86b931bc5c,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_1_count_time,Old Environment Component[1] INVENTORY_OLD / CountTime,0,ms,,2026-07-23,time.count_time.md_0f31065541108121,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_2_states,Old Environment Component[2] CREDIT_OLD / States,2,states,,2026-07-23,states.states.md_916d895be542709c,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_2_transitions,Old Environment Component[2] CREDIT_OLD / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_8edb201c6d570f5c,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_2_count_time,Old Environment Component[2] CREDIT_OLD / CountTime,0,ms,,2026-07-23,time.count_time.md_b56e16272a9aa2b2,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_3_states,Old Environment Component[3] SHIPPING_OLD / States,2,states,,2026-07-23,states.states.md_423ffa5153e000b3,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_3_transitions,Old Environment Component[3] SHIPPING_OLD / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_12d1f43fb6a7a6d7,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_3_count_time,Old Environment Component[3] SHIPPING_OLD / CountTime,0,ms,,2026-07-23,time.count_time.md_1511ac1740e803c9,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_4_states,Old Environment Component[4] BILLING_OLD / States,2,states,,2026-07-23,states.states.md_93ae4f5835d94d36,入力規模 / Old Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_4_transitions,Old Environment Component[4] BILLING_OLD / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_7c61fd2c0b295957,入力規模 / Old Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Old Environment Component,input_old_env_component_4_count_time,Old Environment Component[4] BILLING_OLD / CountTime,0,ms,,2026-07-23,time.count_time.md_68327329e3b18699,入力規模 / Old Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_0_states,New Environment Component[0] ENTRY_NEW / States,4,states,,2026-07-23,states.states.md_2abcc65bb6a6437d,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_0_transitions,New Environment Component[0] ENTRY_NEW / Transitions,15,transitions,,2026-07-23,transitions.transitions.md_9e37dd11cc398ea0,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_0_count_time,New Environment Component[0] ENTRY_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_c96b447ef460acfb,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_1_states,New Environment Component[1] INVENTORY_NEW / States,2,states,,2026-07-23,states.states.md_0aae8504ef575b18,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_1_transitions,New Environment Component[1] INVENTORY_NEW / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_e505ceb1da5554f1,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_1_count_time,New Environment Component[1] INVENTORY_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_35ff657416dd348b,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_2_states,New Environment Component[2] CREDIT_NEW / States,2,states,,2026-07-23,states.states.md_547f601bd095752d,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_2_transitions,New Environment Component[2] CREDIT_NEW / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_a00ef313d3ef2eaf,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_2_count_time,New Environment Component[2] CREDIT_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_4413e86836d87cf3,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_3_states,New Environment Component[3] SHIPPING_NEW / States,2,states,,2026-07-23,states.states.md_14100782e6eca2b9,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_3_transitions,New Environment Component[3] SHIPPING_NEW / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_d62fa304102ecfd7,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_3_count_time,New Environment Component[3] SHIPPING_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_b96ef6aa1ec71381,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_4_states,New Environment Component[4] BILLING_NEW / States,2,states,,2026-07-23,states.states.md_c93df25e10ccb2cd,入力規模 / New Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_4_transitions,New Environment Component[4] BILLING_NEW / Transitions,2,transitions,,2026-07-23,transitions.transitions.md_a4242c812a715a48,入力規模 / New Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / New Environment Component,input_new_env_component_4_count_time,New Environment Component[4] BILLING_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_27973cff155c5950,入力規模 / New Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_0_states,Mapping Environment Component[0] MAP_ENTRY_OLD_ENTRY_NEW / States,8,states,,2026-07-23,states.states.md_8438e5c342f04179,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_0_transitions,Mapping Environment Component[0] MAP_ENTRY_OLD_ENTRY_NEW / Transitions,34,transitions,,2026-07-23,transitions.transitions.md_a92f8c4767cc3002,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_0_count_time,Mapping Environment Component[0] MAP_ENTRY_OLD_ENTRY_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_6dccd1eded7fcc1d,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_1_states,Mapping Environment Component[1] MAP_INVENTORY_OLD_INVENTORY_NEW / States,4,states,,2026-07-23,states.states.md_9e0e9c8607ebabb4,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_1_transitions,Mapping Environment Component[1] MAP_INVENTORY_OLD_INVENTORY_NEW / Transitions,6,transitions,,2026-07-23,transitions.transitions.md_7e2ac1f6d463672d,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_1_count_time,Mapping Environment Component[1] MAP_INVENTORY_OLD_INVENTORY_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_e02985e8a9ed07d8,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_2_states,Mapping Environment Component[2] MAP_CREDIT_OLD_CREDIT_NEW / States,4,states,,2026-07-23,states.states.md_ec8027f7a551a3b9,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_2_transitions,Mapping Environment Component[2] MAP_CREDIT_OLD_CREDIT_NEW / Transitions,6,transitions,,2026-07-23,transitions.transitions.md_e7bbd6f1f6c3bff7,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_2_count_time,Mapping Environment Component[2] MAP_CREDIT_OLD_CREDIT_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_c6c1743f571b2113,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_3_states,Mapping Environment Component[3] MAP_SHIPPING_OLD_SHIPPING_NEW / States,4,states,,2026-07-23,states.states.md_3d0f9b7835dba42c,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_3_transitions,Mapping Environment Component[3] MAP_SHIPPING_OLD_SHIPPING_NEW / Transitions,6,transitions,,2026-07-23,transitions.transitions.md_b2ea2ffee7419e2a,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_3_count_time,Mapping Environment Component[3] MAP_SHIPPING_OLD_SHIPPING_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_2534430b9b1711f5,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_4_states,Mapping Environment Component[4] MAP_BILLING_OLD_BILLING_NEW / States,4,states,,2026-07-23,states.states.md_0fc5fc5baa317013,入力規模 / Mapping Environment Component,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_4_transitions,Mapping Environment Component[4] MAP_BILLING_OLD_BILLING_NEW / Transitions,6,transitions,,2026-07-23,transitions.transitions.md_18c47d8791d8d635,入力規模 / Mapping Environment Component,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / Mapping Environment Component,input_mapping_component_4_count_time,Mapping Environment Component[4] MAP_BILLING_OLD_BILLING_NEW / CountTime,0,ms,,2026-07-23,time.count_time.md_03c5abd55355009d,入力規模 / Mapping Environment Component,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_mapping_component_states_total,mapping component 状態数合計,24,states,,2026-07-23,states.states.md_ff910336634a449d,入力規模,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_mapping_component_transitions_total,mapping component 遷移数合計,58,transitions,,2026-07-23,transitions.transitions.md_560d11a6213a0734,入力規模,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_mapping_component_states_max,mapping component 最大状態数,8,states,,2026-07-23,states.states.md_1fee82a0a3a3bbaf,入力規模,状態数,状態数,,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_mapping_component_transitions_max,mapping component 最大遷移数,34,transitions,,2026-07-23,transitions.transitions.md_7cb4c482f6ffa3ff,入力規模,遷移数,遷移数,,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_old_safety,old safety 数,5,個,,2026-07-23,metric.value.md_cb0000c7bbca63a8,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_new_safety,new safety 数,6,個,,2026-07-23,metric.value.md_f3286458d5632a94,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_transition_requirements,transition requirement 数,11,個,,2026-07-23,transitions.value.md_883a0a1d3a28a09e,入力規模,個,遷移数,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_controllable_actions,controllable action 数,23,個,,2026-07-23,metric.value.md_73b39be905540c9e,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / 事前合成,old_controller_states,Old Controller / States,22,states,,2026-07-23,states.states.md_840c98cfc0b8e7ed,入力規模: 事前合成されたコントローラ,旧コントローラ / 状態数,状態数,旧コントローラ,,,,状態数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / 事前合成,old_controller_transitions,Old Controller / Transitions,31,transitions,,2026-07-23,transitions.transitions.md_f1234914b27df5d8,入力規模: 事前合成されたコントローラ,旧コントローラ / 遷移数,遷移数,旧コントローラ,,,,遷移数
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模 / 事前合成,old_controller_count_time,Old Controller / CountTime,5,ms,,2026-07-23,time.count_time.md_c321c1331468401f,入力規模: 事前合成されたコントローラ,旧コントローラ / 評価用カウント時間,時間,旧コントローラ,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_total_actions,全 action 数（controllable + uncontrollable）,49,個,,2026-07-23,metric.value.md_52380e42d2dc7d38,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,input_uncontrollable_actions,uncontrollable action 数,26,個,,2026-07-23,metric.value.md_eacff12a3a165127,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,input_scale_summary_time,入力規模集計時間,11,ms,,2026-07-23,time.time.md_dad7f7c531d10f97,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_e1170e2d_current_heap,UpdatingControllersDefinition compose 後 / 現在ヒープ,12926368,B,,2026-07-23,memory.b.md_c3d229d63eb01d94,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_e1170e2d_peak_heap,UpdatingControllersDefinition compose 後 / ピークヒープ,26192768,B,,2026-07-23,memory.b.md_a75213ca9637c330,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_e1170e2d_delta_from_start,UpdatingControllersDefinition compose 後 / 開始時からの増減,6234720,B,,2026-07-23,memory.b.md_07ad1e2154c8d4ee,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_e1170e2d_delta_from_previous,UpdatingControllersDefinition compose 後 / 直前からの増減,0,B,,2026-07-23,memory.b.md_6bd01a42b4123dda,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,new_controller_synthesis_time,New Controller 合成時間,0,ms,,2026-07-23,time.time.md_92c3dad3e9fa5116,入力準備: 更新コントローラ定義の構築,新コントローラ / 時間,時間,新コントローラ,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,auto_3b032819,Old Safety の tester 変換時間,0,ms,,2026-07-23,time.time.md_0f54dfc9a0b0934a,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,auto_33934240,New Safety の tester 変換時間,0,ms,,2026-07-23,time.time.md_e7576ce5c588620d,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,auto_a60cfe26,Transition Requirement の tester 変換時間,0,ms,,2026-07-23,time.time.md_96bd6ce3123e88af,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,safety_tester_conversion_total_time,Safety の tester 変換全体時間,0,ms,,2026-07-23,time.time.md_04a91c316c90a6da,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllersDefinition,new_safety_fluent_extraction_time,New Safety から Fluent を抽出する時間,0,ms,,2026-07-23,time.time.md_569b3fe40f7e15ac,入力準備: 更新コントローラ定義の構築,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllerSynthesizer,traditional_eu_construction_time,Traditional DUC E_u 構築時間,96,ms,,2026-07-23,time.time.md_2f7f04e1317b01ca,合成入口: 手法選択と呼び出し,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,solveControlProblem (Traditional DUC),auto_88cd03ba,UpdatingEnvironment から E_u MTS への変換時間,68,ms,,2026-07-23,time.time.md_0f1ce23c03cb5341,Traditional DUC: 合成本体,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_75d65d93_current_heap,Traditional E_u MTS 変換後 / 現在ヒープ,64964512,B,,2026-07-23,memory.b.md_a814859becf2adbc,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_75d65d93_peak_heap,Traditional E_u MTS 変換後 / ピークヒープ,98518944,B,,2026-07-23,memory.b.md_62e5bf120eb93766,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_75d65d93_delta_from_start,Traditional E_u MTS 変換後 / 開始時からの増減,58272864,B,,2026-07-23,memory.b.md_0c9191010c2a571c,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_75d65d93_delta_from_previous,Traditional E_u MTS 変換後 / 直前からの増減,52038144,B,,2026-07-23,memory.b.md_f78c6b39a5071850,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,solveControlProblem (Traditional DUC),auto_7b52f2a8,Old Safety と New Safety から Fluent を抽出する時間,19,ms,,2026-07-23,time.time.md_2ff7e56d889d104f,Traditional DUC: 合成本体,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,traditional_old_safety_fluents,Traditional DUC old safety fluent 数,18,個,,2026-07-23,metric.value.md_88506753d183e408,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,traditional_new_safety_fluents,Traditional DUC new safety fluent 数,20,個,,2026-07-23,metric.value.md_301da6d73a8f80dc,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,traditional_old_new_safety_fluents_unique,Traditional DUC old/new safety fluent 数（重複排除後）,25,個,,2026-07-23,metric.value.md_4fd02ded2975ab44,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,traditional_transition_requirement_fluents,Traditional DUC transition requirement fluent 数,16,個,,2026-07-23,transitions.value.md_7f70469d54499b83,入力規模,個,遷移数,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,入力規模,traditional_meta_environment_fluents,Traditional DUC meta env fluent 数（重複排除後）,41,個,,2026-07-23,metric.value.md_8ed1928a104d481c,入力規模,個,その他,,,,,個
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,失敗時メモリ,auto_77bbf4ca,現在のヒープ使用量,43079144,B,,2026-07-23,memory.b.md_eedd9a02080d2a47,失敗時メモリ,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,失敗時メモリ,auto_628cb6cd,ピークヒープ使用量,225508786264,B,,2026-07-23,memory.b.md_6a540d3e1b06764c,失敗時メモリ,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,失敗時メモリ,auto_93d57a34,JVM 最大ヒープ,214748364800,B,,2026-07-23,memory.b.md_08422c7bbdc540e2,失敗時メモリ,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,失敗時メモリ,auto_953f2cf3,JVM totalMemory,671088640,B,,2026-07-23,memory.b.md_4f71760ff439f304,失敗時メモリ,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,失敗時メモリ,auto_deec693f,JVM freeMemory,622640776,B,,2026-07-23,memory.b.md_2092b0b1aae85fc4,失敗時メモリ,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,total_time,合成ボタンを押してから合成完了までの時間,2576649,ms,,2026-07-23,time.time.md_08e0b5ae6a5691f2,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,compile_if_change_total_time,compileIfChange 全体時間（参考）,2576579,ms,,2026-07-23,time.time.md_4be3eaae565910a4,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,update_controller_generation_time,update controller 生成時間,0,ms,,2026-07-23,time.time.md_ae877d3289a1c470,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,controller_synthesis_related_time,コントローラ合成時間,0,ms,,2026-07-23,time.time.md_698154c8c19a6a48,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,controller_draw_time,コントローラ描画時間,0,ms,,2026-07-23,time.time.md_bb895fce6603a5d6,共通処理: GUI/全体計測,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,controller_synthesis_base_memory,コントローラ合成のベースラインメモリ,6691648,B,,2026-07-23,memory.b.md_3ab68ddb7e92dc40,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,controller_synthesis_peak_memory,コントローラ合成全体のピークメモリ,225508786264,B,共通 / HPWindow の「コントローラ合成全体のピークメモリ」。,2026-07-23,memory.b.md_9050f85f9d9ce9db,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,共通 / HPWindow,controller_synthesis_memory_increase,コントローラ合成により増えたメモリ,225502094616,B,コントローラ合成全体のピークメモリ - コントローラ合成のベースラインメモリ。,2026-07-23,memory.b.md_7ca77181c6132832,共通処理: GUI/全体計測,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_3660d981_current_heap,合成終了時 / 現在ヒープ,43079144,B,,2026-07-23,memory.b.md_5c4876a33facc9af,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_3660d981_peak_heap,合成終了時 / ピークヒープ,225508786264,B,,2026-07-23,memory.b.md_58fe994d9e682f49,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_3660d981_delta_from_start,合成終了時 / 開始時からの増減,36387496,B,,2026-07-23,memory.b.md_764af3acd45ed7bf,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,メモリ使用量チェックポイント,auto_3660d981_delta_from_previous,合成終了時 / 直前からの増減,-21885368,B,,2026-07-23,memory.b.md_cadb1c07f62cd4ec,メモリ使用量,B,メモリ,,,,,B
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllerSynthesizer,generate_controller_total_time,generateController の全体実行時間 (失敗時点まで),2576122,ms,,2026-07-23,time.rate.md_8745b524cfa4f70e,合成入口: 手法選択と呼び出し,割合,時間,,,,,割合
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,UpdatingControllerSynthesizer,method_main_execution_time,Traditional solveControlProblem / OTF generateDUC 実行時間 (失敗時点まで),2576024,ms,,2026-07-23,time.rate.md_c02f977b8849e1b1,合成入口: 手法選択と呼び出し,割合,時間,,,,,割合
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,solveControlProblem (Traditional DUC),traditional_solve_control_problem_total_time,solveControlProblem 全体時間 (失敗時点まで),2576024,ms,,2026-07-23,time.time.md_375ee1d27d2ca920,Traditional DUC: 合成本体,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,solveControlProblem (Traditional DUC),traditional_meta_environment_construction_time,Fluent とベース環境を並列合成した metaEnv 構築時間 (失敗時点まで),2575934,ms,,2026-07-23,time.time.md_4552f9c05ada0341,Traditional DUC: 合成本体,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary,state_transition_count_overhead_total,State/transition count overhead total,5,ms,,2026-07-23,time.time.md_b3b236c3f86923ad,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_2194f03c,合成の全体時間,2576649,ms,HPWindow の「合成ボタンを押してから合成完了までの時間」または runner の「合成全体実行時間」。,2026-07-23,time.time.md_488e0f9cab88d972,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_f7629348,カウントによるオーバーヘッド,5,ms,状態数・遷移数を数える CountTime の合計。,2026-07-23,time.time.md_0fd3f3ea21805cc5,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_6ff39575,コントローラ描画時間,0,ms,HPWindow の「コントローラ描画時間」。,2026-07-23,time.time.md_81fd5d1d890aecba,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_bfad3cf1,描画とカウントを除いた実測時間,2576644,ms,合成の全体時間 - カウントによるオーバーヘッド - コントローラ描画時間。,2026-07-23,time.time.md_bb01875979ed6a77,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_6ceb0120,構文解析時間,93,ms,HPWindow.docompile() 内の comp.compile() 実行時間。FSP/LTL/update controller 定義の解析と定義登録。,2026-07-23,time.time.md_e49b59e9057f1f46,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_a52df022,compileIfChange 全体時間（参考）,2576579,ms,HPWindow の compileIfChange() 全体。構文解析時間 + 合成問題準備時間を含む参考値。,2026-07-23,time.time.md_fa6e612e751c1929,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_f44b8d1f,合成問題準備時間,0,ms,HPWindow.docompile() 内の comp.continueCompilation(target) 実行時間。UpdatingControllersDefinition.compose などを含む。,2026-07-23,time.time.md_9ca5e592c50ee414,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_d1723475,update controller 生成時間,0,ms,HPWindow の TransitionSystemDispatcher.applyComposition(...) 実行時間。,2026-07-23,time.time.md_8e0e9087c0069c49,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_687f9a31,コントローラ合成時間,0,ms,合成問題準備時間 + update controller 生成時間。,2026-07-23,time.time.md_81aeeb4eb46eb0df,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_2a3b5f83,共通準備時間,285,ms,Old Controller 合成時間 + Goal 定義と controllable action 集合生成時間 + Mapping Environment Component 合成時間。,2026-07-23,time.time.md_258f8ceba534a188,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_ac6555c7,共通処理を除いたコントローラ合成時間,-285,ms,コントローラ合成時間 - 共通準備時間。 手法固有として個別計測できた時間と、未分類の非共通時間を含む。,2026-07-23,time.time.md_2df96e43b41ae2ee,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_4aa019f3,手法固有準備時間,2576079,ms,Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間 + 更新用環境構築時間 + Old/New Safety から Fluent を抽出する時間 + 安全性評価用合成環境構築時間 + 安全性制約反映後の環境構築時間 + 安全性制約反映後の環境から出力用モデルへの変換時間。,2026-07-23,time.time.md_abb92ff81f7b4eba,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_a44ca780,合成用モデル準備時間,2576364,ms,共通準備時間 + 手法固有準備時間。,2026-07-23,time.time.md_bac717729f83b6a3,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_5a7adcf0,実際の中核合成時間,0,ms,Traditional DUC の「最終コントローラ合成時間」。,2026-07-23,time.time.md_a49426499f91d691,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_9c790eee,手法固有内のその他時間,73,ms,手法固有として個別計測できた時間 - 手法固有準備時間 - 実際の中核合成時間。 主に出力構築・型変換・後処理など。,2026-07-23,time.time.md_4c6d0deb521c0145,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_3590634,手法固有として個別計測できた時間,2576152,ms,手法固有準備時間 + 実際の中核合成時間 + 手法固有内のその他時間。,2026-07-23,time.time.md_5c4732131620b258,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 全体,auto_958c83a6,未分類の非共通時間,-2576437,ms,共通処理を除いたコントローラ合成時間 - 手法固有として個別計測できた時間。 0 でない場合、共通ではないが個別計測項目に分類していない処理が残っている。,2026-07-23,time.time.md_ec27a31890f38f48,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 共通,auto_f23268bd,共通準備時間（共通合計）,285,ms,Old Controller 合成時間 + Goal 定義と controllable action 集合生成時間 + Mapping Environment Component 合成時間。,2026-07-23,time.time.md_dc395efa53ddf519,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 従来DUC固有,auto_ad7b3a43,従来DUC 固有準備時間,2576079,ms,Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間 + 更新用環境構築時間 + Old/New Safety から Fluent を抽出する時間 + 安全性評価用合成環境構築時間 + 安全性制約反映後の環境構築時間 + 安全性制約反映後の環境から出力用モデルへの変換時間。,2026-07-23,time.time.md_de2e132cb9a4345a,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 従来DUC固有,auto_adc1f9a4,従来DUC 中核合成時間,0,ms,Traditional DUC の「最終コントローラ合成時間」。,2026-07-23,time.time.md_032e340e08f42240,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 従来DUC固有,auto_966e4c9e,従来DUC 固有内のその他時間,73,ms,従来DUC 固有として個別計測できた時間 - 従来DUC 固有準備時間 - 従来DUC 中核合成時間。 主に controller MTS/CompactState 構築や .old 後処理など。,2026-07-23,time.time.md_3d5e970772519286,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,Evaluation Summary / 従来DUC固有,auto_3e76d684,従来DUC 固有として個別計測できた時間,2576152,ms,従来DUC 固有準備時間 + 従来DUC 中核合成時間 + 従来DUC 固有内のその他時間。,2026-07-23,time.time.md_af01d0782ed8e35b,評価サマリ,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力時間,evaluation_output_header_time,評価ヘッダ出力時間,1,ms,EVALUATION ヘッダ、手法、結果、カウントオーバーヘッド行を Output に出す時間。,2026-07-23,time.time.md_4c1ca747bff3a449,評価出力時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力時間,evaluation_output_detailed_report_time,詳細評価レポート出力時間,0,ms,詳細評価レポート本文を Output に出す時間。デフォルトでは省略メッセージのみ。,2026-07-23,time.time.md_ca01752a4ccab7fe,評価出力時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力準備時間,evaluation_output_summary_time,評価サマリ構築時間,2,ms,EVALUATION SUMMARY 本文をメモリ上に構築し、派生metricsを登録する時間。CSV後のOutputへの再生時間は含まない。,2026-07-23,time.time.md_9ecceb76391dadbb,評価出力準備時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力準備・出力時間,evaluation_output_overhead_before_csv,評価準備・出力時間（CSV出力前、SUMMARY再生除外）,3,ms,評価ヘッダ出力時間 + 詳細評価レポート出力時間 + 評価サマリ構築時間。CSV出力時間はCSV出力後に別途記録し、SUMMARYのOutput再生時間は含まない。,2026-07-23,time.time.md_3425d69908884bb8,評価出力準備・出力時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,definition_prepare_total_time_scope_count_overhead_time,UpdatingControllersDefinition / compose の全体実行時間 / 評価用カウント時間,0,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_faff0746180a7ae9,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,definition_prepare_total_time_time_without_scope_count_overhead,UpdatingControllersDefinition / compose の全体実行時間 / 評価用カウント時間除外後,324,ms,definition_prepare_total_time - definition_prepare_total_time_scope_count_overhead_time,2026-07-23,time.time.md_b52e85d1bb22b32c,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,input_scale_summary_time_scope_count_overhead_time,UpdatingControllersDefinition / 入力規模集計時間 / 評価用カウント時間,5,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_b71ee0f74f85682d,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,input_scale_summary_time_time_without_scope_count_overhead,UpdatingControllersDefinition / 入力規模集計時間 / 評価用カウント時間除外後,6,ms,input_scale_summary_time - input_scale_summary_time_scope_count_overhead_time,2026-07-23,time.time.md_2312f147b4433658,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,method_main_execution_time_scope_count_overhead_time,UpdatingControllerSynthesizer / Traditional solveControlProblem / OTF generateDUC 実行時間 / 評価用カウント時間,0,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_02f7094f049d3b83,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,method_main_execution_time_time_without_scope_count_overhead,UpdatingControllerSynthesizer / Traditional solveControlProblem / OTF generateDUC 実行時間 / 評価用カウント時間除外後,2576024,ms,method_main_execution_time - method_main_execution_time_scope_count_overhead_time,2026-07-23,time.time.md_bb03bdbb911bbe86,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,traditional_solve_control_problem_total_time_scope_count_overhead_time,solveControlProblem (Traditional DUC) / solveControlProblem 全体時間 / 評価用カウント時間,0,ms,この関数スコープが開いている間に、状態数・遷移数などの評価用カウントとして加算された時間。,2026-07-23,time.count_time.md_9e2e969cb0ff5986,評価用カウント時間 / 関数スコープ別,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価用カウント時間 / 関数スコープ別,traditional_solve_control_problem_total_time_time_without_scope_count_overhead,solveControlProblem (Traditional DUC) / solveControlProblem 全体時間 / 評価用カウント時間除外後,2576024,ms,traditional_solve_control_problem_total_time - traditional_solve_control_problem_total_time_scope_count_overhead_time,2026-07-23,time.time.md_33ee480600b908d2,評価用カウント時間 / 関数スコープ別,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_observed_total_time,実測総時間,2576649,ms,HPWindow の「合成ボタンを押してから合成完了までの時間」または runner の「合成全体実行時間」。,2026-07-23,time.time.md_72383441b96de904,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_common_preprocess_time,除外する共通前処理時間,285,ms,Old Controller 合成時間 + Goal 定義と controllable action 集合生成時間 + Mapping Environment Component 合成時間。,2026-07-23,time.time.md_35be0217216f88e8,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_count_overhead_time,評価用カウント時間（状態数・遷移数）,5,ms,状態数・遷移数を数えるための CountTime の合計。合成本来の処理ではない評価用オーバーヘッド。,2026-07-23,time.count_time.md_2fbf61f2fce44dbd,比較用時間集計,評価用カウント時間,時間,,,,,評価用カウント時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,auto_a6c340b0,入力規模集計時間（評価用・参考）,11,ms,入力規模セクションを作る時間。状態数・遷移数 CountTime と重なる可能性があるため、差し引き式には入れない参考値。,2026-07-23,time.time.md_45634a7e679a4bf4,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,auto_d7845043,GUI描画時間（比較から除外候補）,0,ms,HPWindow の「コントローラ描画時間」。アルゴリズム比較からは除外する候補。,2026-07-23,time.time.md_0dd1f7c3a8570089,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_method_specific_time,手法固有として個別計測できた時間,2576152,ms,Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間 + generateController の全体実行時間 + removeOldTransitions 実行時間。,2026-07-23,time.time.md_b547d2f633185bec,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_controller_synthesis_time_without_common,共通処理を除いたコントローラ合成時間,-285,ms,コントローラ合成時間 - 除外する共通前処理時間。,2026-07-23,time.time.md_623958b7d063099b,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_unclassified_non_common_time,未分類の非共通時間,-2576437,ms,共通処理を除いたコントローラ合成時間 - 手法固有として個別計測できた時間。,2026-07-23,time.time.md_8151b3484932fb5c,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_core_synthesis_time,内部計測の中核処理時間（参考）,2576120,ms,Traditional DUC 更新用環境構築時間 + 最終コントローラ合成処理全体時間の内部タイマー値。評価用カウント時間を含み得るため参考値。,2026-07-23,time.time.md_6919663cb70f796b,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_traditional_specific_preparation_time,Traditional DUC 固有準備時間,30,ms,Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間。,2026-07-23,time.time.md_a44243c7125ac669,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_traditional_eu_and_gr1_core_time,Traditional DUC の更新用環境構築+最終コントローラ合成時間（中核）,2576120,ms,Traditional DUC 更新用環境構築時間 + 最終コントローラ合成処理全体時間。,2026-07-23,time.time.md_61be1df2b5d93499,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_traditional_old_action_postprocess_time,Traditional DUC の.old後処理時間,0,ms,TransitionSystemDispatcher の removeOldTransitions 実行時間。OTF-DUC では実行しない。,2026-07-23,time.time.md_2383a04acb3248a2,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力時間,evaluation_output_data_csv_time,評価CSV出力時間,44,ms,EVALUATION DATA CSV を Output に出す時間。末尾の追加計測行自身はほぼ含まない。,2026-07-23,time.time.md_8a527c219c4a5fcb,評価出力時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,評価出力準備・出力時間,evaluation_output_overhead_total_including_csv,評価準備・出力時間合計（CSV含む、SUMMARY再生除外）,47,ms,評価ヘッダ出力時間 + 詳細評価レポート出力時間 + 評価サマリ構築時間 + 評価CSV出力時間。SUMMARYのOutput再生時間は含まない。,2026-07-23,time.time.md_c37b195292ceae08,評価出力準備・出力時間,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_evaluation_output_time,評価結果出力時間（比較から除外）,47,ms,評価ヘッダ出力時間 + 詳細評価レポート出力時間 + 評価サマリ構築時間 + 評価CSV出力時間。SUMMARYのOutput再生時間は含まない。,2026-07-23,time.time.md_87bc08e473621f41,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_observed_time_without_parse_count_evaluation_output_and_draw,大枠比較用時間（構文解析・評価・描画除外）,2576504,ms,実測総時間 - 構文解析時間 - 評価用カウント時間 - 評価出力時間合計（CSV含む） - GUI描画時間。共通前処理は差し引かない。,2026-07-23,time.time.md_dfff778c8e467364,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_strict_observed_time_without_parse_common_preprocess_count_evaluation_output_and_draw,厳密比較用時間（共通前処理も除外）,2576219,ms,大枠比較用時間 - 除外する共通前処理時間。,2026-07-23,time.time.md_337de379e5d5751c,比較用時間集計,時間,時間,,,,,時間
+Traditional DUC,OUT_OF_MEMORY,OOM,unverified,false,Java heap space,比較用時間集計,comparison_observed_total_based_unclassified_time,実測総時間ベースの未分類時間（参考）,67,ms,厳密比較用時間 - 手法固有として個別計測できた時間。,2026-07-23,time.time.md_feec07ddce138696,比較用時間集計,時間,時間,,,,,時間
+=====================================================
+
+================ EVALUATION SUMMARY ================
+
+[全体]
+手法 : Traditional DUC
+結果 : OUT_OF_MEMORY
+失敗理由 : Java heap space
+合成の全体時間 : 2576649 ms
+  算出: HPWindow の「合成ボタンを押してから合成完了までの時間」または runner の「合成全体実行時間」。
+カウントによるオーバーヘッド : 5 ms
+  算出: 状態数・遷移数を数える CountTime の合計。
+コントローラ描画時間 : 0 ms
+  算出: HPWindow の「コントローラ描画時間」。
+描画とカウントを除いた実測時間 : 2576644 ms
+  算出: 合成の全体時間 - カウントによるオーバーヘッド - コントローラ描画時間。
+構文解析時間 : 93 ms
+  算出: HPWindow.docompile() 内の comp.compile() 実行時間。FSP/LTL/update controller 定義の解析と定義登録。
+compileIfChange 全体時間（参考） : 2576579 ms
+  算出: HPWindow の compileIfChange() 全体。構文解析時間 + 合成問題準備時間を含む参考値。
+合成問題準備時間 : 0 ms
+  算出: HPWindow.docompile() 内の comp.continueCompilation(target) 実行時間。UpdatingControllersDefinition.compose などを含む。
+update controller 生成時間 : 0 ms
+  算出: HPWindow の TransitionSystemDispatcher.applyComposition(...) 実行時間。
+コントローラ合成時間 : 0 ms
+  算出: 合成問題準備時間 + update controller 生成時間。
+共通準備時間 : 285 ms
+  算出: Old Controller 合成時間 + Goal 定義と controllable action 集合生成時間 + Mapping Environment Component 合成時間。
+共通処理を除いたコントローラ合成時間 : -285 ms
+  算出: コントローラ合成時間 - 共通準備時間。 手法固有として個別計測できた時間と、未分類の非共通時間を含む。
+手法固有準備時間 : 2576079 ms
+  算出: Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間 + 更新用環境構築時間 + Old/New Safety から Fluent を抽出する時間 + 安全性評価用合成環境構築時間 + 安全性制約反映後の環境構築時間 + 安全性制約反映後の環境から出力用モデルへの変換時間。
+合成用モデル準備時間 : 2576364 ms
+  算出: 共通準備時間 + 手法固有準備時間。
+実際の中核合成時間 : 0 ms
+  算出: Traditional DUC の「最終コントローラ合成時間」。
+手法固有内のその他時間 : 73 ms
+  算出: 手法固有として個別計測できた時間 - 手法固有準備時間 - 実際の中核合成時間。 主に出力構築・型変換・後処理など。
+手法固有として個別計測できた時間 : 2576152 ms
+  算出: 手法固有準備時間 + 実際の中核合成時間 + 手法固有内のその他時間。
+未分類の非共通時間 : -2576437 ms
+  算出: 共通処理を除いたコントローラ合成時間 - 手法固有として個別計測できた時間。 0 でない場合、共通ではないが個別計測項目に分類していない処理が残っている。
+中間状態空間ピーク状態数 : 未記録
+  算出: Traditional DUC: 更新用環境、安全性評価用合成環境、安全性違反除去後、最終コントローラ合成入力の各段階で計測した状態数の最大値。出力 update controller 状態数・遷移数とは別に、中間状態空間のピークを表す。
+中間状態空間ピーク遷移数 : 未記録
+  算出: Traditional DUC: 更新用環境、安全性評価用合成環境、安全性違反除去後、最終コントローラ合成入力の各段階で計測した遷移数の最大値。出力 update controller 状態数・遷移数とは別に、中間状態空間のピークを表す。
+状態数ピークの段階 : 未記録
+  算出: 中間状態空間ピーク状態数を記録した段階。
+遷移数ピークの段階 : 未記録
+  算出: 中間状態空間ピーク遷移数を記録した段階。
+出力 update controller 状態数 : 未記録
+出力 update controller 遷移数 : 未記録
+全体ピークメモリ : 225508786264 B
+  算出: 共通 / HPWindow の「コントローラ合成全体のピークメモリ」。
+増加メモリ : 225502094616 B
+  算出: コントローラ合成全体のピークメモリ - コントローラ合成のベースラインメモリ。
+
+[共通]
+共通準備時間（共通合計） : 285 ms
+  算出: Old Controller 合成時間 + Goal 定義と controllable action 集合生成時間 + Mapping Environment Component 合成時間。
+Old Controller 合成時間 : 279 ms
+Goal 定義と controllable action 集合生成時間 : 2 ms
+Mapping Environment Component 合成時間 : 4 ms
+Old Controller 状態数 : 22 states
+Old Controller 遷移数 : 31 transitions
+mapping component 数 : 5 個
+mapping component 状態数合計 : 24 states
+mapping component 遷移数合計 : 58 transitions
+mapping component 最大状態数 : 8 states
+mapping component 最大遷移数 : 34 transitions
+old safety 数 : 5 個
+new safety 数 : 6 個
+transition requirement 数 : 11 個
+controllable action 数 : 23 個
+uncontrollable action 数 : 26 個
+全 action 数（controllable + uncontrollable） : 49 個
+
+[従来DUC固有]
+従来DUC 固有準備時間 : 2576079 ms
+  算出: Traditional DUC ゴール条件生成時間 + Traditional DUC 安全性ゴール条件生成時間 + Traditional DUC Mapping Environment Component 並列合成時間 + 更新用環境構築時間 + Old/New Safety から Fluent を抽出する時間 + 安全性評価用合成環境構築時間 + 安全性制約反映後の環境構築時間 + 安全性制約反映後の環境から出力用モデルへの変換時間。
+従来DUC 中核合成時間 : 0 ms
+  算出: Traditional DUC の「最終コントローラ合成時間」。
+従来DUC 固有内のその他時間 : 73 ms
+  算出: 従来DUC 固有として個別計測できた時間 - 従来DUC 固有準備時間 - 従来DUC 中核合成時間。 主に controller MTS/CompactState 構築や .old 後処理など。
+従来DUC 固有として個別計測できた時間 : 2576152 ms
+  算出: 従来DUC 固有準備時間 + 従来DUC 中核合成時間 + 従来DUC 固有内のその他時間。
+Traditional DUC ゴール条件生成時間 : 3 ms
+Traditional DUC 安全性ゴール条件生成時間 : 3 ms
+Traditional DUC Mapping Environment Component 並列合成時間 : 24 ms
+更新用環境構築時間 : 96 ms
+安全性評価用合成環境構築時間 : 2575934 ms
+安全性制約反映後の環境構築時間 : 0 ms
+最終コントローラ合成時間 : 0 ms
+勝ち領域計算時間 : 0 ms
+コントローラ戦略構築時間 : 0 ms
+removeOldTransitions 実行時間 : 0 ms
+Mapping Environment 状態数 : 2048 states
+Mapping Environment 遷移数 : 10752 transitions
+old safety fluent 数 : 18 個
+new safety fluent 数 : 20 個
+old/new safety fluent 数（重複排除後） : 25 個
+transition requirement fluent 数 : 16 個
+meta env fluent 数（重複排除後） : 41 個
+更新用環境状態数 : 未記録
+更新用環境遷移数 : 未記録
+安全性評価用合成環境状態数 : 未記録
+安全性評価用合成環境遷移数 : 未記録
+安全性違反除去後状態数 : 未記録
+安全性違反除去後遷移数 : 未記録
+最終コントローラ合成入力状態数 : 未記録
+最終コントローラ合成入力遷移数 : 未記録
+
+[出力]
+update controller 状態数 : 未記録
+update controller 遷移数 : 未記録
+出力状態数・遷移数 CountTime : 未記録
+hotSwapIn が出ている状態数 : 未記録
+旧コントローラ状態数 : 未記録
+  算出: hotSwapIn が出るべき基準状態数。
+hotSwapIn coverage CountTime : 未記録
+
+[メモリ]
+ベースラインメモリ : 6691648 B
+全体ピークメモリ : 225508786264 B
+増加メモリ : 225502094616 B
+合成終了時の現在ヒープ : 43079144 B
+合成終了時のピークヒープ : 225508786264 B
+====================================================
+

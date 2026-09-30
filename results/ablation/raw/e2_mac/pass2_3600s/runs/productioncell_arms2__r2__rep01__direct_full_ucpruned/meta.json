@@ -1,0 +1,75 @@
+{
+  "completed": true,
+  "status": "TIMEOUT",
+  "started_utc": "2026-09-28T17:11:19.588553+00:00",
+  "job": {
+    "job_id": "productioncell_arms2__r2__rep01__direct_full_ucpruned",
+    "model_id": "productioncell_arms2",
+    "model_path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+    "target_id": "r2",
+    "target_name": "UPDATE_CONTROLLER_OTF_FG_R2",
+    "method_id": "direct_full_ucpruned",
+    "merge": "none",
+    "repetition": 1,
+    "jvm_properties": {
+      "mtsa.evaluation.enabled": "true",
+      "mtsa.revised.otf.solver": "direct_full_ucpruned",
+      "mtsa.otf.guidedStateLimit": "0",
+      "mtsa.otf.guidedQueryLimit": "0",
+      "mtsa.otf.lazyControllableBuckets": "false",
+      "mtsa.otf.controllableActionOrder": "endpoint_guided",
+      "mtsa.revised.otf.independentVerification": "false"
+    }
+  },
+  "command": [
+    "java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=5117ac36bd910067a9ee22152a3101e909eaf6d7",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=false",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=direct_full_ucpruned",
+    "-Xmx32g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e2.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG_R2",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e2_mac/pass2_3600s/runs/productioncell_arms2__r2__rep01__direct_full_ucpruned/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw/e2_mac/pass2_3600s/runs/productioncell_arms2__r2__rep01__direct_full_ucpruned/transitions.txt",
+    "--transition-output",
+    "summary"
+  ],
+  "timeout_seconds": 3600,
+  "java_heap": "32g",
+  "attempt": "pass2_3600s",
+  "jar_sha256": "4cc2a2f1ab403b239a281fa86c7bd15cdf59dc95068d6b85e864ffca8d437672",
+  "source_commit": "5117ac36bd910067a9ee22152a3101e909eaf6d7",
+  "input_sha256": "117210fa93185f5a814ad7debbdfcde00720019312c4ef68446a844700084e43",
+  "platform": "mac",
+  "pid": 85126,
+  "finished_utc": "2026-09-28T18:11:26.093019+00:00",
+  "elapsed_monotonic_seconds": 3606.541115375,
+  "exit_code": -9,
+  "artifact_digests": {
+    "stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "sha256": "f3f1f19cc766a60f98bc3a2e54298a99139e5bfbbc94113195a9e7ca1c8872fb",
+      "bytes": 82
+    },
+    "output": {
+      "sha256": "0098e17f15952f90d3e9218c1038cf6bc7354a0e1b237cd9aa4352b58d1d6c4b",
+      "bytes": 39235
+    }
+  }
+}

@@ -1,0 +1,15 @@
+% An input map, not an additional formal assumption.
+\begin{table}[!htbp]
+\caption{The contract's inputs, illustrated by the two-station cell.}
+\label{tab:contract-map}
+\centering\small
+\begin{tabular}{@{}p{.27\linewidth}p{.66\linewidth}@{}}\toprule
+Input & Role in the running example\\\midrule
+Endpoints $E^v,C^v$ & Old and new cell models with their verified controllers.\\
+Local transfers $g_i$ & Replace one empty station, preserving the holder.\\
+Requirements $R^{\rm old/new/upd}$ & Old inspection ban; new inspection obligation; one product throughout.\\
+Initialization $\iota_r$ & At activation, make inspection pending if $B$ holds the product.\\
+Dependencies $\prec$ & Start the new requirement before stopping the old one.\\
+Targets $Z_{\rm load}$ & Reachable new closed-loop states with matching plant and monitor states.\\\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,47 @@
+{
+  "status": "INTERIM",
+  "generated_at": "2026-09-30T03:39:14.476790+09:00",
+  "pair_counts": {
+    "witness": 33,
+    "both_loss": 1,
+    "both_win": 0
+  },
+  "families": {
+    "Rolling": 15,
+    "Canary": 15,
+    "Policy": 1,
+    "DB-Rolling": 2,
+    "Rolling+Audit": 1
+  },
+  "canonical_pairs": 34,
+  "canonical_runs": 182,
+  "sources": [
+    {
+      "path": "rolling/v1/summary.csv",
+      "sha256": "faf39632cd7decc90b5500068b098b355c00405b138495c85abd6c1dfc5b2950",
+      "rows": 100
+    },
+    {
+      "path": "canary/v1/summary.csv",
+      "sha256": "d4418cd664951171cc734142c82638dc12f48161ec2dd836895ddea650ff6903",
+      "rows": 60
+    },
+    {
+      "path": "policy/v2/summary.csv",
+      "sha256": "7a6de7174f604341efe7f2e9a7914a0f4eeb680f50dddfeb82951a399978069e",
+      "rows": 6
+    },
+    {
+      "path": "db_rolling/v2/summary.csv",
+      "sha256": "20eb94df79a7ad11ae10901303adbfda7a53b8bc1ccd1d81fd9966a1ab5f30a9",
+      "rows": 8
+    },
+    {
+      "path": "rolling_audit/v1/summary.csv",
+      "sha256": "1a738f31c45ccd39d6a1bd187a82b043993eedec84dbc5151b16c3c6327e11d4",
+      "rows": 8
+    }
+  ],
+  "counting": "One main merge comparison per family/parameter tuple. Repeated solvers, generated coarse contracts, both-merge checks, and prior invalid versions are not independent examples.",
+  "exclusions": "Rolling k-threshold cells are listed separately; Policy transfers null control is separate; PC2 remains active; Rolling+Audit boundaries WIN/WIN is a separate control."
+}

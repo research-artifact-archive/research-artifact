@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "java": "java",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "models": [
+    {
+      "id": "gsm",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/GSM_FG.lts"
+    },
+    {
+      "id": "industry",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Industry_FG.lts"
+    },
+    {
+      "id": "metasocket",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/MetaSocket_FG.lts"
+    },
+    {
+      "id": "powerplant",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/PowerPlant_FG.lts"
+    },
+    {
+      "id": "productioncell_arms1",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=1_FG.lts"
+    },
+    {
+      "id": "productioncell_arms2",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/ProductionCell_Arms=2_FG.lts"
+    },
+    {
+      "id": "railcab",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Railcab_FG.lts"
+    },
+    {
+      "id": "surveillance",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Surveillance_FG.lts"
+    },
+    {
+      "id": "workflow",
+      "path": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/inputs/models/Workflow_FG.lts"
+    }
+  ],
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    },
+    {
+      "id": "r1",
+      "suffix": "_R1"
+    }
+  ],
+  "experiment_id": "fg-ducs-witness-20260929-e5-mac",
+  "repetitions": 1,
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "platform": "mac",
+  "parallel_trials": 1,
+  "source_config": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/configs/rq3.json",
+  "deadline": "2026-09-29T16:00:00+09:00",
+  "classpath": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.jar",
+  "jar_metadata": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/jars/e5.json",
+  "results_root": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e5/raw",
+  "series": "e5",
+  "excluded_targets": {
+    "r2": "Individual stop/start references make this target outside the predeclared merge experiment."
+  },
+  "methods": [
+    {
+      "id": "lazy_none_initial",
+      "merge": "none",
+      "solver": "otf",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "none",
+        "mtsa.otf.transferDomain": "initial"
+      }
+    },
+    {
+      "id": "lazy_transfers_initial",
+      "merge": "transfers",
+      "solver": "otf",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "otf",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "true",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "transfers",
+        "mtsa.otf.transferDomain": "initial"
+      }
+    },
+    {
+      "id": "df_none_initial",
+      "merge": "none",
+      "solver": "direct_full",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false",
+        "mtsa.otf.contractMerge": "none",
+        "mtsa.otf.transferDomain": "initial"
+      }
+    }
+  ],
+  "start_cutoff": "2026-09-29T15:39:00+09:00",
+  "expected_trials": 54,
+  "schedule": "36 Lazy cells in original model/target order, none then transfers; 18 Direct-Full none cells in the same model/target order"
+}

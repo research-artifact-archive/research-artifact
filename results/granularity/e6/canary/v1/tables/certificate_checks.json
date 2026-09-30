@@ -1,0 +1,1526 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "job_id": "n02_m01_fine_lazy",
+      "n": 2,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 9 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n02_m01_merged_lazy",
+      "n": 2,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 5,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        3
+      ],
+      "all_at_once_bucket_outcomes": [
+        4
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 3,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 3,
+            "action": "reportB_1",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 4-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n02_m01_all_lazy",
+      "n": 2,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 5,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        3
+      ],
+      "all_at_once_bucket_outcomes": [
+        4
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 3,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 3,
+            "action": "reportB_1",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 4-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n02_m01_fine_df",
+      "n": 2,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 9,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 9 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n03_m01_fine_lazy",
+      "n": 3,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 25,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 25 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n03_m01_merged_lazy",
+      "n": 3,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 9,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        7
+      ],
+      "all_at_once_bucket_outcomes": [
+        8
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 7,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 7,
+            "action": "reportB_1",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_2",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 8-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n03_m01_all_lazy",
+      "n": 3,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 9,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        7
+      ],
+      "all_at_once_bucket_outcomes": [
+        8
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 7,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 7,
+            "action": "reportB_1",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_2",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 8-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n03_m01_fine_df",
+      "n": 3,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 25,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 25 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n03_m02_fine_lazy",
+      "n": 3,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 13,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 13 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n03_m02_merged_lazy",
+      "n": 3,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 32,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        16
+      ],
+      "all_at_once_bucket_outcomes": [
+        8
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 16,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 16,
+            "action": "reportB_1",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 8-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n03_m02_all_lazy",
+      "n": 3,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 32,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        16
+      ],
+      "all_at_once_bucket_outcomes": [
+        8
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 16,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 16,
+            "action": "reportB_1",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 8-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n03_m02_fine_df",
+      "n": 3,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 13,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 13 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m01_fine_lazy",
+      "n": 4,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 57,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 57 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m01_merged_lazy",
+      "n": 4,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 17,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        15
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 15,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 15,
+            "action": "reportB_1",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_2",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_3",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m01_all_lazy",
+      "n": 4,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 17,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        15
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 15,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 15,
+            "action": "reportB_1",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_2",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_3",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m01_fine_df",
+      "n": 4,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 57,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 57 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m02_fine_lazy",
+      "n": 4,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 41,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 41 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m02_merged_lazy",
+      "n": 4,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 80,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        48
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 48,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 48,
+            "action": "reportB_1",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_2",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m02_all_lazy",
+      "n": 4,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 80,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        48
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 48,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 48,
+            "action": "reportB_1",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_2",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m02_fine_df",
+      "n": 4,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 41,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 41 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m03_fine_lazy",
+      "n": 4,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 17 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n04_m03_merged_lazy",
+      "n": 4,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 164,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        66
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 66,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 66,
+            "action": "reportB_1",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m03_all_lazy",
+      "n": 4,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 164,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        66
+      ],
+      "all_at_once_bucket_outcomes": [
+        16
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 66,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 66,
+            "action": "reportB_1",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 16-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n04_m03_fine_df",
+      "n": 4,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 17,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 17 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m01_fine_lazy",
+      "n": 5,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 121,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 121 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m01_merged_lazy",
+      "n": 5,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 33,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        31
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 31,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 31,
+            "action": "reportB_1",
+            "target": 15
+          },
+          {
+            "source": 15,
+            "action": "reportB_2",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_3",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_4",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_5",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m01_all_lazy",
+      "n": 5,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 33,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        31
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 31,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 31,
+            "action": "reportB_1",
+            "target": 15
+          },
+          {
+            "source": 15,
+            "action": "reportB_2",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_3",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_4",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_5",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m01_fine_df",
+      "n": 5,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 121,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 121 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m02_fine_lazy",
+      "n": 5,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 101,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 101 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m02_merged_lazy",
+      "n": 5,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 192,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        128
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 128,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 128,
+            "action": "reportB_1",
+            "target": 48
+          },
+          {
+            "source": 48,
+            "action": "reportB_2",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_3",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m02_all_lazy",
+      "n": 5,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 192,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        128
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 128,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 128,
+            "action": "reportB_1",
+            "target": 48
+          },
+          {
+            "source": 48,
+            "action": "reportB_2",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_3",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m02_fine_df",
+      "n": 5,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 101,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 101 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m03_fine_lazy",
+      "n": 5,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 61,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 61 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m03_merged_lazy",
+      "n": 5,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 497,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        239
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 239,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 239,
+            "action": "reportB_1",
+            "target": 66
+          },
+          {
+            "source": 66,
+            "action": "reportB_2",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m03_all_lazy",
+      "n": 5,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 497,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        239
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 239,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 239,
+            "action": "reportB_1",
+            "target": 66
+          },
+          {
+            "source": 66,
+            "action": "reportB_2",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m03_fine_df",
+      "n": 5,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 61,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 61 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m04_fine_lazy",
+      "n": 5,
+      "m": 4,
+      "decision": "WIN",
+      "certificate_states": 21,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "required": 4,
+      "violating_state_ids": [],
+      "reason": "All 21 returned WIN-certificate states have at least 4 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n05_m04_merged_lazy",
+      "n": 5,
+      "m": 4,
+      "decision": "LOSS",
+      "certificate_states": 727,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        247
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 247,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 247,
+            "action": "reportB_1",
+            "target": 40
+          },
+          {
+            "source": 40,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m04_all_lazy",
+      "n": 5,
+      "m": 4,
+      "decision": "LOSS",
+      "certificate_states": 727,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        247
+      ],
+      "all_at_once_bucket_outcomes": [
+        32
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 247,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 247,
+            "action": "reportB_1",
+            "target": 40
+          },
+          {
+            "source": 40,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 32-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n05_m04_fine_df",
+      "n": 5,
+      "m": 4,
+      "decision": "WIN",
+      "certificate_states": 21,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "required": 4,
+      "violating_state_ids": [],
+      "reason": "All 21 returned WIN-certificate states have at least 4 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m01_fine_lazy",
+      "n": 6,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 249,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 249 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m01_merged_lazy",
+      "n": 6,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 65,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        63
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 63,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 63,
+            "action": "reportB_1",
+            "target": 31
+          },
+          {
+            "source": 31,
+            "action": "reportB_2",
+            "target": 15
+          },
+          {
+            "source": 15,
+            "action": "reportB_3",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_4",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_5",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_6",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m01_all_lazy",
+      "n": 6,
+      "m": 1,
+      "decision": "LOSS",
+      "certificate_states": 65,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        63
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 63,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 63,
+            "action": "reportB_1",
+            "target": 31
+          },
+          {
+            "source": 31,
+            "action": "reportB_2",
+            "target": 15
+          },
+          {
+            "source": 15,
+            "action": "reportB_3",
+            "target": 7
+          },
+          {
+            "source": 7,
+            "action": "reportB_4",
+            "target": 3
+          },
+          {
+            "source": 3,
+            "action": "reportB_5",
+            "target": 1
+          },
+          {
+            "source": 1,
+            "action": "reportB_6",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m01_fine_df",
+      "n": 6,
+      "m": 1,
+      "decision": "WIN",
+      "certificate_states": 249,
+      "status": "PASS",
+      "minimum_physical_healthy": 1,
+      "required": 1,
+      "violating_state_ids": [],
+      "reason": "All 249 returned WIN-certificate states have at least 1 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m02_fine_lazy",
+      "n": 6,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 225,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 225 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m02_merged_lazy",
+      "n": 6,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 448,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        320
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 320,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 320,
+            "action": "reportB_1",
+            "target": 128
+          },
+          {
+            "source": 128,
+            "action": "reportB_2",
+            "target": 48
+          },
+          {
+            "source": 48,
+            "action": "reportB_3",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_4",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_5",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m02_all_lazy",
+      "n": 6,
+      "m": 2,
+      "decision": "LOSS",
+      "certificate_states": 448,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        320
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 320,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 320,
+            "action": "reportB_1",
+            "target": 128
+          },
+          {
+            "source": 128,
+            "action": "reportB_2",
+            "target": 48
+          },
+          {
+            "source": 48,
+            "action": "reportB_3",
+            "target": 16
+          },
+          {
+            "source": 16,
+            "action": "reportB_4",
+            "target": 4
+          },
+          {
+            "source": 4,
+            "action": "reportB_5",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m02_fine_df",
+      "n": 6,
+      "m": 2,
+      "decision": "WIN",
+      "certificate_states": 225,
+      "status": "PASS",
+      "minimum_physical_healthy": 2,
+      "required": 2,
+      "violating_state_ids": [],
+      "reason": "All 225 returned WIN-certificate states have at least 2 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m03_fine_lazy",
+      "n": 6,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 165,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 165 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m03_merged_lazy",
+      "n": 6,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 1390,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        748
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 748,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 748,
+            "action": "reportB_1",
+            "target": 239
+          },
+          {
+            "source": 239,
+            "action": "reportB_2",
+            "target": 66
+          },
+          {
+            "source": 66,
+            "action": "reportB_3",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m03_all_lazy",
+      "n": 6,
+      "m": 3,
+      "decision": "LOSS",
+      "certificate_states": 1390,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        748
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 748,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 748,
+            "action": "reportB_1",
+            "target": 239
+          },
+          {
+            "source": 239,
+            "action": "reportB_2",
+            "target": 66
+          },
+          {
+            "source": 66,
+            "action": "reportB_3",
+            "target": 13
+          },
+          {
+            "source": 13,
+            "action": "reportB_4",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m03_fine_df",
+      "n": 6,
+      "m": 3,
+      "decision": "WIN",
+      "certificate_states": 165,
+      "status": "PASS",
+      "minimum_physical_healthy": 3,
+      "required": 3,
+      "violating_state_ids": [],
+      "reason": "All 165 returned WIN-certificate states have at least 3 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m04_fine_lazy",
+      "n": 6,
+      "m": 4,
+      "decision": "WIN",
+      "certificate_states": 85,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "required": 4,
+      "violating_state_ids": [],
+      "reason": "All 85 returned WIN-certificate states have at least 4 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m04_merged_lazy",
+      "n": 6,
+      "m": 4,
+      "decision": "LOSS",
+      "certificate_states": 2535,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        1037
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 1037,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 1037,
+            "action": "reportB_1",
+            "target": 247
+          },
+          {
+            "source": 247,
+            "action": "reportB_2",
+            "target": 40
+          },
+          {
+            "source": 40,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m04_all_lazy",
+      "n": 6,
+      "m": 4,
+      "decision": "LOSS",
+      "certificate_states": 2535,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        1037
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 1037,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 1037,
+            "action": "reportB_1",
+            "target": 247
+          },
+          {
+            "source": 247,
+            "action": "reportB_2",
+            "target": 40
+          },
+          {
+            "source": 40,
+            "action": "reportB_3",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m04_fine_df",
+      "n": 6,
+      "m": 4,
+      "decision": "WIN",
+      "certificate_states": 85,
+      "status": "PASS",
+      "minimum_physical_healthy": 4,
+      "required": 4,
+      "violating_state_ids": [],
+      "reason": "All 85 returned WIN-certificate states have at least 4 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m05_fine_lazy",
+      "n": 6,
+      "m": 5,
+      "decision": "WIN",
+      "certificate_states": 25,
+      "status": "PASS",
+      "minimum_physical_healthy": 5,
+      "required": 5,
+      "violating_state_ids": [],
+      "reason": "All 25 returned WIN-certificate states have at least 5 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    },
+    {
+      "job_id": "n06_m05_merged_lazy",
+      "n": 6,
+      "m": 5,
+      "decision": "LOSS",
+      "certificate_states": 2955,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        879
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 879,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 879,
+            "action": "reportB_1",
+            "target": 121
+          },
+          {
+            "source": 121,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m05_all_lazy",
+      "n": 6,
+      "m": 5,
+      "decision": "LOSS",
+      "certificate_states": 2955,
+      "status": "PASS",
+      "all_broken_state_ids": [
+        879
+      ],
+      "all_at_once_bucket_outcomes": [
+        64
+      ],
+      "all_broken_to_error_path": {
+        "start_id": 879,
+        "end_id": 0,
+        "edges": [
+          {
+            "source": 879,
+            "action": "reportB_1",
+            "target": 121
+          },
+          {
+            "source": 121,
+            "action": "reportB_2",
+            "target": 0
+          }
+        ]
+      },
+      "bucket_evidence_pass": true,
+      "reason": "The checked LOSS certificate contains the all-broken result of the 64-outcome merged transfer and an uncontrollable broken-report path to ERR_HEALTH before any restart."
+    },
+    {
+      "job_id": "n06_m05_fine_df",
+      "n": 6,
+      "m": 5,
+      "decision": "WIN",
+      "certificate_states": 25,
+      "status": "PASS",
+      "minimum_physical_healthy": 5,
+      "required": 5,
+      "violating_state_ids": [],
+      "reason": "All 25 returned WIN-certificate states have at least 5 physically healthy replicas; HP counts as healthy, BP and B as broken."
+    }
+  ],
+  "issues": []
+}

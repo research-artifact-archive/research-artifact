@@ -1,0 +1,1041 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "rolling_scale",
+  "version": "v1",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "jobs": [
+    {
+      "id": "n07_m01_fine_lazy",
+      "input": "inputs/rolling_n07_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 7,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n07_m01_merged_lazy",
+      "input": "inputs/rolling_n07_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 7,
+        "m": 1,
+        "k": 7
+      },
+      "compare_input": "inputs/rolling_n07_m01_k07.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n07_m01_all_lazy",
+      "input": "inputs/rolling_n07_m01_k07.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 7,
+        "m": 1,
+        "k": 7
+      }
+    },
+    {
+      "id": "n07_m01_fine_df",
+      "input": "inputs/rolling_n07_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 7,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n07_m06_fine_lazy",
+      "input": "inputs/rolling_n07_m06_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 7,
+        "m": 6,
+        "k": 1
+      }
+    },
+    {
+      "id": "n07_m06_merged_lazy",
+      "input": "inputs/rolling_n07_m06_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 7,
+        "m": 6,
+        "k": 7
+      },
+      "compare_input": "inputs/rolling_n07_m06_k07.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n07_m06_all_lazy",
+      "input": "inputs/rolling_n07_m06_k07.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 7,
+        "m": 6,
+        "k": 7
+      }
+    },
+    {
+      "id": "n07_m06_fine_df",
+      "input": "inputs/rolling_n07_m06_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 7,
+        "m": 6,
+        "k": 1
+      }
+    },
+    {
+      "id": "n08_m01_fine_lazy",
+      "input": "inputs/rolling_n08_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 8,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n08_m01_merged_lazy",
+      "input": "inputs/rolling_n08_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 8,
+        "m": 1,
+        "k": 8
+      },
+      "compare_input": "inputs/rolling_n08_m01_k08.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n08_m01_all_lazy",
+      "input": "inputs/rolling_n08_m01_k08.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 8,
+        "m": 1,
+        "k": 8
+      }
+    },
+    {
+      "id": "n08_m01_fine_df",
+      "input": "inputs/rolling_n08_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 8,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n08_m07_fine_lazy",
+      "input": "inputs/rolling_n08_m07_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 8,
+        "m": 7,
+        "k": 1
+      }
+    },
+    {
+      "id": "n08_m07_merged_lazy",
+      "input": "inputs/rolling_n08_m07_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 8,
+        "m": 7,
+        "k": 8
+      },
+      "compare_input": "inputs/rolling_n08_m07_k08.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n08_m07_all_lazy",
+      "input": "inputs/rolling_n08_m07_k08.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 8,
+        "m": 7,
+        "k": 8
+      }
+    },
+    {
+      "id": "n08_m07_fine_df",
+      "input": "inputs/rolling_n08_m07_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 8,
+        "m": 7,
+        "k": 1
+      }
+    },
+    {
+      "id": "n09_m01_fine_lazy",
+      "input": "inputs/rolling_n09_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 9,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n09_m01_merged_lazy",
+      "input": "inputs/rolling_n09_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 9,
+        "m": 1,
+        "k": 9
+      },
+      "compare_input": "inputs/rolling_n09_m01_k09.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n09_m01_all_lazy",
+      "input": "inputs/rolling_n09_m01_k09.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 9,
+        "m": 1,
+        "k": 9
+      }
+    },
+    {
+      "id": "n09_m01_fine_df",
+      "input": "inputs/rolling_n09_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 9,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n09_m08_fine_lazy",
+      "input": "inputs/rolling_n09_m08_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 9,
+        "m": 8,
+        "k": 1
+      }
+    },
+    {
+      "id": "n09_m08_merged_lazy",
+      "input": "inputs/rolling_n09_m08_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 9,
+        "m": 8,
+        "k": 9
+      },
+      "compare_input": "inputs/rolling_n09_m08_k09.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n09_m08_all_lazy",
+      "input": "inputs/rolling_n09_m08_k09.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 9,
+        "m": 8,
+        "k": 9
+      }
+    },
+    {
+      "id": "n09_m08_fine_df",
+      "input": "inputs/rolling_n09_m08_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 9,
+        "m": 8,
+        "k": 1
+      }
+    },
+    {
+      "id": "n10_m01_fine_lazy",
+      "input": "inputs/rolling_n10_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 10,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n10_m01_merged_lazy",
+      "input": "inputs/rolling_n10_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 10,
+        "m": 1,
+        "k": 10
+      },
+      "compare_input": "inputs/rolling_n10_m01_k10.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n10_m01_all_lazy",
+      "input": "inputs/rolling_n10_m01_k10.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 10,
+        "m": 1,
+        "k": 10
+      }
+    },
+    {
+      "id": "n10_m01_fine_df",
+      "input": "inputs/rolling_n10_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 10,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n10_m09_fine_lazy",
+      "input": "inputs/rolling_n10_m09_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 10,
+        "m": 9,
+        "k": 1
+      }
+    },
+    {
+      "id": "n10_m09_merged_lazy",
+      "input": "inputs/rolling_n10_m09_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 10,
+        "m": 9,
+        "k": 10
+      },
+      "compare_input": "inputs/rolling_n10_m09_k10.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n10_m09_all_lazy",
+      "input": "inputs/rolling_n10_m09_k10.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 10,
+        "m": 9,
+        "k": 10
+      }
+    },
+    {
+      "id": "n10_m09_fine_df",
+      "input": "inputs/rolling_n10_m09_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 10,
+        "m": 9,
+        "k": 1
+      }
+    },
+    {
+      "id": "n11_m01_fine_lazy",
+      "input": "inputs/rolling_n11_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 11,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n11_m01_merged_lazy",
+      "input": "inputs/rolling_n11_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 11,
+        "m": 1,
+        "k": 11
+      },
+      "compare_input": "inputs/rolling_n11_m01_k11.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n11_m01_all_lazy",
+      "input": "inputs/rolling_n11_m01_k11.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 11,
+        "m": 1,
+        "k": 11
+      }
+    },
+    {
+      "id": "n11_m01_fine_df",
+      "input": "inputs/rolling_n11_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 11,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n11_m10_fine_lazy",
+      "input": "inputs/rolling_n11_m10_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 11,
+        "m": 10,
+        "k": 1
+      }
+    },
+    {
+      "id": "n11_m10_merged_lazy",
+      "input": "inputs/rolling_n11_m10_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 11,
+        "m": 10,
+        "k": 11
+      },
+      "compare_input": "inputs/rolling_n11_m10_k11.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n11_m10_all_lazy",
+      "input": "inputs/rolling_n11_m10_k11.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 11,
+        "m": 10,
+        "k": 11
+      }
+    },
+    {
+      "id": "n11_m10_fine_df",
+      "input": "inputs/rolling_n11_m10_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 11,
+        "m": 10,
+        "k": 1
+      }
+    },
+    {
+      "id": "n12_m01_fine_lazy",
+      "input": "inputs/rolling_n12_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 12,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n12_m01_merged_lazy",
+      "input": "inputs/rolling_n12_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 12,
+        "m": 1,
+        "k": 12
+      },
+      "compare_input": "inputs/rolling_n12_m01_k12.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n12_m01_all_lazy",
+      "input": "inputs/rolling_n12_m01_k12.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 12,
+        "m": 1,
+        "k": 12
+      }
+    },
+    {
+      "id": "n12_m01_fine_df",
+      "input": "inputs/rolling_n12_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 12,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n12_m11_fine_lazy",
+      "input": "inputs/rolling_n12_m11_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 12,
+        "m": 11,
+        "k": 1
+      }
+    },
+    {
+      "id": "n12_m11_merged_lazy",
+      "input": "inputs/rolling_n12_m11_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 12,
+        "m": 11,
+        "k": 12
+      },
+      "compare_input": "inputs/rolling_n12_m11_k12.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n12_m11_all_lazy",
+      "input": "inputs/rolling_n12_m11_k12.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 12,
+        "m": 11,
+        "k": 12
+      }
+    },
+    {
+      "id": "n12_m11_fine_df",
+      "input": "inputs/rolling_n12_m11_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 12,
+        "m": 11,
+        "k": 1
+      }
+    },
+    {
+      "id": "n13_m01_fine_lazy",
+      "input": "inputs/rolling_n13_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 13,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n13_m01_merged_lazy",
+      "input": "inputs/rolling_n13_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 13,
+        "m": 1,
+        "k": 13
+      },
+      "compare_input": "inputs/rolling_n13_m01_k13.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n13_m01_all_lazy",
+      "input": "inputs/rolling_n13_m01_k13.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 13,
+        "m": 1,
+        "k": 13
+      }
+    },
+    {
+      "id": "n13_m01_fine_df",
+      "input": "inputs/rolling_n13_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 13,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n13_m12_fine_lazy",
+      "input": "inputs/rolling_n13_m12_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 13,
+        "m": 12,
+        "k": 1
+      }
+    },
+    {
+      "id": "n13_m12_merged_lazy",
+      "input": "inputs/rolling_n13_m12_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 13,
+        "m": 12,
+        "k": 13
+      },
+      "compare_input": "inputs/rolling_n13_m12_k13.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n13_m12_all_lazy",
+      "input": "inputs/rolling_n13_m12_k13.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 13,
+        "m": 12,
+        "k": 13
+      }
+    },
+    {
+      "id": "n13_m12_fine_df",
+      "input": "inputs/rolling_n13_m12_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 13,
+        "m": 12,
+        "k": 1
+      }
+    },
+    {
+      "id": "n14_m01_fine_lazy",
+      "input": "inputs/rolling_n14_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 14,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n14_m01_merged_lazy",
+      "input": "inputs/rolling_n14_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 14,
+        "m": 1,
+        "k": 14
+      },
+      "compare_input": "inputs/rolling_n14_m01_k14.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n14_m01_all_lazy",
+      "input": "inputs/rolling_n14_m01_k14.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 14,
+        "m": 1,
+        "k": 14
+      }
+    },
+    {
+      "id": "n14_m01_fine_df",
+      "input": "inputs/rolling_n14_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 14,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n14_m13_fine_lazy",
+      "input": "inputs/rolling_n14_m13_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 14,
+        "m": 13,
+        "k": 1
+      }
+    },
+    {
+      "id": "n14_m13_merged_lazy",
+      "input": "inputs/rolling_n14_m13_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 14,
+        "m": 13,
+        "k": 14
+      },
+      "compare_input": "inputs/rolling_n14_m13_k14.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n14_m13_all_lazy",
+      "input": "inputs/rolling_n14_m13_k14.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 14,
+        "m": 13,
+        "k": 14
+      }
+    },
+    {
+      "id": "n14_m13_fine_df",
+      "input": "inputs/rolling_n14_m13_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 14,
+        "m": 13,
+        "k": 1
+      }
+    },
+    {
+      "id": "n15_m01_fine_lazy",
+      "input": "inputs/rolling_n15_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 15,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n15_m01_merged_lazy",
+      "input": "inputs/rolling_n15_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 15,
+        "m": 1,
+        "k": 15
+      },
+      "compare_input": "inputs/rolling_n15_m01_k15.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n15_m01_all_lazy",
+      "input": "inputs/rolling_n15_m01_k15.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 15,
+        "m": 1,
+        "k": 15
+      }
+    },
+    {
+      "id": "n15_m01_fine_df",
+      "input": "inputs/rolling_n15_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 15,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n15_m14_fine_lazy",
+      "input": "inputs/rolling_n15_m14_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 15,
+        "m": 14,
+        "k": 1
+      }
+    },
+    {
+      "id": "n15_m14_merged_lazy",
+      "input": "inputs/rolling_n15_m14_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 15,
+        "m": 14,
+        "k": 15
+      },
+      "compare_input": "inputs/rolling_n15_m14_k15.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n15_m14_all_lazy",
+      "input": "inputs/rolling_n15_m14_k15.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 15,
+        "m": 14,
+        "k": 15
+      }
+    },
+    {
+      "id": "n15_m14_fine_df",
+      "input": "inputs/rolling_n15_m14_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 15,
+        "m": 14,
+        "k": 1
+      }
+    },
+    {
+      "id": "n16_m01_fine_lazy",
+      "input": "inputs/rolling_n16_m01_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 16,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n16_m01_merged_lazy",
+      "input": "inputs/rolling_n16_m01_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 16,
+        "m": 1,
+        "k": 16
+      },
+      "compare_input": "inputs/rolling_n16_m01_k16.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n16_m01_all_lazy",
+      "input": "inputs/rolling_n16_m01_k16.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 16,
+        "m": 1,
+        "k": 16
+      }
+    },
+    {
+      "id": "n16_m01_fine_df",
+      "input": "inputs/rolling_n16_m01_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 16,
+        "m": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": "n16_m15_fine_lazy",
+      "input": "inputs/rolling_n16_m15_k01.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 16,
+        "m": 15,
+        "k": 1
+      }
+    },
+    {
+      "id": "n16_m15_merged_lazy",
+      "input": "inputs/rolling_n16_m15_k01.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 16,
+        "m": 15,
+        "k": 16
+      },
+      "compare_input": "inputs/rolling_n16_m15_k16.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "n16_m15_all_lazy",
+      "input": "inputs/rolling_n16_m15_k16.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 16,
+        "m": 15,
+        "k": 16
+      }
+    },
+    {
+      "id": "n16_m15_fine_df",
+      "input": "inputs/rolling_n16_m15_k01.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 16,
+        "m": 15,
+        "k": 1
+      }
+    }
+  ],
+  "frozen_paths": [
+    "rolling_scale/gen_scale.py",
+    "rolling_scale/analyze_scale.py",
+    "rolling_scale/README.md",
+    "rolling/gen_rolling.py",
+    "rolling/validate_endpoints.py",
+    "common/SCHEMA.md",
+    "common/witness.schema.json"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "rolling/validate_endpoints.py",
+      "rolling_scale/v1"
+    ]
+  ],
+  "preflight_jobs": [
+    "n07_m01_fine_lazy",
+    "n07_m01_merged_lazy"
+  ],
+  "analysis_commands": [
+    [
+      "python3",
+      "-B",
+      "rolling_scale/analyze_scale.py",
+      "rolling_scale/v1"
+    ]
+  ]
+}

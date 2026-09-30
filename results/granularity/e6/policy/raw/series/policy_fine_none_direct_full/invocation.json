@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-09-29T16:39:52.687625+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/policy/inputs/policy_2_fine.json",
+    "--merge",
+    "none",
+    "--solver",
+    "direct_full",
+    "--output",
+    "${E6_ROOT}/policy/raw/series/policy_fine_none_direct_full/result.json"
+  ],
+  "job": {
+    "id": "policy_fine_none_direct_full",
+    "input": "inputs/policy_2_fine.json",
+    "merge": "none",
+    "solver": "direct_full",
+    "expected_decision": "WIN"
+  },
+  "input_sha256": "81f45760d6cf33ada09d27631916ce2f16f308306a2438958bf63c118f1f22d0",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "7fbcd8d061a8654e88f47033e3d0df6e38714f0a9f7fdeb862d3a76b990e0ec5",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

@@ -1,0 +1,61 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "H" ], [ "NEW", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "NEW", "H" ], [ "NEW", "HP" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "HP" ], [ "NEW", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "HP" ], [ "NEW", "HP" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ ],
+    "id" : 3,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "H" ], [ "OLD", "H" ] ],
+    "testers" : {
+      "reported_availability" : "b00"
+    },
+    "pending" : [ "ablation.merge.transfers" ],
+    "id" : 4,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  } ],
+  "strategy_edges" : [ [ 4, "ablation.merge.transfers", 3 ], [ 3, "reportH_1", 1 ], [ 3, "reportH_2", 2 ], [ 1, "reportH_2", 0 ], [ 2, "reportH_1", 0 ] ]
+}

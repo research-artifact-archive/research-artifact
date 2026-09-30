@@ -1,0 +1,16 @@
+\begin{longtable}{llrrrrl}
+\toprule
+Parameters & Variant & Decision & States & Queries & Rank/$|L|$ & Expected \\
+\midrule
+\endhead
+audit\_pairs=1, m=1, n=2 & none/lazy & WIN & 30 & 74 & 7 & PASS \\
+audit\_pairs=1, m=1, n=2 & transfers/lazy & LOSS & 22 & 48 & 22 & PASS \\
+audit\_pairs=1, m=1, n=2 & boundaries/lazy & WIN & 30 & 74 & 7 & PASS \\
+audit\_pairs=1, m=1, n=2 & both/lazy & LOSS & 22 & 48 & 22 & PASS \\
+audit\_pairs=1, m=1, n=2 & none/direct\_full & WIN & 107 & 436 & 6 & PASS \\
+audit\_pairs=1, m=1, n=2 & none/lazy & LOSS & 22 & 48 & 22 & PASS \\
+audit\_pairs=1, m=1, n=2 & none/lazy & WIN & 30 & 74 & 7 & PASS \\
+audit\_pairs=1, m=1, n=2 & none/lazy & LOSS & 22 & 48 & 22 & PASS \\
+\bottomrule
+\end{longtable}
+{\par\smallskip\footnotesize Single trials, 32\,GiB heap, whole-JVM 1,200\,s cap. WIN reports the returned policy rank bound; LOSS reports the returned discovered losing-certificate size. NR denotes not started before the fixed cutoff. Expected values are preregistered hypotheses and never substitute for measurements.}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "java": "java",
+  "main_class": "ltsa.updatingControllers.cli.SingleCompositionRunner",
+  "transition_output_mode": "summary",
+  "models": [
+    {
+      "id": "gsm",
+      "path": "Implementation/Experiment/Models/GSM_FG.lts"
+    },
+    {
+      "id": "industry",
+      "path": "Implementation/Experiment/Models/Industry_FG.lts"
+    },
+    {
+      "id": "metasocket",
+      "path": "Implementation/Experiment/Models/MetaSocket_FG.lts"
+    },
+    {
+      "id": "powerplant",
+      "path": "Implementation/Experiment/Models/PowerPlant_FG.lts"
+    },
+    {
+      "id": "productioncell_arms1",
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=1_FG.lts"
+    },
+    {
+      "id": "productioncell_arms2",
+      "path": "Implementation/Experiment/Models/ProductionCell_Arms=2_FG.lts"
+    },
+    {
+      "id": "railcab",
+      "path": "Implementation/Experiment/Models/Railcab_FG.lts"
+    },
+    {
+      "id": "surveillance",
+      "path": "Implementation/Experiment/Models/Surveillance_FG.lts"
+    },
+    {
+      "id": "workflow",
+      "path": "Implementation/Experiment/Models/Workflow_FG.lts"
+    }
+  ],
+  "targets": [
+    {
+      "id": "base",
+      "suffix": ""
+    },
+    {
+      "id": "r1",
+      "suffix": "_R1"
+    },
+    {
+      "id": "r2",
+      "suffix": "_R2"
+    }
+  ],
+  "experiment_id": "fg-ducs-ablation-20260928-e2-mac",
+  "repetitions": 1,
+  "timeout_seconds": 1200,
+  "java_heap": "32g",
+  "platform": "mac",
+  "parallel_trials": 1,
+  "source_config": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/configs/rq3.json",
+  "deadline": "2026-09-29T18:00:00+09:00",
+  "classpath": "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e2.jar",
+  "jar_metadata": "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e2.json",
+  "results_root": "FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/raw",
+  "series": "e2",
+  "methods": [
+    {
+      "id": "direct_full_ucpruned",
+      "target_template": "UPDATE_CONTROLLER_OTF_FG{suffix}",
+      "analysis_role": "same_problem_comparator",
+      "jvm_properties": {
+        "mtsa.evaluation.enabled": "true",
+        "mtsa.revised.otf.solver": "direct_full_ucpruned",
+        "mtsa.otf.guidedStateLimit": "0",
+        "mtsa.otf.guidedQueryLimit": "0",
+        "mtsa.otf.lazyControllableBuckets": "false",
+        "mtsa.otf.controllableActionOrder": "endpoint_guided",
+        "mtsa.revised.otf.independentVerification": "false"
+      }
+    }
+  ],
+  "retry_timeout_seconds": 3600,
+  "retry_deadline": "2026-09-29T12:00:00+09:00"
+}

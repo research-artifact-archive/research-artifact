@@ -1,0 +1,144 @@
+{
+  "schema": "e6-family-run-v1",
+  "family": "rolling_audit",
+  "version": "literal_v1",
+  "heap": "32g",
+  "timeout_seconds": 1200,
+  "trials": 1,
+  "start_cutoff": "2026-09-30T09:39:00+09:00",
+  "deadline": "2026-09-30T10:00:00+09:00",
+  "jobs": [
+    {
+      "id": "fine_none_lazy",
+      "input": "inputs/fine.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      }
+    },
+    {
+      "id": "fine_transfers_lazy",
+      "input": "inputs/fine.json",
+      "merge": "transfers",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      },
+      "compare_input": "inputs/generated_transfers.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "fine_boundaries_lazy",
+      "input": "inputs/fine.json",
+      "merge": "boundaries",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      },
+      "compare_input": "inputs/generated_boundaries.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "fine_both_lazy",
+      "input": "inputs/fine.json",
+      "merge": "both",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      },
+      "compare_input": "inputs/generated_both.json",
+      "compare_merge": "none"
+    },
+    {
+      "id": "fine_none_df",
+      "input": "inputs/fine.json",
+      "merge": "none",
+      "solver": "direct_full",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      }
+    },
+    {
+      "id": "generated_transfers_lazy",
+      "input": "inputs/generated_transfers.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      }
+    },
+    {
+      "id": "generated_boundaries_lazy",
+      "input": "inputs/generated_boundaries.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "WIN",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      }
+    },
+    {
+      "id": "generated_both_lazy",
+      "input": "inputs/generated_both.json",
+      "merge": "none",
+      "solver": "lazy",
+      "expected_decision": "LOSS",
+      "parameters": {
+        "n": 2,
+        "m": 1,
+        "audit_pairs": 1
+      }
+    }
+  ],
+  "frozen_paths": [
+    "rolling_audit/gen_rolling_audit.py",
+    "rolling_audit/validate_rolling_audit.py",
+    "rolling_audit/analyze_rolling_audit.py",
+    "rolling_audit/README.md",
+    "rolling_audit/v1/reference/rolling_n02_m01_k01.json",
+    "common/SCHEMA.md",
+    "common/witness.schema.json"
+  ],
+  "endpoint_checks": [
+    [
+      "python3",
+      "-B",
+      "rolling_audit/validate_rolling_audit.py",
+      "rolling_audit/v1"
+    ]
+  ],
+  "preflight_jobs": [
+    "fine_none_lazy",
+    "fine_transfers_lazy",
+    "fine_boundaries_lazy"
+  ],
+  "analysis_commands": [
+    [
+      "python3",
+      "-B",
+      "rolling_audit/analyze_rolling_audit.py",
+      "rolling_audit/v1"
+    ]
+  ]
+}

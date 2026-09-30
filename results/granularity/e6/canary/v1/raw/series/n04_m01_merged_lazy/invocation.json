@@ -1,0 +1,42 @@
+{
+  "started_at": "2026-09-29T16:43:33.081050+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/canary/v1/inputs/canary_n04_m01_fine.json",
+    "--merge",
+    "transfers",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/canary/v1/raw/series/n04_m01_merged_lazy/result.json",
+    "--compare-input",
+    "${E6_ROOT}/canary/v1/inputs/canary_n04_m01_all.json",
+    "--compare-merge",
+    "none"
+  ],
+  "job": {
+    "id": "n04_m01_merged_lazy",
+    "input": "inputs/canary_n04_m01_fine.json",
+    "merge": "transfers",
+    "solver": "lazy",
+    "expected_decision": "LOSS",
+    "parameters": {
+      "n": 4,
+      "m": 1,
+      "k": 4
+    },
+    "variant": "merged_lazy",
+    "compare_input": "inputs/canary_n04_m01_all.json",
+    "compare_merge": "none"
+  },
+  "input_sha256": "57b16da52583fb85b95e531b71054719a8dc23de1fb9fe99de8cd3e73fc7e751",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "81b19678f7c9a036ffffba154c58c2ca6ac9cac0a49bad7c36b908a9317e99d0",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

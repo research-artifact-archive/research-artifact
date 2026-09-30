@@ -1,0 +1,117 @@
+INFO: Registered Map Environment: MAPPING_IO
+INFO: Registered Map Environment: MAPPING_64_128
+Compiled: DES64
+Compiled: IO
+Composition:ENV_DES64 = ENV_DES64.DES64 || ENV_DES64.IO
+State Space: 1 * 2 = 2 ** 1
+Composing...
+-- States: 2 Transitions: 4 Memory used: 8950K
+Composed in 5ms
+Formula !P_DES64 = (true U ((output & !EncriptionDone64) | (des64 & !InputRecieve)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_DES64 = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |des64&!InputRecieve -> S1 |output&!EncriptionDone64 -> S1).
+Composition:P_DES64 = InputRecieve || EncriptionDone64 || des64 || output || SYNC || P_DES64
+State Space: 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 21 Transitions: 55 Memory used: 9411K
+Composed in 2ms
+After Tau elimination = 11 state
+Tau reduction ON
+P_DES64 minimising...
+Minimised States: 5 in 0ms
+make DFA(P_DES64)
+DFA(P_DES64) has 4 states.
+Tau reduction ON
+P_DES64 minimising...
+Minimised States: 4 in 0ms
+Composition:CONTROLLER64 = ENV_DES64 || P_DES64
+State Space: 2 * 4 = 2 ** 3
+Composing...
+-- States: 4 Transitions: 8 Memory used: 9435K
+Composed in 1ms
+Solving the LTS control problem.
+Environment states: 5
+Game states: 5
+Game transitions: 15
+Analysis time: 34ms.
+Controller [4] generated successfully.
+Composition:CONTROLLER64 = CONTROLLER64 || P_DES64
+State Space: 4 * 4 = 2 ** 4
+Composing...
+-- States: 4 Transitions: 5 Memory used: 10720K
+Composed in 3ms
+ - Synthesizing Mapping Environment from lists (size=2)...
+INFO: Auto-compiling dependency: IO_OLD
+INFO: Auto-compiling dependency: IO_NEW
+Generating Mapping Environment: MAP_IO_OLD_IO_NEW
+INFO: Auto-compiling dependency: DES128
+Generating Mapping Environment: MAP_DES64_DES128
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_DES128 = (true U ((output & !EncriptionDone128) | (des128 & !InputRecieve)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_DES128 = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |des128&!InputRecieve -> S1 |output&!EncriptionDone128 -> S1).
+Composition:P_DES128 = InputRecieve || EncriptionDone128 || des128 || output || SYNC || P_DES128
+State Space: 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 21 Transitions: 55 Memory used: 10754K
+Composed in 3ms
+After Tau elimination = 11 state
+Tau reduction ON
+P_DES128 minimising...
+Minimised States: 5 in 0ms
+make DFA(P_DES128)
+DFA(P_DES128) has 4 states.
+Tau reduction ON
+P_DES128 minimising...
+Minimised States: 4 in 0ms
+Composition:ENV_DES128 = ENV_DES128.DES128 || ENV_DES128.IO
+State Space: 1 * 2 = 2 ** 1
+Composing...
+-- States: 2 Transitions: 4 Memory used: 10749K
+Composed in 3ms
+Composition:CONTROLLER128 = ENV_DES128 || P_DES128
+State Space: 2 * 4 = 2 ** 3
+Composing...
+-- States: 4 Transitions: 8 Memory used: 11133K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 5
+Game states: 5
+Game transitions: 15
+Analysis time: 5ms.
+Controller [4] generated successfully.
+Composition:CONTROLLER128 = CONTROLLER128 || P_DES128
+State Space: 4 * 4 = 2 ** 4
+Composing...
+-- States: 4 Transitions: 5 Memory used: 11554K
+Composed in 3ms
+ - Using explicitly supplied New Controller: CONTROLLER128
+ - New Controller prepared successfully. States: 4
+Formula !R1_OTF_P_DES128 = (true U (AfterStopBeforeStart_P_DES128 & {des128, des64, output}))
+GBA 2 states 3 transitions
+Buchi automata:
+R1_OTF_P_DES128 = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |AfterStopBeforeStart_P_DES128&{des128, des64, output} -> S1).
+Composition:R1_OTF_P_DES128 = AfterStopBeforeStart_P_DES128 || {des128, des64, output} || SYNC || R1_OTF_P_DES128
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 57 Memory used: 11557K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+R1_OTF_P_DES128 minimising...
+Minimised States: 3 in 0ms
+make DFA(R1_OTF_P_DES128)
+DFA(R1_OTF_P_DES128) has 2 states.
+Tau reduction ON
+R1_OTF_P_DES128 minimising...
+Minimised States: 2 in 0ms
+ - Extracting New Safety Fluents and Building Look-up Tables...
+FRONTEND_LOOKUP_EXPORT_COMPLETE requirements=1 fg_solver=false physical_closure=false activation_spec=false

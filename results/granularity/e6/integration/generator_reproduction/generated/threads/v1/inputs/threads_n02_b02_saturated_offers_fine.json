@@ -1,0 +1,1048 @@
+{
+  "schema": "fg-ducs-witness-v1",
+  "id": "threads_n02_b02_saturated_offers_fine",
+  "family": "threads",
+  "parameters": {
+    "n": 2,
+    "B": 2,
+    "regime": "saturated_offers",
+    "group": "fine"
+  },
+  "ordinary": [
+    "arrival",
+    "dispatch_1",
+    "dispatch_2",
+    "finish_1",
+    "finish_2"
+  ],
+  "controllable": [
+    "dispatch_1",
+    "dispatch_2"
+  ],
+  "components": [
+    {
+      "id": "worker_1",
+      "old": {
+        "states": [
+          "I_q0",
+          "I_q1",
+          "I_q2",
+          "B_q0",
+          "B_q1",
+          "B_q2"
+        ],
+        "initial": "I_q0",
+        "edges": [
+          [
+            "I_q0",
+            "arrival",
+            "I_q1"
+          ],
+          [
+            "I_q1",
+            "arrival",
+            "I_q2"
+          ],
+          [
+            "I_q1",
+            "dispatch_1",
+            "B_q0"
+          ],
+          [
+            "I_q1",
+            "dispatch_2",
+            "I_q0"
+          ],
+          [
+            "I_q2",
+            "arrival",
+            "I_q2"
+          ],
+          [
+            "I_q2",
+            "dispatch_1",
+            "B_q1"
+          ],
+          [
+            "I_q2",
+            "dispatch_2",
+            "I_q1"
+          ],
+          [
+            "B_q0",
+            "arrival",
+            "B_q1"
+          ],
+          [
+            "B_q0",
+            "finish_1",
+            "I_q0"
+          ],
+          [
+            "B_q1",
+            "arrival",
+            "B_q2"
+          ],
+          [
+            "B_q1",
+            "dispatch_2",
+            "B_q0"
+          ],
+          [
+            "B_q1",
+            "finish_1",
+            "I_q1"
+          ],
+          [
+            "B_q2",
+            "arrival",
+            "B_q2"
+          ],
+          [
+            "B_q2",
+            "dispatch_2",
+            "B_q1"
+          ],
+          [
+            "B_q2",
+            "finish_1",
+            "I_q2"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "I_q0",
+          "I_q1",
+          "I_q2",
+          "B_q0",
+          "B_q1",
+          "B_q2"
+        ],
+        "initial": "I_q0",
+        "edges": [
+          [
+            "I_q0",
+            "arrival",
+            "I_q1"
+          ],
+          [
+            "I_q1",
+            "arrival",
+            "I_q2"
+          ],
+          [
+            "I_q1",
+            "dispatch_1",
+            "B_q0"
+          ],
+          [
+            "I_q1",
+            "dispatch_2",
+            "I_q0"
+          ],
+          [
+            "I_q2",
+            "arrival",
+            "I_q2"
+          ],
+          [
+            "I_q2",
+            "dispatch_1",
+            "B_q1"
+          ],
+          [
+            "I_q2",
+            "dispatch_2",
+            "I_q1"
+          ],
+          [
+            "B_q0",
+            "arrival",
+            "B_q1"
+          ],
+          [
+            "B_q0",
+            "finish_1",
+            "I_q0"
+          ],
+          [
+            "B_q1",
+            "arrival",
+            "B_q2"
+          ],
+          [
+            "B_q1",
+            "dispatch_2",
+            "B_q0"
+          ],
+          [
+            "B_q1",
+            "finish_1",
+            "I_q1"
+          ],
+          [
+            "B_q2",
+            "arrival",
+            "B_q2"
+          ],
+          [
+            "B_q2",
+            "dispatch_2",
+            "B_q1"
+          ],
+          [
+            "B_q2",
+            "finish_1",
+            "I_q2"
+          ]
+        ]
+      },
+      "transfer_action": "rho_1",
+      "transfer": {
+        "I_q0": [
+          "I_q0"
+        ],
+        "I_q1": [
+          "I_q1"
+        ],
+        "I_q2": [
+          "I_q2"
+        ]
+      }
+    },
+    {
+      "id": "worker_2",
+      "old": {
+        "states": [
+          "I",
+          "B"
+        ],
+        "initial": "I",
+        "edges": [
+          [
+            "I",
+            "dispatch_2",
+            "B"
+          ],
+          [
+            "B",
+            "finish_2",
+            "I"
+          ]
+        ]
+      },
+      "new": {
+        "states": [
+          "I",
+          "B"
+        ],
+        "initial": "I",
+        "edges": [
+          [
+            "I",
+            "dispatch_2",
+            "B"
+          ],
+          [
+            "B",
+            "finish_2",
+            "I"
+          ]
+        ]
+      },
+      "transfer_action": "rho_2",
+      "transfer": {
+        "I": [
+          "I"
+        ]
+      }
+    }
+  ],
+  "requirements": [],
+  "precedence": [],
+  "endpoints": {
+    "old": {
+      "lts": {
+        "states": [
+          "s0",
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5",
+          "s6",
+          "s7",
+          "s8",
+          "s9",
+          "s10",
+          "s11"
+        ],
+        "initial": "s0",
+        "edges": [
+          [
+            "s0",
+            "arrival",
+            "s4"
+          ],
+          [
+            "s4",
+            "arrival",
+            "s8"
+          ],
+          [
+            "s4",
+            "dispatch_1",
+            "s2"
+          ],
+          [
+            "s4",
+            "dispatch_2",
+            "s1"
+          ],
+          [
+            "s8",
+            "arrival",
+            "s8"
+          ],
+          [
+            "s8",
+            "dispatch_1",
+            "s6"
+          ],
+          [
+            "s8",
+            "dispatch_2",
+            "s5"
+          ],
+          [
+            "s2",
+            "arrival",
+            "s6"
+          ],
+          [
+            "s2",
+            "finish_1",
+            "s0"
+          ],
+          [
+            "s1",
+            "arrival",
+            "s5"
+          ],
+          [
+            "s1",
+            "finish_2",
+            "s0"
+          ],
+          [
+            "s6",
+            "arrival",
+            "s10"
+          ],
+          [
+            "s6",
+            "finish_1",
+            "s4"
+          ],
+          [
+            "s6",
+            "dispatch_2",
+            "s3"
+          ],
+          [
+            "s5",
+            "arrival",
+            "s9"
+          ],
+          [
+            "s5",
+            "dispatch_1",
+            "s3"
+          ],
+          [
+            "s5",
+            "finish_2",
+            "s4"
+          ],
+          [
+            "s10",
+            "arrival",
+            "s10"
+          ],
+          [
+            "s10",
+            "finish_1",
+            "s8"
+          ],
+          [
+            "s10",
+            "dispatch_2",
+            "s7"
+          ],
+          [
+            "s3",
+            "arrival",
+            "s7"
+          ],
+          [
+            "s3",
+            "finish_1",
+            "s1"
+          ],
+          [
+            "s3",
+            "finish_2",
+            "s2"
+          ],
+          [
+            "s9",
+            "arrival",
+            "s9"
+          ],
+          [
+            "s9",
+            "dispatch_1",
+            "s7"
+          ],
+          [
+            "s9",
+            "finish_2",
+            "s8"
+          ],
+          [
+            "s7",
+            "arrival",
+            "s11"
+          ],
+          [
+            "s7",
+            "finish_1",
+            "s5"
+          ],
+          [
+            "s7",
+            "finish_2",
+            "s6"
+          ],
+          [
+            "s11",
+            "arrival",
+            "s11"
+          ],
+          [
+            "s11",
+            "finish_1",
+            "s9"
+          ],
+          [
+            "s11",
+            "finish_2",
+            "s10"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "arrival",
+            "C"
+          ],
+          [
+            "C",
+            "dispatch_1",
+            "C"
+          ],
+          [
+            "C",
+            "dispatch_2",
+            "C"
+          ],
+          [
+            "C",
+            "finish_1",
+            "C"
+          ],
+          [
+            "C",
+            "finish_2",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "s0": {
+          "physical": [
+            [
+              "OLD",
+              "I_q0"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s1": {
+          "physical": [
+            [
+              "OLD",
+              "I_q0"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        },
+        "s2": {
+          "physical": [
+            [
+              "OLD",
+              "B_q0"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s3": {
+          "physical": [
+            [
+              "OLD",
+              "B_q0"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        },
+        "s4": {
+          "physical": [
+            [
+              "OLD",
+              "I_q1"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s5": {
+          "physical": [
+            [
+              "OLD",
+              "I_q1"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        },
+        "s6": {
+          "physical": [
+            [
+              "OLD",
+              "B_q1"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s7": {
+          "physical": [
+            [
+              "OLD",
+              "B_q1"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        },
+        "s8": {
+          "physical": [
+            [
+              "OLD",
+              "I_q2"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s9": {
+          "physical": [
+            [
+              "OLD",
+              "I_q2"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        },
+        "s10": {
+          "physical": [
+            [
+              "OLD",
+              "B_q2"
+            ],
+            [
+              "OLD",
+              "I"
+            ]
+          ],
+          "testers": {}
+        },
+        "s11": {
+          "physical": [
+            [
+              "OLD",
+              "B_q2"
+            ],
+            [
+              "OLD",
+              "B"
+            ]
+          ],
+          "testers": {}
+        }
+      }
+    },
+    "new": {
+      "lts": {
+        "states": [
+          "s0",
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5",
+          "s6",
+          "s7",
+          "s8",
+          "s9",
+          "s10",
+          "s11"
+        ],
+        "initial": "s0",
+        "edges": [
+          [
+            "s0",
+            "arrival",
+            "s4"
+          ],
+          [
+            "s4",
+            "arrival",
+            "s8"
+          ],
+          [
+            "s4",
+            "dispatch_1",
+            "s2"
+          ],
+          [
+            "s4",
+            "dispatch_2",
+            "s1"
+          ],
+          [
+            "s8",
+            "arrival",
+            "s8"
+          ],
+          [
+            "s8",
+            "dispatch_1",
+            "s6"
+          ],
+          [
+            "s8",
+            "dispatch_2",
+            "s5"
+          ],
+          [
+            "s2",
+            "arrival",
+            "s6"
+          ],
+          [
+            "s2",
+            "finish_1",
+            "s0"
+          ],
+          [
+            "s1",
+            "arrival",
+            "s5"
+          ],
+          [
+            "s1",
+            "finish_2",
+            "s0"
+          ],
+          [
+            "s6",
+            "arrival",
+            "s10"
+          ],
+          [
+            "s6",
+            "finish_1",
+            "s4"
+          ],
+          [
+            "s6",
+            "dispatch_2",
+            "s3"
+          ],
+          [
+            "s5",
+            "arrival",
+            "s9"
+          ],
+          [
+            "s5",
+            "dispatch_1",
+            "s3"
+          ],
+          [
+            "s5",
+            "finish_2",
+            "s4"
+          ],
+          [
+            "s10",
+            "arrival",
+            "s10"
+          ],
+          [
+            "s10",
+            "finish_1",
+            "s8"
+          ],
+          [
+            "s10",
+            "dispatch_2",
+            "s7"
+          ],
+          [
+            "s3",
+            "arrival",
+            "s7"
+          ],
+          [
+            "s3",
+            "finish_1",
+            "s1"
+          ],
+          [
+            "s3",
+            "finish_2",
+            "s2"
+          ],
+          [
+            "s9",
+            "arrival",
+            "s9"
+          ],
+          [
+            "s9",
+            "dispatch_1",
+            "s7"
+          ],
+          [
+            "s9",
+            "finish_2",
+            "s8"
+          ],
+          [
+            "s7",
+            "arrival",
+            "s11"
+          ],
+          [
+            "s7",
+            "finish_1",
+            "s5"
+          ],
+          [
+            "s7",
+            "finish_2",
+            "s6"
+          ],
+          [
+            "s11",
+            "arrival",
+            "s11"
+          ],
+          [
+            "s11",
+            "finish_1",
+            "s9"
+          ],
+          [
+            "s11",
+            "finish_2",
+            "s10"
+          ]
+        ]
+      },
+      "controller": {
+        "states": [
+          "C"
+        ],
+        "initial": "C",
+        "edges": [
+          [
+            "C",
+            "arrival",
+            "C"
+          ],
+          [
+            "C",
+            "dispatch_1",
+            "C"
+          ],
+          [
+            "C",
+            "dispatch_2",
+            "C"
+          ],
+          [
+            "C",
+            "finish_1",
+            "C"
+          ],
+          [
+            "C",
+            "finish_2",
+            "C"
+          ]
+        ]
+      },
+      "projection": {
+        "s0": {
+          "physical": [
+            [
+              "NEW",
+              "I_q0"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s0"
+        },
+        "s1": {
+          "physical": [
+            [
+              "NEW",
+              "I_q0"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s1"
+        },
+        "s2": {
+          "physical": [
+            [
+              "NEW",
+              "B_q0"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s2"
+        },
+        "s3": {
+          "physical": [
+            [
+              "NEW",
+              "B_q0"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s3"
+        },
+        "s4": {
+          "physical": [
+            [
+              "NEW",
+              "I_q1"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s4"
+        },
+        "s5": {
+          "physical": [
+            [
+              "NEW",
+              "I_q1"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s5"
+        },
+        "s6": {
+          "physical": [
+            [
+              "NEW",
+              "B_q1"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s6"
+        },
+        "s7": {
+          "physical": [
+            [
+              "NEW",
+              "B_q1"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s7"
+        },
+        "s8": {
+          "physical": [
+            [
+              "NEW",
+              "I_q2"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s8"
+        },
+        "s9": {
+          "physical": [
+            [
+              "NEW",
+              "I_q2"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s9"
+        },
+        "s10": {
+          "physical": [
+            [
+              "NEW",
+              "B_q2"
+            ],
+            [
+              "NEW",
+              "I"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s10"
+        },
+        "s11": {
+          "physical": [
+            [
+              "NEW",
+              "B_q2"
+            ],
+            [
+              "NEW",
+              "B"
+            ]
+          ],
+          "testers": {},
+          "goal_id": "load_s11"
+        }
+      },
+      "loadable": [
+        "s0",
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7",
+        "s8",
+        "s9",
+        "s10",
+        "s11"
+      ]
+    }
+  },
+  "metadata": {
+    "expected_decision": "LOSS",
+    "mechanism": "Quiescence/progress null and negative controls, not an L1 separation witness.",
+    "queue": "Finite queue state is carried by worker 1 and preserved by its idle-only transfer; no extra component transfer is introduced.",
+    "versions": "Old and new use the same scheduling abstraction; only version tags and the fixed transfer domain distinguish them.",
+    "update_point": "Every worker transfers only while idle. All-group requires all workers idle simultaneously.",
+    "endpoint_scope": "Every reachable old endpoint state is an initial snapshot; every reachable new endpoint state is loadable.",
+    "arrival_semantics": "A full queue accepts/drops an offered arrival without changing state; this uncontrollable self-loop permits infinite update obstruction without fairness.",
+    "source_url": "https://www.cs.umd.edu/~mwh/papers/kitsune-journal.pdf",
+    "source_doi": "10.1145/2629460",
+    "source_scope": "Kitsune motivates per-thread update points and quiescence. Queue, dispatch, and arrival regimes are this explicit finite abstraction, not a reproduction of Kitsune."
+  }
+}

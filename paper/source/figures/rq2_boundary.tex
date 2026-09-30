@@ -1,0 +1,25 @@
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm,font=\fontsize{8}{9}\selectfont,
+  rqnode/.style={draw,rounded corners=1pt,line width=.35pt,inner xsep=2pt,
+    inner ysep=2pt,minimum width=21mm,align=center},
+  rqedge/.style={-{Latex[length=1.3mm,width=.9mm]},line width=.4pt},
+  rqlabel/.style={inner sep=1pt,fill=white}]
+\node[anchor=west,align=left,inner sep=0pt] at (0,6) {Separation\\W / L};
+\node[anchor=west,align=left,inner sep=0pt] at (0,-7) {Neutral\\W / W};
+\node[rqnode] (ow) at (31,6) {\texttt{OLD\_WAIT}};
+\node[rqnode] (orr) at (75,6) {\texttt{OLD\_READY}};
+\node[rqnode,fill=black!6] (an) at (117,6) {\texttt{ALIGN\_NEW}};
+\draw[rqedge] (ow.east) -- node[rqlabel,above] {\texttt{align}} (orr.west);
+\draw[rqedge] (orr.east) -- node[rqlabel,above] {$\rho$} (an.west);
+\node[rqnode] (ao) at (31,-7) {\texttt{ALIGN\_OLD}};
+\node[rqnode,fill=black!6] (nw) at (75,-7) {\texttt{NEW\_WAIT}};
+\node[rqnode,fill=black!6] (nr) at (117,-7) {\texttt{NEW\_READY}};
+\draw[rqedge] (ao.east) -- node[rqlabel,above] {$\rho$} (nw.west);
+\draw[rqedge] (nw.east) -- node[rqlabel,above] {\texttt{align}} (nr.west);
+\node[anchor=west,align=left,inner sep=0pt] at (0,-18) {Separation witness: $stop\;\to\;align\;\to\;idle\;\to\;\rho\;\to\;start$};
+\end{tikzpicture}
+\caption{Measured requirement-boundary inputs. Row outcomes are free/block (W: WIN, L: LOSS). All events are controllable; shaded states are new. Each node has an $idle$ loop; neutral also has $bad$ loops. $\rho$ is the sole transfer. Old/new monitors forbid $align$ in separation and $bad$ in neutral. An interval monitor permits $start$ only after $align$ since entry. A requirement block forbids intervening events/transfers between $stop$ and $start$. Separation is WIN with free boundaries and LOSS with a block; neutral is WIN in both.}
+\Description{Separation has an old alignment action before transfer; neutral moves alignment into the new component. Interval constraints require alignment before activating the new monitor.}
+\label{fig:rq2-boundary}
+\end{figure}

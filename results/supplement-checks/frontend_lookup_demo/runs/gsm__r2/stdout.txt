@@ -1,0 +1,132 @@
+INFO: Registered Map Environment: MAPPING_ENV
+Compiled: OLD_ENV
+Composition:OldEnvironment = OldEnvironment.OLD_ENV
+State Space: 8 = 2 ** 3
+Composing...
+-- States: 8 Transitions: 9 Memory used: 9289K
+Composed in 5ms
+Formula !P_DECODE = (true U decode[3])
+GBA 2 states 3 transitions
+Buchi automata:
+P_DECODE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |decode[3] -> S1).
+Composition:P_DECODE = decode[3] || SYNC || P_DECODE
+State Space: 2 * 2 * 2 = 2 ** 3
+Composing...
+-- States: 5 Transitions: 8 Memory used: 9429K
+Composed in 1ms
+After Tau elimination = 3 state
+Tau reduction ON
+P_DECODE minimising..
+Minimised States: 2 in 0ms
+make DFA(P_DECODE)
+DFA(P_DECODE) has 1 states.
+Tau reduction ON
+P_DECODE minimising..
+Minimised States: 1 in 0ms
+Composition:OldController = OldEnvironment || P_DECODE
+State Space: 8 * 1 = 2 ** 3
+Composing...
+-- States: 8 Transitions: 9 Memory used: 9442K
+Composed in 2ms
+Solving the LTS control problem.
+Environment states: 9
+Game states: 9
+Game transitions: 27
+Analysis time: 34ms.
+Controller [8] generated successfully.
+Composition:OldController = OldController || P_DECODE
+State Space: 8 * 1 = 2 ** 3
+Composing...
+-- States: 8 Transitions: 8 Memory used: 10726K
+Composed in 3ms
+ - Synthesizing Mapping Environment from lists (size=1)...
+INFO: Auto-compiling dependency: NEW_ENV
+Generating Mapping Environment: MAP_OLD_ENV_NEW_ENV
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_NEW_DECODE = (true U decode[2])
+GBA 2 states 3 transitions
+Buchi automata:
+P_NEW_DECODE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |decode[2] -> S1).
+Composition:P_NEW_DECODE = decode[2] || SYNC || P_NEW_DECODE
+State Space: 2 * 2 * 2 = 2 ** 3
+Composing...
+-- States: 5 Transitions: 8 Memory used: 10739K
+Composed in 3ms
+After Tau elimination = 3 state
+Tau reduction ON
+P_NEW_DECODE minimising..
+Minimised States: 2 in 0ms
+make DFA(P_NEW_DECODE)
+DFA(P_NEW_DECODE) has 1 states.
+Tau reduction ON
+P_NEW_DECODE minimising..
+Minimised States: 1 in 0ms
+Composition:NewEnvironment = NewEnvironment.NEW_ENV
+State Space: 9 = 2 ** 4
+Composing...
+-- States: 9 Transitions: 10 Memory used: 10731K
+Composed in 3ms
+Composition:NewController = NewEnvironment || P_NEW_DECODE
+State Space: 9 * 1 = 2 ** 4
+Composing...
+-- States: 9 Transitions: 10 Memory used: 11136K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 10
+Game states: 10
+Game transitions: 30
+Analysis time: 5ms.
+Controller [9] generated successfully.
+Composition:NewController = NewController || P_NEW_DECODE
+State Space: 9 * 1 = 2 ** 4
+Composing...
+-- States: 9 Transitions: 9 Memory used: 11571K
+Composed in 3ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 9
+Formula !R2_StopOldSpec_P_DECODE = (true U (Pending_StopOldSpec_P_DECODE & !Pending_Reconfigure_ENV))
+GBA 2 states 3 transitions
+Buchi automata:
+R2_StopOldSpec_P_DECODE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StopOldSpec_P_DECODE&!Pending_Reconfigure_ENV -> S1).
+Composition:R2_StopOldSpec_P_DECODE = Pending_StopOldSpec_P_DECODE || Pending_Reconfigure_ENV || SYNC || R2_StopOldSpec_P_DECODE
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 11559K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+R2_StopOldSpec_P_DECODE minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StopOldSpec_P_DECODE)
+DFA(R2_StopOldSpec_P_DECODE) has 2 states.
+Tau reduction ON
+R2_StopOldSpec_P_DECODE minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StartNewSpec_P_NEW_DECODE = (true U (Pending_StartNewSpec_P_NEW_DECODE & !Pending_Reconfigure_ENV))
+GBA 2 states 3 transitions
+Buchi automata:
+R2_StartNewSpec_P_NEW_DECODE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StartNewSpec_P_NEW_DECODE&!Pending_Reconfigure_ENV -> S1).
+Composition:R2_StartNewSpec_P_NEW_DECODE = Pending_StartNewSpec_P_NEW_DECODE || Pending_Reconfigure_ENV || SYNC || R2_StartNewSpec_P_NEW_DECODE
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 11565K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+R2_StartNewSpec_P_NEW_DECODE minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StartNewSpec_P_NEW_DECODE)
+DFA(R2_StartNewSpec_P_NEW_DECODE) has 2 states.
+Tau reduction ON
+R2_StartNewSpec_P_NEW_DECODE minimising...
+Minimised States: 2 in 0ms
+ - Extracting New Safety Fluents and Building Look-up Tables...
+FRONTEND_LOOKUP_EXPORT_COMPLETE requirements=1 fg_solver=false physical_closure=false activation_spec=false

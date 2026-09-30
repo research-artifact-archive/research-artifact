@@ -1,0 +1,15 @@
+\begin{tabular}{lrrrrl}
+\toprule
+Variant & States & Queries & Rank & $|L|$ & Decision \\
+\midrule
+fine\_none\_lazy & 30 & 74 & 7 &  & WIN \\
+fine\_transfers\_lazy & 22 & 48 &  & 22 & LOSS \\
+fine\_boundaries\_lazy & 30 & 74 & 7 &  & WIN \\
+fine\_both\_lazy & 22 & 48 &  & 22 & LOSS \\
+fine\_none\_df & 107 & 436 & 6 &  & WIN \\
+generated\_transfers\_lazy & 22 & 48 &  & 22 & LOSS \\
+generated\_boundaries\_lazy & 30 & 74 & 7 &  & WIN \\
+generated\_both\_lazy & 22 & 48 &  & 22 & LOSS \\
+\bottomrule
+\end{tabular}
+{\par\smallskip\footnotesize Literal Rolling(2,1) with one old/new audit pair. One product interval requirement enforces availability and continuous audit activation. Boundary merging renames the sole start and stop; it is expected to preserve the outcome. One trial per cell, 32\,GiB heap and a whole-JVM 1,200\,s cap. Rank is the returned completion bound; $|L|$ is the discovered losing-certificate size.}

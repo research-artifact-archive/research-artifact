@@ -1,0 +1,316 @@
+INFO: Registered Map Environment: MAP_MAINTENANCE
+INFO: Registered Map Environment: MAP_ENV
+Compiled: MAINTENANCE_OLD
+Compiled: ENV_OLD
+Composition:OldEnvironment = OldEnvironment.MAINTENANCE_OLD || OldEnvironment.ENV_OLD
+State Space: 2 * 2 = 2 ** 2
+Composing...
+-- States: 4 Transitions: 12 Memory used: 9353K
+Composed in 6ms
+Formula !P_PROCEDURE_WHILE_STOPPED = (true U (procedure & !PumpOff))
+GBA 2 states 3 transitions
+Buchi automata:
+P_PROCEDURE_WHILE_STOPPED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |procedure&!PumpOff -> S1).
+Composition:P_PROCEDURE_WHILE_STOPPED = PumpOff || procedure || SYNC || P_PROCEDURE_WHILE_STOPPED
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 9499K
+Composed in 1ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_PROCEDURE_WHILE_STOPPED minimising...
+Minimised States: 3 in 0ms
+make DFA(P_PROCEDURE_WHILE_STOPPED)
+DFA(P_PROCEDURE_WHILE_STOPPED) has 2 states.
+Tau reduction ON
+P_PROCEDURE_WHILE_STOPPED minimising...
+Minimised States: 2 in 0ms
+Formula !P_MAINTEINANCE_GUARANTEED = (true U (endProcedure & (PumpOff | !MainteinanceFinished)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_MAINTEINANCE_GUARANTEED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |endProcedure&!MainteinanceFinished -> S1 |endProcedure&PumpOff -> S1).
+Composition:P_MAINTEINANCE_GUARANTEED = MainteinanceFinished || PumpOff || endProcedure || SYNC || P_MAINTEINANCE_GUARANTEED
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 115 Memory used: 9541K
+Composed in 2ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_MAINTEINANCE_GUARANTEED minimising....
+Minimised States: 5 in 1ms
+make DFA(P_MAINTEINANCE_GUARANTEED)
+DFA(P_MAINTEINANCE_GUARANTEED) has 4 states.
+Tau reduction ON
+P_MAINTEINANCE_GUARANTEED minimising....
+Minimised States: 4 in 0ms
+Formula !P_PROCEDURE_IF_REQUEST = (true U (procedure & !RequestPending))
+GBA 2 states 3 transitions
+Buchi automata:
+P_PROCEDURE_IF_REQUEST = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |procedure&!RequestPending -> S1).
+Composition:P_PROCEDURE_IF_REQUEST = RequestPending || procedure || SYNC || P_PROCEDURE_IF_REQUEST
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 9557K
+Composed in 2ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 3 in 0ms
+make DFA(P_PROCEDURE_IF_REQUEST)
+DFA(P_PROCEDURE_IF_REQUEST) has 2 states.
+Tau reduction ON
+P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 2 in 0ms
+Formula !P_PUMP_OFF_ONLY_OK_NOT_PENDING = (true U (stopPump & PendingOk))
+GBA 2 states 3 transitions
+Buchi automata:
+P_PUMP_OFF_ONLY_OK_NOT_PENDING = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |stopPump&PendingOk -> S1).
+Composition:P_PUMP_OFF_ONLY_OK_NOT_PENDING = PendingOk || stopPump || SYNC || P_PUMP_OFF_ONLY_OK_NOT_PENDING
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 9554K
+Composed in 2ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_PUMP_OFF_ONLY_OK_NOT_PENDING minimising...
+Minimised States: 3 in 1ms
+make DFA(P_PUMP_OFF_ONLY_OK_NOT_PENDING)
+DFA(P_PUMP_OFF_ONLY_OK_NOT_PENDING) has 2 states.
+Tau reduction ON
+P_PUMP_OFF_ONLY_OK_NOT_PENDING minimising...
+Minimised States: 2 in 0ms
+Composition:OldController = OldEnvironment || P_PROCEDURE_WHILE_STOPPED || P_PROCEDURE_IF_REQUEST || P_PUMP_OFF_ONLY_OK_NOT_PENDING || P_MAINTEINANCE_GUARANTEED
+State Space: 4 * 2 * 2 * 2 * 4 = 2 ** 7
+Composing...
+-- States: 8 Transitions: 24 Memory used: 9556K
+Composed in 2ms
+Solving the LTS control problem.
+Environment states: 9
+Game states: 9
+Game transitions: 27
+Analysis time: 34ms.
+Controller [8] generated successfully.
+Composition:OldController = OldController || P_PROCEDURE_WHILE_STOPPED || P_PROCEDURE_IF_REQUEST || P_PUMP_OFF_ONLY_OK_NOT_PENDING || P_MAINTEINANCE_GUARANTEED
+State Space: 8 * 2 * 2 * 2 * 4 = 2 ** 8
+Composing...
+-- States: 8 Transitions: 14 Memory used: 10837K
+Composed in 4ms
+ - Synthesizing Mapping Environment from lists (size=2)...
+INFO: Auto-compiling dependency: MAINTENANCE_NEW
+Generating Mapping Environment: MAP_MAINTENANCE_OLD_MAINTENANCE_NEW
+INFO: Auto-compiling dependency: ENV_NEW
+Generating Mapping Environment: MAP_ENV_OLD_ENV_NEW
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_NEVER_STOP = (true U stopPump)
+GBA 2 states 3 transitions
+Buchi automata:
+P_NEVER_STOP = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |stopPump -> S1).
+Composition:P_NEVER_STOP = stopPump || SYNC || P_NEVER_STOP
+State Space: 2 * 2 * 2 = 2 ** 3
+Composing...
+-- States: 5 Transitions: 8 Memory used: 10815K
+Composed in 3ms
+After Tau elimination = 3 state
+Tau reduction ON
+P_NEVER_STOP minimising..
+Minimised States: 2 in 0ms
+make DFA(P_NEVER_STOP)
+DFA(P_NEVER_STOP) has 1 states.
+Tau reduction ON
+P_NEVER_STOP minimising..
+Minimised States: 1 in 0ms
+Formula !P_MAINTEINANCE_GUARANTEED_NEW = (true U (endProcedure & !MainteinanceFinished))
+GBA 2 states 3 transitions
+Buchi automata:
+P_MAINTEINANCE_GUARANTEED_NEW = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |endProcedure&!MainteinanceFinished -> S1).
+Composition:P_MAINTEINANCE_GUARANTEED_NEW = MainteinanceFinished || endProcedure || SYNC || P_MAINTEINANCE_GUARANTEED_NEW
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 10805K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_MAINTEINANCE_GUARANTEED_NEW minimising...
+Minimised States: 3 in 0ms
+make DFA(P_MAINTEINANCE_GUARANTEED_NEW)
+DFA(P_MAINTEINANCE_GUARANTEED_NEW) has 2 states.
+Tau reduction ON
+P_MAINTEINANCE_GUARANTEED_NEW minimising...
+Minimised States: 2 in 0ms
+Composition:NewEnvironment = NewEnvironment.MAINTENANCE_NEW || NewEnvironment.ENV_NEW
+State Space: 2 * 2 = 2 ** 2
+Composing...
+-- States: 4 Transitions: 12 Memory used: 10810K
+Composed in 3ms
+Composition:NewController = NewEnvironment || P_MAINTEINANCE_GUARANTEED_NEW || P_NEVER_STOP || P_PROCEDURE_IF_REQUEST
+State Space: 4 * 2 * 1 * 2 = 2 ** 4
+Composing...
+-- States: 4 Transitions: 12 Memory used: 11218K
+Composed in 3ms
+Solving the LTS control problem.
+Environment states: 5
+Game states: 5
+Game transitions: 15
+Analysis time: 4ms.
+Controller [4] generated successfully.
+Composition:NewController = NewController || P_MAINTEINANCE_GUARANTEED_NEW || P_NEVER_STOP || P_PROCEDURE_IF_REQUEST
+State Space: 4 * 2 * 1 * 2 = 2 ** 4
+Composing...
+-- States: 4 Transitions: 5 Memory used: 11658K
+Composed in 3ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 4
+Formula !R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED = (true U (Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED & (!Pending_Reconfigure_ENV | !Pending_Reconfigure_MAINTENANCE)))
+GBA 2 states 4 transitions
+Buchi automata:
+R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED&!Pending_Reconfigure_ENV -> S1 |Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED&!Pending_Reconfigure_MAINTENANCE -> S1).
+Composition:R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED = Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED || Pending_Reconfigure_MAINTENANCE || Pending_Reconfigure_ENV || SYNC || R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11656K
+Composed in 3ms
+After Tau elimination = 16 state
+Tau reduction ON
+R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED)
+DFA(R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED) has 2 states.
+Tau reduction ON
+R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StopOldSpec_P_PROCEDURE_IF_REQUEST = (true U (Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST & (!Pending_Reconfigure_ENV | !Pending_Reconfigure_MAINTENANCE)))
+GBA 2 states 4 transitions
+Buchi automata:
+R2_StopOldSpec_P_PROCEDURE_IF_REQUEST = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST&!Pending_Reconfigure_ENV -> S1 |Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST&!Pending_Reconfigure_MAINTENANCE -> S1).
+Composition:R2_StopOldSpec_P_PROCEDURE_IF_REQUEST = Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST || Pending_Reconfigure_MAINTENANCE || Pending_Reconfigure_ENV || SYNC || R2_StopOldSpec_P_PROCEDURE_IF_REQUEST
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11669K
+Composed in 4ms
+After Tau elimination = 16 state
+Tau reduction ON
+R2_StopOldSpec_P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StopOldSpec_P_PROCEDURE_IF_REQUEST)
+DFA(R2_StopOldSpec_P_PROCEDURE_IF_REQUEST) has 2 states.
+Tau reduction ON
+R2_StopOldSpec_P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED = (true U (Pending_StopOldSpec_P_PROCEDURE_WHILE_STOPPED & !Pending_Reconfigure_ENV))
+GBA 2 states 3 transitions
+Buchi automata:
+R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StopOldSpec_P_PROCEDURE_WHILE_STOPPED&!Pending_Reconfigure_ENV -> S1).
+Composition:R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED = Pending_StopOldSpec_P_PROCEDURE_WHILE_STOPPED || Pending_Reconfigure_ENV || SYNC || R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 11674K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED minimising...
+Minimised States: 3 in 1ms
+make DFA(R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED)
+DFA(R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED) has 2 states.
+Tau reduction ON
+R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING = (true U (Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING & (!Pending_Reconfigure_ENV | !Pending_Reconfigure_MAINTENANCE)))
+GBA 2 states 4 transitions
+Buchi automata:
+R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING&!Pending_Reconfigure_ENV -> S1 |Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING&!Pending_Reconfigure_MAINTENANCE -> S1).
+Composition:R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING = Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING || Pending_Reconfigure_MAINTENANCE || Pending_Reconfigure_ENV || SYNC || R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11691K
+Composed in 3ms
+After Tau elimination = 16 state
+Tau reduction ON
+R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING minimising...
+Minimised States: 3 in 1ms
+make DFA(R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING)
+DFA(R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING) has 2 states.
+Tau reduction ON
+R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StartNewSpec_P_NEVER_STOP = (true U (Pending_StartNewSpec_P_NEVER_STOP & !Pending_Reconfigure_ENV))
+GBA 2 states 3 transitions
+Buchi automata:
+R2_StartNewSpec_P_NEVER_STOP = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StartNewSpec_P_NEVER_STOP&!Pending_Reconfigure_ENV -> S1).
+Composition:R2_StartNewSpec_P_NEVER_STOP = Pending_StartNewSpec_P_NEVER_STOP || Pending_Reconfigure_ENV || SYNC || R2_StartNewSpec_P_NEVER_STOP
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 11694K
+Composed in 3ms
+After Tau elimination = 8 state
+Tau reduction ON
+R2_StartNewSpec_P_NEVER_STOP minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StartNewSpec_P_NEVER_STOP)
+DFA(R2_StartNewSpec_P_NEVER_STOP) has 2 states.
+Tau reduction ON
+R2_StartNewSpec_P_NEVER_STOP minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW = (true U (Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW & (!Pending_Reconfigure_ENV | !Pending_Reconfigure_MAINTENANCE)))
+GBA 2 states 4 transitions
+Buchi automata:
+R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW&!Pending_Reconfigure_ENV -> S1 |Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW&!Pending_Reconfigure_MAINTENANCE -> S1).
+Composition:R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW = Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW || Pending_Reconfigure_MAINTENANCE || Pending_Reconfigure_ENV || SYNC || R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11712K
+Composed in 3ms
+After Tau elimination = 16 state
+Tau reduction ON
+R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW)
+DFA(R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW) has 2 states.
+Tau reduction ON
+R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW minimising...
+Minimised States: 2 in 0ms
+Formula !R2_StartNewSpec_P_PROCEDURE_IF_REQUEST = (true U (Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST & (!Pending_Reconfigure_ENV | !Pending_Reconfigure_MAINTENANCE)))
+GBA 2 states 4 transitions
+Buchi automata:
+R2_StartNewSpec_P_PROCEDURE_IF_REQUEST = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST&!Pending_Reconfigure_ENV -> S1 |Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST&!Pending_Reconfigure_MAINTENANCE -> S1).
+Composition:R2_StartNewSpec_P_PROCEDURE_IF_REQUEST = Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST || Pending_Reconfigure_MAINTENANCE || Pending_Reconfigure_ENV || SYNC || R2_StartNewSpec_P_PROCEDURE_IF_REQUEST
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 11725K
+Composed in 3ms
+After Tau elimination = 16 state
+Tau reduction ON
+R2_StartNewSpec_P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 3 in 0ms
+make DFA(R2_StartNewSpec_P_PROCEDURE_IF_REQUEST)
+DFA(R2_StartNewSpec_P_PROCEDURE_IF_REQUEST) has 2 states.
+Tau reduction ON
+R2_StartNewSpec_P_PROCEDURE_IF_REQUEST minimising...
+Minimised States: 2 in 0ms
+ - Extracting New Safety Fluents and Building Look-up Tables...
+FRONTEND_LOOKUP_EXPORT_COMPLETE requirements=3 fg_solver=false physical_closure=false activation_spec=false

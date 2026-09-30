@@ -1,0 +1,195 @@
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
+index 1891ff3..811839b 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/DirectFullStrongSolver.java
+@@ -32,12 +32,20 @@ public final class DirectFullStrongSolver<Q, A, G> {
+ 
+     private final ImplicitStrongGame<Q, A, G> game;
+     private Statistics statistics;
++    private final boolean pruneControllableAtUncontrollable;
+ 
+     public DirectFullStrongSolver(ImplicitStrongGame<Q, A, G> game) {
++        this(game, false);
++    }
++
++    /** Full construction with optional UC-priority pruning; Post is unchanged. */
++    public DirectFullStrongSolver(ImplicitStrongGame<Q, A, G> game,
++            boolean pruneControllableAtUncontrollable) {
+         if (game == null) {
+             throw new IllegalArgumentException("game must not be null");
+         }
+         this.game = game;
++        this.pruneControllableAtUncontrollable = pruneControllableAtUncontrollable;
+     }
+ 
+     public OtfDucsResult<Q, A, G> synthesize() {
+@@ -152,8 +160,24 @@ public final class DirectFullStrongSolver<Q, A, G> {
+ 
+             Map<A, Set<Q>> byAction =
+                     new LinkedHashMap<A, Set<Q>>();
+-            for (A action : sortedActions(
+-                    state, game.candidateActions(state))) {
++            List<A> actions = sortedActions(state, game.candidateActions(state));
++            if (pruneControllableAtUncontrollable) {
++                // Stable partition: determine all enabled UC buckets before
++                // considering any controllable candidate. Empty UC candidates
++                // do not justify pruning. No fixed point is computed here.
++                List<A> ordered = new ArrayList<A>();
++                for (A action : actions) {
++                    if (!game.isControllable(action)) ordered.add(action);
++                }
++                for (A action : actions) {
++                    if (game.isControllable(action)) ordered.add(action);
++                }
++                actions = ordered;
++            }
++            boolean uncontrollableEnabled = false;
++            for (A action : actions) {
++                if (pruneControllableAtUncontrollable && uncontrollableEnabled
++                        && game.isControllable(action)) continue;
+                 explicit.queriedStateActionPairs++;
+                 Set<Q> rawOutcomes = game.post(state, action);
+                 if (rawOutcomes == null) {
+@@ -164,6 +188,7 @@ public final class DirectFullStrongSolver<Q, A, G> {
+                 if (rawOutcomes.isEmpty()) {
+                     continue;
+                 }
++                if (!game.isControllable(action)) uncontrollableEnabled = true;
+                 LinkedHashSet<Q> outcomes =
+                         new LinkedHashSet<Q>(sortedStates(rawOutcomes));
+                 byAction.put(action, outcomes);
+diff --git a/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java b/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
+index 57ec921..f6c06a7 100644
+--- a/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
++++ b/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java
+@@ -169,7 +169,7 @@ public final class MtsaRevisedOtfDucsAdapter {
+         RestrictedFineGrainedGame<LocalState, Long> game =
+                 new RestrictedFineGrainedGame<LocalState, Long>(
+                         baseGame, policyRestriction);
+-        if ("direct_full".equals(solverMode)) {
++        if (isDirectFull(solverMode)) {
+             DirectFullStrongSolver<
+                     CanonicalUpdateConfiguration<LocalState, Long>,
+                     String,
+@@ -177,7 +177,8 @@ public final class MtsaRevisedOtfDucsAdapter {
+                     new DirectFullStrongSolver<
+                             CanonicalUpdateConfiguration<LocalState, Long>,
+                             String,
+-                            GoalSignature<LocalState, Long>>(game);
++                            GoalSignature<LocalState, Long>>(game,
++                                    "direct_full_ucpruned".equals(solverMode));
+             result = directFull.synthesize();
+             new OtfDucsCertificateChecker<
+                     CanonicalUpdateConfiguration<LocalState, Long>,
+@@ -494,10 +495,12 @@ public final class MtsaRevisedOtfDucsAdapter {
+         String schedule;
+         String methodId;
+         String implementationVariant;
+-        if ("direct_full".equals(solverMode)) {
++        if (isDirectFull(solverMode)) {
+             schedule = "exhaustive_reachable_game_then_explicit_fixed_point";
+-            methodId = "Direct-Full";
+-            implementationVariant = "revised_direct_full_v1";
++            methodId = "direct_full_ucpruned".equals(solverMode)
++                    ? "Direct-Full-UCPruned" : "Direct-Full";
++            implementationVariant = "direct_full_ucpruned".equals(solverMode)
++                    ? "revised_direct_full_ucpruned_v1" : "revised_direct_full_v1";
+         } else if ("generic_lazy".equals(solverMode)) {
+             schedule = "opaque_hash_order_batched_materialization_and_fixed_point";
+             methodId = "Generic-Lazy";
+@@ -875,7 +878,7 @@ public final class MtsaRevisedOtfDucsAdapter {
+         metric("revised_early_success", "Revised Workload / Search",
+                 "Early success", Boolean.toString(statistics.earlySuccess()),
+                 "boolean");
+-        String searchMode = "direct_full".equals(solverMode)
++        String searchMode = isDirectFull(solverMode)
+                 ? "exhaustive_reachable_game_then_explicit_fixed_point"
+                 : ("generic_lazy".equals(solverMode)
+                         ? "opaque_hash_order_batched_materialization_and_fixed_point"
+@@ -1008,15 +1011,19 @@ public final class MtsaRevisedOtfDucsAdapter {
+                 millisText(statistics.certificateNanoseconds()), "ms");
+     }
+ 
++    private static boolean isDirectFull(String mode) {
++        return "direct_full".equals(mode) || "direct_full_ucpruned".equals(mode);
++    }
++
+     private static String configuredSolverMode() {
+         String value = System.getProperty(
+                 "mtsa.revised.otf.solver", "otf").trim();
+-        if ("otf".equals(value) || "direct_full".equals(value)
++        if ("otf".equals(value) || isDirectFull(value)
+                 || "generic_lazy".equals(value)) {
+             return value;
+         }
+         throw new IllegalArgumentException(
+-                "mtsa.revised.otf.solver must be otf, generic_lazy, or direct_full: "
++                "mtsa.revised.otf.solver must be otf, generic_lazy, direct_full, or direct_full_ucpruned: "
+                         + value);
+     }
+ 
+diff --git a/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java b/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
+index e121e46..882d2d5 100644
+--- a/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
++++ b/mtsa/src/test/java/ltsa/updatingControllers/otf/DirectFullStrongSolverTest.java
+@@ -20,6 +20,47 @@ import static org.junit.Assert.assertTrue;
+ 
+ public class DirectFullStrongSolverTest {
+ 
++    @Test
++    public void ucPruningSkipsControllableDetourWithoutEarlyTermination() {
++        GraphGame game = new GraphGame("root").goal("goal")
++                .controllable("a-detour", "finish", "loop")
++                .edge("root", "a-detour", "unused")
++                .edge("root", "u", "middle")
++                .edge("middle", "finish", "goal")
++                .edge("unused", "loop", "unused");
++        DirectFullStrongSolver<String, String, String> full =
++                new DirectFullStrongSolver<String, String, String>(game);
++        DirectFullStrongSolver<String, String, String> pruned =
++                new DirectFullStrongSolver<String, String, String>(game, true);
++        OtfDucsResult<String, String, String> a = full.synthesize();
++        OtfDucsResult<String, String, String> b = pruned.synthesize();
++        assertEquals(a.isWinning(), b.isWinning());
++        assertEquals(new OtfDucsSynthesizer<String, String, String>(game, 0, 0)
++                .synthesize().isWinning(), b.isWinning());
++        assertEquals(4L, full.statistics().enumeratedStates());
++        assertEquals(3L, pruned.statistics().enumeratedStates());
++        assertEquals(2L, pruned.statistics().enabledActionBuckets());
++        assertFalse(b.statistics().earlySuccess());
++        assertValid(game, b);
++    }
++
++    @Test
++    public void noUncontrollablesPreservesFullConstruction() {
++        GraphGame game = new GraphGame("root").goal("goal")
++                .controllable("finish", "detour", "loop")
++                .edge("root", "finish", "goal")
++                .edge("root", "detour", "trap")
++                .edge("trap", "loop", "trap");
++        DirectFullStrongSolver<String, String, String> full =
++                new DirectFullStrongSolver<String, String, String>(game);
++        DirectFullStrongSolver<String, String, String> pruned =
++                new DirectFullStrongSolver<String, String, String>(game, true);
++        assertEquals(full.synthesize().isWinning(), pruned.synthesize().isWinning());
++        assertEquals(full.statistics().enumeratedStates(), pruned.statistics().enumeratedStates());
++        assertEquals(full.statistics().queriedStateActionPairs(), pruned.statistics().queriedStateActionPairs());
++        assertEquals(3L, pruned.statistics().enumeratedStates());
++    }
++
+     @Test
+     public void exhaustivelyBuildsRepresentationBeforeSolving() {
+         GraphGame game = new GraphGame("root")
+@@ -142,6 +183,12 @@ public class DirectFullStrongSolverTest {
+             assertValid(game, direct);
+             assertValid(game, otf);
+             assertValid(game, genericLazy);
++            OtfDucsResult<String, String, String> pruned =
++                    new DirectFullStrongSolver<String, String, String>(game, true).synthesize();
++            assertEquals("UC-pruned mismatch in random graph " + sample,
++                    direct.isWinning(), pruned.isWinning());
++            assertTrue(pruned.statistics().discoveredStates() <= direct.statistics().discoveredStates());
++            assertValid(game, pruned);
+         }
+     }
+ 

@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-09-29T17:07:42.698967+09:00",
+  "command": [
+    "/opt/homebrew/Cellar/openjdk@17/17.0.19/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "-Xmx32g",
+    "-cp",
+    "${E6_ROOT}/common/build/classes:${PROJECT_ROOT}/FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/jars/e1.jar",
+    "WitnessDriver",
+    "--input",
+    "${E6_ROOT}/rolling_audit/v1/inputs/generated_transfers.json",
+    "--merge",
+    "none",
+    "--solver",
+    "lazy",
+    "--output",
+    "${E6_ROOT}/rolling_audit/v1/raw/series/generated_transfers_lazy/result.json"
+  ],
+  "job": {
+    "id": "generated_transfers_lazy",
+    "input": "inputs/generated_transfers.json",
+    "merge": "none",
+    "solver": "lazy",
+    "expected_decision": "LOSS",
+    "parameters": {
+      "n": 2,
+      "m": 1,
+      "audit_pairs": 1
+    }
+  },
+  "input_sha256": "b385ae0f7f214c438e31bb31658e2cd5ea26e323dc553838e514703bad222307",
+  "jar_sha256": "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "frozen_manifest_sha256": "4ae2b7ece3a96a31429a7dd94f67ec5305104b6968b2a48bea3484c4171457ec",
+  "timeout_seconds": 1200,
+  "heap": "32g"
+}

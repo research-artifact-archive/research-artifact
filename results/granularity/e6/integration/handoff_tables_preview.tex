@@ -1,0 +1,39 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=11in,paperheight=8.5in,margin=0.6in]{geometry}
+\usepackage{booktabs,array}
+\usepackage[T1]{fontenc}
+\pagestyle{empty}
+\begin{document}
+\section*{E6 comparison and operational controls (interim)}
+Completed entries are observations from the fixed E1 campaign; TO retains a 1,200-second whole-JVM timeout. Each row is a selected illustrative parameter tuple; the complete rows and all outcomes are preserved in the family CSVs. Policy uses boundary merging; other rows use transfer merging. These are constructed examples inspired by operational procedures, not production reproductions.
+
+\bigskip
+\noindent
+% Measured cells only; unfinished statuses are displayed, never replaced by predictions.
+\begin{tabular}{llrrrrl}
+\toprule
+Family & Parameters & Lazy & Full & Merged & Rank & Fine / merged \\
+\midrule
+Rolling & $n=2,m=1$ & 5 & 8 & 2 & 4 & WIN / LOSS \\
+Rolling & $n=6,m=1$ & 13 & 256 & 2 & 12 & WIN / LOSS \\
+Canary & $n=2,m=1$ & 21 & 21 & 17 & 6 & WIN / LOSS \\
+Canary & $n=6,m=1$ & 293 & 3645 & 4097 & 18 & WIN / LOSS \\
+Policy & 2 rule pairs & 24 & 129 & 16 & 6 & WIN / LOSS \\
+DB-Rolling & $n=3,m=2$ & 12 & 96 & 6 & 8 & WIN / LOSS \\
+DB-Rolling & $n=3,m=3$ & 12 & 12 & 6 & -- & LOSS / LOSS \\
+Rolling+Audit & $n=2,m=1$ & 30 & 107 & 22 & 7 & WIN / LOSS \\
+Threads: backpressure & $n=6,B=2$ & 198 & 12097 & 193 & 14 & WIN / WIN \\
+Threads: saturated & $n=6,B=2$ & 192 & 192 & 192 & -- & LOSS / LOSS \\
+PC2-Rolling & 2 arms & 6639 & TO & TO & 37 & WIN / TO \\
+\bottomrule
+\end{tabular}
+% Lazy, Full, and Merged columns report discovered states. Rank is the returned fine Lazy bound.
+% Policy uses boundaries merge; other rows use transfers. TO is a whole-JVM 1200 s timeout.
+% PC2 has no measured merged decision or Full state count. Scale and assumption controls have separate tables.
+
+\bigskip
+The rank column is the returned Lazy certificate bound. Direct-Full returns rank~5 for Policy and rank~6 for Rolling+Audit. A losing-certificate size is not the maximal losing region. The no-slack DB and saturated Threads rows are negative controls. PC2 has a checked fine WIN certificate but no measured merged decision or Full state count. Mac timings are omitted from this compact table.
+
+\medskip
+The current complete main comparisons comprise 33 WIN/LOSS witnesses, 11 LOSS/LOSS controls, and 10 WIN/WIN controls, plus one incomplete PC2 comparison. The distinct Policy-transfer and Audit-boundary WIN/WIN controls are reported separately. The index counts one main comparison per family and parameter tuple, rather than counting generated-coarse duplicates or solver runs as independent examples.
+\end{document}

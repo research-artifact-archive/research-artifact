@@ -1,0 +1,1 @@
+Quick Look cropped the SVG thumbnail. The canonical SVG was unchanged; full-size rendering and visual review use ImageMagick with an explicit system font. This is a rendering failure, not a measured model result.

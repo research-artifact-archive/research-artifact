@@ -1,144 +1,60 @@
-# Reproduction commands and verification
+# Reproduction guide
 
-Run commands from the package root unless stated otherwise. Use fresh output directories.
+Start with `python3 reproduce/check.py --output work/check` from the public root, using Python 3.10+ and the packages in `reproduce/requirements.txt`. This is a saved-evidence check, not a benchmark rerun. The public source contains no JARs. The expected full result is PASS with no skipped checks. Logs are separated into core, supplement and extensions; the restored compatibility workspace is under the chosen output directory.
 
-## Inspect the saved results
+## Why a compatibility workspace exists
 
-Python 3.10+ is sufficient for the offline check:
+Original scripts and configurations refer to `Implementation/` and `FSE2027_SUBMISSION_20260914/experiments/`. Moving those references inside every saved script would unnecessarily alter research programs and manifests. `reproduce/materialize.py` therefore verifies the purpose-based public files and copies them back to their original relative locations in a fresh directory. It also verifies and unpacks all large raw archive parts and writes the compatibility manifest expected by the archived checkers. The public `reproduce/layout.json` gives the exact mapping. No symlink support is required.
+
+## Build and inherited headless example
+
+From the public root:
 
 ```sh
-python check_package.py
-python reproduce_validation.py rq1 --derive-only --output replication/rq1-oracle
-python reproduce_validation.py rq2 --derive-only --output replication/rq2-oracle
-python FSE2027_SUBMISSION_20260914/experiments/paper_witnesses/check_witnesses.py --output replication/paper-witnesses
+python3 tool/build.py --variant baseline --output work/baseline
+cd work/baseline
+python3 campaign/scripts/run_cell.py --model gsm --output replication/gsm-base
 ```
 
-The two derivations parse the original LTS inputs and apply the fixed Post/goal rules without using Java decisions as expected answers. They write fresh files under the requested output directory. The raw parser intentionally supports a restricted FSP subset; unsupported models are outside this oracle's scope. The separate paper-witness command uses only the Python standard library and transcribes the finite definitions in the paper; it checks nine cases, the fixed-head obstruction, and the Production Cell census and 13-state/11-edge policy. Choose fresh output directories to preserve prior results.
+The example uses 4 GiB, a 60-second whole-JVM cap, one repetition and the recorded Lazy properties. `--plan-only` previews the command; `--model metasocket` selects the other small example. Its observation is separate from the fixed Xeon table. Use `tool/run.py` from the public root with variant `e1` for the explicit finite JSON examples and their standalone HTML reports.
 
-## Source distribution and dependency acquisition
+## Full workspace, correctness and performance reruns
 
-The complete tool source tree is distributed directly; no source overlay is needed. All JARs are omitted from the prepared source tree and ignored by its `.gitignore`. The frozen shaded solver contains FFmpeg natives marked `nonfree and unredistributable` and is not publicly distributed, including as a Release asset. Its SHA-256 below identifies the measured binary. Reproduction uses the included sources and the clean-cache build procedure below. Publication and verification status are recorded below. The campaign binary is unchanged.
-
-| Frozen file | Bytes | SHA-256 |
-|---|---:|---|
-| `mtsa-1.0-SNAPSHOT.jar` | 698961879 | `fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07` |
-| `synoptic-1.0.jar` | 109442641 | `21d8611a1f07ae744b436f7e7228d2233896f79b3568a42c96f2886f2eb59f69` |
-
-For existing pre-specified local use, import an exact solver copy without modifying the source copy:
+From the public root:
 
 ```sh
-python fetch_assets.py --asset mtsa --source-file /path/to/mtsa-1.0-SNAPSHOT.jar
-python fetch_assets.py --asset mtsa --verify-only
-```
-
-For a source build, obtain the exact local dependencies directly from the official MTSA tree. Synoptic is available at the [official MTSA upstream file](https://git.exactas.uba.ar/lafhis/mtsa/-/raw/master/maven-root/mtsa/lib/synoptic/synoptic/1.0/synoptic-1.0.jar), under its upstream terms:
-
-```sh
-python fetch_assets.py --asset dependencies
-python fetch_assets.py --asset dependencies --verify-only
-```
-
-This first restores the hashed file-repository metadata from `dependency-metadata/`, then verifies local dependency objects against fixed sizes/SHA-256 values and installs them at their original paths. The published repository contains no `lib/` directory; the acquisition step creates the needed local build layout. URLs are pinned to official upstream commit `d10ba71f092dc9645a80d2752bd089691f158156`. The 109 MB WESSBAS/Synoptic-derived object goes to the POM file-repository path and `locallib/synoptic.jar`; the two different SceneBeans objects remain separate. A local `--source-file` is also accepted. The script rejects a different existing binary and incomplete or mismatching downloads. Obtaining a file from upstream does not establish a right to redistribute it; the package omits all third-party JARs. `fetch_assets.py` has no Release retrieval route. A slim CLI binary is not distributed: redistribution conditions for all nested dependencies have not been established.
-
-## Re-run correctness/capability checks
-
-Use a 64-bit JDK 17 and Python 3.10+. After acquiring dependencies, build the included sources in a separate package copy. The source build and focused tests are:
-
-```sh
+python3 reproduce/materialize.py --output work/full
+cd work/full
+python3 fetch_assets.py --asset dependencies
 mvn -B -f "Implementation/Source Code/maven-root/mtsa/pom.xml" package -DskipTests -Djacoco.skip=true
-mvn -B -f "Implementation/Source Code/maven-root/mtsa/pom.xml" test -Dtest=ltsa.updatingControllers.otf.ActivationSpecTest,ltsa.updatingControllers.otf.FineGrainedOtfDucsTest,ltsa.updatingControllers.otf.OtfDucsSynthesizerTest,ltsa.updatingControllers.otf.QuiescentUpdateBoundaryTest -Dfork.number=0 -Dthread.count=1 -Dparallel=none -DfailIfNoTests=true -Djacoco.skip=true
+python3 reproduce_validation.py rq1 --plan-only --output replication/rq1-plan
+python3 reproduce_validation.py rq2 --plan-only --output replication/rq2-plan
 ```
 
-The build requires JDK 17, Maven, Python 3.10+ for the acquisition script, and network access to Central and FreeHEP. Run the acquisition step before building to reconstruct the complete `mtsa/lib` file repository next to `pom.xml`. Generated `lib/` directories and JARs are ignored by Git. The distribution POM adds Central immediately before FreeHEP, without changing dependency coordinates or Java sources. Build in a separate package copy so its new `target/` does not replace the frozen campaign binary.
+Remove `--plan-only` and choose different fresh output directories to execute. `--derive-only` runs the Python oracle derivations without Java. A run directory must be below the materialized workspace because the archived harness uses workspace-relative paths. Inspect generated plans before reserving machine time. The JAR is locally rebuilt; retain its observed hash.
 
-A real clean-cache check ran on macOS arm64 with **OpenJDK 17.0.19 and Maven 3.9.16**. Starting from a new empty local Maven repository, `package` succeeded with exit 0 in **198.503 seconds** (about 3 min 19 s); 272 resolved dependency JARs were valid ZIP files. Tests were compiled but their execution was skipped. The initial original-POM attempt was stopped after **162.624 seconds** because FreeHEP was repeatedly queried before Central; this was an unfinished dependency-resolution attempt, not a compilation failure. Both attempts and their POMs are preserved in `validation/build/`; distribution copies redact personal filesystem prefixes only. The successful attempt used another new empty repository and only the repository-order change above. Elapsed times are observations of this host/network, not an expected upper bound. Source reconstruction succeeding does not resolve redistribution restrictions on the generated shaded JAR.
+The original large campaign's entry point is `campaign/run-windows.ps1`; its detailed protocol is `campaign/README.md`. The `campaign/` material is the fixed campaign and original ext1–5 planning package. **Its pre-run extension statuses are historical**, not current observations. Final ext1–7 results are under `FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/raw/ext*_*/`. Newer scripts are in that experiment's `scripts/`, configurations in `configs/`, and the original PowerShell commands include `run-ext.ps1`, `run-ext2.ps1`, `run-ext7.ps1` and `run-all.ps1`. Preserve the separate stages and failures.
 
-From a separate package copy, after acquiring the local dependencies, the checked command is:
+For a new performance run, copy the selected saved configuration to a fresh local configuration, set the classpath to the relevant rebuilt JAR and `results_root` to a new replication directory, and use the archived `Implementation/Experiment/FSE2027/scripts/run_experiment.py --config NEW.json --dry-run`. Review the resulting plan before dropping `--dry-run`. Hardware checks in the Xeon protocol are intentional. A smaller machine can run examples but cannot reproduce a 200 GiB heap experiment. Never point a new configuration at distributed raw directories.
 
-```sh
-# Use an unused absolute directory; it must initially be empty.
-mvn -B -f "Implementation/Source Code/maven-root/mtsa/pom.xml" \
-  -Dmaven.repo.local=/absolute/path/to/new-empty-maven-repository \
-  package -DskipTests -Djacoco.skip=true
-```
+## Experimental variants and finite families
 
-The `validation/build/` logs retain their actual execution timestamps. No new timing measurement was substituted for the initial attempt. The distributed Java sources are byte-identical to the measured tool's sources; the distribution-only POM repository ordering does not change dependency coordinates. The exact runtime binary remains identified by the SHA-256 above. The checked rebuild was not byte-identical to that JAR, but was built from the same Java sources. The package also includes all 841 original `src/test/resources` files, restored after this timed check; the recorded package check compiled tests but did not execute them.
+`reproduce/solver-variants/variants.json` records measured commits, JAR hashes and complete baseline-relative patches. The baseline is used for the main fixed comparison and ext1–7; E2 adds full construction with UC pruning; E1 includes E2 and contract merging; E5 includes E1/E2 and physical-initial transfer preprocessing. Apply exactly one patch in a fresh source tree. A rebuilt binary need not have the measured JAR's bytes.
 
-After building, run validation with a fresh output location and explicitly select the JDK if the default `java` differs:
+Materialized E1/E2 scripts live in `FSE2027_SUBMISSION_20260914/experiments/ablation_20260928/scripts/`; E4/E5/E6 live in `.../experiments/witness_20260929/`. The original run scripts record fixed experiment inputs, host-specific paths and measured-JAR expectations; those are provenance, not universally portable commands. Use the public `tool/run.py` for a single finite-model replication. It copies the adapter, substitutes only the actual local JAR digest in that copy, compiles it, and preserves all input/source hashes. It does not rewrite the archived driver or results.
 
-```sh
-python reproduce_validation.py rq1 --java java --output replication/rq1
-python reproduce_validation.py rq2 --java java --output replication/rq2
-```
+The main E6 canonical inputs are Rolling v1, Canary v1, Policy v2, DB-Rolling v2 and Rolling-Audit v1. Threads and PC2 are included in the same main index; scale, assumption controls and Cell reference trials have separate denominators. The family directories provide generators, schemas, interpretation and saved decisions. `independent/check_games_v3.py --help` describes the independent finite-game checker. `reproduce/check_extensions.py` invokes 22 small canonical checks (18 distinct games) and validates the saved larger denominators without rerunning long Java trials.
 
-These commands use the original cases, method properties, heap limits and per-job timeouts. RQ1 originally used a 12 GiB heap; ensure sufficient RAM. The original runs remain untouched. A resource failure remains a resource failure. Alternatively, existing local users can import the exact frozen JAR using the earlier `--source-file` command. The optional binary check in `check_package.py` verifies that frozen hash; run its saved-evidence check before building when using the source-rebuild route.
+## Metrics and certificate boundaries
 
-## Publication and independent clone status
+- Solver time and whole-JVM elapsed time are different columns. The cap is on the JVM process. Fixed complete cells have five-run medians; extended campaigns are single trials.
+- `states_discovered` counts states reached by the selected algorithm, not a common full-game denominator. Enabled buckets count state/action queries with nonempty Post; transition outcomes count the alternatives in those buckets.
+- Process RSS includes more than the Java heap. Missing final counters for TO/OOM must stay missing. No censored state/time ratios are imputed.
+- `internal_certificate_check=passed` in an inherited FSP log records an executed check. It is not itself an exported certificate. Some inherited runs provide output and transitions rather than the explicit E6 JSON certificate format. E6 completed decisions provide `result.json` plus serialized `certificate.json`; invalid and timed-out trials need not.
+- Link checks apply to WINs. LOSS provides a checked discovered losing region, not necessarily the maximum losing region. Viewer output is an inspection aid, not a new independent semantic proof.
 
-The publication location is https://github.com/research-artifact-archive/research-artifact. The repository is reinitialized for this FG-DUCS package, replacing its previous content; the `main` branch history contains only this package's publication commits. The final submission tag `fse27-submission` will be created at the final push after the submission freeze. Until then, `main` is the working preview and the two split result assets are designated for the `v2-preview` pre-release. Release creation and asset upload are pending; the manifest and asset digests are already included. No final-submission tag exists yet.
+## Observed package validation
 
-The public preview was independently cloned over HTTPS and verified on macOS arm64 with OpenJDK 17.0.19 and Maven 3.9.16. From a new empty Maven cache, the source build succeeded in **643.205 seconds**; this includes a slow FreeHEP dependency transfer. Upstream dependency acquisition and digest verification took **89.486 seconds** separately. Tests were compiled but execution was skipped. Saved-package checks passed for all **92 RQ1 and 14 RQ2 jobs**. The `--derive-only` smoke runs succeeded and matched all derived fields of the **46 RQ1 oracle rows and 14 RQ2 expectation rows**, after normalizing clone paths. These derive runs do not rerun synthesis or regenerate the saved RQ2 prose annotations. Logs and timings are in `validation/clean-clone/`; the earlier 198.503-second local build remains separate evidence. Clone the current preview as follows; use `git checkout fse27-submission` only after the final tag has been published:
+The October 2026 reorganization was checked after restoring the public layout: all 11 core checks passed with no SKIP, all supplement tasks passed, and E-series/ext1–7 checks passed. The core check regenerated the complete 135-cell table and scaling figures and preserved 16,027 inspected files. The extension check preserved 3,996 inspected files and independently reconstructed 22 small finite jobs. A comparison with the prior anonymous E6 export found 3,070 raw/input/result/certificate files unchanged and none missing. These are artifact-validation observations; they are not additions to research sample sizes.
 
-```sh
-git clone https://github.com/research-artifact-archive/research-artifact.git fg-ducs-clean
-cd fg-ducs-clean
-python check_package.py
-python fetch_assets.py --asset dependencies
-mvn -B -f "Implementation/Source Code/maven-root/mtsa/pom.xml" -Dmaven.repo.local=/absolute/path/to/new-empty-cache package -DskipTests -Djacoco.skip=true
-python reproduce_validation.py rq1 --derive-only --output replication/clean-rq1
-python reproduce_validation.py rq2 --derive-only --output replication/clean-rq2
-```
-
-After the preview Release is available, download both `fgducs-results.tar.gz.part001` and `fgducs-results.tar.gz.part002` from https://github.com/research-artifact-archive/research-artifact/releases/tag/v2-preview into the same directory, then run:
-
-```sh
-python restore_results.py --assets /path/to/downloaded-assets --verify-only
-python restore_results.py --assets /path/to/downloaded-assets
-```
-
-The restore script verifies both asset and per-file digests. Public Release download and restoration have not been checked because the `v2-preview` Release is not yet published; local asset restoration checks below remain separate evidence. Source models, the measured JAR and original raw remain unchanged.
-
-## Source extent and local package checks
-
-The Maven Java sources and test resources are retained byte for byte. The optional
-`src/main/SPECTRATranslator` Eclipse sources and `src/test/benchmarks` are included
-as inherited supplementary material; they are outside the recorded Maven build.
-Their existing LICENSE files and legal headers remain intact (see NOTICE for
-the separate JavaBDD notices). Native/binary generated outputs and one
-contact-only benchmark note are omitted. File-repository metadata are stored
-under `dependency-metadata/`; `fetch_assets.py` restores their exact original
-paths before obtaining dependency binaries. The public tree itself has no `lib/`. Two optional SPECTRA Java files whose package directory is named `lib` are likewise retained in this mapped store and restored byte for byte; the mapping lists their original paths.
-
-Local packaging checks restored all split assets into a separate directory,
-verified every archived file digest, checked saved RQ1/RQ2 certificates, and
-regenerated the paper tables from the restored raw. The dependency-metadata
-restoration was checked for exact bytes, repeatability, and refusal to replace
-a differing existing file. These checks run on saved data and package copies;
-they are not new synthesis trials. The later public clean-clone check is recorded separately above.
-The anonymity scan distinguishes required third-party legal attribution from
-submission-author identity; both original JavaBDD copyright/contact lines are
-retained. No submission-author identifying matches remain.
-
-
-## Quick-start and layout verification
-
-The Python-only run took **2.711 seconds** on the checked macOS host: eight PASS,
-with contract-variant and measurement regeneration explicitly SKIP because the raw assets were not restored.
-A separate copy with every result asset restored and Matplotlib available took **22.978 seconds**, with **10/10 PASS**.
-It reproduced all 135 RQ3 cells, the saved decision/status counts, paired ratios and all family statistics.
-All 22,834 files in that restored input copy retained their original bytes, with no added or removed input files.
-These elapsed values measure the reproduction checks, not synthesis performance.
-The reports are `validation/quickstart/core.md` and `validation/quickstart/restored.md`.
-
-The safety tests check output refusal, independent copies, corrupted evidence, absent assets and failure reporting:
-
-```sh
-python test_quickstart.py
-```
-
-All seven tests passed. Reusing an existing output directory returned exit code 2 and preserved its contents.
-The portable PowerShell drivers passed parser checks under PowerShell 7.6.6 on macOS;
-this validates syntax, not Windows execution. Every campaign config passed Python plan generation,
-including the 135-cell RQ3 stage and the supplementary 5-slot/1-slot plans, without launching Java.
-All config/model/runtime copies used by the portable layout match their source bytes.
-The original Windows runtime/probe transcripts remain the execution evidence for the measured campaigns.
+Baseline and E1 source builds succeeded with JDK 17 and the existing Maven cache. The newly built E1 JAR produced the expected small Rolling WIN and merged LOSS with certificate/endpoint checks, and WIN Link checking. No claim of a new empty-cache build or a full performance rerun is made.

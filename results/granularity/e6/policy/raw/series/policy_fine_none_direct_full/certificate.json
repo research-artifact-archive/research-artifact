@@ -1,0 +1,131 @@
+{
+  "decision" : "WIN",
+  "jar_sha256" : "ff1e6b176f004ea85f1e99690a90388a6a4d24f44cd8d8e636fcd9337dcf67d5",
+  "states" : [ {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0100",
+      "new_audit" : "unlogged"
+    },
+    "pending" : [ "start_role" ],
+    "id" : 0,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 1
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "0101",
+      "new_audit" : "unlogged",
+      "new_role" : "valid"
+    },
+    "pending" : [ ],
+    "id" : 1,
+    "initial" : false,
+    "safe" : true,
+    "goal" : true,
+    "rank" : 0
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1000",
+      "old_audit" : "logged"
+    },
+    "pending" : [ "start_audit", "start_role", "stop_audit" ],
+    "id" : 2,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1000",
+      "old_audit" : "unlogged"
+    },
+    "pending" : [ "start_audit", "start_role", "stop_audit" ],
+    "id" : 3,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 3
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1100",
+      "new_audit" : "unlogged",
+      "old_audit" : "logged"
+    },
+    "pending" : [ "start_role", "stop_audit" ],
+    "id" : 4,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "NEW", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1100",
+      "new_audit" : "unlogged",
+      "old_audit" : "unlogged"
+    },
+    "pending" : [ "start_role", "stop_audit" ],
+    "id" : 5,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 2
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1000",
+      "old_audit" : "logged"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit" ],
+    "id" : 6,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1000",
+      "old_audit" : "unlogged"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit" ],
+    "id" : 7,
+    "initial" : false,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 4
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1010",
+      "old_audit" : "logged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit", "stop_role" ],
+    "id" : 8,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 5
+  }, {
+    "physical" : [ [ "OLD", "running" ] ],
+    "testers" : {
+      "coverage_and_exclusion" : "1010",
+      "old_audit" : "unlogged",
+      "old_role" : "valid"
+    },
+    "pending" : [ "rho_runtime", "start_audit", "start_role", "stop_audit", "stop_role" ],
+    "id" : 9,
+    "initial" : true,
+    "safe" : true,
+    "goal" : false,
+    "rank" : 5
+  } ],
+  "strategy_edges" : [ [ 9, "stop_role", 7 ], [ 8, "stop_role", 6 ], [ 7, "rho_runtime", 3 ], [ 6, "rho_runtime", 2 ], [ 3, "start_audit", 5 ], [ 2, "start_audit", 4 ], [ 5, "stop_audit", 0 ], [ 4, "stop_audit", 0 ], [ 0, "start_role", 1 ] ]
+}

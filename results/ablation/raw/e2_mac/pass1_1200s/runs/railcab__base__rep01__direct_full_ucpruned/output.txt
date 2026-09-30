@@ -1,0 +1,274 @@
+INFO: Registered Map Environment: MAP_MILESTONES
+INFO: Registered Map Environment: MAP_REQUEST_ATOMIC
+INFO: Registered Map Environment: MAP_TURNS
+INFO: Registered Map Environment: MAP_ANOTHER_REQUEST
+comp.compile time : 108ms
+Compiled: MILESTONES_OLD
+Compiled: REQUEST_ATOMIC_OLD
+Compiled: TURNS_OLD
+Compiled: ANOTHER_REQUEST_OLD
+Composition:OldEnv = OldEnv.MILESTONES_OLD || OldEnv.REQUEST_ATOMIC_OLD || OldEnv.TURNS_OLD || OldEnv.ANOTHER_REQUEST_OLD
+State Space: 5 * 2 * 2 * 1 = 2 ** 5
+Composing...
+-- States: 13 Transitions: 27 Memory used: 10144K
+Composed in 9ms
+Formula !P_BRAKE_DURING_LASTBRAKE = (true U (brake & LastEmergencyBrake))
+GBA 2 states 3 transitions
+Buchi automata:
+P_BRAKE_DURING_LASTBRAKE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |brake&LastEmergencyBrake -> S1).
+Composition:P_BRAKE_DURING_LASTBRAKE = LastEmergencyBrake || brake || SYNC || P_BRAKE_DURING_LASTBRAKE
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 10634K
+Composed in 6ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_BRAKE_DURING_LASTBRAKE minimising...
+Minimised States: 3 in 0ms
+make DFA(P_BRAKE_DURING_LASTBRAKE)
+DFA(P_BRAKE_DURING_LASTBRAKE) has 2 states.
+Tau reduction ON
+P_BRAKE_DURING_LASTBRAKE minimising...
+Minimised States: 2 in 0ms
+Formula !P_EBRAKE_DURING_ELASTBRAKE = (true U (emergencyBrake & NoReturn))
+GBA 2 states 3 transitions
+Buchi automata:
+P_EBRAKE_DURING_ELASTBRAKE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |emergencyBrake&NoReturn -> S1).
+Composition:P_EBRAKE_DURING_ELASTBRAKE = NoReturn || emergencyBrake || SYNC || P_EBRAKE_DURING_ELASTBRAKE
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 10665K
+Composed in 6ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_EBRAKE_DURING_ELASTBRAKE minimising...
+Minimised States: 3 in 0ms
+make DFA(P_EBRAKE_DURING_ELASTBRAKE)
+DFA(P_EBRAKE_DURING_ELASTBRAKE) has 2 states.
+Tau reduction ON
+P_EBRAKE_DURING_ELASTBRAKE minimising...
+Minimised States: 2 in 0ms
+Formula !P_NOT_CRASH = (true U ((CantEnter & NoReturn) | (NoReturn & !RequestedOnce)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_NOT_CRASH = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |CantEnter&NoReturn -> S1 |NoReturn&!RequestedOnce -> S1).
+Composition:P_NOT_CRASH = CantEnter || NoReturn || RequestedOnce || SYNC || P_NOT_CRASH
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 10651K
+Composed in 5ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_NOT_CRASH minimising....
+Minimised States: 7 in 0ms
+make DFA(P_NOT_CRASH)
+DFA(P_NOT_CRASH) has 4 states.
+Tau reduction ON
+P_NOT_CRASH minimising....
+Minimised States: 4 in 0ms
+Formula !P_BRAKE_ONLY_IF_IM_NOT_ALLOWED = (true U (brake & !CantEnter))
+GBA 2 states 3 transitions
+Buchi automata:
+P_BRAKE_ONLY_IF_IM_NOT_ALLOWED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |brake&!CantEnter -> S1).
+Composition:P_BRAKE_ONLY_IF_IM_NOT_ALLOWED = CantEnter || brake || SYNC || P_BRAKE_ONLY_IF_IM_NOT_ALLOWED
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 10647K
+Composed in 5ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_BRAKE_ONLY_IF_IM_NOT_ALLOWED minimising...
+Minimised States: 3 in 0ms
+make DFA(P_BRAKE_ONLY_IF_IM_NOT_ALLOWED)
+DFA(P_BRAKE_ONLY_IF_IM_NOT_ALLOWED) has 2 states.
+Tau reduction ON
+P_BRAKE_ONLY_IF_IM_NOT_ALLOWED minimising...
+Minimised States: 2 in 0ms
+Formula !P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED = (true U (emergencyBrake & !CantEnter))
+GBA 2 states 3 transitions
+Buchi automata:
+P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |emergencyBrake&!CantEnter -> S1).
+Composition:P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED = CantEnter || emergencyBrake || SYNC || P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 10630K
+Composed in 4ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED minimising...
+Minimised States: 3 in 0ms
+make DFA(P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED)
+DFA(P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED) has 2 states.
+Tau reduction ON
+P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED minimising...
+Minimised States: 2 in 0ms
+Composition:OldCont = OldEnv || P_BRAKE_DURING_LASTBRAKE || P_NOT_CRASH || P_EBRAKE_DURING_ELASTBRAKE || P_BRAKE_ONLY_IF_IM_NOT_ALLOWED || P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED
+State Space: 13 * 2 * 4 * 2 * 2 * 2 = 2 ** 10
+Composing...
+-- States: 28 Transitions: 56 Memory used: 10661K
+Composed in 5ms
+Solving the LTS control problem.
+Environment states: 29
+Game states: 29
+Game transitions: 87
+Analysis time: 80ms.
+Controller [21] generated successfully.
+Composition:OldCont = OldCont || P_BRAKE_DURING_LASTBRAKE || P_NOT_CRASH || P_EBRAKE_DURING_ELASTBRAKE || P_BRAKE_ONLY_IF_IM_NOT_ALLOWED || P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED
+State Space: 21 * 2 * 4 * 2 * 2 * 2 = 2 ** 11
+Composing...
+-- States: 21 Transitions: 29 Memory used: 12605K
+Composed in 7ms
+ - Synthesizing Mapping Environment from lists (size=4)...
+INFO: Auto-compiling dependency: MILESTONES_NEW
+Generating Mapping Environment: MAP_MILESTONES_OLD_MILESTONES_NEW
+INFO: Auto-compiling dependency: REQUEST_ATOMIC_NEW
+Generating Mapping Environment: MAP_REQUEST_ATOMIC_OLD_REQUEST_ATOMIC_NEW
+INFO: Auto-compiling dependency: TURNS_NEW
+Generating Mapping Environment: MAP_TURNS_OLD_TURNS_NEW
+INFO: Auto-compiling dependency: ANOTHER_REQUEST
+Generating Mapping Environment: MAP_ANOTHER_REQUEST_OLD_ANOTHER_REQUEST
+Mode: On-The-Fly Updating Controller Synthesis (fine-grained update events)
+Formula !P_NEW_NOT_CRASH = (true U (((CantEnter & NoReturn) | (NoReturn & (!RequestedOnce | !AskedWorkingOnce))) | (NoReturn & NotWorking)))
+GBA 2 states 6 transitions
+Buchi automata:
+P_NEW_NOT_CRASH = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |CantEnter&NoReturn -> S1 |NoReturn&!AskedWorkingOnce -> S1 |NoReturn&!RequestedOnce -> S1 |NoReturn&NotWorking -> S1).
+Composition:P_NEW_NOT_CRASH = CantEnter || NoReturn || RequestedOnce || AskedWorkingOnce || NotWorking || SYNC || P_NEW_NOT_CRASH
+State Space: 2 * 2 * 2 * 2 * 2 * 2 * 2 = 2 ** 7
+Composing...
+-- States: 128 Transitions: 527 Memory used: 12951K
+Composed in 8ms
+After Tau elimination = 64 state
+Tau reduction ON
+P_NEW_NOT_CRASH minimising....
+Minimised States: 11 in 1ms
+make DFA(P_NEW_NOT_CRASH)
+DFA(P_NEW_NOT_CRASH) has 6 states.
+Tau reduction ON
+P_NEW_NOT_CRASH minimising.....
+Minimised States: 6 in 0ms
+Formula !P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE = (true U (LastEmergencyBrake & checkCrossingStatus))
+GBA 2 states 3 transitions
+Buchi automata:
+P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |LastEmergencyBrake&checkCrossingStatus -> S1).
+Composition:P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE = LastEmergencyBrake || checkCrossingStatus || SYNC || P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE
+State Space: 2 * 2 * 2 * 2 = 2 ** 4
+Composing...
+-- States: 16 Transitions: 41 Memory used: 12608K
+Composed in 7ms
+After Tau elimination = 8 state
+Tau reduction ON
+P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE minimising...
+Minimised States: 3 in 0ms
+make DFA(P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE)
+DFA(P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE) has 2 states.
+Tau reduction ON
+P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE minimising...
+Minimised States: 2 in 0ms
+Formula !P_BRAKE_IF_SOMETHING_BAD = (true U (brake & (!NotWorking & !CantEnter)))
+GBA 2 states 3 transitions
+Buchi automata:
+P_BRAKE_IF_SOMETHING_BAD = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |brake&!CantEnter&!NotWorking -> S1).
+Composition:P_BRAKE_IF_SOMETHING_BAD = CantEnter || NotWorking || brake || SYNC || P_BRAKE_IF_SOMETHING_BAD
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 97 Memory used: 12621K
+Composed in 7ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_BRAKE_IF_SOMETHING_BAD minimising...
+Minimised States: 3 in 0ms
+make DFA(P_BRAKE_IF_SOMETHING_BAD)
+DFA(P_BRAKE_IF_SOMETHING_BAD) has 2 states.
+Tau reduction ON
+P_BRAKE_IF_SOMETHING_BAD minimising...
+Minimised States: 2 in 0ms
+Formula !P_EBRAKE_IF_SOMETHING_BAD = (true U (emergencyBrake & (!NotWorking & !CantEnter)))
+GBA 2 states 3 transitions
+Buchi automata:
+P_EBRAKE_IF_SOMETHING_BAD = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |emergencyBrake&!CantEnter&!NotWorking -> S1).
+Composition:P_EBRAKE_IF_SOMETHING_BAD = CantEnter || NotWorking || emergencyBrake || SYNC || P_EBRAKE_IF_SOMETHING_BAD
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 97 Memory used: 12659K
+Composed in 7ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_EBRAKE_IF_SOMETHING_BAD minimising...
+Minimised States: 3 in 0ms
+make DFA(P_EBRAKE_IF_SOMETHING_BAD)
+DFA(P_EBRAKE_IF_SOMETHING_BAD) has 2 states.
+Tau reduction ON
+P_EBRAKE_IF_SOMETHING_BAD minimising...
+Minimised States: 2 in 0ms
+Formula !P_CHECK_STATUS_AFTER_APPROACHING_CROSSING = (true U (checkCrossingStatus & (LastEmergencyBrake | !ApproachingCrossingHappen)))
+GBA 2 states 4 transitions
+Buchi automata:
+P_CHECK_STATUS_AFTER_APPROACHING_CROSSING = S0,
+S1@ =(true -> S1),
+S0 =(true -> S0 |checkCrossingStatus&!ApproachingCrossingHappen -> S1 |checkCrossingStatus&LastEmergencyBrake -> S1).
+Composition:P_CHECK_STATUS_AFTER_APPROACHING_CROSSING = ApproachingCrossingHappen || LastEmergencyBrake || checkCrossingStatus || SYNC || P_CHECK_STATUS_AFTER_APPROACHING_CROSSING
+State Space: 2 * 2 * 2 * 2 * 2 = 2 ** 5
+Composing...
+-- States: 32 Transitions: 99 Memory used: 12671K
+Composed in 7ms
+After Tau elimination = 16 state
+Tau reduction ON
+P_CHECK_STATUS_AFTER_APPROACHING_CROSSING minimising....
+Minimised States: 4 in 0ms
+make DFA(P_CHECK_STATUS_AFTER_APPROACHING_CROSSING)
+DFA(P_CHECK_STATUS_AFTER_APPROACHING_CROSSING) has 3 states.
+Tau reduction ON
+P_CHECK_STATUS_AFTER_APPROACHING_CROSSING minimising....
+Minimised States: 3 in 0ms
+Composition:NewEnvironment = NewEnvironment.MILESTONES_NEW || NewEnvironment.REQUEST_ATOMIC_NEW || NewEnvironment.TURNS_NEW || NewEnvironment.ANOTHER_REQUEST
+State Space: 6 * 2 * 2 * 2 = 2 ** 6
+Composing...
+-- States: 21 Transitions: 49 Memory used: 12646K
+Composed in 7ms
+Composition:NewController = NewEnvironment || P_BRAKE_DURING_LASTBRAKE || P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE || P_EBRAKE_IF_SOMETHING_BAD || P_NEW_NOT_CRASH || P_EBRAKE_DURING_ELASTBRAKE || P_BRAKE_IF_SOMETHING_BAD || P_CHECK_STATUS_AFTER_APPROACHING_CROSSING
+State Space: 21 * 2 * 2 * 2 * 6 * 2 * 2 * 3 = 2 ** 15
+Composing...
+-- States: 54 Transitions: 128 Memory used: 13560K
+Composed in 8ms
+Solving the LTS control problem.
+Environment states: 55
+Game states: 55
+Game transitions: 165
+Analysis time: 15ms.
+Controller [36] generated successfully.
+Composition:NewController = NewController || P_BRAKE_DURING_LASTBRAKE || P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE || P_EBRAKE_IF_SOMETHING_BAD || P_NEW_NOT_CRASH || P_EBRAKE_DURING_ELASTBRAKE || P_BRAKE_IF_SOMETHING_BAD || P_CHECK_STATUS_AFTER_APPROACHING_CROSSING
+State Space: 36 * 2 * 2 * 2 * 6 * 2 * 2 * 3 = 2 ** 16
+Composing...
+-- States: 36 Transitions: 60 Memory used: 14738K
+Composed in 9ms
+ - Using explicitly supplied New Controller: NewController
+ - New Controller prepared successfully. States: 36
+ - Extracting New Safety Fluents and Building Look-up Tables...
+=========================================
+Mode: Revised OTF-DUCS (proof-producing strong synthesis)
+=========================================
+ - Components: 4
+ - Requirements: old=5, new=7, update-time=0
+ - Initial endpoint embeddings: 22
+ - Loadable new endpoint signatures: 71 / 71
+ - Controllable action order: endpoint_guided
+ - Solver implementation: direct_full_ucpruned
+ - Update-policy restriction: full_fg (unrestricted_fine_grained_update_choices)
