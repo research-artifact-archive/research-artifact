@@ -278,7 +278,7 @@ Generative AI assisted contract and example design, proof drafting, Java solver/
 \paragraph{Constructing the benchmark inputs.}
 Nine inputs adapt eight DUCS sources; PC1/PC2 share a parent. PC1/PC2 preserve the parent's repeatable, state-gated arrivals while making tool results UC. Other adaptations shorten Railcab transfers preserving both outcomes, omit PowerPlant's initial ENV pair, and change safety/ordering; equivalence is unestablished. Technical Appendix~\ref{ta:additional_populations} details each adaptation and the inherited arrival cycle.
 
-FSP goals and component/transfer declarations feed MTSA's GR endpoint backend. Targets are all reachable new-endpoint states. The frontend compiles monitors, enumerates physical closure and fills global-tuple initializer tables from current observers; interval tables use post-entry values. Observers track nonlocal labels and survive commands/transfers. Lazy generates the remaining product on demand; JVM cost includes preprocessing.
+From FSP declarations, MTSA first synthesizes the fixed endpoint controllers. Targets are all reachable new-endpoint states. Before search, it compiles monitors, enumerates observer-bearing physical tuples and fills global-tuple initializer tables; interval tables use post-entry values. Observers track nonlocal labels and survive commands/transfers. Lazy defers update-game states and successor buckets, not this preparation. S4 reports both preparation intervals and tuple counts for all 27 contracts.
 
 
 % FGDUCS_RELOCATED: benchmark_inputs
@@ -383,7 +383,7 @@ Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs; Technical App
 
 \input{figures/rq3_paired_absolute.tex}
 
-Capped Direct-Full attempts give total-JVM lower bounds, not solver ratios or timing medians (Technical Appendix~\ref{ta:performance_scope_details}).
+Preparation remains substantial: Lazy's adapter medians reach 14.221~s (PC2/R1; S4). Capped Direct-Full attempts give total-JVM lower bounds, not solver ratios or medians (Technical Appendix~\ref{ta:performance_scope_details}).
 
 % FGDUCS_RELOCATED: workload_rows
 
@@ -433,7 +433,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c81-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c82-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

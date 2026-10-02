@@ -424,6 +424,39 @@ The following table retains all completed Lazy/Direct-Full pairs from the same-g
 \end{table}
 
 \clearpage
+\paragraph{Preparation before game exploration.}
+The FSP benchmark driver constructs the fixed endpoint inputs before calling the FG-DUCS solver. Two saved, nonoverlapping intervals expose this work. Definition preparation ($D$) includes old/new controller synthesis, transfer/component preparation, monitor preparation and fluent-observer lookup construction. Adapter preparation ($P$, next page) imports these structures, constructs closed-loop endpoints and activation tables, and validates the input contract. The four FG methods share this code; their exploration choices follow it.
+
+Table~\ref{tab:rq3-definition-preparation} reports $D$ for every supplied contract and method. Both preparation tables use the original fixed-budget runs: 81 completed cells with five repetitions each (405 runs), including the Industry/R1 LOSS results. The other 27 cells retain their outcomes. No preparation value is imputed from another method or contract.
+
+\begin{table}[!htbp]\centering
+\caption{Definition preparation $D$, in seconds: five-run median [minimum--maximum]. TO is the process outcome; it does not locate the timeout within preparation or search.}
+\label{tab:rq3-definition-preparation}
+\input{build/generated/rq3-definition-times.tex}
+\end{table}
+
+\noindent\footnotesize
+The saved fields are \path{definition_prepare_total_time} and \path{revised_preparation_time}, originally in milliseconds. $D$ ends before input-size census collection. Internal phase fields are nested within these intervals; adding them again would double-count work. Neither $D+P$ nor JVM minus solver time isolates all frontend work: parsing, census collection, startup, output, linking and other overhead have different scopes. $\dagger$ Workflow/R2 Direct-Full retains its original interruption and the later same-setting timeout; neither supplies a preparation summary. Other timeout cells likewise lack these structured phase values.
+\normalsize
+
+\clearpage
+\paragraph{Activation closure and adapter preparation.}
+Table~\ref{tab:rq3-adapter-preparation} gives $P$ and the size of the activation closure built before solver exploration. Starting from all reachable old-endpoint physical tuples, the frontend closes ordinary transitions and component transfers. A tuple includes component versions and fluent-observer states, but omits endpoint-controller states, requirement-monitor states and pending commands. This is neither the explored update game nor an initializer-entry count. For each contract with a completed run, the count is identical across all completed methods and repetitions; PC2/R2 has no recorded count.
+
+\begin{table}[!htbp]\centering
+\caption{Adapter preparation $P$, in seconds: five-run median [minimum--maximum], and precomputed activation-closure tuples. All 27 contracts and four methods remain visible.}
+\label{tab:rq3-adapter-preparation}
+\input{build/generated/rq3-adapter-times.tex}
+\end{table}
+
+\noindent\footnotesize
+$P$ includes endpoint products, the closure, global-tuple initializer construction and endpoint-contract validation; it is not a closure-only timer. The count is \path{revised_reachable_physical_states_for_activation}. TO and $\dagger$ have the preceding table's meaning. Rounding is to milliseconds; the CSV preserves the recorded precision.
+\normalsize
+
+\paragraph{Reading the cost claims.}
+Lazy defers update-game states and successor buckets after this preparation. For example, its $P$ medians are 13.872/14.221~s for PC2 Base/R1 and 5.507--5.730~s for Workflow. Thus reduced search does not remove global preparation. Main-paper Table~5 separately reports total JVM ratios. The public \path{scripts/generate_rq3_preparation.py} regenerates these tables and \path{build/generated/rq3-preparation.csv} directly from the archived campaign metrics, without executing synthesis.
+
+\clearpage
 \subsection{Detailed fixed-budget measurements and policy diagnoses}
 \label{supp:detailed-diagnostics}
 The metric panels complete the fixed-budget record from Section~\ref{supp:fixed-budget}. The Industry and Railcab blocks then explain particular outcomes using separate saved diagnostic runs. Their measurement scopes remain distinct.

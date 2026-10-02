@@ -13,6 +13,7 @@ GENERATORS = (
     'generate_rq2_family_table.py',
     'generate_rq3_outcome_grid.py',
     'generate_rq3_paired_plot.py',
+    'generate_rq3_preparation.py',
 )
 DISPLAY_FILES = (
     'main.tex',
@@ -30,6 +31,9 @@ DISPLAY_FILES = (
     'figures/pc2_saved_path.tex',
     'technical_fragments/pc2_history_boundary.tex',
     'build/generated/rq3-cells.csv',
+    'build/generated/rq3-preparation.csv',
+    'build/generated/rq3-definition-times.tex',
+    'build/generated/rq3-adapter-times.tex',
     'figures/policy_finite_main.tex',
     'technical_fragments/gsm_active_policy.tex',
     'technical_fragments/gsm_entry_derivation.tex',
@@ -118,7 +122,7 @@ def main():
             if row['status'] == 'FAIL':
                 print(row['stdout'] + row['stderr'], file=sys.stderr)
         raise SystemExit('FAIL: a display check failed or modified a display input')
-    print('PASS: all fourteen display and saved-policy checks; input files unchanged.')
+    print('PASS: all fifteen display and saved-policy checks; input files unchanged.')
 
 
 if __name__ == '__main__':
