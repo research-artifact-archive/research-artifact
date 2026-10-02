@@ -30,16 +30,26 @@ def drawing_fonts():
 
 
 def navigation_pdf(readers, paper_title=None):
-    """One or two navigation pages derived from current PDF outlines."""
+    """Generate linked reading routes followed by the complete section contents."""
     from reportlab.pdfgen import canvas
     from reportlab.pdfbase import pdfmetrics
+    from reportlab.lib.utils import simpleSplit
     drawing_fonts()
     width, height = map(float, (readers['ta'].pages[0].mediabox.width,
                                 readers['ta'].pages[0].mediabox.height))
-    rows = []
+    rows, sections = [], {}
     titles = {'ta': 'Part I: Proofs and definitions (Technical Appendix)',
               's': 'Part II: Validation and experimental detail (Supplement S1-S5)'}
+
+    def index_outline(key, nodes):
+        for item in nodes:
+            if isinstance(item, list):
+                index_outline(key, item)
+            else:
+                sections[(key, item.title)] = readers[key].get_destination_page_number(item)
+
     for key in ('ta', 's'):
+        index_outline(key, readers[key].outline)
         rows.append((True, titles[key], key, 0))
         section_number = 0
         for item in readers[key].outline:
@@ -48,51 +58,131 @@ def navigation_pdf(readers, paper_title=None):
                 label = chr(64 + section_number) if key == 'ta' else f'S{section_number}'
                 rows.append((False, f'{label}  {item.title}', key,
                              readers[key].get_destination_page_number(item)))
-    title_lines = []
-    if paper_title:
-        for word in paper_title.split():
-            if not title_lines or pdfmetrics.stringWidth(title_lines[-1] + ' ' + word, 'PackSansBold', 10) > width - 100:
-                title_lines.append(word)
-            else:
-                title_lines[-1] += ' ' + word
-        if len(title_lines) > 3:
-            raise ValueError('Paper title exceeds three lines; supply --front-matter')
-    capacity = int((height - 245 - 14 * len(title_lines)) // 15)
-    count = max(1, math.ceil(len(rows) / capacity))
-    if count > 2:
+    title_lines = simpleSplit(paper_title or '', 'PackSansBold', 10, width - 100)
+    if len(title_lines) > 3:
+        raise ValueError('Paper title exceeds three lines; supply --front-matter')
+    capacity = int((height - 225 - 14 * len(title_lines)) // 15)
+    contents_count = max(1, math.ceil(len(rows) / capacity))
+    if contents_count > 2:
         raise ValueError('Automatic contents exceeds two pages; supply --front-matter')
+    count = 1 + contents_count
     offsets = {'ta': count, 's': count + len(readers['ta'].pages)}
-    stream = io.BytesIO()
+    stream, links = io.BytesIO(), []
     c = canvas.Canvas(stream, pagesize=(width, height), initialFontName='PackSans', initialFontSize=9)
     c.setAuthor('Anonymous Authors'); c.setTitle('Reading guide and contents'); c.setCreator('Documentation build')
-    for number in range(count):
+
+    def header(subtitle):
         y = height - 55
-        c.setFont('PackSansBold', 16); c.drawString(50, y, 'Supplementary Material'); y -= 28
-        if title_lines:
-            c.setFont('PackSansBold', 10)
-            for title_line in title_lines:
-                c.drawString(50, y, title_line); y -= 14
-            y -= 8
-        c.setFont('PackSans', 9)
-        for line in ['Part I follows the argument: proofs and cases (A-C), requirement meaning and',
-                     'execution (D-G), interface comparisons (H-I), PC2 (J), and records (K-P).',
-                     'Part II adds witnesses (S1), implementation (S2), history proofs (S3),',
-                     'current evaluation and separate auxiliary records (S4), and comparisons (S5).',
-                     'Use continuous page numbers and bookmarks. Main paper: main.pdf.']:
+        c.setFont('PackSansBold', 16); c.drawString(50, y, 'Supplementary Material'); y -= 26
+        c.setFont('PackSansBold', 10)
+        for line in title_lines:
+            c.drawString(50, y, line); y -= 14
+        y -= 10
+        c.setFont('PackSansBold', 12); c.drawString(50, y, subtitle)
+        return y - 22
+
+    def paragraph(text, y, size=9):
+        c.setFont('PackSans', size)
+        for line in simpleSplit(text, 'PackSans', size, width - 100):
             c.drawString(50, y, line); y -= 13
-        y -= 15; c.setFont('PackSansBold', 10)
-        c.drawString(50, y, 'Contents' if count == 1 else f'Contents ({number + 1}/{count})')
-        c.drawRightString(width - 50, y, 'PDF page'); y -= 22
+        return y
+
+    def route(title, explanation, targets, y):
+        c.setFont('PackSansBold', 10); c.drawString(50, y, title); y -= 16
+        y = paragraph(explanation, y)
+        x = 50
+        for key, section, label in targets:
+            page = sections[(key, section)]
+            text = f'{label}, p. {offsets[key] + page + 1}'
+            extent = pdfmetrics.stringWidth(text, 'PackSans', 9)
+            if x + extent > width - 50:
+                x = 50; y -= 14
+            c.setFillColorRGB(0.06, 0.25, 0.43)
+            c.drawString(x, y, text)
+            links.append((0, (x, y - 3, x + extent, y + 10), key, page))
+            x += extent + 20
+        c.setFillColorRGB(0, 0, 0)
+        return y - 26
+
+    c.bookmarkPage('reading-routes'); c.addOutlineEntry('Routes from claims to evidence', 'reading-routes')
+    y = header('Routes from claims to evidence')
+    y = paragraph('Choose a route below, or use the complete contents on the next page. Blue references are clickable; all page numbers refer to this integrated PDF.', y) - 15
+    routes = [
+        ('Complete examples: component and requirement choices',
+         'Cell gives the full local input and both completing paths. Policy separates audit and role lifetimes. S1 adds observation and interleaving witnesses.',
+         [('ta', 'Complete Cell Contract and Its Two Completing Paths', 'TA B'),
+          ('ta', 'Policy Requirement-Boundary Argument', 'TA C'),
+          ('s', 'Granularity and observation witnesses', 'S1')]),
+        ('Formal guarantees: correspondence, completion and handover',
+         'Follow the source-history and synthesis proofs, then the execution and endpoint results. Execution requires A1-A4; a progress rank bounds events, not elapsed time.',
+         [('ta', 'Source Histories and Synthesis Correctness', 'TA A'),
+          ('ta', 'Proof of Conditional Trace Lifting', 'TA F'),
+          ('ta', 'Endpoint Interfaces and Certificate Reuse', 'TA G'),
+          ('s', 'Finite games, search invariants, and certificates', 'S2')]),
+        ('Requirement meaning: what holds after activation',
+         'Separate safe-prior-history inclusion from exact start-scoped invariants and entry-scoped interval rules. Actual keys, observations and fallback remain additional obligations.',
+         [('ta', 'NEW and UPD History-Scope Derivations', 'TA D'),
+          ('ta', 'Activation-Scoped Initialization', 'TA E'),
+          ('s', 'Monitor intervals and conditional trace lifting', 'S3')]),
+        ('RQ1: when granularity changes feasibility',
+         'Start with definitions and all constructed outcomes, then read the source-derived PC2 case. Inherited inputs show no decision change; PC2 merged synthesis times out, while a separate source argument proves impossibility.',
+         [('ta', 'Finite contracts for the constructed families', 'TA O.11'),
+          ('s', 'Constructed operational mechanisms and controls', 'S4.1'),
+          ('ta', 'Saved PC2 Activation Histories and Their Boundary', 'TA J')]),
+        ('RQ2-RQ3: checks, fixed-budget costs and policy diagnoses',
+         'Independent fixtures and source-monitor checks have separate populations. The fixed-budget comparison covers all 27 contracts; paired costs omit unresolved runs. Detailed outcomes retain all failures and faster alternatives.',
+         [('s', 'Independent checks for the contract and returned policies', 'S4.2'),
+          ('s', 'Fixed-budget comparison on the 27 adapted contracts', 'S4.3'),
+          ('s', 'Detailed fixed-budget measurements and policy diagnoses', 'S4.4')]),
+        ('Related work: supplied inputs and generated guarantees',
+         "Complete Cell encodings expose the obligations supplied to native DUCS and GR(1) updating. The expanded comparison records each approach's input, progress condition and scope.",
+         [('ta', 'Complete Native DUCS Construction for Cell', 'TA H'),
+          ('ta', 'Cell through a GR(1) Bridge Interface', 'TA I'),
+          ('s', 'Expanded related-work comparison', 'S5')]),
+    ]
+    for title, explanation, targets in routes:
+        y = route(title, explanation, targets, y)
+    y = paragraph('Auxiliary and historical records are retained in S4.5 onward and TA N-O. They do not enlarge the fixed-budget population. Saved campaign names may differ from the current RQ numbers; S4 identifies those mappings.', y, 8)
+    if y < 45:
+        raise ValueError('Reading routes overflow the page')
+    c.showPage()
+
+    for number in range(contents_count):
+        c.bookmarkPage(f'contents-{number}')
+        c.addOutlineEntry('Complete contents' if contents_count == 1 else f'Complete contents ({number + 1})', f'contents-{number}')
+        y = header('Complete contents' if contents_count == 1 else f'Complete contents ({number + 1}/{contents_count})')
+        y = paragraph("Part I follows the paper's argument. Part II supplies additional witnesses, implementation detail, history proofs, evaluation records and comparisons.", y) - 20
+        c.setFont('PackSansBold', 9); c.drawRightString(width - 50, y, 'PDF page'); y -= 20
         for bold, title, key, page in rows[number * capacity:(number + 1) * capacity]:
             font, size = ('PackSansBold', 9) if bold else ('PackSans', 8)
             c.setFont(font, size)
             if pdfmetrics.stringWidth(title, font, size) > width - 155:
                 raise ValueError('Contents title is too wide; supply --front-matter')
-            c.drawString(50 if bold else 62, y, title)
-            c.drawRightString(width - 50, y, str(offsets[key] + page + 1)); y -= 15
+            x = 50 if bold else 62
+            c.drawString(x, y, title)
+            c.drawRightString(width - 50, y, str(offsets[key] + page + 1))
+            links.append((1 + number, (x, y - 3, width - 50, y + 10), key, page))
+            y -= 15
+        if y < 45:
+            raise ValueError('Contents overflow the page')
         c.showPage()
     c.save()
-    return stream.getvalue()
+    # The normal packager remaps these component links into the integrated PDF.
+    writer = PdfWriter(clone_from=PdfReader(io.BytesIO(stream.getvalue())))
+    for source_page, rectangle, key, target_page in links:
+        writer.add_annotation(source_page, DictionaryObject({
+            NameObject('/Type'): NameObject('/Annot'),
+            NameObject('/Subtype'): NameObject('/Link'),
+            NameObject('/Rect'): ArrayObject([NumberObject(round(v)) for v in rectangle]),
+            NameObject('/Border'): ArrayObject([NumberObject(0)] * 3),
+            NameObject('/A'): DictionaryObject({
+                NameObject('/S'): NameObject('/GoToR'),
+                NameObject('/F'): TextStringObject({'ta': 'technical_appendix.pdf', 's': 'supplement.pdf'}[key]),
+                NameObject('/D'): ArrayObject([NumberObject(target_page), NameObject('/Fit')]),
+            }),
+        }))
+    result = io.BytesIO(); writer.write(result)
+    return result.getvalue()
 
 
 def page_stamp(page, text):

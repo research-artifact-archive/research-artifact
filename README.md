@@ -1,6 +1,6 @@
 # Synthesizing Staged Updates between Verified Controllers
 
-**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This is the public, anonymous replication package prepared by the paper's authors for this study. It contains the FG-DUCS tool, all reported models and evidence, and reproducible checks. It is an anonymous research prototype, not a deployment framework. The [paper-matched release, `fgducs-c79-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c79-20261003) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
+**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This is the public, anonymous replication package prepared by the paper's authors for this study. It contains the FG-DUCS tool, all reported models and evidence, and reproducible checks. It is an anonymous research prototype, not a deployment framework. The [paper-matched release, `fgducs-c80-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c80-20261003) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
@@ -17,7 +17,7 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
-The 18-page main text develops synthesis for staged handover between supplied controllers: the Cell input and whole policy, Policy input primitives and opposing requirement orders, local-history/game correspondence, endpoint continuation, requirement interpretation, an independent granularity analysis before certifying synthesis, source-derived cases and all principal positive and negative results. The 29-page technical appendix follows the argument from proofs and cases through interpretation and execution to comparisons and evidence records. The separate 48-page S1–S5 supplement preserves the experimental records. The 78-page integrated supplement adds a one-page reading guide. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+The 18-page main text develops synthesis for staged handover between supplied controllers: the Cell input and whole policy, Policy input primitives and opposing requirement orders, local-history/game correspondence, endpoint continuation, requirement interpretation, an independent granularity analysis before certifying synthesis, source-derived cases and all principal positive and negative results. The 29-page technical appendix follows the argument from proofs and cases through interpretation and execution to comparisons and evidence records. The separate 44-page S1–S5 supplement preserves the experimental records. The 75-page integrated supplement adds two pages of linked reading routes and complete contents. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
 
 ## Read the paper and its appendices
 
@@ -26,12 +26,12 @@ Reference **[4], FG-DUCS Evaluation Artifact**, in the main paper refers to this
 | Reference in the paper | Open this document | Where to look |
 |---|---|---|
 | Main paper | [Main PDF](paper/main.pdf) | Sections 1–10; Introduction and Conclusion frame the contribution |
-| Technical Appendix A–P | [Part I, integrated PDF](paper/supplementary_material.pdf#page=2) · [Separate appendix](paper/technical_appendix.pdf) | Continuous PDF pages 2–30: complete proofs, input definitions and interpretation analyses |
-| Supplement S1–S5 | [Part II, integrated PDF](paper/supplementary_material.pdf#page=31) · [Separate supplement](paper/supplement.pdf) | Continuous PDF pages 31–78: witnesses, validation, all results and expanded comparisons |
+| Technical Appendix A–P | [Part I, integrated PDF](paper/supplementary_material.pdf#page=3) · [Separate appendix](paper/technical_appendix.pdf) | Continuous PDF pages 3–31: complete proofs, input definitions and interpretation analyses |
+| Supplement S1–S5 | [Part II, integrated PDF](paper/supplementary_material.pdf#page=32) · [Separate supplement](paper/supplement.pdf) | Continuous PDF pages 32–75: witnesses, validation, all results and expanded comparisons |
 | Figure 2: states, solver time, peak JVM RSS | [All 135 saved result cells](paper/source/build/generated/rq3-cells.csv) · [Plot generator](paper/source/scripts/generate_rq3_paired_plot.py) | All 14 completed Lazy/Direct-Full pairs; the other 13 Direct-Full contracts remain timeouts in Table 4 and Appendix O |
 | A specific claim or check | [Claim-to-evidence map](docs/CLAIMS.md) · [Appendix section index](paper/README.md#appendix-section-index) | Exact section, evidence path and reproduction command |
 
-The integrated PDF starts with a linked reading guide and has bookmarks and continuous page numbers. Download **main.pdf** and **supplementary_material.pdf** into the same folder to follow relative links from the main paper. If a browser ignores a `#page=` link, use the printed continuous page number or the PDF bookmarks.
+The integrated PDF starts with six linked reading routes from claims to evidence, followed by complete section contents, bookmarks and continuous page numbers. Download **main.pdf** and **supplementary_material.pdf** into the same folder to follow relative links from the main paper. If a browser ignores a `#page=` link, use the printed continuous page number or the PDF bookmarks.
 
 The [original `fgducs-invariants-20261002` evidence snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002) is preserved and is also identified in Data Availability. It includes earlier manuscript PDFs. Use the **paper-matched release above** for the revised paper's appendix references and page numbers; the original tag has not been moved.
 
