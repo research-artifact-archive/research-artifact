@@ -1,13 +1,13 @@
-# Compiling Local Update Contracts into Controller-Preserving Policies
+# Fine-Grained Dynamic Update Controller Synthesis: Component Changes and Requirement Lifetimes
 
-**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c64-20261002) bundles the corresponding paper, technical appendix, experimental supplement and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
+**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c68-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
 | **Use the tool** | [Build and run](#use-the-tool) · [`tool/`](tool/) | A checked update policy or a losing-region certificate, plus a readable local result viewer |
 | **Reproduce the study** | [Reproduction](#reproduce-the-study) · [`reproduce/`](reproduce/) | Saved-evidence checks, source builds, finite examples, and the original benchmark protocols |
 | **Understand the evidence** | [Results and interpretation](#results-and-interpretation) · [`results/`](results/) | The complete positive, negative, invalid, timeout, OOM and unexecuted outcomes |
-| **Read the formal account** | [Paper](paper/main.pdf) · [Technical appendix](paper/technical_appendix.pdf) · [Supplement](paper/supplement.pdf) | Definitions, assumptions, proofs, measurement details and threats to validity |
+| **Read the formal account** | [Paper](paper/main.pdf) · [Integrated supplementary material](paper/supplementary_material.pdf) | Definitions, assumptions, proofs, measurement details and threats to validity |
 
 ```text
 tool/        Source code, inherited FSP models, build/run commands, result viewer
@@ -17,7 +17,7 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
-The 18-page main text develops local-contract compilation: complete Cell and Policy inputs and policies, local-history/game correspondence, endpoint continuation and certificate reuse, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 24-page technical appendix supplies complete proofs, full input encodings and detailed interpretation analyses. The separate 48-page S1–S5 supplement preserves the experimental records. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+The 18-page main text develops local-contract compilation: complete Cell and Policy inputs and policies, local-history/game correspondence, endpoint continuation and certificate reuse, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 25-page technical appendix supplies complete proofs, full input encodings and detailed interpretation analyses. The separate 48-page S1–S5 supplement preserves the experimental records. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
 
 ## What problem does it solve?
 
@@ -92,7 +92,7 @@ Open `tool/models/GSM_FG.lts`, choose `UPDATE_CONTROLLER_OTF_FG`, and click **Co
 
 ## Results and interpretation
 
-All results below are saved observations, not newly selected measurements. Counts include the negative and unresolved cases. The [paper snapshot](paper/main.pdf) and [supplement](paper/supplement.pdf) state the formal assumptions; the tables below explain what the evidence does and does not establish.
+All results below are saved observations, not newly selected measurements. Counts include the negative and unresolved cases. The [paper snapshot](paper/main.pdf) and [integrated supplement](paper/supplementary_material.pdf) state the formal assumptions; the tables below explain what the evidence does and does not establish.
 
 ### Why fine granularity can matter
 

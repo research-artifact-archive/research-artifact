@@ -36,6 +36,7 @@ DISPLAY_FILES = (
     'figures/guarantee_evidence_map.tex',
     'technical_fragments/ducs_cell_complete.tex',
     'technical_fragments/synthesis_statement.tex',
+    'technical_fragments/synthesis_complete_main.tex',
     'technical_fragments/correctness_proof.tex',
     'technical_fragments/cell_residual_derivation.tex',
     'technical_fragments/constructed_contracts.tex',

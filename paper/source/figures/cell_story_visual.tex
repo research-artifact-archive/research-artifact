@@ -47,14 +47,14 @@
   \draw[->] (\left+.65,.05)--(\right-.65,.05);
   \node[action] at ({(\left+\right)/2},.57) {\word};
 }
-\node[align=left,anchor=west,font=\footnotesize] at (9.92,.02) {Both paths\\reach a fixed\\new target.};
+\node[align=left,anchor=west,font=\footnotesize] at (9.92,.02) {Each path\\reaches its\\selected target.};
 \CellRuleBand{-.62}{6.3}{-.91}{black!7}{Old rule: inspection forbidden}
 \CellRuleBand{4.5}{9.62}{-1.32}{blue!10}{New: clear ($B$ empty at new-start)}
 \end{scope}
 \node[draw,fill=orange!9,rounded corners=2pt,align=left,text width=11.7cm,inner sep=4pt,anchor=north west,font=\small] at (-.65,-5.35)
   {\textbf{Joint $A+B$ transfer: never enabled.} It requires two empty stations,\\but every move and requirement change preserves exactly one workpiece.};
 \end{tikzpicture}
-\caption{A complete local policy from both old entries. Bands mark active rules and new-rule inspection memory; new-start precedes old-stop. Each arrow has one action and one outcome, decreasing rank toward a fixed new target. Joint transfer merges these local commands with endpoints and requirements unchanged; this is not a DUCS encoding.}
+\caption{A complete local policy from both old entries. Bands mark active rules and new-rule inspection memory; new-start precedes old-stop. Each arrow has one action and one outcome, decreasing rank toward its selected new target. Joint transfer merges these local commands with endpoints and requirements unchanged; this is not a DUCS encoding.}
 \label{fig:cell-story}\label{tab:cell-story}
 \Description{Two complete paths track the workpiece, station versions, active rules and inspection memory. From A holding: replace B, move to B, start the new rule with inspection pending, stop the old inspection ban, inspect at B to clear the new memory, replace A. From B holding: replace A, move to A, start the new rule already inspection-clear, stop the old rule, replace B. Both rules are active between new-start and old-stop. Ranks decrease from six and five to zero. A joint replacement is impossible because both stations can never be empty.}
 \end{figure}

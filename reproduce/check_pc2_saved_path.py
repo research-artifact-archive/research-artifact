@@ -17,6 +17,37 @@ def verify_text(certificate, input_source, table_source):
     states = {s['id']: s for s in data['states']}
     if len(states) != len(data['states']) or data['decision'] != 'WIN' or not states[126]['initial']:
         raise ValueError('PC2 validation path requires unique states, a WIN record and its saved entry flag')
+    # Check the all-entry rank claim against the saved graph, separately from the
+    # illustrative rank-31 path below. This performs no synthesis or measurement.
+    edges = data['strategy_edges']
+    entries = [q for q, state in states.items() if state['initial']]
+    if (len(states), len(edges), len(entries)) != (381, 522, 126):
+        raise ValueError('PC2 all-entry certificate census changed')
+    if max(s['rank'] for s in states.values()) != 37 or max(states[q]['rank'] for q in entries) != 37:
+        raise ValueError('PC2 maximum state/entry rank differs from 37')
+    successors = {q: [] for q in states}
+    for a, _, b in edges:
+        if a not in states or b not in states or states[a]['rank'] <= states[b]['rank']:
+            raise ValueError('PC2 certificate is not closed with strictly decreasing ranks')
+        successors[a].append(b)
+    reached = set(entries)
+    pending = list(entries)
+    while pending:
+        for q in successors[pending.pop()]:
+            if q not in reached:
+                reached.add(q); pending.append(q)
+    if reached != set(states):
+        raise ValueError('PC2 certificate contains a state outside all-entry reachability')
+    longest = {}
+    for q in sorted(states, key=lambda q: states[q]['rank']):
+        if states[q]['goal']:
+            longest[q] = 0
+        else:
+            if not successors[q]:
+                raise ValueError('PC2 certificate contains a non-goal deadlock')
+            longest[q] = 1 + max(longest[b] for b in successors[q])
+    if max(longest[q] for q in entries) != 37:
+        raise ValueError('PC2 longest entry-to-goal path differs from 37')
     path = [126,139,141,142,143,144,145,146,147,148,149,150,151,152,153,114,
             22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7]
     events = []
@@ -96,7 +127,7 @@ def verify_text(certificate, input_source, table_source):
             'new_solver_or_experiment_executed': False}
 
 
-EXPECTED_PATH_IDS = "The main paper's displayed path starts at $q_{126}$ and ends at $q_7$, whose handover target is \\texttt{new-00000009}. All 13 new monitors are 0 there and no command remains. Its prefix to $q_{12}$ has two arrivals, twelve stops, four transfer/completion events and eight starts, with no $out_1$ or successful tool result."
+EXPECTED_PATH_IDS = "The path in Table~\\ref{tab:pc2-saved-path} starts at $q_{126}$ and ends at $q_7$, whose handover target is \\texttt{new-00000009}. All 13 new monitors are 0 there and no command remains. Its prefix to $q_{12}$ has two arrivals, twelve stops, four transfer/completion events and eight starts, with no $out_1$ or successful tool result."
 
 def verify_history_pointer(appendix):
     if appendix.count(EXPECTED_PATH_IDS) != 1:

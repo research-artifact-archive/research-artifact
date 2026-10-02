@@ -30,7 +30,7 @@
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{theorem}[lemma]{Theorem}
 \newtheorem{proposition}[lemma]{Proposition}
-\title{Fine-Grained Dynamic Update Controller Synthesis\\Supplementary Proofs and Tables}
+\title{Fine-Grained Dynamic Update Controller Synthesis:\\Component Changes and Requirement Lifetimes\\Supplementary Proofs and Tables}
 \author{Anonymous Authors}
 \date{}
 \input{build/generated/rq3-ad-numbers.tex}
@@ -133,6 +133,10 @@ Both executable inputs retain the interval requirement that persistent alignment
 
 \subsection{Complete parameters for the smaller witnesses}
 \textbf{$\mathcal W_b$.} $\Sigma_{\mathrm{N}}=\{idle,u,a,b,d_A,d_B\}$; only $u$ is uncontrollable.
+The old plant has states $\{w,a_0,b_0,a_1,b_1\}$, initially $w$, and exactly the non-idle transitions
+$w\xrightarrow{u}a_0$, $w\xrightarrow{u}b_0$, $a_0\xrightarrow{a}a_1$, $b_0\xrightarrow{b}b_1$, $a_1\xrightarrow{d_A}w$, and $b_1\xrightarrow{d_B}w$.
+The new plant has states $\{x,y\}$, initially $x$, with $x\xrightarrow{d_A}y$ and $y\xrightarrow{d_B}x$.
+Every old and new plant state has an $idle$ self-loop; there are no other plant transitions.
 $g=\{(a_1,x),(b_1,y)\}$, $\SigmaU=\{\rho\}$, $\prec=\emptyset$.
 One-state $C^o/C^n$ loop on all six ordinary labels/$\{idle,d_A,d_B\}$, respectively.
 All requirement, monitor and $\iota$ families are empty.
@@ -140,13 +144,15 @@ $Q_0=\{((o,s),(),\{\rho\}):s\in\{w,a_0,b_0,a_1,b_1\}\}$;
 $Z_{load}=\{(x,c_n),(y,c_n)\}$. Goals are the two new states with empty $P$; $\kappa$ appends $c_n$.
 \par\textbf{$\mathcal W_r$.} All events controllable; $\Sigma_{\mathrm{N}}=\{idle,align\}$, $g=\{(r,n)\}$,
 $\SigmaU=\{\rho,t,s\}$, $t=\ustop{r_o},s=\ustart{r_n}$, $\prec=\emptyset$.
+The old plant has states $\{w,r\}$, initially $w$, with $w\xrightarrow{align}r$ and an $idle$ self-loop at each state. The new plant has the single initial state $n$ and an $idle$ self-loop. These are all plant transitions.
+Each monitor has initial safe state $k$ and absorbing error state $E$; $align$ takes $k$ to $E$, and every other label self-loops at $k$.
 One-state $C^o$ has alphabet $\{idle,align\}$ but only an $idle$ loop; $C^n$ has only an $idle$ loop.
 $R^{old/new/upd}=\{r_o\}/\{r_n\}/\emptyset$;
 $\operatorname{dom}\iota_{r_n}=\{(o,r),(n,n)\}$, $\iota_{r_n}=k$. Its supplied residual forbids $align$ after activation and erases ordinary events before activation (exact RS).
 $\Reach(\mathsf{CL}^{\mathrm{old}})=\{(w,c_o,k)\}$,
 $Q_0=\{((o,w),(k,\bot),\{\rho,t,s\})\}$;
 $Z_{load}=\Reach(\mathsf{CL}^{\mathrm{new}})=\{(n,c_n,k)\}$. The unique goal is $((n,n),(\bot,k),\emptyset)$; $\kappa$ appends $c_n$.
-\par Arrows entering a state mark local initials; dashed edges denote transfer. Unlisted plant/controller transitions are empty, unlisted non-error monitor transitions self-loop, and $E$ absorbs all labels. Every endpoint admits $idle$ and is deadlock-free.
+\par Unlisted controller transitions are empty. The four successor rules supply transfer and requirement operations. In $\mathcal W_b$, both branch paths are admitted by $C^o$, and $d_A$ reaches $y$ from the new initial $x$, establishing the stated entry and load sets. In $\mathcal W_r$, the old controller disables $align$, establishing its singleton entry set. Every endpoint admits $idle$ and is deadlock-free.
 
 \section{Finite games, search invariants, and certificates}
 \label{supp:search}
@@ -179,7 +185,7 @@ The initial root insertion establishes these properties. Expansion, successor di
 \label{supp:ordering}
 The RQ3 LTS configurations disable the preliminary guided search (both guided limits are zero). The complete algorithm queries every uncontrollable candidate first. If any such bucket is nonempty, it omits controllable queries by the UC-priority reduction. The underlying Post relation still contains any enabled ordinary controllable edges, which Direct-Full materializes. Otherwise lazy and update-first consume their sorted controllable cursor through the first nonempty bucket, deferring the rest; eager consumes every controllable candidate. A deferred candidate is never removed merely because it appears unpromising.
 
-The default lazy/eager priority depends on the pending operations and endpoint projection, as follows. Entries within each row have increasing priority; all listed types remain candidates if the game enables them.
+The default lazy/eager priority depends on the pending operations and endpoint projection, as follows. Entries in each row are tried from left to right; all listed types remain candidates if the game enables them.
 \begin{center}\small
 \begin{tabular}{@{}p{.40\linewidth}p{.56\linewidth}@{}}\toprule
 Condition & Priority classes (first to last)\\\midrule
@@ -255,10 +261,10 @@ H counts violations before activation. If an admitted history reaches ERROR, its
 
 \begin{lemma}[Fluent-determined exact initialization]
 \label{lem:fluent-determined}
-Let the freely reachable product of the deterministic requirement monitor (including absorbing errors) and all its referenced fluent observers start at their specified initial states. Suppose equal fluent vectors in that product imply equal monitor states. Let $\sigma_r(v)$ return that unique monitor state for each reachable vector $v$. For any activation state whose histories are represented in this product and whose supplied initializer is $\iota_r(\xi)=\sigma_r(f(\xi))$, initialization is an exact residual for the history-inclusive interpretation.
+Let the freely reachable product of the deterministic requirement monitor (including absorbing errors) and all its referenced fluent observers start at their specified initial states. Suppose equal fluent vectors in that product imply equal monitor states. Let $\sigma_r(v)$ return that unique monitor state for each reachable vector $v$. For any activation state with $\mathsf H_r(\xi)\ne\varnothing$ whose histories are represented in this product and whose supplied initializer is $\iota_r(\xi)=\sigma_r(f(\xi))$, initialization is an exact residual for the history-inclusive interpretation.
 \end{lemma}
 \begin{proof}
-Each projected activation history reaches a product pair $(\eta_r^*(m_r^0,h),f(\xi))$. Fluent determination makes its first coordinate equal to $\sigma_r(f(\xi))$, independently of $h$. Thus every language in the intersection defining $\mathcal C_r(\xi)$ is the same language $\mathcal L_r(\iota_r(\xi))$. Their intersection is that language, proving equality in RS.
+Each projected activation history reaches a product pair $(\eta_r^*(m_r^0,h),f(\xi))$. Fluent determination makes its first coordinate equal to $\sigma_r(f(\xi))$, independently of $h$. Thus every language in the intersection defining $\mathcal C_r(\xi)$ is the same language $\mathcal L_r(\iota_r(\xi))$. Because the history family is nonempty, its intersection is that language, proving equality in RS. For an empty history family, the intersection is $\Sigma^*$ and this argument gives inclusion only, not equality in general.
 \end{proof}
 
 A single non-error state is insufficient for this lemma. For $[]p$ with $p$ initially true, let $a$ make $p$ false and $b$ restore it. The empty history and $ab$ have the same current fluent value but reach the safe and absorbing-error monitor states, respectively. A check that discards errors verifies only safe-prefix determination, a weaker condition that needs a separate safe-history premise. We use the full product, including errors. Failure of this plant-independent sufficient condition leaves RS unverified for the actual activation histories; it is not by itself a counterexample to the supplied plant's RS.
@@ -571,7 +577,7 @@ The generated provenance below retains both the original interrupted attempt and
 \clearpage
 
 \paragraph{Artifact reproduction status.}
-The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation, evidence and manuscript snapshot is identified by tag \texttt{fgducs-c64-20261002}; the repository includes the three corresponding PDFs, source and stable-cross-reference build instructions. The revised contract-compilation manuscript and appendix add mathematical arguments and static saved-policy analysis; experimental observations are unchanged. This snapshot does not identify a completed conference submission.
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The matching implementation, evidence and manuscript snapshot is identified by tag \texttt{fgducs-c68-20261002}. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
 
 \clearpage
 \begin{table}[!htbp]

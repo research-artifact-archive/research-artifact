@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Build the three paper PDFs in a fresh workspace with stable cross-references."""
+"""Build the main paper, integrated supplement and component PDFs with stable links."""
 import argparse
 import hashlib
 import json
 from pathlib import Path
 import shutil
 import subprocess
+from pypdf import PdfReader
+from package_supporting_pdfs import package
 
 
 def auxiliary_signature(build):
@@ -60,6 +62,14 @@ def main():
         if any(token in log for token in unresolved):
             raise SystemExit('Inspect unresolved-reference warnings in ' + name + '.log')
         shutil.copy2(build/(name+'.pdf'), out/(name+'.pdf'))
+    title = ' '.join((PdfReader(build/'main.pdf').metadata.title or
+                      'Fine-Grained Dynamic Update Controller Synthesis').replace(':', ': ').split())
+    packaged = package(build/'main.pdf', build/'technical_appendix.pdf',
+                       build/'supplement.pdf', out/'submission', auto_guide=True,
+                       visible_page_numbers=True, title=title)
+    for name in ('main', 'supplementary_material', 'technical_appendix'):
+        shutil.copy2(packaged/(name+'.pdf'), out/(name+'.pdf'))
+    documents = ('main', 'supplementary_material', 'technical_appendix', 'supplement')
     print(json.dumps({'status': 'PASS', 'cross_reference_rounds': round_number,
                       'outputs': [str(out/(name+'.pdf')) for name in documents],
                       'source_unchanged': True}))
