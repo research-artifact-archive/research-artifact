@@ -1,0 +1,21 @@
+\begin{table}[!htbp]
+\caption{Complete Cell components, controllers and monitors. $o/n$ denote old/new versions; $h/e$ mean holding/empty. Parentheses mark initial states. $m_A,m_B$ move to $A,B$; $j$ inspects at $B$.}
+\label{tab:cell-finite-main}
+\centering\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.16\linewidth}>{\raggedright\arraybackslash}p{.20\linewidth}p{.58\linewidth}@{}}\toprule
+Object & States (initial) & Ordinary transitions\\\midrule
+$A^o,A^n$ & $h,e$ ($h$) & $h\xrightarrow{m_B}e$, $e\xrightarrow{m_A}h$\\
+$B^o$ & $h,e$ ($e$) & $e\xrightarrow{m_B}h$, $h\xrightarrow{m_A}e$\\
+$B^n$ & $h,e$ ($e$) & $e\xrightarrow{m_B}h$, $h\xrightarrow{m_A}e$, $h\xrightarrow{j}h$\\
+$C^o$ & $c_o$ ($c_o$) & $c_o\xrightarrow{m_A,m_B}c_o$\\
+$C^n$ & $c_0,c_1$ ($c_0$) & $c_0\xrightarrow{m_A,j}c_0$, $c_0\xrightarrow{m_B}c_1$, $c_1\xrightarrow{j}c_0$, $c_1\xrightarrow{m_B}c_1$\\\midrule
+$t_{r_{\rm one}}$ & $A,B,\mathsf{err}$ ($A$) & $A\xrightarrow{m_B}B$, $B\xrightarrow{m_A}A$, $A\xrightarrow{m_A}\mathsf{err}$, $B\xrightarrow{m_B}\mathsf{err}$\\
+$t_{r_{\rm old}}$ & $k,\mathsf{err}$ ($k$) & $k\xrightarrow{j}\mathsf{err}$\\
+$t_{r_{\rm inspect}}$ & $c,d,\mathsf{err}$ ($c$) & $c\xrightarrow{m_B}d$, $d\xrightarrow{j}c$, $d\xrightarrow{m_A}\mathsf{err}$\\\bottomrule
+\end{tabular}
+\par\smallskip\raggedright
+$k,c,d$ mean old-safe, inspection-clear and inspection-pending; $c_0,c_1$ are distinct controller states.
+Component/controller alphabets are exactly their displayed labels; unlisted edges are absent.
+Unlisted non-error monitor edges self-loop, and $\mathsf{err}$ absorbs every label.
+Each comma-separated label denotes an edge.\par
+\end{table}

@@ -1,0 +1,20 @@
+Inputs have 1--5 components, 4--131 entries, 1--12 old/new requirements each and 3--26 commands, using PC2/R2's input log.
+\begin{table}[!htbp]
+\caption{The nine adapted inputs. Old/new requirements are shared across variants; interval counts are Base/R1/R2.}
+\label{tab:input-structure}
+\centering\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Input & Comp. & Entries & Old/New & Interval B/R1/R2 & $T$ & $U$\\\midrule
+GSM & \ContractGSMComponents{} & \FixedGSMEntries{} & \ContractGSMOld{}/\ContractGSMNew{} & \ContractGSMBase{}/\ContractGSMROne{}/\ContractGSMRTwo{} & \ContractGSMTransferPairs{} & \ContractGSMUpdates{}\\
+Industry & \ContractIndustryComponents{} & \FixedIndustryEntries{} & \ContractIndustryOld{}/\ContractIndustryNew{} & \ContractIndustryBase{}/\ContractIndustryROne{}/\ContractIndustryRTwo{} & \ContractIndustryTransferPairs{} & \ContractIndustryUpdates{}\\
+MetaSocket & \ContractMetaSocketComponents{} & \FixedMetaSocketEntries{} & \ContractMetaSocketOld{}/\ContractMetaSocketNew{} & \ContractMetaSocketBase{}/\ContractMetaSocketROne{}/\ContractMetaSocketRTwo{} & \ContractMetaSocketTransferPairs{} & \ContractMetaSocketUpdates{}\\
+PowerPlant & \ContractPowerPlantComponents{} & \FixedPowerPlantEntries{} & \ContractPowerPlantOld{}/\ContractPowerPlantNew{} & \ContractPowerPlantBase{}/\ContractPowerPlantROne{}/\ContractPowerPlantRTwo{} & \ContractPowerPlantTransferPairs{} & \ContractPowerPlantUpdates{}\\
+PC Arms=1 & \ContractPCOneComponents{} & \FixedPCOneEntries{} & \ContractPCOneOld{}/\ContractPCOneNew{} & \ContractPCOneBase{}/\ContractPCOneROne{}/\ContractPCOneRTwo{} & \ContractPCOneTransferPairs{} & \ContractPCOneUpdates{}\\
+PC Arms=2 & \ContractPCTwoComponents{} & \FixedPCTwoEntries{} & \ContractPCTwoOld{}/\ContractPCTwoNew{} & \ContractPCTwoBase{}/\ContractPCTwoROne{}/\ContractPCTwoRTwo{} & \ContractPCTwoTransferPairs{} & \ContractPCTwoUpdates{}\\
+Railcab & \ContractRailcabComponents{} & \FixedRailcabEntries{} & \ContractRailcabOld{}/\ContractRailcabNew{} & \ContractRailcabBase{}/\ContractRailcabROne{}/\ContractRailcabRTwo{} & \ContractRailcabTransferPairs{} & \ContractRailcabUpdates{}\\
+Surveillance & \ContractSurveillanceComponents{} & \FixedSurveillanceEntries{} & \ContractSurveillanceOld{}/\ContractSurveillanceNew{} & \ContractSurveillanceBase{}/\ContractSurveillanceROne{}/\ContractSurveillanceRTwo{} & \ContractSurveillanceTransferPairs{} & \ContractSurveillanceUpdates{}\\
+Workflow & \ContractWorkflowComponents{} & \FixedWorkflowEntries{} & \ContractWorkflowOld{}/\ContractWorkflowNew{} & \ContractWorkflowBase{}/\ContractWorkflowROne{}/\ContractWorkflowRTwo{} & \ContractWorkflowTransferPairs{} & \ContractWorkflowUpdates{}\\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize $T$ counts declared transfer pairs before fluent observers; $U$ counts transfer, stop and start commands. Entries agree across completed variants; PC Arms=2/R2 times out and its requirement counts come from its input log. Only Railcab has branching transfers. These nine inputs declare no explicit precedence; the separate cell witness requires $\mathsf{start}\prec\mathsf{stop}$; R2 uses interval monitors.
+\end{table}
+

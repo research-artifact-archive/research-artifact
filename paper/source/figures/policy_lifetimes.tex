@@ -1,0 +1,43 @@
+% All seven states and six edges of the saved Policy(2) Lazy certificate.
+% State ids in displayed order: 4,5,6,3,2,0,1. Both 4 and 5 are entries.
+% Active bits (old audit,new audit,old role,new role):
+% 1010,1010,1110,0110,0100,0100,0101.
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth,
+  policynode/.style={draw,circle,minimum size=.33cm,inner sep=1pt,font=\footnotesize},
+  action/.style={font=\footnotesize,align=center,anchor=south},
+  bandlabel/.style={font=\footnotesize,anchor=east}]
+\node[anchor=west,font=\small\bfseries] at (-1.2,1.13) {Two old entries share a completing path};
+\node[anchor=east,font=\footnotesize] at (10.46,1.13) {Circles give remaining-event ranks};
+\foreach \x/\r in {0/6,1.7/5,3.4/4,5.1/3,6.8/2,8.5/1,10.2/0}
+  \node[policynode] (r\r) at (\x,0) {\r};
+\foreach \left/\right/\word in {6/5/{service},5/4/{start\\new audit},4/3/{stop\\old audit},3/2/{stop\\old role},2/1/{identity\\transfer},1/0/{start\\new role}}{
+  \draw[->] (r\left)--(r\right) node[midway,action,yshift=2pt] {\word};
+}
+\node[font=\footnotesize,align=center,anchor=north] at (0,-.24) {logged};
+\node[font=\footnotesize,align=center,anchor=north] at (1.7,-.24) {unlogged};
+\node[font=\footnotesize,align=center,anchor=north] at (10.2,-.24) {fixed new\\target};
+\node[bandlabel] at (-.25,-1.00) {Old audit};
+\node[bandlabel] at (-.25,-1.36) {New audit};
+\node[bandlabel] at (-.25,-1.89) {Old role};
+\node[bandlabel] at (-.25,-2.25) {New role};
+\foreach \y in {-1.00,-1.36,-1.89,-2.25}
+  \draw[black!25] (0,\y)--(10.4,\y);
+\draw[fill=blue!15,draw=blue!60!black] (0,-1.14) rectangle (4.25,-.86);
+\draw[fill=blue!15,draw=blue!60!black] (2.55,-1.50) rectangle (10.4,-1.22);
+\draw[fill=orange!15,draw=orange!60!black] (0,-2.03) rectangle (5.95,-1.75);
+\draw[fill=orange!15,draw=orange!60!black] (9.35,-2.39) rectangle (10.4,-2.11);
+\draw[black!65,dashed] (2.55,-.71)--(2.55,-1.57);
+\draw[black!65,dashed] (4.25,-.71)--(4.25,-1.57);
+\node[font=\footnotesize,anchor=west] at (4.48,-1.65) {Audit coverage continues; the overlap is required.};
+\draw[<->,black!65] (6.00,-2.17)--(9.30,-2.17);
+\node[font=\footnotesize,anchor=south] at (7.65,-2.17) {Both roles inactive: allowed};
+\node[draw,fill=black!3,rounded corners=2pt,text width=11.45cm,inner sep=4pt,
+  font=\footnotesize,align=left,anchor=north west] at (-1.2,-2.70)
+  {\textbf{Grouped starts/stops:} the first start leaves both roles active; the first stop leaves no audit. Both violate the interval rule. Ordinary events and identity transfer preserve active bits.};
+\end{tikzpicture}
+\caption{Policy with no supplied precedence. Logged/unlogged mark both entries; bars mark active requirements. New-audit start resets to unlogged; handover reaches new audit unlogged and new role valid. Arrows have one action and outcome. The role gap is allowed; ordinary events may be withheld, with no service-continuity guarantee.}
+\label{fig:policy-lifetimes}
+\Description{A seven-state path covers logged and unlogged old entries and decreases rank from six or five to zero. Old and new audits overlap between new-audit start and old-audit stop. Old role stops before new role starts, leaving a permitted interval with neither role active. Grouping both old stops and both new starts makes the first boundary unsafe.}
+\end{figure}

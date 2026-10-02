@@ -1,0 +1,12 @@
+\begin{proof}
+\emph{Termination.} The finite input induces finitely many states and candidates. Each state is discovered and expanded at most once; each retry consumes a new candidate, and each promotion adds a state to $W$ once. Reverse incidences are processed on those promotions, so every worklist drain is finite. Eventually all entries win or both exploration queues empty.
+
+\emph{Soundness.} Induction on promotions gives complete successor sets with smaller retained ranks: expansion supplies all uncontrollables, or the selected nonempty controllable bucket supplies all outcomes. A queried bucket never changes, and ranks are fixed on first promotion, so this evidence persists. If all entries win, their policy closure is safe and every non-goal has a successor. Strict decrease of the natural-number rank excludes infinite runs; nonempty successors exclude non-goal sinks. Thus every maximal run reaches a goal within its initial rank many events. Goal recognition uses modeled uncontrollable quiescence and supplies each compatible $\kappa(q)$.
+
+The monitor-interval lemma above supplies the interval invariant; goal matching preserves components and new-monitor states into the verified endpoint.
+
+\emph{Completeness.} At failure, promotion has reached its fixed point. An entry lies in $L=V\setminus W$, and $L$ contains no goal. By Lemma~\ref{lem:search-coverage}, empty $\mathsf{Open}$ ensures every safe non-goal in $L$ was expanded. With uncontrollables, complete expansion and exhausted propagation imply an uncontrollable outcome in $L$; otherwise promotion would apply. Without uncontrollables, empty $\mathsf{Retry}$ gives every enabled controllable bucket, each with an outcome in $L$ for the same reason. Against any policy, the environment keeps choosing these outcomes; permitting no event produces a deadlock. The resulting run reaches an unsafe state, deadlocks outside a goal, or remains in $L$ forever. Each contradicts winning. Hence a winning policy rules out failure; termination then forces success. 
+
+The losing-region strategy defeats history-dependent policies after every history; success supplies a ranked state-based policy. Lemma~\ref{lem:uc-priority} preserves winning in the original supplied game.
+\end{proof}
+

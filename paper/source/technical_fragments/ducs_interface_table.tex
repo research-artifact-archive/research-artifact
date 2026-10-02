@@ -1,0 +1,13 @@
+\begin{table}[!htbp]
+\caption{Native synthesis inputs and outputs. FG-DUCS exposes component transfers and requirement boundaries as separate choices. DUCS also permits intermediate stages encoded in the new environment~\cite[Defs.~4.1--4.3, Sec.~4.2]{Nahabedian2020}; Section~\ref{sec:ducs-cell-construction} constructs one Cell update. General encoding equivalence and cost remain unevaluated.}
+\label{tab:ducs-interface}
+\centering\small
+\begin{tabular}{@{}p{.18\linewidth}p{.37\linewidth}p{.39\linewidth}@{}}\toprule
+Aspect & DUCS & FG-DUCS\\\midrule
+Transfer input & global state relation & per-component relations $g_i$\\
+Requirement changes & old/new goals and transition requirements & individual boundaries, initializers and interval monitors\\
+Intermediate stages & modeled in the new environment & induced by local commands and precedence\\
+New control & synthesized with the update & supplied controller and targets\\
+Result & updated controller and state relation, or no solution & policy, rank and handover, or losing region\\\bottomrule
+\end{tabular}
+\end{table}

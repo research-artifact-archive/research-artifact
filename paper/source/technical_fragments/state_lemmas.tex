@@ -1,0 +1,11 @@
+\paragraph{Lemma (memoryless policies suffice).}
+If any history-dependent policy wins this finite game, a state-based policy wins.
+\emph{Proof.} Starting with goals, attractor layers add safe states whose nonempty proving sets lie in previous layers. Choosing those sets gives a state-based policy with decreasing layer index. Outside the fixed point, the environment can keep an outcome outside after every history, or force an unsafe state or deadlock, defeating any history-dependent policy (S2).
+
+\paragraph{Lemma (monitor intervals).}
+Along every update prefix, each active monitor is its inherited or initialized state advanced over exactly the labels in its declared active interval.
+\emph{Proof.} Entry inherits old states and initializes interval monitors. Ordinary events and transfers advance all active monitors once. Stop removes its monitor before observation, while others advance. Start advances existing monitors and installs the new one after its boundary. Pending commands enforce one-shot execution and consistent versions/activity. Induction gives the stated interval; safety makes it non-error, and goal matching preserves new-monitor states into the endpoint.
+
+
+
+

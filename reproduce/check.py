@@ -12,4 +12,6 @@ if any(x['status']!='PASS' for x in report['checks']):raise SystemExit('Incomple
 subprocess.run([sys.executable,str(w/'evidence/reproduce_supplement.py'),'--package',str(w),'--output',str(out/'supplement')],check=True)
 extra=Path(__file__).resolve().parent/'check_extensions.py'
 if extra.exists():subprocess.run([sys.executable,str(extra),'--workspace',str(w),'--output',str(out/'extensions.json')],check=True)
+displays=Path(__file__).resolve().parent/'check_paper_displays.py'
+if displays.exists():subprocess.run([sys.executable,str(displays),'--output',str(out/'paper-displays.json')],check=True)
 print('PASS: saved-evidence reproduction completed. No benchmark rerun was performed.')

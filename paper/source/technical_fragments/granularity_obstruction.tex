@@ -1,0 +1,8 @@
+\begin{lemma}[Mandatory-command obstruction]
+\label{lem:mandatory-obstruction}
+Let $q_0$ be an entry and $B$ a nonempty set of commands pending there. Suppose a safe region $R$ contains $q_0$, retains all commands in $B$, and is closed under every safe successor whose label is outside $B$. If each command in $B$ is disabled or has an unsafe outcome at every state in $R$, no winning policy covers $q_0$.
+\end{lemma}
+\begin{proof}
+Every goal exhausts pending commands, so a winner must execute a first command in $B$. Safety and closure keep its prefix in $R$, where that step is disabled or has an environment-chosen unsafe outcome. Avoiding it yields a non-goal deadlock or infinite run, also losing.
+\end{proof}
+In Cell's one-workpiece region, joint transfer is disabled. Policy retains its initial active bits until either grouped boundary violates the interval. PC2-Rolling's enabled joint transfer violates availability (Section~\ref{sec:pc2-case}). These results concern specified merges, not native DUCS expressiveness.

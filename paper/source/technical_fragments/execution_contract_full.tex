@@ -1,0 +1,15 @@
+\paragraph{Linking the phases.}
+\label{def:link}
+The linked model connects disjoint old/update/new phases by entry $z\mapsto\Init(z)$, policy edges $\SuccSet_\sigma$ and handover $q\mapsto\kappa(q)$. Here $\Init(z)$ is the admitted update state copied and initialized from old state $z$, $\SuccSet_\sigma$ gives the policy successors, and $\mathsf{CL}^v$ is the monitored closed loop of endpoint version $v$. Entry and handover add no game event. Let $\alpha$ be a phase-disjoint observation map.
+
+\noindent\textbf{A1 (endpoints):} actual endpoint observations map to same-labeled edges of $\mathsf{CL}^v$ and preserve its component and monitor states.
+\par\noindent\textbf{A2 (update observations and progress):} at a non-goal, filtering the complete environment event set disables every controllable event outside $\sigma(q)$ and disables no uncontrollable event; every remaining event/outcome maps into $\Post(q,a)$ and is reported with its successor identity. The resulting set is nonempty and a next event is eventually observed. This progress premise assumes no fairness among event choices.
+\par\noindent\textbf{A3 (commands and observation):} each command starts at uncontrollable quiescence, finishes atomically and failure-free in finite time, and reports one modeled transfer or monitor-lifecycle transition with its successor identity. Internal $\tau$ steps, unobservable outcomes and divergence are outside the model.
+\par\noindent\textbf{A4 (boundaries):} entry atomically observes the actual reachable old state $z$ and switches to $\Init(z)$; at a quiescent goal, ordinary controllables are disabled and handover installs its selected controller state and switches control. Each boundary is a finite, failure-free linearizable operation preserving the specified component and monitor states~\cite{HerlihyWing1990}.
+
+\begin{theorem}[Conditional trace lifting]
+\label{thm:realization}
+For a returned WIN certificate $(\sigma,\rank,\kappa)$ of an eligible contract, every execution satisfying A1--A4 maps through $\alpha$ to the linked model. From an observed entry $\alpha(x_0)=\Init(z)\in Q_0$, the update reaches quiescent handover within $\rank(\Init(z))$ observed game events and then hands control to the compatible endpoint. With complete activation histories as in Section~\ref{sec:monitor-meaning} and RS for the supplied initializers, each declared active interval satisfies its requirement/residual interpretation. Agreement with application intent remains an input obligation.
+\end{theorem}
+
+

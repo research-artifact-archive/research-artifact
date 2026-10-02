@@ -1,0 +1,6 @@
+\paragraph{Checking the returned evidence.}
+For WIN, let $D_\sigma=\Reach_\sigma(Q_0)$. The checker requires exactly $D_\sigma$ as the rank domain, safety throughout it and, at every non-goal, enabled selected controls, nonempty successor sets inside it, and strict rank decrease for every outcome. At goals it checks rank zero, UC quiescence and compatible $\kappa(q)\in Z_{\rm load}$, with $\operatorname{dom}\kappa=D_\sigma\cap\Goal$; omitted policy entries are empty.
+
+For LOSS, $L\subseteq\mathcal Q$ must include an entry state and exclude all goals. Every safe $q\in L$ must have some UC outcome in $L$ when UC is enabled; otherwise every enabled controllable must have an outcome in $L$. Unsafe states and non-goal deadlocks lose. These conditions certify search relative to shared $\Post$ and endpoint predicates~\cite{HofmannEtAl2016MuCertificates}; the implementation and independent checks in the main paper state the trust boundary (Section~\ref{sec:evaluation}).
+
+

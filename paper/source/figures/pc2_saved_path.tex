@@ -1,0 +1,16 @@
+\begin{table}[!htbp]
+\caption{One saved \PCTwoTraceEvents{}-event PC2-Rolling path. O/N: old/new; ARM: unprocessed workpiece; CAL: its calibration counterpart. Ordinary observers stay zero.}
+\label{tab:pc2-saved-path}
+\centering\small
+\begin{tabular}{@{}p{.41\linewidth}llrr@{}}\toprule
+Reached after & Arm 1 & Arm 2 & Available & Rank\\\midrule
+Update entry & O/initial & O/initial & 2 & 31\\
+Two arrivals, twelve old stops & O/ARM & O/ARM & 2 & 17\\
+Transfer arm 1 & N/CAL & O/ARM & 1 & 16\\
+Calibration completion 1 & N/ARM & O/ARM & 2 & 15\\
+Transfer arm 2 & N/ARM & N/CAL & 1 & 14\\
+Calibration completion 2 & N/ARM & N/ARM & 2 & 13\\
+Thirteen new starts: handover & N/ARM & N/ARM & 2 & 0\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize At handover, all 13 new monitors are 0 and no command remains; the matched endpoint has both arms operational. Certificate identifiers are in Technical Appendix~\ref{ta:pc2_history_boundary}. This path supplies no timing and does not replace all-entry/all-outcome checking.}
+\end{table}

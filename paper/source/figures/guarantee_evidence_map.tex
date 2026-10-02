@@ -1,0 +1,15 @@
+\begin{table}[!htbp]
+\caption{What the guarantees establish and where their evidence ends. The three layers are game correctness, requirement interpretation and execution.}
+\label{tab:guarantee-evidence}
+\centering\small
+\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
+Layer/scope & Established result & Evidence and remaining obligation\\\midrule
+Game & Safety, all-outcome finite completion and compatible handover from all entries & Theorem~\ref{thm:correctness}; checking trusts supplied successor/endpoint predicates\\
+A: safe history & NEW language included in every admitted safe-history residual & \RSNewOccurrences{} occurrences (46 requirements, three variants); nonempty scopes unverified beyond one PC2 tuple\\
+E: from entry & UPD initialization equals the entry residual & \VThreeRSUpdExact{} occurrences: 46 R1/89 R2; guards/stage fluents justify entry values\\
+ACT: from start & Source invariants hold from activation through handover and continuation & PC2: all 13 new requirements, all 126 entries; no active ordinary event. GSM: all entries with decode/output\\
+Cell duty & Actual occupancy initializes inspection debt; the monitor exactly enforces its update rules & Bit/monitor induction in Section~\ref{sec:cell-activation-duty}; both entries, including ordinary inspection\\
+Execution & Observed runs follow policy edges and finish within entry rank & Conditional A1--A4; adapter conformance and real-time bounds unvalidated\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize H (whole history) is not claimed: only 39/126 PC2 entries admit a safe full prefix; 87 do not. None of these checks establishes application intent.}
+\end{table}

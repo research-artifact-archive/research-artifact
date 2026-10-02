@@ -1,0 +1,6 @@
+A safe monitor state must express a declared requirement meaning. Residual soundness (RS) requires every accepted continuation to be safe after every admitted activation history; equality is exact, while strict inclusion can reject feasible updates. An empty history scope passes vacuously, and synthesis does not establish scope completeness or intent. Technical Appendix~\ref{ta:residual_formal} gives the full definition.
+
+A Boolean event-history variable, or \emph{fluent}, records setting/resetting labels. The evaluation distinguishes three history scopes:
+\par\noindent\textbf{A (activation-safe), for new requirements (NEW):} admit only safe pre-activation histories consistent with the observed component state.
+\par\noindent\textbf{E (entry-scoped), for interval requirements (UPD):} start the reference at update entry.
+\par\noindent\textbf{H (history-inclusive):} count pre-activation violations too; not claimed. Synthesis does not establish whether the chosen scope matches intent (S3).

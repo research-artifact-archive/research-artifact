@@ -1,0 +1,67 @@
+% Saved evidence only: every completed fixed-budget Lazy/Direct-Full pair.
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=.31cm,font=\footnotesize]
+\definecolor{pairlazy}{RGB}{25,89,135}
+\definecolor{pairfull}{RGB}{159,72,20}
+% Exact input values are kept in the drawing calls below. Both x axes are log10.
+\newcommand{\RQPair}[9]{%
+  \pgfkeys{/pgf/fpu=true}
+  \pgfmathparse{2.8+.6*ln(#3)/ln(10)}
+  \pgfmathfloattofixed{\pgfmathresult}\let\pairlazyx\pgfmathresult
+  \pgfmathparse{2.8+.6*ln(#4)/ln(10)}
+  \pgfmathfloattofixed{\pgfmathresult}\let\pairfullx\pgfmathresult
+  \pgfkeys{/pgf/fpu=false}
+  \node[anchor=east] at (2.55,-#1) {#2};
+  \draw[black!8] (2.8,-#1)--(6.4,-#1);
+  \draw[black!8] (7.1,-#1)--(10.7,-#1);
+  \draw[black!50] (\pairlazyx,-#1)--(\pairfullx,-#1);
+  \fill[pairlazy] (\pairlazyx,-#1) circle (2pt);
+  \draw[pairfull,fill=white,line width=.65pt] ({\pairfullx-.068},-#1-.22) rectangle ({\pairfullx+.068},-#1+.22);
+  \draw[black!50] ({7.1+.72*(ln(#5)/ln(10)+2)},-#1)--({7.1+.72*(ln(#6)/ln(10)+2)},-#1);
+  \draw[pairlazy,line width=1pt] ({7.1+.72*(ln(#7)/ln(10)+2)},-#1)--({7.1+.72*(ln(#8)/ln(10)+2)},-#1);
+  \fill[pairlazy] ({7.1+.72*(ln(#5)/ln(10)+2)},-#1) circle (2pt);
+  \draw[pairfull,fill=white,line width=.65pt] ({7.1+.72*(ln(#6)/ln(10)+2)-.068},-#1-.22) rectangle ({7.1+.72*(ln(#6)/ln(10)+2)+.068},-#1+.22);
+  \RQFullRange{#1}{#9}% reads the final tenth argument as the full-range maximum.
+}
+\newcommand{\RQFullRange}[3]{%
+  \draw[pairfull,line width=1pt] ({7.1+.72*(ln(#2)/ln(10)+2)},-#1)--({7.1+.72*(ln(#3)/ln(10)+2)},-#1);
+}
+\node[font=\small\bfseries] at (4.6,1.65) {Discovered game states};
+\node[font=\small\bfseries] at (8.9,1.65) {Solver time (seconds)};
+\node at (4.6,.72) {exact first-trial count};
+\node at (8.9,.72) {five-run median [min--max]};
+\RQPair{0}{GSM / Base}{31}{75}{0.02242}{0.041565}{0.020787}{0.023611}{0.039793}{0.042116}
+\RQPair{1}{GSM / R1}{34}{115}{0.022777}{0.045033}{0.021636}{0.023207}{0.043775}{0.04716}
+\RQPair{2}{GSM / R2}{34}{68}{0.020066}{0.032708}{0.019708}{0.021884}{0.031112}{0.034581}
+\RQPair{3}{Industry / Base}{272}{282709}{0.189556}{154.179638}{0.186715}{0.201038}{151.858603}{166.197132}
+\RQPair{4}{Industry / R2}{7717}{51096}{1.146286}{27.97713}{1.132477}{1.172573}{27.693145}{28.300967}
+\RQPair{5}{MetaSocket / Base}{8}{82}{0.014853}{0.040759}{0.014379}{0.016549}{0.039188}{0.042291}
+\RQPair{6}{MetaSocket / R1}{8}{95}{0.013647}{0.042646}{0.013049}{0.015778}{0.039221}{0.044135}
+\RQPair{7}{MetaSocket / R2}{16}{34}{0.015234}{0.024017}{0.014267}{0.016234}{0.023428}{0.029051}
+\RQPair{8}{PowerPlant / Base}{73}{8168}{0.046255}{1.851171}{0.04266}{0.050172}{1.82114}{1.87168}
+\RQPair{9}{PowerPlant / R1}{759}{23686}{0.124537}{5.505817}{0.120161}{0.147416}{5.428509}{5.580208}
+\RQPair{10}{PowerPlant / R2}{1330}{3594}{0.179736}{1.013523}{0.177531}{0.180346}{0.99143}{1.02632}
+\RQPair{11}{PC1 / Base}{83}{407019}{0.074065}{157.299694}{0.067799}{0.075369}{155.77299}{158.796487}
+\RQPair{12}{PC1 / R2}{56443}{158218}{6.155061}{77.841962}{6.061801}{6.891452}{76.99876}{78.182267}
+\RQPair{13}{Railcab / R2}{97522}{317094}{15.538125}{282.529473}{15.519691}{15.601273}{279.389789}{284.289201}
+\draw (2.8,-13.65)--(6.4,-13.65);
+\foreach \power/\tick in {0/1,1/10,2/{$10^2$},3/{$10^3$},4/{$10^4$},5/{$10^5$},6/{$10^6$}}{
+  \draw ({2.8+.6*\power},-13.65)--({2.8+.6*\power},-13.9);
+  \node[anchor=north] at ({2.8+.6*\power},-14.1) {\tick};
+}
+\draw (7.1,-13.65)--(10.7,-13.65);
+\foreach \power/\tick in {0/{.01},1/{.1},2/1,3/10,4/100,5/1000}{
+  \draw ({7.1+.72*\power},-13.65)--({7.1+.72*\power},-13.9);
+  \node[anchor=north] at ({7.1+.72*\power},-14.1) {\tick};
+}
+\fill[pairlazy] (3.1,-16) circle (2pt);
+\node[anchor=west] at (3.22,-16) {Lazy};
+\draw[pairfull,fill=white,line width=.65pt] (4.132,-16.22) rectangle (4.268,-15.78);
+\node[anchor=west] at (4.32,-16) {Direct-Full};
+\node[anchor=west] at (6.6,-16) {Both axes logarithmic; lower is better.};
+\end{tikzpicture}
+\caption{Absolute costs for all \FixedDirectFullPairs{} completed Lazy/Direct-Full pairs. Each row is WIN/WIN; Lazy explores fewer states and uses less solver time, with varying gaps. Solver time includes checking but excludes frontend, endpoint preparation and JVM startup. The other 13 Direct-Full contracts time out (Figure~\ref{fig:rq3-outcomes}); they have no point here. This compares complete same-game procedures, not one isolated search factor.}
+\label{fig:rq3-paired-absolute}
+\Description{Paired plots show game-state counts and solver seconds for all 14 contracts completed by both Lazy and Direct-Full. Lazy is lower on both axes for every row. Direct-Full timeouts, and contracts with no paired result, are shown in the separate all-outcome grid.}
+\end{figure}

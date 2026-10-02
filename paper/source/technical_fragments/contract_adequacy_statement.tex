@@ -1,0 +1,9 @@
+\subsection{Why the Generated State Represents the Contract}
+\label{sec:contract-adequacy}
+A \emph{local update history} records labels and realized local outcomes from an old entry, independently of a global game. It obeys local transitions, active monitor folds, one-shot commands, precedence, quiescence and target matching. Old control is released at entry (full operational definition in Technical Appendix~\ref{ta:source_synthesis}).
+
+\begin{proposition}[Adequacy of the generated update game]
+\label{prop:contract-adequacy}
+For an eligible contract, map each local update history to its current component tuple, active monitor memories and unexecuted commands. Histories with the same image admit the same next events and all the same local outcomes, agree on safety, and have the same handover targets. This map gives a label- and outcome-preserving correspondence between local update histories and paths of the generated game. A history-dependent policy satisfying the source obligations exists exactly when a winning policy exists in that game.
+\end{proposition}
+The proof follows each local operation in both directions and transports policies while preserving outcomes, safety, deadlocks and completion (Technical Appendix~\ref{ta:source_synthesis}). This concerns the supplied contract; requirement meaning and Java frontend correctness are separate obligations.

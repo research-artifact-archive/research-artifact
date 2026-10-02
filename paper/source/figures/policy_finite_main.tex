@@ -1,0 +1,24 @@
+\paragraph{A finite boundary witness.}
+Policy(2) preserves audit coverage and excludes simultaneous old/new roles (Table~\ref{tab:policy-finite-c13}). Here $o,n$ mean old/new, $r$ running, $u,l$ unlogged/logged, $A,R$ audit/role, and $\ell_z,a_z$ mean log/access for version $z$.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Complete finite-game input for Policy(2) under Section~\ref{sec:formalization}'s rules. All events are controllable. Unlisted monitor transitions self-loop, including at absorbing error $\mathsf{err}$; unlisted plant/controller edges are absent. Every monitor has alphabet $\Sigma$.}
+\label{tab:policy-finite-c13}
+\begin{tabular}{@{}p{.16\linewidth}p{.78\linewidth}@{}}\toprule
+Part & Finite definition\\\midrule
+Plant and transfer & Both versions have sole, initial state $r$, self-looping on $\SigmaN=\{\ell_o,\ell_n,\mathsf{service},a_o,a_n\}$. Transfer $\rho$ maps $r$ to $r$ and changes only its version tag.\\
+Controllers & For $z\in\{o,n\}$, $C^z$ has alphabet $\SigmaN$, initial state $u$, edges $u\xrightarrow{\ell_z}l$, $l\xrightarrow{\mathsf{service}}u$, and $a_z$ loops at $u,l$. An unreachable third state has all $\SigmaN$ loops (the saved alphabet-padding state).\\
+Endpoint monitors & Old: $A_o,R_o$; new: $A_n,R_n$. $A_z$ has states $u,l,\mathsf{err}$, initially $u$, and edges $u\xrightarrow{\ell_z}l$, $l\xrightarrow{\mathsf{service}}u$, $u\xrightarrow{\mathsf{service}}\mathsf{err}$. $R_z$ has states $\mathsf{ok},\mathsf{err}$, initially $\mathsf{ok}$, with $\mathsf{ok}\xrightarrow{a_{\bar z}}\mathsf{err}$ ($\bar z$ is the other version).\\
+Interval monitor & States are $\{b\in\{0,1\}^4:(b_1\lor b_2)\land\neg(b_3\land b_4)\}\cup\{\mathsf{err}\}$, initially $1010$. Bits track active $(A_o,A_n,R_o,R_n)$. Commands $\mathsf{stop}_A,\mathsf{start}_A,\mathsf{stop}_R,\mathsf{start}_R$ set $b_1=0,b_2=1,b_3=0,b_4=1$, respectively; unsafe results enter $\mathsf{err}$. Ordinary events and $\rho$ preserve bits.\\
+Commands and initializers & The four boundary commands and $\rho$ occur once each; precedence is empty. Stops deactivate old monitors; starts activate new ones. At either $(o,r)$ or $(n,r)$, initialize $A_n=u$, $R_n=\mathsf{ok}$; the interval initializer is defined only at $(o,r)$, returning $1010$. These domains are complete.\\
+Entries and targets & For $x\in\{u,l\}$, entry $q_x$ admits $((o,r),C^o=x,A_o=x,R_o=\mathsf{ok})$, discards $C^o$, installs interval state $1010$, leaves new monitors inactive and marks all commands pending. Both $z_x=((n,r),C^n=x,A_n=x,R_n=\mathsf{ok})$ are targets. Goals require safety, no pending commands and a matching target; UC quiescence is automatic.\\
+Boundary merge & One global start activates both new monitors; one global stop deactivates both old ones. Each monitor composes the two member transitions, audit then role. All other inputs remain fixed.\\\bottomrule
+\end{tabular}
+\end{table}
+
+Lazy returns from $q_u$ $\mathsf{start}_A$, $\mathsf{stop}_A$, $\mathsf{stop}_R$, $\rho$, $\mathsf{start}_R$, traversing interval states $1010$, $1110$, $0110$, $0100$, $0100$, $0101$, then reaches $z_u$. From $q_l$, $\mathsf{service}$ first reaches $q_u$. Ranks five/six bound completion, not shortest length; this safe order is not unique. Audit overlap and a role-free interval are permitted.
+
+Both merged entries lose: the first global start overlaps roles; the first global stop removes audit coverage. Either enters $\mathsf{err}$; ordinary events and transfer preserve these bits. Saved losing closure checks all alternatives, and merge validation confirms equal effects in both member orders.
+
+These supplied games compare boundary granularity, without a DUCS expressiveness claim. Ordinary events can be withheld; service continuity is not required. Actual-history completeness, application adequacy and A1--A4 remain unestablished.

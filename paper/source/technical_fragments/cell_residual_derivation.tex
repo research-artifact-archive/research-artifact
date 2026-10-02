@@ -1,0 +1,5 @@
+\paragraph{Deriving RS in the cell.}\label{ta:cell-residual}
+The declared pre-activation observation retains only $\mathsf{start}$, so $\mathsf H_{r_{\rm inspect}}(\xi)=\{\mathsf{start}\}$ for every admissible cell tuple. The reference monitor starts at $c$, unchanged by start; the right-hand side of RS is therefore its non-error continuation language from $c$. If $B$ is empty, initialization at $c$ gives equality. If $B$ holds, initialization at $d$ is conservative: before the first $j$ or $m_B$, $d$ additionally forbids $m_A$; either $j$ or $m_B$ brings the two initial states to the same state. Thus every word safe from $d$ is safe from $c$, while the single event $m_A$ witnesses strict inclusion. This is a proof for the declared observation scope, not recovery of pre-activation history.
+
+Initializing at $c$ while $B$ holds satisfies equality but omits the intended pending-inspection duty encoded by $d$. Declared histories and intended obligations are therefore separate input choices.
+

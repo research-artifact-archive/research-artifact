@@ -1,0 +1,10 @@
+\label{sec:cell-finite}
+Table~\ref{tab:cell-finite-main} in the main paper gives all component, endpoint-controller and monitor transitions, including the conventions for absent edges.
+
+Endpoint tuples list stations $A,B$, controller and monitor. States $h/e$ mean holding/empty; $k,c,d$ mean old-safe, inspection-clear and inspection-pending; $c_o,c_0,c_1$ name controller states. Old reachable tuples are $x_A=(h,e,c_o,k)$ and $x_B=(e,h,c_o,k)$; new ones are $z_A=(h,e,c_0,c)$, $y_B=(e,h,c_1,d)$ and $z_B=(e,h,c_0,c)$. Initial tuples are $x_A,z_A$ and loadable targets are $\{z_A,z_B\}$, excluding pending inspection at $y_B$. The interval initializer records the holder at either all-old one-workpiece tuple. The new initializer admits all eight version-tagged one-workpiece tuples, installing $d$ when $B$ holds and $c$ otherwise. The paths starting with $A$/$B$ holding map to $z_B$/$z_A$ at handover.
+
+With empty-only transfers $g_A=g_B=\{(e,e)\}$ and exactly one workpiece, the two paths $\rho_B;m_B;\mathsf{start};\mathsf{stop};j;\rho_A$ from $A$ holding and $\rho_A;m_A;\mathsf{start};\mathsf{stop};\rho_B$ from $B$ holding have safe singleton outcomes: start installs inspection-pending if $B$ holds and inspection-clear otherwise, stop removes the inspection ban, and both paths finish with new versions and clear inspection at matching supplied targets.
+Their remaining lengths $6,\ldots,0$ and $5,\ldots,0$ strictly decrease, proving finite completion from both reachable old states (13 policy states and 11 edges).
+Replacing the two transfer commands by one with relation $g_A\times g_B$, with endpoints and requirements fixed, requires both stations empty, but every ordinary move, inspection and requirement boundary preserves exactly one workpiece; that command can never execute, stays pending and makes every goal unreachable.
+
+\input{figures/cell_policy_paths.tex}

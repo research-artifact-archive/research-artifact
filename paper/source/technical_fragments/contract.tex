@@ -1,0 +1,126 @@
+Seven supplied groups determine the game: \emph{event control}, \emph{fixed old/new controllers}, \emph{components and local transfers}, \emph{old/new/interval requirements}, \emph{activation initializers}, \emph{optional command precedence}, and \emph{handover targets}. They do not prescribe a sequence. Section~\ref{sec:monitor-meaning} connects initialized monitor states to declared requirement scopes.
+
+\subsection{Supplied Choices}
+
+\paragraph{Finite LTSs and safety monitors.}
+A labeled transition system (LTS) $\mathcal L=(S,\Sigma_{\mathcal L},\delta,s^0)$ has nondeterministic transitions $\delta:S\times\Sigma_{\mathcal L}\to2^S$. Partition events as $\Sigma=\Sigmauc\uplus\Sigmac$: controllers may disable controllables but cannot select outcomes or suppress uncontrollable (UC) events. A synchronous-product event requires a transition in every component whose alphabet contains it; other components retain their state~\cite{MageeKramer2006}.
+A monitor is an automaton that checks a requirement as events occur. Requirement $r$ has a total deterministic monitor $t_r=(M_r,\Sigma,\eta_r,m_r^0,F_r)$ with absorbing errors for violating prefixes~\cite{AlpernSchneider1985,KupfermanVardi2001}. The empty monitor product has one non-error state. Monitors observe labels; policies also observe successor component states.
+
+\label{def:fg-inputs}
+\label{def:update_plan}
+\paragraph{Components and transfers.}
+For each $i\in I$, let $e_i^{\mathrm{old}},e_i^{\mathrm{new}}$ be the pre-update and post-update components and let $g_i\subseteq S_{e_i^{\mathrm{old}}}\times S_{e_i^{\mathrm{new}}}$ be their state-transfer relation.
+  Define $g_i(s)=\{s'\mid(s,s')\in g_i\}$. The supplied $g_i$ includes every modeled transformation outcome. Let $E^v=\mathop{\parallel}_{i\in I}e_i^v$.
+
+\paragraph{Requirements and activation.}
+Let pairwise-disjoint $R^{\mathrm{old}},R^{\mathrm{new}},R^{\mathrm{upd}}$ contain the pre-update, post-update, and update-interval safety requirements, respectively.
+For each $r\in R^{\mathrm{new}}\cup R^{\mathrm{upd}}$, the input supplies a partial \emph{monitor-initialization map} $\iota_r$ from version-tagged component tuples to $M_r\setminus F_r$. Its domain specifies where activation is allowed; in the cell, initialization records whether inspection is pending.
+For history-based requirements, residual soundness (RS) requires every continuation accepted by the installed state to be safe after every declared activation history. Activation-scoped invariants instead retain current facts and constrain behavior from their start; both interpretations are defined in Section~\ref{sec:monitor-meaning}. For $r\in R^{\mathrm{upd}}$, $\operatorname{dom}\iota_r$ includes every reachable old component state.
+
+\paragraph{Endpoints and handover targets.}
+\label{def:endpoint_controllers}
+For $v\in\{\mathrm{old},\mathrm{new}\}$, the supplied finite controller $C^v$ preserves uncontrollables and makes $E^v\parallel C^v$ deadlock-free and satisfy $R^v$. Hiding controller auxiliary events leaves observation alphabet $\bigcup_i\Sigma_{e_i^v}$; the union over both versions is the ordinary alphabet $\SigmaN$. Write $\Reach$ for initial-state reachability and
+\[
+\mathsf{CL}^v=E^v\parallel C^v\parallel\mathop{\parallel}_{r\in R^v}t_r.
+\]
+Monitors are passive: every endpoint transition originates in $E^v\parallel C^v$; a monitor only updates on that label and adds no enabled event.
+The input supplies nonempty, checked targets $Z_{\mathrm{load}}\subseteq\Reach(\CLnew)$ with component, controller and new-monitor states. FG-DUCS keeps the supplied new controller fixed. The nine adapted benchmark inputs admit all of $\Reach(\CLnew)$; constructed contracts may select a proper subset, as Cell does. For a supplied maximally permissive controller this is its reachable winning region, equal to the full region only if all winning states are represented and reachable.
+
+\paragraph{Update commands and order.}
+The set of update events, each executed exactly once, is
+  \begin{equation}
+  \SigmaU=
+    \{\rho_i\mid i\in I\}
+    \cup\{\ustop{r}\mid r\in R^{\mathrm{old}}\}
+    \cup\{\ustart{r}\mid r\in R^{\mathrm{new}}\}.
+  \end{equation}
+These controllable events transfer components, stop old monitors or start new ones, respectively, and are disjoint from ordinary events $\SigmaN$:
+$\Sigma=\SigmaN\uplus\SigmaU$ and $\SigmaU\subseteq\Sigmac$. Each transfer event $\rho_i$ is one atomic model transition: the controller chooses the update, but cannot choose its $g_i$ outcome.
+They require uncontrollable quiescence: no modeled uncontrollable event may be enabled when an update command is issued.
+
+An optional strict partial order $\prec\ \subseteq\SigmaU\times\SigmaU$ expresses precedence among update operations. For a pending-event set $P$, event $a$ is order-enabled exactly when $a\in P$ and every $a'\prec a$ has left $P$.
+Monitors self-loop on update events that they do not specify.
+\paragraph{Eligible contracts.}
+Eligibility requires finite, consistently typed states/events and controllability; total deterministic monitors with absorbing errors; typed transfers and non-error initializers covering interval entry; and strict partial-order dependencies. Endpoints are safe, deadlock-free and uncontrollable-preserving, with controller alphabets covering environment labels; targets are nonempty and reachable. Justifying initializers against their declared requirement meaning is separate from game eligibility. Interval and post-handover duties belong to $R^{\mathrm{upd}}$ and $R^{\mathrm{new}}$; $\ustart{r^{\mathrm{new}}}\prec\ustop{r^{\mathrm{old}}}$ enforces overlap.
+
+\Needspace{4\baselineskip}
+\subsection{States, Transitions, and Completion}
+\label{sec:game-rules}
+
+\label{def:configuration}
+\label{def:init}
+\emph{States and all entry states.}
+An update state $q=(\xi,\mu,P)$ records each component's version/state $\xi(i)=(v,s)$ with $s\in S_{e_i^v}$, each monitor's state $\mu(t_r)\in M_r\cup\{\bot\}$ ($\bot$ means inactive), and pending commands $P\subseteq\SigmaU$.
+Here $\rho_i\in P$ exactly when component $i$ is old. Old monitors remain active until their stop leaves $P$; new monitors become active when their start leaves $P$; update monitors are always active. 
+
+Admission $\Init(z)$ copies $z$'s component and old-monitor states. It initializes interval monitors through $\iota_r(\xi)$, leaves new monitors inactive and sets $P=\SigmaU$. The policy replaces $C^{\mathrm{old}}$, discarding its state and scheduling restrictions; undeclared objectives, including old liveness, are not preserved. Old monitors remain until stopped. The entry set is
+\begin{equation}
+ Q_0=\{\Init(z)\mid
+ z\in\Reach(\mathsf{CL}^{\mathrm{old}})\}.
+\label{eq:initial}
+\end{equation}
+All-entry coverage avoids waiting for a favorable old state; an admission predicate would define a different contract. In the cell, $Q_0=\{q_A^0,q_B^0\}$ distinguishes the two holders.
+\par\noindent\emph{Four kinds of induced transitions.}
+\label{def:successor}
+For $\xi(i)=(v,s)$, component $i$ uses $e_i^v$. The active-component product determines enabled ordinary uncontrollables $U(q)$, including those with unsafe outcomes, independently of updates and goals. For every $a\in\SigmaU$, impose
+\begin{equation}
+ U(q)\ne\emptyset\quad\Longrightarrow\quad\Post(q,a)=\emptyset.
+ \label{eq:nonpreemption}
+\end{equation}
+This global \emph{uncontrollable quiescence} differs from transaction quiescence~\cite{KramerMagee1990Quiescence} and tranquility~\cite{VandewoudeEtAl2007Tranquility}. It is a command restriction, not a consequence of local transfer. Ordinary controllables may coexist with uncontrollables; the UC-priority lemma later justifies suppressing them. $\Post(q,a)$ contains exactly the following outcomes; unmentioned coordinates remain unchanged. ``Advance'' means $\mu'(t_r)=\eta_r(\mu(t_r),a)$ for the specified active monitors.
+
+\begin{description}
+  \item[Ordinary event $a\in\SigmaN$.]
+  If $a$ belongs to the local event set of at least one active component and every active component having $a$ can transition, take every synchronous-product outcome and advance every active monitor.
+
+  \item[Component update $\rho_i$.]
+  If $U(q)=\emptyset$, order-enabled, and $\xi(i)=(\mathrm{old},s)$, set $\xi'(i)=(\mathrm{new},s')$ for each $s'\in g_i(s)$, delete $\rho_i$ from $P$, and advance every active monitor.
+
+  \item[Requirement deactivation $\ustop{r}$.]
+  If $U(q)=\emptyset$ and order-enabled, advance every active monitor except $t_r$, retain inactive monitors at $\bot$, set $\mu'(t_r)=\bot$, and delete $\ustop{r}$ from $P$; $t_r$ does not observe it.
+
+  \item[Requirement activation $\ustart{r}$.]
+  If $U(q)=\emptyset$, order-enabled, and $\xi\in\operatorname{dom}\iota_r$, advance every active monitor, retain other inactive monitors at $\bot$, install $\mu'(t_r)=\iota_r(\xi)$, and delete $\ustart{r}$ from $P$; $t_r$ begins online observation afterward.
+\end{description}
+On the cell path starting with $A$ holding, $\mathsf{start}$ preserves old/empty $A$ and new/holding $B$, installs inspection-pending in the new monitor and removes itself from $P$. The old and interval monitors stay active.
+
+If a precondition is false, the successor set is empty; every nondeterministic outcome is included and environment-chosen.
+Let $\mathcal Q$ contain every state reachable from $Q_0$ through these transitions. 
+\par\noindent\emph{Safety and handover-ready goals.}
+\label{def:safe_goal}
+An update state $q=(\xi,\mu,P)$ is safe, written $\Safe(q)$, exactly when every active monitor is outside its error states.
+For $P=\emptyset$ and $z\in Z_{\mathrm{load}}$, write $q\sim z$ when component states (without version tags) and all new-monitor states agree. The handover map $\kappa$ selects such a full endpoint state $z$. Goals are
+\begin{equation}
+\Goal=\{q=(\xi,\mu,\emptyset)\in\mathcal Q\mid
+\Safe(q)\land U(q)=\emptyset\land\exists z\in Z_{\mathrm{load}}:q\sim z\}.
+\label{eq:goal}
+\end{equation}
+At a goal, all components and endpoint monitors are new; interval obligations end and matching new monitors continue. Handover disables ordinary controllables and installs $\kappa(q)$'s controller state, outside $\Sigma$ and the rank. No uncontrollable can compete. A matching UC-enabled state is not a goal; compatible targets may differ in later safe behavior.
+\par\noindent\emph{State-dependent policies and finite completion.}
+\label{def:strategy}
+A memoryless update policy is a function
+$\sigma:\mathcal Q\setminus\Goal\to2^{\Sigmac}$ selecting only events with nonempty successor sets.
+
+The possible next states under this policy are
+\begin{equation}
+ \SuccSet_\sigma(q)=
+ \bigcup_{u\in U(q)}\Post(q,u)
+ \ \cup\
+ \bigcup_{a\in\sigma(q)}\Post(q,a).
+\label{eq:strategy-successors}
+\end{equation}
+The environment chooses any uncontrollable and any permitted-event outcome. An uncontrollable self-loop blocks updates by Equation~\eqref{eq:nonpreemption} and permits a losing infinite run. The returned policy retains one controllable at a quiescent state.
+
+Let $\Reach_\sigma(Q_0)$ be the policy closure from $Q_0$, stopping at goals. 
+
+\emph{Runs, winning, and witnesses.}
+A run follows the policy successors and stops at a goal. It is \emph{maximal} if infinite or ending at a goal or a state without successors. A single policy $\sigma$ is winning for an FG-DUCS instance if, from every $q_0\in Q_0$,
+(i) every reachable update state is safe, (ii) every reachable non-goal state has a successor, and
+(iii) every maximal update run reaches $\Goal$ after finitely many events.
+This \emph{finite completion} counts observed transitions and assumes no fairness.
+
+A \emph{progress-ranking function} for a winning policy is $\rank:\Reach_\sigma(Q_0)\to\mathbb N$, with value 0 at goal states and satisfying $\rank(q')<\rank(q)$ for every non-goal state $q$ and every
+$q'\in \SuccSet_\sigma(q)$.
+
+\paragraph{The FG-DUCS problem.}
+The seven supplied groups define the eligible game. Decide whether one policy safely completes it from every entry under every permitted event and outcome. Return $(\sigma,\rank,\kappa)$ covering all $Q_0$, or a losing-region certificate.

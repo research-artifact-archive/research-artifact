@@ -1,0 +1,520 @@
+{
+  "kind": "presentation_aggregation_of_preserved_rows_not_new_evidence",
+  "status": "PASS",
+  "document": "FG-DUCS paper",
+  "generator": "scripts/generate_rq2_family_table.py",
+  "table": "figures/rq2_family_counts.tex",
+  "readme": {
+    "generate": "python3 -B scripts/generate_rq2_family_table.py",
+    "check": "python3 -B scripts/generate_rq2_family_table.py --check",
+    "emit_patch": "python3 -B scripts/generate_rq2_family_table.py --emit-patch",
+    "artifact_root": "Public artifact root, found among script ancestors or supplied with --artifact-root.",
+    "write_scope": "Only the new figure and this JSON; --check writes nothing.",
+    "unit": "One saved fine/merged comparison per results_index.csv row, not a trial, application or independent operational case."
+  },
+  "sources": {
+    "population_definition": "paper/source/scripts/generate_rq2_family_table.py#MAIN_POPULATIONS",
+    "threads_control_definition": "paper/source/scripts/generate_rq2_family_table.py#EXPECTED_THREADS",
+    "results_index": "results/granularity/e6/results_index.csv",
+    "audit_boundary_check": "results/granularity/e6/rolling_audit/v1/summary.csv",
+    "threads_queue_capacity_definition": "results/granularity/e6/threads/README.md#registered-model",
+    "existing_macros": "paper/source/build/generated/base-v3-evidence-macros.tex",
+    "family_labels": "Preserved all eight family/control labels; Cell_n displayed separately from the main total. The paper explains the mechanisms."
+  },
+  "population_filter": [
+    "application_plant_attempt",
+    "core",
+    "operational_control"
+  ],
+  "all_index_comparisons": 96,
+  "main_counts": {
+    "pairs": 55,
+    "witness": 33,
+    "both_loss": 11,
+    "both_win": 10,
+    "incomplete": 1
+  },
+  "main_family_counts": {
+    "Rolling": {
+      "pairs": 15,
+      "witness": 15,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "Canary": {
+      "pairs": 15,
+      "witness": 15,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "Policy": {
+      "pairs": 1,
+      "witness": 1,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "DB-Rolling": {
+      "pairs": 2,
+      "witness": 1,
+      "both_loss": 1,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "Rolling+Audit": {
+      "pairs": 1,
+      "witness": 1,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "Threads": {
+      "pairs": 20,
+      "witness": 0,
+      "both_loss": 10,
+      "both_win": 10,
+      "incomplete": 0
+    },
+    "PC2-Rolling": {
+      "pairs": 1,
+      "witness": 0,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 1
+    }
+  },
+  "parameter_domains": {
+    "Rolling": {
+      "keys": [
+        "n",
+        "m"
+      ],
+      "tuples": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=2\\ldots6,\\ 1\\le m<n$"
+    },
+    "Canary": {
+      "keys": [
+        "n",
+        "m"
+      ],
+      "tuples": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=2\\ldots6,\\ 1\\le m<n$"
+    },
+    "Policy": {
+      "keys": [
+        "rule_pairs"
+      ],
+      "tuples": [
+        [
+          2
+        ]
+      ],
+      "comparison": "boundaries",
+      "tex": "2 rule pairs"
+    },
+    "DB-Rolling": {
+      "keys": [
+        "n",
+        "m"
+      ],
+      "tuples": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=3,\\ m=2,3$"
+    },
+    "Rolling+Audit": {
+      "keys": [
+        "n",
+        "m",
+        "audit_pairs"
+      ],
+      "tuples": [
+        [
+          2,
+          1,
+          1
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=2,\\ m=1$; 1 audit pair"
+    },
+    "Threads": {
+      "keys": [
+        "n",
+        "B",
+        "regime"
+      ],
+      "tuples": [
+        [
+          2,
+          1,
+          "backpressure"
+        ],
+        [
+          2,
+          1,
+          "saturated_offers"
+        ],
+        [
+          2,
+          2,
+          "backpressure"
+        ],
+        [
+          2,
+          2,
+          "saturated_offers"
+        ],
+        [
+          3,
+          1,
+          "backpressure"
+        ],
+        [
+          3,
+          1,
+          "saturated_offers"
+        ],
+        [
+          3,
+          2,
+          "backpressure"
+        ],
+        [
+          3,
+          2,
+          "saturated_offers"
+        ],
+        [
+          4,
+          1,
+          "backpressure"
+        ],
+        [
+          4,
+          1,
+          "saturated_offers"
+        ],
+        [
+          4,
+          2,
+          "backpressure"
+        ],
+        [
+          4,
+          2,
+          "saturated_offers"
+        ],
+        [
+          5,
+          1,
+          "backpressure"
+        ],
+        [
+          5,
+          1,
+          "saturated_offers"
+        ],
+        [
+          5,
+          2,
+          "backpressure"
+        ],
+        [
+          5,
+          2,
+          "saturated_offers"
+        ],
+        [
+          6,
+          1,
+          "backpressure"
+        ],
+        [
+          6,
+          1,
+          "saturated_offers"
+        ],
+        [
+          6,
+          2,
+          "backpressure"
+        ],
+        [
+          6,
+          2,
+          "saturated_offers"
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=2\\ldots6$; queue 1,2",
+      "B_meaning": "queue capacity, confirmed by threads/README.md Registered model"
+    },
+    "PC2-Rolling": {
+      "keys": [
+        "arms",
+        "ready_floor"
+      ],
+      "tuples": [
+        [
+          2,
+          1
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "2 arms; floor 1"
+    },
+    "Cell_n": {
+      "keys": [
+        "n"
+      ],
+      "tuples": [
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ]
+      ],
+      "comparison": "transfers",
+      "tex": "$n=2\\ldots10$"
+    }
+  },
+  "separate_e4_reference": {
+    "family": "Cell_n",
+    "included_in_main": false,
+    "pairs": 9,
+    "witness": 9,
+    "both_loss": 0,
+    "both_win": 0,
+    "incomplete": 0
+  },
+  "excluded_population_counts": {
+    "assumption_control": {
+      "pairs": 12,
+      "witness": 0,
+      "both_loss": 6,
+      "both_win": 6,
+      "incomplete": 0
+    },
+    "reference_e4": {
+      "pairs": 9,
+      "witness": 9,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    },
+    "scale_extension": {
+      "pairs": 20,
+      "witness": 20,
+      "both_loss": 0,
+      "both_win": 0,
+      "incomplete": 0
+    }
+  },
+  "verified_existing_macros": {
+    "VThreeESixMainPairs": 55,
+    "VThreeESixWitness": 33,
+    "VThreeESixBothLoss": 11,
+    "VThreeESixBothWin": 10,
+    "VThreeESixIncomplete": 1,
+    "VThreeESixCanaryPairs": 15
+  },
+  "checks": {
+    "declared_population_filter": [
+      "application_plant_attempt",
+      "core",
+      "operational_control"
+    ],
+    "unique_comparison_identities": true,
+    "classes_match_saved_decisions": true,
+    "family_sums_match_existing_total_macros": true,
+    "all_eight_family_control_rows_preserved": true,
+    "canary_count_and_all_witnesses": {
+      "pairs": 15,
+      "witness": 15
+    },
+    "threads_control_counts_and_regimes": {
+      "both_win": 10,
+      "both_loss": 10
+    },
+    "audit_transfer_pair_counted_boundary_WIN_separate": true,
+    "pc2_incomplete_timeout_fields": {
+      "merged_decision": "TO",
+      "merged_status": "TO",
+      "direct_full_status": "TO",
+      "merged_extended_7200_status": "TO",
+      "direct_full_extended_7200_status": "TO",
+      "xeon_merged_status": "TO",
+      "xeon_direct_full_status": "TO"
+    },
+    "e4_reference_excluded_from_main_total": true,
+    "all_table_numeric_cells_generated": true,
+    "parameter_domains_exactly_cover_saved_tuples": true,
+    "policy_boundary_other_transfer_modes_preserved": true,
+    "threads_B_confirmed_as_queue_capacity": true
+  },
+  "limits": [
+    "Existing rows are aggregated; no experiments, new solver decisions, retiming or new validation evidence are added.",
+    "TO remains incomplete despite the separately reported PC2 obstruction; this script does not re-prove it.",
+    "Audit boundary WIN is checked from its preserved summary and does not add a comparison to the main population.",
+    "No inference about prevalence or operational effectiveness; no timing or host data are pooled.",
+    "The generator only updates this table and its provenance; main.tex and supplements are not edited."
+  ],
+  "generated_at_utc": "2026-10-01T06:14:34.510974+00:00"
+}

@@ -1,13 +1,13 @@
-# FG-DUCS: fine-grained dynamic update controller synthesis
+# Controller-Preserving Dynamic Update Synthesis from Local Contracts
 
-**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The bundled PDFs are a pre-submission snapshot. The manuscript’s planned `fse27-submission` tag has not been created; use the repository commit for this snapshot until the final submission version is fixed.
+**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c55-20261002) bundles the corresponding paper, technical appendix, experimental supplement and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
 | **Use the tool** | [Build and run](#use-the-tool) · [`tool/`](tool/) | A checked update policy or a losing-region certificate, plus a readable local result viewer |
 | **Reproduce the study** | [Reproduction](#reproduce-the-study) · [`reproduce/`](reproduce/) | Saved-evidence checks, source builds, finite examples, and the original benchmark protocols |
 | **Understand the evidence** | [Results and interpretation](#results-and-interpretation) · [`results/`](results/) | The complete positive, negative, invalid, timeout, OOM and unexecuted outcomes |
-| **Read the formal account** | [Paper](paper/main.pdf) · [Supplement](paper/supplement.pdf) | Definitions, assumptions, proofs, measurement details and threats to validity |
+| **Read the formal account** | [Paper](paper/main.pdf) · [Technical appendix](paper/technical_appendix.pdf) · [Supplement](paper/supplement.pdf) | Definitions, assumptions, proofs, measurement details and threats to validity |
 
 ```text
 tool/        Source code, inherited FSP models, build/run commands, result viewer
@@ -17,11 +17,13 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
+The main paper contains the complete Cell contract, the update-game adequacy statement, a concrete Cell construction comparison, endpoint-preservation and granularity results, the numbered synthesis theorem and invariant proof outline, certificate checks, and the Cell activation argument. It introduces residual soundness (RS); the technical appendix gives its full definition, the source operational semantics and complete adequacy/synthesis proofs, the prior generic interface table, complete Policy input, the finite Rolling/Canary/DB-Rolling/Rolling+Audit/Threads definitions, the full Cell residual derivation, native Cell construction, separate performance populations and adverse outcomes, the all-thirteen-requirement saved PC2 activation proof, the Canary returned-WIN physical-health scope, and the source-derived GSM activation proof. The separate S1–S5 supplement preserves the full experimental records.
+
 ## What problem does it solve?
 
 A running system can need several changes while continuing to satisfy safety conditions. Updating everything together can create a transient violation; keeping every old requirement active until the end can also prevent a valid update. FG-DUCS makes component transfers and old/new requirement boundaries separate controllable events. A transfer can have multiple possible outcomes. The synthesized policy must work from **every admitted old entry**, retain **every adversarial outcome** of each chosen event, respect uncontrollable priority, and finish at an admitted state of the **fixed new controller**.
 
-The inputs are finite old/new component models, fixed endpoint controllers and projections, local state-transfer relations, safety testers with explicit activation initializers, requirement lifetimes, precedence constraints and loadable new states. A **WIN** supplies a policy, completion ranks and handover targets. A **LOSS** supplies a checked losing region. **INVALID** means the declared contract failed validation; it is not a losing game. A timeout or OOM establishes neither WIN nor LOSS.
+The inputs are finite old/new component models, fixed endpoint controllers and projections, local state-transfer relations, safety testers with explicit activation initializers, requirement lifetimes, precedence constraints and loadable new states. A **WIN** supplies a policy, completion ranks and handover targets. For finite JSON inputs, a **LOSS** saves the checked losing-region membership in `certificate.json`. The FSP/application benchmark driver checks that region internally but saves only its size and phase-mask statistics; its full-game export supports independent reconstruction, without comparing the solver's membership list. **INVALID** means the declared contract failed validation; it is not a losing game. A timeout or OOM establishes neither WIN nor LOSS.
 
 Update commands and handover require global modeled uncontrollable quiescence; permanently enabled uncontrollable behavior can prevent completion. No fairness assumption is made.
 
@@ -218,6 +220,8 @@ python3 reproduce/materialize.py --output work/full-workspace
 ```
 
 This compatibility workspace keeps archived scripts unchanged while the public repository remains organized by purpose. [`reproduce/layout.json`](reproduce/layout.json) maps each public file or archived member to its workspace path. New `work/` outputs are ignored by Git. Unpacking data is not a benchmark rerun.
+
+The saved-evidence command also checks the revised paper displays. For that subset alone, run `python3 -B reproduce/check_paper_displays.py`. Its fourteen checks cover PC2 values, the granularity table, all 108 outcome tiles, the 14 paired absolute costs and their Base/R1/R2 strata, Cell states/edges and requirement bands, and Policy states/edges and requirement bands against the saved inputs and certificate, without running Java. A separate all-thirteen PC2 check replays all 870 saved old/policy observer edges, binds every old entry, and checks the source invariants from their reached starts through handover. [Paper build instructions](paper/README.md) explain how to rebuild the main paper, technical appendix and supplement with stable cross-references.
 
 ### B. Rerun functional examples
 

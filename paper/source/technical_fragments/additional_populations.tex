@@ -1,0 +1,47 @@
+The following descriptions preserve the separate secondary populations reported in the main paper. They are not pooled with the fixed-budget comparisons.
+Figure~\ref{fig:rq3-outcomes} displays all 108 fixed-budget outcomes. Figure~\ref{fig:rq3-paired-absolute} in the main paper gives absolute costs for every completed Lazy/Direct-Full pair.
+\input{figures/rq3_outcome_grid.tex}
+\FloatBarrier
+Base/R1/R2's 5/3/6 pairs give median state ratios 111.89/11.88/2.75 and solver ratios 40.02/3.12/9.14. The largest state savings are in Base, but different completed populations do not isolate interval requirements' effect.
+
+\subsection{Full+UC observations}
+Full+UC yields \VThreeETwoMacWin{} WIN/\VThreeETwoMacLoss{} LOSS/\VThreeETwoMacTO{} TO on Mac, \VThreeETwoXeonWin{} WIN/\VThreeETwoXeonTO{} TO on Xeon; Industry/R1 times out on Xeon despite Mac's LOSS. State counts equal Eager in \VThreeETwoEagerStateEqual{}/\VThreeETwoComparableEager{} cells, differing on GSM/R1 and PowerPlant/R1. On PC1/Base, Direct-Full/Full+UC/Eager each discover \VThreeETwoPCOneBaseStatesFullUC{} states versus Lazy's \VThreeETwoPCOneBaseStatesLazy{}. Full+UC, Eager and Lazy all use UC pruning. Builds, hosts and repetitions differ, precluding single-factor timing claims (all rows/conditions in S4.7).
+
+\subsection{Legacy reference}
+\paragraph{Separate Legacy reference.}
+Legacy uses our MTSA fork's traditional DUCS/GR backend with a subsequent-control objective, differing from FG's fixed endpoints. It yields \LegacyNativeWins{} matching WIN, \LegacyNativeOOM{} OOM and \LegacyCaptureNM{} unmeasured snapshot-cap cases. At \VThreeExtSixHeap{}~GiB/\VThreeExtSixCap{}~s, \VThreeExtSixTrials{} single trials give \VThreeExtSixOOM{} OOM and \VThreeExtSixNM{} instrumentation stops, no decisions. S4 retains build identities, source/fork discrepancies and enlarged-heap records; these failures prove no impossibility.
+
+\subsection{Controlled, Travel and extended-budget populations}
+Controlled families vary fanout, transfer outcomes, UC events/outcomes, requirements or precedence. All methods agree on \FixedControlledWin{} WIN/\FixedControlledLossWord{} LOSS across \FixedControlledInputs{} inputs (\FixedControlledJobs{} single-run jobs); multiple graph measures may vary together (definitions/counts in S4).
+
+Travel couples an agency with $N$ amenities, $K$ UC choices and $0$--$K-1$ selection steps: size, branching and length covary. Adaptations change purchasing, admission, transfers and monitors without claimed trace equivalence (S4). Across 192 first trials on \TravelSettings{} settings, each OTF variant yields \TravelOTFDecisions{} WIN/26 TO/2 OOM, Direct-Full \TravelFullDecisions{} WIN/28 TO/2 OOM. Only $(N,K)=\FixedTravelAdditionalSettingsMath{}$ extend OTF's decided range. Both approaches still time out on $(6,1)$ at \ExtBudgetExpandedHeap{}~GiB/\ExtBudgetTimeCap{}~s, so the original heap cap is not the sole limit. S4 retains every setting and the \FixedTravelPairs{} completed-pair state/time comparisons.
+
+\paragraph{Extended-budget limits.}
+At \ExtBudgetTimeCap{}~s and heaps up to \ExtBudgetExpandedHeap{}~GiB, \ExtBudgetPlanned{} earlier jobs include \ExtBudgetTimeout{} TO/\ExtBudgetOOM{} OOM/\ExtBudgetSkipped{} skips; \VThreeExtSevenTrials{} Eager jobs include \VThreeExtSevenTO{} TO/\VThreeExtSevenOOM{} OOM. Comparable decisions agree with fixed-budget Lazy. The separate extended-budget OTF decisions on Travel $(4,8)$ agree with one another, but fixed-budget Lazy timed out there, so they are not baseline decision matches. These single trials are excluded from its medians; all outcomes remain in the artifact appendix and S4.
+
+
+\subsection{Additional granularity witnesses}
+The boundary fixture requires alignment after old-stop and before new-start: the requirement-block restriction forbids that intervening ordinary event and loses, whereas boundary merging merely renames the single stop and single start and remains WIN. Cell$_n$ has one workpiece circulating through $n$ stations with empty-only transfers; its single old stop and new start make boundary merging a renaming. It remains WIN with merged boundaries and LOSS with both merges. Restricting transfers to initial local states yields \VThreeEFiveWitness{} fine WIN/merged LOSS, \VThreeEFiveBothLoss{} both-LOSS and \VThreeEFiveBothWin{} both-WIN pairs, with \VThreeEFiveIncomplete{}/\VThreeEFivePairs{} incomplete; enabled UC requests can obstruct transfer quiescence.
+
+\FixedRQTwoFilesWord{} original finite files produce \FixedRQTwoWinWord{} WIN/\FixedRQTwoLossWord{} LOSS across fourteen jobs covering cell transfer, observed branches, requirement interleaving and neutral controls (parameters in S1). S4 retains excluded populations and earlier failed inputs. The alignment sequence states a required boundary order, not the complete saved Java execution trace.
+
+
+\subsection{Application policy and losing-contract details}
+\paragraph{Following an application policy.}
+Railcab Base retains both transfer outcomes and their distinct continuations, memories and targets. R1's braking ban causes earlier braking or completion without it; crossing requires approach without a last emergency brake. Both all-entry exports pass certificate/Link checks, with no timing/runtime validation (complete tuples/branches in S4).
+
+
+\paragraph{What a losing contract means.}
+Industry has three validation components: gate-form GF1, TOR and DSD1. Industry/R1 loses at \FixedIndustryLosingEntries{} of \FixedIndustryEntries{} entries by independent exhaustive checking. A reachable safe quiescent state has no supplied target: validating GF1 or TOR violates the new requirements; the remaining safe alternative, DSD1, admits a rejection cycle, while disabling it deadlocks. The full losing fixed point, not this one path, excludes every update order.
+R1 forbids validation between old stop and new start. DUCS instead synthesizes continued new-specification control~\cite[Defs.~4.1--4.3]{Nahabedian2020}; its original build and aligned fork win on the source model. FG LOSS depends on supplied initializers, requirements and targets. Exempting GF1 from R1 makes all \FixedIndustryVariantWinningEntries{} entries WIN via earlier paths before the DSD1/TOR alternatives are activated, not escape from the displayed trap; this separate Mac contract variant supplies no timing data.
+
+
+\subsection{Input adaptation details}
+Nine inputs manually adapt eight DUCS sources; both ProductionCell sizes share a parent. Base/R1/R2 vary interval requirements, fixing components, transfers, endpoints and old/new goals (Technical Appendix~\ref{ta:benchmark_inputs}). Adaptations make PC tool results UC, revise Surveillance battery behavior/safety, order GSM/R2's decode boundaries before ENV transfer, shorten Railcab transfer paths while keeping both outcomes, and omit PowerPlant's initial ENV transfer pair. Recorded provenance does not establish whole-problem equivalence.
+\subsection{Independent-update construction}
+For $n\geq1$, take $n$ components, each with one old and one new state and a singleton transfer. Every version and its endpoint controller admit a controllable $tick$ self-loop, making both endpoints deadlock-free. There are no monitors, dependencies or uncontrollables; the unique new endpoint is available for handover. These inputs are eligible. Each update state is the subset of transferred components, and all $2^n$ subsets are reachable; Direct-Full discovers them all.
+
+Under Lazy's default order, pending transfers precede ordinary events in this family, so expansion follows one $n$-step chain. Because $\mathsf{Open}$ precedes $\mathsf{Retry}$, it reaches the sole goal after discovering exactly $n+1$ states. Backward propagation then assigns ranks $0,\ldots,n$ and proves the entry state before any alternative query. The ordinary self-loops are losing choices under finite completion; both methods use the same terminal goal. Thus the separation concerns exploration of one supplied game.
+
+\subsection{Memory and returned policies}\label{ta:memory_policies}
+Lazy's five-run median peak working sets span \FixedLazyRSSMin{}--\FixedLazyRSSMax{}~GiB (median \FixedLazyRSSMedian{}), including JVM/native overhead; Eager/Update-first sometimes use less. Its \FixedPolicies{} WIN policies contain \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} states (median \FixedPolicyStatesMedian{}) and maximum ranks \FixedRankMin{}--\FixedRankMax{} (median \FixedRankMedian{}). Ranks bound events, not downtime or optimal length. Counts match all five repeats; LOSS/TO has no winning policy.

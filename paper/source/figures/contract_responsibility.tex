@@ -1,0 +1,12 @@
+\begin{table}[!htbp]
+\caption{The same Cell obligations through two construction interfaces. The native column describes our explicit DUCS encoding~\cite[Defs.~4.1--4.3]{Nahabedian2020}, not a lower bound on other encodings.}
+\label{tab:contract-responsibility}\label{tab:ducs-interface}
+\centering\small
+\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
+Obligation & Explicit native Cell modeling & FG-DUCS input and generated structure\\\midrule
+Replace empty stations & Eight mixed stages record versions and holder; transfer guards require empty stations. & Component models and local empty-station transfers generate mixed configurations and guarded edges.\\
+Preserve inspection duties & Holder-refined old control, history variables and temporal requirements encode memory and boundaries. & Typed monitors, initializers and ordering generate boundary events, active memories and lifetime guards.\\
+Preserve fixed continuation & A supplied continuation graph, guarded handover and eventual-handover requirement connect fixed control. & Fixed controllers and targets generate compatibility conditions; synthesis selects the load state.\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize Native DUCS also generates its standard protocol and interrupt composition, and synthesizes subsequent control. Both methods require justified input meanings. The Cell proof preserves the displayed paths and subsequent traces; it establishes neither general equivalence nor measured effort savings.}
+\end{table}

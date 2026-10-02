@@ -1,0 +1,12 @@
+\subsection{Why the Generated State Represents the Contract}
+\label{sec:contract-adequacy}
+Independently of a global game, a \emph{local update history} records labels and realized local outcomes from an old closed-loop entry. Ordinary events follow the installed local LTSs; one-shot transfers follow their relations; commands obey precedence and quiescence. Each monitor folds exactly its active interval from inherited or initialized memory, with start/stop observation as specified above. Handover requires all commands, quiescence and matching components/new monitors at a supplied target. The old controller is released at entry. These local obligations define the source histories represented by the game.
+
+\begin{proposition}[Adequacy of the generated update game]
+\label{prop:contract-adequacy}
+For an eligible contract, map each local update history to its current component tuple, active monitor memories and unexecuted commands. Histories with the same image admit the same next events and all the same local outcomes, agree on safety, and have the same handover targets. This map gives a label- and outcome-preserving correspondence between local update histories and paths of the generated game. A history-dependent policy satisfying the source obligations exists exactly when a winning policy exists in that game.
+\end{proposition}
+\begin{proof}
+The entry map retains components and old-monitor memory and installs interval states. Current versions and states determine all ordinary product outcomes and uncontrollables, including unsafe outcomes. Pending commands determine one-shot and precedence guards; local relations and initializers determine transfer and boundary outcomes. Equal images thus have equal next choices and outcomes. Monitor folds coincide with all four transition rules, preserving safety and targets without consuming boundaries twice. Released old-controller memory adds no constraint. Induction extends source histories and game paths in both directions. Transporting policies preserves finite and infinite outcome paths, non-goal deadlocks and goals, hence safe finite completion. The memoryless-policy lemma below then yields a state-based winner.
+\end{proof}
+The result concerns the supplied contract. Residual soundness connects its monitors to requirement meaning; Java frontend correctness is a separate validation question.

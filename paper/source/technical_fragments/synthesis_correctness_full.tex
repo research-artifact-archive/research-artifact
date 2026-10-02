@@ -1,0 +1,9 @@
+\begin{theorem}[Termination, soundness, and completeness]
+\label{thm:correctness}
+\label{thm:termination}
+\label{thm:soundness}
+\label{thm:completeness}
+For every eligible finite FG-DUCS instance with Equation~\eqref{eq:nonpreemption} and quiescent goals in Equation~\eqref{eq:goal}, Algorithm~\ref{alg:otf} terminates. A returned $(\sigma,\rank,\kappa)$ keeps every active monitor non-error, preserves every uncontrollable event and every outcome of each policy event, reaches $\Goal$ finitely without deadlock, and gives each reached goal a compatible target in $Z_{\mathrm{load}}$ for the supplied game. It returns no solution iff no winning policy covers $Q_0$ in that supplied game.
+\end{theorem}
+
+\input{technical_fragments/correctness_proof.tex}

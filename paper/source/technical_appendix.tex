@@ -1,0 +1,170 @@
+% !TeX program = xelatex
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{fontspec,libertine,amsmath,amssymb,amsthm,booktabs,array,longtable,graphicx}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{placeins,needspace,xurl,tikz}
+\setlength{\emergencystretch}{2em}
+\usetikzlibrary{automata,positioning,arrows.meta,fpu}
+\providecommand{\Description}[1]{}
+\usepackage[numbers]{natbib}
+\usepackage{xr-hyper}
+\usepackage[hidelinks]{hyperref}
+\externaldocument{build/main}[main.pdf]
+\hypersetup{pdftitle={Technical Appendix: Controller-Preserving Update Synthesis},pdfauthor={Anonymous Authors}}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{proposition}[lemma]{Proposition}
+\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\newcommand{\Post}{\mathsf{Post}}
+\newcommand{\Safe}{\mathsf{Safe}}
+\newcommand{\Goal}{Q_{\mathrm{goal}}}
+\newcommand{\rank}{\mathsf{rk}}
+\newcommand{\ActT}{\mathsf{ActiveM}}
+\newcommand{\Init}{\mathsf{Init}}
+\newcommand{\Reach}{\mathsf{Reach}}
+\newcommand{\SuccSet}{\mathsf{Succ}}
+\newcommand{\En}{\mathsf{En}}
+\newcommand{\Cand}{\mathsf{Next}}
+\newcommand{\Sigmauc}{\Sigma_{\mathrm{uc}}}
+\newcommand{\Sigmac}{\Sigma_{\mathrm{c}}}
+\newcommand{\SigmaN}{\Sigma_{\mathrm{N}}}
+\newcommand{\SigmaU}{\Sigma_{\mathrm{upd}}}
+\newcommand{\CLnew}{\mathsf{CL}^{\mathrm{new}}}
+\newcommand{\ustart}[1]{\mathsf{start}(#1)}
+\newcommand{\ustop}[1]{\mathsf{stop}(#1)}
+
+\input{build/generated/rq3-ad-numbers.tex}
+\input{build/generated/legacy-fidelity-stats.tex}
+\input{build/generated/rq3-censored-stats.tex}
+\input{build/generated/rs-counts.tex}
+\input{build/generated/editorial-numbers.tex}
+\input{build/generated/legacy-reference-numbers.tex}
+\input{build/generated/travel-editorial-numbers.tex}
+\input{build/generated/contract-size-macros.tex}
+\input{build/generated/ext-budget-macros.tex}
+\input{build/generated/base-v3-evidence-macros.tex}
+\input{build/generated/base-v3-fixed-macros.tex}
+\input{build/generated/base-v3-ext-seven-macros.tex}
+\input{build/generated/pc2-case-macros.tex}
+\input{build/generated/pc2-trace-macros.tex}
+
+\begin{document}
+\title{Technical Appendix: Controller-Preserving Update Synthesis}
+\author{Anonymous Author(s)}
+\date{}
+\maketitle
+This technical appendix accompanies the paper. The main paper gives the complete Cell contract, update-game specification, contract correspondence, the continuation proof, synthesis guarantees and certificate checks. This document supplies the detailed source-history definition, remaining correctness proofs, residual-soundness formalization, full tables and further history and execution arguments. References to the main paper use its section and algorithm numbers. S1--S5 remain a separate supplement.
+\FloatBarrier
+\appendix
+\section{Source Histories and Synthesis Correctness}\label{ta:source_synthesis}
+\input{technical_fragments/source_history_operations.tex}
+The main paper states Proposition~\ref{prop:contract-adequacy} for these source operations.
+\paragraph{Proof of Proposition~\ref{prop:contract-adequacy}.}
+\input{technical_fragments/contract_adequacy_proof.tex}
+\input{technical_fragments/state_lemmas.tex}
+\input{technical_fragments/search_lemmas.tex}
+\paragraph{Proof of Theorem~\ref{thm:correctness}.}
+\input{technical_fragments/correctness_proof.tex}
+\paragraph{Promotion cases.}\label{ta:promotion_cases}
+\input{technical_fragments/promotion_cases.tex}
+\FloatBarrier
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{Complete Cell Contract and Its Two Completing Paths}\label{ta:cell}
+\input{technical_fragments/cell.tex}
+\input{technical_fragments/residual_formal.tex}
+\input{technical_fragments/cell_residual_derivation.tex}
+\FloatBarrier
+
+
+
+
+
+
+
+
+
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{Complete Benchmark Input Counts}\label{ta:benchmark_inputs}
+\input{technical_fragments/benchmark_inputs.tex}
+\FloatBarrier
+
+\FloatBarrier
+\Needspace{19\baselineskip}
+\section{All Completed Direct-Full Exploration Pairs}\label{ta:workload_rows}
+The all-contract outcome summary is Table~\ref{tab:xeon-rq3} in the main paper. The table below reports every completed pair.
+
+\input{technical_fragments/workload_rows.tex}
+\FloatBarrier
+
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{Default Exploration Order}\label{ta:exploration_order}
+\input{technical_fragments/exploration_order.tex}
+\input{technical_fragments/work_accounting.tex}
+\FloatBarrier
+
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{Separate Extended-Budget Trials}\label{ta:extended_budget}
+\input{technical_fragments/extended_budget.tex}
+\FloatBarrier
+
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{NEW and UPD History-Scope Derivations}\label{ta:history_checks}
+\input{technical_fragments/history_checks.tex}
+\FloatBarrier
+
+\FloatBarrier
+\Needspace{6\baselineskip}
+\section{Proof of Conditional Trace Lifting}\label{ta:execution_proof}
+\input{technical_fragments/execution_contract_full.tex}
+\input{technical_fragments/execution_proof.tex}
+\FloatBarrier
+
+\section{Policy Requirement-Boundary Argument}\label{ta:policy_interpretation}
+\input{technical_fragments/policy_interpretation.tex}
+\input{figures/policy_finite_main.tex}
+\FloatBarrier
+
+\FloatBarrier
+\section{Separate Evaluation Populations and All-Contract Grid}
+\label{ta:additional_populations}
+\input{technical_fragments/additional_populations.tex}
+\input{technical_fragments/performance_scope_details.tex}
+\input{technical_fragments/constructed_contracts.tex}
+
+\clearpage
+\section{Complete Native DUCS Construction for Cell}
+\label{ta:ducs_cell_complete}\label{ta:ducs_interface}
+Table~\ref{tab:ducs-interface} in the main paper compares the interfaces; the following construction makes that comparison concrete.
+
+\input{figures/contract_interfaces_full.tex}
+
+\input{technical_fragments/ducs_cell_complete.tex}
+
+\FloatBarrier
+\section{Saved PC2 Activation Histories and Their Boundary}
+\label{ta:pc2_history_boundary}
+\input{technical_fragments/pc2_contract_details.tex}
+
+\input{figures/pc2_saved_path.tex}
+
+\input{technical_fragments/pc2_history_boundary.tex}
+\input{technical_fragments/pc2_all_activation.tex}
+
+\FloatBarrier
+\section{Activation-Scoped Initialization}\label{ta:activation_scope}
+\input{technical_fragments/activation_scoped.tex}
+\input{technical_fragments/gsm_active_policy.tex}
+\FloatBarrier
+\section{Implementation and AI-Assisted Research Details}\label{ta:implementation_details}
+Algorithm~\ref{alg:otf} returns and internally checks the losing region $L$. The finite-JSON runner serializes its members in \path{certificate.json}; an independent checker reconstructs successors from the input and checks closure. The FSP/application benchmark driver instead records LOSS, region size and phase-mask statistics, without serializing solver membership. Its saved full-game exports support independent region reconstruction, but do not compare the solver's member list. These output interfaces therefore provide different saved certificate evidence.
+The fixed RQ3 runs use Windows~10, an Intel Xeon W-2265, 256~GB RAM and Temurin~17.0.20.1. The main paper states the heap, time cap and repetition policy; separate Mac structural checks and extended trials retain their own provenance.
+
+Codex (\texttt{gpt-5.5}, \texttt{gpt-5.6-sol}, \texttt{gpt-6-astra}; September 30--October 2: GPT-6, variant unavailable) assisted design, implementation, tooling, tests, experiments, analysis, proofs and presentation. Claude Fable 5.1 assisted planning, drivers, source checks and drafts. September 30--October 2 editing used Opus 5.5 and ChatGPT Pro/Latest reviews (response model unavailable); Claude Code inherited project context. Authors checked outputs using tests, certificates, oracles and primary sources and retain responsibility; correlated faults remain possible. Reviews were editorial, not human evaluation.
+\end{document}

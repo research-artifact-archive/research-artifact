@@ -1,0 +1,14 @@
+\begin{table}[!htbp]
+\caption{Contract interfaces and construction responsibilities. Native DUCS permits stages explicitly encoded in its new environment~\cite[Defs.~4.1--4.3, Sec.~4.2]{Nahabedian2020}.}
+\label{tab:contract-interfaces-full}
+\centering\small
+\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
+Aspect & Native DUCS & FG-DUCS\\\midrule
+Transfer input & Old/new environments and global relation & Component pairs and local relations $g_i$\\
+Requirement input & Old/new goals, transition requirement and fluents & Old/new/interval monitors, initializers and precedence\\
+Constructed structure & Interrupt composition and update protocol; extra stages supplied in the new environment & Mixed versions, command guards, lifetimes and all local outcomes\\
+Controller choice & Old controller supplied; update and subsequent control synthesized & Both controllers and targets supplied; update policy and load state selected\\
+Returned result & Updated controller and state relation, or no solution & Policy, rank and handover, or losing region\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize Both require justified models. Explicit native stages, guards and fluents preserve both Cell paths and their subsequent traces. This is one-direction witness preservation, not general equivalence or measured effort. Fixed new control excludes solutions requiring a different continuation.}
+\end{table}

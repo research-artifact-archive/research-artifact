@@ -1,0 +1,12 @@
+\paragraph{Obligations that begin at activation.}
+\label{sec:activation-scoped}
+\emph{Activation-scoped} interpretation ACT starts a pure invariant $\Box\varphi$ with the actual post-boundary observer vector, checking $\varphi$ there and after each later label. It retains factual fluent values, not a past-violation bit. Start follows the declared observer rules and is not consumed twice. This differs from A's safe-history restriction and H's whole-past obligation.
+
+\begin{proposition}[Activation-scoped invariant initialization]
+\label{prop:activation-scoped}
+For such an invariant, let a safe reference history end at vector $v$. If the supplied initialized monitor has the same continuation language as that reference history's residual, it is exact for ACT at every activation with vector $v$, including activations whose actual histories violated the invariant before its start.
+\end{proposition}
+\begin{proof}
+The safe reference prefix leaves only current/future invariant obligations. Deterministic observers give the same future valuations from $v$ on every common suffix, proving equality with ACT. Earlier violations in the actual history do not affect those valuations.
+\end{proof}
+This requires an appropriate initializer, not merely A inclusion. Section~\ref{sec:pc2-case} proves one saved requirement's ACT behavior directly; the 138 A checks remain A checks.

@@ -1,0 +1,887 @@
+{
+  "purpose": "Static source and graph analysis of existing PC2 exports; no synthesis, compiler, solver, experiment, or changed input.",
+  "source_certificate": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e6/pc2_rolling/v2/validation/export/lazy_none/certificate.json",
+  "source_lts": "FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e6/pc2_rolling/v2/inputs/ProductionCell_Arms2_Calibration.lts",
+  "scope": "All thirteen new requirements of this one saved PC2-Rolling policy at their reached activation tuples, from every saved entry.",
+  "saved_population": {
+    "states": 381,
+    "edges": 522,
+    "entries": 126,
+    "goals": [
+      7
+    ]
+  },
+  "graph_checks": {
+    "entry_reachable_domain_exact": true,
+    "closed_domain": true,
+    "natural_strictly_decreasing_ranks": true,
+    "non_goal_deadlocks": 0,
+    "goal_terminal_and_rank_zero": true,
+    "entry_on_start_chain": false,
+    "chain_successors_have_only_preceding_incoming_edge": true,
+    "all_maximal_runs_cross_all_thirteen_starts": true
+  },
+  "observer_interpretation": {
+    "registry": [
+      {
+        "name": "Calibrating.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "beginCalibration.1"
+        ],
+        "reset": [
+          "calibrated.1"
+        ]
+      },
+      {
+        "name": "Calibrating.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "beginCalibration.2"
+        ],
+        "reset": [
+          "calibrated.2"
+        ]
+      },
+      {
+        "name": "CleanPending.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "clean.1"
+        ],
+        "reset": [
+          "cleanOk.1",
+          "cleanNOk.1"
+        ]
+      },
+      {
+        "name": "CleanPending.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "clean.2"
+        ],
+        "reset": [
+          "cleanOk.2",
+          "cleanNOk.2"
+        ]
+      },
+      {
+        "name": "Cleaned.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "cleanOk.1"
+        ],
+        "reset": [
+          "reset.1"
+        ]
+      },
+      {
+        "name": "Cleaned.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "cleanOk.2"
+        ],
+        "reset": [
+          "reset.2"
+        ]
+      },
+      {
+        "name": "DrillPending.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "drill.1"
+        ],
+        "reset": [
+          "drillOk.1",
+          "drillNOk.1"
+        ]
+      },
+      {
+        "name": "DrillPending.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "drill.2"
+        ],
+        "reset": [
+          "drillOk.2",
+          "drillNOk.2"
+        ]
+      },
+      {
+        "name": "Drilled.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "drillOk.1"
+        ],
+        "reset": [
+          "reset.1"
+        ]
+      },
+      {
+        "name": "Drilled.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "drillOk.2"
+        ],
+        "reset": [
+          "reset.2"
+        ]
+      },
+      {
+        "name": "PaintPending.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "paint.1"
+        ],
+        "reset": [
+          "paintOk.1",
+          "paintNOk.1"
+        ]
+      },
+      {
+        "name": "PaintPending.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "paint.2"
+        ],
+        "reset": [
+          "paintOk.2",
+          "paintNOk.2"
+        ]
+      },
+      {
+        "name": "Painted.1",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "paintOk.1"
+        ],
+        "reset": [
+          "reset.1"
+        ]
+      },
+      {
+        "name": "Painted.2",
+        "kind": "declared_fluent",
+        "initial": 0,
+        "set": [
+          "paintOk.2"
+        ],
+        "reset": [
+          "reset.2"
+        ]
+      },
+      {
+        "name": "clean.1",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "clean.1"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "clean.2",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "clean.2"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "drill.1",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "drill.1"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "drill.2",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "drill.2"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "out.1",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "out.1"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "out.2",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "out.2"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "paint.1",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "paint.1"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "paint.2",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "paint.2"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "stamp.1",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "stamp.1"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      },
+      {
+        "name": "stamp.2",
+        "kind": "event_proposition",
+        "initial": 0,
+        "set": [
+          "stamp.2"
+        ],
+        "reset": [
+          "other ordinary event"
+        ]
+      }
+    ],
+    "declared_fluent_coordinates": 14,
+    "event_proposition_coordinates": 10,
+    "source_observer_edges_checked": 870,
+    "all_chain_observers_zero": true
+  },
+  "old_prefix_and_calibration": {
+    "old_states": 126,
+    "old_edges": 348,
+    "old_initial": 0,
+    "old_domain_initial_reachable": true,
+    "old_source_has_no_calibration_request": true,
+    "old_requests": 0,
+    "policy_requests": 0,
+    "source_calibration_initial_values": [
+      0,
+      0
+    ],
+    "all_old_and_policy_calibration_values_zero": true,
+    "every_entry_bound_to_old_hot_swap_predecessor": true,
+    "entry_to_old_state": {
+      "126": 0,
+      "127": 2,
+      "128": 10,
+      "129": 25,
+      "130": 17,
+      "131": 92,
+      "132": 5,
+      "133": 45,
+      "135": 124,
+      "136": 57,
+      "137": 117,
+      "138": 34,
+      "139": 1,
+      "141": 4,
+      "154": 16,
+      "155": 33,
+      "167": 24,
+      "168": 6,
+      "169": 20,
+      "170": 12,
+      "171": 29,
+      "185": 26,
+      "186": 49,
+      "187": 48,
+      "188": 73,
+      "213": 36,
+      "214": 58,
+      "215": 11,
+      "216": 9,
+      "217": 21,
+      "218": 37,
+      "219": 18,
+      "220": 39,
+      "221": 55,
+      "234": 71,
+      "235": 70,
+      "237": 77,
+      "238": 99,
+      "261": 93,
+      "262": 110,
+      "263": 90,
+      "264": 109,
+      "265": 40,
+      "266": 51,
+      "273": 75,
+      "274": 96,
+      "287": 83,
+      "288": 62,
+      "289": 64,
+      "290": 112,
+      "303": 120,
+      "304": 119,
+      "305": 46,
+      "306": 43,
+      "307": 68,
+      "308": 88,
+      "309": 61,
+      "310": 86,
+      "311": 106,
+      "312": 104,
+      "313": 121,
+      "314": 41,
+      "315": 30,
+      "316": 38,
+      "317": 63,
+      "318": 84,
+      "319": 76,
+      "320": 60,
+      "321": 85,
+      "322": 72,
+      "323": 52,
+      "324": 50,
+      "325": 107,
+      "326": 114,
+      "327": 108,
+      "328": 115,
+      "329": 97,
+      "330": 98,
+      "331": 13,
+      "332": 19,
+      "333": 35,
+      "334": 59,
+      "335": 47,
+      "336": 27,
+      "337": 28,
+      "338": 87,
+      "339": 102,
+      "340": 100,
+      "341": 78,
+      "342": 74,
+      "343": 94,
+      "344": 7,
+      "345": 3,
+      "346": 8,
+      "347": 22,
+      "348": 42,
+      "349": 31,
+      "350": 23,
+      "351": 44,
+      "352": 32,
+      "353": 14,
+      "354": 15,
+      "355": 67,
+      "356": 81,
+      "357": 69,
+      "358": 82,
+      "359": 56,
+      "360": 54,
+      "362": 125,
+      "363": 66,
+      "364": 53,
+      "365": 65,
+      "366": 91,
+      "367": 103,
+      "368": 101,
+      "369": 89,
+      "370": 105,
+      "371": 95,
+      "372": 79,
+      "373": 80,
+      "374": 116,
+      "375": 122,
+      "376": 118,
+      "378": 123,
+      "379": 113,
+      "380": 111
+    },
+    "argument": "The old source plant has no beginCalibration action. Its initially false calibration fluents stay false on every saved old edge; all old states are initial-reachable. Exact physical/old-monitor signatures and hotSwapIn edges bind every policy entry to an old state. Replay of all 522 policy edges then preserves those two false bits, including ordinary calibrated events that reset them."
+  },
+  "start_chain": [
+    [
+      20,
+      "startNewSpec_P_AVOID_STAMPING_1",
+      19
+    ],
+    [
+      19,
+      "startNewSpec_P_AVOID_STAMPING_2",
+      18
+    ],
+    [
+      18,
+      "startNewSpec_P_CAL_AVAILABILITY",
+      17
+    ],
+    [
+      17,
+      "startNewSpec_P_CLEAN_ONCE_1",
+      16
+    ],
+    [
+      16,
+      "startNewSpec_P_CLEAN_ONCE_2",
+      15
+    ],
+    [
+      15,
+      "startNewSpec_P_DRILL_ONCE_1",
+      14
+    ],
+    [
+      14,
+      "startNewSpec_P_DRILL_ONCE_2",
+      13
+    ],
+    [
+      13,
+      "startNewSpec_P_NEW_OUT_IF_FINISHED_1",
+      12
+    ],
+    [
+      12,
+      "startNewSpec_P_NEW_OUT_IF_FINISHED_2",
+      11
+    ],
+    [
+      11,
+      "startNewSpec_P_NEW_TOOL_ORDER_1",
+      10
+    ],
+    [
+      10,
+      "startNewSpec_P_NEW_TOOL_ORDER_2",
+      9
+    ],
+    [
+      9,
+      "startNewSpec_P_PAINT_ONCE_1",
+      8
+    ],
+    [
+      8,
+      "startNewSpec_P_PAINT_ONCE_2",
+      7
+    ]
+  ],
+  "active_obligations": [
+    {
+      "requirement": "P_AVOID_STAMPING_1",
+      "source_invariant": "(!stamp[1])",
+      "start_edge": [
+        20,
+        "startNewSpec_P_AVOID_STAMPING_1",
+        19
+      ],
+      "active_states_through_handover": [
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_AVOID_STAMPING_1:0",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_AVOID_STAMPING_2",
+      "source_invariant": "(!stamp[2])",
+      "start_edge": [
+        19,
+        "startNewSpec_P_AVOID_STAMPING_2",
+        18
+      ],
+      "active_states_through_handover": [
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_AVOID_STAMPING_2:1",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_CAL_AVAILABILITY",
+      "source_invariant": "(!Calibrating[1] || !Calibrating[2])",
+      "start_edge": [
+        18,
+        "startNewSpec_P_CAL_AVAILABILITY",
+        17
+      ],
+      "active_states_through_handover": [
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_CAL_AVAILABILITY:2",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_CLEAN_ONCE_1",
+      "source_invariant": "(clean[1] -> !Cleaned[1])",
+      "start_edge": [
+        17,
+        "startNewSpec_P_CLEAN_ONCE_1",
+        16
+      ],
+      "active_states_through_handover": [
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_CLEAN_ONCE_1:3",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_CLEAN_ONCE_2",
+      "source_invariant": "(clean[2] -> !Cleaned[2])",
+      "start_edge": [
+        16,
+        "startNewSpec_P_CLEAN_ONCE_2",
+        15
+      ],
+      "active_states_through_handover": [
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_CLEAN_ONCE_2:4",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_DRILL_ONCE_1",
+      "source_invariant": "(drill[1] -> !Drilled[1])",
+      "start_edge": [
+        15,
+        "startNewSpec_P_DRILL_ONCE_1",
+        14
+      ],
+      "active_states_through_handover": [
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_DRILL_ONCE_1:5",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_DRILL_ONCE_2",
+      "source_invariant": "(drill[2] -> !Drilled[2])",
+      "start_edge": [
+        14,
+        "startNewSpec_P_DRILL_ONCE_2",
+        13
+      ],
+      "active_states_through_handover": [
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_DRILL_ONCE_2:6",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_NEW_OUT_IF_FINISHED_1",
+      "source_invariant": "(out[1] -> (Drilled[1] && Cleaned[1] && Painted[1]))",
+      "start_edge": [
+        13,
+        "startNewSpec_P_NEW_OUT_IF_FINISHED_1",
+        12
+      ],
+      "active_states_through_handover": [
+        12,
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_NEW_OUT_IF_FINISHED_1:7",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_NEW_OUT_IF_FINISHED_2",
+      "source_invariant": "(out[2] -> (Drilled[2] && Cleaned[2] && Painted[2]))",
+      "start_edge": [
+        12,
+        "startNewSpec_P_NEW_OUT_IF_FINISHED_2",
+        11
+      ],
+      "active_states_through_handover": [
+        11,
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_NEW_OUT_IF_FINISHED_2:8",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_NEW_TOOL_ORDER_1",
+      "source_invariant": "((DrillPending[1] -> (Painted[1] && Cleaned[1])) && (PaintPending[1] -> (Cleaned[1] && !Drilled[1])) && (CleanPending[1] -> (!Painted[1] && !Drilled[1])))",
+      "start_edge": [
+        11,
+        "startNewSpec_P_NEW_TOOL_ORDER_1",
+        10
+      ],
+      "active_states_through_handover": [
+        10,
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_NEW_TOOL_ORDER_1:9",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_NEW_TOOL_ORDER_2",
+      "source_invariant": "((DrillPending[2] -> (Painted[2] && Cleaned[2])) && (PaintPending[2] -> (Cleaned[2] && !Drilled[2])) && (CleanPending[2] -> (!Painted[2] && !Drilled[2])))",
+      "start_edge": [
+        10,
+        "startNewSpec_P_NEW_TOOL_ORDER_2",
+        9
+      ],
+      "active_states_through_handover": [
+        9,
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_NEW_TOOL_ORDER_2:10",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_PAINT_ONCE_1",
+      "source_invariant": "(paint[1] -> !Painted[1])",
+      "start_edge": [
+        9,
+        "startNewSpec_P_PAINT_ONCE_1",
+        8
+      ],
+      "active_states_through_handover": [
+        8,
+        7
+      ],
+      "installed_monitor": "new:P_PAINT_ONCE_1:11",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    },
+    {
+      "requirement": "P_PAINT_ONCE_2",
+      "source_invariant": "(paint[2] -> !Painted[2])",
+      "start_edge": [
+        8,
+        "startNewSpec_P_PAINT_ONCE_2",
+        7
+      ],
+      "active_states_through_handover": [
+        7
+      ],
+      "installed_monitor": "new:P_PAINT_ONCE_2:12",
+      "monitor_state_through_handover": 0,
+      "source_invariant_true_on_all_active_states": true,
+      "ordinary_or_transfer_edges_after_activation": [],
+      "every_maximal_saved_run_crosses_start": true
+    }
+  ],
+  "handover": {
+    "goal": 7,
+    "target": "new-00000009",
+    "physical": [
+      [
+        "NEW",
+        1,
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      [
+        "NEW",
+        1,
+        []
+      ]
+    ],
+    "new_monitors": {
+      "new:P_AVOID_STAMPING_1:0": 0,
+      "new:P_AVOID_STAMPING_2:1": 0,
+      "new:P_CAL_AVAILABILITY:2": 0,
+      "new:P_CLEAN_ONCE_1:3": 0,
+      "new:P_CLEAN_ONCE_2:4": 0,
+      "new:P_DRILL_ONCE_1:5": 0,
+      "new:P_DRILL_ONCE_2:6": 0,
+      "new:P_NEW_OUT_IF_FINISHED_1:7": 0,
+      "new:P_NEW_OUT_IF_FINISHED_2:8": 0,
+      "new:P_NEW_TOOL_ORDER_1:9": 0,
+      "new:P_NEW_TOOL_ORDER_2:10": 0,
+      "new:P_PAINT_ONCE_1:11": 0,
+      "new:P_PAINT_ONCE_2:12": 0
+    },
+    "linked_post_state": 135,
+    "linked_post_controller": 140,
+    "linked_endpoint_physical_observers_and_new_monitors_equal": true,
+    "post_handover_assumption": "The supplied verified fixed new endpoint and continuation-preserving handover; endpoint semantics are not independently verified by this script."
+  },
+  "stored_checks": {
+    "certificate_checker": "PASS rechecked by fixed E1",
+    "link_checker": "PASS rechecked by fixed E1 structural Link checker"
+  },
+  "not_checked": [
+    "Completeness of exported modeled outcomes",
+    "Frontend or compiler correctness",
+    "Full Rolling initializer or every permitted activation tuple",
+    "All 138 NEW occurrences",
+    "History-inclusive pre-activation safety",
+    "Runtime conformance",
+    "Independent verification of the fixed new endpoint"
+  ]
+}

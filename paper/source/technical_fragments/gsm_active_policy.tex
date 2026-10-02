@@ -1,0 +1,35 @@
+\paragraph{A source-derived policy with active ordinary behavior.}
+\label{ta:gsm-active-policy}
+This is an analytical construction from the supplied \texttt{GSM\_FG.lts} and saved frontend lookup, not an exported solver policy or an additional experiment. The old plant is the cycle
+\[
+\begin{aligned}
+\mathsf{SENDER}&\xrightarrow{shiftX}X\xrightarrow{shiftY}Y
+\xrightarrow{shiftZ}Z\xrightarrow{encode}\mathsf{ENCODED}\\
+&\xrightarrow{send}\mathsf{SENT}\xrightarrow{receive}\mathsf{RECEIVED}\\
+&\xrightarrow{decode.2\ \mathrm{or}\ decode.3}\mathsf{DECODED}
+\xrightarrow{output}\mathsf{SENDER}.
+\end{aligned}
+\]
+The new plant inserts $shiftT$ and state $T$ between $Z$ and $encode$; the supplied transfer maps identically named old states to new ones. All ordinary events are controllable. The old safety requirement forbids $decode.3$; the new one forbids $decode.2$. The R1 interval forbids ten ordinary labels between old-stop and new-start. Its initializer and source interpretation are derived below.
+
+The new requirement's physical observer is initially zero, becomes one on $decode.2$, and becomes zero on every other ordinary label. The saved lookup maps observer zero to non-error monitor state zero and observer one to error (outside the safe initializer domain). In monitor state zero, $decode.2$ enters error; every other label preserves zero. Update commands and transfer preserve the physical observer. In particular, start reads its current value and does not reset it.
+
+\begin{proposition}[GSM activation with ordinary events]\label{prop:gsm-active-policy}
+The supplied GSM/R1 contract admits a state-based completing policy from every old entry whose new-decode requirement is active during ordinary $decode.3$ and $output$ events. At these activations, the supplied new-requirement initializer is exact for the activation-scoped requirement $\Box\neg decode.2$; the policy reaches a compatible supplied new-controller state within twelve update events.
+\end{proposition}
+\begin{proof}
+While old-stop is pending, follow the old cycle only until the first $\mathsf{RECEIVED}$ state, then select old-stop and new-start consecutively. Select $decode.3$, then $output$, then the identity transfer at $\mathsf{SENDER}$; disable other controllables. No UC event occurs and each selected label has a singleton outcome.
+
+Every old plant state reaches the first $\mathsf{RECEIVED}$ in zero to seven edges without taking a decode edge. This prefix preserves the old requirement and the initially false R1 gap guard. At $\mathsf{RECEIVED}$, the previous $receive$ has set the observer to zero; the same holds for an old entry at $\mathsf{RECEIVED}$. Hence the new initializer is defined. Stop and start preserve that observer, and no ordinary event occurs while the R1 gap guard is true. After start, both $decode.3$ and $output$ preserve monitor state zero. A choice of $decode.2$ at that same plant state would enter error, so the active requirement constrains an actual ordinary choice.
+
+Following $output$, the physical state is old $\mathsf{SENDER}$ with observer zero. Transfer yields new $\mathsf{SENDER}$ with observer zero and new monitor zero, exactly the supplied new endpoint's initial projection; all three commands are consumed. The remaining safe R1 monitor is of interval type and is not matched against an endpoint requirement. The fixed new controller subsequently excludes $decode.2$. Its monitor therefore recognizes precisely the safe active suffixes; violations before activation have no bearing on this ACT claim.
+
+Let $d$ be distance along the old cycle to the first $\mathsf{RECEIVED}$. Give pre-stop states rank $d+5$; give the states after stop, start, $decode.3$, $output$ and transfer ranks $4,3,2,1,0$, respectively. Every edge strictly decreases rank, with maximum twelve and rank zero at a matching goal. The pending-command set and active monitors distinguish these phases, so no extra history memory is needed. This proves all-entry safety and finite completion. The same event sequence also places both boundaries before transfer, as required by the separately supplied R2 order; no R2 solver result is inferred here.
+\end{proof}
+
+An old execution can already have performed $decode.2$ before the update request. This construction thus does not establish H or safe full histories for A. It establishes a non-vacuous ACT obligation over ordinary update actions and the fixed endpoint continuation, within this supplied model. It does not validate the compiler, application intent or runtime adapter.
+
+\paragraph{From the source interval to an entry guarantee.}
+GSM/R1 requires $\Box(G\Rightarrow\neg A)$: $G$ starts at old-decode stop and ends at new-decode start; $A$ denotes ten decode/encode, communication and shift events. Every old entry has $G=false$, since no command has occurred. Entry preserves this guard and resets action predicates. Its monitor has guard-false, guard-true and error states: stop sets the guard, start clears it, and $A$ enters error while the guard holds. Installing guard-false therefore gives exactly the fresh E obligation at every old entry.
+
+The source/export check covers this formula, initializer, all 45 state--label pairs and both action-predicate entry values. This establishes declared E meaning; application intent and runtime conformance remain unvalidated. Technical Appendix~\ref{ta:history_checks} retains the full check population and older unverified results.

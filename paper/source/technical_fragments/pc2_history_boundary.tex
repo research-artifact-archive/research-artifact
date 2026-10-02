@@ -1,0 +1,38 @@
+This analysis traverses existing PC2-Rolling exports; it runs no solver and adds no timing trial. The selected requirement is $\Box(out_1\Rightarrow Drilled_1\land Cleaned_1\land Painted_1)$. The three fluents start false, successful tool events set them, and $reset_1$ clears them. An $out_1$ with any false fluent violates the requirement. Other update commands stutter for these fluents.
+
+The saved old closed loop contains 126 reachable states and 348 edges; the policy contains 381 states and 522 edges. Matching component states, old-monitor memory and ordinary observers identifies each policy entry with one old state. Every maximal policy run crosses the single selected start edge $q_{13}\to q_{12}$, which installs monitor state 0 at two NEW/ARM components with all 24 ordinary observers zero. Ranks strictly decrease; removing that start edge makes the unique goal unreachable from every entry.
+The main paper's displayed path starts at $q_{126}$ and ends at $q_7$, whose handover target is \texttt{new-00000009}. All 13 new monitors are 0 there and no command remains. Its prefix to $q_{12}$ has two arrivals, twelve stops, four transfer/completion events and eight starts, with no $out_1$ or successful tool result.
+
+For each entry, find an old prefix from the declared old initial state and a policy prefix ending at this start. Keep an edge only if the source fluent values and its label do not violate the selected new requirement. Forward reachability in the old graph and reverse reachability from the start in the policy graph yield the table. Separate per-entry breadth-first traversals construct positive witnesses or record failure of each portion; set-based fixed points reproduce the same partition.
+
+\begin{center}\small
+\begin{tabular}{@{}llr@{}}\toprule
+Safe old prefix exists & Safe policy prefix exists & Entry count\\\midrule
+Yes & Yes & 39\\
+No & Yes & 21\\
+Yes & No & 66\\\bottomrule
+\end{tabular}
+\end{center}
+All 126 entries reach the start through some unrestricted saved-model history. The 39 positive rows establish existential nonemptiness at this one reached tuple, not safety of all histories. An old cycle
+\[
+in_1;drill_1;drillOk_1;polish_1;polishOk_1;clean_1;cleanOk_1;out_1;reset_1
+\]
+returns to the identical old initial tuple. It violates the new requirement at $out_1$ because $Painted_1$ is false. Prepending this cycle to any entry's history preserves its final activation tuple while retaining a past violation. The new monitor is absent in every old state and all 375 policy ancestors of its start, so none of these negative histories refutes its active-lifetime safety. They show why activation-safe and history-inclusive scopes cannot be conflated.
+
+Replay of source-declared plant moves and all 24 observer updates agrees with all 348 old and 522 policy edges. This establishes consistency of these saved histories, not independent frontend correctness or completeness of exported outcomes. The artifact retains all 126 rows, positive paths, negative reasons and 18 boundary edges separating the safe reachability sets. Only one reached tuple of one requirement is covered; the reported 38,288 initializer guard tuples, the other 12 PC2 new requirements and the 138-occurrence population are not checked for nonemptiness by this analysis.
+
+\paragraph{Direct ACT argument after the selected start.}
+ACT begins the invariant with the actual observer values at activation. For the selected requirement these values are all zero. The saved policy graph's complete suffix is:
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Source (rank) & New requirement started & Target (rank)\\\midrule
+$q_{12}$ (5) & \texttt{OUT\_IF\_FINISHED\_2} & $q_{11}$ (4)\\
+$q_{11}$ (4) & \texttt{TOOL\_ORDER\_1} & $q_{10}$ (3)\\
+$q_{10}$ (3) & \texttt{TOOL\_ORDER\_2} & $q_9$ (2)\\
+$q_9$ (2) & \texttt{PAINT\_ONCE\_1} & $q_8$ (1)\\
+$q_8$ (1) & \texttt{PAINT\_ONCE\_2} & $q_7$ (0)\\\bottomrule
+\end{tabular}
+\end{center}
+All six states have two NEW/ARM components, 24 zero observers and selected-monitor state 0. No ordinary event, transfer or uncontrollable edge occurs in this suffix. The unique goal matches \texttt{new-00000009}. Consequently the source invariant holds at activation and on every remaining update step; matching the verified new endpoint supplies its post-handover guarantee.
+
+The saved graph is closed over 381 entry-reachable states; all 522 edges decrease a natural rank, and no non-goal deadlocks. Removing the unique selected start leaves 375 reachable states and no goal from any of the 126 entries. Thus every maximal saved-policy run crosses the start and follows this suffix. The static checker \path{check_saved_suffix.py} reproduces these facts from the existing certificate without invoking synthesis. Completeness of modeled outcomes relies on the stored certificate checker; frontend/compiler correctness and real execution are not independently proved here. The argument concerns one requirement and one reached tuple, not all 138 NEW occurrences. The A/H diagnostics above remain unchanged.

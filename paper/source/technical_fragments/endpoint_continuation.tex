@@ -1,0 +1,8 @@
+\begin{proposition}[Preservation of the selected endpoint]
+\label{prop:endpoint-continuation}
+For a returned WIN certificate and reached goal $q$, the new-phase submodel reachable after handover at $q$ is label-preserving isomorphic to $\CLnew$ rooted at $\kappa(q)$. Hence their finite and infinite ordinary-event traces coincide.
+\end{proposition}
+\begin{proof}
+Handover retains matching components and monitors and installs the selected controller state. Each new-phase state copies an endpoint state with exactly its labeled transitions, without further policy restriction or return to updating. This bijection preserves and reflects edges, hence finite and infinite paths.
+\end{proof}
+Continuation properties established at the selected state are preserved; target selection can change which continuation applies. Execution additionally requires the adapter premises in Section~\ref{sec:interpretation-execution}.

@@ -1,0 +1,53 @@
+Complete construction and witness-preservation proof for main Section~\ref{sec:ducs-cell-construction}.
+We construct a correct Cell update using native DUCS environments, relation $R$, transition requirement $T$ and boundary protocol $O$~\cite[Defs.~4.1--4.3 and 5.1]{Nahabedian2020}.
+
+DUCS's \texttt{hotSwap} event requests the update and interrupts old control. Its \texttt{reconfigure} milestone switches environments; our extra $h$ connects mixed stages to a fixed endpoint.
+
+\paragraph{Environments and entry.}
+Refine the old controller to its reachable closed loop $c_A\xrightarrow{m_B}c_B\xrightarrow{m_A}c_A$, preserving ordinary traces and recording the holder. The old environment has these same moves. Let $E'$ contain eight stages $(v_A,v_B,L)\in\{o,n\}^2\times\{A,B\}$ and three post-handover states. In a stage, $m_B$ moves $A$ to $B$, $m_A$ moves $B$ to $A$, and $j$ self-loops only if $v_B=n,L=B$. Transfer $\rho_i$ changes $v_i=o$ to $n$ only while station $i$ is empty. A controllable $h$ maps $(n,n,L)$ to $z_L$. Post-handover edges copy the fixed new closed loop:
+\[
+z_A\xrightarrow{m_B}y_B\xrightarrow{j}z_B,
+\qquad z_B\xrightarrow{j}z_B,
+\qquad z_B\xrightarrow{m_A}z_A.
+\]
+Here $y_B$ is inspection-pending; $z_A,z_B$ are clear targets. The standalone initial state is $z_A$, but interrupt entry uses $R:L\mapsto(o,o,L)$. The 11-state count excludes protocol and monitors and is not a minimality result.
+
+\paragraph{Requirements and memory.}
+Write $s=\mathsf{startNewSpec}$ and $t=\mathsf{stopOldSpec}$. Protocol $O$ accepts these physical stutters. Let $\dot a$ record last event $a$, resetting on every other label. Fluents $B=\langle m_B,m_A,\mathsf{false}\rangle$ and $P=\langle m_B,j,\mathsf{false}\rangle$ retain holder and uninspected-arrival history. Take $G=\neg\dot j$ and $G'=\neg(P\land\dot m_A)$ under native old-until-stop and new-after-start scopes.
+
+For each event $a$, let $S_a$ be its initially false, never-reset occurrence flag. Take $T$ to be the conjunction
+\[
+\begin{aligned}
+&\Box(\dot s\Rightarrow S_{\mathsf{reconfigure}}),
+&&\Box(\dot t\Rightarrow S_s),\\
+&\Box(\dot h\Rightarrow S_{\rho_A}\land S_{\rho_B}\land S_s\land S_t\land\neg(B\land P)),
+&&\Box(\dot{\mathsf{reconfigure}}\Rightarrow\Diamond\dot h).
+\end{aligned}
+\]
+Interrupts, $O$, version guards and the post-handover region ensure at most one occurrence of each update event. This analytical $T$ includes eventual $h$, beyond the published safety-$T$ implementation~\cite[Sec.~5.3]{Nahabedian2020}; no solver experiment is claimed.
+Native DUCS still requires eventual $\mathsf{stopOldSpec}$, $\mathsf{reconfigure}$ and $\mathsf{startNewSpec}$, including in its safety-$T$ implementation. Here $\mathsf{reconfigure}$ enters the mixed stages; $h$ is an additional fixed-target connection, so those three milestones do not by themselves require $h$. We do not rule out another encoding within safety-$T$.
+
+\begin{proposition}[Cell witness preservation]
+\label{prop:cell-ducs-complete}
+This staged native DUCS instance admits a correct update from both reachable old entries. On the segment from $\mathsf{hotSwap}$ through $h$, erasing these two events and $\mathsf{reconfigure}$ and renaming $s,t$ to Cell's boundaries gives the displayed FG policy paths. After $h$, its ordinary traces equal those of the supplied new closed loop rooted at the selected target.
+\end{proposition}
+\begin{proof}
+Use DUCS's assembled environment, including $O$, its old-event renaming/fluent extension, and controller extraction~\cite[Sec.~5, Theorem~5.1]{Nahabedian2020}. Preserve old behavior before $\mathsf{hotSwap}$. Map $H(c_L)$ to the corresponding pre-reconfiguration controller state; then choose $\mathsf{reconfigure}$, the six-/five-event path of Figure~\ref{fig:cell-story}, $h$, and every fixed-endpoint edge thereafter. All choices are enabled in the assembled environment; no ordinary UC event remains after initiation, ensuring legality and deadlock freedom.
+
+Old $j$ is disabled until $t$. On safe active prefixes the correspondence is: the FG monitor is pending iff $B\land P$. At $s$, a $B$ holder has an earlier $m_B$ and no $j$, so both are pending. At an $A$ holder, $B$ is false and FG is clear, although $P$ may remain true from an earlier visit to $B$. This is equivalence of permitted continuations on the plant, not equality between $P$ and the monitor state: $m_A$ and $j$ are disabled at $A$, and the next $m_B$ makes both representations pending. Thereafter $j$ clears $P$ and the monitor. An enabled $m_A$ comes from $B$; it leaves $P$ unchanged while setting $\dot m_A$, so it violates $G'$ exactly when FG was pending. Otherwise it leaves $B\land P$ and FG clear. Transfers and boundaries preserve the correspondence. Thus every ordinary extension has the same safety outcome in both representations. The finite paths satisfy the boundary order and reach all-new, clear targets, fulfilling $T$ and the native update milestones. After $h$, the synchronized environment/controller copies retain every fixed-endpoint edge. Their reachable product is diagonal, giving the claimed ordinary-trace equality.
+\end{proof}
+
+The native encoding explicitly supplies stages, guards, holder refinement, history fluents, target gate and post-handover graph. FG-DUCS generates the update-game counterparts from local transfers, lifecycle rules, initializers and fixed targets, returning rank and handover certificates. This deterministic, fully controllable example establishes one-direction witness preservation, not a general translation, solution-set equivalence, measured effort saving or performance advantage.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{The same Cell obligations through the two interfaces. Native entries refer to this explicit construction; they are not lower bounds on other encodings. FG-DUCS supplies the generated structure in addition to the modeler's inputs.}
+\label{tab:cell-input-responsibilities}
+\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
+Obligation & Explicit native Cell modeling & FG-DUCS input and generated structure\\\midrule
+Empty-station replacement & Eight mixed stages in $E'$, holder moves and version/empty-station guards for $\rho_A,\rho_B$. & Old/new models for $A,B$ and $g_A=g_B=\{(e,e)\}$ generate mixed versions and transfer edges with lifecycle/quiescence guards.\\
+Inspection lifetime & Holder-refined old control; $B,P,\dot a,S_a$ fluents and $G,G',T$ encode memory and boundaries. & Typed monitors, initializers and declared precedence generate boundary events, active-memory updates and initialization under the type-defined lifetimes.\\
+Fixed continuation & Post-handover graph in $E'$, a guarded $h$ and eventual-$h$ in $T$. & Fixed controllers and load targets generate matching/goal conditions; synthesis selects a load state and handover map.\\\bottomrule
+\end{tabular}
+\par\smallskip{\footnotesize Native DUCS also constructs its standard protocol $O$ and interrupt composition; these are not additional modeler inputs. The native witness retains every fixed-endpoint edge after $h$.}
+\end{table}

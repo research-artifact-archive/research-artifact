@@ -1,0 +1,18 @@
+\begin{lemma}[UC priority]
+\label{lem:uc-priority}
+Disabling controllable events at UC-enabled states preserves the existence of a policy for finite safe completion.
+\end{lemma}
+\begin{proof}
+A winning policy must handle every UC outcome. Disabling optional controls removes runs and creates no deadlock while a UC event remains enabled. Every surviving maximal run was already a maximal run of that policy, so it still completes safely. Conversely, the reduced policy is admissible in the original game because controllers may disable those events.
+\end{proof}
+
+\begin{lemma}[Search coverage]
+\label{lem:search-coverage}
+At loop boundaries, every state in $X$ has all UC candidates queried; every expanded unproved quiescent safe non-goal with candidates left is in $\mathsf{Retry}$; and every discovered safe non-goal outside $X$ is in $\mathsf{Open}$.
+\end{lemma}
+\begin{proof}
+Initialization at entry states establishes coverage. Discovery queues each new safe non-goal; only expansion removes it, after querying all UC candidates. At quiescence, expansion and retries consume the cursor through a nonempty bucket or exhaustion, retaining every nonwinner with candidates left. Promotion removes only winners. These are the only changes to those sets; finite propagation drains before either return.
+\end{proof}
+
+
+
