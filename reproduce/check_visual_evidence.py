@@ -215,10 +215,10 @@ def verify_pairs(source, expected):
             'timing': 'Five valid consistent runs: median, minimum and maximum'}
 
 
-def verify_placements(main, technical, secondary, promotion):
+def verify_placements(main, technical, secondary, promotion, policy):
     sources={'main':main.split(r'\begin{document}',1)[-1],
              'technical':technical.split(r'\begin{document}',1)[-1],
-             'secondary':secondary,'promotion':promotion}
+             'secondary':secondary,'promotion':promotion,'policy':policy}
     for name,source in sources.items():
         require(not re.search(r'\\(?:iffalse|iftrue|ifnum|ifx|ifdefined|unless)\b',clean(source)),
                 'display_placement', name+' has conditional hiding')
@@ -229,7 +229,8 @@ def verify_placements(main, technical, secondary, promotion):
         'figures/rq3_paired_absolute.tex': {'main':1},
         'technical_fragments/additional_populations.tex': {'technical':1},
         'technical_fragments/promotion_cases.tex': {'technical':1},
-        'figures/policy_finite_main.tex': {'main':1},
+        'figures/policy_finite_main.tex': {'policy':1},
+        'technical_fragments/policy_interpretation.tex': {'technical':1},
         'technical_fragments/gsm_active_policy.tex': {'technical':1},
         'technical_fragments/gsm_entry_derivation.tex': {'main':1},
         'figures/guarantee_evidence_map.tex': {'main':1},
@@ -260,9 +261,14 @@ def verify_placements(main, technical, secondary, promotion):
         for name,source in sources.items():
             require(len(re.findall(pattern,clean(source)))==counts.get(name,0),
                     'display_placement',rel+' in '+name)
+    require(r'\ref{ta:policy_interpretation}' in clean(sources['main']),
+            'display_placement', 'main reference to ta:policy_interpretation')
+    require(clean(sources['technical']).count(r'\label{ta:policy_interpretation}') == 1,
+            'display_placement', 'technical label ta:policy_interpretation')
     return {'main': [rel for rel, counts in expected.items() if counts.get('main')],
             'technical_appendix': [rel for rel, counts in expected.items()
-                                   if counts.get('technical') or counts.get('secondary')],
+                                   if counts.get('technical') or counts.get('secondary')
+                                   or counts.get('policy')],
             'retained_unincluded': [rel for rel, counts in expected.items() if not counts],
             'all_designated_inclusions_checked': True}
 
@@ -270,7 +276,8 @@ def verify(paper, primary_summary):
     main = (paper/'main.tex').read_text()
     placements=verify_placements(main,(paper/'technical_appendix.tex').read_text(),
         (paper/'technical_fragments/additional_populations.tex').read_text(),
-        (paper/'technical_fragments/promotion_cases.tex').read_text())
+        (paper/'technical_fragments/promotion_cases.tex').read_text(),
+        (paper/'technical_fragments/policy_interpretation.tex').read_text())
     display = (paper / 'build/generated/rq3-cells.csv').read_text()
     formal = (paper / 'figures/cell_policy_paths.tex').read_text()
     expected, comparisons = expected_pairs(primary_summary, display)

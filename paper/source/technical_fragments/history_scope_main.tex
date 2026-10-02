@@ -1,6 +1,5 @@
-Let $S_r$ be requirement $r$'s prefix-closed safe language, $H_r(\xi)$ its declared activation histories at observation $\xi$, and $L_r(m)$ the safe continuations accepted from monitor state $m$. Residual soundness (RS) requires $L_r(\iota_r(\xi))\subseteq\bigcap_{h\in H_r(\xi)}\{w:hw\in S_r\}$. New-requirement histories include start once; initialized monitors consume later events. Equality is exact; strict inclusion may reject feasible updates. Empty $H_r(\xi)$ makes the right side universal. Synthesis establishes neither history-scope completeness nor intent (Technical Appendix~\ref{ta:residual_formal}).
+For prefix-closed requirement language $S_r$, declared activation histories $H_r(\xi)$ and monitor continuations $L_r(m)$, residual soundness (RS) means
+$L_r(\iota_r(\xi))\subseteq\bigcap_{h\in H_r(\xi)}\{w:hw\in S_r\}$.
+New histories include start once; monitors consume later events. Equality is exact; strict inclusion can reject feasible updates, and an empty history set makes inclusion vacuous. Scope completeness and intent are external obligations (Technical Appendix~\ref{ta:residual_formal}).
 
-A Boolean event-history variable, or \emph{fluent}, records setting/resetting labels. The evaluation distinguishes three history scopes:
-\par\noindent\textbf{A (activation-safe), for new requirements (NEW):} admit only safe pre-activation histories consistent with the observed component state.
-\par\noindent\textbf{E (entry-scoped), for interval requirements (UPD):} start the reference at update entry.
-\par\noindent\textbf{H (history-inclusive):} count pre-activation violations too; not claimed. Synthesis does not establish whether the chosen scope matches intent (S3).
+A \emph{fluent} records setting/resetting events. The saved checks use \textbf{A} for NEW (safe pre-activation histories consistent with the component observation) and \textbf{E} for UPD (reference beginning at entry). \textbf{H}, which counts prior violations too, is not claimed (S3).

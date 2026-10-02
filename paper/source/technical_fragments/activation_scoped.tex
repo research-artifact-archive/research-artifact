@@ -10,3 +10,52 @@ For such an invariant, let a safe reference history end at vector $v$. If the su
 The safe reference prefix leaves only current/future invariant obligations. Deterministic observers give the same future valuations from $v$ on every common suffix, proving equality with ACT. Earlier violations in the actual history do not affect those valuations.
 \end{proof}
 This requires an appropriate initializer, not merely A inclusion. Section~\ref{sec:pc2-case} proves one saved requirement's ACT behavior directly; the 138 A checks remain A checks.
+
+\subsection{From a Safe Lookup Cell to an Activation-Scoped Invariant}
+\label{ta:lookup-act}
+The preceding proposition specializes standard residual-language reasoning~\cite{RosuHavelund2005Rewriting,FinkbeinerEtAl2022LiveSynthesis} and can be applied without a physically executable safe reference history. This matters because a table can provide a correct initial state for a requirement that begins now, even when the actual past violated that requirement.
+
+Let $V$ be the valuation space of a fixed vector of deterministic observers, with total update $d:V\times\Sigma\to V$ and initial vector $v_0$. The alphabet and updates include the declared observation convention: an unobserved command may stutter, but this choice must be the same in the reference monitor and the interpreted execution. For a propositional predicate $\varphi$ over this vector, define
+\[
+ S_\varphi=\{h\mid \forall u\preceq h:\varphi(d^*(v_0,u))\},\qquad
+ \operatorname{ACT}_\varphi(v)=\{w\mid\forall u\preceq w:\varphi(d^*(v,u))\},
+\]
+where $u\preceq w$ ranges over all finite prefixes, including the empty prefix. Assume a deterministic safety monitor $M$ is faithful to this invariant: its non-error language from its initial state is exactly $S_\varphi$.
+
+\begin{proposition}[Safe lookup cells for pure invariants]
+\label{prop:lookup-act}
+Suppose a lookup entry at vector $v$ selects a non-error state $m$ reached together with $v$ by some safe word in the unrestricted monitor--observer product, or selects a state with the same continuation language. Then $\varphi(v)$ holds and $L_M(m)=\operatorname{ACT}_\varphi(v)$. The witnessing word need not be executable by the plant or satisfy the update game's one-shot command restrictions.
+\end{proposition}
+\begin{proof}
+Let $h$ witness the product pair $(m_h,v)$ and let $m$ be the selected state. Non-error reachability and monitor faithfulness give $h\in S_\varphi$, hence $\varphi(v)$. For every suffix $w$, determinism and faithfulness give
+\[
+ w\in L_M(m_h)\ \Longleftrightarrow\ hw\in S_\varphi
+ \ \Longleftrightarrow\ \forall u\preceq w:\varphi(d^*(v,u))
+ \ \Longleftrightarrow\ w\in\operatorname{ACT}_\varphi(v).
+\]
+The middle equivalence uses the safety of the whole prefix $h$ and the current vector $v$; deterministic observers make all future valuations depend only on $v$ and the suffix. Language equivalence transfers the conclusion from $m_h$ to $m$. No step requires plant reachability of $h$, and the equality holds for all suffixes, so also for the subset admitted by an actual plant.
+\end{proof}
+
+\paragraph{What this yields for a winning policy.}
+At a real activation, the adapter must use this lookup entry for the actual post-start observer vector and must subsequently follow the same observation and update rules. Start is accounted for once, before initialization, rather than observed twice. Every active suffix of a winning policy is accepted by the installed monitor; the proposition therefore gives the invariant at activation and after every observed prefix. A previous actual violation is irrelevant to this explicitly start-scoped requirement. This is not the history-inclusive H interpretation, nor does it turn an arbitrary A inclusion into ACT exactness. An undefined/rejected lookup or a separate fallback initializer is outside this argument. Conversely, $\varphi(v)$ alone does not ensure that the table has a non-error entry for $v$.
+
+\paragraph{Connection to the saved lookup evidence.}
+All 46 NEW requirement positions in the nine inherited inputs are pure invariants $\Box\varphi$: seven use declared fluents only, six use action predicates only, and 33 use both. Names such as Pending and SEQUENTIAL designate deterministic current-value observers, not additional temporal operators. The three variants yield 138 occurrences. The saved independent reconstruction checks all 138 lookup tables and 1,587 entries, including 900 non-error entries, 687 error entries, 408 observer columns and 31,176 observer transitions (S4). A non-error entry is chosen from a pair reached by a finite safe word of the free monitor--observer product; equivalent-state alternatives must have the same error language. The reconstruction explores non-error successors, so induction on its search depth supplies that witness. The saved table records $(v,m)$, not the witness word itself.
+
+The recorded checks establish the lookup-construction premise of Proposition~\ref{prop:lookup-act} for all 900 non-error cells. We additionally compare the saved monitors with the original source invariants, independently of the Java formula compiler. A restricted parser reads propositional negation, conjunction, disjunction and implication inside $\Box$, assertion aliases, fluent initial values, event-set aliases/differences and finite indexed ranges. Unsupported syntax is rejected. Source-defined observer rules must match the saved rules, including action predicates' last-event convention.
+
+For each invariant, the finite check verifies $\varphi(v_0)$ and a non-error initial monitor state, then explores every non-error monitor--observer pair. At each pair $(m,v)$ and every checked label $a$, it verifies
+\[
+ \delta_M(m,a)\in\mathsf{Error}
+ \quad\Longleftrightarrow\quad
+ \neg\varphi(d(v,a)).
+\]
+The checked alphabet contains every saved observer label and every source-referenced event, plus a fresh representative for all unmentioned events. The latter class has the same source-observer effect (declared fluents stutter and action predicates reset); the saved DFA uses its default transition. From the initial pair, induction on word length now proves that a prefix is non-error exactly when all its source valuations satisfy $\varphi$. Thus this finite condition establishes the monitor-faithfulness premise used above on these alphabets; it is not an assumption that a passing table check alone validates the compiler.
+
+All 138 occurrences pass: 900 non-error product pairs, 35,283 pair/label checks, and all 900 non-error lookup cells contained in the safe product. There are no unsupported formulas or mismatches. The three variants agree on source formula, observers and monitor for each of the 46 positions; the counts are occurrences, not 138 independent formulas. This establishes ACT exactness for those lookup cells under their reference observation semantics.
+
+Physical-state decoding, actual key selection and absence of fallback at every benchmark activation remain unchecked. In particular, the adapter preserves physical observers across commands, whereas an implicit action predicate can reset under the reference alphabet convention; matching future observations must be checked rather than inferred from table equality. These results do not report 900 observed activation points or claim that all 25 WIN policies have newly validated source semantics.
+
+The existing objects are \path{results/supplement-checks/frontend_lookup_demo/verification_details.json} (per-requirement normalized actual and independently reconstructed tables) and \path{lookup_check_summary.csv}; \path{verify_saved.py} contains the reconstruction and exact table comparison. The additional source analysis is supplied in \path{results/supplement-checks/source_invariant_lookup/}. These checks reuse saved objects and introduce no new synthesis or performance result.
+
+\input{figures/guarantee_evidence_detail.tex}

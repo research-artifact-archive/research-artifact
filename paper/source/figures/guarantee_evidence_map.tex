@@ -1,15 +1,11 @@
 \begin{table}[!htbp]
-\caption{What the guarantees establish and where their evidence ends. The three layers are game correctness, requirement interpretation and execution.}
+\caption{Three guarantees and the evidence needed to apply them. Technical Appendix~\ref{ta:lookup-act} and S3--S4 give the individual requirement checks.}
 \label{tab:guarantee-evidence}
 \centering\small
-\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
-Layer/scope & Established result & Evidence and remaining obligation\\\midrule
-Game & Safety, all-outcome finite completion and compatible handover from all entries & Theorem~\ref{thm:correctness}; checking trusts supplied successor/endpoint predicates\\
-A: safe history & NEW language included in every admitted safe-history residual & \RSNewOccurrences{} occurrences (46 requirements, three variants); nonempty scopes unverified beyond one PC2 tuple\\
-E: from entry & UPD initialization equals the entry residual & \VThreeRSUpdExact{} occurrences: 46 R1/89 R2; guards/stage fluents justify entry values\\
-ACT: from start & Source invariants hold from activation through handover and continuation & PC2: all 13 new requirements, all 126 entries; no active ordinary event. GSM: all entries with decode/output\\
-Cell duty & Actual occupancy initializes inspection debt; the monitor exactly enforces its update rules & Bit/monitor induction in Section~\ref{sec:cell-activation-duty}; both entries, including ordinary inspection\\
-Execution & Observed runs follow policy edges and finish within entry rank & Conditional A1--A4; adapter conformance and real-time bounds unvalidated\\\bottomrule
+\begin{tabular}{@{}p{.15\linewidth}p{.39\linewidth}p{.40\linewidth}@{}}\toprule
+Layer & Established result & Application obligation\\\midrule
+Game & Every policy run safely completes from every entry and matches a supplied target & Theorem~\ref{thm:correctness}; certificate checks use the supplied successor and endpoint predicates\\
+Requirement & Active monitors enforce their declared continuation languages & Cell, PC2 and GSM have direct duty arguments. Saved lookup/source and entry checks support other initializers; actual key/observation conformance and intended scopes remain premises\\
+Execution & Observed execution follows the policy and finishes within its entry rank & A1--A4 below connect observations and atomic commands to the model; execution conformance and real-time bounds are unvalidated\\\bottomrule
 \end{tabular}
-\par\smallskip{\footnotesize H (whole history) is not claimed: only 39/126 PC2 entries admit a safe full prefix; 87 do not. Selecting a deployment's requirements remains the modeler's responsibility.}
 \end{table}

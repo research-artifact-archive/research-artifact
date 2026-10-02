@@ -1,6 +1,6 @@
 # Compiling Local Update Contracts into Controller-Preserving Policies
 
-**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c69-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
+**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c73-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
@@ -17,7 +17,7 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
-The 18-page main text develops controller-preserving local-contract compilation: complete Cell and Policy inputs and policies, local-history/game correspondence, endpoint continuation and certificate reuse, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 25-page technical appendix supplies complete proofs, full input encodings and detailed interpretation analyses. The separate 48-page S1–S5 supplement preserves the experimental records. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+The 18-page main text develops controller-preserving local-contract compilation: the Cell input and whole policy, Policy input primitives and opposing requirement orders, local-history/game correspondence, endpoint continuation, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 29-page technical appendix supplies complete proofs, full input encodings, certificate reuse criteria and detailed interpretation analyses. The separate 46-page S1–S5 supplement preserves the experimental records. The 76-page integrated supplement adds a one-page reading guide. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
 
 ## What problem does it solve?
 
@@ -96,7 +96,7 @@ All results below are saved observations, not newly selected measurements. Count
 
 ### Why fine granularity can matter
 
-Four constructed families isolate different update mechanisms. They are models inspired by update patterns, not measurements of deployed products or estimates of how often the problem occurs in practice.
+Five constructed families expose different update constraints, including both directions of the granularity comparison. They are models inspired by update patterns, not measurements of deployed products or estimates of how often the problem occurs in practice.
 
 | Family | Mechanism and result | Interpretation and boundary |
 |---|---|---|
@@ -104,6 +104,7 @@ Four constructed families isolate different update mechanisms. They are models i
 | **Canary** | 15/15 local-versus-merged pairs separate when all transfer outcomes, uncontrollable reports and recovery are modeled | A successful branch alone is insufficient; recovery behavior is supplied in the model |
 | **Policy v2** | Audit overlap and role nonoverlap require opposite requirement-boundary orders | A single global boundary does not express this contract directly; this is a boundary-order result, not a service-continuity guarantee |
 | **DB-Rolling v2** | Secondary-first maintenance separates; no-slack controls are both LOSS | Granularity helps only when the contract provides a safe intermediate state |
+| **Rolling+Audit** | Transfer merging can lose under the startup-capacity constraint, while requirement-boundary merging wins in the same family | Finer granularity is not uniformly beneficial: the result depends on which commands are merged and on the declared requirement scopes |
 
 The main E6 denominator is **55 pairs: 33 fine-WIN/merged-LOSS, 11 both-LOSS, 10 both-WIN, and 1 incomplete pair**. It also includes Audit, Threads and PC2 cases. The 20 scale pairs, 12 Canary assumption-control pairs, nine Cell reference pairs, and additional PC2 budget attempts are separate; they are not added to 55. The 70 threshold cells and 15 Canary pairs above overlap these analyses and are not 85 independent applications. Canonical versions are **Policy v2** and **DB-Rolling v2**. Earlier versions, rejected checker attempts, counterexamples and failed preparation attempts remain available.
 

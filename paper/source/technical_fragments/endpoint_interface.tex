@@ -1,10 +1,2 @@
-\paragraph{Reusing certificates across endpoint controllers.}
 \label{sec:endpoint-interface}
-Let $T$ project loadable targets onto component and new-monitor states, omitting controller state.
-\begin{theorem}[Interface reuse]\label{thm:endpoint-interface}
-Fix components, transfers, monitors, initializers, event control and precedence. Eligible contracts with equal entries $Q_0$ and target projections $T$ have identical update games. Every WIN policy/rank and LOSS certificate transfers; a compatible new target preserves that endpoint's continuations.
-\end{theorem}
-\begin{proof}
-The four successor rules and UC tests use only the fixed local data. Equal $Q_0$ gives equal entries; equal $T$ gives equal goals. Thus all certificate conditions are unchanged. Each goal has a compatible target by projection; reconnecting preserves its continuations by Proposition~\ref{prop:endpoint-continuation}.
-\end{proof}
-Technical Appendix~\ref{ta:endpoint-interface} extends reuse to fewer entries/more targets; no cache implementation or speedup is claimed.
+Technical Appendix~\ref{ta:endpoint-interface} characterizes policy reuse under changed endpoints, with a saved PC2 specialization.

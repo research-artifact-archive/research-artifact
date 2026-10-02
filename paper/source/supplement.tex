@@ -5,6 +5,8 @@
 \usepackage{xurl,tikz}
 \usetikzlibrary{arrows.meta}
 \providecommand{\Description}[1]{}
+\usepackage{xr-hyper}
+\externaldocument[taDoc-]{build/technical_appendix}[technical_appendix.pdf]
 \usepackage[hidelinks]{hyperref}
 \setlength{\emergencystretch}{2em}
 \hypersetup{pdftitle={FG-DUCS: Supplementary Proofs and Tables},pdfauthor={Anonymous Authors}}
@@ -42,56 +44,19 @@
 % Reproducible exploration order.
 
 \maketitle
-This supplement uses the finite contract, four successor rules, and algorithm in the main paper. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 reports completed correctness/capability and Xeon results, retaining unresolved outcomes and original trial provenance.
+This supplement provides the full closure census, implementation order, auxiliary semantic arguments, and all experimental detail. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 reports completed correctness/capability and Xeon results, retaining unresolved outcomes and original trial provenance.
 
 \section{Granularity and observation witnesses}
 \label{supp:witnesses}
-The main paper gives the two completing paths and the local-versus-bulk argument. Here we give the complete finite contract, tabulate its full closure, define the additional observation and requirement-boundary witnesses, and give their complete proofs. We also explain how the smaller executable fixtures relate to these contracts.
+The main paper gives the two completing paths and the local-versus-bulk argument. Here we tabulate its full closure, define the additional observation and requirement-boundary witnesses, and give their complete proofs. We also explain how the smaller executable fixtures relate to these contracts.
 
-\subsection{Complete finite contract and paths of the cell}
+\subsection{Cell closure and the global-transfer embedding}
 \label{supp:cell-finite}
+The complete Cell input is in main-paper Table~1 and Technical Appendix~\ref{taDoc-ta:cell}; the latter also supplies its residual interpretation. Main-paper Figure~1 gives the entire policy, and Technical Appendix~\ref{taDoc-ta:cell} lists both paths. From the two old entries, the paths have lengths six and five, respectively, with 13 policy states and 11 edges in total. Their final states match the two loadable targets. The policy is safe and rank-decreasing. Joint transfer requires both stations empty, whereas every reachable physical tuple contains exactly one workpiece, so the merged contract has no goal. These arguments use the same endpoints and requirements.
 
-Table~\ref{tab:cell-automata} gives the finite LTSs: $o/n$ mark versions, $h/e$ holding/empty, $m_A,m_B$ move the product to $A,B$, and $j$ inspects at $B$. Monitor states $k,c,d,\mathsf{err}$ mean old-safe, inspection-clear, inspection-pending and error; $c_0,c_1$ are distinct controller states. All events are controllable. Ordinary events are $\{m_A,m_B,j\}$; the updates are $\rho_A,\rho_B,\mathsf{start},\mathsf{stop}$, where $\mathsf{start}:=\ustart{r_{\rm inspect}}$, $\mathsf{stop}:=\ustop{r_{\rm old}}$, and $\mathsf{start}\prec\mathsf{stop}$.
-
-
-\input{figures/cell_components.tex}
-\input{figures/cell_paths.tex}
-
-Transfers are $g_A=g_B=\{(e,e)\}$, defined only at empty stations. Old/new/interval requirements are $r_{\rm old}/r_{\rm inspect}/r_{\rm one}$. The interval initializer records the holder at either all-old one-product tuple. The new initializer accepts all eight version-tagged one-product tuples, installing $d$ if $B$ holds, $c$ otherwise (the main paper\textquotesingle s requirement interpretation).
-
-Endpoint tuples list $A$, $B$, controller and endpoint-monitor states in that order. The reachable old tuples are $x_A=(h,e,c_o,k)$ and $x_B=(e,h,c_o,k)$; the new tuples are $z_A=(h,e,c_0,c)$, $y_B=(e,h,c_1,d)$ and $z_B=(e,h,c_0,c)$. Initial tuples are $x_A,z_A$; the loadable targets are $Z_{\rm load}=\{z_A,z_B\}$, and both reachable old tuples must admit an update. Handover excludes $y_B$: inspection must be clear at completion.
-
-Component and controller alphabets contain exactly their displayed outgoing labels. Unlisted component or controller transitions are absent; unlisted non-error monitor transitions self-loop, and $\mathsf{err}$ absorbs every label. Comma-separated labels are separate edges. Transfer changes one empty station to its new version; start installs the new monitor and stop removes the old one. Other active monitors observe these events. The policy selects $\rho_B;m_B;\mathsf{start};\mathsf{stop};j;\rho_A$ from $x_A$ and $\rho_A;m_A;\mathsf{start};\mathsf{stop};\rho_B$ from $x_B$, and is empty elsewhere. These two paths determine 13 states and 11 edges. Their last states map to $z_B,z_A$, respectively; the states are listed below.
-
-
-
-
-
-\paragraph{Local versus simultaneous transfer.}
-Both entries have safe singleton-outcome paths without uncontrollables. The $x_A$ path is the sequence in the upper path above. The remaining lengths $6,\ldots,0$ and $5,\ldots,0$ strictly decrease to the compatible targets $z_B,z_A$, proving finite completion.
-
-For simultaneous transfer, replace the two commands by one whose relation is $g_A\times g_B$, preserving the endpoints and requirements over the same cell states. It requires both stations empty. Ordinary moves preserve exactly one product, inspection preserves its position, and requirement boundaries leave it unchanged. The joint transfer is therefore never enabled; it stays pending, making every goal unreachable. The comparison holds endpoints and requirements fixed.
-
-
-
-
-
-\subsection{Embedding and the Two-Station Cell}
 For a global-transfer input with a single component $\star$, identify its old/new component states with the corresponding old/new product states. Carry monitor states and pending requirement operations unchanged. The map on update states is a bijection. The ordinary rule synchronizes the same transitions, the transfer rule applies the same global relation, and requirement stop/start applies the same monitor update and initialization. The sets of modeled uncontrollables coincide, so the non-preemption guard also coincides. Safety, roots, target matching, and quiescence are preserved. This establishes the game isomorphism for the global-transfer fragment.
 
-For $\mathcal W_{\rm cell}$, every ordinary move preserves exactly one product. Transfer changes only an empty station's version, and inspection leaves the product in place. Consequently the holder is always $A$ or $B$. Using the main paper's cell-state notation and abbreviating start/stop by $s/t$, the two retained paths are
-\begin{align*}
-p_A:&\quad ooA;k-\xrightarrow{\rho_B}onA;k-
-\xrightarrow{m_B}onB;k-\xrightarrow{s}onB;kd
-\xrightarrow{t}onB;-d\xrightarrow{j}onB;-c
-\xrightarrow{\rho_A}nnB;-c,\\
-p_B:&\quad ooB;k-\xrightarrow{\rho_A}noB;k-
-\xrightarrow{m_A}noA;k-\xrightarrow{s}noA;kc
-\xrightarrow{t}noA;-c\xrightarrow{\rho_B}nnA;-c.
-\end{align*}
-Every event on these paths is controllable and singleton-outcome. Old requirement is stopped before inspection; the inspection monitor is initialized to $d$ when $B$ holds and to $c$ when $A$ holds. Inspection clears the former obligation. Thus every retained state is safe, and the two paths have disjoint roots and no contradictory action assignment. Assign remaining-path lengths $6,\ldots,0$ and $5,\ldots,0$. Their final component/new-monitor projections match $z_B,z_A$, respectively. These states are quiescent since the fixture has no uncontrollables. This proves all-root winning, not just a path from the initial old component tuple.
-
-For the bulk variant, $g_A\times g_B$ is defined only if both stations are empty. No ordinary transition, requirement event, or available transfer can create that state from a one-product root. Hence $\rho_\star$ stays pending in every reachable state, and there is no goal. Under any policy, a maximal execution either ends outside a goal or continues indefinitely; both violate finite completion. This obstruction is independent of the ordinary moves that remain available.
+The following exhaustive census retains unsafe successors to expose the full contract relation. It is distinct from the terminalized solver work and from the policy's retained states.
 
 \begin{table}[ht]
 \centering\small
@@ -203,13 +168,7 @@ $\mathsf{Open}$ is a LIFO stack. Initial roots and each newly discovered batch a
 \subsection{Attractor, termination, soundness, and completeness}
 Let $W_0=V\cap\Goal$. At the next layer a safe expanded state joins if its nonempty uncontrollable union is contained in the preceding layers, or if it has no uncontrollable and one complete nonempty controllable bucket contained there. Induction on these layers proves the existence of a winning policy for the current table. These minimum layer indices are analytical, not the implementation's retained certificate ranks. On first promotion the implementation assigns one plus the largest rank of the complete chosen successor set (all uncontrollable outcomes, or one winning controllable choice); goals have rank zero. It never lowers that assigned rank. Every stored choice used for promotion remains complete and rank-decreasing. Extraction may choose another stored controllable set only if all its successors also have smaller retained ranks. Goals satisfy the target and quiescence checks. Invariant I3 therefore preserves a valid certificate as exploration continues without claiming rank minimality.
 
-For termination, there are finitely many reachable states and state/event candidates. Each state is discovered and expanded at most once, and each cursor position is consumed at most once. Retry always consumes a new candidate, and worklist propagation inserts a state into $W$ at most once. After finite work the algorithm either covers every root or empties its queues. This argument needs no fairness of the modeled environment; it is an argument about the finite synthesis procedure.
-
-If every root is in $W$, the induced policy graph is safe and closed, has a nonempty successor set at every non-goal, and has a strict rank. The maximal-run lemma proves finite completion. Goal recognition provides a compatible $\kappa(q)$. Section~S3 supplies the monitor-interval induction and the relative requirement guarantee.
-
-If the algorithm returns LOSS, let $L=V\setminus W$. Invariant I4 ensures that each safe non-goal in $L$ was expanded, and I1 provides all uncontrollable outcomes. If an uncontrollable is enabled and all its outcomes across all uncontrollables were in $W$, the state would have been promoted. Hence some uncontrollable outcome lies in $L$. When there is no uncontrollable, I2 supplies every controllable bucket. If a nonempty bucket were contained in $W$, the state would likewise be promoted. Therefore every enabled controllable has an outcome in $L$. The failure return leaves a root in $L$ and excludes goals from $L$.
-
-Against any policy at an uncontrollable state, the environment selects the exhibited uncontrollable outcome in $L$. Otherwise, it selects a remaining outcome of whichever enabled controllable the policy permits; if none is permitted, there is a non-goal deadlock. Repeating yields an unsafe state, a non-goal deadlock, or an infinite run in $L$. Each violates winning. Thus failure is sound for all policies, including policies enabling several controllables. Conversely, a winning policy rules out such a failure. Together with termination, this proves completeness for the fixed successor and goal rules. Equivalently, a winning policy can be normalized by removing all controllables in the presence of an uncontrollable, and retaining one winning controllable elsewhere: only runs are removed and non-goal successors remain nonempty.
+The complete termination, soundness and completeness proof is in Technical Appendix~\ref{taDoc-ta:source_synthesis}. It uses the coverage and rank invariants above: finite discovery and cursor consumption establish termination; complete rank-decreasing proving sets establish safe completion; and, at failure, $L=V\setminus W$ contains a root and an outcome in $L$ for every controller choice. The environment can remain in $L$ or reach an unsafe state or non-goal deadlock, defeating even a history-dependent policy. This is completeness for the supplied successor and goal rules. A winning policy can be normalized by removing controls in the presence of an uncontrollable and retaining one winning control elsewhere; complete uncontrollable outcomes and non-goal successors remain.
 
 \subsection{Checking the returned evidence}
 A WIN checker reconstructs the reachable policy domain from all roots and complete $\Post$ buckets. It verifies safety, enabledness of every retained action, nonempty successors outside goals, closure in the rank domain, and strict rank decrease for every outcome. At each goal it checks rank zero, physical uncontrollable quiescence, membership of $\kappa(q)$ in $Z_{load}$, and component/new-monitor equality. Omitted policy entries mean the empty set. The maximal-run lemma then proves the model-level claim without reproducing the synthesizer's exploration order.
@@ -348,15 +307,15 @@ Thus the combined observed history satisfies the supplied requirement meaning. F
 At goal, every update operation has occurred, all new monitors are active, old monitors are inactive, and update monitors are safe. Equality of component and new-monitor projections with $\kappa(q)$ carries the new monitored continuation into the verified endpoint. The entry/load boundary contributes no ordinary observation, and update-interval monitoring ends at goal. This establishes the model-level interval safety used by the synthesis theorem.
 
 \subsection{Execution correspondence}
-Assume the main paper's A1--A4 and a phase-disjoint observation map $\alpha$. A4 gives an atomic entry from an actually reachable old state $z$ to $\Init(z)$; all-root coverage places it in the certified domain. Induct on observed update-game events. At a non-goal, A2 disables every unselected controllable, preserves all possible uncontrollables, and reports every remaining outcome within the policy-permitted complete bucket. For commands, A3 supplies one finite, failure-free, atomic event and its modeled successor identity at a quiescent source. Hence the next observation maps to a complete $\Post$ successor allowed by the policy. The certificate supplies closure, safety and a strict rank decrease.
+Technical Appendix~\ref{taDoc-ta:execution_proof} gives the complete statement and proof of conditional trace lifting, including history completeness for residual interpretations. A1--A4 connect concrete observations to every modeled policy outcome and supply eventual observation, finite atomic commands and atomic boundaries; rank then forces handover. Neither these premises nor initializer meaning follows from synthesis. The linked-LTS checker checks abstract composition, not the execution platform.
 
-A2 also supplies eventual observation of a next event while at a non-goal. A rank initially $r$ permits at most $r$ such decreases. No positive-rank deadlock is compatible with A2, so the execution reaches a certified goal. Goal recognition establishes quiescence from physical enabledness, rather than from a partial search table. Ordinary controllables are disabled there; A4 performs the finite atomic load of $\kappa(q)$ and the control switch. A1 maps the subsequent endpoint observations to the verified new closed loop. The lifecycle induction and externally supplied RS give safety for each declared interval relative to its specified residual meaning.
-
-This is a conditional lifting theorem for an observed execution. A2 supplies concrete progress, A3 excludes internal $\tau$, unobservable update outcomes and divergence within an update, and A4 supplies the atomic boundaries. The returned artifact is a finite policy/rank/handover table interpreted by an execution platform satisfying these premises. The linked LTS checker verifies the abstract boundary composition; the Java entry operation is named \texttt{hotSwapIn}, and its completion-side atomic quotient is \texttt{hotSwapOut}. The paper uses the neutral boundary names entry and load, respectively. The naming correspondence changes neither the game nor the implementation.
+The Java entry operation is named \texttt{hotSwapIn}, and its completion-side atomic quotient is \texttt{hotSwapOut}. The paper uses the neutral boundary names entry and load. This naming correspondence changes neither the game nor the implementation.
 
 \clearpage
 \section{Supplementary validation and cost tables}
 \label{supp:tables}
+\paragraph{Current interpretation evidence.}
+The current results are NEW: \RSNewOccurrences{} A inclusions (nonempty safe-history domains unverified except the stated PC2 tuple), and UPD: \VThreeRSUpdExact{} E justifications (46 R1 and 89 R2). Direct ACT policy arguments cover PC2 and GSM. Separately, all 900 non-error lookup cells have the exact source-invariant continuation language under their reference observers; actual activation key/observation/fallback conformance remains a premise (Technical Appendix~\ref{taDoc-ta:lookup-act}). The additional R1 evidence below strengthens its earlier sufficient condition; no historical failures are removed.
 \paragraph{Historical RS coverage.}
 The following generated table preserves the earlier H/A/E$'$ checks. Its 46 unverified R1 entries describe that older sufficient condition; they are not the classification of the additional guarded-invariant check in Lemma~\ref{lem:r1-entry}.
 \input{build/generated/rs-model-table.tex}
@@ -412,14 +371,7 @@ Q19580\xrightarrow{\texttt{validateDSD1}}Q29028
 \]
 Validation and review are controllable; rejection and receipt are uncontrollable. At each safe state, alternative GF1/TOR validations violate an active monitor; declining validation at quiescent $Q19580$ deadlocks. The four safe states and eight unsafe alternatives form a 12-state spoiling certificate. R1 disallows ordinary controllable events between stopping the old requirements and starting the new ones. The global losing-region check, rather than this illustrative update order alone, rules out alternative policies. The exported game, command, outputs, collector diagnostics, and reproducible graph analysis are in \path{raw/industry-r1-independent/}. Update-command preemption alone cannot remove a cycle with no pending update commands; whether a different command/handover contract avoids this region remains unverified.
 \paragraph{Monolithic cross-check: original-source lab build versus this fork.}
-The input is the monolithic model from which the fine-grained adaptation was derived. Its bytes match the original-source lab build's bundled model after the stated transition selection; identity with a final published benchmark release remains unconfirmed. Only the two transition-selection lines change:
-{\small\begin{verbatim}
--//  transition = T_Empty,
--    transition = T,
-+    transition = T_Empty,
-+    //transition = T,
-\end{verbatim}}
-Whitespace is normalized in this display. The definitions remain
+The input is the monolithic model from which the fine-grained adaptation was derived. Its bytes match the original-source lab build's bundled model after selecting $T_{\rm Empty}$ instead of $T$; identity with a final published benchmark release remains unconfirmed. Only the two transition-selection lines change. Their definitions remain
 \[
 \begin{aligned}
 T&=(\mathit{StopOldSpec}\land\mathit{TORDone})\Rightarrow
@@ -429,50 +381,15 @@ T_{\rm Empty}&=(\mathit{StopOldSpec}\land\neg\mathit{StartNewSpec})
  \Rightarrow\neg\mathit{AnyAction}.
 \end{aligned}
 \]
-The supplied logs both show a 64-state old controller; the fork also reports a 240-state mapping product. The original-source lab-build log reports a 2,312-state update controller, whereas the fork reports no controller. The following selected lines retain formula names, construction sizes and decisions; gaps omit other formulas and resource measurements. The lab-build log has no \texttt{Mode:} line, so none is added. The executable is a lab-maintained build of the original DUCS source, not an identified official TSE release; these runs are decision evidence, separate from the main RQ3 table.
+Both saved logs process the same named old/new safety formulas and $T_{\rm Empty}$, report a 64-state old controller, and use deterministic GR synthesis after safety pruning. They disagree on the update result: the original-source lab build returns a 2,312-state controller, while the fork returns no controller. The fork also reports a 240-state mapping product. Construction counts and the source-level cause appear below. The reference executable is a lab-maintained build of original DUCS source, not an identified official TSE release. Full logs and unchanged input files are in \path{experiments/industry_r1_legacy_monolithic_check/}.
 
-\noindent\textbf{Original-source lab-build log:}
-{\footnotesize\begin{verbatim}
-Processing formula for update: P_DO_NOT_SEND_TWICE_UPD_OLD
-Processing formula for update: P_NEW_TOR_POLICY_UPD_NEW
-Processing formula for update: P_NEW_DSD1_POLICY_UPD_NEW
-Processing formula for update: P_NEW_DO_NOT_SEND_TWICE_UPD_NEW
-Processing formula for update: T_Empty
-Environment states:14763
-Solving safety goals for the controller synthesis
-Environment states after safety: 3134
-Synthezising GR
-Environment after safety is deterministic
-Solving a deterministic controller synthesis
-Controller [2312] generated successfully.
-\end{verbatim}}
-\noindent\begin{minipage}{\linewidth}
-\textbf{Fork log:}
-{\footnotesize\begin{verbatim}
-Mode: Traditional DUC (legacy update events)
-Processing formula for update: P_DO_NOT_SEND_TWICE_UPD_OLD
-Processing formula for update: P_NEW_TOR_POLICY_UPD_NEW
-Processing formula for update: P_NEW_DSD1_POLICY_UPD_NEW
-Processing formula for update: P_NEW_DO_NOT_SEND_TWICE_UPD_NEW
-Processing formula for update: T_Empty
-Environment states:33093
-Solving safety goals for the controller synthesis
-Environment states after safety: 15177
-Synthezising GR
-Environment after safety is deterministic
-Solving a deterministic controller synthesis
-There is no controller for model UpdCont for the given setting.
-\end{verbatim}}
-\end{minipage}\par
-The full logs and both unchanged input files are in
-\path{experiments/industry_r1_legacy_monolithic_check/}.
-These results rule out interpreting the FG LOSS as general unrealizability of R1. The FG requirement is universal completion from all 131 entries into a compatible verified endpoint at quiescence. Published DUCS instead synthesizes a controller that continues enforcing the new specification after the switch; it takes no fixed new-controller endpoint as input.
+These decision-only results remain separate from RQ3. They rule out interpreting the FG LOSS as general unrealizability of R1: FG requires universal completion from all 131 entries into a compatible verified endpoint at quiescence. Published DUCS synthesizes continued control enforcing the new specification after the switch and takes no fixed new-controller endpoint as input.
 
 \paragraph{Source explanation of the cross-check.}
 We compare the fork's synthesis, environment construction and GR-goal code with the
 \href{https://git.exactas.uba.ar/lafhis/mtsa/-/tree/d10ba71f092dc9645a80d2752bd089691f158156/maven-root/mtsa/src/main/java/ltsa/updatingControllers}{official MTSA source at commit d10ba71f}.
 The inspected official revision is separate from the supplied lab build (source commit e1bf040); the latter JAR is the one used for the recorded GUI result.
-Both constructions retain the old closed loop and allow update entry throughout its reachable states; a GR solver's single initial-state check covers that entire pre-update behavior. Both traditional paths synthesize continued control under old/transition/new safety and a GR progress objective. A persistent only-turn-on fluent for the entry event is the GR assumption; persistent stop/start/reconfigure fluents give the three guarantees. Thus the input keyword \texttt{nonblocking} does not make this an existential-only completion check. Neither traditional path checks a fixed new-controller connection or quiescent handover. Its separate OTF branch uses \texttt{DirectedController\allowbreak SynthesisDUC} and an endpoint connection map; neither is used here.
+Both constructions retain the old closed loop and allow update entry throughout its reachable states; a GR solver's single initial-state check covers that entire pre-update behavior. Both traditional paths synthesize continued control under old/transition/new safety and a GR progress objective. A persistent only-turn-on fluent for the entry event is the GR assumption; persistent stop/start/reconfigure fluents give the three guarantees. Thus the input keyword \texttt{nonblocking} does not make this an existential-only completion check. Neither traditional path checks a fixed new-controller connection or quiescent handover. The supplied fork additionally has a separate OTF branch using \texttt{DirectedController\allowbreak SynthesisDUC} and an endpoint connection map; the inspected official synthesis file at \texttt{d10ba71f} has no such branch. The fork's plain OTF path synthesizes a new controller from the new environment and goal, matches component and new-safety states, and copies the matched controller's transitions into the result. This endpoint connection is therefore not specific to FG-DUCS. It is not used for the Traditional runs here, and inspection of this fork does not establish identity with a historical OTF release.
 
 The upstream formula builder uses the model's \texttt{StopOldSpec}/\texttt{StartNewSpec}. The fork substitutes internal progress fluents (prefix \texttt{\_\_DUC\_}) when reconstructing the violation formulas. Its seven old-safety fluents are TORDone, DSD1Done, Finished, the three validation-event fluents, and internal StopOldSpec. The seven new-safety fluents replace TORDone by NewTORDone and internal StopOldSpec by internal StartNewSpec: their union has nine. \texttt{T\_Empty} adds the model's StopOldSpec/StartNewSpec and eight controllable-event fluents, sharing three validation fluents. Hence the logged total is $9+10-3=16$; these are not 16 additional endpoint obligations.
 
@@ -498,13 +415,7 @@ The source model's \texttt{AnyAction} includes eight controllable events; its fi
 The fixed RQ3 Legacy reference instead targets \texttt{UPDATE\_CONTROLLER\_FG} and its R1/R2 variants in the nine adapted input files. Those files use \texttt{hotSwapIn} and contain no \texttt{beginUpdate} label. The specific entry/reset mismatch above therefore belongs to the separate monolithic source-input cross-check; this distinction does not establish general source/fork equivalence.
 
 \paragraph{Aligned-entry execution and reference-build identity.}
-The reference is a lab-maintained build of the original DUCS source at commit
-\path{e1bf040b83e36b36308bce22e280133682986250}, using the same 672,505,060-byte JAR as the recorded GUI execution. Its SHA-256 is
-\begin{center}\small\ttfamily
-4ab198ba14c9f0f829c36808025aefc063\\
-e2a3a0836679490179cc407e6133e5
-\end{center}
-The eight monolithic model files agree byte-for-byte between that commit's resources, compiled resources, and the JAR. This identifies the lab build and its inputs without asserting an official published release identity.
+The reference is a lab-maintained build of original DUCS source at commit \texttt{e1bf040}, with the executable and source identity retained in \path{experiments/legacy_fidelity/}. The eight monolithic inputs agree byte-for-byte across that source revision, compiled resources and executable. This identifies the lab build without asserting an official published-release identity.
 
 A separate fork input changes only the three fluent reset lines for StopOldSpec, StartNewSpec and Reconfigure, replacing \texttt{beginUpdate} by \texttt{hotSwapIn}. One Mac execution of the frozen fork JAR through its Traditional path returns a 2,312-state controller, agreeing with the reference result; the meta-product and final safety input also match at 14,763 and 3,134 states. The earlier mismatched-input failure remains preserved. This is a decision-only fidelity check, excluded from RQ3 and its performance measurements. Input diff, command and original outputs are retained under \path{experiments/legacy_fidelity/}; the returned monolithic reference campaign is reported separately below.
 
@@ -518,14 +429,14 @@ $T_{\rm Empty}$ & 2,312 / 6,615 & 2,312 / 6,615\\\bottomrule
 Two initial adapter failures are preserved: synthesis produced a controller, but an incorrect Java type check rejected the outer composite. Correcting only that adapter yielded the two successful reference-tool cells. The final adapter additionally classifies an explicit no-controller result wrapped in a composition exception; four classification assertions check that branch. These Mac checks supply no performance evidence. The separate Xeon campaign has 21 conditions per tool (15 supplied targets and six named empty-transition alternatives); its returned results remain outside the main RQ3 table.
 
 \paragraph{Returned legacy-fidelity reference experiment.}
-Both Windows campaigns have completed: the lab-maintained original-source build and this fork use mechanically generated monolithic conditions, with the three entry-fluent resets aligned. They remain reference tools with different contracts from FG; none of these conditions is a new RQ3 cell. Table~\ref{tab:legacy-fidelity} reads their saved summaries and per-trial logs. The collector retains raw process statuses; its local CSV is byte-identical to the output of the deployed collector on the returned inputs. The separately produced Xeon comparison CSV and final run-all transcript are also retained; all six driver stages complete successfully, while the recorded fork exceptions remain failures. The locally regenerated and Xeon-produced CSVs are byte-identical.
+The separate Windows campaigns compare the lab-maintained original-source build and this fork use mechanically generated monolithic conditions, with the three entry-fluent resets aligned. They remain reference tools with different contracts from FG; none of these conditions is a new RQ3 cell. Table~\ref{tab:legacy-fidelity} reports their saved summaries and per-trial logs, including all fork exceptions. Independently regenerated summaries match the returned comparison CSVs byte-for-byte; raw process statuses and reproduction outputs are retained in the artifact.
 
 \input{build/generated/legacy-fidelity-reference.tex}
 
 \paragraph{Causes of unmeasured fork conditions.}
-GSM reuses \path{T_NO_UPDATE_WHILE_SEND} for a property and an assertion (input lines 105/130); PowerPlant similarly reuses \texttt{LeavesPumpOn} (91/114). In \texttt{LTSCompiler}, the original parser's uniqueness check consults assertion definitions through \texttt{getDefinition} (1889--1897). The fork additionally checks constraints through \texttt{getConstraint} (2054), rejecting these original inputs during parsing. This accounts for the three N/M (fork parser) entries, not a synthesis LOSS.
+GSM reuses \path{T_NO_UPDATE_WHILE_SEND} for a property and an assertion; PowerPlant similarly reuses \texttt{LeavesPumpOn}. The original parser checks assertion definitions for name uniqueness, whereas the fork also checks constraints, rejecting these inputs during parsing. This accounts for the three N/M (fork parser) entries, not a synthesis LOSS.
 
-Surveillance declares \texttt{weather} only in \path{NewControllableActions}, not in its old/new alphabets or environment transitions. The fork derives \texttt{weather.old} from the declaration and inserts that derived label into the alphabet (\path{UpdatingControllerSafetySynthesizer}, 565--582, 612--615). Author-side \path{M9TraditionalSafetySemanticsSnapshot} requires both the derived label and its base action in the alphabet (519--525); the absent base \texttt{weather} triggers the saved exception. This capture follows construction of the old controller and meta-environment, but precedes update safety pruning and the legacy GR decision (safety synthesizer, 129--176). The two N/M (instrumentation) entries therefore provide no evidence of legacy synthesis capability or failure. No model, tool or JAR was changed and no trial was repeated to repair these outcomes.
+Surveillance declares \texttt{weather} only in \path{NewControllableActions}, not in its old/new alphabets or environment transitions. The fork derives \texttt{weather.old} from the declaration and inserts that derived label into the alphabet. Author-side \path{M9TraditionalSafetySemanticsSnapshot} requires both the derived label and its base action in the alphabet; the absent base \texttt{weather} triggers the saved exception. This capture follows construction of the old controller and meta-environment, but precedes update safety pruning and the legacy GR decision. The two N/M (instrumentation) entries therefore provide no evidence of legacy synthesis capability or failure. No model, tool or JAR was changed and no trial was repeated to repair these outcomes.
 
 \paragraph{Railcab size variation and unresolved cause.}
 For supplied Railcab, both logs report 1,763 states before safety pruning and 1,582 afterward, then use nondeterministic controller synthesis. The first-trial difference is already present when the strategy is converted to an MTS and unreachable states are removed, before final CompactState conversion or outer composition. The inspected subset construction, knowledge-game solver and strategy-to-MTS paths share their operative code; preprocessing, fluent-valuation handling and enumeration still differ. The saved evidence does not establish corresponding safety graphs, valuations or strategies. Moreover, controller sizes vary within each tool across repetitions, with some sizes shared across tools. The cause of that variation and the first-trial difference remains unresolved after bounded static inspection; neither a persistent fork effect nor controller equivalence is inferred.
@@ -553,7 +464,7 @@ At the illustrative losing root's counterpart, a winning path reconfigures the t
 % Keep the generated campaign heading with its first table; retain later breaks.
 \let\FGClearPage\clearpage
 \def\clearpage{\let\clearpage\FGClearPage}
-The archived display label ``Output policy states'' below means the linked old--update--new controller (saved field \texttt{output\_controller\_states}), not the update certificate's rank domain (\texttt{certificate\_states}). Lazy's 25 WIN contracts have 15--1,260 linked states and 8--1,071 certificate states. Linking includes reachable old/new closed-loop states and non-goal update states, identifying goals with their selected new states. Neither quantity is the explored game size.
+The output-state and output-transition panels below count the linked old--update--new controller (saved field \texttt{output\_controller\_states}), not the update certificate's rank domain (\texttt{certificate\_states}). Lazy's 25 WIN contracts have 15--1,260 linked states and 8--1,071 certificate states. Linking includes reachable old/new closed-loop states and non-goal update states, identifying goals with their selected new states. Neither quantity is the explored game size.
 \IfFileExists{build/generated/rq3-supplement.tex}{\input{build/generated/rq3-supplement.tex}}{\par\emph{Xeon measurements pending. Run the result renderer to materialize the table schema.}}
 \endgroup
 \IfFileExists{build/generated/rq4-controlled.tex}{\input{build/generated/rq4-controlled.tex}}{}
@@ -577,7 +488,7 @@ The generated provenance below retains both the original interrupted attempt and
 \clearpage
 
 \paragraph{Artifact reproduction status.}
-The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The matching implementation, evidence and manuscript snapshot is identified by tag \texttt{fgducs-c69-20261002}. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the submitted PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
 
 \clearpage
 \begin{table}[!htbp]

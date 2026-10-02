@@ -1,4 +1,7 @@
-Seven supplied groups determine the game: \emph{event control}, \emph{fixed old/new controllers}, \emph{components and local transfers}, \emph{old/new/interval requirements}, \emph{activation initializers}, \emph{optional command precedence}, and \emph{handover targets}. They do not prescribe a sequence. Section~\ref{sec:monitor-meaning} connects initialized monitor states to declared requirement scopes.
+The input supplies event control, fixed endpoints, components/transfers, old/new/interval requirements, initializers, optional precedence and handover targets, without prescribing a sequence. Section~\ref{sec:monitor-meaning} connects initializers to requirement scopes.
+
+\paragraph{The choices and their costs.}
+Admission releases old scheduling and liveness, retaining each old safety monitor until its stop. Local commands require \emph{global} UC quiescence; perpetual UC activity can prevent completion. Service may be withheld, so uninterrupted service and bounded downtime are not promised. Fixing the new controller preserves selected continuations but restricts completion states.
 
 \subsection{Supplied Choices}
 

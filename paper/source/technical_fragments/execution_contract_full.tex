@@ -7,9 +7,10 @@ The linked model connects disjoint old/update/new phases by entry $z\mapsto\Init
 \par\noindent\textbf{A3 (commands and observation):} each command starts at uncontrollable quiescence, finishes atomically and failure-free in finite time, and reports one modeled transfer or monitor-lifecycle transition with its successor identity. Internal $\tau$ steps, unobservable outcomes and divergence are outside the model.
 \par\noindent\textbf{A4 (boundaries):} entry atomically observes the actual reachable old state $z$ and switches to $\Init(z)$; at a quiescent goal, ordinary controllables are disabled and handover installs its selected controller state and switches control. Each boundary is a finite, failure-free linearizable operation preserving the specified component and monitor states~\cite{HerlihyWing1990}.
 
+For the history-based interpretation below, let $H_r^{\mathrm{exec}}(\xi)$ contain the actual activation histories at $\xi$, using the declared reference origin and event projection of $r$ (and consuming a new requirement's start exactly once). \emph{History completeness} is the explicit premise $H_r^{\mathrm{exec}}(\xi)\subseteq H_r(\xi)$ at every reached activation. It is not established by A1--A4 or by synthesis.
+
 \begin{theorem}[Conditional trace lifting]
 \label{thm:realization}
-For a returned WIN certificate $(\sigma,\rank,\kappa)$ of an eligible contract, every execution satisfying A1--A4 maps through $\alpha$ to the linked model. From an observed entry $\alpha(x_0)=\Init(z)\in Q_0$, the update reaches quiescent handover within $\rank(\Init(z))$ observed game events and then hands control to the compatible endpoint. With complete activation histories as in Section~\ref{sec:monitor-meaning} and RS for the supplied initializers, each declared active interval satisfies its requirement/residual interpretation. Agreement with application intent remains an input obligation.
+For a returned WIN certificate $(\sigma,\rank,\kappa)$ of an eligible contract, every execution satisfying A1--A4 maps through $\alpha$ to the linked model. From an observed entry $\alpha(x_0)=\Init(z)\in Q_0$, the update reaches quiescent handover within $\rank(\Init(z))$ observed game events and then hands control to the compatible endpoint. With history completeness and RS for a supplied initializer, its active interval satisfies the declared residual interpretation. Agreement with application intent remains an input obligation.
 \end{theorem}
-
 
