@@ -1,6 +1,6 @@
-# Fine-Grained Dynamic Update Controller Synthesis: Component Changes and Requirement Lifetimes
+# Compiling Local Update Contracts into Controller-Preserving Policies
 
-**Synthesize a safe, terminating update between fixed old and new controllers, with explicit control over when components change and when requirements start or stop.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c68-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
+**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c69-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
@@ -17,7 +17,7 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
-The 18-page main text develops local-contract compilation: complete Cell and Policy inputs and policies, local-history/game correspondence, endpoint continuation and certificate reuse, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 25-page technical appendix supplies complete proofs, full input encodings and detailed interpretation analyses. The separate 48-page S1–S5 supplement preserves the experimental records. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+The 18-page main text develops controller-preserving local-contract compilation: complete Cell and Policy inputs and policies, local-history/game correspondence, endpoint continuation and certificate reuse, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 25-page technical appendix supplies complete proofs, full input encodings and detailed interpretation analyses. The separate 48-page S1–S5 supplement preserves the experimental records. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
 
 ## What problem does it solve?
 

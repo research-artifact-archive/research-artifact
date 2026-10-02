@@ -69,13 +69,13 @@
 \input{build/generated/pc2-case-macros.tex}
 \input{build/generated/pc2-trace-macros.tex}
 \begin{document}
-\title[Fine-Grained Dynamic Update Controller Synthesis]{Fine-Grained Dynamic Update Controller Synthesis:\\Component Changes and Requirement Lifetimes}
+\title[Compiling Local Update Contracts]{Compiling Local Update Contracts into Controller-Preserving Policies}
 
 \author{Anonymous Author(s)}
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Updating a controlled system can require component changes and safety requirements to take effect at different times. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) formulates this problem through local transfers, individual requirement lifetimes and current-state initializers. From these contracts it constructs mixed-version behavior and synthesizes a policy between supplied controllers. We prove contract correspondence and a specialized lazy procedure's soundness and completeness for safe finite completion from every old entry under every outcome, preserving the selected new controller's continuations. Complete examples and merging obstructions establish why both forms of granularity matter. An MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts within 1,200~s versus \FixedUpdateFirstDecisions{} with update-first priority, \FixedEagerDecisions{} with eager successors and \DirectFullDecisions{} with full construction; \VThreeESixWitness{}/\VThreeESixMainPairs{} controlled comparisons exhibit fine-WIN/merged-LOSS. Guarantees cover declared lifetimes and quiescent commands/handover under explicit execution premises.
+Verified endpoints leave their intervening update unspecified. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) compiles local transfers, individual requirement lifetimes and stateful initializers into a policy that safely finishes from every old entry under every outcome and preserves the supplied new controller's continuations from the selected handover state. We prove local-history correspondence and certificate reuse under equal endpoint interfaces. A sound and complete lazy procedure returns a policy, progress rank and handover map, or proves impossibility. Complete examples and merging obstructions establish why component and requirement granularity matter. An MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts within 1,200~s versus \FixedUpdateFirstDecisions{} with update-first priority, \FixedEagerDecisions{} with eager successors and \DirectFullDecisions{} with full construction; \VThreeESixWitness{}/\VThreeESixMainPairs{} constructed comparisons exhibit fine-WIN/merged-LOSS. Guarantees cover declared safety lifetimes and uncontrollable (UC) quiescence at commands/handover and explicit execution premises.
 \end{abstract}
 
 \begin{CCSXML}
@@ -95,18 +95,16 @@ Updating a controlled system can require component changes and safety requiremen
 
 \section{Introduction}
 \label{sec:introduction}
-Verified endpoints leave their intervening update unspecified~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. A cell may need to move its workpiece before replacing an empty station. An audit requirement may need overlap while a role requirement forbids it. Updating therefore coordinates component changes and the requirements currently in force. It must safely finish from every old entry under every transformation outcome; safety alone permits infinite execution.
+Verified endpoints leave their intervening update unspecified~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. Moving a workpiece can enable an empty-station replacement; audit requirements may need overlap while roles forbid it. Updating coordinates these changes and obligations, safely finishing from every old entry under every outcome. Safety alone permits infinite execution.
 
-\emph{FG-DUCS formulates and solves updating with independently scheduled component changes and requirement lifetimes.} Inputs specify local transfers, individual start/stop operations and current-state initializers. The construction generates mixed-version behavior; synthesis returns a policy, completion rank and compatible handover state, or proves impossibility. No complete update sequence is supplied. After handover the supplied new controller retains all its continuations.
+\emph{Our result is a controller-preserving construction from local update contracts.} Synthesis returns a completing policy, rank and handover state, or proves impossibility. Local transfers, individual requirement lifetimes and initializers replace a supplied global mixed-state graph or update sequence.
 
-DUCS uses global specification-stop/start and reconfiguration events~\cite[Defs.~4.1--4.3]{Nahabedian2020}; GR(1) updating switches between two specifications~\cite[Def.~3.1]{Amram2022GR1DynamicUpdate}. Both generate update models or bridges. Additional encodings can represent finer choices, but their native inputs lack the indexed lifecycle operations studied here. FG-DUCS defines their joint semantics and provides dedicated synthesis; Section~\ref{sec:ducs-cell-construction} distinguishes this contribution from general expressive power.
+DUCS generates update and subsequent control from global transfers and transition requirements~\cite[Defs.~4.1--4.3]{Nahabedian2020}; GR(1) updating constructs its new controller and bridge independently~\cite[Def.~3.1, Sec.~4]{Amram2022GR1DynamicUpdate}. FG-DUCS generates mixed behavior from local data and reconnects to a supplied controller. Only entry and projected-target interfaces determine endpoint dependence (Section~\ref{sec:formalization}); Section~\ref{sec:ducs-cell-construction} compares generation responsibilities.
 
-\par\noindent\textbf{C1: Fine-grained update problem.} A contract and game construction for component transfers, individual requirement lifetimes and stateful activation, with correspondence and endpoint-preservation proofs (Section~\ref{sec:formalization}).
-\par\noindent\textbf{C2: Specialized synthesis.} A sound and complete lazy procedure with independently checkable WIN/LOSS certificates (Section~\ref{sec:algorithm}).
-\par\noindent\textbf{C3: Why granularity matters.} Complete component and requirement examples, general merging obstructions, and an exact Rolling batch threshold (Sections~\ref{sec:example} and~\ref{sec:rq2}).
-\par\noindent\textbf{C4: Implemented feasibility and cost.} An MTSA tool evaluated on \ApplicationContracts{} adapted contracts and \VThreeESixMainPairs{} controlled comparisons, including all adverse outcomes (Section~\ref{sec:evaluation}).
-
-Commands and handover require uncontrollable (UC) quiescence. Guarantees cover declared safety lifetimes and finite completion.
+\par\noindent\textbf{C1: Contract compilation.} Local-history correspondence, endpoint-continuation preservation and interface-based certificate reuse (Section~\ref{sec:formalization}).
+\par\noindent\textbf{C2: Certifying synthesis.} A sound and complete specialized lazy procedure with checkable WIN/LOSS certificates (Section~\ref{sec:algorithm}).
+\par\noindent\textbf{C3: Granularity boundaries.} Complete component and requirement examples, merging obstructions and an exact Rolling batch threshold (Sections~\ref{sec:example} and~\ref{sec:rq2}).
+\par\noindent\textbf{C4: Implementation evidence.} An MTSA tool evaluated on \ApplicationContracts{} adapted contracts and \VThreeESixMainPairs{} constructed comparisons, retaining all adverse outcomes (Section~\ref{sec:evaluation}).
 
 \FloatBarrier
 \section{From a Complete Contract to a Completing Policy}
@@ -142,9 +140,9 @@ Figure~\ref{fig:cell-story} covers both entries and targets: 13 states and 11 ed
 The construction reconnects each goal to the supplied endpoint.
 \input{technical_fragments/endpoint_continuation.tex}
 \paragraph{Why matching and reconnection both matter.}
-The Cell prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ safely executes every command but leaves inspection pending. Matching physical states alone would allow loading clear target $z_B$, whose immediate $m_A$ violates that active duty. Matching new-monitor memory excludes this reset. Conversely, a new closed loop with controllable self-loops $a,b$ and goal $\mathit{true}$ stays legal, deadlock-free and safe if $b$ is disabled~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but loses its $b$-continuations. Reconnection retains them. Matching protects the continuing obligation; reconnection preserves the selected controller's behavior.
+Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ finishes every command with inspection pending. Physical matching alone admits clear target $z_B$, whose $m_A$ violates that duty; monitor matching excludes the reset. Conversely, disabling controllable loop $b$ in a one-state endpoint with loops $a,b$ and goal $\mathit{true}$ preserves legality, deadlock freedom and safety~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but loses $b$-continuations. Reconnection preserves them.
 
-With fixed local data, equal entry sets and projected target sets permit WIN/LOSS certificate reuse across endpoint controllers (Technical Appendix~\ref{ta:endpoint-interface}).
+\input{technical_fragments/endpoint_interface.tex}
 
 \input{technical_fragments/ducs_cell_correspondence.tex}
 
@@ -407,11 +405,11 @@ Null/LOSS results, faster Update-first, lower Eager/Update-first memory and Trav
 
 \paragraph{Conclusion.}
 \label{sec:conclusion}
-FG-DUCS makes component changes and individual requirement lifetimes part of the update-synthesis problem. Its construction and lazy solver provide safe finite completion between supplied controllers, under declared requirement meanings and execution premises.
+FG-DUCS compiles local transfers and requirement lifetimes into safe, completing policies preserving continuations from the selected new state. Correspondence, interface reuse, granularity boundaries and implementation evidence establish this construction under explicit interpretation and execution premises.
 
 \clearpage
 \paragraph{Data Availability.}
-The anonymous repository~\cite{FGDUCSAnonymousArtifact}, snapshot \texttt{fgducs-c68-20261002}, provides the MTSA-derived source, all 27 application contracts, scripts, generated results and split raw-output archive, together with the matching manuscript and complete build sources. The submission comprises this main paper and \texttt{supplementary\_material.pdf}, which combines the technical appendix and experimental supplement with complete proofs, model definitions and result tables. Section labels distinguish Technical Appendix A--P from Supplement S1--S5; bookmarks and continuous page numbers support navigation. The claim-to-evidence map gives saved-data checks and build commands. The build produces the main paper and integrated supplement, retaining the two component PDFs for compatibility; saved evidence checks do not rerun performance experiments. Third-party dependencies are retrieved from official upstream sources.
+The anonymous repository~\cite{FGDUCSAnonymousArtifact}, snapshot \texttt{fgducs-c69-20261002}, provides the MTSA-derived source, all 27 application contracts, scripts, generated results and split raw-output archive, together with the matching manuscript and complete build sources. The submission comprises this main paper and \texttt{supplementary\_material.pdf}, which combines the technical appendix and experimental supplement with complete proofs, model definitions and result tables. Section labels distinguish Technical Appendix A--P from Supplement S1--S5; bookmarks and continuous page numbers support navigation. The claim-to-evidence map gives saved-data checks and build commands. The build produces the main paper and integrated supplement, retaining the two component PDFs for compatibility; saved evidence checks do not rerun performance experiments. Third-party dependencies are retrieved from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

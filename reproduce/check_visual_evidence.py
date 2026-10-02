@@ -251,7 +251,7 @@ def verify_placements(main, technical, secondary, promotion):
         'figures/contract_interfaces_full.tex': {'technical':1},
         'figures/policy_lifetimes.tex': {'technical':1},
         'technical_fragments/ducs_cell_correspondence.tex': {'main':1},
-        'technical_fragments/endpoint_interface.tex': {},
+        'technical_fragments/endpoint_interface.tex': {'main':1},
         'technical_fragments/endpoint_interface_proof.tex': {'technical':1},
         'technical_fragments/gr1_cell_interface.tex': {'technical':1},
     }
