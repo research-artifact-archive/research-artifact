@@ -1,10 +1,11 @@
-\begin{figure}[!htbp]
+\begin{table}[!htbp]
 \centering\small
-\begin{tabular}{@{}p{.22\linewidth}@{\hspace{.04\linewidth}}p{.22\linewidth}@{\hspace{.04\linewidth}}p{.22\linewidth}@{\hspace{.04\linewidth}}p{.22\linewidth}@{}}
-\textbf{1. Supply contract} & \textbf{2. Generate game} & \textbf{3. Search lazily} & \textbf{4. Check result}\\
-Fixed controllers, local transfers, requirements and initializers & Combine versions, monitor memories, commands and targets & Query events as needed; retain all outcomes of each query & WIN: policy, rank, handover; LOSS: losing region
+\caption{The formal workflow. Update control replaces old control; handover resumes the selected new controller.}
+\label{tab:contract-workflow}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\linewidth}@{\hspace{.05\linewidth}}>{\raggedright\arraybackslash}p{.30\linewidth}@{\hspace{.05\linewidth}}>{\raggedright\arraybackslash}p{.30\linewidth}@{}}\toprule
+\textbf{Modeler supplies} & \textbf{Compiler generates} & \textbf{Synthesis returns}\\\midrule
+Old/new components and fixed controllers; local transfer relations; requirement monitors, initializers and optional precedence; loadable endpoint states
+& Mixed-version transitions, individual requirement boundaries, all old entries and compatible handover goals; no update sequence is supplied.
+& Policy, decreasing rank and matched handover states covering every entry and outcome; otherwise a losing region excludes every policy.\\\bottomrule
 \end{tabular}
-\caption{From local specifications to a certified update. Game successors are generated on demand during search. WIN covers every old entry and outcome; requirement meaning and execution conformance have separate proof obligations.}
-\label{fig:contract-pipeline}
-\Description{Four stages: supplied local contract; generated game states, transitions and targets; lazy search retaining every queried outcome; checked winning policy, rank and handover or losing region.}
-\end{figure}
+\end{table}

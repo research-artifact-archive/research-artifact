@@ -44,7 +44,7 @@
 % Reproducible exploration order.
 
 \maketitle
-Read S1 for additional granularity and observation witnesses, S2 for implementation order, S3 for requirement-history proofs, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 follows RQ1--RQ3: constructed mechanisms, independent validation, then the fixed 27-contract comparison. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
+Read S1 for additional granularity and observation witnesses, S2 for search invariants and certificates, S3 for requirement interpretation, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 follows RQ1--RQ3: constructed mechanisms, independent validation, then the fixed 27-contract comparison. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
 
 \section{Granularity and observation witnesses}
 \label{supp:witnesses}
@@ -694,14 +694,17 @@ The public anonymous repository contains the full derived source tree, saved RQ1
 
 \clearpage
 \section{Expanded related-work comparison}
+The two tables separate update and adaptation interfaces from synthesis and switching foundations. Publication details appear in the main bibliography. Section and definition numbers identify the inspected native contracts; differences do not establish an inability to encode one approach in another.
+
+\subsection{Update and adaptation interfaces}
 \begin{table}[!htbp]
-\caption{Expanded primary-source comparison of verified native contracts. C/R: component/requirement granularity; T: transfer; Res/P: residual obligations/precedence; Roots/O: initial states/outcomes. Publication details are in the main bibliography; section/definition numbers locate the inspected contracts.}
+\caption{Native inputs, progress conditions and outputs of update and adaptation approaches.}
 \label{tab:supp-native}
 \centering\footnotesize
-\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.02}
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.15\linewidth}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}p{.29\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}@{}}
 \toprule
-Work & Native C/R; T; Res/P & Roots/O; progress premises & Artifact and construction\\
+Work & Inputs and change mechanism & Coverage and progress & Constructed result and scope\\
 \midrule
 DUCS (2016, 2020)
 & One global old-stop/new-start pair, with distinct events; partial, set-valued global $R$; optional stages in $E'$; $T$ constrains order (Secs.~4.2--4.3)
@@ -715,6 +718,42 @@ GR(1) bridge (2022)
 & Two specifications and switching assertion; old safety guarantees before switch, new specification afterward
 & All prefixes meeting new environment safety; uniformly bounded switch (Def.~3.1); subsequent GR(1) liveness assumes justice
 & New controller $C_2$ and symbolic reachability bridge; switching bookkeeping; winning set $W$ or current-state early stop (Sec.~4)\\
+Live Synthesis (2022)
+& Old/new LTL and trace or transition system; residual $\Psi(\eta,\varphi)$; old obligations finitely satisfied
+& Universal variant: all old finite traces and new traces; reduction assumes one eventual update (Thm.~6.4)
+& Obligation monitor and LTL synthesis; LiveLTL language inclusion\\
+Jiao et al. (2013)
+& Existing workcell supervisor and added machine; event relabeling and communication transitions produce coordinated supervisors (Sec.~III.B)
+& Old states map to new supervisor-state pairs; instant switching is assumed faster than UC events (Sec.~III.C)
+& Reuses and transforms the controller; the example checks equivalence to monolithic synthesis; no staged all-outcome handover search\\
+Dynamic Feature (2024)
+& Feature come/go, component reinitialization, simultaneous changes; behavioral/configuration constraints
+& Mixed controllability; UC preserved; every reachable controlled state has a jointly marked continuation (Sec.~7)
+& CIF BDD synthesis; maximal safe controllable nonblocking supervisor\\
+Zhang et al. (2005)
+& Configurations, dependency invariants, adaptive actions, implementations and costs; generated safe adaptation graph (Secs.~3.1, 4.1--4.2)
+& Supplied source/target request; minimum-cost path; failed steps may roll back or await intervention (Sec.~4.4)
+& Dijkstra path and manager/agent protocol; action-specific safe states, atomic isolated adaptation (Secs.~3.1, 4.3)\\
+Network updates (2015)
+& Per-switch replacement; searched update order; packet-flush waits
+& All single-packet traces satisfy LTL; failure freedom, fair forwarding, bounded processing (Sec.~3.1)
+& Sequence; DFS and incremental checking; simple/careful completeness\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\subsection{Synthesis and supervisory switching}
+Existing synthesis and switching methods supply foundations for FG-DUCS. In particular, state correspondence and switching between existing supervisors are established ideas. FG-DUCS combines supplied endpoints with staged component transfers, individual requirement lifetimes and finite completion under all permitted outcomes.
+\begin{table}[!htbp]
+\caption{Synthesis and switching contracts. An available completing continuation differs from completion of every maximal update run.}
+\label{tab:supp-foundations}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.15\linewidth}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}p{.29\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}@{}}
+\toprule
+Work & Inputs and change mechanism & Coverage and progress & Constructed result and scope\\
+\midrule
 DCS (2016)
 & Deterministic component LTSs; safety/co-safety event goals
 & Initial product state; safety and eventual goal occurrence on every closed-loop trace; states enabling controllable and UC events treated as UC
@@ -731,26 +770,18 @@ Strong planning (1998)
 & Action/fluent domain, nondeterministic effects and goal formula
 & All initial states and outcomes; strong completion; fair iterative extension separate (pp.~40--43)
 & OBDD state/action plan; universal outcome preimages; initial-set early stop\\
-Live Synthesis (2022)
-& Old/new LTL and trace or transition system; residual $\Psi(\eta,\varphi)$; old obligations finitely satisfied
-& Universal variant: all old finite traces and new traces; reduction assumes one eventual update (Thm.~6.4)
-& Obligation monitor and LTL synthesis; LiveLTL language inclusion\\
 DES state attraction (2015)
 & Common deterministic plant; request/startup sets; task language $K$ and recognizer
 & All request states; UC preserved; weakly invariant startup set; bounded first completion (Def.~2, Thm.~1)
 & Attractor supervisor; plant/recognizer product and state-attraction algorithm\\
-Dynamic Feature (2024)
-& Feature come/go, component reinitialization, simultaneous changes; behavioral/configuration constraints
-& Mixed controllability; UC preserved; every reachable controlled state has a jointly marked continuation (Sec.~7)
-& CIF BDD synthesis; maximal safe controllable nonblocking supervisor\\
-Zhang et al. (2005)
-& Configurations, dependency invariants, adaptive actions, implementations and costs; generated safe adaptation graph (Secs.~3.1, 4.1--4.2)
-& Supplied source/target request; minimum-cost path; failed steps may roll back or await intervention (Sec.~4.4)
-& Dijkstra path and manager/agent protocol; action-specific safe states, atomic isolated adaptation (Secs.~3.1, 4.3)\\
-Network updates (2015)
-& Per-switch replacement; searched update order; packet-flush waits
-& All single-packet traces satisfy LTL; failure freedom, fair forwarding, bounded processing (Sec.~3.1)
-& Sequence; DFS and incremental checking; simple/careful completeness\\
+Switched supervisory control (2020)
+& One plant and two safe/live supervisors; switching and state-reinitialization functions (Sec.~3.3, Defs.~4--6)
+& Safe, deadlock-free switching; every finite trace has an extension reaching a switching opportunity (Problem~1); repeated switching
+& Also synthesizes the supervisor pair; supplied-pair construction retains compatible plant/supervisor states, not a one-time finite completion objective\\
+Switched DES invariants (2017)
+& Given operational modes and transitions, uncontrollable mode switches and a safety predicate per mode (Sec.~II)
+& Invariants under every permitted transition; all mode switches retained; finite convergence concerns computation, not handover time
+& Maximally permissive supervisor; distributed modal computation reaches the same solution (Thms.~1--2)\\
 \bottomrule
 \end{tabular}
 \end{table}

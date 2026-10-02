@@ -1,4 +1,4 @@
-Policy(2) requires audit overlap and role nonoverlap. Table~\ref{tab:policy-finite-c13} gives its complete input. Write $o,n$ for old/new, $u,l$ for unlogged/logged, $A,R$ for audit/role, and $\ell_z,a_z$ for version-$z$ log/access.
+Policy(2) has two old/new requirement pairs: audit and role. It requires audit overlap and role nonoverlap. Table~\ref{tab:policy-finite-c13} gives its complete input. Write $o,n$ for old/new, $u,l$ for unlogged/logged, $A,R$ for audit/role, and $\ell_z,a_z$ for version-$z$ log/access.
 
 \begin{table}[!htbp]
 \centering\small
@@ -16,6 +16,6 @@ Boundary merge & One global start activates both new monitors; one global stop d
 \end{tabular}
 \end{table}
 
-From $q_u$, the saved policy executes $\mathsf{start}_A$, $\mathsf{stop}_A$, $\mathsf{stop}_R$, $\rho$, $\mathsf{start}_R$, reaching $z_u$. From $q_l$, $\mathsf{service}$ first reaches $q_u$. Ranks five/six decrease on every edge; other controllables are disabled. Technical Appendix~\ref{ta:policy_interpretation} depicts this whole policy.
+From $q_u$, the saved policy executes $\mathsf{start}_A$, $\mathsf{stop}_A$, $\mathsf{stop}_R$, $\rho$, $\mathsf{start}_R$, reaching $z_u$. From $q_l$, $\mathsf{service}$ first reaches $q_u$. Ranks five/six decrease on every edge; other controllables are disabled. Figure~\ref{fig:policy-lifetimes} depicts this whole policy.
 
 Both merged entries lose: the first global start overlaps roles; the first global stop removes audit coverage. Ordinary events and transfer preserve these bits, so every completing path encounters error. The saved checks confirm closure and both member orders. This compares boundary granularity, not DUCS expressiveness. Service continuity is not required.

@@ -266,7 +266,7 @@ def verify_placements(main, technical, secondary, promotion, policy):
         'technical_fragments/pc2_all_activation.tex': {'technical':1},
         'technical_fragments/activation_duty_main.tex': {'main':1},
         'technical_fragments/history_scope_main.tex': {'main':1},
-        'figures/contract_pipeline_c30.tex': {},
+        'figures/contract_pipeline_c30.tex': {'main':1},
         'figures/contract_responsibility.tex': {},
         'technical_fragments/contract_adequacy_statement.tex': {'main':1},
         'technical_fragments/contract_adequacy_proof.tex': {'technical':1},
