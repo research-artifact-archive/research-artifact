@@ -1,6 +1,6 @@
 # Compiling Local Update Contracts into Controller-Preserving Policies
 
-**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This repository contains the FG-DUCS tool, all reported models and evidence, and reproducible checks for the accompanying research paper. It is an anonymous research prototype, not a deployment framework. The [2026-10-02 snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c73-20261002) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
+**Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This is the public, anonymous replication package prepared by the paper's authors for this study. It contains the FG-DUCS tool, all reported models and evidence, and reproducible checks. It is an anonymous research prototype, not a deployment framework. The [paper-matched release, `fgducs-c74-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c74-20261003) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
 | What would you like to do? | Start here | What you get |
 |---|---|---|
@@ -18,6 +18,22 @@ docs/        Input guide, reproduction details, interpretation and packaging not
 ```
 
 The 18-page main text develops controller-preserving local-contract compilation: the Cell input and whole policy, Policy input primitives and opposing requirement orders, local-history/game correspondence, endpoint continuation, the DUCS/GR(1) input-generation comparison, certifying synthesis, requirement interpretation, source-derived cases and all principal positive and negative results. The 29-page technical appendix supplies complete proofs, full input encodings, certificate reuse criteria and detailed interpretation analyses. The separate 46-page S1–S5 supplement preserves the experimental records. The 76-page integrated supplement adds a one-page reading guide. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+
+## Read the paper and its appendices
+
+Reference **[4], FG-DUCS Evaluation Artifact**, in the main paper refers to this authors' package. **Technical Appendix A–P and Supplement S1–S5 are included here**, as Parts I and II of the [integrated supplementary material](paper/supplementary_material.pdf).
+
+| Reference in the paper | Open this document | Where to look |
+|---|---|---|
+| Main paper | [Main PDF](paper/main.pdf) | Sections 1–9; Introduction and Conclusion frame the contribution |
+| Technical Appendix A–P | [Part I, integrated PDF](paper/supplementary_material.pdf#page=2) · [Separate appendix](paper/technical_appendix.pdf) | Continuous PDF pages 2–30: complete proofs, input definitions and interpretation analyses |
+| Supplement S1–S5 | [Part II, integrated PDF](paper/supplementary_material.pdf#page=31) · [Separate supplement](paper/supplement.pdf) | Continuous PDF pages 31–76: witnesses, validation, all results and expanded comparisons |
+| Figure 2: states, solver time, peak JVM RSS | [All 135 saved result cells](paper/source/build/generated/rq3-cells.csv) · [Plot generator](paper/source/scripts/generate_rq3_paired_plot.py) | All 14 completed Lazy/Direct-Full pairs; the other 13 Direct-Full contracts remain timeouts in Table 5 and Appendix J |
+| A specific claim or check | [Claim-to-evidence map](docs/CLAIMS.md) · [Appendix section index](paper/README.md#appendix-section-index) | Exact section, evidence path and reproduction command |
+
+The integrated PDF starts with a linked reading guide and has bookmarks and continuous page numbers. Download **main.pdf** and **supplementary_material.pdf** into the same folder to follow relative links from the main paper. If a browser ignores a `#page=` link, use the printed continuous page number or the PDF bookmarks.
+
+The [original `fgducs-invariants-20261002` evidence snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002) is preserved and is also identified in Data Availability. It includes earlier manuscript PDFs. Use the **paper-matched release above** for the revised paper's appendix references and page numbers; the original tag has not been moved.
 
 ## What problem does it solve?
 
@@ -136,6 +152,8 @@ The fixed comparison uses nine adapted inputs derived from eight source models, 
 | **Direct-Full** | 14 | 0 | 13 | **14/27** |
 
 Lazy materializes controllable buckets on demand; Eager queries them at expansion time. Both preserve all outcomes of a chosen bucket and use UC priority. Eager can stop before the full game is discovered. Update-first changes the controllable-action order. Direct-Full is an in-house full-construction comparator for the same FG objective, including fixed-new-controller handover; it is not an external DUCS implementation.
+
+Figure 2 adds the saved **sampled peak JVM resident memory (RSS, MiB)** for the same 14 completed Lazy/Direct-Full pairs. All 14 Lazy medians are lower: Direct-Full/Lazy ratios range from **1.01 to 36.94**, with median **1.95**. Each range spans the five trial peaks. These are Windows JVM-process working-set samples taken every 0.1 seconds over the whole run, including frontend and endpoint preparation, not heap occupancy or solver-only memory. Some ranges overlap, so this is not a claim of statistically significant separation in every pair. Other methods can use less memory: Eager does so in 1/17 completed pairs and Update-first in 12/24. The 13 Direct-Full timeouts are excluded from completed-pair medians and remain in the all-contract results.
 
 The result supports completion of more fixed-budget cases by Lazy. It does **not** say Lazy is always fastest: **Update-first has a smaller solver-time median in 8/24 completed comparisons**. In the Travel scaling grid the three on-the-fly methods each finish **20/48** conditions and Direct-Full finishes **18/48**. Other scaling grids, states, queries, RSS and timings are included in the [generated tables](paper/source/build/generated/) and [scaling analyses](results/performance/analysis/).
 

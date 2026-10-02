@@ -21,6 +21,7 @@
 \usepackage{array}
 \usepackage{placeins}
 \usepackage{needspace}
+\usepackage{xurl}
 \usepackage{xr-hyper}
 \externaldocument[][nocite]{build/technical_appendix}[technical_appendix.pdf]
 \usepackage{tikz}
@@ -107,6 +108,8 @@ DUCS~\cite{Nahabedian2016SEAMS} generates update and subsequent control from glo
 \par\noindent\textbf{C2: Certifying synthesis.} A sound and complete specialized lazy procedure with checkable WIN/LOSS certificates (Section~\ref{sec:algorithm}).
 \par\noindent\textbf{C3: Granularity boundaries.} Complete component and requirement examples, sufficient merging obstructions and a reverse separation; Rolling supplies an exact batch bound (Sections~\ref{sec:example} and~\ref{sec:rq2}).
 \par\noindent\textbf{C4: Implementation evidence.} An MTSA tool evaluated on \ApplicationContracts{} adapted contracts and \VThreeESixMainPairs{} constructed comparisons, retaining all adverse outcomes (Section~\ref{sec:evaluation}).
+
+Our public replication package~\cite{FGDUCSAnonymousArtifact}, prepared for this paper, includes the cited Technical Appendix A--P and Supplement S1--S5 as Parts I and II of \texttt{supplementary\_material.pdf}. Data Availability gives versioned links.
 
 \FloatBarrier
 \section{From a Complete Contract to a Completing Policy}
@@ -383,7 +386,7 @@ Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullPairs{} &
 \par\smallskip{\footnotesize TO: timeout; no OOM/unmeasured cases. $\dagger$ Workflow/R2 retains its interruption and later same-setting timeout (S4). Comparator/Lazy ratios are median [min--max] across completed pairs of five-run medians. Faster counts lower comparator solver time. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs have no ratio.}
 \end{table}
 
-Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs; Appendix~\ref{ta:workload_rows} gives exact states, queries and costs. In R2, Update-first uses fewer states and a lower solver median on six of eight completed pairs, showing order sensitivity (Technical Appendix~\ref{ta:additional_populations}).
+Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs; Technical Appendix~\ref{ta:workload_rows} gives exact states, queries and costs. In R2, Update-first uses fewer states and a lower solver median on six of eight completed pairs, showing order sensitivity (Technical Appendix~\ref{ta:additional_populations}).
 
 \input{figures/rq3_paired_absolute.tex}
 
@@ -402,13 +405,13 @@ Travel reaches timeouts and out-of-memory failures under all methods, including 
 \section{Related Work}
 \label{sec:related}
 \label{sec:expressiveness}
-Zhang and Cheng formalize temporal adaptation semantics~\cite{ZhangCheng2006ALTL}; scenario-based synthesis uses history-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates}. Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite[Secs.~4.3--4.6]{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite[Secs.~4.3, 5.2]{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite[Sec.~2]{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address replacement, migration or transition safety. Live Synthesis carries unfinished obligations~\cite{FinkbeinerEtAl2022LiveSynthesis}; our initialization reasoning uses scopes~\cite{Dwyer1999Patterns} and residual rewriting~\cite{RosuHavelund2005Rewriting}. State attraction bounds startup steps under weak invariance~\cite{NooruldeenSchmidt2015}; compositional/modular control addresses specification structure~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}. OTF-DCS requires marked extensions~\cite[Sec.~3]{CiolekEtAl2023OTFDCS}, whereas FG requires every maximal update run to reach handover.
+Zhang and Cheng formalize temporal adaptation~\cite{ZhangCheng2006ALTL}; scenario-based synthesis uses history-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates}. Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite[Secs.~4.3--4.6]{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite[Secs.~4.3, 5.2]{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite[Sec.~2]{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address replacement, migration and transition safety. Live Synthesis carries unfinished obligations~\cite{FinkbeinerEtAl2022LiveSynthesis}; initialization relates to scopes~\cite{Dwyer1999Patterns} and residual rewriting~\cite{RosuHavelund2005Rewriting}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; compositional/modular control structures specifications~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}. OTF-DCS requires marked extensions~\cite[Sec.~3]{CiolekEtAl2023OTFDCS}; FG requires every maximal update run to reach handover.
 
-Ma et al. preserve transaction version consistency using dynamic dependencies and a sufficient freeness condition, with concurrent versions and selective blocking~\cite[Secs.~4.1--4.3]{MaEtAl2011VersionConsistency}. Their transaction quiescence differs from FG's UC quiescence; FG's finite handover contract does not establish transaction consistency.
+Ma et al. ensure transaction version consistency through dynamic dependencies and sufficient freeness, allowing concurrent versions and selective blocking~\cite[Secs.~4.1--4.3]{MaEtAl2011VersionConsistency}. This differs from UC quiescence; finite handover alone establishes no transaction consistency.
 
-O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. Our fork's plain OTF route precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}; identity with the 2024 release is unestablished. FG combines this existing reconnection with supplied endpoints/targets, local transfers, individual lifetimes and initializers.
+O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. The fork's plain OTF precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}; identity with the 2024 release is unestablished. FG adds supplied endpoints/targets, local transfers, individual lifetimes and initializers to this existing reconnection.
 
-Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} support individual/simultaneous reconfiguration, feature-dependent requirements and state retention/reset. Their nonblocking supervisor permits a marked continuation from every reachable state. FG instead requires every maximal update run to finish at a supplied controller, with independent lifetimes and declared initialization.
+Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} support individual/simultaneous reconfiguration, feature-dependent requirements and state retention/reset. Their supervisor permits a marked continuation from every reachable state. FG requires every maximal update run to finish at a supplied controller, with independent lifetimes and declared initialization.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -418,13 +421,13 @@ Shared authorship, AI and code risk correlated faults; independent parsing cover
 
 Null/LOSS results, faster Update-first, lower Eager/Update-first memory and Travel/PC limits bound gains. PC2's merged timeout remains unresolved. Fixtures/repeats are not independent applications; timing uses one machine. Inherited inputs lack precedence; only Railcab transfers branch. Exponential separation assumes the default order.
 
-\paragraph{Conclusion.}
+\section{Conclusion}
 \label{sec:conclusion}
-FG-DUCS compiles local transfers and requirement lifetimes into safe, completing policies preserving continuations from the selected new state.
+FG-DUCS compiles local transfers, requirement lifetimes and monitor initialization into policies connecting verified controllers. Contract correspondence and certifying synthesis establish safe finite completion from every admitted entry and outcome, preserving the chosen new controller's continuation. Complete examples explain granularity-dependent feasibility; experiments show reduced exploration and more decisions within a fixed budget. Guarantees remain relative to declared requirements, uncontrollable quiescence and faithful execution.
 
 \clearpage
-\paragraph{Data Availability.}
-The anonymous evidence snapshot~\cite{FGDUCSAnonymousArtifact} provides source, 27 application contracts, scripts and saved results. The submission contains this main paper and an integrated supplement (Technical Appendix A--P and Supplement S1--S5), with complete proofs, model definitions, result tables, bookmarks and continuous pagination. The repository's claim map identifies checks and build commands; saved-evidence checks run without new performance experiments. Dependencies come from official upstream sources.
+\section*{Data Availability}
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c74-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

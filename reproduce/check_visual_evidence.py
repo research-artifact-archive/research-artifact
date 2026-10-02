@@ -18,7 +18,8 @@ VARIANTS = {'Base': 'base', 'R1': 'r1', 'R2': 'r2'}
 METHODS = ('fg_ducs_otf', 'direct_full')
 FIELDS = ('states_discovered', 'successor_queries', 'solver_time_ms_median',
           'solver_time_ms_min', 'solver_time_ms_max', 'measurement_scope',
-          'structure_repetition', 'completed_valid_repetitions')
+          'structure_repetition', 'completed_valid_repetitions',
+          'peak_rss_bytes_median', 'peak_rss_bytes_min', 'peak_rss_bytes_max')
 ACTION_WORDS = {r'\rho_A': r'replace\\empty $A$', r'\rho_B': r'replace\\empty $B$',
                 r'm_A': r'move\\to $A$', r'm_B': r'move\\to $B$',
                 r'\mathsf{start}': r'start\\new rule',
@@ -165,6 +166,11 @@ def expected_pairs(summary_text, display_text):
             values.extend(Decimal(rows[1]['solver_time_ms_' + s]) / 1000 for s in ('min', 'max'))
             require(0 < values[4] <= values[2] <= values[5] and 0 < values[6] <= values[3] <= values[7],
                     'time_range', key)
+            values.extend(Decimal(row['peak_rss_bytes_median']) / 1048576 for row in rows)
+            values.extend(Decimal(rows[0]['peak_rss_bytes_' + k]) / 1048576 for k in ('min', 'max'))
+            values.extend(Decimal(rows[1]['peak_rss_bytes_' + k]) / 1048576 for k in ('min', 'max'))
+            require(0 < values[10] <= values[8] <= values[11] and
+                    0 < values[12] <= values[9] <= values[13], 'memory_range', key)
             pairs[model, variant] = tuple(values)
     require(len(pairs) == 14, 'pair_inventory', 'Exactly fourteen eligible pairs')
     return pairs, comparisons
@@ -182,11 +188,13 @@ def verify_pairs(source, expected):
             'plot_binding', 'Reviewed state/time/median/range argument binding changed')
     require(norm(macro_body(source, 'RQFullRange', 3)) == norm(RQFULLRANGE_BODY),
             'plot_binding', 'Tenth argument must be the Direct-Full range maximum')
+    require(norm(macro_body(source, 'RQMemory', 7)) == norm(RQMEMORY_BODY),
+            'plot_binding', 'RSS medians and ranges must bind to the correct method')
     require([(v, norm(d), norm(b)) for v, d, b in loops(source)] == AXIS_LOOPS,
             'plot_axes', 'Logarithmic tick values or their scale mapping changed')
     matches = list(re.finditer(r'(?m)^\\RQPair((?:\{[^{}\n]*\}){10})\s*$', clean(source)))
     require(len(matches) == 14, 'plot_inventory', 'All fourteen calls are required')
-    actual, positions = {}, set()
+    actual, positions, row_keys = {}, set(), {}
     for match in matches:
         values = re.findall(r'\{([^{}]*)\}', match[1])
         index, label = values[:2]
@@ -197,11 +205,24 @@ def verify_pairs(source, expected):
         key = MODELS[names[0]], VARIANTS[names[1]]
         require(key not in actual, 'plot_duplicate', label)
         actual[key] = tuple(Decimal(value) for value in values[2:])
+        row_keys[int(index)] = key
     require(positions == set(range(14)), 'plot_row', 'Every row 0--13 appears once')
+    memory_matches = list(re.finditer(r'(?m)^\\RQMemory((?:\{[^{}\n]*\}){7})\s*$', clean(source)))
+    require(len(memory_matches) == 14, 'memory_inventory', 'All fourteen memory calls are required')
+    memory_rows = set()
+    for match in memory_matches:
+        values = re.findall(r'\{([^{}]*)\}', match[1])
+        index = int(values[0])
+        require(index in row_keys and index not in memory_rows, 'memory_row', index)
+        memory_rows.add(index)
+        actual[row_keys[index]] += tuple(Decimal(value) for value in values[1:])
     require(set(actual) == set(expected), 'plot_coverage', sorted(set(actual) ^ set(expected)))
     require(actual == expected, 'plot_values', [k for k in expected if actual[k] != expected[k]])
     for phrase in ('Discovered game states', 'Solver time (seconds)', 'exact first-trial count',
-                   'five-run median [min--max]', 'Both axes logarithmic; lower is better.'):
+                   'five-run median [min--max]', 'Peak JVM RSS (MiB)',
+                   'All axes logarithmic; lower is better.',
+                   'sampled resident memory over the whole JVM run',
+                   'not solver-only or heap usage'):
         require(phrase in source, 'plot_units', phrase)
     for phrase in (r'\fill[pairlazy] (3.1,-16) circle (2pt);',
                    r'\node[anchor=west] at (3.22,-16) {Lazy};',
@@ -210,9 +231,11 @@ def verify_pairs(source, expected):
         require(norm(phrase) in norm(source), 'plot_legend', phrase)
     require(not re.search(r'\\(?:if\w*|else|fi)\b', clean(source)), 'plot_visibility', 'Conditional hiding')
     require(len(re.findall(r'\\RQPair\b', clean(source))) == 15, 'plot_calls', 'Unparsed drawing call')
-    return {'pairs': len(actual), 'exact_numeric_values': len(actual) * 8,
-            'units': 'First-trial integer states; raw solver milliseconds / 1000',
-            'timing': 'Five valid consistent runs: median, minimum and maximum'}
+    require(len(re.findall(r'\\RQMemory\b', clean(source))) == 15,
+            'memory_calls', 'Unparsed memory drawing call')
+    return {'pairs': len(actual), 'exact_numeric_values': len(actual) * 14,
+            'units': 'First-trial integer states; raw solver milliseconds / 1000; raw process RSS bytes / 1048576',
+            'timing_and_memory': 'Five valid consistent runs: median, minimum and maximum'}
 
 
 def verify_placements(main, technical, secondary, promotion, policy):
@@ -292,10 +315,12 @@ def verify(paper, primary_summary):
 # Reviewed rendering bindings; only presentation geometry may be revised explicitly.
 CELL_STATE_BODY = '\n  \\node[\\av] at (\\x,.27) {$A$ \\av\\phantom{$\\bullet$}};\n  \\node[\\bv] at (\\x,-.17) {$B$ \\bv\\phantom{$\\bullet$}};\n  \\def\\aholder{A}\\ifx\\holder\\aholder\n    \\fill (\\x+.44,.27) circle (1.7pt);\n  \\else\n    \\fill (\\x+.44,-.17) circle (1.7pt);\n  \\fi\n  \\node[ranklabel] at (\\x,-.63) {rank \\r};\n'
 CELL_EDGE_BODY = '\n  \\draw[->] (\\left+.65,.05)--(\\right-.65,.05);\n  \\node[action] at ({(\\left+\\right)/2},.57) {\\word};\n'
-RQPAIR_BODY = '%\n  \\pgfkeys{/pgf/fpu=true}\n  \\pgfmathparse{2.8+.6*ln(#3)/ln(10)}\n  \\pgfmathfloattofixed{\\pgfmathresult}\\let\\pairlazyx\\pgfmathresult\n  \\pgfmathparse{2.8+.6*ln(#4)/ln(10)}\n  \\pgfmathfloattofixed{\\pgfmathresult}\\let\\pairfullx\\pgfmathresult\n  \\pgfkeys{/pgf/fpu=false}\n  \\node[anchor=east] at (2.55,-#1) {#2};\n  \\draw[black!8] (2.8,-#1)--(6.4,-#1);\n  \\draw[black!8] (7.1,-#1)--(10.7,-#1);\n  \\draw[black!50] (\\pairlazyx,-#1)--(\\pairfullx,-#1);\n  \\fill[pairlazy] (\\pairlazyx,-#1) circle (2pt);\n  \\draw[pairfull,fill=white,line width=.65pt] ({\\pairfullx-.068},-#1-.22) rectangle ({\\pairfullx+.068},-#1+.22);\n  \\draw[black!50] ({7.1+.72*(ln(#5)/ln(10)+2)},-#1)--({7.1+.72*(ln(#6)/ln(10)+2)},-#1);\n  \\draw[pairlazy,line width=1pt] ({7.1+.72*(ln(#7)/ln(10)+2)},-#1)--({7.1+.72*(ln(#8)/ln(10)+2)},-#1);\n  \\fill[pairlazy] ({7.1+.72*(ln(#5)/ln(10)+2)},-#1) circle (2pt);\n  \\draw[pairfull,fill=white,line width=.65pt] ({7.1+.72*(ln(#6)/ln(10)+2)-.068},-#1-.22) rectangle ({7.1+.72*(ln(#6)/ln(10)+2)+.068},-#1+.22);\n  \\RQFullRange{#1}{#9}% reads the final tenth argument as the full-range maximum.\n'
-RQFULLRANGE_BODY = '%\n  \\draw[pairfull,line width=1pt] ({7.1+.72*(ln(#2)/ln(10)+2)},-#1)--({7.1+.72*(ln(#3)/ln(10)+2)},-#1);\n'
+RQPAIR_BODY = '%\n  \\pgfkeys{/pgf/fpu=true}\n  \\pgfmathparse{2.7+.5*ln(#3)/ln(10)}\n  \\pgfmathfloattofixed{\\pgfmathresult}\\let\\pairlazyx\\pgfmathresult\n  \\pgfmathparse{2.7+.5*ln(#4)/ln(10)}\n  \\pgfmathfloattofixed{\\pgfmathresult}\\let\\pairfullx\\pgfmathresult\n  \\pgfkeys{/pgf/fpu=false}\n  \\node[anchor=east] at (2.45,-#1) {#2};\n  \\draw[black!8] (2.7,-#1)--(5.7,-#1);\n  \\draw[black!8] (6.3,-#1)--(9.3,-#1);\n  \\draw[black!50] (\\pairlazyx,-#1)--(\\pairfullx,-#1);\n  \\fill[pairlazy] (\\pairlazyx,-#1) circle (2pt);\n  \\draw[pairfull,fill=white,line width=.65pt] ({\\pairfullx-.068},-#1-.22) rectangle ({\\pairfullx+.068},-#1+.22);\n  \\draw[black!50] ({6.3+.6*(ln(#5)/ln(10)+2)},-#1)--({6.3+.6*(ln(#6)/ln(10)+2)},-#1);\n  \\draw[pairlazy,line width=1pt] ({6.3+.6*(ln(#7)/ln(10)+2)},-#1)--({6.3+.6*(ln(#8)/ln(10)+2)},-#1);\n  \\fill[pairlazy] ({6.3+.6*(ln(#5)/ln(10)+2)},-#1) circle (2pt);\n  \\draw[pairfull,fill=white,line width=.65pt] ({6.3+.6*(ln(#6)/ln(10)+2)-.068},-#1-.22) rectangle ({6.3+.6*(ln(#6)/ln(10)+2)+.068},-#1+.22);\n  \\RQFullRange{#1}{#9}% reads the final tenth argument as the full-range maximum.\n'
+RQFULLRANGE_BODY = '%\n  \\draw[pairfull,line width=1pt] ({6.3+.6*(ln(#2)/ln(10)+2)},-#1)--({6.3+.6*(ln(#3)/ln(10)+2)},-#1);\n'
 
-AXIS_LOOPS = [('\\power/\\tick', '0/1,1/10,2/{$10^2$},3/{$10^3$},4/{$10^4$},5/{$10^5$},6/{$10^6$}', '\\draw ({2.8+.6*\\power},-13.65)--({2.8+.6*\\power},-13.9); \\node[anchor=north] at ({2.8+.6*\\power},-14.1) {\\tick};'), ('\\power/\\tick', '0/{.01},1/{.1},2/1,3/10,4/100,5/1000', '\\draw ({7.1+.72*\\power},-13.65)--({7.1+.72*\\power},-13.9); \\node[anchor=north] at ({7.1+.72*\\power},-14.1) {\\tick};')]
+RQMEMORY_BODY = '%\n  \\draw[black!8] (9.9,-#1)--(12.9,-#1);\n  \\draw[black!50] ({9.9+1.5*(ln(#2)/ln(10)-2)},-#1)--({9.9+1.5*(ln(#3)/ln(10)-2)},-#1);\n  \\draw[pairlazy,line width=1pt] ({9.9+1.5*(ln(#4)/ln(10)-2)},-#1)--({9.9+1.5*(ln(#5)/ln(10)-2)},-#1);\n  \\draw[pairfull,line width=1pt] ({9.9+1.5*(ln(#6)/ln(10)-2)},-#1)--({9.9+1.5*(ln(#7)/ln(10)-2)},-#1);\n  \\fill[pairlazy] ({9.9+1.5*(ln(#2)/ln(10)-2)},-#1) circle (2pt);\n  \\draw[pairfull,fill=white,line width=.65pt] ({9.9+1.5*(ln(#3)/ln(10)-2)-.068},-#1-.22) rectangle ({9.9+1.5*(ln(#3)/ln(10)-2)+.068},-#1+.22);\n'
+
+AXIS_LOOPS = [('\\power/\\tick', '0/1,1/10,2/{$10^2$},3/{$10^3$},4/{$10^4$},5/{$10^5$},6/{$10^6$}', '\\draw ({2.7+.5*\\power},-13.65)--({2.7+.5*\\power},-13.9); \\node[anchor=north] at ({2.7+.5*\\power},-14.1) {\\tick};'), ('\\power/\\tick', '0/{.01},1/{.1},2/1,3/10,4/100,5/1000', '\\draw ({6.3+.6*\\power},-13.65)--({6.3+.6*\\power},-13.9); \\node[anchor=north] at ({6.3+.6*\\power},-14.1) {\\tick};'), ('\\power/\\tick', '0/100,1/1000,2/10000', '\\draw ({9.9+1.5*\\power},-13.65)--({9.9+1.5*\\power},-13.9); \\node[anchor=north] at ({9.9+1.5*\\power},-14.1) {\\tick};')]
 
 
 def main():
