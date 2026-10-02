@@ -37,7 +37,7 @@
   font=\footnotesize,align=left,anchor=north west] at (-1.2,-2.70)
   {\textbf{Grouped starts/stops:} the first start leaves both roles active; the first stop leaves no audit. Both violate the interval rule. Ordinary events and identity transfer preserve active bits.};
 \end{tikzpicture}
-\caption{Policy with no supplied precedence. Logged/unlogged mark both entries; bars mark active requirements. New-audit start resets to unlogged; handover reaches new audit unlogged and new role valid. Arrows have one action and outcome. The role gap is allowed; ordinary events may be withheld, with no service-continuity guarantee.}
+\caption{A saved Policy certificate with no supplied precedence; ranks need not be shortest. Logged/unlogged mark both entries; bars mark active requirements. New-audit start resets to unlogged; handover reaches new audit unlogged and new role valid. Arrows have one action and outcome. The role gap is allowed; ordinary events may be withheld, with no service-continuity guarantee.}
 \label{fig:policy-lifetimes}
 \Description{A seven-state path covers logged and unlogged old entries and decreases rank from six or five to zero. Old and new audits overlap between new-audit start and old-audit stop. Old role stops before new role starts, leaving a permitted interval with neither role active. Grouping both old stops and both new starts makes the first boundary unsafe.}
 \end{figure}

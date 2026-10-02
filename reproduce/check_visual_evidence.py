@@ -224,12 +224,12 @@ def verify_placements(main, technical, secondary, promotion):
                 'display_placement', name+' has conditional hiding')
     expected={
         'figures/cell_story_visual.tex': {'main':1},
-        'figures/lazy_choices.tex': {'main':1},
+        'figures/lazy_choices.tex': {'technical':1},
         'figures/rq3_outcome_grid.tex': {'secondary':1},
         'figures/rq3_paired_absolute.tex': {'main':1},
         'technical_fragments/additional_populations.tex': {'technical':1},
         'technical_fragments/promotion_cases.tex': {'technical':1},
-        'figures/policy_finite_main.tex': {'technical':1},
+        'figures/policy_finite_main.tex': {'main':1},
         'technical_fragments/gsm_active_policy.tex': {'technical':1},
         'technical_fragments/gsm_entry_derivation.tex': {'main':1},
         'figures/guarantee_evidence_map.tex': {'main':1},
@@ -241,21 +241,29 @@ def verify_placements(main, technical, secondary, promotion):
         'technical_fragments/pc2_all_activation.tex': {'technical':1},
         'technical_fragments/activation_duty_main.tex': {'main':1},
         'technical_fragments/history_scope_main.tex': {'main':1},
-        'figures/contract_pipeline_c30.tex': {'main':1},
-        'figures/contract_responsibility.tex': {'main':1},
+        'figures/contract_pipeline_c30.tex': {},
+        'figures/contract_responsibility.tex': {},
         'technical_fragments/contract_adequacy_statement.tex': {'main':1},
         'technical_fragments/contract_adequacy_proof.tex': {'technical':1},
         'technical_fragments/residual_formal.tex': {'technical':1},
         'technical_fragments/performance_scope_details.tex': {'technical':1},
         'figures/contract_interfaces_full.tex': {'technical':1},
+        'figures/policy_lifetimes.tex': {'technical':1},
+        'technical_fragments/ducs_cell_correspondence.tex': {'main':1},
+        'technical_fragments/endpoint_interface.tex': {'main':1},
+        'technical_fragments/endpoint_interface_proof.tex': {'technical':1},
+        'technical_fragments/gr1_cell_interface.tex': {'technical':1},
     }
     for rel,counts in expected.items():
         pattern=r'\\(?:input|include)\{'+re.escape(rel[:-4])+r'(?:\.tex)?\}'
         for name,source in sources.items():
             require(len(re.findall(pattern,clean(source)))==counts.get(name,0),
                     'display_placement',rel+' in '+name)
-    return {'main':['cell_story_visual','lazy_choices','rq3_paired_absolute','gsm_entry_derivation','guarantee_evidence_map','synthesis_statement','contract_pipeline_c30','contract_responsibility','contract_adequacy_statement','activation_duty_main','history_scope_main'],
-            'technical_appendix':['rq3_outcome_grid','policy_finite_main','gsm_active_policy','ducs_cell_complete','correctness_proof','cell_residual_derivation','constructed_contracts','pc2_all_activation','contract_adequacy_proof','residual_formal','performance_scope_details','contract_interfaces_full'],'all_designated_inclusions_checked':True}
+    return {'main': [rel for rel, counts in expected.items() if counts.get('main')],
+            'technical_appendix': [rel for rel, counts in expected.items()
+                                   if counts.get('technical') or counts.get('secondary')],
+            'retained_unincluded': [rel for rel, counts in expected.items() if not counts],
+            'all_designated_inclusions_checked': True}
 
 def verify(paper, primary_summary):
     main = (paper/'main.tex').read_text()

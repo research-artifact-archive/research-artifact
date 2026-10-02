@@ -1,0 +1,11 @@
+\subsection{Reusing Policies across Endpoint Controllers}
+\label{sec:endpoint-interface}
+Let $T$ project loadable targets onto component and new-monitor states, omitting controller state. The construction uses endpoint controllers only through entries $Q_0$ and $T$.
+
+\begin{theorem}[Endpoint-interface reuse]\label{thm:endpoint-interface}
+Keep components, transfers, monitors, initializers, event control and precedence fixed. Eligible contracts with equal entries and target projections have identical update games. Every WIN policy/rank and LOSS certificate transfers between them; selecting a compatible target of the second contract preserves that endpoint's continuations. A winning policy also transfers to fewer entries and more projected targets, stopping at newly admitted goals.
+\end{theorem}
+\begin{proof}
+The four transition rules ignore endpoint-controller state, so $Q_0,T$ determine the game and goals. Restricting entries and truncating at new goals preserves safety and rank decrease (Technical Appendix~\ref{ta:endpoint-interface}).
+\end{proof}
+For Cell, deleting $c_0\xrightarrow{j}c_0$ preserves both targets and the update policy, but removes repeated endpoint inspection. The appendix verifies eligibility; no implemented cache or speedup is claimed.

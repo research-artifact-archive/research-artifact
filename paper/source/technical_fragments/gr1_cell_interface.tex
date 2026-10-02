@@ -1,0 +1,35 @@
+\section{Cell through a GR(1) Bridge Interface}\label{ta:gr1-cell}
+Amram et al.'s update problem takes old/new GR(1) specifications and a switching condition. Before switching, an update strategy satisfies the old system safety relation; afterwards it satisfies the new relation and new justice, under the new environment safety assumptions~\cite[Def.~3.1]{Amram2022GR1DynamicUpdate}. Their construction generates the bridge and its \emph{switch}/\emph{allowed} bookkeeping~\cite[Sec.~4.1]{Amram2022GR1DynamicUpdate}. We describe concrete predicates for Cell to identify which additional mixed-version and lifetime structure must be supplied through that interface. This is an analytical input construction, not a Spectra run or a general translation.
+
+\paragraph{A phase extension of the endpoint specifications.}
+Cell is deterministic and all its events are controllable. Take no environment variables and the environment safety relation to be true. System variables are the holder $h\in\{A,B\}$, versions $v_A,v_B\in\{0,1\}$, new-start and old-stop flags $s,t$, inspection debt $p$, a phase $d\in\{\mathrm{bridge},\mathrm{post}\}$, an event selector $a$, and the post-phase controller coordinate $c\in\{c_0,c_1\}$. Before start, $p=0$. The old initial valuation has $h=A$, all five bits zero, $d=\mathrm{bridge}$, $c=c_0$ and an unused initial selector value; its other old entry has $h=B$. The two-state old closed loop only alternates $m_B,m_A$ and preserves all added bits.
+
+Let $G=v_A\land v_B\land s\land t\land\neg p$. Define $R_B$ on bridge-phase states with $\neg G$ by the following guarded assignments. A row sets $a'$ to its label and performs its assignments; every other unlisted coordinate is unchanged. There is no additional waiting round.
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Label & Guard & Assignment\\\midrule
+$m_A$ & $h=B\land(\neg s\lor\neg p)$ & $h'=A$\\
+$m_B$ & $h=A$ & $h'=B,\ p'=s$\\
+$j$ & $h=B\land v_B\land t$ & $p'=0$\\
+$\rho_A$ & $\neg v_A\land h=B$ & $v_A'=1$\\
+$\rho_B$ & $\neg v_B\land h=A$ & $v_B'=1$\\
+start & $\neg s$ & $s'=1,\ p'=[h=B]$\\
+stop & $s\land\neg t$ & $t'=1$\\\bottomrule
+\end{tabular}
+\end{center}
+The holder type preserves exactly one workpiece; transfer guards express empty-station replacement; $s\land\neg t$ enforces start-before-stop. The $j$ guard releases the old inspection prohibition only after local stop. Thus $R_B$ is a \emph{phase extension} of the old specification, not the unmodified old requirement. Keeping the original global prohibition until the final specification switch would exclude the displayed path that inspects before its last transfer. The supplied old controller nevertheless satisfies this extension because it never changes the added bits or inspects.
+
+Take the old system safety relation to be $R_B$ and the switching condition to be $d=\mathrm{bridge}\land G$. The new system relation permits one auxiliary handover from that condition, preserving $h,v_A,v_B,s,t,p$ and setting $d'=\mathrm{post},c'=c_0,a'=\mathsf{handover}$. In the post phase it permits exactly the endpoint edges
+\[
+ z_A\xrightarrow{m_B}y_B\xrightarrow{j}z_B,
+ \qquad z_B\xrightarrow{m_A}z_A,
+ \qquad z_B\xrightarrow{j}z_B.
+\]
+Here $p=0,1,0$ and $c=c_0,c_1,c_0$ at $z_A,y_B,z_B$, respectively, and both versions and lifetime flags are one. The new initial valuation is post-phase $z_A$; both justice conditions are true. The two loadable bridge projections reach this new winning region through the auxiliary handover.
+
+\paragraph{What this construction establishes.}
+Each edge of Figure~\ref{fig:cell-story} satisfies its row: start records the actual holder, inspection clears debt only after old-stop, and transfer preserves debt. Both displayed paths reach $G$ and then take the auxiliary handover. With FG rank $r$, assign $r+1$ before handover and zero afterwards; every bridge round, including the auxiliary handover, strictly decreases rank. The six-/five-event paths therefore give seven-/six-round bridge witnesses. Erasing the auxiliary handover preserves their local events, initialized memories and selected physical targets. Unsafe controllable choices are excluded by the guards; we assert witness preservation, not equality of unsafe game buckets.
+
+The post relation permits every supplied endpoint edge, although synthesizing a new GR(1) controller may select fewer of them. Once that $C_2$ is selected, Amram et al. execute it unchanged after the bridge~\cite[Sec.~4.2, Alg.~2]{Amram2022GR1DynamicUpdate}. FG-DUCS instead takes the replacement controller and loadable targets as inputs; its continuation guarantee concerns that supplied controller. GR(1) predicates also avoid enumerating every mixed state: the comparison concerns who supplies the version, lifetime, initialization and target equations, not a state-count lower bound. FG-DUCS derives those equations' operational counterparts from the local contract. No modeling-effort or runtime reduction is inferred.
+
+The construction does not extend unchanged to contracts with UC or nondeterministic outcomes. Their environment/system move order and observation of realized successors must be aligned: replacing a control choice followed by all its outcomes with an environment-first round can change $\exists a\,\forall o$ into $\forall o\,\exists a$. The complete deterministic Cell comparison avoids that issue; the main all-outcome guarantee remains defined by FG-DUCS's own game.

@@ -1,3 +1,20 @@
-\subsection{A Constructive Correspondence for Cell}
+\subsection{What the Local Interface Generates}
 \label{sec:ducs-cell-construction}
-Native DUCS can express the two Cell paths~\cite[Defs.~4.1--4.3 and 5.1]{Nahabedian2020}. Its new environment contains eight mixed version/holder stages plus three new-endpoint states. Ordinary moves change the holder, empty-station transfers change one version, and a guarded handover connects all-new stages to clear-inspection targets. Holder refinement, history fluents and transition requirements enforce lifetimes. Technical Appendix~\ref{ta:ducs_cell_complete} proves path and continuation preservation; Table~\ref{tab:contract-responsibility} contrasts these explicit inputs with FG-DUCS's generated structure. The 11 environment states exclude protocols/monitors and imply no minimum cost. Eventual handover uses theoretical FLTL beyond native safety-$T$~\cite[Sec.~5.3]{Nahabedian2020}; this is a construction, not a native solver run.
+Table~\ref{tab:main-generation} distinguishes the supplied structures from the generated result. DUCS already constructs an update environment and goal; GR(1) updating already constructs a bridge. From the supplied local contract, FG-DUCS constructs mixed-component transitions, implements individual monitor lifetimes, and derives handover target tests.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Input and generation responsibilities. Existing guarantees are retained in the comparison; the rows do not claim a general translation or measured modeling-effort reduction.}
+\label{tab:main-generation}
+\begin{tabular}{@{}p{.16\linewidth}p{.36\linewidth}p{.43\linewidth}@{}}\toprule
+Interface & Supplied structure & Generated result and guarantee\\\midrule
+DUCS~\cite[Defs.~4.1--4.3, 5.1]{Nahabedian2020} & Environments/goals, old controller, global transfer, transition requirements and update fluents & Update environment/goal, update-and-subsequent controller and controller-transfer relation; legal, deadlock-free completion from every old-controller state\\
+GR(1) update~\cite[Def.~3.1, Secs.~4--4.1]{Amram2022GR1DynamicUpdate} & Old/new specifications and switching condition & New controller, bridge and switching bookkeeping; bounded switching and new-specification satisfaction from winning states\\
+FG-DUCS & Local components/transfers, requirement lifetimes/initializers and fixed endpoints & Mixed game and WIN/LOSS certificates; local-history correspondence and selected-endpoint continuation\\\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Concrete Cell constructions.}
+A native DUCS encoding supplies eight mixed version/holder stages and three endpoint states in $E'$, empty-station guards, history fluents for inspection/lifetimes, and a target gate. DUCS supplies its interrupt/protocol composition. Our explicit construction preserves both Cell paths and every endpoint continuation; its additional eventual-handover condition uses theoretical FLTL beyond native safety-$T$~\cite[Sec.~5.3]{Nahabedian2020}. The 11 states imply no lower bound (Technical Appendix~\ref{ta:ducs_cell_complete}).
+
+For GR(1), supply version/lifetime predicates, $p'=[h=B]$ at start, inspection release at stop, and a target test. Unmodified old safety forbids inspection until global switching. Both paths are preserved; the algorithm adds \emph{switch}/\emph{allowed} bookkeeping and retains its chosen $C_2$ after the bridge. FG-DUCS takes endpoints as inputs and derives the local update structure. These analytical Cell witnesses are not solver runs or general translations (Technical Appendix~\ref{ta:gr1-cell}).

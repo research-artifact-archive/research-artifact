@@ -157,7 +157,7 @@ def generate(raw_root, config_root, output):
                 values = [row[tool + '_rep' + str(rep) + '_states'] + '/' + row[tool + '_rep' + str(rep) + '_transitions'] for rep in range(1, 6)]
                 lines.append(' & '.join(['Lab build' if tool == 'published' else 'Fork', tex(row['label'])] + values) + r'\\')
     lines += [r'\bottomrule\end{tabular}\end{center}',
-        'These are all ' + str(stats['size_variable_tool_conditions']) + ' tool/condition cells whose returned controller sizes vary across the five successful trials; other completed cells retain their first-trial sizes. The fifteen size matches and the five-state Railcab difference in the main text compare first trials only. In particular, the Railcab supplied lab-build trial 4 returns the same size as fork trial 1; a persistent tool-specific size difference or controller equivalence is not established.']
+        'These are all ' + str(stats['size_variable_tool_conditions']) + ' tool/condition cells whose returned controller sizes vary across the five successful trials; other completed cells retain their first-trial sizes. The fifteen size matches and five-state Railcab difference in Table~\\ref{tab:legacy-fidelity} compare first trials only. In particular, the Railcab supplied lab-build trial 4 returns the same size as fork trial 1; a persistent tool-specific size difference or controller equivalence is not established.']
     (output / 'legacy-fidelity-reference.tex').write_text('\n'.join(lines) + '\n')
     lines = [r'\begingroup\scriptsize\setlength{\tabcolsep}{3pt}',
         r'\begin{longtable}{@{}p{.25\linewidth}rrrr@{}}',

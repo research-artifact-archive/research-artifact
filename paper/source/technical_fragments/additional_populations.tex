@@ -4,6 +4,9 @@ Figure~\ref{fig:rq3-outcomes} displays all 108 fixed-budget outcomes. Figure~\re
 \FloatBarrier
 Base/R1/R2's 5/3/6 pairs give median state ratios 111.89/11.88/2.75 and solver ratios 40.02/3.12/9.14. The largest state savings are in Base, but different completed populations do not isolate interval requirements' effect.
 
+\paragraph{Order sensitivity in R2.}
+Eight R2 contracts complete all five repetitions with both Lazy and Update-first; PC2/R2 times out with both. Update-first discovers fewer states and has a lower solver median on Industry, PowerPlant, PC1, Railcab, Surveillance and Workflow; Lazy is lower on both measures for GSM and MetaSocket. For example, PC1/R2 has 56,443 versus 9,304 discovered states and 6.155 versus 1.166 seconds for Lazy versus Update-first. These saved results expose a substantial order dependence, but do not isolate a causal interaction between the order and interval monitors. The performance contribution concerns the full lazy procedure relative to construction alternatives, not a uniformly best exploration order.
+
 \subsection{Full+UC observations}
 Full+UC yields \VThreeETwoMacWin{} WIN/\VThreeETwoMacLoss{} LOSS/\VThreeETwoMacTO{} TO on Mac, \VThreeETwoXeonWin{} WIN/\VThreeETwoXeonTO{} TO on Xeon; Industry/R1 times out on Xeon despite Mac's LOSS. State counts equal Eager in \VThreeETwoEagerStateEqual{}/\VThreeETwoComparableEager{} cells, differing on GSM/R1 and PowerPlant/R1. On PC1/Base, Direct-Full/Full+UC/Eager each discover \VThreeETwoPCOneBaseStatesFullUC{} states versus Lazy's \VThreeETwoPCOneBaseStatesLazy{}. Full+UC, Eager and Lazy all use UC pruning. Builds, hosts and repetitions differ, precluding single-factor timing claims (all rows/conditions in S4.7).
 
@@ -44,4 +47,21 @@ For $n\geq1$, take $n$ components, each with one old and one new state and a sin
 Under Lazy's default order, pending transfers precede ordinary events in this family, so expansion follows one $n$-step chain. Because $\mathsf{Open}$ precedes $\mathsf{Retry}$, it reaches the sole goal after discovering exactly $n+1$ states. Backward propagation then assigns ranks $0,\ldots,n$ and proves the entry state before any alternative query. The ordinary self-loops are losing choices under finite completion; both methods use the same terminal goal. Thus the separation concerns exploration of one supplied game.
 
 \subsection{Memory and returned policies}\label{ta:memory_policies}
-Lazy's five-run median peak working sets span \FixedLazyRSSMin{}--\FixedLazyRSSMax{}~GiB (median \FixedLazyRSSMedian{}), including JVM/native overhead; Eager/Update-first sometimes use less. Its \FixedPolicies{} WIN policies contain \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} states (median \FixedPolicyStatesMedian{}) and maximum ranks \FixedRankMin{}--\FixedRankMax{} (median \FixedRankMedian{}). Ranks bound events, not downtime or optimal length. Counts match all five repeats; LOSS/TO has no winning policy.
+Lazy's five-run median peak working sets span \FixedLazyRSSMin{}--\FixedLazyRSSMax{}~GiB (median \FixedLazyRSSMedian{}), including JVM/native overhead; Eager/Update-first sometimes use less. Its \FixedPolicies{} WIN certificates contain \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} update states (median \FixedPolicyStatesMedian{}) and maximum ranks \FixedRankMin{}--\FixedRankMax{} (median \FixedRankMedian{}). Ranks bound events, not downtime or optimal length. Counts match all five repeats; LOSS/TO has no winning policy.
+
+The rank domain is recorded as \texttt{certificate\_states} in saved \path{rq3/stage1.csv}. S4's ``Output policy states'' instead uses \texttt{output\_controller\_states}: the linked old--update--new controller, with 15--1,260 states for Lazy. Linking includes reachable old and new closed-loop states and non-goal update states, identifying each update goal with its selected new state. These columns describe the same successful runs at different construction stages; neither counts explored game states.
+
+\subsection{Lifetime gaps in two saved policies}\label{ta:saved-gaps}
+The separate qualitative Railcab Base/R1 exports in S4 retain their full policy graphs. Define a gap on a completed path as the labels strictly after its last old-stop edge and strictly before its first new-start edge, excluding both boundaries. A normal label is outside the complete command set pending at entry. All 22 entries of each export have every old stop before the first new start on every possible policy path. There are 34 Base and 41 R1 completed paths when paths from different old entries are counted separately.
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Saved policy & States / edges & Entries & Gap labels & Ordinary gap labels\\\midrule
+Railcab Base & 115 / 118 & 22 & 5--8 & 1--4\\
+Railcab R1 & 44 / 46 & 22 & 3 & 0\\\bottomrule
+\end{tabular}
+\end{center}
+The Base policy exploits a period without old or new requirements; R1 keeps its seven interval monitors active even when those requirements are inactive. The observed zero ordinary events in R1 describes this selected policy, not every winning policy. These counts quantify events, not elapsed time or suppressed alternatives.
+
+The revised source's \path{scripts/analyze_saved_railcab_gap.py} traverses every saved outcome from every entry. It verifies entry coverage, strict rank decrease, one-shot command consumption, active-monitor membership, full certificate reachability and all terminal paths. Its inputs are the two \path{handoff-bundle.json} files under \path{results/supplement-checks/railcab_policy_demo/} and \path{results/supplement-checks/railcab_r1_policy_demo/}; it returns per-entry ranges and extremal path segments. Counting internal edges of the region with no active old/new monitor independently gives the same ranges for all 44 entries. The input bundles and this analysis script are included in the matching public snapshot.
+
+This is a static analysis of the already saved qualitative exports, with no new synthesis or timing trial. Lazy's 125 successful fixed-budget repetitions instead retain summary-only controller output, certificate sizes and maximum ranks. Their unrecorded policy edges cannot establish corresponding gap ranges for all 25 WIN contracts. Neither these two exports nor their analysis reconstructs enabled but unselected events or an optimal completion rank.

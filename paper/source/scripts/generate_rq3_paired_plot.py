@@ -97,7 +97,7 @@ def render():
 \node[anchor=west] at (4.32,-16) {Direct-Full};
 \node[anchor=west] at (6.6,-16) {Both axes logarithmic; lower is better.};
 \end{tikzpicture}
-\caption{Absolute costs for all \FixedDirectFullPairs{} completed Lazy/Direct-Full pairs. Each row is WIN/WIN; Lazy explores fewer states and uses less solver time, with varying gaps. Solver time includes checking but excludes frontend, endpoint preparation and JVM startup. The other 13 Direct-Full contracts time out (Figure~\ref{fig:rq3-outcomes}); they have no point here. This compares complete same-game procedures, not one isolated search factor.}
+\caption{All \FixedDirectFullPairs{} completed WIN/WIN pairs. Solver time includes checking but excludes frontend, endpoint preparation and JVM startup. The other 13 Direct-Full contracts time out (Figure~\ref{fig:rq3-outcomes}) and are omitted. This compares whole procedures.}
 \label{fig:rq3-paired-absolute}
 \Description{Paired plots show game-state counts and solver seconds for all 14 contracts completed by both Lazy and Direct-Full. Lazy is lower on both axes for every row. Direct-Full timeouts, and contracts with no paired result, are shown in the separate all-outcome grid.}
 \end{figure}

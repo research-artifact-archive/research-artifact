@@ -8,7 +8,7 @@ Residual soundness (RS) relates monitor memory to prior history. Let $\mathsf{Sa
 \]
 for every $\xi\in\operatorname{dom}\iota_r$. Equality is exact; strict inclusion is conservative and may exclude feasible updates. An empty history set makes the right side universal. Synthesis checks initializer states and domains, but neither infers histories nor establishes their completeness.
 
-For Cell's declared start-only reference, $\mathsf H_{r_{\rm inspect}}(\xi)=\{\mathsf{start}\}$. Initializing at $c$ is exact for that reference; initializing at $d$ when $B$ holds is conservative, forbidding departure until inspection. The complete inclusion proof is in Technical Appendix~\ref{ta:cell-residual}. This distinction exposes a separate obligation: an exact history residual need not encode the intended duty at activation.
+For Cell's declared start-only reference, $\mathsf H_{r_{\rm inspect}}(\xi)=\{\mathsf{start}\}$. Initializing at $c$ is exact for that reference; initializing at $d$ when $B$ holds is conservative, forbidding departure until inspection. The inclusion proof follows below. This distinction exposes a separate obligation: an exact history residual need not encode the intended duty at activation.
 
 
 A Boolean event-history variable, or \emph{fluent}, records setting/resetting labels. For an initially true fluent $p$, a history making $p$ false then true and the empty history end at the same value but differ under $\Box p$. 

@@ -11,7 +11,7 @@
 \usepackage{xr-hyper}
 \usepackage[hidelinks]{hyperref}
 \externaldocument{build/main}[main.pdf]
-\hypersetup{pdftitle={Technical Appendix: Controller-Preserving Update Synthesis},pdfauthor={Anonymous Authors}}
+\hypersetup{pdftitle={Technical Appendix: Compiling Local Update Contracts},pdfauthor={Anonymous Authors}}
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{theorem}[lemma]{Theorem}
 \newtheorem{proposition}[lemma]{Proposition}
@@ -51,11 +51,11 @@
 \input{build/generated/pc2-trace-macros.tex}
 
 \begin{document}
-\title{Technical Appendix: Controller-Preserving Update Synthesis}
+\title{Technical Appendix: Compiling Local Update Contracts}
 \author{Anonymous Author(s)}
 \date{}
 \maketitle
-This technical appendix accompanies the paper. The main paper gives the complete Cell contract, update-game specification, contract correspondence, the continuation proof, synthesis guarantees and certificate checks. This document supplies the detailed source-history definition, remaining correctness proofs, residual-soundness formalization, full tables and further history and execution arguments. References to the main paper use its section and algorithm numbers. S1--S5 remain a separate supplement.
+This technical appendix accompanies the paper. The main paper gives the complete Cell and Policy contracts, update-game specification, contract correspondence, the continuation proof, synthesis guarantees and certificate checks. This document supplies the detailed source-history definition, remaining correctness proofs, residual-soundness formalization, full tables and further history and execution arguments. References to the main paper use its section and algorithm numbers. S1--S5 remain a separate supplement.
 \FloatBarrier
 \appendix
 \section{Source Histories and Synthesis Correctness}\label{ta:source_synthesis}
@@ -68,6 +68,7 @@ The main paper states Proposition~\ref{prop:contract-adequacy} for these source 
 \paragraph{Proof of Theorem~\ref{thm:correctness}.}
 \input{technical_fragments/correctness_proof.tex}
 \paragraph{Promotion cases.}\label{ta:promotion_cases}
+\input{figures/lazy_choices.tex}
 \input{technical_fragments/promotion_cases.tex}
 \FloatBarrier
 \FloatBarrier
@@ -128,7 +129,8 @@ The all-contract outcome summary is Table~\ref{tab:xeon-rq3} in the main paper. 
 
 \section{Policy Requirement-Boundary Argument}\label{ta:policy_interpretation}
 \input{technical_fragments/policy_interpretation.tex}
-\input{figures/policy_finite_main.tex}
+The main paper gives the complete finite input in Table~\ref{tab:policy-finite-c13}. Figure~\ref{fig:policy-lifetimes} visualizes its saved policy and requirement lifetimes.
+\input{figures/policy_lifetimes.tex}
 \FloatBarrier
 
 \FloatBarrier
@@ -141,7 +143,7 @@ The all-contract outcome summary is Table~\ref{tab:xeon-rq3} in the main paper. 
 \clearpage
 \section{Complete Native DUCS Construction for Cell}
 \label{ta:ducs_cell_complete}\label{ta:ducs_interface}
-Table~\ref{tab:ducs-interface} in the main paper compares the interfaces; the following construction makes that comparison concrete.
+Table~\ref{tab:ducs-interface} compares the Cell interfaces; the following construction makes that comparison concrete.
 
 \input{figures/contract_interfaces_full.tex}
 
@@ -167,4 +169,6 @@ Algorithm~\ref{alg:otf} returns and internally checks the losing region $L$. The
 The fixed RQ3 runs use Windows~10, an Intel Xeon W-2265, 256~GB RAM and Temurin~17.0.20.1. The main paper states the heap, time cap and repetition policy; separate Mac structural checks and extended trials retain their own provenance.
 
 Codex (\texttt{gpt-5.5}, \texttt{gpt-5.6-sol}, \texttt{gpt-6-astra}; September 30--October 2: GPT-6, variant unavailable) assisted design, implementation, tooling, tests, experiments, analysis, proofs and presentation. Claude Fable 5.1 assisted planning, drivers, source checks and drafts. September 30--October 2 editing used Opus 5.5 and ChatGPT Pro/Latest reviews (response model unavailable); Claude Code inherited project context. Authors checked outputs using tests, certificates, oracles and primary sources and retain responsibility; correlated faults remain possible. Reviews were editorial, not human evaluation.
+\input{technical_fragments/endpoint_interface_proof.tex}
+\input{technical_fragments/gr1_cell_interface.tex}
 \end{document}

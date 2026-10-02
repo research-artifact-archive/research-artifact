@@ -53,6 +53,9 @@ DISPLAY_FILES = (
     'technical_fragments/performance_scope_details.tex',
     'figures/contract_interfaces_full.tex',
     'technical_fragments/ducs_cell_correspondence.tex',
+    'technical_fragments/endpoint_interface.tex',
+    'technical_fragments/endpoint_interface_proof.tex',
+    'technical_fragments/gr1_cell_interface.tex',
 )
 
 

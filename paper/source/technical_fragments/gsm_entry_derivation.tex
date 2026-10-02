@@ -1,3 +1,9 @@
-\paragraph{A source requirement constraining ordinary update actions.}
+\paragraph{Source obligation over ordinary actions.}
 \label{sec:gsm-entry-derivation}
-GSM changes decoding from mode 2 to mode 3. From every old entry, follow its cycle to the first received-message state; then stop the old requirement, start the new one, decode in mode 3, output and transfer at the sender state. The current action observer is zero at activation, so the saved lookup installs non-error state zero. The active new monitor rejects mode 2 while permitting mode 3 and output; transfer reaches the supplied endpoint's initial projection. These steps respect R1's ban on ordinary actions between stop and start. A decreasing rank bounds completion by twelve events (Proposition~\ref{prop:gsm-active-policy}, Technical Appendix~\ref{ta:activation_scope}). This analytical policy uses the existing source and lookup, not a new solver run. It establishes ACT over ordinary update behavior; the separate 45-pair source check establishes the interval's E initialization. Earlier mode-2 events still preclude a whole-history claim.
+GSM changes $\Box\neg decode.3$ to $\Box\neg decode.2$. From every old entry, reach the first $\mathsf{RECEIVED}$ state; then
+\[
+\mathsf{RECEIVED}\xrightarrow{stop,start}\mathsf{RECEIVED}
+\xrightarrow{decode.3}\mathsf{DECODED}\xrightarrow{output}
+\mathsf{SENDER}\xrightarrow{\rho}\mathsf{SENDER}_{new}.
+\]
+The preceding $receive$ sets the $decode.2$ observer to zero; boundaries preserve it. The saved initializer maps zero to monitor state zero: $decode.2$ enters error, all other labels preserve zero. Thus the new obligation constrains an actual ordinary choice. Transfer matches sender, observer and new-monitor zero to the endpoint. The pre-stop distance is at most seven; adding the five displayed events gives rank at most twelve. Consecutive stop/start satisfies R1's gap ban. This source-derived analytical policy proves ACT, not a new solver result; a separate 45-pair source check establishes E initialization (Technical Appendix~\ref{ta:activation_scope}).
