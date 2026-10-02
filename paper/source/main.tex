@@ -104,7 +104,7 @@ The policy must cover different old states and every environment outcome while r
 
 \emph{FG-DUCS compiles local choices into a policy for safe finite handover.} The contract fixes permitted transfers, requirement lifetimes and endpoint obligations; synthesis chooses how to complete the update (Table~\ref{tab:contract-workflow}). Modeling and transfer code remain the modeler's responsibility; effort reduction is unmeasured.
 
-Existing DUCS generates update and subsequent control from global transfers and transition requirements~\cite{Nahabedian2016SEAMS,Nahabedian2020}; GR(1) updating generates a new controller and bridge~\cite{Amram2022GR1DynamicUpdate}. Both express Cell with additional supplied structure (Section~\ref{sec:ducs-cell-construction}). FG-DUCS fixes the endpoints and generates the intervening game from local transfers, independent boundaries and initializers. Its contribution is this construction and its guarantees, not greater general expressiveness or a new reachability algorithm.
+DUCS~\cite{Nahabedian2016SEAMS,Nahabedian2020} and GR(1) updating~\cite{Amram2022GR1DynamicUpdate} already generate update or bridge control. FG-DUCS instead fixes both controllers and generates the intervening game from local transfers, independent requirement boundaries and initializers (Section~\ref{sec:ducs-cell-construction}). Its contribution is this construction and its guarantees, not greater general expressiveness or a new reachability algorithm.
 
 \Needspace{4\baselineskip}
 Our contributions are:
@@ -149,10 +149,14 @@ The new audit monitor starts unlogged and requires a log before service. Each en
 
 If the starts are merged and the stops are merged, the first start overlaps roles and the first stop removes audit coverage. Ordinary events and transfer preserve the four activity bits, so neither old entry has a completing merged policy. Technical Appendix~\ref{ta:policy_interpretation} gives the complete finite input, policy and losing closure. This isolates independently scheduled requirement lifetimes.
 
+\subsection{Existing Update Interfaces}
+\label{sec:ducs-cell-construction}
+\input{figures/contract_pipeline_c30.tex}
+\input{technical_fragments/ducs_cell_correspondence.tex}
+
 \section{Defining an Update Contract}
 \label{sec:formalization}
 \label{tab:contract-inputs}
-\input{figures/contract_pipeline_c30.tex}
 \input{technical_fragments/contract.tex}
 \input{technical_fragments/contract_adequacy_statement.tex}
 \input{technical_fragments/endpoint_continuation.tex}
@@ -286,7 +290,7 @@ From FSP declarations, MTSA first synthesizes the fixed endpoint controllers. Ta
 Inputs have 1--5 components, 4--131 entries and 3--26 commands (Technical Appendix~\ref{ta:benchmark_inputs}). Only Railcab transfers branch; none declares precedence. R2 encodes order in monitors. GSM/PC1's single transfer makes merging the identity.
 
 \paragraph{Exploration variants.}
-All methods share entries, successors, goals, checks and terminals. On-the-fly (OTF) variants omit controls at UC-enabled states and stop when all entries win. Direct-Full constructs all reachable buckets, including those controls, then applies UC priority; auxiliary Full+UC omits them during construction. At quiescence, Lazy queries individual buckets, Eager all controls; Update-first tests O-DUCS's update priority~\cite{HiranoEtAl2024ODUCS} within our solver. Lazy favors stops/transfers, endpoint mismatch and pending-command counts, using LIFO exploration before FIFO retries (Technical Appendix~\ref{ta:exploration_order}); its order need not minimize exploration.
+All methods share entries, successors, goals, checks and terminals. On-the-fly (OTF) variants omit controls at UC-enabled states and stop when all entries win. Direct-Full constructs all reachable buckets, including those controls, then applies UC priority; auxiliary Full+UC omits them during construction. At quiescence, Lazy queries individual buckets, Eager all controls; Update-first tests O-DUCS's update priority~\cite{HiranoEtAl2024ODUCS} within our solver. While stops remain, Lazy tries stop, transfer, then ordinary buckets. It next favors remaining transfers; only when both are exhausted does an endpoint match put start first. This orders queries, not required executions; LIFO expansion precedes FIFO retries (full state/tie rules in Technical Appendix~\ref{ta:exploration_order}).
 
 \paragraph{Design and measures.}
 RQ3 uses one Windows/Xeon host, 64~GiB heap and 1,200~s JVM cap: $27\times4$ same-game cells plus 27 Legacy references. Medians require five completions; censored cells retain their capped trial. Solver time includes checking; total JVM adds frontend, startup, output and endpoints. We also report exploration, policy size and peak working set. Legacy uses its native timer; Mac pilots are excluded. Full settings and interruptions remain in Technical Appendices~\ref{ta:implementation_details} and~\ref{ta:memory_policies} and S4.
@@ -377,7 +381,7 @@ Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullFaster{} 
 \par\smallskip{\footnotesize TO: timeout; no OOM/unmeasured cases. $\dagger$ Workflow/R2 retains its interruption and later same-setting timeout (S4). Comparator/Lazy ratios are median [min--max] across completed pairs of five-run medians. Faster / pairs counts lower comparator solver medians among all completed pairs. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs have no ratio.}
 \end{table}
 
-Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs; Technical Appendix~\ref{ta:workload_rows} gives exact states, queries and costs. In R2, Update-first uses fewer states and a lower solver median on six of eight completed pairs, showing order sensitivity (Technical Appendix~\ref{ta:additional_populations}).
+Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs (full rows in Technical Appendix~\ref{ta:workload_rows}). Base/R1/R2's 5/3/6 pairs have median Direct-Full/Lazy state ratios 111.89/11.88/2.75. These different completed populations do not isolate interval requirements' effects or attribute savings to old-stop/new-start gaps. In R2, Update-first uses fewer states and a lower solver median on six of eight pairs (Technical Appendix~\ref{ta:additional_populations}).
 
 \input{figures/rq3_paired_absolute.tex}
 
@@ -397,7 +401,8 @@ Travel reaches timeouts and out-of-memory failures under all methods, including 
 \section{Related Work}
 \label{sec:related}
 \label{sec:expressiveness}
-\input{technical_fragments/ducs_cell_correspondence.tex}
+\paragraph{Generating update environments.}
+Yamauchi et al. generate an update environment from pre/post environments and supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. Table~\ref{tab:contract-workflow} distinguishes FG-DUCS's local input contract from existing update interfaces; this is not the first generated update environment.
 
 \paragraph{On-the-fly updating.}
 O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. S4.8 documents the archived fork's plain OTF: it precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}. Identity with the 2024 release is unestablished.
@@ -406,7 +411,7 @@ O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODU
 DCS already uses on-demand component products, defers controllable alternatives, treats UC-enabled states as uncontrollable and propagates success/failure backward~\cite[Sec.~IV]{CiolekDCS}. Its 2016 formulation requires safety and eventual goal occurrence on every trace; OTF-DCS (2023) requires a marked extension of each finite controlled trace~\cite[Def.~4]{CiolekEtAl2023OTFDCS}. FG specializes these patterns to its generated contract, with complete outcome buckets and all-entry certificates. Compositional and modular approaches structure control specifications~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}.
 
 \paragraph{Supervisor switching.}
-State reinitialization enables safe, deadlock-free switching between supplied supervisors on one plant~\cite[Sec.~3.3]{MeiraGoesLafortune2020Switching}. Jiao et al. transform workcell supervisors and map their states, assuming instantaneous switching faster than UC events~\cite[Sec.~III]{JiaoGanXiao2013Reconfiguration}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; switched-DES control enforces mode-specific invariants under uncontrollable switches~\cite{ReveliotisFei2017SwitchedDES}. FG adds staged transfers, independent lifetimes and all-outcome finite completion.
+State reinitialization enables safe, deadlock-free switching between supplied supervisors on one plant~\cite[Sec.~3.3]{MeiraGoesLafortune2020Switching}. Jiao et al. transform workcell supervisors and map their states, assuming instantaneous switching faster than UC events~\cite[Sec.~III]{JiaoGanXiao2013Reconfiguration}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; switched-DES control enforces mode-specific invariants under uncontrollable switches~\cite{ReveliotisFei2017SwitchedDES}. FG combines staged transfers, independent lifetimes and all-outcome finite completion.
 
 \paragraph{Requirements across adaptation.}
 Temporal adaptation~\cite{ZhangCheng2006ALTL}, scenario-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates} and Live Synthesis~\cite{FinkbeinerEtAl2022LiveSynthesis} address obligations across change. Our initialization uses scoped requirements~\cite{Dwyer1999Patterns} and residual reasoning~\cite{RosuHavelund2005Rewriting}. Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} allow individual or simultaneous reconfiguration, requirements that depend on features, and state retention or reset. Their supervisor permits a marked continuation from every reachable state; FG requires every maximal update run to finish at a supplied controller.
@@ -431,7 +436,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c83-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c84-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

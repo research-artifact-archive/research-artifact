@@ -1,11 +1,20 @@
 \begin{table}[!htbp]
-\centering\small
-\caption{The formal workflow. Update control replaces old control; handover resumes the selected new controller.}
+\caption{Supplied inputs and generated results: DUCS~\cite[Defs.~4.1--4.3, Sec.~5]{Nahabedian2020}, GR(1) updating~\cite[Def.~3.1, Sec.~4]{Amram2022GR1DynamicUpdate}, and FG-DUCS.}
 \label{tab:contract-workflow}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.30\linewidth}@{\hspace{.05\linewidth}}>{\raggedright\arraybackslash}p{.30\linewidth}@{\hspace{.05\linewidth}}>{\raggedright\arraybackslash}p{.30\linewidth}@{}}\toprule
-\textbf{Modeler supplies} & \textbf{Compiler generates} & \textbf{Synthesis returns}\\\midrule
-Old/new components and fixed controllers; local transfer relations; requirement monitors, initializers and optional precedence; loadable endpoint states
-& Mixed-version transitions, individual requirement boundaries, all old entries and compatible handover goals; no update sequence is supplied.
-& Policy, decreasing rank and matched handover states covering every entry and outcome; otherwise a losing region excludes every policy.\\\bottomrule
+\centering\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.12\linewidth}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}p{.31\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}@{}}\toprule
+Interface & Supplied inputs & Generated structure and successful result & Post-update control\\\midrule
+DUCS
+& Old control; old/new environments $E,E'$ and goals; global transfer relation $R$; transition requirement $T$
+& Update environment and goal; controller $C'$ and map $H$ covering every old-controller state
+& Synthesized $C'$ enforces the new goals.\\\addlinespace
+GR(1) updating
+& Old/new GR(1) specifications and switching condition
+& New controller $C_2$, bridge and switching bookkeeping
+& Selected $C_2$ runs unchanged after the bridge.\\\addlinespace
+FG-DUCS
+& Fixed components/controllers; local transfers; monitors, initializers and precedence; loadable targets
+& Mixed-version and boundary game; policy, rank and handover map for every old entry and permitted outcome
+& Supplied new closed loop is preserved from the selected compatible target.\\\bottomrule
 \end{tabular}
 \end{table}
