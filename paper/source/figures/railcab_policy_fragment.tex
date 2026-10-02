@@ -1,5 +1,5 @@
-% Candidate-only figure; no manuscript is edited.
-% Requires tikz and arrows.meta. All diagram labels are 8 pt; no scaling.
+% Saved-policy illustration for Supplement S4.
+% Requires tikz and arrows.meta. The uniform enlargement preserves geometry.
 % Source: railcab_policy_demo/policy-fragment.json and handoff-bundle.json.
 % Full descendant subgraph of M69: 26 states, 25 edges. Exact contractions:
 % M30 -> M29 -> M28 -> M27 (3 transfers); M27 -> ... -> M20 (7 starts).
@@ -12,7 +12,7 @@
 \begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[
-  x=1mm,y=1mm,
+  x=1mm,y=1mm,scale=1.15,transform shape,
   font=\fontsize{8}{9}\selectfont,
   statebox/.style={draw,rounded corners=1.2pt,line width=.4pt,
     align=center,inner xsep=1pt,inner ysep=2pt,minimum width=18mm},
@@ -60,7 +60,7 @@
 \node[anchor=west,align=left,font=\fontsize{8}{9}\selectfont] at (0,-23)
 {C: controllable; UC: uncontrollable (dashed). Shaded boxes: handover targets.};
 \end{tikzpicture}
-\caption{Both outcomes of one Railcab/Base transfer after five old stops and before any new start. AC is approaching-crossing; T/F records whether that event occurred since \texttt{endOfTS}. Boxes show milestone state and rank; targets identify supplied new-controller states. Only single-path sequences of three transfers or seven starts are contracted. Every branch of this 26-state, 25-edge fragment is retained.}
+\caption{Both outcomes of one Railcab/Base transfer after five old stops and before any new start; Base has no interval monitor. AC is approaching-crossing; T/F records whether that event occurred since \texttt{endOfTS}. Boxes show milestone state and rank; targets identify supplied new-controller states. Only single-path sequences of three transfers or seven starts are contracted. Every branch of this 26-state, 25-edge fragment is retained.}
 \Description{A controllable milestone transfer has two outcomes. One waits for approachingCrossing, completes transfers and starts, then hands control to controller state 3. The other transfers, brakes, waits for endOfTS, starts the monitors and hands control to state 1. Ranks decrease on every branch.}
 \label{fig:railcab-policy}
 \end{figure}

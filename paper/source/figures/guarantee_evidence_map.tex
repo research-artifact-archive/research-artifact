@@ -1,14 +1,14 @@
 \begin{table}[!htbp]
-\caption{Guarantees and their evidence. Requirement interpretations are distinct; source checks alone do not establish actual activation conformance.}
+\caption{Guarantee scopes and their premises. RQ2 reports validation coverage.}
 \label{tab:guarantee-evidence}
 \centering\small
 \begin{tabular}{@{}p{.18\linewidth}p{.40\linewidth}p{.36\linewidth}@{}}\toprule
-Scope & Established result & Remaining premise or boundary\\\midrule
-Game & Safe finite completion from all entries; matching target & Supplied successor/endpoint predicates (Theorem~\ref{thm:correctness})\\
-Invariant from start & Exact source language at 900 non-error cells in 138 lookup tables; direct PC2/GSM policy arguments & No benchmark-wide check of actual key/observation/fallback conformance\\
-Safe prior histories & \RSNewOccurrences{} NEW residual inclusions & Nonempty scopes unverified except one PC2 tuple; empty scopes pass vacuously\\
-From update entry & \VThreeRSUpdExact{} exact UPD initializations: 46 R1/89 R2 & Source guard/stage-fluent conditions; physical decoding remains unvalidated\\
-Execution & Handover within the entry's event rank & A1--A4; platform conformance and elapsed-time bounds unvalidated\\\bottomrule
+Scope & What follows & Additional premise or boundary\\\midrule
+Game & Safe finite completion for all entries/outcomes; matched handover & The supplied transition and endpoint rules (Theorem~\ref{thm:correctness})\\
+Invariant from start & Truth at activation and while active & Correct predicates/observations and initializer conformance; ACT below\\
+Safe prior histories & Continuations preserve obligations of the admitted safe histories & Residual inclusion; an empty history scope makes inclusion vacuous\\
+From update entry & UPD monitors reflect obligations from admission onward & Correct boundary state and entry interpretation; S3 gives sufficient conditions\\
+Execution & Handover within the entry's event rank; selected endpoint continues & A1--A4; no elapsed-time bound or guarantee of platform conformance\\\bottomrule
 \end{tabular}
-\par\smallskip{\footnotesize Cell's occupancy-based duty is proved in Section~\ref{sec:cell-activation-duty}. Whole-history obligations are not claimed: 39/126 PC2 entries admit a safe full prefix; 87 fail that check. Details: Technical Appendices~\ref{ta:history_checks} and~\ref{ta:lookup-act}.}
+\par\smallskip{\footnotesize Source checks alone do not establish actual activation conformance. Cell's occupancy duty is proved below; S3 treats stronger whole-history meaning separately.}
 \end{table}

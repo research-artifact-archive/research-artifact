@@ -44,11 +44,11 @@
 % Reproducible exploration order.
 
 \maketitle
-Read S1 for additional granularity and observation witnesses, S2 for implementation order, S3 for requirement-history proofs, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 starts with the fixed 27-contract comparison, then independent validation and constructed mechanisms. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
+Read S1 for additional granularity and observation witnesses, S2 for implementation order, S3 for requirement-history proofs, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 follows RQ1--RQ3: constructed mechanisms, independent validation, then the fixed 27-contract comparison. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
 
 \section{Granularity and observation witnesses}
 \label{supp:witnesses}
-The main paper gives the two completing paths and the local-versus-bulk argument. Here we tabulate its full closure, define the additional observation and requirement-boundary witnesses, and give their complete proofs. We also explain how the smaller executable fixtures relate to these contracts.
+The main paper gives the two completing paths and the local-versus-bulk argument. Here we tabulate its full closure, define the additional observation and requirement-boundary witnesses, and give their complete proofs. We also explain how the smaller executable fixtures relate to these contracts. In the two additional witnesses $\mathcal W_b$ and $\mathcal W_r$, unlisted controller transitions are empty, the four successor rules supply transfer and requirement operations, and every endpoint admits $idle$ and is deadlock-free.
 
 \subsection{Cell closure and the global-transfer embedding}
 \label{supp:cell-finite}
@@ -77,6 +77,20 @@ Retained policy states / edges & 13 / 11 & --\\
 Local counts are 30 for $m_A$, 26 for $m_B$, 20 for $j$, 15 for $\rho_A$, 10 for $\rho_B$, 12 for $s$, and 26 for $t$. Twelve safe-to-unsafe buckets remain visible: eight $m_A$ edges violate inspection and four $j$ edges violate the still-active old requirement. The holder monitor never reaches error. Bulk counts are 5 for each move, 2 for $s$, 4 for $t$, and zero for inspection and transfer. The primitives and omitted-transition conventions determine this census; these counts are not additional rules.
 
 \subsection{Observation-dependent choice}
+\paragraph{Complete input.}
+$\Sigma_{\mathrm{N}}=\{idle,u,a,b,d_A,d_B\}$; only $u$ is uncontrollable.
+The old plant has states $\{w,a_0,b_0,a_1,b_1\}$, initially $w$, and exactly the non-idle transitions
+$w\xrightarrow{u}a_0$, $w\xrightarrow{u}b_0$, $a_0\xrightarrow{a}a_1$, $b_0\xrightarrow{b}b_1$, $a_1\xrightarrow{d_A}w$, and $b_1\xrightarrow{d_B}w$.
+The new plant has states $\{x,y\}$, initially $x$, with $x\xrightarrow{d_A}y$ and $y\xrightarrow{d_B}x$.
+Every old and new plant state has an $idle$ self-loop; there are no other plant transitions.
+$g=\{(a_1,x),(b_1,y)\}$, $\SigmaU=\{\rho\}$, $\prec=\emptyset$.
+One-state $C^o/C^n$ loop on all six ordinary labels/$\{idle,d_A,d_B\}$, respectively.
+All requirement, monitor and $\iota$ families are empty.
+$Q_0=\{((o,s),(),\{\rho\}):s\in\{w,a_0,b_0,a_1,b_1\}\}$;
+$Z_{load}=\{(x,c_n),(y,c_n)\}$. Goals are the two new states with empty $P$; $\kappa$ appends $c_n$.
+In $\mathcal W_b$, both branch paths are admitted by $C^o$, and $d_A$ reaches $y$ from the new initial $x$, establishing the stated entry and load sets.
+
+\paragraph{Policy and fixed-list obstruction.}
 In $\mathcal W_b$, all five old component states are reachable under the permissive endpoint controller. The policy waits at $w$, permits $a$ at $a_0$ and $b$ at $b_0$, and transfers at $a_1,b_1$. Both outcomes of $u$ are retained. Ranks $3,2,1,0$ by distance to the compatible new endpoint certify all five roots.
 
 Consider any fixed finite list of controllable events, with uncontrollables accepted without advancing the list position. The environment can take $u$ at $w$ before the next listed controllable. Its two outcomes leave the same list position at $a_0$ and $b_0$. Any finite sequence of $idle$ heads changes neither component state; an infinite sequence would itself fail completion. The next non-idle head is one of $a,b,d_A,d_B,\rho$. At $a_0$, only $a$ among these is enabled; at $b_0$, only $b$ is enabled. Thus no common head can complete both outcomes. An exhausted list also fails at these non-goals. This proves failure for every such fixed list from the root $w$, and therefore for all-root admission.
@@ -84,6 +98,20 @@ Consider any fixed finite list of controllable events, with uncontrollables acce
 The executable branching fixture tests the unrestricted policy and two all-time safety restrictions, $[]\neg b$ and $[]\neg a$. Each restriction has a losing branch and hence gives one of the two observed LOSS jobs. These restrictions are concrete obstruction checks; the universal statement about fixed lists follows from the head argument above. In the neutral fixture, both resolving events are available after each branch, so the unrestricted and both restricted tests win.
 
 \subsection{Requirement interleaving}
+\paragraph{Complete input.}
+All events controllable; $\Sigma_{\mathrm{N}}=\{idle,align\}$, $g=\{(r,n)\}$,
+$\SigmaU=\{\rho,t,s\}$, $t=\ustop{r_o},s=\ustart{r_n}$, $\prec=\emptyset$.
+The old plant has states $\{w,r\}$, initially $w$, with $w\xrightarrow{align}r$ and an $idle$ self-loop at each state. The new plant has the single initial state $n$ and an $idle$ self-loop. These are all plant transitions.
+Each monitor has initial safe state $k$ and absorbing error state $E$; $align$ takes $k$ to $E$, and every other label self-loops at $k$.
+One-state $C^o$ has alphabet $\{idle,align\}$ but only an $idle$ loop; $C^n$ has only an $idle$ loop.
+$R^{old/new/upd}=\{r_o\}/\{r_n\}/\emptyset$;
+$\operatorname{dom}\iota_{r_n}=\{(o,r),(n,n)\}$, $\iota_{r_n}=k$. Its supplied residual forbids $align$ after activation and erases ordinary events before activation (exact RS).
+$\Reach(\mathsf{CL}^{\mathrm{old}})=\{(w,c_o,k)\}$,
+$Q_0=\{((o,w),(k,\bot),\{\rho,t,s\})\}$;
+$Z_{load}=\Reach(\mathsf{CL}^{\mathrm{new}})=\{(n,c_n,k)\}$. The unique goal is $((n,n),(\bot,k),\emptyset)$; $\kappa$ appends $c_n$.
+In $\mathcal W_r$, the old controller disables $align$, establishing its singleton entry set.
+
+\paragraph{Policy and interleaving obstruction.}
 The old endpoint of $\mathcal W_r$ stays at $w$ using $idle$; its controller disables the controllable $align$ to satisfy the old monitor. The new endpoint at $n$ is likewise safe and deadlock-free. Update admission drops the old controller while retaining the old monitor. The sequence
 \[
   \ustop{r_o};\ align;\ \ustart{r_n};\ \rho
@@ -95,29 +123,6 @@ Every completion must execute $\rho$, which requires the old ready state. Only $
 The executable separation fixture is a related test input, not the same transition system as $\mathcal W_r$. It requires $startNewSpec\Rightarrow Aligned$ with persistent $Aligned$ set by $align$ and reset at entry. Its NEW monitor instead uses the frontend's current-fluent lookup: the forbidden-event observer $align_a$ must be false at activation. An ordinary $align$ sets both $Aligned$ and $align_a$; $idle$ clears $align_a$ while preserving $Aligned$, and transfer/lifecycle events preserve these observer values. Consequently $stop;align;idle;\rho;start$ is a source-derived five-step winning witness. The saved separation WIN has six certificate states and maximum rank five; the logs contain only transition summaries, so they do not establish the returned policy's exact placement of transfer. The four-step witness above belongs only to the abstract $\mathcal W_r$.
 
 Both executable inputs retain the interval requirement that persistent alignment hold when new requirement starts. Neutral is not removal of this requirement. Both actual separation endpoints have one state and only $idle$ loops. In the actual neutral model, the old endpoint has one $idle$ state; the new endpoint has two states, $NEW\_WAIT\xrightarrow{align}NEW\_READY$, with $idle$ at both. Its OLD/NEW monitors forbid $bad$, and NEW activation requires $bad_a=false$. It therefore permits transfer and alignment before the requirement block. The neutral full/block certificates have maximum ranks five/four; the full policy's extra step is not identified from the summary. The executable block forbids transfer as well as ordinary events between requirement operations. Its separation obstruction still follows because old requirement prevents alignment before stop and the interval requirement prevents starting before alignment. No trace equivalence or monitor-state isomorphism between the abstract and executable encodings is claimed.
-
-\subsection{Complete parameters for the smaller witnesses}
-\textbf{$\mathcal W_b$.} $\Sigma_{\mathrm{N}}=\{idle,u,a,b,d_A,d_B\}$; only $u$ is uncontrollable.
-The old plant has states $\{w,a_0,b_0,a_1,b_1\}$, initially $w$, and exactly the non-idle transitions
-$w\xrightarrow{u}a_0$, $w\xrightarrow{u}b_0$, $a_0\xrightarrow{a}a_1$, $b_0\xrightarrow{b}b_1$, $a_1\xrightarrow{d_A}w$, and $b_1\xrightarrow{d_B}w$.
-The new plant has states $\{x,y\}$, initially $x$, with $x\xrightarrow{d_A}y$ and $y\xrightarrow{d_B}x$.
-Every old and new plant state has an $idle$ self-loop; there are no other plant transitions.
-$g=\{(a_1,x),(b_1,y)\}$, $\SigmaU=\{\rho\}$, $\prec=\emptyset$.
-One-state $C^o/C^n$ loop on all six ordinary labels/$\{idle,d_A,d_B\}$, respectively.
-All requirement, monitor and $\iota$ families are empty.
-$Q_0=\{((o,s),(),\{\rho\}):s\in\{w,a_0,b_0,a_1,b_1\}\}$;
-$Z_{load}=\{(x,c_n),(y,c_n)\}$. Goals are the two new states with empty $P$; $\kappa$ appends $c_n$.
-\par\textbf{$\mathcal W_r$.} All events controllable; $\Sigma_{\mathrm{N}}=\{idle,align\}$, $g=\{(r,n)\}$,
-$\SigmaU=\{\rho,t,s\}$, $t=\ustop{r_o},s=\ustart{r_n}$, $\prec=\emptyset$.
-The old plant has states $\{w,r\}$, initially $w$, with $w\xrightarrow{align}r$ and an $idle$ self-loop at each state. The new plant has the single initial state $n$ and an $idle$ self-loop. These are all plant transitions.
-Each monitor has initial safe state $k$ and absorbing error state $E$; $align$ takes $k$ to $E$, and every other label self-loops at $k$.
-One-state $C^o$ has alphabet $\{idle,align\}$ but only an $idle$ loop; $C^n$ has only an $idle$ loop.
-$R^{old/new/upd}=\{r_o\}/\{r_n\}/\emptyset$;
-$\operatorname{dom}\iota_{r_n}=\{(o,r),(n,n)\}$, $\iota_{r_n}=k$. Its supplied residual forbids $align$ after activation and erases ordinary events before activation (exact RS).
-$\Reach(\mathsf{CL}^{\mathrm{old}})=\{(w,c_o,k)\}$,
-$Q_0=\{((o,w),(k,\bot),\{\rho,t,s\})\}$;
-$Z_{load}=\Reach(\mathsf{CL}^{\mathrm{new}})=\{(n,c_n,k)\}$. The unique goal is $((n,n),(\bot,k),\emptyset)$; $\kappa$ appends $c_n$.
-\par Unlisted controller transitions are empty. The four successor rules supply transfer and requirement operations. In $\mathcal W_b$, both branch paths are admitted by $C^o$, and $d_A$ reaches $y$ from the new initial $x$, establishing the stated entry and load sets. In $\mathcal W_r$, the old controller disables $align$, establishing its singleton entry set. Every endpoint admits $idle$ and is deadlock-free.
 
 \section{Finite games, search invariants, and certificates}
 \label{supp:search}
@@ -317,35 +322,17 @@ Technical Appendix~\ref{taDoc-ta:execution_proof} proves conditional trace lifti
 \label{supp:tables}
 To follow the main paper, use Section~\ref{supp:vthree-mechanisms} for granularity comparisons (RQ1), Section~\ref{supp:independent-checks} for independent checks (RQ2), and Sections~\ref{supp:fixed-budget} and~\ref{supp:detailed-diagnostics} for fixed-budget costs and policy diagnoses (RQ3). Auxiliary campaigns, extended budgets and Legacy references follow in separate blocks. Constructed pairs, application contracts, checker jobs and single diagnostic runs have different purposes and denominators and are not pooled. Archived RQ1/RQ2/RQ4 names in files retain their historical meanings; each block identifies its current role.
 
-\subsection{Fixed-budget comparison on the 27 adapted contracts}
-\label{supp:fixed-budget}
-This is the application comparison for current RQ3. All 135 instance--method cells are retained, including the Legacy reference column; same-game comparisons concern the four FG constructions. The outcome grid, absolute solver times, and all completed Lazy/Direct-Full pairs appear first. Complete metric panels and JVM-time details follow in Section~\ref{supp:detailed-diagnostics}.
+\subsection{Constructed operational mechanisms and controls}
+\label{supp:vthree-mechanisms}
+The E6 input generators construct finite abstractions motivated by documented staged-replacement practices; they are not deployment measurements or replications of production incidents. The final index contains \VThreeESixTrials{} terminal trials (\VThreeESixWin{} WIN, \VThreeESixLoss{} LOSS, \VThreeESixTO{} TO), including \VThreeESixMacTrials{} Mac and \VThreeESixXeonTrials{} Xeon trials. The main comparison population is \VThreeESixMainPairs{} pairs; scale extensions, assumption controls, E4 references and follow-up budgets do not increase that denominator. Full model definitions, generated inputs, prior failed versions, independent checks and primary-source scope are retained under \path{experiments/witness_20260929/e6/}.
 
-The generated tables report all RQ3 model/method cells and metrics. Timing summaries require five valid, decision-consistent completions; other groups retain their statuses. Mac pilot and Industry/R1 diagnostic measurements are excluded from Xeon timing comparisons. The controlled-family table reports first-trial structure only.
-The five Legacy N/M (capture cap) cells are interrupted before synthesis by the author-side \texttt{M9MtsSnapshot} instrumentation's fixed 250,000-state cap. They give no evidence of Legacy capability or solver failure. Saved process statuses remain unchanged; N/M is an evidence-based display annotation.
+Rolling models a fixed number of replicas and a readiness floor. Updating a batch introduces a finite startup gap; the checked threshold concerns this abstraction, not arbitrary asynchronous deployment. Canary adds observed set-valued healthy/broken outcomes and recovery: controls with only healthy outcomes win even when merged, while removing recovery loses under both granularities. Policy's opposing requirement-boundary orders separate individual from globally merged boundaries. DB-Rolling models secondary-first replacement with a retained availability requirement; the no-slack control loses under both granularities. Rolling+Audit has only one old-stop/new-start pair, so boundary merging remains WIN; transfer merging loses. Its displayed six-step path comes from the Full policy, not Lazy's returned maximum rank. Threads models backpressure versus saturation; the former wins both ways and the latter loses both ways. These null controls prevent reading every staged update as a granularity separation.
 
-\input{build/generated/contract-model-table.tex}
+\paragraph{PC2-Rolling: measured and checked facts.}
+The fine contract returns WIN on the two-arm physical plant with a calibration phase. Its exported game has \VThreeESixPCTwoFineStates{} discovered states, \VThreeESixPCTwoCertificateStates{} policy states and \VThreeESixPCTwoQueries{} queries; the Xeon counters agree with the saved Mac result. A separate enumeration of the old closed-loop product checks that both raw transfer domains contain every reachable old state. Their product nevertheless puts both arms in calibration, immediately violating the interval availability requirement. Ordinary old-product moves preserve the enumerated invariant, and any completing joint-transfer policy must eventually take that violating transfer; this gives a structural impossibility argument independently of the unresolved solver. The fine Lazy Xeon trial completes in \VThreeESixPCTwoXeonJVMSec{} total JVM seconds; the merged Lazy and fine Direct-Full trials both time out at \VThreeESixPCTwoCap{} seconds with a \VThreeESixPCTwoHeap{} GiB heap. Earlier Mac timeouts remain separate records. Raw exit codes and runtime class hashes are unavailable for these Xeon exports and are not reconstructed. The saved invariant check is not a claim that the larger game was independently enumerated in full.
 
-\begin{table}[ht]
-\centering\small
-\caption{Full main-campaign outcome grid for all 135 instance--method cells.}
-\input{build/generated/rq3-status-grid.tex}
-\end{table}
-\par\medskip
-
-\begin{table}[!htbp]
-\caption{RQ3 solver medians in seconds: Lazy / Direct-Full for all 27 supplied contracts. Every numeric median uses five completed runs.}
-\label{tab:rq3-absolute}
-\centering\small
-\input{figures/absolute_times.tex}
-\end{table}
-
-\paragraph{Completed-pair exploration counts.}
-The following table retains all completed Lazy/Direct-Full pairs from the same-game campaign. Counts come from the first trial; solver times are medians of five valid runs. Unresolved instances remain in the complete outcome tables above and are not imputed here.
-\begin{table}[htbp]\centering\small
-\caption{All 14 completed application pairs, with exploration and cost.}
-\input{figures/rq3_workload14.tex}
-\end{table}
+\paragraph{Inherited-contract granularity transformations (E1).}
+E1 merges all transfer events, all old-stop/new-start events, or both on each Base/R1 inherited contract; R2 is excluded because its interval monitors name individual commands. These are contract transformations rather than encodings of the DUCS objective. All \VThreeEOneTrials{} transformations finish with \VThreeEOneChanged{} changes in decision. The raw physical transfer relations are total. The inherited models omit the explicit post-transfer startup/calibration availability phase used in the constructed examples. These observations explain why those particular mechanisms are absent; they do not constitute a theorem that every total-transfer contract permits simultaneous updating. Requirements can still reject the joint successor, as PC2-Rolling above demonstrates.
 
 \clearpage
 \subsection{Independent checks for the contract and returned policies}
@@ -406,18 +393,35 @@ Both WIN certificates contain two states and one transfer edge, with maximum ran
 
 The saved \path{evidence/load_target_selector_demo/verify_saved.py} parses the fixture's restricted FSP independently, constructs the endpoint products and a Python least fixed point, and compares all exported edges, goals, physical tuples, empty monitor maps, pending transfer, rank and handover. All comparisons pass, as does Java's separate exhaustive construction. There are no monitors, initializer obligations, uncontrollable events or precedence edges. These checks do not validate those features or deployment behavior and are separate from the original 92-job suite and all performance statistics. The directory retains all three inputs, commands, complete game exports, WIN endpoint bundles and verification outputs; no attempt was repeated.
 
-\clearpage
-\subsection{Constructed operational mechanisms and controls}
-\label{supp:vthree-mechanisms}
-The E6 input generators construct finite abstractions motivated by documented staged-replacement practices; they are not deployment measurements or replications of production incidents. The final index contains \VThreeESixTrials{} terminal trials (\VThreeESixWin{} WIN, \VThreeESixLoss{} LOSS, \VThreeESixTO{} TO), including \VThreeESixMacTrials{} Mac and \VThreeESixXeonTrials{} Xeon trials. The main comparison population is \VThreeESixMainPairs{} pairs; scale extensions, assumption controls, E4 references and follow-up budgets do not increase that denominator. Full model definitions, generated inputs, prior failed versions, independent checks and primary-source scope are retained under \path{experiments/witness_20260929/e6/}.
+\subsection{Fixed-budget comparison on the 27 adapted contracts}
+\label{supp:fixed-budget}
+This is the application comparison for current RQ3. All 135 instance--method cells are retained, including the Legacy reference column; same-game comparisons concern the four FG constructions. The outcome grid, absolute solver times, and all completed Lazy/Direct-Full pairs appear first. Complete metric panels and JVM-time details follow in Section~\ref{supp:detailed-diagnostics}.
 
-Rolling models a fixed number of replicas and a readiness floor. Updating a batch introduces a finite startup gap; the checked threshold concerns this abstraction, not arbitrary asynchronous deployment. Canary adds observed set-valued healthy/broken outcomes and recovery: controls with only healthy outcomes win even when merged, while removing recovery loses under both granularities. Policy's opposing requirement-boundary orders separate individual from globally merged boundaries. DB-Rolling models secondary-first replacement with a retained availability requirement; the no-slack control loses under both granularities. Rolling+Audit has only one old-stop/new-start pair, so boundary merging remains WIN; transfer merging loses. Its displayed six-step path comes from the Full policy, not Lazy's returned maximum rank. Threads models backpressure versus saturation; the former wins both ways and the latter loses both ways. These null controls prevent reading every staged update as a granularity separation.
+The generated tables report all RQ3 model/method cells and metrics. Timing summaries require five valid, decision-consistent completions; other groups retain their statuses. Mac pilot and Industry/R1 diagnostic measurements are excluded from Xeon timing comparisons. The controlled-family table reports first-trial structure only.
+The five Legacy N/M (capture cap) cells are interrupted before synthesis by the author-side \texttt{M9MtsSnapshot} instrumentation's fixed 250,000-state cap. They give no evidence of Legacy capability or solver failure. Saved process statuses remain unchanged; N/M is an evidence-based display annotation.
 
-\paragraph{PC2-Rolling: measured and checked facts.}
-The fine contract returns WIN on the two-arm physical plant with a calibration phase. Its exported game has \VThreeESixPCTwoFineStates{} discovered states, \VThreeESixPCTwoCertificateStates{} policy states and \VThreeESixPCTwoQueries{} queries; the Xeon counters agree with the saved Mac result. A separate enumeration of the old closed-loop product checks that both raw transfer domains contain every reachable old state. Their product nevertheless puts both arms in calibration, immediately violating the interval availability requirement. Ordinary old-product moves preserve the enumerated invariant, and any completing joint-transfer policy must eventually take that violating transfer; this gives a structural impossibility argument independently of the unresolved solver. The fine Lazy Xeon trial completes in \VThreeESixPCTwoXeonJVMSec{} total JVM seconds; the merged Lazy and fine Direct-Full trials both time out at \VThreeESixPCTwoCap{} seconds with a \VThreeESixPCTwoHeap{} GiB heap. Earlier Mac timeouts remain separate records. Raw exit codes and runtime class hashes are unavailable for these Xeon exports and are not reconstructed. The saved invariant check is not a claim that the larger game was independently enumerated in full.
+\input{build/generated/contract-model-table.tex}
 
-\paragraph{Inherited-contract granularity transformations (E1).}
-E1 merges all transfer events, all old-stop/new-start events, or both on each Base/R1 inherited contract; R2 is excluded because its interval monitors name individual commands. These are contract transformations rather than encodings of the DUCS objective. All \VThreeEOneTrials{} transformations finish with \VThreeEOneChanged{} changes in decision. The raw physical transfer relations are total. The inherited models omit the explicit post-transfer startup/calibration availability phase used in the constructed examples. These observations explain why those particular mechanisms are absent; they do not constitute a theorem that every total-transfer contract permits simultaneous updating. Requirements can still reject the joint successor, as PC2-Rolling above demonstrates.
+\begin{table}[ht]
+\centering\small
+\caption{Full main-campaign outcome grid for all 135 instance--method cells.}
+\input{build/generated/rq3-status-grid.tex}
+\end{table}
+\par\medskip
+
+\begin{table}[!htbp]
+\caption{RQ3 solver medians in seconds: Lazy / Direct-Full for all 27 supplied contracts. Every numeric median uses five completed runs.}
+\label{tab:rq3-absolute}
+\centering\small
+\input{figures/absolute_times.tex}
+\end{table}
+
+\paragraph{Completed-pair exploration counts.}
+The following table retains all completed Lazy/Direct-Full pairs from the same-game campaign. Counts come from the first trial; solver times are medians of five valid runs. Unresolved instances remain in the complete outcome tables above and are not imputed here.
+\begin{table}[htbp]\centering\small
+\caption{All 14 completed application pairs, with exploration and cost.}
+\input{figures/rq3_workload14.tex}
+\end{table}
 
 \clearpage
 \subsection{Detailed fixed-budget measurements and policy diagnoses}
@@ -426,9 +430,18 @@ The metric panels complete the fixed-budget record from Section~\ref{supp:fixed-
 
 \subsubsection{Complete metric panels and completion ranks}
 \begingroup
-% Keep the generated campaign heading with its first table; retain later breaks.
+% Keep the first panel with its introduction. Pair queries/outcomes and
+% linked states/transitions at the original font size; retain all table data.
+\newcount\FGMetricPanel
+\FGMetricPanel=0
 \let\FGClearPage\clearpage
-\def\clearpage{\let\clearpage\FGClearPage}
+\def\clearpage{%
+  \advance\FGMetricPanel by 1
+  \ifnum\FGMetricPanel=1\relax
+  \else\ifnum\FGMetricPanel=3\par\bigskip
+  \else\ifnum\FGMetricPanel=7\par\bigskip
+  \else\FGClearPage
+  \fi\fi\fi}
 The output-state and output-transition panels below count the linked old--update--new controller (saved field \path{output_controller_states}), not the update certificate's rank domain (\path{certificate_states}). Lazy's 25 WIN contracts have 15--1,260 linked states and 8--1,071 certificate states. Linking includes reachable old/new closed-loop states and non-goal update states, identifying goals with their selected new states. Neither quantity is the explored game size.
 
 \IfFileExists{build/generated/rq3-supplement.tex}{\input{build/generated/rq3-supplement.tex}}{\par\emph{Xeon measurements pending. Run the result renderer to materialize the table schema.}}
@@ -474,7 +487,8 @@ The two qualitative illustrations are separate, single executions on macOS/ARM64
 
 Base exports 115 certificate states, 117 buckets, 118 outcomes, 22 entries, two reached goals and maximum rank 21; R1 exports 44 states, 46 buckets, 46 outcomes, 22 entries, one goal and maximum rank 33. Both have 71 new endpoint states. These structural fields agree with the saved campaign. Full realized-controller transition counts differ from certificate counts and are not substituted for them.
 
-The extracted Base fragment begins at certificate state M69, rank 13, reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. One \texttt{reconfigure\_MILESTONES} bucket has two outcomes: M15 (new ENDOFTS, rank 11) and M19 (new AC, rank 12). M15 observes uncontrollable \texttt{approachingCrossing} to M30 (AC, rank 10), then takes three transfers and seven starts to M20 (rank 0, load new controller state 3). M19 instead takes the three transfers to M16 (rank 9), controllable \texttt{brake} to M0 (rank 8), uncontrollable \texttt{endOfTS} to M14 (rank 7), then seven starts to M7 (rank 0, load state 1). M19 and M30 have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values, so they are distinct states. The expanded descendant fragment has 26 states and 25 edges; no branch is omitted.
+Figure~\ref{fig:railcab-policy} shows the entire descendant fragment of Base state M69 (rank 13), reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. Both outcomes of one transfer and their distinct endpoint continuations are retained. AC,T and AC,F have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values; they must not be merged. The fragment has 26 states and 25 edges, with state identifiers and every expanded edge in \path{policy-fragment-edges.csv}.
+\input{figures/railcab_policy_fragment.tex}
 
 Each contracted transfer block uses \texttt{ANOTHER\_REQUEST}, \texttt{REQUEST\_ATOMIC}, then \texttt{TURNS}. Each start block activates, in order, \texttt{P\_BRAKE\_DURING\_LASTBRAKE}, \path{P_BRAKE_IF_SOMETHING_BAD}, \path{P_CHECK_STATUS_AFTER_APPROACHING_CROSSING}, \path{P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE}, \path{P_EBRAKE_DURING_ELASTBRAKE}, \path{P_EBRAKE_IF_SOMETHING_BAD}, and \texttt{P\_NEW\_NOT\_CRASH}. Every internal contracted state has exactly one bucket and one outcome. Extraction verifies all 118 rank decreases and both component/new-monitor matches with the fixed endpoint.
 
@@ -518,7 +532,6 @@ Each input has one old entry. Separation's endpoints allow only $idle$; neutral'
 
 The source-derived sequence $stop,align,idle,\rho,start$ matches the saved six-state certificate and maximum rank five. Old requirement prevents $align$ before $stop$, so a contiguous block cannot complete. Neutral permits $\rho,align$ before the block. Its block/free runs return ranks four/five; ranks need not be minimal. These are source-derived witnesses and saved certificate counts, not recovered execution traces.
 
-\clearpage
 \subsubsection{Granularity and construction ablations}
 \label{supp:vthree-ablations}
 The E1 transformations are described with the granularity evidence above. The remaining E4/E5 variants and E2 construction comparison are additional campaigns; the generated tables also preserve the full E1 and E6 series indices without expanding the main comparison populations.
@@ -655,7 +668,7 @@ $T_{\rm Empty}$ & 2,312 / 6,615 & 2,312 / 6,615\\\bottomrule
 Two initial adapter failures are preserved: synthesis produced a controller, but an incorrect Java type check rejected the outer composite. Correcting only that adapter yielded the two successful reference-tool cells. The final adapter additionally classifies an explicit no-controller result wrapped in a composition exception; four classification assertions check that branch. These Mac checks supply no performance evidence. The separate Xeon campaign has 21 conditions per tool (15 supplied targets and six named empty-transition alternatives); its returned results remain outside the main RQ3 table.
 
 \paragraph{Returned legacy-fidelity reference experiment.}
-The separate Windows campaigns compare the lab-maintained original-source build and this fork on mechanically generated monolithic conditions, with the three entry-fluent resets aligned. They remain reference tools with different contracts from FG; none of these conditions is a new RQ3 cell. Table~\ref{tab:legacy-fidelity} reports their saved summaries and per-trial logs, including all fork exceptions. Independently regenerated summaries match the returned comparison CSVs byte-for-byte; raw process statuses and reproduction outputs are retained in the artifact.
+These Windows campaigns compare the lab build and fork on mechanically generated monolithic conditions with all three entry-fluent resets aligned. Their contracts differ from FG; the results remain outside RQ3. Table~\ref{tab:legacy-fidelity} retains summaries, per-trial records and fork exceptions. Independently regenerated summaries match the returned CSVs byte-for-byte; raw statuses and reproduction outputs remain in the artifact.
 
 \input{build/generated/legacy-fidelity-reference.tex}
 
@@ -691,7 +704,7 @@ The public anonymous repository contains the full derived source tree, saved RQ1
 Work & Native C/R; T; Res/P & Roots/O; progress premises & Artifact and construction\\
 \midrule
 DUCS (2016, 2020)
-& One global old-stop/new-start pair, with distinct events; set-valued global $R$; stages in $E'$; $T$ constrains order (Secs.~4.2--4.3)
+& One global old-stop/new-start pair, with distinct events; partial, set-valued global $R$; optional stages in $E'$; $T$ constrains order (Secs.~4.2--4.3)
 & All old states via total $H$; all outcomes; eventual update events after hotSwap; legal and deadlock-free (Defs.~4.1--4.3)
 & Update controller; FLTL control reduction and MTSA synthesis\\
 GR(1) bridge (2022)
@@ -700,7 +713,7 @@ GR(1) bridge (2022)
 & New controller $C_2$ and symbolic reachability bridge; switching bookkeeping; winning set $W$ or current-state early stop (Sec.~4)\\
 DCS (2016)
 & Deterministic component LTSs; safety/co-safety event goals
-& Initial product state; safety and eventual goal occurrence on every closed-loop trace; mixed states treated as UC
+& Initial product state; safety and eventual goal occurrence on every closed-loop trace; states enabling controllable and UC events treated as UC
 & Controller or failure; heuristic OTF composition, deferred control alternatives and backward propagation (Secs.~I, III--IV)\\
 OTF-DCS (2023)
 & Component automata, marked/illegal states and control partition
