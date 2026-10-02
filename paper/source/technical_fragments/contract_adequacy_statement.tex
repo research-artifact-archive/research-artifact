@@ -1,6 +1,6 @@
 \subsection{Why the Generated State Represents the Contract}
 \label{sec:contract-adequacy}
-A \emph{local update history} $\ell=z(a_1,o_1)\cdots(a_n,o_n)$ records the old entry, events and realized local successors. Components follow their active-version transitions and transfers; monitors fold their declared active intervals. Commands obey precedence, guards and UC quiescence. A source policy selects controllable labels, retains every UC and permitted outcome, and safely completes every maximal history at a matching quiescent target. Technical Appendix~\ref{ta:source_synthesis} gives these source operations independently of the game.
+A \emph{local update history} $\ell=z(a_1,o_1)\cdots(a_n,o_n)$ records the old entry, events and realized local successors. Components follow their active-version transitions and transfers; monitors fold their declared active intervals. Commands obey precedence, guards and UC quiescence. A source policy selects controllable labels, retains every UC and permitted outcome, and safely completes every maximal history at a matching quiescent target. Technical Appendix~\ref{ta:source_synthesis} defines these contract operations on histories.
 
 \begin{proposition}[Adequacy of the generated update game]
 \label{prop:contract-adequacy}

@@ -53,7 +53,7 @@ An eligible contract satisfies the finiteness, typing, totality and non-error co
 An update state $q=(\xi,\mu,P)$ records each component's version/state $\xi(i)=(v,s)$ with $s\in S_{e_i^v}$, each monitor's state $\mu(t_r)\in M_r\cup\{\bot\}$ ($\bot$ means inactive), and pending commands $P\subseteq\SigmaU$.
 Here $\rho_i\in P$ exactly when component $i$ is old. Old monitors remain active until their stop leaves $P$; new monitors become active when their start leaves $P$; update monitors are always active. 
 
-Admission $\Init(z)$ copies $z$'s component and old-monitor states. It initializes interval monitors through $\iota_r(\xi)$, leaves new monitors inactive and sets $P=\SigmaU$. The policy replaces $C^{\mathrm{old}}$, discarding its state and scheduling restrictions; undeclared objectives, including old liveness, are not preserved. The entry set is
+Admission $\Init(z)$ copies $z$'s component and old-monitor states, installs interval initializers, leaves new monitors inactive and sets $P=\SigmaU$. The update policy replaces $C^{\mathrm{old}}$ and its scheduling restrictions. Declared old monitors remain until their stops; undeclared objectives, including old liveness, are not preserved. Duties needed throughout belong in interval monitors. The entry set is
 \begin{equation}
  Q_0=\{\Init(z)\mid
  z\in\Reach(\mathsf{CL}^{\mathrm{old}})\}.

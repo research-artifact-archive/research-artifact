@@ -193,8 +193,9 @@ Every subset is reached by performing exactly its transfers in some order. Full 
 
 \section{Monitor intervals and conditional trace lifting}
 \label{supp:runtime}
+The main paper proves the activation-invariant criterion, supported by the source checks in Technical Appendix~\ref{taDoc-ta:lookup-act}. Here we develop residual-history meanings and their frontend and execution premises.
 \subsection{Activation histories and residual meanings}
-The supplied prefix-closed $\mathsf{SafePref}_r$ defines safe histories. Let $\mathsf H_r(\xi)$ contain the admissible activation histories under the declared requirement meaning, projected by $\mathsf{obs}_r$. The history-inclusive interpretation below admits all old-loop and update-prefix histories; the alternative A and E interpretations specify different scopes. A new requirement's activation history includes its start boundary once; initialization supplies the residual after that boundary, and online monitoring does not consume the label again. Entry consumes no symbol. Define $\mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}\{w:hw\in\mathsf{SafePref}_r\}$ and $\mathcal L_r(m)=\{w:\eta_r^*(m,w)\notin F_r\}$. Residual-sound initialization requires
+For prefix-closed requirement language $\mathsf{SafePref}_r$, let $\mathsf H_r(\xi)$ be the declared activation histories projected by $\mathsf{obs}_r$. NEW checks use safe prior histories (A); UPD checks begin their reference at entry (E). Whole-history meaning H is a separate diagnostic. NEW activation histories include start once: initialization supplies the post-start residual and online monitoring consumes later events. Entry consumes no symbol. Define $\mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}\{w:hw\in\mathsf{SafePref}_r\}$ and $\mathcal L_r(m)=\{w:\eta_r^*(m,w)\notin F_r\}$. Residual-sound initialization requires
   \[
     \mathcal L_r(\iota_r(\xi))\subseteq\mathcal C_r(\xi)
     \quad(\xi\in\operatorname{dom}\iota_r)
@@ -203,32 +204,16 @@ The supplied prefix-closed $\mathsf{SafePref}_r$ defines safe histories. Let $\m
 with equality for an exact residual and strict inclusion for a conservative one. Distinct activation histories may require finite history bits in components and transfers. RS is supplied external interpretation evidence relative to the given requirement and observation meanings. For $r\in R^{\mathrm{upd}}$, $\operatorname{dom}\iota_r$ includes every reachable old component state.
 
 
-\paragraph{Actual frontend initialization.}
+\subsection{What the frontend initializes}
 The measured frontend has two distinct paths. For each NEW safety formula, it constructs the referenced fluent observers, including implicit action fluents. Observers track their initiating/terminating events, and unrelated events stutter. A product traversal associates each reachable observer vector with a compiled safety-monitor state. Multiple non-error monitor states for one vector are accepted only if their safe-continuation languages agree; the least state identifier is retained. An error association takes precedence. Crucially, the table-building traversal does not expand error monitor states, so it does not check how observer values evolve after a violation.
 
 \path{MtsaRevisedOtfDucsAdapter.newActivation} selects the observer indices belonging to that NEW formula (identity first, then a unique-name match), extracts their states from the augmented component tuple, and looks up the signature. A missing signature, an unknown monitor state or an error excludes the tuple. If observer indices are empty or the mapping is absent, it falls back to the monitor's initial state. Candidate tuples are the physical closure of all old endpoint roots under ordinary events and component transfers, allowing mixed versions. $\operatorname{dom}\iota_r$ retains exactly the non-error lookup entries; this does not prove past-history safety. The observer vector is stored with component zero, follows ordinary events in either version even while the NEW monitor is inactive, and is preserved by component transfers. At start, existing active monitors advance and the NEW monitor is installed from the lookup; it does not consume that start again.
 
 For UPD, \texttt{compileTesters} instead computes a constant boundary state by taking the raw monitor from state zero through \texttt{hotSwapIn}, or stuttering if that label is absent. \texttt{updateActivation} assigns this same non-error state to every reachable old physical tuple; an error boundary is rejected. UPD has no fluent-based activation lookup. The symbolic contract allows both forms as supplied $\iota_r$ maps, but the fluent-determination lemma below applies to an actual initializer only after its state agrees with the history-derived state. Our coverage CSV records the initializer mode separately. Source locations (including \path{UpdatingControllersDefinition}, which builds the table) and extraction commands are in the artifact's \path{experiments/rs_coverage/README.md}.
 
-\paragraph{Interpretation H: history-inclusive.}
-For this coverage audit, $\mathsf{obs}_r$ retains the events defining the referenced fluents, independently of the active component version. Run the requirement monitor from $m_r^0$ on the whole projected history before activation and its continuation. With absorbing error states this gives
-\[
- \mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}
- \mathcal L_r\bigl(\eta_r^*(m_r^0,h)\bigr).
-\]
-H counts violations before activation. If an admitted history reaches ERROR, its continuation language is empty; a non-error initializer accepts the empty suffix and cannot satisfy RS at that activation. We retain the H check as a diagnostic and assert no benchmark RS guarantee under H. The guarantee sought below uses A for NEW and E for UPD; neither interpretation changes the compiled game or any saved synthesis decision. A lookup initializer uses only the current referenced fluent-observer vector $f(\xi)$, writing $\iota_r(\xi)=\sigma_r(f(\xi))$. It can forget prior violations or pending obligations. The actual new- and update-requirement frontend paths are distinguished above.
+A lookup initializer uses only the current referenced fluent-observer vector $f(\xi)$, writing $\iota_r(\xi)=\sigma_r(f(\xi))$. It can forget prior violations or pending obligations. The actual new- and update-requirement frontend paths are distinguished above.
 
-\begin{lemma}[Fluent-determined exact initialization]
-\label{lem:fluent-determined}
-Let the freely reachable product of the deterministic requirement monitor (including absorbing errors) and all its referenced fluent observers start at their specified initial states. Suppose equal fluent vectors in that product imply equal monitor states. Let $\sigma_r(v)$ return that unique monitor state for each reachable vector $v$. For any activation state with $\mathsf H_r(\xi)\ne\varnothing$ whose histories are represented in this product and whose supplied initializer is $\iota_r(\xi)=\sigma_r(f(\xi))$, initialization is an exact residual for the history-inclusive interpretation.
-\end{lemma}
-\begin{proof}
-Each projected activation history reaches a product pair $(\eta_r^*(m_r^0,h),f(\xi))$. Fluent determination makes its first coordinate equal to $\sigma_r(f(\xi))$, independently of $h$. Thus every language in the intersection defining $\mathcal C_r(\xi)$ is the same language $\mathcal L_r(\iota_r(\xi))$. Because the history family is nonempty, its intersection is that language, proving equality in RS. For an empty history family, the intersection is $\Sigma^*$ and this argument gives inclusion only, not equality in general.
-\end{proof}
-
-A single non-error state is insufficient for this lemma. For $[]p$ with $p$ initially true, let $a$ make $p$ false and $b$ restore it. The empty history and $ab$ have the same current fluent value but reach the safe and absorbing-error monitor states, respectively. A check that discards errors verifies only safe-prefix determination, a weaker condition that needs a separate safe-history premise. We use the full product, including errors. Failure of this plant-independent sufficient condition leaves RS unverified for the actual activation histories; it is not by itself a counterexample to the supplied plant's RS.
-
-\paragraph{Interpretation A: activation-safe NEW requirements.}
+\subsection{Safe prior histories for NEW requirements (A)}
 A new requirement becomes effective at its own activation. Its supplied meaning retains the progress or obligations represented by the current fluent vector, while excluding prior violating histories from the reference intersection. With at most one occurrence of each update event, define
 \[
  \mathsf H_r^{\rm safe}(\xi)=\{h\in\mathsf H_r(\xi):
@@ -248,7 +233,7 @@ Every admissible safe history reaches a non-error product pair with observer vec
 \end{proof}
 Language equivalence, rather than equality of state identifiers, is also the frontend's acceptance condition for multiple non-error states at a lookup vector. Our independent checker compares deterministic state pairs until an ERROR/non-error distinction or pair closure, and separately reconstructs the frontend's error-priority, equivalent-state/minimum-ID rule. This checks the earlier saved monitor/observer exports against the source rule; those exports do not contain a materialized lookup table. A separate fresh frontend export directly checks all 138 tables (S4), while leaving physical-state decoding and actual activation histories unverified. The check establishes $\mathsf{RS}_A$ inclusion for all \RSAExactNew/\RSNewOccurrences{} NEW initializers without a nonemptiness premise. Equality additionally requires nonempty safe histories at the actual activation; their plant-level nonemptiness remains unverified.
 
-\paragraph{Interpretation E: entry-scoped UPD requirements.}
+\subsection{From update entry: UPD requirements (E)}
 An update-interval requirement becomes effective at entry. Its reference monitor starts afresh with the actual entry fluent vector $v$, consumes \texttt{hotSwapIn} once, and observes the subsequent update interval. Let $\mathcal L_r^E(v)$ denote the resulting continuation language and $b_r$ the frontend's constant post-entry monitor state. For the entry vectors $V_r(\xi)$ compatible with $\xi$, define
 \[
  \mathcal C_r^E(\xi)=\bigcap_{v\in V_r(\xi)}\mathcal L_r^E(v),
@@ -291,6 +276,24 @@ The added checker reads the original source formulas, expands action aliases, an
 
 Inspection of namespace validation and endpoint construction, together with the saved successful input-validation results, establishes that old histories contain only ordinary events. The adapter computes the boundary value once and installs it directly at every old root; initialization does not consume entry a second time. Seven negative mutations test rejection of a wrong guard value, non-update guard event, guard-changing entry, missing declared edge/label, non-rejecting forbidden event and missing entry reset. The checker verifies all 46 occurrences across 4,722 state--label pairs and 854 possible action-predicate entry valuations. These are static validation counts, not extra synthesis trials or enumerated physical histories. S4 preserves the older free-history and E$'$ results, and the new CSV labels its distinct sufficient condition. The new proof uses the existing E meaning; it does not establish the history-inclusive H interpretation or application-level conformance.
 
+\subsection{Whole-history obligations: a stronger diagnostic}\label{supp:history-diagnostic}
+For this coverage audit, $\mathsf{obs}_r$ retains the events defining the referenced fluents, independently of the active component version. Run the requirement monitor from $m_r^0$ on the whole projected history before activation and its continuation. With absorbing error states this gives
+\[
+ \mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}
+ \mathcal L_r\bigl(\eta_r^*(m_r^0,h)\bigr).
+\]
+H counts violations before activation. If an admitted history reaches ERROR, its continuation language is empty; a non-error initializer accepts the empty suffix and cannot satisfy RS at that activation. We retain the H check as a diagnostic and assert no benchmark RS guarantee under H. The A and E interpretations above have different scopes; none changes the compiled game or any saved synthesis decision.
+
+\begin{lemma}[Fluent-determined exact initialization]
+\label{lem:fluent-determined}
+Let the freely reachable product of the deterministic requirement monitor (including absorbing errors) and all its referenced fluent observers start at their specified initial states. Suppose equal fluent vectors in that product imply equal monitor states. Let $\sigma_r(v)$ return that unique monitor state for each reachable vector $v$. For any activation state with $\mathsf H_r(\xi)\ne\varnothing$ whose histories are represented in this product and whose supplied initializer is $\iota_r(\xi)=\sigma_r(f(\xi))$, initialization is an exact residual for the history-inclusive interpretation.
+\end{lemma}
+\begin{proof}
+Each projected activation history reaches a product pair $(\eta_r^*(m_r^0,h),f(\xi))$. Fluent determination makes its first coordinate equal to $\sigma_r(f(\xi))$, independently of $h$. Thus every language in the intersection defining $\mathcal C_r(\xi)$ is the same language $\mathcal L_r(\iota_r(\xi))$. Because the history family is nonempty, its intersection is that language, proving equality in RS. For an empty history family, the intersection is $\Sigma^*$ and this argument gives inclusion only, not equality in general.
+\end{proof}
+
+A single non-error state is insufficient for this lemma. For $[]p$ with $p$ initially true, let $a$ make $p$ false and $b$ restore it. The empty history and $ab$ have the same current fluent value but reach the safe and absorbing-error monitor states, respectively. A check that discards errors verifies only safe-prefix determination, a weaker condition that needs a separate safe-history premise. We use the full product, including errors. Failure of this plant-independent sufficient condition leaves RS unverified for the actual activation histories; it is not by itself a counterexample to the supplied plant's RS.
+
 \subsection{Lifecycle induction and residual meanings}
 At entry, each component is old, all update operations are pending, old monitor states are inherited from the reachable monitored endpoint, new monitors are inactive, and update-interval monitors receive the supplied $\iota_r$. This establishes the version/pending equivalence and $t\in\ActT(P)\iff\mu(t)\ne\bot$.
 
@@ -307,9 +310,7 @@ Thus the combined observed history satisfies the supplied requirement meaning. F
 At goal, every update operation has occurred, all new monitors are active, old monitors are inactive, and update monitors are safe. Equality of component and new-monitor projections with $\kappa(q)$ carries the new monitored continuation into the verified endpoint. The entry/load boundary contributes no ordinary observation, and update-interval monitoring ends at goal. This establishes the model-level interval safety used by the synthesis theorem.
 
 \subsection{Execution correspondence}
-Technical Appendix~\ref{taDoc-ta:execution_proof} gives the complete statement and proof of conditional trace lifting, including history completeness for residual interpretations. A1--A4 connect concrete observations to every modeled policy outcome and supply eventual observation, finite atomic commands and atomic boundaries; rank then forces handover. Neither these premises nor initializer meaning follows from synthesis. The linked-LTS checker checks abstract composition, not the execution platform.
-
-The Java entry operation is named \texttt{hotSwapIn}, and its completion-side atomic quotient is \texttt{hotSwapOut}. The paper uses the neutral boundary names entry and load. This naming correspondence changes neither the game nor the implementation.
+Technical Appendix~\ref{taDoc-ta:execution_proof} proves conditional trace lifting under A1--A4 and history completeness. Runtime conformance, eventual observation, atomic boundaries and initializer meaning remain premises; the linked-LTS checker verifies abstract composition. Java names entry \texttt{hotSwapIn} and the completion-side atomic quotient \texttt{hotSwapOut}; the paper calls the latter load.
 
 \clearpage
 \section{Supplementary validation and cost tables}
