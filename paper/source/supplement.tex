@@ -162,11 +162,9 @@ A WIN checker reconstructs the reachable policy domain from all roots and comple
 A LOSS checker verifies a nonempty intersection with the roots, no goal in $L$, and the obstruction conditions of that proof. Unsafe states are terminal losses. At a safe uncontrollable-free deadlock the universal condition on enabled controllables is vacuous, correctly certifying a loss. A safe uncontrollable-free state with choices requires inspecting every enabled candidate, so checking LOSS may cost as much as the corresponding exhaustive search. These checks trust the shared parser, successor, monitor, transfer, and endpoint/goal semantics; the separately implemented explicit and raw-LTS checks in the fixed correctness campaign (main-paper RQ2) provide additional, scoped cross-checks.
 
 \subsection{Work bound and static encoding}
-After endpoint/eligibility preprocessing, put $N=|\mathcal Q|$, $A=\sum_q|\Ev(q)|$, and $B=\sum_{q,a}|\Post(q,a)|$, counting nonempty outcomes in $B$. With indexed constant-time state predicates, expected-amortized constant-time dictionaries, and $O(1+|\Post(q,a)|)$ successor enumeration, state discovery and expansion cost $O(N)$, consumed candidates cost $O(A)$, and stored outcomes/reverse incidences cost $O(B)$. Each bucket maintains its number of nonwinning outcomes and maximum winning-successor rank. Its reverse incidences are visited only on a successor's first winning insertion. Each state aggregates its uncontrollable buckets. A duplicate-free queue, one-way cursor, and intrusive retry-removal handle charge each queue operation to a discovery, candidate consumption, or promotion. A remaining-root counter avoids repeated all-root scans. Certificate extraction scans its retained domain once. These charges give $O(N+A+B)$ time and space after preprocessing.
+Technical Appendix~\ref{taDoc-ta:exploration_order} gives the complete counter-based $O(d+c+o)$ work and storage argument, where $d$ counts discovered states, $c$ candidate queries and $o$ returned outcome incidences. The bound assumes indexed predicates and constant-time bookkeeping; preprocessing and Java sorting/scans are additional costs.
 
-Let preprocessing cost $T_{end},S_{end}$. The total bounds are $O(T_{end}+N+A+B)$ and $O(S_{end}+N+A+B)$. They are bounds on this indexed implementation model. The Java implementation sorts and scans active transitions for quiescence and repeatedly checks roots; its timings include that work and are not measurements of constant-cost semantic queries. Preprocessing cannot be bounded by the reached update game alone; all-entry sets can themselves be exponential in compact component descriptions.
-
-For a generic reachability encoding, use a fresh environment root with edges to every $Q_0$ state. At a safe non-goal with uncontrollables, an environment vertex chooses any uncontrollable event and then any outcome. At an uncontrollable-free state, a controller vertex selects a nonempty bucket and an environment vertex chooses its outcome. Unsafe states and deadlocks lose, and goals win. At most one intermediate vertex per nonempty bucket and one edge per outcome are required, giving $O(N+A+B)$ construction. Normalization above proves equivalence to the supplied game; a compatible $\kappa$ remains additional typed evidence.
+For the following full-game encoding, let $N$ count states, $A$ candidate labels summed over states and $B$ outcome incidences. Use a fresh environment root with edges to every $Q_0$ state. At a safe non-goal with uncontrollables, an environment vertex chooses any uncontrollable event and then any outcome. At an uncontrollable-free state, a controller vertex selects a nonempty bucket and an environment vertex chooses its outcome. Unsafe states and deadlocks lose, and goals win. At most one intermediate vertex per nonempty bucket and one edge per outcome are required, giving $O(N+A+B)$ construction. Normalization above proves equivalence to the supplied game; a compatible $\kappa$ remains additional typed evidence.
 
 For any root/safety/goal/controllability-preserving isomorphism preserving all buckets, including empty ones, the strong-predecessor operation commutes with the state bijection. Induction preserves every attractor layer and its rank; complementing gives corresponding losing sets. Selected actions transport through the event bijection. Transport of load targets and $\kappa$ additionally requires matching typed endpoint projections; an untyped graph isomorphism alone supplies no such map.
 
@@ -179,23 +177,7 @@ Every subset is reached by performing exactly its transfers in some order. Full 
 
 \subsection{Fixed exploration order in the measured implementation}
 \label{supp:ordering}
-The RQ3 LTS configurations disable the preliminary guided search (both guided limits are zero). The complete algorithm queries every uncontrollable candidate first. If any such bucket is nonempty, it omits controllable queries by the UC-priority reduction. The underlying Post relation still contains any enabled ordinary controllable edges, which Direct-Full materializes. Otherwise lazy and update-first consume their sorted controllable cursor through the first nonempty bucket, deferring the rest; eager consumes every controllable candidate. A deferred candidate is never removed merely because it appears unpromising.
-
-The default lazy/eager priority depends on the pending operations and endpoint projection, as follows. Entries in each row are tried from left to right; all listed types remain candidates if the game enables them.
-\begin{center}\small
-\begin{tabular}{@{}p{.40\linewidth}p{.56\linewidth}@{}}\toprule
-Condition & Priority classes (first to last)\\\midrule
-Some old stop pending & stop; transfer; ordinary; other update\\
-No stop, some transfer pending & transfer; ordinary; other update\\
-No stop or transfer, endpoint aligned & start; all other events\\
-No stop or transfer, not aligned & events other than start; start\\
-Update-first ablation & every update; every ordinary event\\\bottomrule
-\end{tabular}
-\end{center}
-Within a class, the implementation prefers updates if update-first is configured or the endpoint projection is aligned, and ordinary events otherwise; remaining ties use type order start, transfer, stop, ordinary, then Java string order on the event label. Endpoint mismatch is the minimum over load signatures of the number of disagreeing component/new-monitor coordinates. An old coordinate agrees when its transfer contains the target; an inactive new monitor agrees when its defined activation map produces the target state.
-
-$\mathsf{Open}$ is a LIFO stack. Initial roots and each newly discovered batch are sorted by increasing endpoint mismatch, then pending-set size, then canonical state order, and inserted in reverse so the least element is popped first. Existing stack entries keep their positions; this is not a global priority queue. Canonical ties compare component count, then each component's version and state, sorted active-monitor identifiers and states, and sorted pending labels; the problem's comparators define local state order. Already queued/expanded states are not inserted again. $\mathsf{Retry}$ is FIFO: append a state when it first has deferred candidates, remove from the head, skip winners/exhausted cursors, consume through the next nonempty bucket, and append again if candidates remain. Drain propagation after each expansion/resumption, and always serve $\mathsf{Open}$ before $\mathsf{Retry}$. These rules are implemented by \texttt{FineGrainedSuccessorOracle} and \texttt{OtfDucsSynthesizer}; the artifact retains their exact source. Eager changes bucket materialization and update-first changes candidate priority, providing the reported sensitivity checks without selecting an order after observing results.
-
+Technical Appendix~\ref{taDoc-ta:exploration_order} gives the complete measured order: disabled preliminary guided search, conditional event classes, endpoint mismatch and state ties, LIFO discovery, FIFO retries and promotion timing. It also derives the indexed work bound. The rules order queries, not policy execution; Eager and Update-first provide the reported materialization and order checks.
 
 \section{Monitor intervals and conditional trace lifting}
 \label{supp:runtime}
@@ -211,6 +193,7 @@ with equality for an exact residual and strict inclusion for a conservative one.
 
 
 \subsection{What the frontend initializes}
+Cell is an explicit finite contract. The Cell$_n$ measurements load its parameterized JSON representation through \texttt{CellRingDriver}, supplying the holder-dependent UPD initializer directly. The inherited FSP benchmarks use the distinct formula-compilation path below; its constant UPD initializer is not a restriction of the abstract contract.
 Java names entry \texttt{hotSwapIn} and the completion-side atomic quotient \texttt{hotSwapOut}; the paper calls the latter load.
 
 The measured frontend has two distinct paths. For each NEW safety formula, it constructs the referenced fluent observers, including implicit action fluents. Observers track their initiating/terminating events, and unrelated events stutter. A product traversal associates each reachable observer vector with a compiled safety-monitor state. Multiple non-error monitor states for one vector are accepted only if their safe-continuation languages agree; the least state identifier is retained. An error association takes precedence. Crucially, the table-building traversal does not expand error monitor states, so it does not check how observer values evolve after a violation.
@@ -631,7 +614,7 @@ The generated provenance below retains both the original interrupted attempt and
 \input{build/generated/base-v3-ext-seven.tex}
 
 \clearpage
-\subsection{Separate monolithic Legacy reference and fidelity checks}
+\subsection{Legacy reference, archived OTF path and fidelity checks}
 \label{supp:legacy-reference}
 These original-source/fork comparisons use monolithic conditions and the reference tools' own continued-control objectives. They are decision and fidelity evidence for those contracts, separate from the four same-game FG constructions and from their timing ratios.
 

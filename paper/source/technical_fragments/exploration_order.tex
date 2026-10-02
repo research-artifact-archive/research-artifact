@@ -1,1 +1,16 @@
-Lazy orders stop--transfer--ordinary while stops remain, then transfer--ordinary while transfers remain, with other updates last. Otherwise, start leads only when an endpoint target matches components and current or initialized new monitors. State priority uses endpoint mismatch and pending-command counts; final ties use event type/Java labels and canonical state order. LIFO exploration precedes FIFO retries (full order in S2); it need not minimize exploration.
+The RQ3 LTS configurations disable the preliminary guided search (both guided limits are zero). The complete algorithm queries every uncontrollable candidate first. If any such bucket is nonempty, it omits controllable queries by the UC-priority reduction. The underlying Post relation still contains any enabled ordinary controllable edges, which Direct-Full materializes. Otherwise lazy and update-first consume their sorted controllable cursor through the first nonempty bucket, deferring the rest; eager consumes every controllable candidate. A deferred candidate is never removed merely because it appears unpromising.
+
+The default lazy/eager priority depends on the pending operations and endpoint projection, as follows. Entries in each row are tried from left to right; all listed types remain candidates if the game enables them.
+\begin{center}\small
+\begin{tabular}{@{}p{.40\linewidth}p{.56\linewidth}@{}}\toprule
+Condition & Priority classes (first to last)\\\midrule
+Some old stop pending & stop; transfer; ordinary; other update\\
+No stop, some transfer pending & transfer; ordinary; other update\\
+No stop or transfer, endpoint aligned & start; all other events\\
+No stop or transfer, not aligned & events other than start; start\\
+Update-first ablation & every update; every ordinary event\\\bottomrule
+\end{tabular}
+\end{center}
+Within a class, the implementation prefers updates if update-first is configured or the endpoint projection is aligned, and ordinary events otherwise; remaining ties use type order start, transfer, stop, ordinary, then Java string order on the event label. Endpoint mismatch is the minimum over load signatures of the number of disagreeing component/new-monitor coordinates. An old coordinate agrees when its transfer contains the target; an inactive new monitor agrees when its defined activation map produces the target state.
+
+$\mathsf{Open}$ is a LIFO stack. Initial roots and each newly discovered batch are sorted by increasing endpoint mismatch, then pending-set size, then canonical state order, and inserted in reverse so the least element is popped first. Existing stack entries keep their positions; this is not a global priority queue. Canonical ties compare component count, then each component's version and state, sorted active-monitor identifiers and states, and sorted pending labels; the problem's comparators define local state order. Already queued/expanded states are not inserted again. $\mathsf{Retry}$ is FIFO: append a state when it first has deferred candidates, remove from the head, skip winners/exhausted cursors, consume through the next nonempty bucket, and append again if candidates remain. Drain propagation after each expansion/resumption, and always serve $\mathsf{Open}$ before $\mathsf{Retry}$. These rules are implemented by \texttt{FineGrainedSuccessorOracle} and \texttt{OtfDucsSynthesizer}; the artifact retains their exact source. Eager changes bucket materialization and update-first changes candidate priority, providing the reported sensitivity checks without selecting an order after observing results.

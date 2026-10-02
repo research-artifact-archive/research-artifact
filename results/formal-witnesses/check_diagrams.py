@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Check finite paper diagrams/tables against primitives and scoped RQ2 fixtures.
 
-Supports the original complete TikZ cell and the split Cell tables plus overview.
+Supports the current main Cell table and appendix paths, the earlier split
+tables/overview, and the original complete TikZ cell.
 Parsers accept the explicitly displayed finite syntax; unsupported notation fails.
 No JVM, saved baseline, synthesis, or model edit is used.
 """
@@ -12,12 +13,76 @@ import io
 import shutil
 import tempfile
 import re
+import json
+import sys
 import check_witnesses as w
 HERE=Path(__file__).resolve().parent
 SUB=HERE.parents[1]
 ROOT=SUB.parent
 FIG=SUB/'paper/figures'
 FSP=ROOT/'Implementation/Experiment/FSE2027/rq2-formal-witness/models'
+CURRENT_PAPER_FILES = (
+    'main.tex', 'technical_appendix.tex', 'technical_fragments/cell.tex',
+    'figures/cell_finite_main.tex', 'figures/cell_policy_paths.tex',
+    'figures/cell_story_visual.tex', 'figures/policy_lifetimes.tex',
+    'figures/witness_other.tex',
+)
+
+
+def current_layout(paper):
+    main = paper/'main.tex'
+    return main.is_file() and r'\input{figures/cell_finite_main.tex}' in read_text(main)
+
+
+def current_paths(source):
+    """Read every displayed Cell state, monitor coordinate, action and rank."""
+    nodes = {}
+    pattern = (r'\\node\[state\]\s*\(([ab]\d+)\)[^\n]*?\{\$\(([on]{2});([AB]);'
+               r'([kcd{}-]+)\)\$\\\\rank (\d+)\};')
+    for name, versions, holder, monitors, rank in re.findall(pattern, source):
+        assert name not in nodes, ('duplicate policy state', name)
+        nodes[name] = (versions+holder+';'+monitors.replace('{-}', '-'), int(rank))
+    expected = {'a'+str(i) for i in range(7)} | {'b'+str(i) for i in range(6)}
+    assert set(nodes) == expected, ('policy state inventory', set(nodes))
+    assert len(re.findall(r'\\node\[state\]', source)) == len(nodes), 'Unparsed policy state'
+    edge_pattern = (r'\\draw\[edge\]\s*\(([ab]\d+)\)--node\[action\]'
+                    r'\{\$(.*?)\$\}\(([ab]\d+)\);')
+    edges = re.findall(edge_pattern, source)
+    assert len(edges) == len(set(edges)) == 11, 'Policy edge inventory/duplicates'
+    assert len(re.findall(r'\\draw\[edge\]', source)) == len(edges), 'Unparsed policy edge'
+    paths = {}
+    for holder, prefix, length in [('A', 'a', 7), ('B', 'b', 6)]:
+        incoming = {target: (origin, event(label)) for origin, label, target in edges
+                    if target.startswith(prefix)}
+        assert set(incoming) == {prefix+str(i) for i in range(1, length)}, ('policy targets', holder)
+        rows = [('entry', *nodes[prefix+'0'])]
+        for i in range(1, length):
+            origin, action = incoming[prefix+str(i)]
+            assert origin == prefix+str(i-1), ('policy edge source', holder, i, origin)
+            rows.append((action, *nodes[prefix+str(i)]))
+        paths[holder] = rows
+    return paths
+
+
+def current_visuals(paper):
+    """Bind the two current figures to checked Cell paths and saved Policy data."""
+    package = next((p for p in HERE.parents
+                    if (p/'reproduce/check_visual_evidence.py').is_file()), None)
+    assert package is not None, 'Missing packaged visual evidence readers'
+    sys.path.insert(0, str(package/'reproduce'))
+    import check_visual_evidence as visual
+    import check_policy_evidence as policy
+    visual.verify_cell(read_text(paper/'figures/cell_story_visual.tex'),
+                       read_text(paper/'figures/cell_policy_paths.tex'))
+    candidates = (package/'results/granularity/e6/policy/v2',
+                  package/'FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e6/policy/v2')
+    evidence = next((p for p in candidates if (p/'inputs/policy_2_fine.json').is_file()), None)
+    assert evidence is not None, 'Missing saved Policy input/certificate'
+    load = lambda name: json.loads((evidence/name).read_text())
+    policy.verify_figure(read_text(paper/'figures/policy_lifetimes.tex'),
+                         load('inputs/policy_2_fine.json'), load('inputs/policy_2_coarse.json'),
+                         load('raw/series/policy_fine_none_lazy/certificate.json'))
+    print('PASS current figures: both Cell paths and all seven Policy states/six edges, entries, ranks and active bands.')
 def read_text(path):
     return re.sub(r'%[^\n]*', '', path.read_text())
 
@@ -30,9 +95,9 @@ def event(text):
     return text.strip().strip('$').replace(r"\mathsf{start}", "s").replace(r"\mathsf{stop}", "t").replace(r"\rho", "rho")
 
 
-def table_cell(paper):
+def table_cell(paper, current=False):
     """Strict parser for the displayed finite inventories; no baseline file comparison."""
-    source = read_text(paper/'figures/cell_components.tex')
+    source = read_text(paper/('figures/cell_finite_main.tex' if current else 'figures/cell_components.tex'))
     aliases = {r'$A^o,A^n$': ('Ao','An'), r'$B^o$': ('Bo',), r'$B^n$': ('Bn',),
                r'$C^o$': ('Co',), r'$C^n$': ('Cn',),
                r'$t_{r_{\rm one}}$': ('One',), r'$t_{r_{\rm old}}$': ('Old',),
@@ -40,6 +105,8 @@ def table_cell(paper):
     graphs, initials, states = {}, {}, {}
     for line in source.splitlines():
         fields = line.split(r'\\', 1)[0].split('&')
+        if current and len(fields)==3 and fields[0].strip() not in aliases:
+            assert fields[0].strip() == 'Object', ('unknown displayed object', fields[0])
         if len(fields)!=3 or fields[0].strip() not in aliases:
             continue
         names = aliases[fields[0].strip()]
@@ -65,15 +132,30 @@ def table_cell(paper):
         assert set(states[name])==set(contract.components[component][version].states), ('component states',name)
     for name,expected in [('Co',{'co'}),('Cn',{'c','d'}),('One',{'A','B','E'}),('Old',{'k','E'}),('Ins',{'c','d','E'})]:
         assert set(states[name])==expected, ('controller/monitor states',name)
-    section = read_text(paper/'supplement.tex').split(r'\label{supp:cell-finite}',1)[1].split(r'\subsection',1)[0]
-    assert 'unlisted non-error monitor transitions self-loop' in section
-    assert r'\mathsf{err}$ absorbs every label' in section
-    assert 'Unlisted component or controller transitions are absent' in section
-    assert 'alphabets contain exactly their displayed outgoing labels' in section
+    if current:
+        main = read_text(paper/'main.tex')
+        appendix = read_text(paper/'technical_appendix.tex')
+        section = read_text(paper/'technical_fragments/cell.tex')
+        assert r'\input{technical_fragments/cell.tex}' in appendix, 'Cell definitions not included in appendix'
+        assert r'\input{figures/cell_policy_paths.tex}' in section, 'Cell paths not included in appendix'
+        assert r'\input{figures/cell_story_visual.tex}' in main, 'Cell story not included in main'
+        assert r'\input{figures/policy_lifetimes.tex}' in main+appendix, 'Policy figure not included'
+        assert 'Component/controller alphabets are exactly their displayed labels; unlisted edges are absent.' in source
+        assert 'Unlisted non-error monitor edges self-loop' in source
+        assert r'\mathsf{err}$ absorbs every label' in source
+        assert 'Each comma-separated label denotes an edge.' in source
+    else:
+        section = read_text(paper/'supplement.tex').split(r'\label{supp:cell-finite}',1)[1].split(r'\subsection',1)[0]
+        assert 'unlisted non-error monitor transitions self-loop' in section
+        assert r'\mathsf{err}$ absorbs every label' in section
+        assert 'Unlisted component or controller transitions are absent' in section
+        assert 'alphabets contain exactly their displayed outgoing labels' in section
     for name in ('One','Old','Ins'):
         graphs[name].add(('E','Sigma','E'))
-    transfer = re.search(r'Transfers are \$g_A=g_B=\\\{\(([he]),([he])\)\\\}\$', section)
+    transfer = re.search(r'g_A=g_B=\\\{\(([he]),([he])\)\\\}', section)
     assert transfer, 'Unparsed cell transfer relation'
+    if current:
+        assert re.findall(r'g_A=g_B=\\\{\(([he]),([he])\)\\\}', main) == [transfer.groups()], 'Main/appendix transfers differ'
     drawn=[('Ao',transfer[1],'g_A','An',transfer[2]),('Bo',transfer[1],'g_B','Bn',transfer[2])]
     endpoints={name.replace('_',''):tuple(atom(values).split(','))
                for name,values in re.findall(r'([xyz]_[AB])=\(([^()]*)\)',section)}
@@ -108,15 +190,19 @@ def table_cell(paper):
                 if target not in reached: reached.add(target); pending.append(target)
         assert reached==set(inverse), ('extra unreachable endpoint',version,set(inverse)-reached)
         graphs[label]=edges
-    load=re.search(r'Z_\{\\rm load\}=\\\{([^{}]+)\\\}',section)
+    load=re.search(r'loadable targets are \$\\\{([^{}]+)\\\}' if current else r'Z_\{\\rm load\}=\\\{([^{}]+)\\\}',section)
     assert load and set(load[1].split(','))=={'z_A','z_B'}, 'Cell load targets'
     assert {((endpoints[n][0],endpoints[n][1]),(endpoints[n][3],)) for n in ('zA','zB')}==set(w.cell().load)
     assert 'Initial tuples are $x_A,z_A$' in section
-    initializer=re.search(r'installing \$([cd])\$ if \$B\$ holds, \$([cd])\$ otherwise',section)
+    initializer=re.search(r'installing \$([cd])\$ when \$B\$ holds and \$([cd])\$ otherwise' if current else r'installing \$([cd])\$ if \$B\$ holds, \$([cd])\$ otherwise',section)
     assert initializer and initializer.groups()==('d','c'), 'Cell initializer values'
-    assert 'all eight version-tagged one-product tuples' in section
-    paths={'A':[],'B':[]}
-    for line in read_text(paper/'figures/cell_paths.tex').splitlines():
+    assert ('all eight version-tagged one-workpiece tuples' if current else 'all eight version-tagged one-product tuples') in section
+    if current:
+        assert 'The interval initializer records the holder at either all-old one-workpiece tuple.' in section
+        paths=current_paths(read_text(paper/'figures/cell_policy_paths.tex'))
+    else:
+        paths={'A':[],'B':[]}
+    for line in ([] if current else read_text(paper/'figures/cell_paths.tex').splitlines()):
         fields=[x.strip() for x in line.split(r'\\',1)[0].split('&')]
         if len(fields)!=6 or '$(' not in fields[1]: continue
         for holder,offset in [('A',0),('B',3)]:
@@ -133,15 +219,19 @@ def table_cell(paper):
 
 def check(paper=SUB/'paper', fsp=FSP):
     paper=Path(paper); fsp=Path(fsp)
+    current=current_layout(paper)
     modern=(paper/'figures/cell_components.tex').is_file() and (paper/'figures/cell_paths.tex').is_file()
     supplement=read_text(paper/'supplement.tex') if (paper/'supplement.tex').is_file() else ''
-    modern=modern and r'\input{figures/cell_components.tex}' in supplement
+    modern=current or (modern and r'\input{figures/cell_components.tex}' in supplement)
     text=read_text(paper/'figures/witness_other.tex')
     if modern:
-        graphs, cell_transfers, table_paths, table_initials=table_cell(paper)
+        graphs, cell_transfers, table_paths, table_initials=table_cell(paper,current)
     else:
         graphs={};cell_transfers=[];table_paths=None
-        text+='\n'+read_text(paper/'figures/witness_cell.tex')
+        assert (paper/'figures/witness_cell.tex').is_file(), 'Unsupported Cell layout: no included current table'
+        legacy=read_text(paper/'figures/witness_cell.tex')
+        assert r'\FGedge{Ao}' in legacy, 'Unsupported Cell layout: no included current table or complete legacy drawing'
+        text+='\n'+legacy
     edge_re=r'\\FGedge\{([^}]+)\}\{([^}]+)\}\{([^}]+)\}\{([^}]+)\}\{[^}]*\}'
     for graph,src,labels,dst in re.findall(edge_re,text):
         if graph.startswith('#'):continue
@@ -195,18 +285,21 @@ def check(paper=SUB/'paper', fsp=FSP):
         for name,comp,version in [('Ao',0,'o'),('An',0,'n'),('Bo',1,'o'),('Bn',1,'n')]:
             assert table_initials[name]==wc.components[comp][version].initial, ('component initial',name)
         assert {name:table_initials[name] for name in ('Co','Cn','One','Old','Ins')}==dict(Co='co',Cn='c',One='A',Old='k',Ins='c')
-        overview=read_text(paper/'figures/update_overview.tex')
-        heads=re.search(r'\\foreach \\dy/\\holder/\\target/\\rank in \{([^}]+)\}',overview)
-        assert heads and heads[1]=='0/A/B/6,-1.9/B/A/5', 'Overview entry/target/rank'
-        blocks=re.findall(r'\\foreach \\x/\\label/\\rk in \{(.*?)\}\s*\{',overview,re.S)
-        assert len(blocks)==2, 'Overview paths'
-        action_names={'replace $A$':'rho_A','replace $B$':'rho_B','move to $A$':'m_A','move to $B$':'m_B','start new':'s','stop old':'t','inspect':'j'}
-        for holder,body in zip(('A','B'),blocks):
-            items=re.findall(r'([0-9.]+)/\{([^{}]+)\}/([0-9]+)',body)
-            assert re.sub(r'[0-9.]+/\{[^{}]+\}/[0-9]+','',body).replace(',','').strip()=='', 'Unparsed overview step'
-            observed=[(action_names[label],int(rank)) for _,label,rank in items]
-            assert observed==[(row[0],row[2]) for row in table_paths[holder][1:]], ('Overview action/rank',holder,observed)
-        assert '$B$ holds the workpiece: inspection pending' in overview and '$B$ empty: no inspection needed' in overview
+        if current:
+            current_visuals(paper)
+        else:
+            overview=read_text(paper/'figures/update_overview.tex')
+            heads=re.search(r'\\foreach \\dy/\\holder/\\target/\\rank in \{([^}]+)\}',overview)
+            assert heads and heads[1]=='0/A/B/6,-1.9/B/A/5', 'Overview entry/target/rank'
+            blocks=re.findall(r'\\foreach \\x/\\label/\\rk in \{(.*?)\}\s*\{',overview,re.S)
+            assert len(blocks)==2, 'Overview paths'
+            action_names={'replace $A$':'rho_A','replace $B$':'rho_B','move to $A$':'m_A','move to $B$':'m_B','start new':'s','stop old':'t','inspect':'j'}
+            for holder,body in zip(('A','B'),blocks):
+                items=re.findall(r'([0-9.]+)/\{([^{}]+)\}/([0-9]+)',body)
+                assert re.sub(r'[0-9.]+/\{[^{}]+\}/[0-9]+','',body).replace(',','').strip()=='', 'Unparsed overview step'
+                observed=[(action_names[label],int(rank)) for _,label,rank in items]
+                assert observed==[(row[0],row[2]) for row in table_paths[holder][1:]], ('Overview action/rank',holder,observed)
+            assert '$B$ holds the workpiece: inspection pending' in overview and '$B$ empty: no inspection needed' in overview
         print('PASS cell tables/overview: components, controllers, monitor totalization, endpoint products, both Post paths and every rank agree.')
     # Parse only the explicit, single-event finite state equations used by these fixtures.
     def fsp_edges(filename):
@@ -305,6 +398,7 @@ def check(paper=SUB/'paper', fsp=FSP):
 
 def negative_checks(paper, fsp=FSP):
     """Corrupt independent displayed facts in throwaway copies and require rejection."""
+    current=current_layout(paper)
     mutations=[
         ('figures/cell_components.tex',r'$h\xrightarrow{m_B}e$',r'$h\xrightarrow{m_B}h$','component edge'),
         ('figures/cell_components.tex',r'$d\xrightarrow{m_A}\mathsf{err}$',r'$d\xrightarrow{m_A}c$','monitor error edge'),
@@ -313,13 +407,38 @@ def negative_checks(paper, fsp=FSP):
         ('figures/update_overview.tex','replace $B$','replace $A$','overview action'),
         ('supplement.tex',r'z_B=(e,h,c_0,c)',r'z_B=(e,h,c_1,c)','endpoint controller'),
     ]
+    if current:
+        mutations=[
+            ('figures/cell_finite_main.tex',r'$h\xrightarrow{m_B}e$',r'$h\xrightarrow{m_B}h$','component edge'),
+            ('figures/cell_finite_main.tex',r'$h,e$ ($h$)',r'$h,e$ ($e$)','component initial'),
+            ('figures/cell_finite_main.tex',r'$c_0\xrightarrow{m_B}c_1$',r'$c_0\xrightarrow{m_B}c_0$','controller edge'),
+            ('figures/cell_finite_main.tex',r'$d\xrightarrow{m_A}\mathsf{err}$',r'$d\xrightarrow{m_A}c$','monitor error edge'),
+            ('figures/cell_finite_main.tex','Unlisted non-error monitor edges self-loop','Unlisted non-error monitor edges are absent','monitor totalization'),
+            ('figures/cell_finite_main.tex',r'$B^n$ &',r'$B^x$ &','unknown displayed object'),
+            ('figures/cell_policy_paths.tex',r'$(oo;A;k{-})$\\rank 6',r'$(oo;A;k{-})$\\rank 7','Cell rank'),
+            ('figures/cell_policy_paths.tex',r'$(on;B;kd)$',r'$(on;B;kc)$','Cell monitor state'),
+            ('figures/cell_policy_paths.tex',r'{$\rho_B$}(a1)',r'{$\rho_A$}(a1)','Cell path action'),
+            ('technical_fragments/cell.tex',r'g_A=g_B=\{(e,e)\}',r'g_A=g_B=\{(h,e)\}','transfer'),
+            ('technical_fragments/cell.tex',r'z_B=(e,h,c_0,c)',r'z_B=(e,h,c_1,c)','endpoint controller'),
+            ('technical_fragments/cell.tex',r'\{z_A,z_B\}',r'\{z_A,y_B\}','load targets'),
+            ('technical_fragments/cell.tex',r'installing $d$ when $B$ holds',r'installing $c$ when $B$ holds','NEW initializer'),
+            ('technical_fragments/cell.tex','records the holder at either all-old one-workpiece tuple','always records A at either all-old one-workpiece tuple','UPD initializer'),
+            ('main.tex',r'\input{figures/cell_finite_main.tex}',r'\input{figures/cell_components.tex}','included main table'),
+            ('technical_appendix.tex',r'\input{technical_fragments/cell.tex}',r'\input{technical_fragments/omitted_cell.tex}','included appendix definitions'),
+            ('figures/cell_story_visual.tex',r'replace\\empty $B$',r'replace\\empty $A$','Cell story action'),
+            ('figures/policy_lifetimes.tex',r'6/5/{service}',r'6/5/{start\\new audit}','Policy action'),
+            ('figures/policy_lifetimes.tex','(0,-1.14) rectangle (4.25,-.86)','(0,-1.14) rectangle (2.55,-.86)','Policy active band'),
+        ]
     check(paper,fsp)
     for filename,old,new,label in mutations:
         with tempfile.TemporaryDirectory(prefix='cell-diagram-negative-') as temporary:
             target=Path(temporary)/'paper';(target/'figures').mkdir(parents=True)
-            for name in ('cell_components.tex','cell_paths.tex','update_overview.tex','witness_other.tex'):
-                shutil.copyfile(paper/'figures'/name,target/'figures'/name)
-            shutil.copyfile(paper/'supplement.tex',target/'supplement.tex')
+            files = CURRENT_PAPER_FILES if current else (
+                'figures/cell_components.tex','figures/cell_paths.tex',
+                'figures/update_overview.tex','figures/witness_other.tex','supplement.tex')
+            for name in files:
+                (target/name).parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(paper/name,target/name)
             path=target/filename; content=path.read_text()
             assert old in content, ('negative mutation target absent',label)
             path.write_text(content.replace(old,new,1))
@@ -334,7 +453,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--paper-dir',type=Path,default=SUB/'paper')
     parser.add_argument('--fsp-dir',type=Path,default=FSP)
-    parser.add_argument('--self-test',action='store_true',help='check split-table layout and six negative mutations')
+    parser.add_argument('--self-test',action='store_true',help='also reject corrupt displayed edges, states, initializers, targets, ranks and bindings')
     args=parser.parse_args()
     if args.self_test: negative_checks(args.paper_dir,args.fsp_dir)
     else: check(args.paper_dir,args.fsp_dir)

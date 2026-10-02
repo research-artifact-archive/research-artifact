@@ -204,18 +204,36 @@ class Quickstart:
         module = EXP / 'paper_witnesses'
         self.tree(module, '*.py')
         self.tree(SUB / 'paper/figures', 'witness_*.tex')
-        for name in ('cell_components.tex', 'cell_paths.tex', 'update_overview.tex'):
-            path = SUB / 'paper/figures' / name
-            if (self.root / path).is_file():
-                self.copy(path)
-        if (self.root / SUB / 'paper/supplement.tex').is_file():
-            self.copy(SUB / 'paper/supplement.tex')
+        main = self.root / SUB / 'paper/main.tex'
+        current = main.is_file() and re.search(
+            r'(?m)^\s*\\input\{figures/cell_finite_main\.tex\}', main.read_text())
+        if current:
+            for name in ('main.tex', 'technical_appendix.tex', 'technical_fragments/cell.tex',
+                         'figures/cell_finite_main.tex', 'figures/cell_policy_paths.tex',
+                         'figures/cell_story_visual.tex', 'figures/policy_lifetimes.tex'):
+                self.copy(SUB / 'paper' / name)
+            for name in ('check_visual_evidence.py', 'check_policy_evidence.py'):
+                self.copy(Path('reproduce') / name)
+            policy = EXP / 'witness_20260929/e6/policy/v2'
+            for name in ('inputs/policy_2_fine.json', 'inputs/policy_2_coarse.json',
+                         'raw/series/policy_fine_none_lazy/certificate.json'):
+                self.copy(policy / name)
+        else:
+            for name in ('cell_components.tex', 'cell_paths.tex', 'update_overview.tex'):
+                path = SUB / 'paper/figures' / name
+                if (self.root / path).is_file():
+                    self.copy(path)
+            if (self.root / SUB / 'paper/supplement.tex').is_file():
+                self.copy(SUB / 'paper/supplement.tex')
         self.tree(Path('Implementation/Experiment/FSE2027/rq2-formal-witness/models'), '*.lts')
-        text = self.command('paper-diagrams', self.work / module / 'check_diagrams.py')
+        arguments = ('--self-test',) if current else ()
+        text = self.command('paper-diagrams', self.work / module / 'check_diagrams.py', *arguments)
         for marker in ('PASS: all drawn', 'PASS transfers:', 'PASS RQ2 mapRelation:'):
             if marker not in text:
                 raise ValueError('Missing diagram check: ' + marker)
-        return 'Figure/table edges, five transfer pairs, mapRelation selections and both paths/ranks of the 13/11 policy match (scoped projections)'
+        return ('Figure/table edges, five transfer pairs, mapRelation selections and both Cell paths/ranks '
+                'match (scoped projections); current layout also checks Policy and rejects 19 display corruptions'
+                if current else 'Figure/table edges, five transfer pairs, mapRelation selections and both Cell paths/ranks match (scoped projections)')
 
     def rs_coverage(self):
         module = EXP / 'rs_coverage'
