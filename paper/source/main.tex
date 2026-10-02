@@ -328,29 +328,27 @@ Restricted-transfer comparisons retain both-LOSS and incomplete cases separately
 \label{sec:rq1}
 
 
-\textbf{Answer.} Lazy and Direct-Full match all expected finite-fixture decisions. Application certificates check the shared Java game; separate source checks establish scoped initializer meanings.
-\paragraph{Independent reconstruction and certificates.}\label{tab:validation-scope}
-Python independently constructs graphs and certificates for $\FixedRQOneFixtures{}$ fixtures: $\FixedRQOneFixtures{}\times\FixedRQOneMethods{}=\FixedRQOneJobs{}$ jobs yield \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS and \FixedRQOneInvalid{} invalid (missing events, deadlocks or suppressed UC). All \FixedRQOneEligible{} eligible jobs pass certificate/exhaustive checks; all WIN jobs pass Link. Explicit successors are separate; frontend and endpoint/goal code are shared. These jobs are not independent applications.
+\textbf{Answer.} Table~\ref{tab:validation-populations} maps the checks and their populations to the guarantee layers in Table~\ref{tab:guarantee-evidence}.
+\input{figures/validation_populations.tex}
 
-\FixedTargetQuiescenceFixturesWord{} separate monitor-free fixtures independently reconstruct restricted FSP, endpoints, complete games and goals.
+\paragraph{Independent reconstruction.}\label{tab:validation-scope}
+For the \FixedRQOneJobs{}-job suite, Python reconstructs explicit successors; frontend and endpoint/goal code are shared. All WIN jobs pass Link; invalid cases omit events, deadlock or suppress UC. \FixedTargetQuiescenceFixturesWord{} separate monitor-free fixtures independently reconstruct FSP endpoints, games and goals (S4.2).
 
 \paragraph{From source invariants to initialized monitors.}
-The nine inputs have 46 NEW requirement positions, repeated across three variants as 138 occurrences. Independent reconstruction matches all \FixedLookupMonitors{} lookup tables and \FixedLookupEntries{} entries (900 non-error, 687 ERROR). A separate source parser checks initial truth, observer rules and 35,283 one-step cases from 900 non-error monitor--observer pairs. Induction establishes source-invariant fidelity on the checked alphabets. Together with safe lookup reachability, Proposition~\ref{prop:lookup-act} gives exact start-scoped continuation languages for the 900 retained cells (Technical Appendix~\ref{ta:lookup-act}).
-
-These are static checks, not 900 observed activations. Physical decoding, actual post-start key selection, subsequent observations and absence of fallback remain unvalidated. The checks do not validate arbitrary FSP compilation.
+Initial truth, observer updates and monitor steps establish invariant fidelity by induction; safe lookup reachability supplies Proposition~\ref{prop:lookup-act}'s premise. These are static checks: actual decoding, post-start keys, subsequent observations and absence of fallback remain unvalidated. Technical Appendix~\ref{ta:lookup-act} retains every entry, ERROR case and one-step count; arbitrary FSP compilation is unvalidated.
 
 \paragraph{Which history is meant.}
-For safe-prior-history requirements, all \RSNewOccurrences{} NEW occurrences satisfy residual inclusion; actual scope nonemptiness remains unverified except one PC2 tuple. Source guard and stage-fluent conditions establish \VThreeRSUpdExact{} exact entry-scoped UPD initializations: 46 R1 and 89 R2 (Technical Appendix~\ref{ta:history_checks}).
+All \RSNewOccurrences{} NEW occurrences also satisfy residual inclusion for safe prior histories; actual scope nonemptiness remains unverified except one PC2 tuple. UPD monitors instead begin their reference at update entry (Technical Appendix~\ref{ta:history_checks}).
 \input{technical_fragments/gsm_entry_derivation.tex}
 
 % FGDUCS_RELOCATED: history_checks
 
 \paragraph{What application WIN and LOSS mean.}\label{sec:railcab-policy}\label{sec:contract-case}
-Railcab's 22-entry Base policy permits 1--4 ordinary events between old-stop and new-start; R1's saved policy has no ordinary gap events and retains seven interval guards. Both pass certificate/Link checks. A continuously needed duty must therefore be declared as an interval requirement; WIN alone does not supply it (Technical Appendix~\ref{ta:saved-gaps}).
+Railcab's 22-entry Base policy permits 1--4 ordinary gap events; R1 has none and retains seven interval guards. Both pass certificate/Link. Duties needed between old-stop and new-start require interval requirements; WIN alone does not supply them (Technical Appendix~\ref{ta:saved-gaps}).
 
-Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries. In its final trap, GF1/TOR validation violates new monitors; DSD1 admits an endless rejection cycle, while withholding its only safe validation at quiescence deadlocks. Exhaustive closure excludes every order. Native DUCS wins on its different subsequent-control problem. Full case details and diagnostic variants are retained in Technical Appendix~\ref{ta:additional_populations} and S4.
+Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries: GF1/TOR validation violates new monitors; DSD1 permits endless rejection, or quiescent deadlock if its only safe validation is withheld. Exhaustive closure excludes every order. Native DUCS wins its different subsequent-control problem (Technical Appendix~\ref{ta:additional_populations}; S4).
 
-The \FixedPolicies{} WIN certificates have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} update states and maximum ranks \FixedRankMin{}--\FixedRankMax{}, consistent across five repeats. These 125 runs retain summaries, not complete policy edges; the PC2 and Railcab exports above are separate. Linked old--update--new controllers have 15--1,260 states (S4). Ranks bound events, not downtime or optimal length (Technical Appendix~\ref{ta:memory_policies}).
+Lazy's winning certificates have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} update states and maximum ranks \FixedRankMin{}--\FixedRankMax{}, consistent across five repeats. Linked controllers have 15--1,260 states (S4). Ranks bound events, not downtime or optimal length (Technical Appendix~\ref{ta:memory_policies}).
 
 % The complete trap figure remains in the candidate source; the main text states its obstruction.
 
@@ -408,16 +406,16 @@ O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODU
 DCS already uses on-demand component products, defers controllable alternatives, treats UC-enabled states as uncontrollable and propagates success/failure backward~\cite[Sec.~IV]{CiolekDCS}. Its 2016 formulation requires safety and eventual goal occurrence on every trace; OTF-DCS (2023) requires a marked extension of each finite controlled trace~\cite[Def.~4]{CiolekEtAl2023OTFDCS}. FG specializes these patterns to its generated contract, with complete outcome buckets and all-entry certificates. Compositional and modular approaches structure control specifications~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}.
 
 \paragraph{Supervisor switching.}
-State reinitialization enables safe, deadlock-free switching between supplied supervisors on one plant~\cite[Sec.~3.3]{MeiraGoesLafortune2020Switching}. Jiao et al. transform workcell supervisors and map their states, assuming instantaneous switching faster than UC events~\cite[Sec.~III]{JiaoGanXiao2013Reconfiguration}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; switched-DES control enforces mode-specific invariants under uncontrollable switches~\cite{ReveliotisFei2017SwitchedDES}. FG combines staged transfers, independent requirement lifetimes and all-outcome finite handover to supplied control.
+State reinitialization enables safe, deadlock-free switching between supplied supervisors on one plant~\cite[Sec.~3.3]{MeiraGoesLafortune2020Switching}. Jiao et al. transform workcell supervisors and map their states, assuming instantaneous switching faster than UC events~\cite[Sec.~III]{JiaoGanXiao2013Reconfiguration}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; switched-DES control enforces mode-specific invariants under uncontrollable switches~\cite{ReveliotisFei2017SwitchedDES}. FG adds staged transfers, independent lifetimes and all-outcome finite completion.
 
 \paragraph{Requirements across adaptation.}
 Temporal adaptation~\cite{ZhangCheng2006ALTL}, scenario-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates} and Live Synthesis~\cite{FinkbeinerEtAl2022LiveSynthesis} address obligations across change. Our initialization uses scoped requirements~\cite{Dwyer1999Patterns} and residual reasoning~\cite{RosuHavelund2005Rewriting}. Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} allow individual or simultaneous reconfiguration, requirements that depend on features, and state retention or reset. Their supervisor permits a marked continuation from every reachable state; FG requires every maximal update run to finish at a supplied controller.
 
 \paragraph{Safe adaptation paths.}
-Zhang et al. generate safe adaptation graphs from dependency invariants and adaptive actions, then select minimum-cost configuration paths~\cite[Secs.~3--4]{Zhang2005SafeAdaptation}. FG-DUCS instead requires all-outcome finite handover with independent requirement boundaries; it does not optimize cost.
+Zhang et al. generate safe adaptation graphs from dependency invariants and adaptive actions, then choose minimum-cost paths~\cite[Secs.~3--4]{Zhang2005SafeAdaptation}. FG's finite-handover objective has no cost optimization.
 
 \paragraph{Operational update mechanisms.}
-Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address migration and transition safety. Ma et al. enforce transaction version consistency using dynamic dependencies and sufficient freeness, permitting concurrent versions and selective blocking~\cite{MaEtAl2011VersionConsistency}. These mechanisms differ from global UC quiescence; finite handover alone gives no transaction consistency.
+Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address migration and transition safety. Ma et al. use dynamic dependencies and sufficient freeness for transaction version consistency with concurrent versions and selective blocking~\cite{MaEtAl2011VersionConsistency}. FG's finite handover gives no such guarantee.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -433,7 +431,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c82-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c83-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

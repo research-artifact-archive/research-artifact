@@ -38,6 +38,7 @@ DISPLAY_FILES = (
     'technical_fragments/gsm_active_policy.tex',
     'technical_fragments/gsm_entry_derivation.tex',
     'figures/guarantee_evidence_map.tex',
+    'figures/validation_populations.tex',
     'technical_fragments/ducs_cell_complete.tex',
     'technical_fragments/synthesis_statement.tex',
     'technical_fragments/synthesis_complete_main.tex',

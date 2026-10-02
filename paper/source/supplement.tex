@@ -395,7 +395,7 @@ The saved \path{evidence/load_target_selector_demo/verify_saved.py} parses the f
 
 \subsection{Fixed-budget comparison on the 27 adapted contracts}
 \label{supp:fixed-budget}
-This is the application comparison for current RQ3. All 135 instance--method cells are retained, including the Legacy reference column; same-game comparisons concern the four FG constructions. The outcome grid, absolute solver times, and all completed Lazy/Direct-Full pairs appear first. Complete metric panels and JVM-time details follow in Section~\ref{supp:detailed-diagnostics}.
+This is the application comparison for current RQ3. All 135 instance--method cells are retained, including the Legacy reference column; same-game comparisons concern the four FG constructions. The outcome grid and absolute solver times appear first. Technical Appendix~\ref{taDoc-ta:workload_rows} is the complete table of all 14 finished Lazy/Direct-Full exploration pairs. Preparation measurements follow here; complete metric panels and JVM-time details are in Section~\ref{supp:detailed-diagnostics}.
 
 The generated tables report all RQ3 model/method cells and metrics. Timing summaries require five valid, decision-consistent completions; other groups retain their statuses. Mac pilot and Industry/R1 diagnostic measurements are excluded from Xeon timing comparisons. The controlled-family table reports first-trial structure only.
 The five Legacy N/M (capture cap) cells are interrupted before synthesis by the author-side \texttt{M9MtsSnapshot} instrumentation's fixed 250,000-state cap. They give no evidence of Legacy capability or solver failure. Saved process statuses remain unchanged; N/M is an evidence-based display annotation.
@@ -414,13 +414,6 @@ The five Legacy N/M (capture cap) cells are interrupted before synthesis by the 
 \label{tab:rq3-absolute}
 \centering\small
 \input{figures/absolute_times.tex}
-\end{table}
-
-\paragraph{Completed-pair exploration counts.}
-The following table retains all completed Lazy/Direct-Full pairs from the same-game campaign. Counts come from the first trial; solver times are medians of five valid runs. Unresolved instances remain in the complete outcome tables above and are not imputed here.
-\begin{table}[htbp]\centering\small
-\caption{All 14 completed application pairs, with exploration and cost.}
-\input{figures/rq3_workload14.tex}
 \end{table}
 
 \clearpage
@@ -454,7 +447,7 @@ $P$ includes endpoint products, the closure, global-tuple initializer constructi
 \normalsize
 
 \paragraph{Reading the cost claims.}
-Lazy defers update-game states and successor buckets after this preparation. For example, its $P$ medians are 13.872/14.221~s for PC2 Base/R1 and 5.507--5.730~s for Workflow. Thus reduced search does not remove global preparation. Main-paper Table~5 separately reports total JVM ratios. The public \path{scripts/generate_rq3_preparation.py} regenerates these tables and \path{build/generated/rq3-preparation.csv} directly from the archived campaign metrics, without executing synthesis.
+Lazy defers update-game states and successor buckets after this preparation. For example, its $P$ medians are 13.872/14.221~s for PC2 Base/R1 and 5.507--5.730~s for Workflow. Thus reduced search does not remove global preparation. Main-paper Table~6 separately reports total JVM ratios. The public \path{scripts/generate_rq3_preparation.py} regenerates these tables and \path{build/generated/rq3-preparation.csv} directly from the archived campaign metrics, without executing synthesis.
 
 \clearpage
 \subsection{Detailed fixed-budget measurements and policy diagnoses}
