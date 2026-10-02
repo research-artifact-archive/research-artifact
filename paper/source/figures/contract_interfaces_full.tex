@@ -1,14 +1,12 @@
 \begin{table}[!htbp]
-\caption{Contract interfaces and construction responsibilities. Native DUCS permits stages explicitly encoded in its new environment~\cite[Defs.~4.1--4.3, Sec.~4.2]{Nahabedian2020}.}
-\label{tab:contract-interfaces-full}
 \centering\small
-\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
-Aspect & Native DUCS & FG-DUCS\\\midrule
-Transfer input & Old/new environments and global relation & Component pairs and local relations $g_i$\\
-Requirement input & Old/new goals, transition requirement and fluents & Old/new/interval monitors, initializers and precedence\\
-Constructed structure & Interrupt composition and update protocol; extra stages supplied in the new environment & Mixed versions, command guards, lifetimes and all local outcomes\\
-Controller choice & Old controller supplied; update and subsequent control synthesized & Both controllers and targets supplied; update policy and load state selected\\
-Returned result & Updated controller and state relation, or no solution & Policy, rank and handover, or losing region\\\bottomrule
+\caption{Analytical Cell constructions: supplied and generated structures. No general translation, minimum-size, effort or performance result is claimed.}
+\label{tab:main-generation}\label{tab:contract-interfaces-full}
+\begin{tabular}{@{}p{.16\linewidth}p{.42\linewidth}p{.36\linewidth}@{}}\toprule
+Interface & Supplied Cell structure & Generated or selected structure\\\midrule
+DUCS~\cite[Defs.~4.1--4.3, 5.1]{Nahabedian2020} & Holder-refined old controller; environment transfer $R$; eight version/holder and three endpoint states in $E'$; guarded transfers, fluent goals $G,G',T$ and eventual handover $h$ & Protocol/interrupt composition, update environment/goal, update-and-subsequent controller with map $H$; legal, deadlock-free completion from all old-controller states\\
+GR(1) update~\cite[Def.~3.1, Secs.~4--4.1]{Amram2022GR1DynamicUpdate} & Phase-extended specifications with version/lifetime variables, transfer guards, $p'=[h=B]$ at start, old inspection ban released at stop, switching condition and endpoint edges & New controller $C_2$, bridge and switching bookkeeping; bounded switch from winning states, then $C_2$ unchanged\\
+FG-DUCS & Local components, $g_A=g_B=\{(e,e)\}$, typed monitors, initializers, start-before-stop, endpoint controllers and $Z_{\mathrm{load}}=\{z_A,z_B\}$ & Mixed-state and boundary transitions, target tests; policy, rank and handover map preserving the supplied continuation\\\bottomrule
 \end{tabular}
-\par\smallskip{\footnotesize Both require justified models. Explicit native stages, guards and fluents preserve both Cell paths and their subsequent traces. This is one-direction witness preservation, not general equivalence or measured effort. Fixed new control excludes solutions requiring a different continuation.}
+\par\smallskip{\footnotesize The eight stages record versions and holder, excluding protocol and monitors. FG-DUCS's new-monitor initializer also covers all eight tuples. All three interfaces require justified input meanings.}
 \end{table}

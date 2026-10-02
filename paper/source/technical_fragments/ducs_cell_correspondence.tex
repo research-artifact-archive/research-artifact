@@ -1,18 +1,9 @@
-\paragraph{Native update interfaces.}
+\paragraph{Fixed post-update control.}
 \label{sec:ducs-cell-construction}
-Table~\ref{tab:main-generation} compares Cell inputs and generated structures; Technical Appendices~\ref{ta:ducs_cell_complete} and~\ref{ta:gr1-cell} give complete constructions and path/continuation proofs.
+DUCS synthesizes update and subsequent control from old control, old/new goals and transition requirements~\cite[Defs.~4.1--4.3]{Nahabedian2020}. GR(1) updating synthesizes a new controller $C_2$ and a bridge, then runs that $C_2$ unchanged~\cite[Def.~3.1, Sec.~4]{Amram2022GR1DynamicUpdate}. FG-DUCS instead takes the new controller and loadable targets as inputs. Its update policy selects a target while preserving the supplied continuation (Proposition~\ref{prop:endpoint-continuation}). These are different synthesis objectives; Section~\ref{sec:rq1} reports the divergent Industry/R1 decisions separately.
 
-\begin{table}[!htbp]
-\centering\small
-\caption{Analytical Cell constructions: supplied and generated structures. No general translation, minimum-size, effort or performance result is claimed.}
-\label{tab:main-generation}
-\begin{tabular}{@{}p{.16\linewidth}p{.42\linewidth}p{.37\linewidth}@{}}\toprule
-Interface & Supplied Cell structure & Generated or selected structure\\\midrule
-DUCS~\cite[Defs.~4.1--4.3, 5.1]{Nahabedian2020} & Holder-refined old controller; environment transfer $R$; eight version/holder and three endpoint states in $E'$; guarded transfers, fluent goals $G,G',T$ and eventual handover $h$ & Protocol/interrupt composition, update environment/goal, update-and-subsequent controller with map $H$; legal, deadlock-free completion from all old-controller states\\
-GR(1) update~\cite[Def.~3.1, Secs.~4--4.1]{Amram2022GR1DynamicUpdate} & Phase-extended specifications with version/lifetime variables, transfer guards, $p'=[h=B]$ at start, old inspection ban released at stop, switching condition and endpoint edges & New controller $C_2$, bridge and switching bookkeeping; bounded switch from winning states, then $C_2$ unchanged\\
-FG-DUCS & Local components, $g_A=g_B=\{(e,e)\}$, typed monitors, initializers, start-before-stop, endpoint controllers and $Z_{\mathrm{load}}=\{z_A,z_B\}$ & Mixed-state and boundary transitions, target tests; policy, rank and handover map preserving the supplied continuation\\\bottomrule
-\end{tabular}
-\par\smallskip{\footnotesize The eight stages record versions and holder, excluding protocol and monitors. FG-DUCS's new-monitor initializer also covers all eight tuples. All three interfaces require justified input meanings.}
-\end{table}
+\paragraph{Independent requirement boundaries.}
+DUCS's transition requirement $T$ already expresses overlap, gaps and gap duties for one global stop/start pair~\cite[Sec.~2, Def.~4.1]{Nahabedian2020}. FG-DUCS gives each old requirement its stop and each new requirement its start and initializer. Policy(2) illustrates the distinction: audit coverage requires overlap while role exclusion requires a gap. This is a direct input discipline for separate lifetimes, not an expressiveness impossibility for existing languages.
 
-DUCS already expresses overlap, gaps and gap duties for one global boundary pair through $T$~\cite[Sec.~2, Def.~4.1]{Nahabedian2020}; FG-DUCS gives each requirement its own boundaries. The Cell witness retains every fixed-endpoint edge after $h$; its eventual-$h$ requirement exceeds the published safety-$T$ implementation~\cite[Sec.~5.3]{Nahabedian2020}. A synthesized GR(1) $C_2$ may retain fewer endpoint edges, then runs unchanged. FG-DUCS preserves the supplied controller's continuation from the selected target. Supplement S5 gives the broader primary-source comparison.
+\paragraph{Local inputs and generated stages.}
+Yamauchi et al. already generate an update environment from pre/post environments and separately supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. FG-DUCS generates mixed-version and independent boundary transitions from component transfers, monitors and initializers. For Cell, DUCS and GR(1) can express the displayed paths with added structure (Table~\ref{tab:main-generation}, Technical Appendix~\ref{ta:ducs_cell_complete}). Appendices~\ref{ta:ducs_cell_complete} and~\ref{ta:gr1-cell} give complete constructions and proofs. The DUCS witness copies every endpoint edge after $h$ and adds eventual $h$ beyond the published safety-$T$ implementation~\cite[Sec.~5.3]{Nahabedian2020}; GR(1) may select fewer endpoint edges. These deterministic, fully controllable witnesses establish neither a general translation nor an effort or performance advantage. S5 compares the native contracts.

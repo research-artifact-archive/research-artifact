@@ -133,7 +133,7 @@ Endpoint tuples list $A,B$, controller and its requirement monitor. The old init
 \input{figures/cell_story_visual.tex}
 
 \paragraph{The generated policy.}
-Figure~\ref{fig:cell-story}'s 13 states and 11 edges cover both entries and targets. Each displayed event has one outcome; other controls are disabled. Both paths move the workpiece to enable empty-station replacements. The first also clears inspection debt before handover. Every arrow decreases rank from six or five to zero, excluding safe but endless inspection. A joint transfer always requires both stations empty and is impossible. Technical Appendix~\ref{ta:cell} and S1 give the paths and closure. Table~\ref{tab:main-generation} compares which Cell structures the modeler supplies and each interface generates.
+Figure~\ref{fig:cell-story}'s 13 states and 11 edges cover both entries and targets. Each displayed event has one outcome; other controls are disabled. Both paths move the workpiece to enable empty-station replacements. The first also clears inspection debt before handover. Every arrow decreases rank from six or five to zero, excluding safe but endless inspection. A joint transfer always requires both stations empty and is impossible. Technical Appendix~\ref{ta:cell} and S1 give the paths and closure. Section~\ref{sec:ducs-cell-construction} compares the supplied and generated structures through existing update interfaces.
 
 \Needspace{7\baselineskip}
 \subsection{Audit and Role Lifetimes}
@@ -390,6 +390,7 @@ Lazy versus Eager isolates deferred controllable-bucket generation under the sam
 
 Travel reaches timeouts and out-of-memory failures under all methods, including expanded-budget timeouts. These separate trials never enter medians; Technical Appendix~\ref{ta:performance_scope_details} retains all populations and adverse outcomes.
 
+\Needspace{8\baselineskip}
 \section{Related Work}
 \label{sec:related}
 \label{sec:expressiveness}
@@ -403,6 +404,9 @@ DCS already explores component products on demand, defers controllable alternati
 
 \paragraph{Requirements across adaptation.}
 Temporal adaptation~\cite{ZhangCheng2006ALTL}, scenario-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates} and Live Synthesis~\cite{FinkbeinerEtAl2022LiveSynthesis} address obligations across change. Our initialization uses scoped requirements~\cite{Dwyer1999Patterns} and residual reasoning~\cite{RosuHavelund2005Rewriting}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}. Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} allow individual or simultaneous reconfiguration, requirements that depend on features, and state retention or reset. Their supervisor permits a marked continuation from every reachable state; FG requires every maximal update run to finish at a supplied controller.
+
+\paragraph{Safe adaptation paths.}
+Zhang et al. generate safe adaptation graphs from dependency invariants and adaptive actions, then select minimum-cost configuration paths~\cite[Secs.~3--4]{Zhang2005SafeAdaptation}. FG-DUCS seeks finite handover to a supplied controller from every old entry under every permitted outcome, with independent requirement boundaries; it does not optimize adaptation cost.
 
 \paragraph{Operational update mechanisms.}
 Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address migration and transition safety. Ma et al. enforce transaction version consistency using dynamic dependencies and sufficient freeness, permitting concurrent versions and selective blocking~\cite{MaEtAl2011VersionConsistency}. These mechanisms differ from global UC quiescence; finite handover alone gives no transaction consistency.
@@ -421,7 +425,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c78-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c79-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

@@ -1,6 +1,6 @@
 \paragraph{Lemma (memoryless policies suffice).}
 If any history-dependent policy wins this finite game, a state-based policy wins.
-\emph{Proof.} Starting with goals, attractor layers add safe states whose nonempty proving sets lie in previous layers. Choosing those sets gives a state-based policy with decreasing layer index. Outside the fixed point, the environment can keep an outcome outside after every history, or force an unsafe state or deadlock, defeating any history-dependent policy (S2).
+\emph{Proof.} At a safe non-goal, a proving set is the full nonempty UC successor union if UC is enabled, or one complete nonempty controllable bucket otherwise. Starting with goals, attractor layers add safe states whose proving sets lie in previous layers. Choosing those sets gives a state-based policy with decreasing layer index. Outside the fixed point, every controller choice has an outcome outside, or the state is unsafe or a non-goal deadlock. The environment can keep selecting such outcomes after every history, defeating any history-dependent policy.
 
 \paragraph{Lemma (monitor intervals).}
 Along every update prefix, each active monitor is its inherited or initialized state advanced over exactly the labels in its declared active interval.
