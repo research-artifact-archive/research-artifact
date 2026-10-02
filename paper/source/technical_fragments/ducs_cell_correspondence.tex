@@ -1,6 +1,6 @@
 \subsection{What the Local Interface Generates}
 \label{sec:ducs-cell-construction}
-Table~\ref{tab:main-generation} distinguishes the supplied structures from the generated result. DUCS already constructs an update environment and goal; GR(1) updating already constructs a bridge. From the supplied local contract, FG-DUCS constructs mixed-component transitions, implements individual monitor lifetimes, and derives handover target tests.
+Table~\ref{tab:main-generation} compares native input and generation responsibilities, not general expressive power. A generated new controller can subsequently be fixed and reused, as in GR(1) updating. DUCS already constructs an update environment and goal; GR(1) updating already constructs a bridge. From the supplied local contract, FG-DUCS constructs mixed-component transitions, implements individual monitor lifetimes, and derives handover target tests.
 
 \begin{table}[!htbp]
 \centering\small
@@ -10,7 +10,7 @@ Table~\ref{tab:main-generation} distinguishes the supplied structures from the g
 Interface & Supplied structure & Generated result and guarantee\\\midrule
 DUCS~\cite[Defs.~4.1--4.3, 5.1]{Nahabedian2020} & Environments/goals, old controller, global transfer, transition requirements and update fluents & Update environment/goal, update-and-subsequent controller and controller-transfer relation; legal, deadlock-free completion from every old-controller state\\
 GR(1) update~\cite[Def.~3.1, Secs.~4--4.1]{Amram2022GR1DynamicUpdate} & Old/new specifications and switching condition & New controller, bridge and switching bookkeeping; bounded switching and new-specification satisfaction from winning states\\
-FG-DUCS & Local components/transfers, requirement lifetimes/initializers and fixed endpoints & Mixed game and WIN/LOSS certificates; local-history correspondence and selected-endpoint continuation\\\bottomrule
+FG-DUCS & Local components/transfers, requirement lifetimes/initializers, supplied old/new controllers and loadable targets & Mixed game and WIN/LOSS certificates; local-history correspondence and selected-endpoint continuation\\\bottomrule
 \end{tabular}
 \end{table}
 

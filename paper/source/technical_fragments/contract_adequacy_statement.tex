@@ -1,8 +1,6 @@
 \subsection{Why the Generated State Represents the Contract}
 \label{sec:contract-adequacy}
-A \emph{local update history} $\ell=z(a_1,o_1)\cdots(a_n,o_n)$ begins at an old closed-loop tuple and records each event and its realized local successors. Components follow their active-version transitions and local transfers; boundaries preserve physical states. Monitor memories fold their active intervals: stop excludes its own boundary; start installs its initializer after the boundary. Initially inherit old memories, initialize interval monitors and release old control, leaving new monitors inactive.
-
-Ordinary events retain all combinations of participating local outcomes. Commands require UC quiescence, unexecuted status, completed predecessors and a transfer/initializer value where applicable. Quiescence includes unsafe UC outcomes. A source policy selects controllable labels and must retain every UC and every permitted outcome. Every maximal history must safely reach a quiescent matching target after all commands. Technical Appendix~\ref{ta:source_synthesis} gives the full recurrences.
+A \emph{local update history} $\ell=z(a_1,o_1)\cdots(a_n,o_n)$ records the old entry, events and realized local successors. Components follow their active-version transitions and transfers; monitors fold their declared active intervals. Commands obey precedence, guards and UC quiescence. A source policy selects controllable labels, retains every UC and permitted outcome, and safely completes every maximal history at a matching quiescent target. Technical Appendix~\ref{ta:source_synthesis} gives these source operations independently of the game.
 
 \begin{proposition}[Adequacy of the generated update game]
 \label{prop:contract-adequacy}
@@ -13,4 +11,4 @@ Fold a source history into its current tuple $F(h)$. At entry this is $\Init(z)$
 
 Induction maps source histories to game paths. Conversely, choose an old tuple witnessing the entry and lift each edge by this one-step correspondence, also for infinite paths. A game policy lifts through $F$; applying a source policy to consistently lifted game histories gives a history-dependent game policy. Both directions preserve UC events, all selected-label outcomes, unsafe prefixes, deadlocks and infinite avoiding runs. Theorem~\ref{thm:correctness} supplies a state-based winner or excludes every history-dependent winner, completing the equivalence.
 \end{proof}
-This proves correspondence for the supplied contract; requirement meaning and Java frontend correctness remain separate obligations. Technical Appendix~\ref{ta:source_synthesis} gives the full source recurrences and expanded proof.
+This proves correspondence for the supplied contract; requirement meaning and Java frontend correctness remain separate obligations.

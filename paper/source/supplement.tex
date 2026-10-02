@@ -32,7 +32,7 @@
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{theorem}[lemma]{Theorem}
 \newtheorem{proposition}[lemma]{Proposition}
-\title{Compiling Local Update Contracts\\into Controller-Preserving Policies\\Supplementary Proofs and Tables}
+\title{Synthesizing Staged Updates\\between Verified Controllers\\Supplementary Proofs and Tables}
 \author{Anonymous Authors}
 \date{}
 \input{build/generated/rq3-ad-numbers.tex}
@@ -44,7 +44,7 @@
 % Reproducible exploration order.
 
 \maketitle
-This supplement provides the full closure census, implementation order, auxiliary semantic arguments, and all experimental detail. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 reports completed correctness/capability and Xeon results, retaining unresolved outcomes and original trial provenance.
+Read S1 for additional granularity and observation witnesses, S2 for implementation order, S3 for requirement-history proofs, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 starts with the fixed 27-contract comparison, then independent validation and constructed mechanisms. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
 
 \section{Granularity and observation witnesses}
 \label{supp:witnesses}
@@ -314,29 +314,43 @@ The Java entry operation is named \texttt{hotSwapIn}, and its completion-side at
 \clearpage
 \section{Supplementary validation and cost tables}
 \label{supp:tables}
-\paragraph{Current interpretation evidence.}
-The current results are NEW: \RSNewOccurrences{} A inclusions (nonempty safe-history domains unverified except the stated PC2 tuple), and UPD: \VThreeRSUpdExact{} E justifications (46 R1 and 89 R2). Direct ACT policy arguments cover PC2 and GSM. Separately, all 900 non-error lookup cells have the exact source-invariant continuation language under their reference observers; actual activation key/observation/fallback conformance remains a premise (Technical Appendix~\ref{taDoc-ta:lookup-act}). The additional R1 evidence below strengthens its earlier sufficient condition; no historical failures are removed.
-\paragraph{Historical RS coverage.}
-The following generated table preserves the earlier H/A/E$'$ checks. Its 46 unverified R1 entries describe that older sufficient condition; they are not the classification of the additional guarded-invariant check in Lemma~\ref{lem:r1-entry}.
-\input{build/generated/rs-model-table.tex}
-\paragraph{Direct frontend lookup validation.}
-We materialized the normal frontend's NEW lookup objects for all 27 application inputs using the same frozen JAR and byte-identical inputs. Each separate JVM ran once with a 2~GiB heap and 120~s limit; all 27 completed, with no retry or omitted target. Frontend compilation constructs the endpoint controllers, but the exporter neither runs FG synthesis nor expands physical closure or the activation domain. These are functional checks, not performance samples or recovered historical JVM objects.
+The main paper asks whether local choices change feasibility (RQ1), whether returned policies satisfy the contract (RQ2), and whether Lazy reduces exploration (RQ3). The evidence below begins with the fixed-budget comparison on 27 adapted contracts and the independent checks. It then gives constructed mechanisms and granularity controls, detailed measurements and policy diagnoses, archived auxiliary campaigns, extended budgets, and separate Legacy references. These populations have different purposes and denominators: constructed pairs, application contracts, checker jobs, and single diagnostic runs are not pooled. Archived RQ1/RQ2/RQ4 names in files retain their historical meanings; each block states how it relates to the current questions.
 
-An independent Python checker matched all 138 tables and their 1,587 entries (900 non-error, 687 ERROR). It verified actual observer order, alphabets, 408 observer columns and 31,176 transitions against the saved definitions. It reconstructs the full monitor/observer table over repeatable update events, includes the first ERROR frontier, applies ERROR priority and compares every key and value. A second reconstruction uses the earlier check's alphabet and order: all 138 alphabet differences and 114 column permutations are reconciled explicitly. The resulting non-error values and ERROR counts match the earlier CSV.
+\subsection{Fixed-budget comparison on the 27 adapted contracts}
+\label{supp:fixed-budget}
+This is the application comparison for current RQ3. All 135 instance--method cells are retained, including the Legacy reference column; same-game comparisons concern the four FG constructions. The outcome grid, absolute solver times, and all completed Lazy/Direct-Full pairs appear first. Complete metric panels and JVM-time details follow in Section~\ref{supp:detailed-diagnostics}.
 
-Five mutations of copies of real exports are detected: a safe value changed to ERROR, the converse, a deleted key with adjusted count, an omitted observer transition, and permuted columns without matching key permutation. Two separate Python unit cases cover initially-true normalization and ERROR priority. Actual data contain no initially-true columns, safe/ERROR key collisions or multiple safe states needing nontrivial language-equivalence checks, so these Java branches are not validated by the 27 exports. Physical-state decoding, full activation-domain construction and actual safe-history nonemptiness remain unverified. The complete inputs, commands, tables, comparison and negative checks are in \path{evidence/frontend_lookup_demo/}; these files are included in the public artifact.
+The generated tables report all RQ3 model/method cells and metrics. Timing summaries require five valid, decision-consistent completions; other groups retain their statuses. Mac pilot and Industry/R1 diagnostic measurements are excluded from Xeon timing comparisons. The controlled-family table reports first-trial structure only.
+The five Legacy N/M (capture cap) cells are interrupted before synthesis by the author-side \texttt{M9MtsSnapshot} instrumentation's fixed 250,000-state cap. They give no evidence of Legacy capability or solver failure. Saved process statuses remain unchanged; N/M is an evidence-based display annotation.
 
-\paragraph{Additional entry-invariant evidence.}
-The separate static checker \path{verify_r1_entry_invariant.py} verifies the guarded-invariant condition for R1 in GSM (1 occurrence), Industry (3), MetaSocket (1), PowerPlant (3), PC Arms=1 (6), PC Arms=2 (12), Railcab (7), Surveillance (7), and Workflow (6): 46/46 in total. Its CSV records each source formula and guard line, saved export selector, original run's input validation and update labels, and the old E$'$ flags without altering them. The seven negative mutations are separate checker tests. No synthesis decision, input formula, measurement or historical diagnostic was replaced. These check files are included in the public artifact.
-\par\medskip
 \input{build/generated/contract-model-table.tex}
-\input{build/generated/rq3-evaluation-details.tex}
+
 \begin{table}[ht]
 \centering\small
 \caption{Full main-campaign outcome grid for all 135 instance--method cells.}
 \input{build/generated/rq3-status-grid.tex}
 \end{table}
 \par\medskip
+
+\begin{table}[!htbp]
+\caption{RQ3 solver medians in seconds: Lazy / Direct-Full for all 27 supplied contracts. Every numeric median uses five completed runs.}
+\label{tab:rq3-absolute}
+\centering\small
+\input{figures/absolute_times.tex}
+\end{table}
+
+\paragraph{Completed-pair exploration counts.}
+The following table retains all completed Lazy/Direct-Full pairs from the same-game campaign. Counts come from the first trial; solver times are medians of five valid runs. Unresolved instances remain in the complete outcome tables above and are not imputed here.
+\begin{table}[htbp]\centering\small
+\caption{All 14 completed application pairs, with exploration and cost.}
+\input{figures/rq3_workload14.tex}
+\end{table}
+
+\clearpage
+\subsection{Independent checks for the contract and returned policies}
+\label{supp:independent-checks}
+The following evidence supports current RQ2 at different levels: finite-game decisions and certificates, frontend/source-monitor agreement, and focused handover fixtures. Functional checks and source-level sufficient conditions do not add application performance samples. Each check retains its explicit exclusions.
+
 \begin{table}[ht]
 \centering\small
 \caption{Confirmed-semantic checks. Denominators exclude inapplicable checks, not failed cases.}
@@ -357,8 +371,74 @@ The archived correctness campaign, labeled RQ1 in the saved files, contains 92 j
 
 Ten original semantic models have 31 variants that rename or reorder elements, add unreachable states, or permute components. The code passes 41 focused tests, including five boundary tests; the broader run passes 99 tests with one opt-in integration test unexecuted.
 
-The generated tables report all RQ3 model/method cells and metrics. Timing summaries require five valid, decision-consistent completions; other groups retain their statuses. Mac pilot and Industry/R1 diagnostic measurements are excluded from Xeon timing comparisons. The controlled-family table reports first-trial structure only.
-The five Legacy N/M (capture cap) cells are interrupted before synthesis by the author-side \texttt{M9MtsSnapshot} instrumentation's fixed 250,000-state cap. They give no evidence of Legacy capability or solver failure. Saved process statuses remain unchanged; N/M is an evidence-based display annotation.
+\paragraph{Current interpretation evidence.}
+The current results are NEW: \RSNewOccurrences{} A inclusions (nonempty safe-history domains unverified except the stated PC2 tuple), and UPD: \VThreeRSUpdExact{} E justifications (46 R1 and 89 R2). Direct ACT policy arguments cover PC2 and GSM. Separately, all 900 non-error lookup cells have the exact source-invariant continuation language under their reference observers; actual activation key/observation/fallback conformance remains a premise (Technical Appendix~\ref{taDoc-ta:lookup-act}). The additional R1 evidence below strengthens its earlier sufficient condition; no historical failures are removed.
+
+\paragraph{Direct frontend lookup validation.}
+We materialized the normal frontend's NEW lookup objects for all 27 application inputs using the same frozen JAR and byte-identical inputs. Each separate JVM ran once with a 2~GiB heap and 120~s limit; all 27 completed, with no retry or omitted target. Frontend compilation constructs the endpoint controllers, but the exporter neither runs FG synthesis nor expands physical closure or the activation domain. These are functional checks, not performance samples or recovered historical JVM objects.
+
+An independent Python checker matched all 138 tables and their 1,587 entries (900 non-error, 687 ERROR). It verified actual observer order, alphabets, 408 observer columns and 31,176 transitions against the saved definitions. It reconstructs the full monitor/observer table over repeatable update events, includes the first ERROR frontier, applies ERROR priority and compares every key and value. A second reconstruction uses the earlier check's alphabet and order: all 138 alphabet differences and 114 column permutations are reconciled explicitly. The resulting non-error values and ERROR counts match the earlier CSV.
+
+Five mutations of copies of real exports are detected: a safe value changed to ERROR, the converse, a deleted key with adjusted count, an omitted observer transition, and permuted columns without matching key permutation. Two separate Python unit cases cover initially-true normalization and ERROR priority. Actual data contain no initially-true columns, safe/ERROR key collisions or multiple safe states needing nontrivial language-equivalence checks, so these Java branches are not validated by the 27 exports. Physical-state decoding, full activation-domain construction and actual safe-history nonemptiness remain unverified. The complete inputs, commands, tables, comparison and negative checks are in \path{evidence/frontend_lookup_demo/}; these files are included in the public artifact.
+
+\paragraph{Additional entry-invariant evidence.}
+The separate static checker \path{verify_r1_entry_invariant.py} verifies the guarded-invariant condition for R1 in GSM (1 occurrence), Industry (3), MetaSocket (1), PowerPlant (3), PC Arms=1 (6), PC Arms=2 (12), Railcab (7), Surveillance (7), and Workflow (6): 46/46 in total. Its CSV records each source formula and guard line, saved export selector, original run's input validation and update labels, and the old E$'$ flags without altering them. The seven negative mutations are separate checker tests. No synthesis decision, input formula, measurement or historical diagnostic was replaced. These check files are included in the public artifact.
+
+\subsubsection{Quiescent-goal functional checks}
+Three separate one-run fixtures test a safe target match with an enabled uncontrollable event. One old state has a controllable idle loop and a transfer to new state $n_0$. There are no monitors or dependencies. All new states have controllable idle loops. The three cases are:
+\begin{center}\small
+\begin{tabular}{@{}llll@{}}\toprule
+Case & New uncontrollable edges & Targets & Decision\\\midrule
+Persistent & $n_0\xrightarrow{spin}n_0$ & $\{n_0\}$ & LOSS\\
+Finite & $n_0\xrightarrow{step}n_1$ & $\{n_0,n_1\}$ & WIN\\
+Restricted & $n_0\xrightarrow{step}n_1$ & $\{n_0\}$ & LOSS\\\bottomrule
+\end{tabular}
+\end{center}
+A target match at $n_0$ is never a goal while UC is enabled. The finite case reaches quiescent $n_1$, with certificate ranks $2,1,0$ and load into the new controller's state 1. The restricted case cannot return to its only allowed target; its quiescent $n_1$ is not a goal.
+
+The Python checker independently parses restricted FSP and constructs endpoint products, the entire game, NP and goals, and a least fixed point before comparing with Java. It checks all saved game states and buckets, and for WIN all certificate states, ranks, policy edges and endpoint links. The LOSS result is corroborated by independent full-game closure and Java certificate/exhaustive PASS logs; the CLI does not serialize losing-region membership, so no membership comparison is claimed. The frozen campaign JAR runs once per case under a 512~MiB heap and 120~s cap. Inputs, commands, exports and verification output are retained in \path{evidence/quiescent_goal_demo/}. These checks are outside the original 92 jobs and every performance statistic.
+
+\subsubsection{Load-target selector functional checks}
+Three separate one-run JVM invocations use the frozen campaign JAR and the same one-component input, changing only \texttt{loadable\_new\_states}. The old environment/controller has one idle state. The new environment/controller starts at $n_0$, permits a controllable move to $n_1$, admits idle at both states and has no return. The sole transfer maps the old state to $n_1$. Selecting both endpoint states or only $n_1$ returns WIN; selecting only $n_0$ returns LOSS. Although $n_0$ is reachable in the fixed endpoint, it is unreachable from the update entry.
+
+Both WIN certificates contain two states and one transfer edge, with maximum rank one, and load new controller state 1 at endpoint \texttt{new-00000001}. All three complete update-game exports have two reachable states; the LOSS game has no goal. Goal states are terminal in the update export; subsequent idle edges remain in the endpoint bundle. The LOSS CLI exit 6 denotes unrealizability, not an execution failure.
+
+The saved \path{evidence/load_target_selector_demo/verify_saved.py} parses the fixture's restricted FSP independently, constructs the endpoint products and a Python least fixed point, and compares all exported edges, goals, physical tuples, empty monitor maps, pending transfer, rank and handover. All comparisons pass, as does Java's separate exhaustive construction. There are no monitors, initializer obligations, uncontrollable events or precedence edges. These checks do not validate those features or deployment behavior and are separate from the original 92-job suite and all performance statistics. The directory retains all three inputs, commands, complete game exports, WIN endpoint bundles and verification outputs; no attempt was repeated.
+
+\clearpage
+\subsection{Constructed operational mechanisms and controls}
+\label{supp:vthree-mechanisms}
+The E6 input generators construct finite abstractions motivated by documented staged-replacement practices; they are not deployment measurements or replications of production incidents. The final index contains \VThreeESixTrials{} terminal trials (\VThreeESixWin{} WIN, \VThreeESixLoss{} LOSS, \VThreeESixTO{} TO), including \VThreeESixMacTrials{} Mac and \VThreeESixXeonTrials{} Xeon trials. The main comparison population is \VThreeESixMainPairs{} pairs; scale extensions, assumption controls, E4 references and follow-up budgets do not increase that denominator. Full model definitions, generated inputs, prior failed versions, independent checks and primary-source scope are retained under \path{experiments/witness_20260929/e6/}.
+
+Rolling models a fixed number of replicas and a readiness floor. Updating a batch introduces a finite startup gap; the checked threshold concerns this abstraction, not arbitrary asynchronous deployment. Canary adds observed set-valued healthy/broken outcomes and recovery: controls with only healthy outcomes win even when merged, while removing recovery loses under both granularities. Policy's opposing requirement-boundary orders separate individual from globally merged boundaries. DB-Rolling models secondary-first replacement with a retained availability requirement; the no-slack control loses under both granularities. Rolling+Audit has only one old-stop/new-start pair, so boundary merging remains WIN; transfer merging loses. Its displayed six-step path comes from the Full policy, not Lazy's returned maximum rank. Threads models backpressure versus saturation; the former wins both ways and the latter loses both ways. These null controls prevent reading every staged update as a granularity separation.
+
+\paragraph{PC2-Rolling: measured and checked facts.}
+The fine contract returns WIN on the two-arm physical plant with a calibration phase. Its exported game has \VThreeESixPCTwoFineStates{} discovered states, \VThreeESixPCTwoCertificateStates{} policy states and \VThreeESixPCTwoQueries{} queries; the Xeon counters agree with the saved Mac result. A separate enumeration of the old closed-loop product checks that both raw transfer domains contain every reachable old state. Their product nevertheless puts both arms in calibration, immediately violating the interval availability requirement. Ordinary old-product moves preserve the enumerated invariant, and any completing joint-transfer policy must eventually take that violating transfer; this gives a structural impossibility argument independently of the unresolved solver. The fine Lazy Xeon trial completes in \VThreeESixPCTwoXeonJVMSec{} total JVM seconds; the merged Lazy and fine Direct-Full trials both time out at \VThreeESixPCTwoCap{} seconds with a \VThreeESixPCTwoHeap{} GiB heap. Earlier Mac timeouts remain separate records. Raw exit codes and runtime class hashes are unavailable for these Xeon exports and are not reconstructed. The saved invariant check is not a claim that the larger game was independently enumerated in full.
+
+\paragraph{Inherited-contract granularity transformations (E1).}
+E1 merges all transfer events, all old-stop/new-start events, or both on each Base/R1 inherited contract; R2 is excluded because its interval monitors name individual commands. These are contract transformations rather than encodings of the DUCS objective. All \VThreeEOneTrials{} transformations finish with \VThreeEOneChanged{} changes in decision. The raw physical transfer relations are total. The inherited models omit the explicit post-transfer startup/calibration availability phase used in the constructed examples. These observations explain why those particular mechanisms are absent; they do not constitute a theorem that every total-transfer contract permits simultaneous updating. Requirements can still reject the joint successor, as PC2-Rolling above demonstrates.
+
+\clearpage
+\subsection{Detailed fixed-budget measurements and policy diagnoses}
+\label{supp:detailed-diagnostics}
+The metric panels complete the fixed-budget record from Section~\ref{supp:fixed-budget}. The Industry and Railcab blocks then explain particular outcomes using separate saved diagnostic runs. Their measurement scopes remain distinct.
+
+\subsubsection{Complete metric panels and completion ranks}
+\begingroup
+% Keep the generated campaign heading with its first table; retain later breaks.
+\let\FGClearPage\clearpage
+\def\clearpage{\let\clearpage\FGClearPage}
+The output-state and output-transition panels below count the linked old--update--new controller (saved field \path{output_controller_states}), not the update certificate's rank domain (\path{certificate_states}). Lazy's 25 WIN contracts have 15--1,260 linked states and 8--1,071 certificate states. Linking includes reachable old/new closed-loop states and non-goal update states, identifying goals with their selected new states. Neither quantity is the explored game size.
+
+\IfFileExists{build/generated/rq3-supplement.tex}{\input{build/generated/rq3-supplement.tex}}{\par\emph{Xeon measurements pending. Run the result renderer to materialize the table schema.}}
+\endgroup
+\input{build/generated/rq3-evaluation-details.tex}
+
+\paragraph{Completion-rank coverage.}
+All 25 winning Lazy contracts have five saved worst-completion-rank values, for 125 records. Human-readable and structured metric entries agree in every saved output, and each contract's rank is identical across its five repetitions. Maximum retained ranks range from 4 to 34, with median 19 across contracts; Railcab Base/R1 have 21/33. The raw summary preserves the other two contracts as LOSS/TO with no winning rank. These are upper bounds on observed game events under the stated execution-progress premises, not downtime measurements or minimal update lengths. The script \path{evidence/summarize_completion_ranks.py} and all 27 rows in \path{evidence/completion_ranks.csv} permit rechecking without rerunning synthesis.
+
+\clearpage
+\subsubsection{Industry/R1 losing region and a separate contract variant}
 \paragraph{Industry/R1 diagnostic.}
 One Mac run of the frozen JAR enables the separate exhaustive checker and confirms UNREALIZABLE by its reachable-state fixed point (110,992 states, 873,132 successor queries, 211,940 outcomes). Its exported game stops at goals, giving 110,825 states; a Python fixed point on this export identifies 89 winning and 42 losing entries among 131 roots and checks every losing-region closure condition. These counts concern correctness, not performance.
 
@@ -370,6 +450,151 @@ Q19580\xrightarrow{\texttt{validateDSD1}}Q29028
 \xrightarrow{\texttt{receiveDSD1}}Q19580.
 \]
 Validation and review are controllable; rejection and receipt are uncontrollable. At each safe state, alternative GF1/TOR validations violate an active monitor; declining validation at quiescent $Q19580$ deadlocks. The four safe states and eight unsafe alternatives form a 12-state spoiling certificate. R1 disallows ordinary controllable events between stopping the old requirements and starting the new ones. The global losing-region check, rather than this illustrative update order alone, rules out alternative policies. The exported game, command, outputs, collector diagnostics, and reproducible graph analysis are in \path{raw/industry-r1-independent/}. Update-command preemption alone cannot remove a cycle with no pending update commands; whether a different command/handover contract avoids this region remains unverified.
+
+\paragraph{Separate validation-permitting contract variant.}
+Keep the original Industry components, endpoint controllers, transfer relations, roots, precedence and Post/goal rules. In each of the three R1 update-time properties, replace
+\[
+\begin{gathered}
+\Box(\mathit{AfterStopBeforeStart}_r\Rightarrow\neg\mathit{AnyAction})\\
+\text{by}\quad
+\Box(\mathit{AfterStopBeforeStart}_r\Rightarrow
+\neg(\mathit{AnyAction}\land\neg\mathit{validateGF1})).
+\end{gathered}
+\]
+Thus the same one event, \texttt{validateGF1}, becomes permitted in those intervals; the other seven ordinary controllable labels stay forbidden. This assumes that gate-form validation is an acceptable operation during update. It changes the supplied contract, not the synthesis semantics, and its application-level acceptability is an external premise.
+
+One Mac run with the frozen JAR returns WIN, passing the 214-state winning certificate, atomic Link and separate exhaustive checks (145,864 reachable states). A Python fixed point over the export confirms that the 131 roots match the original tuples and all win, including the original 42 losing entries. Its independently extracted rank certificate covers 273 states and 407 successor buckets; its different size reflects policy extraction, not a different decision.
+
+At the illustrative losing root's counterpart, a winning path reconfigures the three components, stops the three old requirements, starts the new no-duplicate requirement, and validates GF1. Each of the uncontrollable outcomes \texttt{adjustGF1}, \texttt{approveGF1} and \texttt{cancelGF1} resets the relevant TOR/DSD1 history fluents; receipt of GF1 and activation of the remaining two requirements then reach a compatible goal. All outcomes are retained in the certificate. The exact three-line LTS diff, executable checks, source-fluent definitions and raw evidence are in \path{experiments/industry_r1_contract_variant/}. This decision-only diagnosis supplies no timing comparison and is excluded from the 27-instance table; the original R1 LOSS remains unchanged.
+
+\clearpage
+\subsubsection{Qualitative Railcab policy exports}
+The two qualitative illustrations are separate, single executions on macOS/ARM64 with OpenJDK 17.0.19, using the saved RQ3 campaign JAR, input model, solver properties and 64~GiB heap limit. Only the output options change: \texttt{--transition-output full} and \path{--deployment-output handoff-bundle.json} retain complete policy bodies. The scripts, exact commands, outputs and extraction checks are in \path{evidence/railcab_policy_demo} and \path{evidence/railcab_r1_policy_demo}. Their times are excluded from every performance table. Each was executed once; both return WIN with certificate and Link checks. No independent full-game enumeration or actual runtime experiment was added.
+
+Base exports 115 certificate states, 117 buckets, 118 outcomes, 22 entries, two reached goals and maximum rank 21; R1 exports 44 states, 46 buckets, 46 outcomes, 22 entries, one goal and maximum rank 33. Both have 71 new endpoint states. These structural fields agree with the saved campaign. Full realized-controller transition counts differ from certificate counts and are not substituted for them.
+
+The extracted Base fragment begins at certificate state M69, rank 13, reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. One \texttt{reconfigure\_MILESTONES} bucket has two outcomes: M15 (new ENDOFTS, rank 11) and M19 (new AC, rank 12). M15 observes uncontrollable \texttt{approachingCrossing} to M30 (AC, rank 10), then takes three transfers and seven starts to M20 (rank 0, load new controller state 3). M19 instead takes the three transfers to M16 (rank 9), controllable \texttt{brake} to M0 (rank 8), uncontrollable \texttt{endOfTS} to M14 (rank 7), then seven starts to M7 (rank 0, load state 1). M19 and M30 have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values, so they are distinct states. The expanded descendant fragment has 26 states and 25 edges; no branch is omitted.
+
+Each contracted transfer block uses \texttt{ANOTHER\_REQUEST}, \texttt{REQUEST\_ATOMIC}, then \texttt{TURNS}. Each start block activates, in order, \texttt{P\_BRAKE\_DURING\_LASTBRAKE}, \path{P_BRAKE_IF_SOMETHING_BAD}, \path{P_CHECK_STATUS_AFTER_APPROACHING_CROSSING}, \path{P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE}, \path{P_EBRAKE_DURING_ELASTBRAKE}, \path{P_EBRAKE_IF_SOMETHING_BAD}, and \texttt{P\_NEW\_NOT\_CRASH}. Every internal contracted state has exactly one bucket and one outcome. Extraction verifies all 118 rank decreases and both component/new-monitor matches with the fixed endpoint.
+
+R1 retains seven UPD monitors throughout all 44 certificate states, including its goal. Their guards become true after any old stop until the associated new start. Together they forbid \texttt{requestEnter}, \texttt{brake}, \texttt{emergencyBrake}, \texttt{idle\_c} and \texttt{checkCrossingStatus} during the relevant intervals; they do not forbid uncontrollables. The returned policy performs its ordinary controllable steps before its first stop. Milestone transfers occur at LB or NR and each has one outcome. R1 has \emph{zero} multi-outcome buckets. Its branch at M30 instead has two distinct uncontrollable labels, \texttt{enterAllowed.0} and \texttt{enterAllowed.1}. For entry O1, all 32 descendant states/32 edges are retained; branches merge before the suffix of five stops, three remaining transfers and seven starts. All $46\times7=322$ interval-monitor steps match the source DFA, and the goal matches the physical tuple and NEW monitors of new controller state 3. These are checks of the particular returned certificate, not a proof that every winning policy has this order.
+
+\paragraph{Additional Railcab stop/brake path extraction.}
+The Base and R1 exports share old endpoint entry O1, controller state 1, with identical component and old-monitor states. Their update roots are Base M64 (rank 18) and R1 M28 (rank 27); identifiers are local to each export. Base takes five old stops to M69 (rank 13), then its MILESTONES transfer has two outcomes retained in the saved export and the paths below. On the lower branch, three further transfers reach M16 (rank 9), whose brake edge reaches M0 (rank 8).
+
+The R1 prefix, without any old stop, consists of:
+\begin{center}\small
+\begin{tabular}{lll}
+Source & Event & Target\\\hline
+M28 (27) & requestEnter (C) & M30 (26)\\
+M30 (26) & enterAllowed.0 (UC) & M31 (20)\\
+M31 (20) & lastBrake (UC) & M37 (19)\\
+M37 (19) & reconfigure\_MILESTONES (C) & M19 (18)\\
+M19 (18) & brake (C) & M1 (17)\\
+M1 (17) & endOfTS (UC) & M2 (16)\\
+M2 (16) & approachingCrossing (UC) & M13 (15)\\
+M13 (15) & stopOldSpec\_P\_BRAKE\_DURING\_LASTBRAKE (C) & M14 (14)
+\end{tabular}
+\end{center}
+Parentheses give ranks. The final four sources each have one successor. All five old monitors remain active until M13. The stop removes one and changes all seven R1 monitor guards from 0 to 1. Four further stops, three transfers and seven starts reach M3 (rank 0).
+
+The separate $enterAllowed.1$ branch completes from the same old entry without brake. This extraction does not establish that braking is necessary for every run. The file \path{railcab_stop_brake_paths.csv} preserves every edge of the selected Base/R1 entry-to-goal paths (18/22 edges) and all alternative outgoing edges from states on those selected paths. The accompanying extraction script checks path membership, ownership, ranks, common entry and saved UPD-monitor transitions without rerunning synthesis. Original campaign measurements remain unchanged.
+
+\clearpage
+\subsection{Archived auxiliary campaigns and historical checks}
+\label{supp:auxiliary-campaigns}
+This section retains older sufficient-condition diagnostics, the auxiliary requirement-boundary fixtures, construction/contract variants, and controlled scaling families. They supplement the current RQs without replacing fixed-budget failures or increasing the main constructed-pair denominator.
+
+\subsubsection{Historical initialization coverage}
+\paragraph{Historical RS coverage.}
+The following generated table preserves the earlier H/A/E$'$ checks. Its 46 unverified R1 entries describe that older sufficient condition; they are not the classification of the additional guarded-invariant check in Lemma~\ref{lem:r1-entry}.
+\input{build/generated/rs-model-table.tex}
+
+\subsubsection{Auxiliary requirement-boundary inputs}
+The capability campaign contains 14 decisions. Its requirement-boundary comparison follows.
+\input{figures/rq2_boundary.tex}
+Each input has one old entry. Separation's endpoints allow only $idle$; neutral's old endpoint allows $idle$, and its new controller allows $idle$ and the displayed $align$. OLD/NEW testers have one safe state and an error sink; NEW activation requires a false forbidden-event observer. Entry sets $Aligned$ false. In separation, $align$ sets persistent $Aligned$ and a separate observer of the last ordinary event. $idle$ clears only the observer; update events preserve both.
+
+The source-derived sequence $stop,align,idle,\rho,start$ matches the saved six-state certificate and maximum rank five. Old requirement prevents $align$ before $stop$, so a contiguous block cannot complete. Neutral permits $\rho,align$ before the block. Its block/free runs return ranks four/five; ranks need not be minimal. These are source-derived witnesses and saved certificate counts, not recovered execution traces.
+
+\clearpage
+\subsubsection{Granularity and construction ablations}
+\label{supp:vthree-ablations}
+The E1 transformations are described with the granularity evidence above. The remaining E4/E5 variants and E2 construction comparison are additional campaigns; the generated tables also preserve the full E1 and E6 series indices without expanding the main comparison populations.
+
+E4-1 checks the transformations against saved finite fixtures. Transfer/both merging recovers the cell's losing bulk case. Merging the stop commands with each other and the start commands with each other does not forbid ordinary steps between stop and start: the transformed boundary fixture is therefore distinct from the hand-written contiguous-block restriction. E4-2's corrected Cell$_n$ rings preserve one circulating workpiece; local and boundary-merged inputs win, transfer/both-merged inputs lose. The original series' input-validation errors are retained, not treated as synthesis losses. The series are stored in \path{experiments/witness_20260929/e4_1/} and \path{experiments/witness_20260929/e4_2_corrected/}.
+
+E5 uniformly restricts each physical transfer domain to the declared initial local state. Of \VThreeEFivePairs{} fine/merged pairs, \VThreeEFiveWitness{} separate, \VThreeEFiveBothLoss{} lose both ways, \VThreeEFiveBothWin{} win both ways and \VThreeEFiveIncomplete{} remain unresolved. The \VThreeEFiveTrials{} attempted jobs and \VThreeEFiveNotRun{} deadline-excluded jobs remain separate. Railcab/Base's fine job timed out; its merged job and the other deadline-excluded jobs were not run. Enabled UC requests at the restricted states can prevent a safe quiescent transfer opportunity. Sources and domain checks are in \path{experiments/witness_20260929/e5/tables/}.
+
+E2 changes graph construction alone: Full+UC omits controllable buckets at states with enabled UC events, then constructs the reachable graph before solving. The Mac series has an initial capped pass and a longer pass over its timeouts; its final decisions are \VThreeETwoMacWin{} WIN, \VThreeETwoMacLoss{} LOSS and \VThreeETwoMacTO{} unresolved. State counts, unlike runtime, can be compared across these saved deterministic constructions. On comparable cells, Full+UC is smaller than Direct-Full in \VThreeETwoStateSmaller{} and equal in \VThreeETwoStateEqual{}. It is equal in count to Eager in \VThreeETwoEagerStateEqual{} and larger in \VThreeETwoEagerStateMore{} (GSM/R1 and PowerPlant/R1); equality of the state sets was not checked. OTF without UC pruning is not implemented, so this is an incomplete two-factor comparison. The separate Xeon series uses one fresh trial per cell; Industry/R1 is TO there despite Mac's LOSS. No Mac runtime is used in the paired Xeon table. Sources: \path{experiments/ablation_20260928/tables/} and \path{experiments/ablation_20260928/raw/e2_xeon/}.
+
+\begin{table}[!htbp]
+\caption{Construction choices: saved state counts (E2: Mac; other methods: fixed-budget Xeon) and separate Xeon timings. DF = Direct-Full; F+UC = full construction with UC pruning. Time is solve plus internal checking (seconds); F+UC is one trial, Eager a five-run median.}
+\label{tab:e2-choices}
+\centering\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+ & \multicolumn{4}{c}{Discovered states} & \multicolumn{2}{c}{Xeon seconds}\\
+Input & Lazy & Eager & DF & F+UC & F+UC & Eager\\\midrule
+Industry/Base & \VThreeETwoIndustryBaseStatesLazy{} & \VThreeETwoIndustryBaseStatesEager{} & \VThreeETwoIndustryBaseStatesDF{} & \VThreeETwoIndustryBaseStatesFullUC{} & \VThreeETwoIndustryBaseXeonFullUCSec{} & \VThreeETwoIndustryBaseXeonEagerMedianSec{}\\
+PC1/Base & \VThreeETwoPCOneBaseStatesLazy{} & \VThreeETwoPCOneBaseStatesEager{} & \VThreeETwoPCOneBaseStatesDF{} & \VThreeETwoPCOneBaseStatesFullUC{} & \VThreeETwoPCOneBaseXeonFullUCSec{} & \VThreeETwoPCOneBaseXeonEagerMedianSec{}\\
+PC1/R2 & \VThreeETwoPCOneRTwoStatesLazy{} & \VThreeETwoPCOneRTwoStatesEager{} & \VThreeETwoPCOneRTwoStatesDF{} & \VThreeETwoPCOneRTwoStatesFullUC{} & \VThreeETwoPCOneRTwoXeonFullUCSec{} & \VThreeETwoPCOneRTwoXeonEagerMedianSec{}\\
+Railcab/R2 & \VThreeETwoRailcabRTwoStatesLazy{} & \VThreeETwoRailcabRTwoStatesEager{} & \VThreeETwoRailcabRTwoStatesDF{} & \VThreeETwoRailcabRTwoStatesFullUC{} & \VThreeETwoRailcabRTwoXeonFullUCSec{} & \VThreeETwoRailcabRTwoXeonEagerMedianSec{}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\input{build/generated/base-v3-evidence-supp.tex}
+
+\clearpage
+\subsubsection{Controlled families, Travel, and hub scaling}
+These are additional scaling populations for current RQ3; RQ4 in generated captions is the archived campaign name. Their first-trial structure, completion eligibility, censored outcomes, and complete plotted ranges are retained below.
+
+\begingroup
+% Keep the first generated panel with its introductory heading.
+\let\FGClearPage\clearpage
+\def\clearpage{\let\clearpage\FGClearPage}
+\IfFileExists{build/generated/rq4-controlled.tex}{\input{build/generated/rq4-controlled.tex}}{}
+\endgroup
+\IfFileExists{build/generated/rq4-returned.tex}{\input{build/generated/rq4-returned.tex}}{}
+
+\begin{table}[!htbp]
+\centering\small
+\caption{All Travel first-trial outcomes. Entries are Lazy/Eager/Update-first/Direct-Full; W = WIN, T = timeout, O = out of memory.}
+\input{figures/travel_outcomes.tex}
+\end{table}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{build/generated/rq4-states-vs-k-full.pdf}
+\caption{Full scaling-state panels, retaining every tested Travel concurrency level and every hub profile. RQ4 is the archived campaign name; these results appear under RQ3 (Scaling limits) in the main paper. The saved plots label the independent component count as $K$; it is $n$ in the main paper and S2, distinct from Travel's choice count $K$. Censored outcomes have status marks and no numeric ordinate.}
+\end{figure}
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{build/generated/rq4-time-vs-k-full.pdf}
+\caption{Full scaling-time panels from the archived RQ4 campaign. Medians and ranges require five valid, consistent completions; TO/OOM and other incomplete outcomes remain visible.}
+\end{figure}
+
+\clearpage
+\subsection{Extended-budget trials}
+\label{supp:extended-budget}
+These single trials extend the budget for previously unresolved conditions; the fixed-budget results remain unchanged. Missing raw is not a failed trial, and a capped single trial supplies no five-run median.
+\input{build/generated/ext-budget.tex}
+The \ExtFixedComparable{} comparable extended decisions all match fixed-budget Lazy: Direct-Full on Travel $(4,4)$ and $(4,6)$, Industry/R1 (LOSS), PC1/R1 and Workflow/R2 (WIN). The \ExtFixedUncompared{} Travel $(4,8)$ decisions agree with one another, but fixed-budget Lazy timed out there; they are not baseline decision matches. JVM elapsed time includes preprocessing and other work outside the solver. For Travel $(4,8)$, Lazy, Update-first and Eager have JVM/solver times \ExtTravelFourEightLazySeconds{}/\ExtTravelFourEightLazySolverSeconds{}, \ExtTravelFourEightUpdateFirstSeconds{}/\ExtTravelFourEightUpdateFirstSolverSeconds{} and \ExtTravelFourEightEagerSeconds{}/\ExtTravelFourEightEagerSolverSeconds{} seconds. Table~\ref{tab:ext-budget}'s JVM ratios compare a single extended trial with a fixed-budget Lazy five-run median; the main paper's solver ratios use solver time. Separate solver ratios are retained in the CSV.
+
+Industry/R1's \ExtIndustryDFStates{} states here count the game with goal states terminal. The larger independent-checker count in the Industry/R1 diagnostic above includes reachable states before this truncation, so the enumeration domains differ. Surveillance/R1 has an explicit \texttt{Java heap space} failure. Timeout logs contain no heap-occupancy or GC measurements, so large process RSS alone does not prove a full heap or identify the bottleneck. The \ExtBudgetSkipped{} Travel $(6,4)$ skips record the preregistered unmet success prerequisite for $(6,1)$ under both budgets; they are not observed timeouts or losing decisions.
+
+\paragraph{Additional timeout evidence.}
+The generated provenance below retains both the original interrupted attempt and its separate same-setting follow-up. The main PC Arms=2/R2 cell continues to report its original 1,200~s TO; the single 3,600~s result is separate evidence.
+
+\input{build/generated/rq3-supplementary-provenance.tex}
+
+\clearpage
+\input{build/generated/base-v3-ext-seven.tex}
+
+\clearpage
+\subsection{Separate monolithic Legacy reference and fidelity checks}
+\label{supp:legacy-reference}
+These original-source/fork comparisons use monolithic conditions and the reference tools' own continued-control objectives. They are decision and fidelity evidence for those contracts, separate from the four same-game FG constructions and from their timing ratios.
+
 \paragraph{Monolithic cross-check: original-source lab build versus this fork.}
 The input is the monolithic model from which the fine-grained adaptation was derived. Its bytes match the original-source lab build's bundled model after selecting $T_{\rm Empty}$ instead of $T$; identity with a final published benchmark release remains unconfirmed. Only the two transition-selection lines change. Their definitions remain
 \[
@@ -429,7 +654,7 @@ $T_{\rm Empty}$ & 2,312 / 6,615 & 2,312 / 6,615\\\bottomrule
 Two initial adapter failures are preserved: synthesis produced a controller, but an incorrect Java type check rejected the outer composite. Correcting only that adapter yielded the two successful reference-tool cells. The final adapter additionally classifies an explicit no-controller result wrapped in a composition exception; four classification assertions check that branch. These Mac checks supply no performance evidence. The separate Xeon campaign has 21 conditions per tool (15 supplied targets and six named empty-transition alternatives); its returned results remain outside the main RQ3 table.
 
 \paragraph{Returned legacy-fidelity reference experiment.}
-The separate Windows campaigns compare the lab-maintained original-source build and this fork use mechanically generated monolithic conditions, with the three entry-fluent resets aligned. They remain reference tools with different contracts from FG; none of these conditions is a new RQ3 cell. Table~\ref{tab:legacy-fidelity} reports their saved summaries and per-trial logs, including all fork exceptions. Independently regenerated summaries match the returned comparison CSVs byte-for-byte; raw process statuses and reproduction outputs are retained in the artifact.
+The separate Windows campaigns compare the lab-maintained original-source build and this fork on mechanically generated monolithic conditions, with the three entry-fluent resets aligned. They remain reference tools with different contracts from FG; none of these conditions is a new RQ3 cell. Table~\ref{tab:legacy-fidelity} reports their saved summaries and per-trial logs, including all fork exceptions. Independently regenerated summaries match the returned comparison CSVs byte-for-byte; raw process statuses and reproduction outputs are retained in the artifact.
 
 \input{build/generated/legacy-fidelity-reference.tex}
 
@@ -444,189 +669,14 @@ For supplied Railcab, both logs report 1,763 states before safety pruning and 1,
 \input{build/generated/legacy-fidelity-resources.tex}
 \path{experiments/legacy_fidelity/} holds the inputs, diffs, collector, renderer and raw evidence; the public package omits shaded JARs and the private delta's \texttt{lib/}.
 
-\paragraph{Separate validation-permitting contract variant.}
-Keep the original Industry components, endpoint controllers, transfer relations, roots, precedence and Post/goal rules. In each of the three R1 update-time properties, replace
-\[
-\begin{gathered}
-\Box(\mathit{AfterStopBeforeStart}_r\Rightarrow\neg\mathit{AnyAction})\\
-\text{by}\quad
-\Box(\mathit{AfterStopBeforeStart}_r\Rightarrow
-\neg(\mathit{AnyAction}\land\neg\mathit{validateGF1})).
-\end{gathered}
-\]
-Thus the same one event, \texttt{validateGF1}, becomes permitted in those intervals; the other seven ordinary controllable labels stay forbidden. This assumes that gate-form validation is an acceptable operation during update. It changes the supplied contract, not the synthesis semantics, and its application-level acceptability is an external premise.
-
-One Mac run with the frozen JAR returns WIN, passing the 214-state winning certificate, atomic Link and separate exhaustive checks (145,864 reachable states). A Python fixed point over the export confirms that the 131 roots match the original tuples and all win, including the original 42 losing entries. Its independently extracted rank certificate covers 273 states and 407 successor buckets; its different size reflects policy extraction, not a different decision.
-
-At the illustrative losing root's counterpart, a winning path reconfigures the three components, stops the three old requirements, starts the new no-duplicate requirement, and validates GF1. Each of the uncontrollable outcomes \texttt{adjustGF1}, \texttt{approveGF1} and \texttt{cancelGF1} resets the relevant TOR/DSD1 history fluents; receipt of GF1 and activation of the remaining two requirements then reach a compatible goal. All outcomes are retained in the certificate. The exact three-line LTS diff, executable checks, source-fluent definitions and raw evidence are in \path{experiments/industry_r1_contract_variant/}. This decision-only diagnosis supplies no timing comparison and is excluded from the 27-instance table; the original R1 LOSS remains unchanged.
-\clearpage
-\begingroup
-% Keep the generated campaign heading with its first table; retain later breaks.
-\let\FGClearPage\clearpage
-\def\clearpage{\let\clearpage\FGClearPage}
-The output-state and output-transition panels below count the linked old--update--new controller (saved field \texttt{output\_controller\_states}), not the update certificate's rank domain (\texttt{certificate\_states}). Lazy's 25 WIN contracts have 15--1,260 linked states and 8--1,071 certificate states. Linking includes reachable old/new closed-loop states and non-goal update states, identifying goals with their selected new states. Neither quantity is the explored game size.
-\IfFileExists{build/generated/rq3-supplement.tex}{\input{build/generated/rq3-supplement.tex}}{\par\emph{Xeon measurements pending. Run the result renderer to materialize the table schema.}}
-\endgroup
-\IfFileExists{build/generated/rq4-controlled.tex}{\input{build/generated/rq4-controlled.tex}}{}
-\IfFileExists{build/generated/rq4-returned.tex}{\input{build/generated/rq4-returned.tex}}{}
-\clearpage
-\paragraph{Additional timeout evidence.}
-The generated provenance below retains both the original interrupted attempt and its separate same-setting follow-up. The main PC Arms=2/R2 cell continues to report its original 1,200~s TO; the single 3,600~s result is separate evidence.
-
-\input{build/generated/rq3-supplementary-provenance.tex}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{build/generated/rq4-states-vs-k-full.pdf}
-\caption{Full scaling-state panels, retaining every tested Travel concurrency level and every hub profile. RQ4 is the archived campaign name; these results appear under RQ3 (Scaling limits) in the main paper. The saved plots label the independent component count as $K$; it is $n$ in the main paper and S2, distinct from Travel's choice count $K$. Censored outcomes have status marks and no numeric ordinate.}
-\end{figure}
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{build/generated/rq4-time-vs-k-full.pdf}
-\caption{Full scaling-time panels from the archived RQ4 campaign. Medians and ranges require five valid, consistent completions; TO/OOM and other incomplete outcomes remain visible.}
-\end{figure}
-\clearpage
-
-\paragraph{Artifact reproduction status.}
-The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the submitted PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
-
-\clearpage
-\begin{table}[!htbp]
-\centering\small
-\caption{All Travel first-trial outcomes. Entries are Lazy/Eager/Update-first/Direct-Full; W = WIN, T = timeout, O = out of memory.}
-\input{figures/travel_outcomes.tex}
-\end{table}
-
-
-\subsection{Qualitative Railcab policy exports}
-The two qualitative illustrations are separate, single executions on macOS/ARM64 with OpenJDK 17.0.19, using the saved RQ3 campaign JAR, input model, solver properties and 64~GiB heap limit. Only the output options change: \texttt{--transition-output full} and \path{--deployment-output handoff-bundle.json} retain complete policy bodies. The scripts, exact commands, outputs and extraction checks are in \path{evidence/railcab_policy_demo} and \path{evidence/railcab_r1_policy_demo}. Their times are excluded from every performance table. Each was executed once; both return WIN with certificate and Link checks. No independent full-game enumeration or actual runtime experiment was added.
-
-Base exports 115 certificate states, 117 buckets, 118 outcomes, 22 entries, two reached goals and maximum rank 21; R1 exports 44 states, 46 buckets, 46 outcomes, 22 entries, one goal and maximum rank 33. Both have 71 new endpoint states. These structural fields agree with the saved campaign. Full realized-controller transition counts differ from certificate counts and are not substituted for them.
-
-The extracted Base fragment begins at certificate state M69, rank 13, reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. One \texttt{reconfigure\_MILESTONES} bucket has two outcomes: M15 (new ENDOFTS, rank 11) and M19 (new AC, rank 12). M15 observes uncontrollable \texttt{approachingCrossing} to M30 (AC, rank 10), then takes three transfers and seven starts to M20 (rank 0, load new controller state 3). M19 instead takes the three transfers to M16 (rank 9), controllable \texttt{brake} to M0 (rank 8), uncontrollable \texttt{endOfTS} to M14 (rank 7), then seven starts to M7 (rank 0, load state 1). M19 and M30 have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values, so they are distinct states. The expanded descendant fragment has 26 states and 25 edges; no branch is omitted.
-
-Each contracted transfer block uses \texttt{ANOTHER\_REQUEST}, \texttt{REQUEST\_ATOMIC}, then \texttt{TURNS}. Each start block activates, in order, \texttt{P\_BRAKE\_DURING\_LASTBRAKE}, \path{P_BRAKE_IF_SOMETHING_BAD}, \path{P_CHECK_STATUS_AFTER_APPROACHING_CROSSING}, \path{P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE}, \path{P_EBRAKE_DURING_ELASTBRAKE}, \path{P_EBRAKE_IF_SOMETHING_BAD}, and \texttt{P\_NEW\_NOT\_CRASH}. Every internal contracted state has exactly one bucket and one outcome. Extraction verifies all 118 rank decreases and both component/new-monitor matches with the fixed endpoint.
-
-R1 retains seven UPD monitors throughout all 44 certificate states, including its goal. Their guards become true after any old stop until the associated new start. Together they forbid \texttt{requestEnter}, \texttt{brake}, \texttt{emergencyBrake}, \texttt{idle\_c} and \texttt{checkCrossingStatus} during the relevant intervals; they do not forbid uncontrollables. The returned policy performs its ordinary controllable steps before its first stop. Milestone transfers occur at LB or NR and each has one outcome. R1 has \emph{zero} multi-outcome buckets. Its branch at M30 instead has two distinct uncontrollable labels, \texttt{enterAllowed.0} and \texttt{enterAllowed.1}. For entry O1, all 32 descendant states/32 edges are retained; branches merge before the suffix of five stops, three remaining transfers and seven starts. All $46\times7=322$ interval-monitor steps match the source DFA, and the goal matches the physical tuple and NEW monitors of new controller state 3. These are checks of the particular returned certificate, not a proof that every winning policy has this order.
-
-\paragraph{Completion-rank coverage.}
-All 25 winning Lazy contracts have five saved worst-completion-rank values, for 125 records. Human-readable and structured metric entries agree in every saved output, and each contract's rank is identical across its five repetitions. Maximum retained ranks range from 4 to 34, with median 19 across contracts; Railcab Base/R1 have 21/33. The raw summary preserves the other two contracts as LOSS/TO with no winning rank. These are upper bounds on observed game events under the stated execution-progress premises, not downtime measurements or minimal update lengths. The script \path{evidence/summarize_completion_ranks.py} and all 27 rows in \path{evidence/completion_ranks.csv} permit rechecking without rerunning synthesis.
-
-\subsection{Auxiliary requirement-boundary inputs}
-The capability campaign contains 14 decisions. Its requirement-boundary comparison follows.
-\input{figures/rq2_boundary.tex}
-Each input has one old entry. Separation's endpoints allow only $idle$; neutral's old endpoint allows $idle$, and its new controller allows $idle$ and the displayed $align$. OLD/NEW testers have one safe state and an error sink; NEW activation requires a false forbidden-event observer. Entry sets $Aligned$ false. In separation, $align$ sets persistent $Aligned$ and a separate observer of the last ordinary event. $idle$ clears only the observer; update events preserve both.
-
-The source-derived sequence $stop,align,idle,\rho,start$ matches the saved six-state certificate and maximum rank five. Old requirement prevents $align$ before $stop$, so a contiguous block cannot complete. Neutral permits $\rho,align$ before the block. Its block/free runs return ranks four/five; ranks need not be minimal. These are source-derived witnesses and saved certificate counts, not recovered execution traces.
-
-\subsection{Quiescent-goal functional checks}
-Three separate one-run fixtures test a safe target match with an enabled uncontrollable event. One old state has a controllable idle loop and a transfer to new state $n_0$. There are no monitors or dependencies. All new states have controllable idle loops. The three cases are:
-\begin{center}\small
-\begin{tabular}{@{}llll@{}}\toprule
-Case & New uncontrollable edges & Targets & Decision\\\midrule
-Persistent & $n_0\xrightarrow{spin}n_0$ & $\{n_0\}$ & LOSS\\
-Finite & $n_0\xrightarrow{step}n_1$ & $\{n_0,n_1\}$ & WIN\\
-Restricted & $n_0\xrightarrow{step}n_1$ & $\{n_0\}$ & LOSS\\\bottomrule
-\end{tabular}
-\end{center}
-A target match at $n_0$ is never a goal while UC is enabled. The finite case reaches quiescent $n_1$, with certificate ranks $2,1,0$ and load into the new controller's state 1. The restricted case cannot return to its only allowed target; its quiescent $n_1$ is not a goal.
-
-The Python checker independently parses restricted FSP and constructs endpoint products, the entire game, NP and goals, and a least fixed point before comparing with Java. It checks all saved game states and buckets, and for WIN all certificate states, ranks, policy edges and endpoint links. The LOSS result is corroborated by independent full-game closure and Java certificate/exhaustive PASS logs; the CLI does not serialize losing-region membership, so no membership comparison is claimed. The frozen campaign JAR runs once per case under a 512~MiB heap and 120~s cap. Inputs, commands, exports and verification output are retained in \path{evidence/quiescent_goal_demo/}. These checks are outside the original 92 jobs and every performance statistic.
-
-\subsection{Load-target selector functional checks}
-Three separate one-run JVM invocations use the frozen campaign JAR and the same one-component input, changing only \texttt{loadable\_new\_states}. The old environment/controller has one idle state. The new environment/controller starts at $n_0$, permits a controllable move to $n_1$, admits idle at both states and has no return. The sole transfer maps the old state to $n_1$. Selecting both endpoint states or only $n_1$ returns WIN; selecting only $n_0$ returns LOSS. Although $n_0$ is reachable in the fixed endpoint, it is unreachable from the update entry.
-
-Both WIN certificates contain two states and one transfer edge, with maximum rank one, and load new controller state 1 at endpoint \texttt{new-00000001}. All three complete update-game exports have two reachable states; the LOSS game has no goal. Goal states are terminal in the update export; subsequent idle edges remain in the endpoint bundle. The LOSS CLI exit 6 denotes unrealizability, not an execution failure.
-
-The saved \path{evidence/load_target_selector_demo/verify_saved.py} parses the fixture's restricted FSP independently, constructs the endpoint products and a Python least fixed point, and compares all exported edges, goals, physical tuples, empty monitor maps, pending transfer, rank and handover. All comparisons pass, as does Java's separate exhaustive construction. There are no monitors, initializer obligations, uncontrollable events or precedence edges. These checks do not validate those features or deployment behavior and are separate from the original 92-job suite and all performance statistics. The directory retains all three inputs, commands, complete game exports, WIN endpoint bundles and verification outputs; no attempt was repeated.
-
-\clearpage
-\subsection*{Additional Railcab stop/brake path extraction}
-The Base and R1 exports share old endpoint entry O1, controller state 1, with identical component and old-monitor states. Their update roots are Base M64 (rank 18) and R1 M28 (rank 27); identifiers are local to each export. Base takes five old stops to M69 (rank 13), then its MILESTONES transfer has two outcomes retained in the saved export and the paths below. On the lower branch, three further transfers reach M16 (rank 9), whose brake edge reaches M0 (rank 8).
-
-The R1 prefix, without any old stop, consists of:
-\begin{center}\small
-\begin{tabular}{lll}
-Source & Event & Target\\\hline
-M28 (27) & requestEnter (C) & M30 (26)\\
-M30 (26) & enterAllowed.0 (UC) & M31 (20)\\
-M31 (20) & lastBrake (UC) & M37 (19)\\
-M37 (19) & reconfigure\_MILESTONES (C) & M19 (18)\\
-M19 (18) & brake (C) & M1 (17)\\
-M1 (17) & endOfTS (UC) & M2 (16)\\
-M2 (16) & approachingCrossing (UC) & M13 (15)\\
-M13 (15) & stopOldSpec\_P\_BRAKE\_DURING\_LASTBRAKE (C) & M14 (14)
-\end{tabular}
-\end{center}
-Parentheses give ranks. The final four sources each have one successor. All five old monitors remain active until M13. The stop removes one and changes all seven R1 monitor guards from 0 to 1. Four further stops, three transfers and seven starts reach M3 (rank 0).
-
-The separate $enterAllowed.1$ branch completes from the same old entry without brake. This extraction does not establish that braking is necessary for every run. The file \path{railcab_stop_brake_paths.csv} preserves every edge of the selected Base/R1 entry-to-goal paths (18/22 edges) and all alternative outgoing edges from states on those selected paths. The accompanying extraction script checks path membership, ownership, ranks, common entry and saved UPD-monitor transitions without rerunning synthesis. Original campaign measurements remain unchanged.
-
-\begin{table}[!htbp]
-\caption{RQ3 solver medians in seconds: Lazy / Direct-Full for all 27 supplied contracts. Every numeric median uses five completed runs.}
-\label{tab:rq3-absolute}
-\centering\small
-\input{figures/absolute_times.tex}
-\end{table}
-
-\subsection{Completed-pair exploration counts}
-The following table retains all completed Lazy/Direct-Full pairs from the same-game campaign. Counts come from the first trial; solver times are medians of five valid runs. Unresolved instances remain in the complete outcome tables above and are not imputed here.
-\begin{table}[htbp]\centering\small
-\caption{All 14 completed application pairs, with exploration and cost.}
-\input{figures/rq3_workload14.tex}
-\end{table}
-
-\clearpage
-\subsection{Extended-budget trials}
-These single trials extend the budget for previously unresolved conditions; the fixed-budget results remain unchanged. Missing raw is not a failed trial, and a capped single trial supplies no five-run median.
-\input{build/generated/ext-budget.tex}
-The \ExtFixedComparable{} comparable extended decisions all match fixed-budget Lazy: Direct-Full on Travel $(4,4)$ and $(4,6)$, Industry/R1 (LOSS), PC1/R1 and Workflow/R2 (WIN). The \ExtFixedUncompared{} Travel $(4,8)$ decisions agree with one another, but fixed-budget Lazy timed out there; they are not baseline decision matches. JVM elapsed time includes preprocessing and other work outside the solver. For Travel $(4,8)$, Lazy, Update-first and Eager have JVM/solver times \ExtTravelFourEightLazySeconds{}/\ExtTravelFourEightLazySolverSeconds{}, \ExtTravelFourEightUpdateFirstSeconds{}/\ExtTravelFourEightUpdateFirstSolverSeconds{} and \ExtTravelFourEightEagerSeconds{}/\ExtTravelFourEightEagerSolverSeconds{} seconds. Table~\ref{tab:ext-budget}'s JVM ratios compare a single extended trial with a fixed-budget Lazy five-run median; the main paper's solver ratios use solver time. Separate solver ratios are retained in the CSV.
-
-Industry/R1's \ExtIndustryDFStates{} states here count the game with goal states terminal. The larger independent-checker count in the Industry/R1 diagnostic above includes reachable states before this truncation, so the enumeration domains differ. Surveillance/R1 has an explicit \texttt{Java heap space} failure. Timeout logs contain no heap-occupancy or GC measurements, so large process RSS alone does not prove a full heap or identify the bottleneck. The \ExtBudgetSkipped{} Travel $(6,4)$ skips record the preregistered unmet success prerequisite for $(6,1)$ under both budgets; they are not observed timeouts or losing decisions.
-
-\clearpage
-\subsection{Granularity and construction ablations}
-\label{supp:vthree-ablations}
-E1 merges all transfer events, all old-stop/new-start events, or both on each Base/R1 inherited contract; R2 is excluded because its interval monitors name individual commands. These are contract transformations rather than encodings of the DUCS objective. All \VThreeEOneTrials{} transformations finish with \VThreeEOneChanged{} changes in decision. The raw physical transfer relations are total. The inherited models omit the explicit post-transfer startup/calibration availability phase used in the constructed examples. These observations explain why those particular mechanisms are absent; they do not constitute a theorem that every total-transfer contract permits simultaneous updating. Requirements can still reject the joint successor, as PC2 below demonstrates.
-
-E4-1 checks the transformations against saved finite fixtures. Transfer/both merging recovers the cell's losing bulk case. Merging the stop commands with each other and the start commands with each other does not forbid ordinary steps between stop and start: the transformed boundary fixture is therefore distinct from the hand-written contiguous-block restriction. E4-2's corrected Cell$_n$ rings preserve one circulating workpiece; local and boundary-merged inputs win, transfer/both-merged inputs lose. The original series' input-validation errors are retained, not treated as synthesis losses. The series are stored in \path{experiments/witness_20260929/e4_1/} and \path{experiments/witness_20260929/e4_2_corrected/}.
-
-E5 uniformly restricts each physical transfer domain to the declared initial local state. Of \VThreeEFivePairs{} fine/merged pairs, \VThreeEFiveWitness{} separate, \VThreeEFiveBothLoss{} lose both ways, \VThreeEFiveBothWin{} win both ways and \VThreeEFiveIncomplete{} remain unresolved. The \VThreeEFiveTrials{} attempted jobs and \VThreeEFiveNotRun{} deadline-excluded jobs remain separate. Railcab/Base's fine job timed out; its merged job and the other deadline-excluded jobs were not run. Enabled UC requests at the restricted states can prevent a safe quiescent transfer opportunity. Sources and domain checks are in \path{experiments/witness_20260929/e5/tables/}.
-
-E2 changes graph construction alone: Full+UC omits controllable buckets at states with enabled UC events, then constructs the reachable graph before solving. The Mac series has an initial capped pass and a longer pass over its timeouts; its final decisions are \VThreeETwoMacWin{} WIN, \VThreeETwoMacLoss{} LOSS and \VThreeETwoMacTO{} unresolved. State counts, unlike runtime, can be compared across these saved deterministic constructions. On comparable cells, Full+UC is smaller than Direct-Full in \VThreeETwoStateSmaller{} and equal in \VThreeETwoStateEqual{}. It is equal in count to Eager in \VThreeETwoEagerStateEqual{} and larger in \VThreeETwoEagerStateMore{} (GSM/R1 and PowerPlant/R1); equality of the state sets was not checked. OTF without UC pruning is not implemented, so this is an incomplete two-factor comparison. The separate Xeon series uses one fresh trial per cell; Industry/R1 is TO there despite Mac's LOSS. No Mac runtime is used in the paired Xeon table. Sources: \path{experiments/ablation_20260928/tables/} and \path{experiments/ablation_20260928/raw/e2_xeon/}.
-
-\begin{table}[!htbp]
-\caption{Construction choices: saved state counts (E2: Mac; other methods: fixed-budget Xeon) and separate Xeon timings. DF = Direct-Full; F+UC = full construction with UC pruning. Time is solve plus internal checking (seconds); F+UC is one trial, Eager a five-run median.}
-\label{tab:e2-choices}
-\centering\small
-\begin{tabular}{@{}lrrrrrr@{}}\toprule
- & \multicolumn{4}{c}{Discovered states} & \multicolumn{2}{c}{Xeon seconds}\\
-Input & Lazy & Eager & DF & F+UC & F+UC & Eager\\\midrule
-Industry/Base & \VThreeETwoIndustryBaseStatesLazy{} & \VThreeETwoIndustryBaseStatesEager{} & \VThreeETwoIndustryBaseStatesDF{} & \VThreeETwoIndustryBaseStatesFullUC{} & \VThreeETwoIndustryBaseXeonFullUCSec{} & \VThreeETwoIndustryBaseXeonEagerMedianSec{}\\
-PC1/Base & \VThreeETwoPCOneBaseStatesLazy{} & \VThreeETwoPCOneBaseStatesEager{} & \VThreeETwoPCOneBaseStatesDF{} & \VThreeETwoPCOneBaseStatesFullUC{} & \VThreeETwoPCOneBaseXeonFullUCSec{} & \VThreeETwoPCOneBaseXeonEagerMedianSec{}\\
-PC1/R2 & \VThreeETwoPCOneRTwoStatesLazy{} & \VThreeETwoPCOneRTwoStatesEager{} & \VThreeETwoPCOneRTwoStatesDF{} & \VThreeETwoPCOneRTwoStatesFullUC{} & \VThreeETwoPCOneRTwoXeonFullUCSec{} & \VThreeETwoPCOneRTwoXeonEagerMedianSec{}\\
-Railcab/R2 & \VThreeETwoRailcabRTwoStatesLazy{} & \VThreeETwoRailcabRTwoStatesEager{} & \VThreeETwoRailcabRTwoStatesDF{} & \VThreeETwoRailcabRTwoStatesFullUC{} & \VThreeETwoRailcabRTwoXeonFullUCSec{} & \VThreeETwoRailcabRTwoXeonEagerMedianSec{}\\\bottomrule
-\end{tabular}
-\end{table}
-
-\input{build/generated/base-v3-evidence-supp.tex}
-
-\clearpage
-\subsection{Constructed operational mechanisms and controls}
-\label{supp:vthree-mechanisms}
-The E6 input generators construct finite abstractions motivated by documented staged-replacement practices; they are not deployment measurements or replications of production incidents. The final index contains \VThreeESixTrials{} terminal trials (\VThreeESixWin{} WIN, \VThreeESixLoss{} LOSS, \VThreeESixTO{} TO), including \VThreeESixMacTrials{} Mac and \VThreeESixXeonTrials{} Xeon trials. The main comparison population is \VThreeESixMainPairs{} pairs; scale extensions, assumption controls, E4 references and follow-up budgets do not increase that denominator. Full model definitions, generated inputs, prior failed versions, independent checks and primary-source scope are retained under \path{experiments/witness_20260929/e6/}.
-
-Rolling models a fixed number of replicas and a readiness floor. Updating a batch introduces a finite startup gap; the checked threshold concerns this abstraction, not arbitrary asynchronous deployment. Canary adds observed set-valued healthy/broken outcomes and recovery: controls with only healthy outcomes win even when merged, while removing recovery loses under both granularities. Policy's opposing requirement-boundary orders separate individual from globally merged boundaries. DB-Rolling models secondary-first replacement with a retained availability requirement; the no-slack control loses under both granularities. Rolling+Audit has only one old-stop/new-start pair, so boundary merging remains WIN; transfer merging loses. Its displayed six-step path comes from the Full policy, not Lazy's returned maximum rank. Threads models backpressure versus saturation; the former wins both ways and the latter loses both ways. These null controls prevent reading every staged update as a granularity separation.
-
-\paragraph{PC2-Rolling: measured and checked facts.}
-The fine contract returns WIN on the two-arm physical plant with a calibration phase. Its exported game has \VThreeESixPCTwoFineStates{} discovered states, \VThreeESixPCTwoCertificateStates{} policy states and \VThreeESixPCTwoQueries{} queries; the Xeon counters agree with the saved Mac result. A separate enumeration of the old closed-loop product checks that both raw transfer domains contain every reachable old state. Their product nevertheless puts both arms in calibration, immediately violating the interval availability requirement. Ordinary old-product moves preserve the enumerated invariant, and any completing joint-transfer policy must eventually take that violating transfer; this gives a structural impossibility argument independently of the unresolved solver. The fine Lazy Xeon trial completes in \VThreeESixPCTwoXeonJVMSec{} total JVM seconds; the merged Lazy and fine Direct-Full trials both time out at \VThreeESixPCTwoCap{} seconds with a \VThreeESixPCTwoHeap{} GiB heap. Earlier Mac timeouts remain separate records. Raw exit codes and runtime class hashes are unavailable for these Xeon exports and are not reconstructed. The saved invariant check is not a claim that the larger game was independently enumerated in full.
-
 \clearpage
 \subsection{Separate Legacy enlarged-heap reference}
 \label{supp:vthree-ext-six}
 \input{build/generated/base-v3-ext-six.tex}
+
 \clearpage
-\input{build/generated/base-v3-ext-seven.tex}
+\subsection*{Artifact reproduction status}
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the submitted PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
 
 \clearpage
 \section{Expanded related-work comparison}
@@ -655,6 +705,10 @@ DES state attraction (2015)
 & Common deterministic plant; request/startup sets; task language $K$ and recognizer
 & All request states; UC preserved; weakly invariant startup set; bounded first completion (Def.~2, Thm.~1)
 & Attractor supervisor; plant/recognizer product and state-attraction algorithm\\
+DCS (2016)
+& Deterministic component LTSs; safety/co-safety event goals
+& Initial product state; goals hold on all closed-loop traces; mixed states treated as UC
+& Controller or failure; heuristic OTF composition, deferred control alternatives and backward propagation (Secs.~I, III--IV)\\
 OTF-DCS (2023)
 & Component automata, marked/illegal states and control partition
 & All UC enabled; designated disturbances; eager director (Def.~3); every controlled finite trace has a marked extension (Def.~4)

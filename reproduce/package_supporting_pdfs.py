@@ -38,12 +38,16 @@ def navigation_pdf(readers, paper_title=None):
                                 readers['ta'].pages[0].mediabox.height))
     rows = []
     titles = {'ta': 'Part I: Proofs and definitions (Technical Appendix)',
-              's': 'Part II: Experimental detail (Supplement S1-S5)'}
+              's': 'Part II: Validation and experimental detail (Supplement S1-S5)'}
     for key in ('ta', 's'):
         rows.append((True, titles[key], key, 0))
+        section_number = 0
         for item in readers[key].outline:
             if not isinstance(item, list):
-                rows.append((False, item.title, key, readers[key].get_destination_page_number(item)))
+                section_number += 1
+                label = chr(64 + section_number) if key == 'ta' else f'S{section_number}'
+                rows.append((False, f'{label}  {item.title}', key,
+                             readers[key].get_destination_page_number(item)))
     title_lines = []
     if paper_title:
         for word in paper_title.split():
@@ -70,11 +74,11 @@ def navigation_pdf(readers, paper_title=None):
                 c.drawString(50, y, title_line); y -= 14
             y -= 8
         c.setFont('PackSans', 9)
-        for line in ['Part I contains the Technical Appendix. Part II contains the existing S1-S5',
-                     'supplement, including supporting proofs, validation and experimental detail.',
-                     'Original section labels and component page numbers are retained. Use the',
-                     'continuous supplementary page numbers and bookmarks for navigation.',
-                     'The main paper is supplied separately as main.pdf.']:
+        for line in ['Part I follows the argument: proofs and cases (A-C), requirement meaning and',
+                     'execution (D-G), interface comparisons (H-I), PC2 (J), and records (K-P).',
+                     'Part II adds witnesses (S1), implementation (S2), history proofs (S3),',
+                     'current evaluation and separate auxiliary records (S4), and comparisons (S5).',
+                     'Use continuous page numbers and bookmarks. Main paper: main.pdf.']:
             c.drawString(50, y, line); y -= 13
         y -= 15; c.setFont('PackSansBold', 10)
         c.drawString(50, y, 'Contents' if count == 1 else f'Contents ({number + 1}/{count})')

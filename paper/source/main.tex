@@ -70,13 +70,13 @@
 \input{build/generated/pc2-case-macros.tex}
 \input{build/generated/pc2-trace-macros.tex}
 \begin{document}
-\title[Compiling Local Update Contracts]{Compiling Local Update Contracts into Controller-Preserving Policies}
+\title[Staged Updates between Verified Controllers]{Synthesizing Staged Updates between Verified Controllers}
 
 \author{Anonymous Author(s)}
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Updating a controlled system can require components to change at different times while old and new requirements overlap or exclude one another. Choosing an update sequence is insufficient when its steps have multiple possible outcomes. We present Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS), which compiles local state transfers, individual requirement lifetimes and monitor initialization into a policy between supplied verified controllers. The policy must safely finish from every admitted starting state and for every possible outcome. We prove that the generated game implements the local contract and preserves the chosen new controller's behavior after handover. A sound and complete lazy procedure returns a policy with a progress certificate or proves that none exists. Complete examples show how merging components or requirement boundaries can prevent completion; a reverse example shows that merging can also help. An MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts within 1,200~s, compared with \FixedEagerDecisions{} for eager successors and \DirectFullDecisions{} for full construction. Five constructed families exhibit granularity-dependent feasibility; inherited inputs show no feasibility change. Commands and handover require uncontrollable quiescence, and the contract guarantees finite completion without fairness, rather than service continuity or elapsed-time bounds.
+A system may have verified controllers for both its old and new versions while still lacking a safe way to move between them. Components may need separate replacement steps, and old and new requirements may need different periods of overlap. We present Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS): a local contract specifies component transfers, requirement lifetimes and initial obligations, and a compiler generates an update policy between the supplied controllers. The policy handles every reachable old entry and every permitted event outcome, safely completes the update, and then preserves the chosen new controller's behavior. We prove correspondence between local contracts and their generated games, and specialize established lazy reachability methods to return a policy with a progress certificate or a losing-region certificate. Complete examples characterize when merging update steps prevents completion and when it enables it. An MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts within 1,200~s, compared with \FixedEagerDecisions{} for eager successors and \DirectFullDecisions{} for full construction. Constructed families exhibit granularity effects; inherited inputs exhibit none. The result supports finite, quiescent handover under declared safety requirements; it does not guarantee continuous service or an elapsed-time bound.
 \end{abstract}
 
 \begin{CCSXML}
@@ -96,18 +96,23 @@ Updating a controlled system can require components to change at different times
 
 \section{Introduction}
 \label{sec:introduction}
-Verified endpoints leave their intervening update unspecified~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. Consider replacing two stations while retaining exactly one workpiece. Each replacement needs its station empty. Replacing both together is impossible, but moving the workpiece between separate replacements can make the update possible. A second choice concerns requirements: audit coverage may require the new audit rule before the old rule ends, whereas mutually exclusive access roles require the old role to end first. One global start/stop order cannot satisfy both. These are different reasons to expose update granularity.
+A verified controller governs one version. Updating requires reaching another while component states and active requirements change~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. The endpoints do not supply this intervening policy. We generate it while preserving the supplied new controller's behavior after handover.
 
-An update may begin in any reachable old state, with environment-chosen events and transfer outcomes. Initial memory also matters: starting a monitor must not clear an existing inspection duty. A safe policy may inspect forever. The required result must cover every admitted entry and outcome, preserve declared obligations and force finite completion.
+Two choices make this more than a replacement order. Components may need separate replacement times: with one workpiece shared by two stations, an empty-station replacement guard prevents joint replacement, but moving the workpiece can enable separate replacements. Requirements also need separate lifetimes: continuous audit coverage needs new-start before old-stop, whereas mutually exclusive roles require the opposite order.
 
-\emph{Our result compiles local update contracts into controller-preserving policies.} Components, transfers, requirement lifetimes and initializers generate the mixed-state game between verified endpoints. Neither that graph nor an update sequence is supplied. Requirement intent and transfer code remain inputs; modeling effort is unmeasured.
+A fixed sequence cannot always handle different old states or multiple outcomes. The policy must respond to observations and preserve every environment outcome. Initialization must also retain obligations already due, such as inspection before departure. Safety alone permits an update to remain unfinished forever.
 
-DUCS~\cite{Nahabedian2016SEAMS} generates update and subsequent control from global transfers and transition requirements~\cite[Defs.~4.1--4.3]{Nahabedian2020}; GR(1) updating constructs its new controller and bridge independently and runs the new controller afterward~\cite[Def.~3.1, Sec.~4]{Amram2022GR1DynamicUpdate}. Reconnection to subsequent control is therefore already established. FG-DUCS adds local transfers, independent boundaries and initializers to supplied endpoints and targets. Sections~\ref{sec:ducs-cell-construction} and~\ref{sec:related} compare generation responsibilities and OTF implementations.
+\emph{FG-DUCS compiles local choices into a policy for safe finite handover.} The modeler supplies transfers, requirement lifetimes, monitor initializers and compatible endpoint states. The compiler generates mixed-state behavior and chooses a policy; neither a mixed-state graph nor a sequence is supplied. Modeling and transfer code remain the modeler's responsibility; effort reduction is unmeasured.
 
-\par\noindent\textbf{C1: Contract compilation.} A local input semantics with individual requirement boundaries, its generated game, and proofs of correspondence and endpoint-continuation preservation, with an initialization criterion for pure invariants (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
-\par\noindent\textbf{C2: Certifying synthesis.} A sound and complete specialized lazy procedure with checkable WIN/LOSS certificates (Section~\ref{sec:algorithm}).
-\par\noindent\textbf{C3: Granularity boundaries.} Complete component and requirement examples, sufficient merging obstructions and a reverse separation; Rolling supplies an exact batch bound (Sections~\ref{sec:example} and~\ref{sec:rq2}).
-\par\noindent\textbf{C4: Implementation evidence.} An MTSA tool evaluated on \ApplicationContracts{} adapted contracts and \VThreeESixMainPairs{} constructed comparisons, retaining all adverse outcomes (Section~\ref{sec:evaluation}).
+Existing DUCS generates update and subsequent control from global transfers and transition requirements~\cite{Nahabedian2016SEAMS,Nahabedian2020}; GR(1) updating generates a new controller and bridge~\cite{Amram2022GR1DynamicUpdate}. Both express Cell with additional supplied structure (Section~\ref{sec:ducs-cell-construction}). FG-DUCS fixes the endpoints and generates the intervening game from local transfers, independent boundaries and initializers. Its contribution is this construction and its guarantees, not greater general expressiveness or a new reachability algorithm.
+
+Our contributions are:
+\par\noindent\textbf{C1: A local contract and its meaning.} We define the generated game, prove local-history correspondence and selected-endpoint preservation, and give an invariant-initialization criterion (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
+\par\noindent\textbf{C2: A policy with checkable evidence.} Sound and complete lazy synthesis returns a completing policy and rank or a losing-region certificate (Section~\ref{sec:algorithm}).
+\par\noindent\textbf{C3: Boundaries of update granularity.} Examples and merging obstructions explain granularity-dependent feasibility, including a reverse example where finer updates lose (Sections~\ref{sec:example} and~\ref{sec:rq2}).
+\par\noindent\textbf{C4: Implementation evidence.} An MTSA implementation is checked against finite reference games and evaluated on \ApplicationContracts{} adapted contracts; constructed comparisons test the granularity mechanisms separately (Section~\ref{sec:evaluation}). All unfavorable and unresolved outcomes are retained.
+
+The target is a finite maintenance interval: controllable work may pause while pending environment events finish. Commands and handover require global uncontrollable quiescence. Continuous service and perpetual uncontrollable arrivals fall outside this contract; real-time bounds and execution conformance need additional assumptions.
 
 Our public replication package~\cite{FGDUCSAnonymousArtifact}, prepared for this paper, includes the cited Technical Appendix A--P and Supplement S1--S5 as Parts I and II of \texttt{supplementary\_material.pdf}. Data Availability gives versioned links.
 
@@ -127,21 +132,18 @@ Endpoint tuples list $A,B$, controller and its requirement monitor. The old init
 
 \input{figures/cell_story_visual.tex}
 
-\paragraph{Feasibility and completion.}
-Moving the workpiece enables local replacements; joint replacement requires both stations empty, impossible under any move or boundary. Endpoints and requirements remain fixed. Inspection may repeat forever safely, but every policy arrow decreases rank from six or five to zero, proving all-outcome handover from both entries.
-
-\paragraph{A whole policy from the local input.}
-Figure~\ref{fig:cell-story} covers both entries and targets: 13 states and 11 edges. Shown events have singleton outcomes; other controllables are disabled. Activation on the first path creates an inspection duty cleared before handover to $z_B$; the second reaches $z_A$. Technical Appendix~\ref{ta:cell} and S1 give paths and closure.
+\paragraph{The generated policy.}
+Figure~\ref{fig:cell-story}'s 13 states and 11 edges cover both entries and targets. Each displayed event has one outcome; other controls are disabled. Both paths move the workpiece to enable empty-station replacements. The first also clears inspection debt before handover. Every arrow decreases rank from six or five to zero, excluding safe but endless inspection. A joint transfer always requires both stations empty and is impossible. Technical Appendix~\ref{ta:cell} and S1 give the paths and closure.
 
 \Needspace{7\baselineskip}
 \subsection{Policy: Scheduling Requirement Lifetimes}
-Policy(2) separates requirement boundaries. Four bits record active old/new audit rules $a_o,a_n$ and roles $r_o,r_n$. The interval invariant $(a_o\lor a_n)\land\neg(r_o\land r_n)$ forces new-audit start before old-audit stop, but old-role stop before new-role start. No order is supplied. The plant has one state in each version and all ordinary self-loops; transfer is identity. Each endpoint alternates its version-specific log and service, with its own access event enabled in either state. Its audit monitor rejects service without a log, and its role monitor rejects the other version's access. New audit starts unlogged and new role starts safe. The old endpoint supplies logged and unlogged entries; one service event first clears a logged entry. A whole policy then executes
+Policy(2) makes the second choice explicit. Four bits record active old/new audit rules $a_o,a_n$ and roles $r_o,r_n$. The interval invariant
 \[
-\mathsf{start}_A,\ \mathsf{stop}_A,\ \mathsf{stop}_R,\ \rho,\ \mathsf{start}_R,
+ (a_o\lor a_n)\land\neg(r_o\land r_n)
 \]
-where $A$ denotes audit, $R$ role and $\rho$ an identity component transfer. Ranks six and five decrease to the compatible new endpoint; other controllables are disabled.
+requires new-audit start before old-audit stop, but old-role stop before new-role start. The new audit monitor starts unlogged and requires a log before service. Each endpoint alternates its own log and service events and permits only its version's access role. With an identity component transfer, a completing policy clears any pending old service, starts new audit, stops old audit and role, transfers, and starts the new role. It reaches a compatible new endpoint from both old states; all outcomes decrease rank from at most six.
 
-If both starts are merged and both stops are merged, the first start overlaps roles and the first stop removes audit coverage. Ordinary events and transfer cannot change these active bits, so neither entry has a completing merged policy. Technical Appendix~\ref{ta:policy_interpretation} supplies every plant, controller, monitor, initializer and target, plus the whole policy and losing closure. This isolates boundary granularity; it does not assert greater expressiveness than DUCS or service continuity.
+If the starts are merged and the stops are merged, the first start overlaps roles and the first stop removes audit coverage. Ordinary events and transfer preserve the four activity bits, so neither old entry has a completing merged policy. Technical Appendix~\ref{ta:policy_interpretation} gives the complete finite input, policy and losing closure. This isolates independently scheduled requirement lifetimes.
 
 \section{Defining an Update Contract}
 \label{sec:formalization}
@@ -157,22 +159,38 @@ Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ finishes every co
 
 \input{technical_fragments/ducs_cell_correspondence.tex}
 
+\section{What a Winning Policy Guarantees}
+\label{sec:interpretation-execution}
+\label{sec:proof}
+\label{sec:runtime-boundary}
+A contract gives each requirement an active interval and an initial obligation. A winning policy enforces the supplied monitors over those intervals. Applying this result to a source requirement or an implementation also needs the connections in Table~\ref{tab:guarantee-evidence}.
+\input{figures/guarantee_evidence_map.tex}
+
+\subsection{Giving Requirements Their Intended Lifetimes}
+\label{sec:monitor-meaning}
+\input{technical_fragments/activation_duty_main.tex}
+\paragraph{When prior histories are part of the requirement.}
+\input{technical_fragments/history_scope_main.tex}
+Cell's pending initializer is exact for occupancy-based debt but conservative for a start-only reference that starts clear. An A inclusion alone establishes neither the occupancy duty nor ACT.
+
+\subsection{Execution and Handover}
+
+The execution connection has four distinct premises (Technical Appendix~\ref{ta:execution_proof}):
+\par\noindent\textbf{A1:} endpoint observations preserve component/monitor states and same-labeled endpoint edges.
+\par\noindent\textbf{A2:} update control disables only unselected controllables, preserves every UC event/outcome, reports the successor and eventually observes a next event.
+\par\noindent\textbf{A3:} commands start quiescently and finish atomically, finitely and failure-free with an observed modeled successor.
+\par\noindent\textbf{A4:} entry observes/copies the actual old state; quiescent handover installs the selected compatible state, using finite failure-free linearizable boundaries~\cite{HerlihyWing1990}.
+
+Under A1--A4, every execution maps to the linked model and reaches handover within the entry rank (Theorem~\ref{thm:realization}). History completeness means that every actual activation history, with its declared reference origin, belongs to the supplied history scope; with RS it justifies the residual interpretation. No event-choice fairness is assumed. Internal divergence and unobservable outcomes are excluded; rank bounds events, not time.
+
 \section{Synthesizing and Checking an Update Policy}
-Lazy explores products on demand using finite reachability reasoning~\cite{Cimatti1998StrongPlanning,TripakisAltisen1999,CiolekEtAl2023OTFDCS}.
+The procedure specializes strong-planning and on-the-fly reachability principles~\cite{Cimatti1998StrongPlanning,TripakisAltisen1999,CiolekDCS}, retaining every queried event outcome and producing evidence for every old entry.
 \label{sec:algorithm}
 
-A \emph{bucket} is $\Post(q,a)$; an empty bucket disables $a$. \emph{UC priority:} disabling controls at a UC-enabled state preserves winning: it removes runs and creates no deadlock because every UC outcome remains (Lemma~\ref{lem:uc-priority}). \emph{Memoryless sufficiency:} whenever a history-dependent policy wins, a state-based one wins; the proof below establishes this by attractor ranks and a history-independent losing-region response.
+A \emph{bucket} is $\Post(q,a)$; empty means disabled. Disabling controls at a UC-enabled state removes runs without creating deadlock, preserving winning (\emph{UC priority}, Lemma~\ref{lem:uc-priority}). The proof below also establishes memoryless sufficiency using ranks and a history-independent losing-region response.
 
 \subsection{Lazy Successor Generation}
-Algorithm~\ref{alg:otf} constructs a reachability attractor~\cite{CassezEtAl2005TimedGames}. It tracks discovered states $V$, states $X\subseteq V$ with all UC candidates queried, and proved winners $W$. States in $X$ may retain unqueried controls; $W$ may omit winners.
-
-Expansion queries every UC candidate. If none is enabled, it queries controls through the next nonempty bucket or exhaustion; $\mathsf{Retry}$ resumes unfinished cursors. Each query retains all outcomes. Candidates include local events and precedence-enabled commands in any fixed finite order.
-
-\emph{Promote.} A safe expanded state wins when its nonempty proving set---all UC successors, or one control bucket at quiescence---lies in $W$; its rank is one above their maximum. Reverse incidences trigger predecessor reconsideration. Failure requires exhausted candidates and a promotion fixed point. Once all entries win, extraction selects one lower-rank control bucket at each reached quiescent non-goal, none elsewhere; it need not follow promotion or minimize length.
-
-
-
-\par
+Algorithm~\ref{alg:otf} constructs a reachability attractor~\cite{CassezEtAl2005TimedGames}. $V$ contains discovered states, $X$ those with all UC candidates queried, and $W$ proved winners. A UC state needs all successors to win; a quiescent state needs one complete control bucket. Lazy queries controls incrementally, keeping unfinished cursors in $\mathsf{Retry}$. Each promotion records a complete nonempty proving set and a rank above its members. Reverse incidences propagate promotions. Failure requires exhausted candidates and a promotion fixed point. Extraction chooses lower-rank controls and compatible targets; it need not minimize path length.
 
 \SetAlgoNlRelativeSize{-1}
 \SetAlgoRefRelativeSize{-1}
@@ -220,42 +238,16 @@ $\mathsf{Open}\leftarrow\{q\in Q_0\mid\Safe(q)\land q\notin\Goal\}$; set $\rank(
 \label{thm:lazy-separation}
 With indexed predicates and constant-time bookkeeping, search is linear in discovered states, queried candidates and returned outcomes, excluding preprocessing and Java sorting/scans. Lazy may explore the whole reachable graph. For independent one-state updates, transfer-first Lazy instead visits $n+1$ states versus Direct-Full's $2^n$ subsets; Technical Appendices~\ref{ta:exploration_order} and~\ref{ta:additional_populations} give the accounting and complete default-order proof.
 
-\section{Interpreting and Executing a Winning Policy}
-\label{sec:interpretation-execution}
-\label{sec:proof}
-\label{sec:runtime-boundary}
-The construction proves properties of the supplied game. Requirement meaning and execution conformance are separate obligations; Table~\ref{tab:guarantee-evidence} states the evidence for each before the evaluation.
-\input{figures/guarantee_evidence_map.tex}
-
-\subsection{Giving Requirements Their Intended Lifetimes}
-\label{sec:monitor-meaning}
-An initializer assigns the obligation present at activation; Cell illustrates why this is more than selecting a safe state.
-
-\input{technical_fragments/activation_duty_main.tex}
-\paragraph{Obligations that begin at activation.}\label{sec:activation-scoped-main}
-ACT starts $\Box\varphi$ at the actual post-start observer vector. A faithful invariant monitor reached safely with that vector has exactly the ACT continuation language (Proposition~\ref{prop:lookup-act}); the reference word need not be plant-executable. Source checks prove this correspondence for 900 non-error cells in 138 saved tables. Application requires the actual key, matching future observations and no fallback. PC2 and GSM have direct policy arguments below.
-\paragraph{When prior histories are part of the requirement.}
-\input{technical_fragments/history_scope_main.tex}
-Cell's pending initializer is exact for occupancy-based debt but conservative for a start-only reference that starts clear. A inclusion alone establishes neither the occupancy duty nor ACT.
-
-\subsection{Execution and Handover}
-
-The execution connection has four distinct premises (Technical Appendix~\ref{ta:execution_proof}):
-\par\noindent\textbf{A1:} endpoint observations preserve component/monitor states and same-labeled endpoint edges.
-\par\noindent\textbf{A2:} update control disables only unselected controllables, preserves every UC event/outcome, reports the successor and eventually observes a next event.
-\par\noindent\textbf{A3:} commands start quiescently and finish atomically, finitely and failure-free with an observed modeled successor.
-\par\noindent\textbf{A4:} entry observes/copies the actual old state; quiescent handover installs the selected compatible state, using finite failure-free linearizable boundaries~\cite{HerlihyWing1990}.
-
-Under A1--A4, every execution maps to the linked model and reaches handover within the entry rank (Theorem~\ref{thm:realization}). History completeness means that every actual activation history, with its declared reference origin, belongs to the supplied history scope; with RS it justifies the residual interpretation. No event-choice fairness is assumed. Internal divergence and unobservable outcomes are excluded; rank bounds events, not time. Table~\ref{tab:guarantee-evidence} separates these premises from the scope checks and proofs actually obtained.
-
 \section{Implementation and Evaluation}
 \label{sec:evaluation}
 \subsection{Design and Implementation}
 
-Four FG procedures use \ApplicationContracts{} contracts from \ApplicationModels{} inputs. Base has no interval requirement; R1 restricts ordinary actions and R2 orders boundaries versus transfers. PC2-Rolling adds continuous availability. Legacy, our DUCS/GR fork, synthesizes subsequent control instead.
+RQ1 tests feasibility mechanisms on constructed fine/merged pairs. RQ2 separates finite reference games, application certificates and source-monitor checks. RQ3 compares exploration and cost on \ApplicationContracts{} adapted contracts. Extended budgets and auxiliary variants remain separate from fixed-budget medians.
+
+The \ApplicationModels{} inherited inputs each have three variants: Base has no interval requirement, R1 restricts ordinary actions, and R2 relates boundaries to transfers. PC2-Rolling is a separate source-derived availability case. Legacy synthesizes subsequent control as well as updating, a different objective.
 
 \paragraph{Implementation.}
-Our Modal Transition System Analyser (MTSA) extension~\cite{paper:MTSA2008} checks certificates~\cite{McConnellEtAl2011Certifying}; Link checks old--update--new composition, entries and targets. An independent oracle parses restricted Finite State Processes (FSP). Finite-JSON runs save losing membership; FSP benchmark runs report only its statistics. Runtime conformance is unchecked.
+Our Modal Transition System Analyser (MTSA) extension~\cite{paper:MTSA2008} checks certificates~\cite{McConnellEtAl2011Certifying}; Link checks old--update--new composition, entries and targets. An independent oracle parses restricted Finite State Processes (FSP). Finite-JSON runs save losing membership; FSP benchmark runs report only its statistics.
 
 \paragraph{Use of generative AI}
 Generative AI assisted contract and example design, proof drafting, Java solver/frontend implementation, Python checkers, experiment drivers, execution, result analysis and manuscript editing. Validation used certificate and exhaustive checks for algorithms, source and automaton comparisons for initialization, saved-output checks for tables and primary sources for citations. Claude Opus 5.5 and ChatGPT Pro/Latest supplied editorial reviews, not empirical evidence. Authors retain responsibility; shared AI/code can produce correlated faults. Technical Appendix~\ref{ta:implementation_details} details tool roles; no human evaluation was performed.
@@ -307,25 +299,14 @@ Two components with one state per version share UC labels $x,y$. The only UC loo
 
 \Needspace{4\baselineskip}
 \subsubsection{A Source-Derived Calibration Case}\label{sec:pc2-case}
-PC2-Rolling adds calibration before replacement arms resume production, requiring another arm operational. Calibration requests are controllable; completions are UC; transfers enter calibration states. Erasing calibration recovers the original operational process, without whole-problem equivalence. Fixed endpoints retain baseline requirements plus availability, giving \PCTwoTraceNewStarts{} new starts. Endpoint availability tracks requests/completions; the interval also treats transfers as calibration entry. Transfers preserve initializer observers. The 25 boundaries and two transfers have no supplied order; Technical Appendix~\ref{ta:pc2-generation} compares generation responsibilities.
+PC2-Rolling adds calibration while requiring another arm operational. Requests are controllable, completions UC, and transfers enter calibration while preserving initializer observers. Erasing calibration recovers the original operational process, without whole-problem equivalence. Endpoints retain baseline requirements plus availability; the interval additionally treats transfers as calibration entry. The 25 boundaries and two transfers have no supplied order (Technical Appendix~\ref{ta:pc2-generation}).
 
-\paragraph{Generated update and certificate.}
-The saved policy calibrates arm~1, waits for completion, then calibrates arm~2 and waits again. Transfers directly enter calibration, so no calibration request occurs. All \PCTwoCaseEntries{} entries are covered; every outcome decreases rank from at most \PCTwoCaseMaxRank{} and keeps \PCTwoCaseMinOperationalArms{} arm outside calibration. Link checks the full old--update--new composition. Table~\ref{tab:pc2-saved-path} and complete counts are in Technical Appendix~\ref{ta:pc2_history_boundary}; this replay supplies no timing.
+The saved policy calibrates arm~1, waits for completion, then calibrates arm~2 and waits again. All \PCTwoCaseEntries{} entries are covered, every outcome decreases rank from at most \PCTwoCaseMaxRank{}, and at least \PCTwoCaseMinOperationalArms{} arm stays outside calibration. Link checks the full composition. Each of the thirteen source invariants holds at its start and through the remaining start-only suffix until handover, proving ACT on reached tuples. This covers neither all initializer tuples nor all 138 occurrences; GSM below exercises ordinary actions under an active new requirement.
 
-\paragraph{Source obligations through handover.}
-Arm~1 retains $\Box(out_1\Rightarrow Drilled_1\land Cleaned_1\land Painted_1)$. Successful tool results set its initially false fluents; reset clears them. At the eighth start on the saved path, no tool has succeeded. Initialization installs zero observers, so departure still requires all three tasks; falsely marking them finished would allow violating $out_1$.
+History-wide obligations give a different result: 87/126 entries fail the safe-full-prefix check (21 before entry, 66 during update), and all admit an earlier violating cycle restoring zero observers. Safe-history nonemptiness for 38,288 initializer tuples and runtime remain unchecked. Technical Appendix~\ref{ta:pc2_history_boundary} retains each source formula, activation path and history partition.
 
-Every run from all 126 entries traverses the same thirteen-start chain. Each source invariant holds at its start and is preserved by the remaining starts until the endpoint takes over, proving all thirteen ACT obligations on this policy's reached tuples. No ordinary event occurs on that suffix; GSM separately shows active ordinary behavior. This does not cover all initializer tuples or all 138 occurrences (Technical Appendix~\ref{ta:pc2_all_act}).
-
-Only 39/126 entries admit a safe full prefix; 87 fail (21 before entry, 66 during update). All admit an earlier violating cycle restoring zero observers. These limit history-wide interpretations, not ACT. Safe-history nonemptiness for 38,288 initializer tuples and runtime remain unchecked (Technical Appendix~\ref{ta:pc2_history_boundary}).
-
-\begingroup
-\emergencystretch=1em
-\paragraph{PC2-Rolling: fixed-merge obstruction.}
-All checked old entries admit both raw transfers. Before their mandatory joint transfer, old plants lack calibration actions; ordinary moves and boundaries preserve readiness even after releasing old control. Every joint outcome calibrates both arms and clears both interval readiness bits, reaching absorbing error. This source argument proves impossibility independently of solver completion.
-The merged solver and fine Direct-Full nevertheless time out at \VThreeESixPCTwoCap{}~s/\VThreeESixPCTwoHeap{}~GiB; these are not losing decisions.
-
-\endgroup
+\paragraph{Why the fixed merge loses.}
+Every old entry admits both raw transfers. Before joint transfer, old plants lack calibration actions and all other steps preserve readiness. The joint transfer therefore puts both arms in calibration, clearing both interval readiness bits and reaching error. This proves impossibility, while the merged solver and fine Direct-Full both time out at \VThreeESixPCTwoCap{}~s/\VThreeESixPCTwoHeap{}~GiB. Those timeouts remain unresolved solver results.
 
 \paragraph{Inherited inputs and additional witnesses.}
 On nine inherited inputs, merging transfers, boundaries or both changes \VThreeEOneChanged{}/\VThreeEOneTrials{} Base/R1 decisions. Their total raw transfers omit Rolling's startup phase; totality alone does not ensure safe merging. States decrease in \VThreeEOneStatesReduced{} comparisons and stay equal in \VThreeEOneStatesEqual{}. R2 names individual events and is excluded. This null result limits observed granularity benefits.
@@ -338,13 +319,6 @@ Additional restricted-transfer comparisons retain both-LOSS and incomplete cases
 \label{sec:rq1}
 
 
-\paragraph{Winning and losing applications.}\label{sec:railcab-policy}\label{sec:contract-case}
-Railcab has four component pairs, twelve requirement boundaries and a transfer with ENDOFTS/AC outcomes. Two new-AC states differ in approachingCrossing memory, so location alone determines neither initialization nor target compatibility. All 22 entries of each saved policy stop every old requirement before the first new start: Base allows 1--4 ordinary events in this unprotected interval, whereas R1 allows none and retains seven interval guards. Both pass certificate/Link checks. Independent lifetimes thus require the modeler to state any continuously needed obligation as an interval requirement; WIN alone does not supply it. These exports do not characterize all benchmark gaps (Technical Appendix~\ref{ta:saved-gaps}; S4).
-
-
-
-Industry/R1 forbids validation between old-stop and new-start and loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries by exhaustive checking. Its trap offers violating GF1/TOR validation or an infinite DSD1 rejection cycle; disabling DSD1 deadlocks. The losing closure excludes all orders. Native DUCS and its aligned fork win on their different subsequent-control problem~\cite[Defs.~4.1--4.3]{Nahabedian2020}. Exempting GF1 yields \FixedIndustryVariantWinningEntries{} WIN through earlier paths, not trap escape (Technical Appendix~\ref{ta:additional_populations}); these checks supply no timing.
-
 \textbf{Answer.} On the finite validation fixtures, Lazy and Direct-Full match all expected results from independently reconstructed labeled transition systems (LTSs). Application certificates additionally check the shared Java game semantics; source-level initialization evidence is reported separately below.
 \paragraph{Independent reconstruction and certificates.}\label{tab:validation-scope}
 Python independently constructs graphs and certificates for $\FixedRQOneFixtures{}$ fixtures: $\FixedRQOneFixtures{}\times\FixedRQOneMethods{}=\FixedRQOneJobs{}$ jobs yield \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS and \FixedRQOneInvalid{} invalid (missing events, deadlocks or suppressed UC). All \FixedRQOneEligible{} eligible jobs pass certificate/exhaustive checks; all WIN jobs pass Link. Explicit successors are separate; frontend and endpoint/goal code are shared. These jobs are not independent applications.
@@ -352,6 +326,11 @@ Python independently constructs graphs and certificates for $\FixedRQOneFixtures
 \FixedTargetQuiescenceFixturesWord{} monitor-free fixtures independently reconstruct restricted FSP, endpoints, complete games and goals. All \FixedLookupMonitors{} NEW tables match \FixedLookupEntries{} reconstructed entries. A separate source parser checks the 46 invariant positions across three variants: initial truth, source observer rules and all 35,283 transitions from 900 safe monitor--observer pairs agree. Induction gives source-invariant fidelity for these saved objects and their checked alphabets, not arbitrary FSP compilation, physical decoding or actual activation conformance (Technical Appendices~\ref{ta:history_checks} and~\ref{ta:lookup-act}).
 
 % FGDUCS_RELOCATED: history_checks
+
+\paragraph{What application WIN and LOSS mean.}\label{sec:railcab-policy}\label{sec:contract-case}
+Railcab's 22-entry Base policy permits 1--4 ordinary events between old-stop and new-start; R1's saved policy has no ordinary gap events and retains seven interval guards. Both pass certificate/Link checks. A continuously needed duty must therefore be declared as an interval requirement; WIN alone does not supply it (Technical Appendix~\ref{ta:saved-gaps}).
+
+Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries. In its final trap, GF1/TOR validation violates new monitors; DSD1 admits an endless rejection cycle, while withholding its only safe validation at quiescence deadlocks. Exhaustive closure excludes every order. Native DUCS wins on its different subsequent-control problem. Full case details and diagnostic variants are retained in Technical Appendix~\ref{ta:additional_populations} and S4.
 
 \paragraph{Checking initializer interpretation.}
 There are \RSNewOccurrences{} safe-history NEW inclusions and \VThreeRSUpdExact{} entry-scoped UPD justifications (46 R1/89 R2), distinct from ACT. Empty scopes pass vacuously. Technical Appendix~\ref{ta:history_checks} gives all formula, label, reset and automaton checks.
@@ -366,7 +345,7 @@ The \FixedPolicies{} WIN certificates have \FixedPolicyStatesMin{}--\FixedPolicy
 \label{sec:rq3}
 
 
-\textbf{Answer.} Lazy avoids states and queries in all \FixedDirectFullPairs{} completed Direct-Full pairs. Within the fixed budget it decides \FixedLazyDecisions{} contracts, Eager \FixedEagerDecisions{} and Direct-Full \FixedDirectFullDecisions{}; all paired decisions agree (Table~\ref{tab:xeon-rq3}). Update-first is faster on \FixedUpdateFirstFaster{}/\FixedUpdateFirstPairs{} paired solver medians but adds \FixedUpdateFirstAdditionalTOWord{} timeouts. Lazy returns LOSS for Industry/R1 and times out on PC2/R2 at 1,200~s/64~GiB (fixed), 3,600~s/64~GiB (sensitivity) and 7,200~s/200~GiB (S4.6, earlier series); the limiting resource is unknown.
+\textbf{Answer.} Lazy avoids states and queries in all \FixedDirectFullPairs{} completed Direct-Full pairs. Within the fixed budget it decides \FixedLazyDecisions{} contracts, Eager \FixedEagerDecisions{} and Direct-Full \FixedDirectFullDecisions{}; all paired decisions agree (Table~\ref{tab:xeon-rq3}). Update-first is faster on \FixedUpdateFirstFaster{}/\FixedUpdateFirstPairs{} paired solver medians but adds \FixedUpdateFirstAdditionalTOWord{} timeouts. Lazy returns LOSS for Industry/R1 and times out on PC2/R2 at 1,200~s/64~GiB (fixed), 3,600~s/64~GiB (sensitivity) and 7,200~s/200~GiB (S4, earlier series); the limiting resource is unknown.
 
 Legacy yields \LegacyNativeWins{} WIN, \LegacyNativeOOM{} OOM and \LegacyCaptureNM{} unmeasured snapshot-cap cases. Its differing subsequent-control objective precludes same-game ratios or impossibility inferences (Technical Appendix~\ref{ta:additional_populations}).
 
@@ -376,14 +355,14 @@ Legacy yields \LegacyNativeWins{} WIN, \LegacyNativeOOM{} OOM and \LegacyCapture
 \caption{All \ApplicationContracts{} contracts per method. TO denotes one capped trial, not a timing median. Ratios summarize heterogeneous completed pairs; values above one favor Lazy.}
 \label{tab:xeon-rq3}\label{tab:paired-costs}
 \centering\small
-\begin{tabular}{@{}lrrrrr@{}}\toprule
-Method & WIN/LOSS/TO & Pairs & Faster than Lazy & Solver ratio & Total JVM ratio\\\midrule
-Lazy & \FixedLazyOutcomes{} & --- & --- & --- & ---\\
-Eager & \FixedEagerOutcomes{} & \FixedEagerPairs{} & \FixedEagerFaster{} & \FixedEagerSolverRatio{} & \FixedEagerJVMRatio{}\\
-Update-first & \FixedUpdateFirstOutcomes{} & \FixedUpdateFirstPairs{} & \FixedUpdateFirstFaster{} & \FixedUpdateFirstSolverRatio{} & \FixedUpdateFirstJVMRatio{}\\
-Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullPairs{} & \FixedDirectFullFaster{} & \FixedDirectFullSolverRatio{} & \FixedDirectFullJVMRatio{}\\\bottomrule
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & WIN/LOSS/TO & Faster / pairs & Solver ratio & Total JVM ratio\\\midrule
+Lazy & \FixedLazyOutcomes{} & --- & --- & ---\\
+Eager & \FixedEagerOutcomes{} & \FixedEagerFaster{} / \FixedEagerPairs{} & \FixedEagerSolverRatio{} & \FixedEagerJVMRatio{}\\
+Update-first & \FixedUpdateFirstOutcomes{} & \FixedUpdateFirstFaster{} / \FixedUpdateFirstPairs{} & \FixedUpdateFirstSolverRatio{} & \FixedUpdateFirstJVMRatio{}\\
+Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullFaster{} / \FixedDirectFullPairs{} & \FixedDirectFullSolverRatio{} & \FixedDirectFullJVMRatio{}\\\bottomrule
 \end{tabular}
-\par\smallskip{\footnotesize TO: timeout; no OOM/unmeasured cases. $\dagger$ Workflow/R2 retains its interruption and later same-setting timeout (S4). Comparator/Lazy ratios are median [min--max] across completed pairs of five-run medians. Faster counts lower comparator solver time. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs have no ratio.}
+\par\smallskip{\footnotesize TO: timeout; no OOM/unmeasured cases. $\dagger$ Workflow/R2 retains its interruption and later same-setting timeout (S4). Comparator/Lazy ratios are median [min--max] across completed pairs of five-run medians. Faster / pairs counts lower comparator solver medians among all completed pairs. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs have no ratio.}
 \end{table}
 
 Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs; Technical Appendix~\ref{ta:workload_rows} gives exact states, queries and costs. In R2, Update-first uses fewer states and a lower solver median on six of eight completed pairs, showing order sensitivity (Technical Appendix~\ref{ta:additional_populations}).
@@ -405,13 +384,17 @@ Travel reaches timeouts and out-of-memory failures under all methods, including 
 \section{Related Work}
 \label{sec:related}
 \label{sec:expressiveness}
-Zhang and Cheng formalize temporal adaptation~\cite{ZhangCheng2006ALTL}; scenario-based synthesis uses history-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates}. Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite[Secs.~4.3--4.6]{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite[Secs.~4.3, 5.2]{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite[Sec.~2]{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address replacement, migration and transition safety. Live Synthesis carries unfinished obligations~\cite{FinkbeinerEtAl2022LiveSynthesis}; initialization relates to scopes~\cite{Dwyer1999Patterns} and residual rewriting~\cite{RosuHavelund2005Rewriting}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}; compositional/modular control structures specifications~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}. OTF-DCS requires marked extensions~\cite[Sec.~3]{CiolekEtAl2023OTFDCS}; FG requires every maximal update run to reach handover.
+\paragraph{Updating and preserving existing control.}
+DUCS and GR(1) updating generate the intervening control from different native inputs; Section~\ref{sec:ducs-cell-construction} and Table~\ref{tab:main-generation} give concrete Cell constructions. O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. The fork's plain OTF precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}; identity with the 2024 release is unestablished. FG adds supplied endpoints/targets, local transfers, individual lifetimes and initializers to this existing reconnection.
 
-Ma et al. ensure transaction version consistency through dynamic dependencies and sufficient freeness, allowing concurrent versions and selective blocking~\cite[Secs.~4.1--4.3]{MaEtAl2011VersionConsistency}. This differs from UC quiescence; finite handover alone establishes no transaction consistency.
+\paragraph{On-demand synthesis.}
+DCS already explores component products on demand, defers controllable alternatives, treats mixed states as uncontrollable, and propagates success or failure backward~\cite[Sec.~IV]{CiolekDCS}. Its 2016 formulation addresses safety and reachability; the later OTF-DCS synthesizes safe nonblocking directors~\cite{CiolekEtAl2023OTFDCS}. FG specializes these search patterns to its generated contract, with complete event-outcome buckets and all-entry certificates for requirement lifetimes and matched handover. Compositional and modular control instead structure specifications for synthesis~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}.
 
-O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. The fork's plain OTF precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}; identity with the 2024 release is unestablished. FG adds supplied endpoints/targets, local transfers, individual lifetimes and initializers to this existing reconnection.
+\paragraph{Requirements across adaptation.}
+Temporal adaptation~\cite{ZhangCheng2006ALTL}, scenario-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates} and Live Synthesis~\cite{FinkbeinerEtAl2022LiveSynthesis} address obligations across change. Our initialization uses scoped requirements~\cite{Dwyer1999Patterns} and residual reasoning~\cite{RosuHavelund2005Rewriting}. State attraction bounds startup under weak invariance~\cite{NooruldeenSchmidt2015}. Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} allow individual or simultaneous reconfiguration, requirements that depend on features, and state retention or reset. Their supervisor permits a marked continuation from every reachable state; FG requires every maximal update run to finish at a supplied controller.
 
-Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} support individual/simultaneous reconfiguration, feature-dependent requirements and state retention/reset. Their supervisor permits a marked continuation from every reachable state. FG requires every maximal update run to finish at a supplied controller, with independent lifetimes and declared initialization.
+\paragraph{Operational update mechanisms.}
+Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite[Secs.~4.3--4.6]{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite[Secs.~4.3, 5.2]{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite[Sec.~2]{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address replacement, migration and transition safety. Ma et al. enforce transaction version consistency using dynamic dependencies and sufficient freeness, permitting concurrent versions and selective blocking~\cite[Secs.~4.1--4.3]{MaEtAl2011VersionConsistency}. These mechanisms differ from global UC quiescence; finite handover alone establishes no transaction consistency.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -427,7 +410,7 @@ FG-DUCS compiles local transfers, requirement lifetimes and monitor initializati
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c74-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c75-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

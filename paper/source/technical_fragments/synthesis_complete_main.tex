@@ -1,5 +1,5 @@
 \begin{proof}
-\emph{Coverage.} Initialization/discovery queues every new safe non-goal in $\mathsf{Open}$. Only expansion removes it, after querying all UC candidates. At quiescence, expansion/retries advance a finite control cursor and retain every nonwinner with candidates left in $\mathsf{Retry}$; promotion removes only winners. Thus all expanded states have complete UC outcomes, unfinished quiescent nonwinners remain retryable, and unexpanded safe non-goals remain open.
+\emph{Coverage.} Every new safe non-goal enters $\mathsf{Open}$ and leaves only after expansion queries all UC candidates. At quiescence, finite control cursors retain unfinished nonwinners in $\mathsf{Retry}$; promotion removes only winners. Thus expanded states have complete UC outcomes, unfinished nonwinners remain retryable, and unexpanded safe non-goals remain open.
 
 \emph{Termination.} Each state is expanded/promoted once and each candidate queried once. Reverse incidences are processed on promotion, so the finite search terminates.
 

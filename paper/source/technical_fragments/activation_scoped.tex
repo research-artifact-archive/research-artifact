@@ -13,28 +13,7 @@ This requires an appropriate initializer, not merely A inclusion. Section~\ref{s
 
 \subsection{From a Safe Lookup Cell to an Activation-Scoped Invariant}
 \label{ta:lookup-act}
-The preceding proposition specializes standard residual-language reasoning~\cite{RosuHavelund2005Rewriting,FinkbeinerEtAl2022LiveSynthesis} and can be applied without a physically executable safe reference history. This matters because a table can provide a correct initial state for a requirement that begins now, even when the actual past violated that requirement.
-
-Let $V$ be the valuation space of a fixed vector of deterministic observers, with total update $d:V\times\Sigma\to V$ and initial vector $v_0$. The alphabet and updates include the declared observation convention: an unobserved command may stutter, but this choice must be the same in the reference monitor and the interpreted execution. For a propositional predicate $\varphi$ over this vector, define
-\[
- S_\varphi=\{h\mid \forall u\preceq h:\varphi(d^*(v_0,u))\},\qquad
- \operatorname{ACT}_\varphi(v)=\{w\mid\forall u\preceq w:\varphi(d^*(v,u))\},
-\]
-where $u\preceq w$ ranges over all finite prefixes, including the empty prefix. Assume a deterministic safety monitor $M$ is faithful to this invariant: its non-error language from its initial state is exactly $S_\varphi$.
-
-\begin{proposition}[Safe lookup cells for pure invariants]
-\label{prop:lookup-act}
-Suppose a lookup entry at vector $v$ selects a non-error state $m$ reached together with $v$ by some safe word in the unrestricted monitor--observer product, or selects a state with the same continuation language. Then $\varphi(v)$ holds and $L_M(m)=\operatorname{ACT}_\varphi(v)$. The witnessing word need not be executable by the plant or satisfy the update game's one-shot command restrictions.
-\end{proposition}
-\begin{proof}
-Let $h$ witness the product pair $(m_h,v)$ and let $m$ be the selected state. Non-error reachability and monitor faithfulness give $h\in S_\varphi$, hence $\varphi(v)$. For every suffix $w$, determinism and faithfulness give
-\[
- w\in L_M(m_h)\ \Longleftrightarrow\ hw\in S_\varphi
- \ \Longleftrightarrow\ \forall u\preceq w:\varphi(d^*(v,u))
- \ \Longleftrightarrow\ w\in\operatorname{ACT}_\varphi(v).
-\]
-The middle equivalence uses the safety of the whole prefix $h$ and the current vector $v$; deterministic observers make all future valuations depend only on $v$ and the suffix. Language equivalence transfers the conclusion from $m_h$ to $m$. No step requires plant reachability of $h$, and the equality holds for all suffixes, so also for the subset admitted by an actual plant.
-\end{proof}
+Proposition~\ref{prop:lookup-act} in the main paper gives the criterion and complete proof: a faithful invariant monitor reached safely with observer vector $v$ accepts exactly $\operatorname{ACT}_\varphi(v)$. The witness may come from the unrestricted monitor--observer product; physical executability of that reference history is unnecessary. Here we detail the saved checks of its premises and the remaining application obligations.
 
 \paragraph{What this yields for a winning policy.}
 At a real activation, the adapter must use this lookup entry for the actual post-start observer vector and must subsequently follow the same observation and update rules. Start is accounted for once, before initialization, rather than observed twice. Every active suffix of a winning policy is accepted by the installed monitor; the proposition therefore gives the invariant at activation and after every observed prefix. A previous actual violation is irrelevant to this explicitly start-scoped requirement. This is not the history-inclusive H interpretation, nor does it turn an arbitrary A inclusion into ACT exactness. An undefined/rejected lookup or a separate fallback initializer is outside this argument. Conversely, $\varphi(v)$ alone does not ensure that the table has a non-error entry for $v$.

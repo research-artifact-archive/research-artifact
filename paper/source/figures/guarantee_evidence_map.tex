@@ -1,11 +1,11 @@
 \begin{table}[!htbp]
-\caption{Three guarantees and the evidence needed to apply them. Technical Appendix~\ref{ta:lookup-act} and S3--S4 give the individual requirement checks.}
+\caption{From game guarantees to requirement meaning and execution.}
 \label{tab:guarantee-evidence}
 \centering\small
-\begin{tabular}{@{}p{.15\linewidth}p{.39\linewidth}p{.40\linewidth}@{}}\toprule
-Layer & Established result & Application obligation\\\midrule
-Game & Every policy run safely completes from every entry and matches a supplied target & Theorem~\ref{thm:correctness}; certificate checks use the supplied successor and endpoint predicates\\
-Requirement & Active monitors enforce their declared continuation languages & Cell, PC2 and GSM have direct duty arguments. Saved lookup/source and entry checks support other initializers; actual key/observation conformance and intended scopes remain premises\\
-Execution & Observed execution follows the policy and finishes within its entry rank & A1--A4 below connect observations and atomic commands to the model; execution conformance and real-time bounds are unvalidated\\\bottomrule
+\begin{tabular}{@{}p{.15\linewidth}p{.40\linewidth}p{.39\linewidth}@{}}\toprule
+Connection & Established result & Premises beyond the game\\\midrule
+Game & Safe finite completion from every entry; matching target & Supplied successors and endpoint predicates (Theorem~\ref{thm:correctness})\\
+Requirement & Installed monitors enforce their continuation languages & Correct initializer key, observations and intended scope; checks below and in Technical Appendix~\ref{ta:lookup-act}\\
+Execution & Handover within the entry's event rank & A1--A4 below; platform conformance and elapsed-time bounds remain unvalidated\\\bottomrule
 \end{tabular}
 \end{table}
