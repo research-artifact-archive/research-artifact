@@ -1,6 +1,6 @@
 # Claims, evidence and reproduction
 
-This map concerns the manuscript and evidence in snapshot `fgducs-c75-20261003` of the anonymous public repository. This authors' replication package includes the cited [Technical Appendix A–P and Supplement S1–S5](../paper/README.md#appendix-section-index). Paths are relative to the repository root. Run commands from that root, using fresh output directories when a command writes results.
+This map concerns the manuscript and evidence in snapshot `fgducs-c76-20261003` of the anonymous public repository. This authors' replication package includes the cited [Technical Appendix A–P and Supplement S1–S5](../paper/README.md#appendix-section-index). Paths are relative to the repository root. Run commands from that root, using fresh output directories when a command writes results.
 
 | Claim or question | Concrete evidence | How to inspect or reproduce it | Boundary |
 |---|---|---|---|

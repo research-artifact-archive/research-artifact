@@ -1,10 +1,10 @@
-\subsection{What the Local Interface Generates}
+\paragraph{Native update interfaces.}
 \label{sec:ducs-cell-construction}
-Table~\ref{tab:main-generation} compares native input and generation responsibilities, not general expressive power. A generated new controller can subsequently be fixed and reused, as in GR(1) updating. DUCS already constructs an update environment and goal; GR(1) updating already constructs a bridge. From the supplied local contract, FG-DUCS constructs mixed-component transitions, implements individual monitor lifetimes, and derives handover target tests.
+Table~\ref{tab:main-generation} compares input and generation responsibilities. DUCS generates an update environment and goal; GR(1) updating generates a bridge and new controller, which can then be fixed and reused. FG-DUCS generates mixed-component transitions, individual monitor lifetimes and target tests from a local contract with supplied endpoints.
 
 \begin{table}[!htbp]
 \centering\small
-\caption{Input and generation responsibilities. Existing guarantees are retained in the comparison; the rows do not claim a general translation or measured modeling-effort reduction.}
+\caption{Input and generation responsibilities, retaining existing guarantees. This comparison establishes neither general translations nor measured modeling-effort reduction.}
 \label{tab:main-generation}
 \begin{tabular}{@{}p{.16\linewidth}p{.36\linewidth}p{.43\linewidth}@{}}\toprule
 Interface & Supplied structure & Generated result and guarantee\\\midrule

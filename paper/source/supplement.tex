@@ -314,7 +314,7 @@ The Java entry operation is named \texttt{hotSwapIn}, and its completion-side at
 \clearpage
 \section{Supplementary validation and cost tables}
 \label{supp:tables}
-The main paper asks whether local choices change feasibility (RQ1), whether returned policies satisfy the contract (RQ2), and whether Lazy reduces exploration (RQ3). The evidence below begins with the fixed-budget comparison on 27 adapted contracts and the independent checks. It then gives constructed mechanisms and granularity controls, detailed measurements and policy diagnoses, archived auxiliary campaigns, extended budgets, and separate Legacy references. These populations have different purposes and denominators: constructed pairs, application contracts, checker jobs, and single diagnostic runs are not pooled. Archived RQ1/RQ2/RQ4 names in files retain their historical meanings; each block states how it relates to the current questions.
+To follow the main paper, use Section~\ref{supp:vthree-mechanisms} for granularity comparisons (RQ1), Section~\ref{supp:independent-checks} for independent checks (RQ2), and Sections~\ref{supp:fixed-budget} and~\ref{supp:detailed-diagnostics} for fixed-budget costs and policy diagnoses (RQ3). Auxiliary campaigns, extended budgets and Legacy references follow in separate blocks. Constructed pairs, application contracts, checker jobs and single diagnostic runs have different purposes and denominators and are not pooled. Archived RQ1/RQ2/RQ4 names in files retain their historical meanings; each block identifies its current role.
 
 \subsection{Fixed-budget comparison on the 27 adapted contracts}
 \label{supp:fixed-budget}
@@ -690,24 +690,16 @@ The public anonymous repository contains the full derived source tree, saved RQ1
 Work & Native C/R; T; Res/P & Roots/O; progress premises & Artifact and construction\\
 \midrule
 DUCS (2016, 2020)
-& Global environment/specification switch; set-valued $R$; steps inside $E'$; transition formula $T$ constrains update order (Sec.~4.2)
+& One global old-stop/new-start pair, with distinct events; set-valued global $R$; stages in $E'$; $T$ constrains order (Secs.~4.2--4.3)
 & All old states via total $H$; all outcomes; eventual update events after hotSwap; legal and deadlock-free (Defs.~4.1--4.3)
 & Update controller; FLTL control reduction and MTSA synthesis\\
 GR(1) bridge (2022)
 & Two specifications and switching assertion; old safety guarantees before switch, new specification afterward
 & All prefixes meeting new environment safety; uniformly bounded switch (Def.~3.1); subsequent GR(1) liveness assumes justice
-& Symbolic reachability bridge; winning set $W$ or current-state early stop\\
-Live Synthesis (2022)
-& Old/new LTL and trace or transition system; residual $\Psi(\eta,\varphi)$; old obligations finitely satisfied
-& Universal variant: all old finite traces and new traces; reduction assumes one eventual update (Thm.~6.4)
-& Obligation monitor and LTL synthesis; LiveLTL language inclusion\\
-DES state attraction (2015)
-& Common deterministic plant; request/startup sets; task language $K$ and recognizer
-& All request states; UC preserved; weakly invariant startup set; bounded first completion (Def.~2, Thm.~1)
-& Attractor supervisor; plant/recognizer product and state-attraction algorithm\\
+& New controller $C_2$ and symbolic reachability bridge; switching bookkeeping; winning set $W$ or current-state early stop (Sec.~4)\\
 DCS (2016)
 & Deterministic component LTSs; safety/co-safety event goals
-& Initial product state; goals hold on all closed-loop traces; mixed states treated as UC
+& Initial product state; safety and eventual goal occurrence on every closed-loop trace; mixed states treated as UC
 & Controller or failure; heuristic OTF composition, deferred control alternatives and backward propagation (Secs.~I, III--IV)\\
 OTF-DCS (2023)
 & Component automata, marked/illegal states and control partition
@@ -721,6 +713,14 @@ Strong planning (1998)
 & Action/fluent domain, nondeterministic effects and goal formula
 & All initial states and outcomes; strong completion; fair iterative extension separate (pp.~40--43)
 & OBDD state/action plan; universal outcome preimages; initial-set early stop\\
+Live Synthesis (2022)
+& Old/new LTL and trace or transition system; residual $\Psi(\eta,\varphi)$; old obligations finitely satisfied
+& Universal variant: all old finite traces and new traces; reduction assumes one eventual update (Thm.~6.4)
+& Obligation monitor and LTL synthesis; LiveLTL language inclusion\\
+DES state attraction (2015)
+& Common deterministic plant; request/startup sets; task language $K$ and recognizer
+& All request states; UC preserved; weakly invariant startup set; bounded first completion (Def.~2, Thm.~1)
+& Attractor supervisor; plant/recognizer product and state-attraction algorithm\\
 Dynamic Feature (2024)
 & Feature come/go, component reinitialization, simultaneous changes; behavioral/configuration constraints
 & Mixed controllability; UC preserved; every reachable controlled state has a jointly marked continuation (Sec.~7)

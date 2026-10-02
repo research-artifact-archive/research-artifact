@@ -1,9 +1,3 @@
-\paragraph{Source obligation over ordinary actions.}
+\paragraph{GSM after activation.}
 \label{sec:gsm-entry-derivation}
-GSM changes $\Box\neg decode.3$ to $\Box\neg decode.2$. From every old entry, reach the first $\mathsf{RECEIVED}$ state; then
-\[
-\mathsf{RECEIVED}\xrightarrow{stop,start}\mathsf{RECEIVED}
-\xrightarrow{decode.3}\mathsf{DECODED}\xrightarrow{output}
-\mathsf{SENDER}\xrightarrow{\rho}\mathsf{SENDER}_{new}.
-\]
-The preceding $receive$ sets the $decode.2$ observer to zero; boundaries preserve it. The saved initializer maps zero to monitor state zero: $decode.2$ enters error, all other labels preserve zero. Thus the new obligation constrains an actual ordinary choice. Transfer matches sender, observer and new-monitor zero to the endpoint. The pre-stop distance is at most seven; adding the five displayed events gives rank at most twelve. Consecutive stop/start satisfies R1's gap ban. This source-derived analytical policy proves ACT, not a new solver result; a separate 45-pair source check establishes E initialization (Technical Appendix~\ref{ta:activation_scope}).
+GSM changes $\Box\neg decode.3$ to $\Box\neg decode.2$. A source-derived all-entry policy starts the new requirement with observer/monitor zero, then permits $decode.3$ and output before transfer while rejecting $decode.2$. It reaches a matching endpoint within twelve events and satisfies R1's gap restriction. This proves ACT over ordinary behavior; PC2's active suffix contains only starts. The complete path, rank proof and separate 45-pair entry-initialization check are in Technical Appendix~\ref{ta:activation_scope}; no new solver result is claimed.
