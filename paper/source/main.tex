@@ -113,7 +113,7 @@ We develop and assess this construction as follows:
 \par\noindent\textbf{C1: A local contract and its meaning.} We define the generated game, prove local-history correspondence and selected-endpoint preservation, and give an invariant-initialization criterion (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
 \par\noindent\textbf{C2: Boundaries of update granularity.} FG-DUCS examples and merging obstructions explain when separate choices are necessary and when they prevent completion (Sections~\ref{sec:example} and~\ref{sec:granularity-analysis}).
 \par\noindent\textbf{C3: A policy with checkable evidence.} Sound and complete lazy synthesis returns a completing policy and rank or a losing-region certificate (Section~\ref{sec:algorithm}).
-\par\noindent\textbf{C4: Implementation evidence.} An MTSA implementation is checked against finite reference games and evaluated on \ApplicationContracts{} adapted contracts; constructed comparisons test the granularity mechanisms separately (Section~\ref{sec:evaluation}). All unfavorable and unresolved outcomes are retained.
+\par\noindent\textbf{C4: Implementation evidence.} An MTSA implementation is checked against finite reference games and evaluated on \ApplicationContracts{} adapted contracts; constructed comparisons test granularity separately (Section~\ref{sec:evaluation}).
 
 Our public replication package~\cite{FGDUCSAnonymousArtifact}, prepared for this paper, includes the cited Technical Appendix A--P and Supplement S1--S5 as Parts I and II of \texttt{supplementary\_material.pdf}. Data Availability gives versioned links.
 
@@ -323,8 +323,7 @@ History-wide obligations give a different result: only 39/126 entries admit a sa
 \paragraph{Why the fixed merge loses.}
 Every old entry admits both raw transfers. Before joint transfer, old plants lack calibration actions and all other steps preserve readiness. The joint transfer therefore puts both arms in calibration, clearing both interval readiness bits and reaching error. This proves impossibility, while the merged solver and fine Direct-Full both time out at \VThreeESixPCTwoCap{}~s/\VThreeESixPCTwoHeap{}~GiB. Those timeouts remain unresolved solver results.
 
-\paragraph{Additional witnesses.}
-Restricted-transfer comparisons retain both-LOSS and incomplete cases separately (Technical Appendix~\ref{ta:additional_populations}; S1--S4).
+Restricted-transfer comparisons also retain both-LOSS and incomplete cases (Technical Appendix~\ref{ta:additional_populations}; S1--S4).
 
 \Needspace{7\baselineskip}
 \subsection{RQ2: What Do the Checks Establish?}
@@ -348,13 +347,20 @@ All \RSNewOccurrences{} NEW occurrences also satisfy residual inclusion for safe
 % FGDUCS_RELOCATED: history_checks
 
 \paragraph{What application WIN and LOSS mean.}\label{sec:railcab-policy}\label{sec:contract-case}
-Railcab's 22-entry Base policy permits 1--4 ordinary gap events; R1 has none and retains seven interval guards. Both pass certificate/Link. Duties needed between old-stop and new-start require interval requirements; WIN alone does not supply them (Technical Appendix~\ref{ta:saved-gaps}).
+Railcab's Base policy covers 22 entries with 1--4 ordinary gap events; R1's has none and retains seven interval guards. Both pass certificate/Link. Gap duties require interval requirements; WIN alone supplies none (Technical Appendix~\ref{ta:saved-gaps}).
 
-One Base milestone transfer has two outcomes. Both must complete, loading new-controller states 3 and 1; S4.4.3 expands the full branching fragment.
+One Base milestone transfer has two outcomes; both must complete (full fragment in S4.4.3):
+\[
+\text{rank }13\;\xrightarrow{\text{milestone transfer}}\;
+\left\{\begin{array}{l}
+\text{rank }11\;\xrightarrow{\text{11 more events}}\;\text{new-controller state }3\\[2pt]
+\text{rank }12\;\xrightarrow{\text{12 more events}}\;\text{new-controller state }1
+\end{array}\right.
+\]
 
-Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries: GF1/TOR validation violates new monitors; DSD1 permits endless rejection, or quiescent deadlock if its only safe validation is withheld. Exhaustive closure excludes every order. Native DUCS wins its different subsequent-control problem (Technical Appendix~\ref{ta:additional_populations}; S4).
+Exhaustive closure shows Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries under every order: GF1/TOR validation violates new monitors; DSD1 permits endless rejection, or quiescent deadlock if safe validation is withheld. Native DUCS wins its different subsequent-control problem (Technical Appendix~\ref{ta:additional_populations}; S4).
 
-Lazy's winning certificates have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} update states and maximum ranks \FixedRankMin{}--\FixedRankMax{}, consistent across five repeats. Linked controllers have 15--1,260 states (S4). Ranks bound events, not downtime or optimal length (Technical Appendix~\ref{ta:memory_policies}).
+Across five repeats, Lazy's WIN certificates consistently have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} states and maximum ranks \FixedRankMin{}--\FixedRankMax{}; linked controllers have 15--1,260 states (S4). Ranks bound events, not downtime or optimal length (Technical Appendix~\ref{ta:memory_policies}).
 
 % The complete trap figure remains in the candidate source; the main text states its obstruction.
 
@@ -383,11 +389,11 @@ Direct-Full & \FixedDirectFullOutcomes{}$^{\dagger}$ & \FixedDirectFullFaster{} 
 \par\smallskip{\footnotesize TO: timeout; no OOM/unmeasured cases. $\dagger$ Workflow/R2 retains its interruption and later same-setting timeout (S4). Comparator/Lazy ratios are median [min--max] across completed pairs of five-run medians. Faster / pairs counts lower comparator solver medians among all completed pairs. JVM includes frontend, startup, endpoints and output; solver includes checking. Unresolved costs have no ratio.}
 \end{table}
 
-Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs (full rows in Technical Appendix~\ref{ta:workload_rows}). Base/R1/R2's 5/3/6 pairs have median Direct-Full/Lazy state ratios 111.89/11.88/2.75. These different completed populations do not isolate interval requirements' effects or attribute savings to old-stop/new-start gaps. In R2, Update-first uses fewer states and a lower solver median on six of eight pairs (Technical Appendix~\ref{ta:additional_populations}).
+Figure~\ref{fig:rq3-paired-absolute} shows all 14 completed pairs (Technical Appendix~\ref{ta:workload_rows}). Base/R1/R2 contribute 5/3/6 pairs with median Direct-Full/Lazy state ratios 111.89/11.88/2.75. These different populations neither isolate interval effects nor attribute savings to old-stop/new-start gaps. In R2, Update-first has fewer states and lower solver medians in six of eight pairs (Technical Appendix~\ref{ta:additional_populations}).
 
 \input{figures/rq3_paired_absolute.tex}
 
-Preparation remains substantial: Lazy's adapter medians reach 14.221~s (PC2/R1; S4). Capped Direct-Full attempts give total-JVM lower bounds, not solver ratios or medians. Auxiliary Full+UC timings span different builds, hosts and repetitions and cannot isolate pruning; no unpruned OTF is implemented (Technical Appendix~\ref{ta:performance_scope_details}).
+Lazy's adapter medians reach 14.221~s (PC2/R1; S4). Capped Direct-Full JVM totals are lower bounds, not solver medians or ratios. Auxiliary Full+UC timings mix builds, hosts and repeats, preventing pruning isolation; unpruned OTF is unimplemented (Technical Appendix~\ref{ta:performance_scope_details}).
 
 % FGDUCS_RELOCATED: workload_rows
 
@@ -401,7 +407,7 @@ Travel reaches timeouts and out-of-memory failures under all methods, including 
 \label{sec:related}
 \label{sec:expressiveness}
 \paragraph{Generating update environments.}
-Yamauchi et al. generate an update environment from pre/post environments and supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. Table~\ref{tab:contract-workflow} distinguishes FG-DUCS's local input contract from existing update interfaces; this is not the first generated update environment.
+Yamauchi et al. generate an update environment from pre/post environments and supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. DUCS adds \texttt{reconfigure} edges through $R$ without a UC-quiescence guard~\cite[Defs.~3.7, 5.1]{Nahabedian2020}; FG gates every command and handover on global UC quiescence (Table~\ref{tab:contract-workflow} compares their interfaces).
 
 \paragraph{On-the-fly updating.}
 O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. S4.8 documents the archived fork's plain OTF: it precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}. Identity with the 2024 release is unestablished.
@@ -431,11 +437,11 @@ Null/LOSS results, faster Update-first, lower Eager/Update-first memory and Trav
 
 \section{Conclusion}
 \label{sec:conclusion}
-FG-DUCS compiles local contracts into certified finite updates preserving the selected endpoint's continuation. Merging commands can help or prevent completion. With the same UC pruning, Lazy decides \FixedLazyDecisions{}/\ApplicationContracts{} contracts to Eager's \FixedEagerDecisions{}; Update-first is sometimes faster. Guarantees require declared lifetimes, uncontrollable quiescence and faithful execution.
+In the contract model, FG-DUCS certifies finite updates preserving the selected endpoint's continuation. Merging commands can help or prevent completion. With the same UC pruning, Lazy decides \FixedLazyDecisions{}/\ApplicationContracts{} contracts to Eager's \FixedEagerDecisions{}; Update-first is sometimes faster. Guarantees require declared lifetimes, uncontrollable quiescence and faithful execution.
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c90-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c91-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

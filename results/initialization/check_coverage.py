@@ -389,7 +389,7 @@ def render(rows,contracts,output):
   r'The independent free product includes absorbing ERROR and evolving fluent values after error. '
   r'A failed sufficient check leaves RS untested and does not establish a reachable contract violation.',
   r'\begin{center}\scriptsize\begin{tabular}{@{}lrrrrrrrr@{}}\toprule',
-  r'Model & New / upd & H checked & H FD & H exact & H untested & A sound$^a$ & E exact$^b$ & A/E unverified\\\midrule']
+  r'Model & New / upd & H checked & H FD & H exact & H untested & A sound$^a$ & E$^{\prime}$ exact$^b$ & A/E$^{\prime}$ unverified\\\midrule']
  for g in per_model:lines.append(f"{LABELS[g['model']]} & {g['new']} / {g['upd']} & {g['classified']} & {g['fluent_determined']} & {g['exact_residual_certified']} & {g['rs_untested']} & {g['a_exact_sufficient']} & {g['e_ah_exact_sufficient']} & {g['ae_ah_unverified']}"+r'\\')
  lines.extend([r'\bottomrule\end{tabular}\end{center}',
   r'FD means that equal reachable fluent valuations determine the same monitor state, including ERROR. '
@@ -398,7 +398,7 @@ def render(rows,contracts,output):
   r'Per-requirement state counts, two conflicting histories, and update-boundary checks are in \path{rs-requirements.csv}.',
   r'$^a$All \RSAInclusionNew{} NEW occurrences satisfy RS under A: the checked safe-prefix language condition gives equality when the actual safe-history set is nonempty; with an empty set, inclusion is automatic. '
   r'Plant-level nonemptiness is not established, so exactness remains conditional. '
-  r'$^b$The current E column uses the syntactic sufficient condition (Lemma E$^{\prime}$): every referenced fluent is declared and affected only by update labels, which cannot occur before entry; the constant initializer must match the non-error state after one \texttt{hotSwapIn}. '
+  r'$^b$The archived E$^{\prime}$ column uses the syntactic sufficient condition (Lemma E$^{\prime}$): every referenced fluent is declared and affected only by update labels, which cannot occur before entry; the constant initializer must match the non-error state after one \texttt{hotSwapIn}. '
   r'Remaining event/plant predicates retain unverified reference-language comparisons. Earlier E diagnostic columns and all H/A results are unchanged. '
   r'Update labels occur at most once in the new prefix explorations; continuation-language equivalence is checked over all words, a stronger condition.'])
  (output/'rs-model-table.tex').write_text('\n'.join(lines)+'\n')
