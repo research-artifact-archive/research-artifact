@@ -3,7 +3,7 @@ An initializer assigns the obligation present at activation; selecting any non-e
 Cell's owed-inspection bit starts at 1 exactly when $B$ holds the workpiece. Event $m_B$ sets it, $j$ clears it, and $m_A$ is forbidden while it is 1; other labels preserve it. Encoding 0 by $c$ and 1 by $d$ makes every monitor transition identical to this rule, including rejection of forbidden departure. Initialization and suffix induction prove exact enforcement. Figure~\ref{fig:cell-story}'s first path starts with debt and clears it by ordinary inspection; the second starts clear.
 
 \paragraph{Invariants that begin at activation.}\label{sec:activation-scoped-main}
-Activation-scoped interpretation ACT checks a pure invariant $\Box\varphi$ at the actual post-start observer vector and after every later label. It retains factual fluent values, not a past-violation bit. For deterministic observers with total update $d:V\times\Sigma\to V$, define
+Activation-scoped interpretation ACT checks a pure invariant $\Box\varphi$ at the actual post-start observer vector and after every later label. It retains the current truth values of event-tracked properties (fluents), rather than a bit recording a prior violation. For deterministic observers with total update $d:V\times\Sigma\to V$, define
 \[
  \operatorname{ACT}_\varphi(v)=\{w\mid\forall u\preceq w:\varphi(d^*(v,u))\},
 \]

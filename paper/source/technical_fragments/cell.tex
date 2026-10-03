@@ -1,5 +1,6 @@
 \label{sec:cell-finite}
-Table~\ref{tab:cell-finite-main} in the main paper gives all component, endpoint-controller and monitor transitions, including the conventions for absent edges.
+Table~\ref{tab:cell-finite-main} gives all component, endpoint-controller and monitor transitions, including the conventions for absent edges.
+\input{figures/cell_finite_main.tex}
 
 Endpoint tuples list stations $A,B$, controller and monitor. States $h/e$ mean holding/empty; $k,c,d$ mean old-safe, inspection-clear and inspection-pending; $c_o,c_0,c_1$ name controller states. Old reachable tuples are $x_A=(h,e,c_o,k)$ and $x_B=(e,h,c_o,k)$; new ones are $z_A=(h,e,c_0,c)$, $y_B=(e,h,c_1,d)$ and $z_B=(e,h,c_0,c)$. Initial tuples are $x_A,z_A$ and loadable targets are $\{z_A,z_B\}$, excluding pending inspection at $y_B$. The interval initializer records the holder at either all-old one-workpiece tuple. The new initializer admits all eight version-tagged one-workpiece tuples, installing $d$ when $B$ holds and $c$ otherwise. The paths starting with $A$/$B$ holding map to $z_B$/$z_A$ at handover.
 
