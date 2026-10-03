@@ -76,7 +76,7 @@
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Verified controllers for old and new software versions leave an open problem: how to complete the transition while component states and active requirements change. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) takes local transfers, requirement lifetimes and initial obligations as a contract and synthesizes a staged update policy. In the model, a winning policy safely completes after finitely many events from every reachable old state under every permitted outcome, then hands control to the supplied new controller without changing its continuation. Commands and handover require states with no enabled uncontrollable event. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Merging commands enables or prevents completion in constructed examples, but changes no decision in 54 comparisons derived from existing models. Within 1,200~s, our MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Continuous service and elapsed-time bounds are not guaranteed.
+Verified controllers for old and new software versions leave an open problem: how to complete the transition while component states and active requirements change. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) takes local transfers, requirement lifetimes and initial obligations as a contract and synthesizes a staged update policy. In the model, a winning policy safely completes after finitely many events from every reachable old state under every permitted outcome, then hands control to the supplied new controller without changing its continuation. Commands and handover require states with no enabled uncontrollable event. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Merging commands enables or prevents completion in constructed examples, but changes no decision in 54 comparisons derived from existing models. On the same \ApplicationContracts{} adapted contract games, our MTSA implementation decides \LazyDecisions{} within 1,200~s with lazy exploration, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Continuous service and elapsed-time bounds are not guaranteed.
 \end{abstract}
 
 \begin{CCSXML}
@@ -96,9 +96,9 @@ Verified controllers for old and new software versions leave an open problem: ho
 
 \section{Introduction}
 \label{sec:introduction}
-A verified controller governs one version. Updating requires reaching another while component states and active requirements change~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. The endpoints do not supply this intervening policy. We generate it while preserving the supplied new controller's behavior after handover.
+Separate endpoint verification leaves the intervening policy unspecified. Updating changes component states and active requirements~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. We generate this policy while preserving the supplied new controller's continuation.
 
-The target is a finite maintenance interval. Work may pause; commands and handover require global uncontrollable quiescence. Interval requirements cover duties between old-stop and new-start. Neither continuous service nor elapsed-time bounds follow; an environment that forever avoids quiescence prevents completion.
+During a finite maintenance interval, update control replaces old control and enforces active requirements. Work may pause; commands and handover need global uncontrollable quiescence. Interval requirements cover old-stop/new-start gaps. Neither continuous service nor elapsed-time bounds follow; an environment that forever avoids quiescence prevents completion.
 
 Components and requirements pose different scheduling choices. Empty-station guards can require moving a workpiece before replacing each station. An interval contract may require audit coverage while forbidding old and new access rules from being active together.
 
@@ -110,7 +110,7 @@ DUCS~\cite{Nahabedian2016SEAMS,Nahabedian2020} and GR(1) updating~\cite{Amram202
 
 \Needspace{4\baselineskip}
 We develop and assess this construction as follows:
-\par\noindent\textbf{C1: A local contract and its meaning.} We define the generated game, prove local-history correspondence and selected-endpoint preservation, and give an invariant-initialization criterion (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
+\par\noindent\textbf{C1: A local contract and its generated game.} We define the generated game, prove local-history correspondence and selected-endpoint preservation, and give an invariant-initialization criterion (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
 \par\noindent\textbf{C2: Boundaries of update granularity.} FG-DUCS examples and merging obstructions explain when separate choices are necessary and when they prevent completion (Sections~\ref{sec:example} and~\ref{sec:granularity-analysis}).
 \par\noindent\textbf{C3: A policy with checkable evidence.} Sound and complete lazy synthesis returns a completing policy and rank or a losing-region certificate (Section~\ref{sec:algorithm}).
 \par\noindent\textbf{C4: Implementation evidence.} An MTSA implementation is checked against finite reference games and evaluated on \ApplicationContracts{} adapted contracts; constructed comparisons test granularity separately (Section~\ref{sec:evaluation}).
@@ -152,6 +152,10 @@ If the starts are merged and the stops are merged, the first start overlaps role
 \subsection{Existing Update Interfaces}
 \label{sec:ducs-cell-construction}
 \input{figures/contract_pipeline_c30.tex}
+
+\paragraph{Earlier endpoint reconnection.}
+On-the-fly DUCS (O-DUCS) separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. S4.8 documents an archived fork that precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}. Identity with the 2024 release is unestablished.
+
 \input{technical_fragments/ducs_cell_correspondence.tex}
 
 \section{Defining an Update Contract}
@@ -407,10 +411,7 @@ Travel reaches timeouts and out-of-memory failures under all methods, including 
 \label{sec:related}
 \label{sec:expressiveness}
 \paragraph{Generating update environments.}
-Yamauchi et al. generate an update environment from pre/post environments and supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. DUCS adds \texttt{reconfigure} edges through $R$ without a UC-quiescence guard~\cite[Defs.~3.7, 5.1]{Nahabedian2020}; FG gates every command and handover on global UC quiescence (Table~\ref{tab:contract-workflow} compares their interfaces).
-
-\paragraph{On-the-fly updating.}
-O-DUCS separates update and post-update analysis~\cite[Sec.~3]{HiranoEtAl2024ODUCS}. S4.8 documents the archived fork's plain OTF: it precomputes a new controller and reconnects matching environment/safety states~\cite{FGDUCSAnonymousArtifact}. Identity with the 2024 release is unestablished.
+Yamauchi et al. generate an update environment from pre/post environments and supplied global state-preservation transitions~\cite[Sec.~V]{Yamauchi2020Partitioning}. DUCS adds \texttt{reconfigure} edges through $R$ without a UC-quiescence guard; a partial $R$ can restrict its source states~\cite[Sec.~4.2, Defs.~3.7, 5.1]{Nahabedian2020}. FG gates every command and handover on global UC quiescence (Table~\ref{tab:contract-workflow} compares their interfaces).
 
 \paragraph{On-demand synthesis.}
 DCS already uses on-demand component products, defers controllable alternatives, treats UC-enabled states as uncontrollable and propagates success/failure backward~\cite[Sec.~IV]{CiolekDCS}. Its 2016 formulation requires safety and eventual goal occurrence on every trace; OTF-DCS (2023) requires a marked extension of each finite controlled trace~\cite[Def.~4]{CiolekEtAl2023OTFDCS}. FG specializes these patterns to its generated contract, with complete outcome buckets and all-entry certificates. Compositional and modular approaches structure control specifications~\cite{MohajeraniMalikFabian2014Compositional,WonhamRamadge1988Modular}.
@@ -422,7 +423,7 @@ State reinitialization enables safe, deadlock-free switching between supplied su
 Temporal adaptation~\cite{ZhangCheng2006ALTL}, scenario-based updatability~\cite{Ghezzi2012DynamicScenarioUpdate,PanzicaLaManna2013CorrectnessDynamicUpdates} and Live Synthesis~\cite{FinkbeinerEtAl2022LiveSynthesis} address obligations across change. Our initialization uses scoped requirements~\cite{Dwyer1999Patterns} and residual reasoning~\cite{RosuHavelund2005Rewriting}. Thuijsman and Reniers~\cite[Secs.~4--7]{ThuijsmanReniers2024DynamicFeature} allow individual or simultaneous reconfiguration, requirements that depend on features, and state retention or reset. Their supervisor permits a marked continuation from every reachable state; FG requires every maximal update run to finish at a supplied controller.
 
 \paragraph{Safe adaptation paths.}
-Zhang et al. generate safe adaptation graphs from dependency invariants and adaptive actions, then choose minimum-cost paths~\cite[Secs.~3--4]{Zhang2005SafeAdaptation}. FG's finite-handover objective has no cost optimization.
+Zhang et al. generate safe adaptation graphs and choose minimum-cost paths~\cite[Secs.~3--4]{Zhang2005SafeAdaptation}. Boyer et al. derive reconfiguration sequences between component architectures, preserving lifecycle and architectural constraints~\cite[Secs.~II--VI]{BoyerGruberPous2013}. Without failures they reach the target; failure recovery terminates in a consistent architecture. FG targets finite handover to a fixed controller under declared requirement lifetimes, without cost optimization or repair.
 
 \paragraph{Operational update mechanisms.}
 Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite{Giuffrida2013SafeLiveUpdate}, workflow updating~\cite{Sokolowski2022DynamicWorkflowUpdates}, Kitsune~\cite{e6_hayden2014_kitsune} and network synthesis~\cite{McClurgEtAl2015NetworkUpdates} address migration and transition safety. Ma et al. use dynamic dependencies and sufficient freeness for transaction version consistency with concurrent versions and selective blocking~\cite{MaEtAl2011VersionConsistency}. FG's finite handover gives no such guarantee.
@@ -441,7 +442,7 @@ In the contract model, FG-DUCS certifies finite updates preserving the selected 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c93-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c94-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

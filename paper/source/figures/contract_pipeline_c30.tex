@@ -3,11 +3,11 @@
 \label{tab:contract-workflow}
 \centering\small\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.12\linewidth}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}p{.31\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}@{}}\toprule
-Interface & Supplied inputs & Generated structure and successful result & Post-update control\\\midrule
+Interface & Supplied inputs & Generated structure and successful result & Progress and continuation\\\midrule
 DUCS
 & Old control; old/new environments $E,E'$ and goals; global transfer relation $R$; transition requirement $T$
 & Update environment and goal; controller $C'$ and map $H$ covering every old-controller state
-& Synthesized $C'$ enforces the new goals.\\\addlinespace
+& Eventual stop/start/reconfigure after hotSwap; $C'$ enforces new goals.\\\addlinespace
 GR(1) updating
 & Old/new GR(1) specifications and switching condition
 & New controller $C_2$, bridge and switching bookkeeping
