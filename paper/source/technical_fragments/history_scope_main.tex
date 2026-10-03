@@ -1,5 +1,3 @@
-For prefix-closed requirement language $S_r$, declared activation histories $H_r(\xi)$ and monitor continuations $L_r(m)$, residual soundness (RS) means
-$L_r(\iota_r(\xi))\subseteq\bigcap_{h\in H_r(\xi)}\{w:hw\in S_r\}$.
-New histories include start once; monitors consume later events. Equality is exact; strict inclusion can reject feasible updates, and an empty history set makes inclusion vacuous. Scope completeness and intent are external obligations (Technical Appendix~\ref{ta:residual_formal}).
+Some requirements intentionally refer to events before activation. In that case, the modeler declares the admitted histories, and the initialized monitor must preserve every remaining obligation of those histories. A more restrictive monitor may reject feasible updates; an empty set of admitted histories makes this check vacuous.
 
-The saved checks use safe pre-activation histories consistent with the current observation for new requirements (A) and a reference beginning at entry for interval requirements (E). Whole-history interpretation H includes prior violations and is considered separately (S3).
+Our saved checks distinguish safe histories consistent with the current observation, references beginning at update entry, and whole histories that may include earlier violations. Technical Appendix~\ref{ta:residual_formal} defines the residual-language inclusion precisely; S3 states the conditions for each interpretation. These interpretations answer different questions and must be chosen to match the intended requirement.

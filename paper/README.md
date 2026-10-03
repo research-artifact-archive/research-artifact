@@ -2,11 +2,11 @@
 
 [Main paper](main.pdf) · [Integrated supplementary material](supplementary_material.pdf) · [TeX and generated evidence](source/).
 
-These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c104-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c104-20261003): 18 body pages and 21 pages total, plus 78 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
+These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c105-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c105-20261003): 18 body pages and 21 pages total, plus 78 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
 
-The main paper proceeds from complete Cell and Policy examples to the local contract, its generated game and guarantees, granularity, synthesis and evaluation. Table 2 compares the supplied inputs, generated results, progress and continuation of DUCS, GR(1) updating and FG-DUCS. Section 2.3 also distinguishes earlier O-DUCS analysis from the archived fork examined in S4.8. Broader primary-source comparisons appear in Related Work and S5.
+The main paper proceeds from Cell and Policy examples to the local contract, its generated game and guarantees, granularity, synthesis and evaluation. The comparison table compares the supplied inputs, generated results, progress and continuation of DUCS, GR(1) updating and FG-DUCS. Section 2.3 also distinguishes earlier O-DUCS analysis from the archived fork examined in S4.8. Broader primary-source comparisons appear in Related Work and S5.
 
-Table 3 states the properties and premises; Table 5 identifies the corresponding validation populations and boundaries. The paper distinguishes correctness of the supplied contract game, the meaning of requirements at activation, and faithful execution. Saved lookup exactness does not establish actual activation conformance: decoding, post-start keys, observer behavior and absence of fallback remain unchecked. The main text explains the physical-observer/action-predicate difference. Technical Appendix E, S3 and S4.2 give the detailed evidence; S4.5.1 connects the archived entry-initialization diagnostic to the current results without replacing the historical values.
+The guarantee table states the properties and premises; the RQ2 table identifies the corresponding validation populations and boundaries. The paper distinguishes correctness of the supplied contract game, the meaning of requirements at activation, and faithful execution. Saved lookup exactness does not establish actual activation conformance: decoding, post-start keys, observer behavior and absence of fallback remain unchecked. The main text explains the physical-observer/action-predicate difference. Technical Appendix E, S3 and S4.2 give the detailed evidence; S4.5.1 connects the archived entry-initialization diagnostic to the current results without replacing the historical values.
 
 The integrated supplement contains two linked guide pages, **Part I: Technical Appendix A–P (30 pages)** and **Part II: Supplement S1–S5 (46 pages)**. Six reading routes, a complete contents list, continuous page numbers and bookmarks lead to the proofs, full examples, checks, results and comparisons. S4 follows the main RQ order before presenting diagnostic, historical and extended-budget records separately. All positive, negative, invalid, timeout, OOM and unmeasured outcomes remain available.
 
@@ -22,11 +22,11 @@ Page numbers below are **continuous PDF pages in [supplementary_material.pdf](su
 |---|---|---:|
 | A | Source Histories and Synthesis Correctness | [3](supplementary_material.pdf#page=3) |
 | B | Complete Cell Contract and Its Two Completing Paths | [6](supplementary_material.pdf#page=6) |
-| C | Policy Requirement-Boundary Argument | [7](supplementary_material.pdf#page=7) |
+| C | Policy Requirement-Boundary Argument | [8](supplementary_material.pdf#page=8) |
 | D | NEW and UPD History-Scope Derivations | [9](supplementary_material.pdf#page=9) |
 | E | Activation-Scoped Initialization | [9](supplementary_material.pdf#page=9) |
 | F | Proof of Conditional Trace Lifting | [12](supplementary_material.pdf#page=12) |
-| G | Endpoint Interfaces and Certificate Reuse | [13](supplementary_material.pdf#page=13) |
+| G | Endpoint Interfaces and Certificate Reuse | [14](supplementary_material.pdf#page=14) |
 | H | Complete Native DUCS Construction for Cell | [16](supplementary_material.pdf#page=16) |
 | I | Cell through a GR(1) Bridge Interface | [18](supplementary_material.pdf#page=18) |
 | J | Saved PC2 Activation Histories and Their Boundary | [19](supplementary_material.pdf#page=19) |
@@ -42,7 +42,7 @@ Page numbers below are **continuous PDF pages in [supplementary_material.pdf](su
 | S4 | Supplementary validation and cost tables | [44](supplementary_material.pdf#page=44) |
 | S5 | Expanded related-work comparison | [77](supplementary_material.pdf#page=77) |
 
-For Figure 2, inspect [the complete fixed-budget CSV](source/build/generated/rq3-cells.csv), including all five-trial time and peak-RSS ranges. Its third panel uses raw process bytes divided by 1,048,576 to obtain MiB. The generator retains every completed Lazy/Direct-Full pair; Table 6 and Appendix O retain the unresolved cases. See the [claim map](../docs/CLAIMS.md) for validation commands and scope limits.
+For Figure 2, inspect [the complete fixed-budget CSV](source/build/generated/rq3-cells.csv), including all five-trial time and peak-RSS ranges. Its third panel uses raw process bytes divided by 1,048,576 to obtain MiB. The generator retains every completed Lazy/Direct-Full pair; The RQ3 table and Appendix O retain the unresolved cases. See the [claim map](../docs/CLAIMS.md) for validation commands and scope limits.
 
 The [original evidence snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002) is preserved with its earlier manuscript PDFs. This section index applies to the current paper-matched release, not to that earlier pagination.
 
