@@ -2,7 +2,7 @@
 
 [Main paper](main.pdf) · [Integrated supplementary material](supplementary_material.pdf) · [TeX and generated evidence](source/).
 
-These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c97-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c97-20261003): 18 body pages and 21 pages total, plus 78 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
+These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c98-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c98-20261003): 18 body pages and 21 pages total, plus 78 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
 
 The main paper proceeds from complete Cell and Policy examples to the local contract, its generated game and guarantees, granularity, synthesis and evaluation. Table 2 compares the supplied inputs, generated results, progress and continuation of DUCS, GR(1) updating and FG-DUCS. Section 2.3 also distinguishes earlier O-DUCS analysis from the archived fork examined in S4.8. Broader primary-source comparisons appear in Related Work and S5.
 
