@@ -1,4 +1,5 @@
 \subsection{Supplied Choices}
+The contract states what may change and what must be preserved. Its inputs are component models and transfers, requirements and their initializers, and fixed endpoint controllers. Synthesis supplies the coordination among them.
 
 \paragraph{Finite LTSs and safety monitors.}
 A labeled transition system (LTS) $\mathcal L=(S,\Sigma_{\mathcal L},\delta,s^0)$ has nondeterministic transitions $\delta:S\times\Sigma_{\mathcal L}\to2^S$. Partition events as $\Sigma=\Sigmauc\uplus\Sigmac$: controllers may disable controllables but cannot select outcomes or suppress uncontrollable (UC) events. A synchronous-product event requires a transition in every component whose alphabet contains it; other components retain their state~\cite{MageeKramer2006}.
@@ -64,7 +65,7 @@ For $\xi(i)=(v,s)$, component $i$ uses $e_i^v$. The active-component product det
  U(q)\ne\emptyset\quad\Longrightarrow\quad\Post(q,a)=\emptyset.
  \label{eq:nonpreemption}
 \end{equation}
-This global \emph{uncontrollable quiescence} differs from transaction quiescence~\cite{KramerMagee1990Quiescence} and tranquility~\cite{VandewoudeEtAl2007Tranquility}. Ordinary controls may coexist with UC. The following rules define $\Post$; unmentioned coordinates stay unchanged. ``Advance'' means $\mu'(t_r)=\eta_r(\mu(t_r),a)$ for the specified active monitors.
+Thus even a local command waits until the active-component product has no enabled uncontrollable event. A finite operation may drain to such a point; perpetual polling may prevent it. This global \emph{uncontrollable quiescence} differs from transaction quiescence~\cite{KramerMagee1990Quiescence} and tranquility~\cite{VandewoudeEtAl2007Tranquility}. Ordinary controls may coexist with UC. The following rules define $\Post$; unmentioned coordinates stay unchanged. ``Advance'' means $\mu'(t_r)=\eta_r(\mu(t_r),a)$ for the specified active monitors.
 
 \begin{description}
   \item[Ordinary event $a\in\SigmaN$.]
@@ -90,7 +91,7 @@ For $P=\emptyset$ and $z\in Z_{\mathrm{load}}$, write $q\sim z$ when component s
 \Safe(q)\land U(q)=\emptyset\land\exists z\in Z_{\mathrm{load}}:q\sim z\}.
 \label{eq:goal}
 \end{equation}
-At a goal, interval obligations end and matched new monitors continue. Handover disables ordinary controllables and installs $\kappa(q)$'s controller state, outside $\Sigma$ and the rank. UC cannot compete; compatible targets may have different continuations.
+The goal is a quiescent handover boundary, not merely completion of the command list. At a goal, interval obligations end and matched new monitors continue. Handover disables ordinary controllables and installs $\kappa(q)$'s controller state, outside $\Sigma$ and the rank. UC cannot compete; compatible targets may have different continuations.
 \par\noindent\emph{State-dependent policies and finite completion.}
 \label{def:strategy}
 A memoryless update policy is a function

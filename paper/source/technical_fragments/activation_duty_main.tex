@@ -1,6 +1,6 @@
 An initializer records what is owed when a requirement starts. Cell makes this concrete: a workpiece already at the inspection station brings an inspection duty with it.
-\paragraph{An exact activation obligation.}\label{sec:cell-activation-duty}
-Cell's owed-inspection bit starts at 1 exactly when $B$ holds the workpiece. Event $m_B$ sets it, $j$ clears it, and $m_A$ is forbidden while it is 1; other labels preserve it. Encoding 0 by $c$ and 1 by $d$ makes every monitor transition identical to this rule, including rejection of forbidden departure. Initialization and suffix induction prove exact enforcement. Figure~\ref{fig:cell-story}'s first path starts with debt and clears it by ordinary inspection; the second starts clear.
+\paragraph{A duty installed at activation.}\label{sec:cell-activation-duty}
+Cell's owed-inspection bit starts at 1 exactly when $B$ holds the workpiece. Event $m_B$ sets it, $j$ clears it, and $m_A$ is forbidden while it is 1; other labels preserve it. Encoding 0 by $c$ and 1 by $d$ makes every monitor transition identical to this rule, including rejection of forbidden departure. Initialization and induction over subsequent events show that the monitor enforces exactly this duty rule. Figure~\ref{fig:cell-story}'s first path starts with debt and clears it by ordinary inspection; the second starts clear.
 
 \paragraph{Invariants that begin at activation.}\label{sec:activation-scoped-main}
 An invariant that begins at activation must hold immediately after start and after every later event. We call this the activation-scoped interpretation, written $\operatorname{ACT}$. For a pure invariant $\Box\varphi$, its truth depends on the current values of event-tracked properties (fluents). Deterministic observers update these values through $d:V\times\Sigma\to V$. From the actual post-start vector $v$, the permitted continuations are
@@ -19,6 +19,6 @@ Let $h$ reach the pair $(m_h,v)$. Faithfulness and non-error reachability give $
 \]
 The second equivalence uses safety of the prefix $h$ and deterministic observers: future valuations depend only on $v$ and $w$. Language equivalence transfers the equality to $m$.
 \end{proof}
-The witness need not be plant-executable or obey one-shot update restrictions. This is residual-language reasoning~\cite{RosuHavelund2005Rewriting,FinkbeinerEtAl2022LiveSynthesis}, applied to the generated lookup. At activation, the adapter must choose the actual post-start key and use the same future observation rules; start is consumed once. Undefined entries and fallback initialization are outside the criterion. A true $\varphi(v)$ alone does not supply a lookup entry.
+This criterion checks the selected lookup state against a reference observation model. Its witness need not be plant-executable or obey one-shot update restrictions. The argument uses residual-language reasoning~\cite{RosuHavelund2005Rewriting,FinkbeinerEtAl2022LiveSynthesis}, applied to the generated lookup. At activation, the adapter must choose the actual post-start key and use the same future observation rules; start is consumed once. Undefined entries and fallback initialization are outside the criterion. A true $\varphi(v)$ alone does not supply a lookup entry.
 
 RQ2 distinguishes finite source checks from conformance at actual activations (Technical Appendix~\ref{ta:lookup-act}).
