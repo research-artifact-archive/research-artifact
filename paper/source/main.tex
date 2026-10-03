@@ -76,7 +76,7 @@
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Verified old and new controllers do not supply a safe transition when component replacement and requirement activation require different schedules. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) compiles local transfers, requirement lifetimes and initial obligations into a policy between supplied controllers. In the model, winning means safe completion from every reachable old entry under every permitted outcome, enforcing declared lifetimes and preserving the selected new controller's continuation. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Complete examples show merging commands can prevent or enable completion. Within 1,200~s, our MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Constructed families exhibit granularity effects; inherited inputs exhibit none. Commands and handover require uncontrollable quiescence; continuous service and elapsed-time bounds are not guaranteed.
+Verified controllers for old and new software versions leave an open problem: how to complete the transition while component states and active requirements change. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) takes local transfers, requirement lifetimes and initial obligations as a contract and synthesizes a staged update policy. In the model, a winning policy safely completes after finitely many events from every reachable old state under every permitted outcome, then hands control to the supplied new controller without changing its continuation. Commands and handover require states with no enabled uncontrollable event. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Complete examples show why merging commands can prevent or enable completion. Within 1,200~s, our MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Constructed families exhibit granularity effects; inherited inputs exhibit none. Continuous service and elapsed-time bounds are not guaranteed.
 \end{abstract}
 
 \begin{CCSXML}
@@ -98,6 +98,8 @@ Verified old and new controllers do not supply a safe transition when component 
 \label{sec:introduction}
 A verified controller governs one version. Updating requires reaching another while component states and active requirements change~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. The endpoints do not supply this intervening policy. We generate it while preserving the supplied new controller's behavior after handover.
 
+The target is a finite maintenance interval. Work may pause; commands and handover require global uncontrollable quiescence. Interval requirements cover duties between old-stop and new-start. Neither continuous service nor elapsed-time bounds follow; an environment that forever avoids quiescence prevents completion.
+
 Components and requirements pose different scheduling choices. Empty-station guards can require moving a workpiece before replacing each station. Audit coverage may require overlap between old and new requirements, whereas exclusive roles require a gap.
 
 The policy must cover different old states and every environment outcome while retaining duties such as inspection before departure. A fixed sequence may fail under branching; safety alone permits an update to remain unfinished forever.
@@ -112,8 +114,6 @@ We develop and assess this construction as follows:
 \par\noindent\textbf{C2: Boundaries of update granularity.} FG-DUCS examples and merging obstructions explain when separate choices are necessary and when they prevent completion (Sections~\ref{sec:example} and~\ref{sec:granularity-analysis}).
 \par\noindent\textbf{C3: A policy with checkable evidence.} Sound and complete lazy synthesis returns a completing policy and rank or a losing-region certificate (Section~\ref{sec:algorithm}).
 \par\noindent\textbf{C4: Implementation evidence.} An MTSA implementation is checked against finite reference games and evaluated on \ApplicationContracts{} adapted contracts; constructed comparisons test the granularity mechanisms separately (Section~\ref{sec:evaluation}). All unfavorable and unresolved outcomes are retained.
-
-The target is a finite maintenance interval. Work may pause; commands and handover require global uncontrollable quiescence. Interval requirements cover duties between old-stop and new-start. Neither continuous service nor elapsed-time bounds follow; an environment that forever avoids quiescence prevents completion.
 
 Our public replication package~\cite{FGDUCSAnonymousArtifact}, prepared for this paper, includes the cited Technical Appendix A--P and Supplement S1--S5 as Parts I and II of \texttt{supplementary\_material.pdf}. Data Availability gives versioned links.
 
@@ -161,7 +161,7 @@ If the starts are merged and the stops are merged, the first start overlaps role
 \input{technical_fragments/contract_adequacy_statement.tex}
 \input{technical_fragments/endpoint_continuation.tex}
 \paragraph{Why matching and reconnection both matter.}
-Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ finishes every command with inspection pending. Physical matching alone admits clear target $z_B$, whose $m_A$ violates that duty; monitor matching excludes the reset. Conversely, disabling controllable loop $b$ in a one-state endpoint with loops $a,b$ and goal $\mathit{true}$ preserves legality, deadlock freedom and safety~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but loses $b$-continuations. Reconnection preserves them.
+Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ finishes every command with inspection pending. Physical matching alone admits clear target $z_B$, whose $m_A$ violates that duty; monitor matching excludes the reset. Conversely, disabling controllable loop $b$ in a one-state endpoint with loops $a,b$ and goal $\mathit{true}$ preserves legality, deadlock freedom and safety~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but loses $b$-continuations. FG's fixed-endpoint contract requires preserving those continuations.
 
 \input{technical_fragments/endpoint_interface.tex}
 
@@ -431,11 +431,11 @@ Null/LOSS results, faster Update-first, lower Eager/Update-first memory and Trav
 
 \section{Conclusion}
 \label{sec:conclusion}
-FG-DUCS compiles local contracts into certified finite updates between verified controllers, preserving the selected endpoint's continuation. Granularity changes feasibility in both directions. Evaluation shows reduced exploration and more fixed-budget decisions. These guarantees require declared requirement lifetimes, uncontrollable quiescence and faithful execution.
+FG-DUCS compiles local contracts into certified finite updates preserving the selected endpoint's continuation. Merging commands can help or prevent completion. With the same UC pruning, Lazy decides \FixedLazyDecisions{}/\ApplicationContracts{} contracts to Eager's \FixedEagerDecisions{}; Update-first is sometimes faster. Guarantees require declared lifetimes, uncontrollable quiescence and faithful execution.
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c89-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c90-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
