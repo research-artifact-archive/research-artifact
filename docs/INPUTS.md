@@ -4,7 +4,7 @@ The quickest executable input is the two-replica [Rolling model](../results/gran
 
 1. Declare each component's old and new finite transition systems, ordinary actions and controllability. A component that does not own an ordinary action stutters under the product rule.
 2. Give local transfer domains and **all** possible target states. An omitted source has an empty transfer domain. Nondeterministic outcomes are adversarial; do not keep only a successful outcome.
-3. Declare old, new and interval safety testers. State their activation initializers explicitly. Initializers and any residual monitors must represent the supplied histories; the artifact does not infer real-system history soundness.
+3. Declare old, new and interval safety testers, their lifetimes and their initial obligations. State each initializer explicitly: an activation-scoped obligation constrains behavior from its start, while a history-dependent residual must represent the admitted prior histories. The artifact does not infer which interpretation matches a real system or establish actual activation-observation conformance.
 4. Supply strict precedence constraints only when the contract needs them. Requirements stop and start through explicit boundary events; interval requirements activate at entry.
 5. Supply both fixed endpoint controllers, their reachable products/projections and loadable new states. Validate the whole admitted old-entry set rather than only one physical initial state.
 6. Run the fine model, then explicit merged controls as appropriate. A merge that collapses strict precedence or noncommuting monitor observations is INVALID, not LOSS.

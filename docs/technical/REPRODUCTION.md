@@ -1,6 +1,6 @@
-# Reproduction commands and verification
+# Detailed reproduction commands and historical verification
 
-Run commands from the package root unless stated otherwise. Use fresh output directories.
+The public C115 layout is described in the [current reproduction guide](../REPRODUCTION.md). From the public repository root, run `python3 reproduce/check.py --output work/check` for complete saved-evidence validation, or `python3 reproduce/materialize.py --output work/full` to restore the research workspace. The detailed commands below use that **restored workspace root** unless stated otherwise. Use fresh output directories. Recorded build times and earlier validation counts below describe their original checks, not a new C115 benchmark run.
 
 ## Inspect the saved results
 
@@ -73,15 +73,19 @@ python reproduce_validation.py rq2 --java java --output replication/rq2
 
 These commands use the original cases, method properties, heap limits and per-job timeouts. RQ1 originally used a 12 GiB heap; ensure sufficient RAM. The original runs remain untouched. A resource failure remains a resource failure. Alternatively, existing local users can import the exact frozen JAR using the earlier `--source-file` command. The optional binary check in `check_package.py` verifies that frozen hash; run its saved-evidence check before building when using the source-rebuild route.
 
-## Publication and independent clone status
+## Publication and historical independent-clone validation
 
-The publication location is https://github.com/research-artifact-archive/research-artifact. The repository is reinitialized for this FG-DUCS package, replacing its previous content; the `main` branch history contains only this package's publication commits. The final submission tag `fse27-submission` will be created at the final push after the submission freeze. Until then, `main` is the working preview and the two split result assets are designated for the `v2-preview` pre-release. Release creation and asset upload are pending; the manifest and asset digests are already included. No final-submission tag exists yet.
+The publication location is the [anonymous repository](https://github.com/research-artifact-archive/research-artifact). The C115 manuscript snapshot is tagged `fgducs-c115-20261003`; subsequent documentation and checker maintenance on `main` preserves those manuscript files. The current public layout includes all three raw-results archive parts directly under `results/archives/`. No separate preview Release download is required. `reproduce/materialize.py` verifies the parts and archived files against `reproduce/layout.json` and restores them with the mapped source files.
 
-The public preview was independently cloned over HTTPS and verified on macOS arm64 with OpenJDK 17.0.19 and Maven 3.9.16. From a new empty Maven cache, the source build succeeded in **643.205 seconds**; this includes a slow FreeHEP dependency transfer. Upstream dependency acquisition and digest verification took **89.486 seconds** separately. Tests were compiled but execution was skipped. Saved-package checks passed for all **92 RQ1 and 14 RQ2 jobs**. The `--derive-only` smoke runs succeeded and matched all derived fields of the **46 RQ1 oracle rows and 14 RQ2 expectation rows**, after normalizing clone paths. These derive runs do not rerun synthesis or regenerate the saved RQ2 prose annotations. Logs and timings are in `validation/clean-clone/`; the earlier 198.503-second local build remains separate evidence. Clone the current preview as follows; use `git checkout fse27-submission` only after the final tag has been published:
+The earlier public preview was independently cloned over HTTPS and verified on macOS arm64 with OpenJDK 17.0.19 and Maven 3.9.16. From a new empty Maven cache, the source build succeeded in **643.205 seconds**; this includes a slow FreeHEP dependency transfer. Upstream dependency acquisition and digest verification took **89.486 seconds** separately. Tests were compiled but execution was skipped. Saved-package checks passed for all **92 RQ1 and 14 RQ2 jobs**. The `--derive-only` smoke runs succeeded and matched all derived fields of the **46 RQ1 oracle rows and 14 RQ2 expectation rows**, after normalizing clone paths. These derive runs do not rerun synthesis or regenerate the saved RQ2 prose annotations. Logs and timings are in `validation/clean-clone/` in the restored workspace; the earlier 198.503-second local build remains separate evidence. To use the current public layout:
 
 ```sh
 git clone https://github.com/research-artifact-archive/research-artifact.git fg-ducs-clean
 cd fg-ducs-clean
+python3 -m pip install -r reproduce/requirements.txt
+python3 reproduce/check.py --output work/check
+python3 reproduce/materialize.py --output work/full
+cd work/full
 python check_package.py
 python fetch_assets.py --asset dependencies
 mvn -B -f "Implementation/Source Code/maven-root/mtsa/pom.xml" -Dmaven.repo.local=/absolute/path/to/new-empty-cache package -DskipTests -Djacoco.skip=true
@@ -89,14 +93,7 @@ python reproduce_validation.py rq1 --derive-only --output replication/clean-rq1
 python reproduce_validation.py rq2 --derive-only --output replication/clean-rq2
 ```
 
-After the preview Release is available, download both `fgducs-results.tar.gz.part001` and `fgducs-results.tar.gz.part002` from https://github.com/research-artifact-archive/research-artifact/releases/tag/v2-preview into the same directory, then run:
-
-```sh
-python restore_results.py --assets /path/to/downloaded-assets --verify-only
-python restore_results.py --assets /path/to/downloaded-assets
-```
-
-The restore script verifies both asset and per-file digests. Public Release download and restoration have not been checked because the `v2-preview` Release is not yet published; local asset restoration checks below remain separate evidence. Source models, the measured JAR and original raw remain unchanged.
+The earlier two-part preview-Release plan is superseded by the self-contained public layout. Historical restoration logs below still describe the original packaging checks. Source models and original raw measurements remain unchanged; the measured shaded JAR is not distributed.
 
 ## Source extent and local package checks
 

@@ -2,6 +2,8 @@
 
 **Compile local component transfers and individual requirement lifetimes into a safe, completing update policy between supplied controllers.** This is the public, anonymous replication package prepared by the paper's authors for this study. It contains the FG-DUCS tool, all reported models and evidence, and reproducible checks. It is an anonymous research prototype, not a deployment framework. The [paper-matched release, `fgducs-c115-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c115-20261003) bundles the corresponding main paper, integrated supplementary material and source evidence. It records the current manuscript, without claiming a completed conference submission. The [claim-to-evidence map](docs/CLAIMS.md) identifies the files and reproduction commands for this snapshot.
 
+The maintained `main` branch keeps the C115 PDFs, TeX sources and experimental evidence unchanged, while correcting the reading guides and teaching the saved-evidence checker to follow Cell's current location in Technical Appendix B. Use this maintained checkout for the reproduction commands below; the original manuscript tag is preserved.
+
 | What would you like to do? | Start here | What you get |
 |---|---|---|
 | **Use the tool** | [Build and run](#use-the-tool) · [`tool/`](tool/) | A checked update policy or a losing-region certificate, plus a readable local result viewer |
@@ -17,7 +19,7 @@ paper/       Anonymous PDF snapshots and their TeX/generated tables
 docs/        Input guide, reproduction details, interpretation and packaging notes
 ```
 
-The 18-page main text develops synthesis for staged handover between supplied controllers: the early comparison of supplied inputs, generated results and post-update control, the Cell and Policy input contracts and their required transfer/boundary choices, local-history/game correspondence, endpoint continuation, requirement interpretation, a granularity analysis with a local sufficient condition for serializing transfer-only batches before certifying synthesis, source-derived cases and all principal positive and negative results. The RQ2 validation table separates the populations and boundaries of finite-game, source-initialization and application-policy checks. The 33-page technical appendix follows the argument from proofs and cases through interpretation and execution to comparisons and evidence records. The separate 46-page S1–S5 supplement preserves the experimental records, including all-contract preparation times and activation-closure counts from 405 saved completed runs. The 81-page integrated supplement adds two pages of linked reading routes and complete contents. All three documents remain available for inspection; the main text identifies the assumptions and evidence limits needed to assess its claims.
+The 18-page main text develops synthesis for staged handover between supplied controllers: the early comparison of supplied inputs, generated results and post-update control, the Cell and Policy scenarios and their required transfer/boundary choices, local-history/game correspondence, endpoint continuation, requirement interpretation, a granularity analysis with a local sufficient condition for serializing transfer-only batches before certifying synthesis, source-derived cases and all principal positive and negative results. The RQ2 validation table separates the populations and boundaries of finite-game, source-initialization and application-policy checks. The 33-page technical appendix follows the argument from complete input contracts and proofs through interpretation and execution to comparisons and evidence records. The separate 47-page S1–S5 supplement preserves the experimental records, including all-contract preparation times and activation-closure counts from 405 saved completed runs. The 82-page integrated supplement adds two pages of linked reading routes and complete contents. The main paper and both supporting parts are available as separate PDFs; the integrated PDF combines the two supporting parts. The main text identifies the assumptions and evidence limits needed to assess its claims.
 
 ## Read the paper and its appendices
 
@@ -27,7 +29,7 @@ Reference **[4], FG-DUCS Evaluation Artifact**, in the main paper refers to this
 |---|---|---|
 | Main paper | [Main PDF](paper/main.pdf) | Sections 1–10; Introduction and Conclusion frame the contribution |
 | Technical Appendix A–P | [Part I, integrated PDF](paper/supplementary_material.pdf#page=3) · [Separate appendix](paper/technical_appendix.pdf) | Continuous PDF pages 3–35: complete proofs, input definitions and interpretation analyses |
-| Supplement S1–S5 | [Part II, integrated PDF](paper/supplementary_material.pdf#page=36) · [Separate supplement](paper/supplement.pdf) | Continuous PDF pages 36–81: witnesses, validation, all results and expanded comparisons |
+| Supplement S1–S5 | [Part II, integrated PDF](paper/supplementary_material.pdf#page=36) · [Separate supplement](paper/supplement.pdf) | Continuous PDF pages 36–82: witnesses, validation, all results and expanded comparisons |
 | Figure 2: states, solver time, peak JVM RSS | [All 135 saved result cells](paper/source/build/generated/rq3-cells.csv) · [Plot generator](paper/source/scripts/generate_rq3_paired_plot.py) | All 14 completed Lazy/Direct-Full pairs; the other 13 Direct-Full contracts remain timeouts in Table 5 and Appendix O |
 | A specific claim or check | [Claim-to-evidence map](docs/CLAIMS.md) · [Appendix section index](paper/README.md#appendix-section-index) | Exact section, evidence path and reproduction command |
 
@@ -118,7 +120,7 @@ All results below are saved observations, not newly selected measurements. Count
 
 ### Why fine granularity can matter
 
-Five constructed families expose different update constraints, including both directions of the granularity comparison. They are models inspired by update patterns, not measurements of deployed products or estimates of how often the problem occurs in practice.
+Five constructed families expose constraints under which merging can lose feasibility; a separate analytical contract shows the reverse direction (Technical Appendix O.12). They are models inspired by update patterns, not measurements of deployed products or estimates of how often the problem occurs in practice.
 
 | Family | Mechanism and result | Interpretation and boundary |
 |---|---|---|
@@ -126,7 +128,7 @@ Five constructed families expose different update constraints, including both di
 | **Canary** | 15/15 local-versus-merged pairs separate when all transfer outcomes, uncontrollable reports and recovery are modeled | A successful branch alone is insufficient; recovery behavior is supplied in the model |
 | **Policy v2** | Audit overlap and role nonoverlap require opposite requirement-boundary orders | Merging the individual boundaries in the specified FG contract loses; this is an internal boundary-order comparison, not an impossibility claim about alternative DUCS encodings or a service-continuity guarantee |
 | **DB-Rolling v2** | Secondary-first maintenance separates; no-slack controls are both LOSS | Granularity helps only when the contract provides a safe intermediate state |
-| **Rolling+Audit** | Transfer merging can lose under the startup-capacity constraint, while requirement-boundary merging wins in the same family | Finer granularity is not uniformly beneficial: the result depends on which commands are merged and on the declared requirement scopes |
+| **Rolling+Audit** | Transfer merging can lose under the startup-capacity constraint, while requirement-boundary merging wins in the same family | The outcome depends on which commands are merged and on the declared requirement scopes |
 
 The main E6 denominator is **55 pairs: 33 fine-WIN/merged-LOSS, 11 both-LOSS, 10 both-WIN, and 1 incomplete pair**. It also includes Audit, Threads and PC2 cases. The 20 scale pairs, 12 Canary assumption-control pairs, nine Cell reference pairs, and additional PC2 budget attempts are separate; they are not added to 55. The 70 threshold cells and 15 Canary pairs above overlap these analyses and are not 85 independent applications. Canonical versions are **Policy v2** and **DB-Rolling v2**. Earlier versions, rejected checker attempts, counterexamples and failed preparation attempts remain available.
 

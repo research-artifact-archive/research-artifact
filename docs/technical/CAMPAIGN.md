@@ -1,5 +1,7 @@
 # Windows measurement campaigns
 
+The commands below use the restored compatibility workspace described in the [current reproduction guide](../REPRODUCTION.md). The dated planning statuses are historical; final campaign outcomes are in the [current result guide](../../README.md).
+
 Use the portable layout in `campaign/`. The nested
 `FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/` contains the paper's source layout,
 renderers and archived measurements. The input/configuration bytes and runtime scripts are the same;
@@ -94,7 +96,7 @@ with about 100 ms between samples; a short peak can be missed.
 Preserve the entire new `campaign/raw/` tree, including plans, environments, skipped rows, logs and all run directories.
 Do not merge it into the archived raw. Keep its new binary/host identity and use a separate output directory.
 The supplementary trials use `run-supplement.ps1`; see [their protocol](RQ3_SUPPLEMENT.md).
-The five further extended-budget campaigns use the separate [extension delta](../campaign/extensions/ext/README.md), applied to a fresh campaign copy. Their 27 planned trials have no returned results as of 27 September 2026 and remain `NOT_RUN`; they are outside the five-campaign sequence above.
+The five further extended-budget campaigns use the separate [extension delta](../../reproduce/campaign/extensions/ext/README.md), applied to a fresh campaign copy. Their 27 planned trials had no returned results as of 27 September 2026; this is the retained pre-run status. The completed ext1–7 observations are reported in the [current result guide](../../README.md). The extension plans are outside the five-campaign sequence above.
 Legacy fidelity has separate inputs and tooling under `FSE2027_SUBMISSION_20260914/experiments/legacy_fidelity/`; its original-source conditions are outside the 27-contract campaign. The separate adapted-input Legacy column remains in the full supplementary outcome grid.
 
 Restore the published assets for reproducing the paper's original displays, then run from the package root:

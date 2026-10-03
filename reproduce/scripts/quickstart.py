@@ -205,8 +205,14 @@ class Quickstart:
         self.tree(module, '*.py')
         self.tree(SUB / 'paper/figures', 'witness_*.tex')
         main = self.root / SUB / 'paper/main.tex'
-        current = main.is_file() and re.search(
-            r'(?m)^\s*\\input\{figures/cell_finite_main\.tex\}', main.read_text())
+        appendix = self.root / SUB / 'paper/technical_appendix.tex'
+        cell_section = self.root / SUB / 'paper/technical_fragments/cell.tex'
+        includes = lambda path, name: path.is_file() and re.search(
+            r'(?m)^\s*\\input\{' + re.escape(name) + r'\}', path.read_text())
+        current = main.is_file() and (
+            includes(main, 'figures/cell_finite_main.tex') or
+            (includes(appendix, 'technical_fragments/cell.tex') and
+             includes(cell_section, 'figures/cell_finite_main.tex')))
         if current:
             for name in ('main.tex', 'technical_appendix.tex', 'technical_fragments/cell.tex',
                          'figures/cell_finite_main.tex', 'figures/cell_policy_paths.tex',

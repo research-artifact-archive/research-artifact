@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Check finite paper diagrams/tables against primitives and scoped RQ2 fixtures.
 
-Supports the current main Cell table and appendix paths, the earlier split
-tables/overview, and the original complete TikZ cell.
+Supports the Cell table in the main paper or its included technical-appendix
+section, the earlier split tables/overview, and the original complete TikZ cell.
 Parsers accept the explicitly displayed finite syntax; unsupported notation fails.
 No JVM, saved baseline, synthesis, or model edit is used.
 """
@@ -29,9 +29,23 @@ CURRENT_PAPER_FILES = (
 )
 
 
-def current_layout(paper):
+def current_table_location(paper):
+    """Find the displayed table only through a supported document include chain."""
     main = paper/'main.tex'
-    return main.is_file() and r'\input{figures/cell_finite_main.tex}' in read_text(main)
+    table_input = r'\input{figures/cell_finite_main.tex}'
+    if main.is_file() and table_input in read_text(main):
+        return 'main.tex'
+    appendix = paper/'technical_appendix.tex'
+    section = paper/'technical_fragments/cell.tex'
+    if (main.is_file() and appendix.is_file() and section.is_file()
+            and r'\input{technical_fragments/cell.tex}' in read_text(appendix)
+            and table_input in read_text(section)):
+        return 'technical_fragments/cell.tex'
+    return None
+
+
+def current_layout(paper):
+    return current_table_location(paper) is not None
 
 
 def current_paths(source):
@@ -155,7 +169,9 @@ def table_cell(paper, current=False):
     transfer = re.search(r'g_A=g_B=\\\{\(([he]),([he])\)\\\}', section)
     assert transfer, 'Unparsed cell transfer relation'
     if current:
-        assert re.findall(r'g_A=g_B=\\\{\(([he]),([he])\)\\\}', main) == [transfer.groups()], 'Main/appendix transfers differ'
+        main_transfers = re.findall(r'g_A=g_B=\\\{\(([he]),([he])\)\\\}', main)
+        if current_table_location(paper) == 'main.tex' or main_transfers:
+            assert main_transfers == [transfer.groups()], 'Main/appendix transfers differ'
     drawn=[('Ao',transfer[1],'g_A','An',transfer[2]),('Bo',transfer[1],'g_B','Bn',transfer[2])]
     endpoints={name.replace('_',''):tuple(atom(values).split(','))
                for name,values in re.findall(r'([xyz]_[AB])=\(([^()]*)\)',section)}
@@ -423,7 +439,7 @@ def negative_checks(paper, fsp=FSP):
             ('technical_fragments/cell.tex',r'\{z_A,z_B\}',r'\{z_A,y_B\}','load targets'),
             ('technical_fragments/cell.tex',r'installing $d$ when $B$ holds',r'installing $c$ when $B$ holds','NEW initializer'),
             ('technical_fragments/cell.tex','records the holder at either all-old one-workpiece tuple','always records A at either all-old one-workpiece tuple','UPD initializer'),
-            ('main.tex',r'\input{figures/cell_finite_main.tex}',r'\input{figures/cell_components.tex}','included main table'),
+            (current_table_location(paper),r'\input{figures/cell_finite_main.tex}',r'\input{figures/cell_components.tex}','included Cell table'),
             ('technical_appendix.tex',r'\input{technical_fragments/cell.tex}',r'\input{technical_fragments/omitted_cell.tex}','included appendix definitions'),
             ('figures/cell_story_visual.tex',r'replace\\empty $B$',r'replace\\empty $A$','Cell story action'),
             ('figures/policy_lifetimes.tex',r'6/5/{service}',r'6/5/{start\\new audit}','Policy action'),
