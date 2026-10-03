@@ -5,15 +5,15 @@
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.12\linewidth}>{\raggedright\arraybackslash}p{.28\linewidth}>{\raggedright\arraybackslash}p{.31\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}@{}}\toprule
 Interface & Supplied inputs & Generated structure and successful result & Progress and continuation\\\midrule
 DUCS
-& Old controller; old/new environments and goals; global transfer relation; transition requirements
-& Update environment and goal; controller and entry map covering every old-controller state
-& After the update trigger: eventually stop, start and reconfigure; enforce new goals from new-start.\\\addlinespace
+& Old control; old/new environments $E,E'$ and goals; global transfer relation $R$; transition requirement $T$
+& Update environment and goal; controller $C'$ and map $H$ covering every old-controller state
+& Eventual stop/start/reconfigure after hotSwap; $C'$ enforces new goals.\\\addlinespace
 GR(1) updating
 & Old/new GR(1) specifications and switching condition
-& New controller, bridge and switching bookkeeping
-& The generated new controller runs unchanged after the bridge.\\\addlinespace
+& New controller $C_2$, bridge and switching bookkeeping
+& This $C_2$ runs unchanged after the bridge.\\\addlinespace
 FG-DUCS
-& Fixed components/controllers; component transfers; monitors, initializers and precedence; allowed handover states
+& Fixed components/controllers; component transfers; monitors, initializers and precedence; loadable targets
 & Mixed-version and boundary game; policy, rank and handover map for every old entry and permitted outcome
 & Supplied new closed loop is preserved from the selected compatible target.\\\bottomrule
 \end{tabular}

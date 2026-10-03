@@ -1,13 +1,15 @@
-% Reader-facing inputs, with the complete automata in Technical Appendix B.
+% An input map, not an additional formal assumption.
 \begin{table}[!htbp]
-\caption{Cell's supplied update obligations. Synthesis chooses the order and moves shown in Figure~\ref{fig:cell-story}.}
+\caption{The contract's inputs, illustrated by the two-station cell.}
 \label{tab:contract-map}
 \centering\small
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.24\linewidth}>{\raggedright\arraybackslash}p{.69\linewidth}@{}}\toprule
-Supplied choice & Meaning in Cell\\\midrule
-Local replacements & Replace either empty station while preserving the workpiece.\\
-Requirement lifetimes & Keep exactly one workpiece throughout; start the new inspection rule before stopping the old inspection ban.\\
-Initial obligation & At new-start, inspection is pending exactly when $B$ holds the workpiece.\\
-Permitted handover & Finish at either reachable new-controller state with no inspection pending, retaining that controller's continuations.\\\bottomrule
+\begin{tabular}{@{}p{.27\linewidth}p{.66\linewidth}@{}}\toprule
+Input & Role in the running example\\\midrule
+Endpoints $E^v,C^v$ & Old and new cell models with their verified controllers.\\
+Local transfers $g_i$ & Replace one empty station, preserving the holder.\\
+Requirements $R^{\rm old/new/upd}$ & Old inspection ban; new inspection obligation; one product throughout.\\
+Initialization $\iota_r$ & At activation, make inspection pending if $B$ holds the product.\\
+Dependencies $\prec$ & Start the new requirement before stopping the old one.\\
+Targets $Z_{\rm load}$ & Reachable new closed-loop states with matching plant and monitor states.\\\bottomrule
 \end{tabular}
 \end{table}
