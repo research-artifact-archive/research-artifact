@@ -1,12 +1,12 @@
 \begin{table}[!htbp]
-\caption{What each RQ2 validation population establishes.}
+\caption{RQ2 validation populations, keyed to the scopes in Table~\ref{tab:guarantee-evidence}.}
 \label{tab:validation-populations}
 \centering\small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.21\linewidth}>{\raggedright\arraybackslash}p{.30\linewidth}>{\raggedright\arraybackslash}p{.43\linewidth}@{}}\toprule
-Check & Population & Established result and boundary\\\midrule
-Independent games & \FixedRQOneFixtures{} fixtures, two solvers: \FixedRQOneJobs{} jobs & \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS, \FixedRQOneInvalid{} invalid; all \FixedRQOneEligible{} eligible jobs pass certificate/exhaustive checks.\\\addlinespace
-NEW lookup tables & 46 source positions, 138 occurrences; 900 non-error cells & Exact start-scoped languages under reference observations (Proposition~\ref{prop:lookup-act}); actual activation conformance unchecked.\\\addlinespace
-UPD initialization & \VThreeRSUpdExact{} occurrences: 46 R1, 89 R2 & Exact entry-scoped initialization from source guards and stage fluents; execution is unchecked.\\\addlinespace
-Application policies & \FixedPolicies{} Lazy WIN contracts; 125 runs & Certificates check the shared Java game. Runs save summaries; complete PC2-Rolling/Railcab exports are separate.\\\bottomrule
+Scope and check & Population & Established result and boundary\\\midrule
+Game:\newline independent games & \FixedRQOneFixtures{} fixtures, two solvers: \FixedRQOneJobs{} jobs & \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS, \FixedRQOneInvalid{} invalid; all \FixedRQOneEligible{} eligible jobs pass certificate/exhaustive checks.\\\addlinespace
+Invariant from start:\newline NEW lookup tables & 46 source positions, 138 occurrences; 900 non-error cells & Exact start-scoped languages under reference observations (Proposition~\ref{prop:lookup-act}); actual activation conformance unchecked.\\\addlinespace
+From update entry:\newline UPD initialization & \VThreeRSUpdExact{} occurrences: 46 R1, 89 R2 & Exact entry-scoped initialization from source guards and stage fluents; execution is unchecked.\\\addlinespace
+Game:\newline application policies & \FixedPolicies{} Lazy WIN contracts; 125 runs & Certificates check the shared Java game. Runs save summaries; complete PC2-Rolling/Railcab exports are separate.\\\bottomrule
 \end{tabular}
 \end{table}

@@ -544,16 +544,24 @@ This section retains older sufficient-condition diagnostics, the auxiliary requi
 
 \subsubsection{Historical initialization coverage}
 \paragraph{Archived H/A/E$'$ sufficient-condition results.}
-The table preserves the earlier H/A/E$'$ checks. Its E$'$ column records the syntactic test, which leaves 46 R1 occurrences unverified. Lemma~\ref{lem:r1-entry} establishes their exact E initialization using a different sufficient condition. The old result is retained.
+The historical table below is retained unchanged. For UPD, the current entry-scoped conclusion combines two sufficient conditions:
+\begin{center}\small
+\begin{tabular}{@{}p{.33\linewidth}p{.25\linewidth}p{.34\linewidth}@{}}\toprule
+UPD population & Archived E$'$ check & Current E justification\\\midrule
+89 stage-fluent occurrences & Exact & Lemma~\ref{lem:rs-e-prime}\\
+46 guarded R1 occurrences & Unverified & Exact by Lemma~\ref{lem:r1-entry}\\\bottomrule
+\end{tabular}
+\end{center}
+Together they establish exact entry initialization for 135 UPD occurrences; application-level execution conformance remains unchecked.
 
 \input{build/generated/rs-model-table.tex}
 
 \subsubsection{Auxiliary requirement-boundary inputs}
 The capability campaign contains 14 decisions. Its requirement-boundary comparison follows.
 \input{figures/rq2_boundary.tex}
-Each input has one old entry. Separation's endpoints allow only $idle$; neutral's old endpoint allows $idle$, and its new controller allows $idle$ and the displayed $align$. OLD/NEW testers have one safe state and an error sink; NEW activation requires a false forbidden-event observer. Entry sets $Aligned$ false. In separation, $align$ sets persistent $Aligned$ and a separate observer of the last ordinary event. $idle$ clears only the observer; update events preserve both.
+Each input has one old entry. Endpoints allow only $idle$, with $align$ additionally permitted at neutral's new endpoint. OLD/NEW testers have one safe state and an error sink; NEW activation requires a false forbidden-event observer. Entry sets $Aligned$ false. In separation, $align$ sets persistent $Aligned$ and a separate observer of the last ordinary event. $idle$ clears only the observer; update events preserve both.
 
-The source-derived sequence $stop,align,idle,\rho,start$ matches the saved six-state certificate and maximum rank five. Old requirement prevents $align$ before $stop$, so a contiguous block cannot complete. Neutral permits $\rho,align$ before the block. Its block/free runs return ranks four/five; ranks need not be minimal. These are source-derived witnesses and saved certificate counts, not recovered execution traces.
+The source-derived sequence $stop,align,idle,\rho,start$ matches the saved six-state certificate and maximum rank five. Old requirement prevents $align$ before $stop$, so a contiguous block cannot complete. Neutral permits $\rho,align$ before the block. Its block/free runs return ranks four/five; ranks need not be minimal. The saved counts do not identify the returned paths.
 
 \subsubsection{Granularity and construction ablations}
 \label{supp:vthree-ablations}
