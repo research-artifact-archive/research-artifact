@@ -1,7 +1,7 @@
 \subsection{Supplied Choices}
 The contract states what may change and what must be preserved. Its inputs are component models and transfers, requirements and their initializers, and fixed endpoint controllers. Synthesis supplies the coordination among them.
 
-\paragraph{Finite LTSs and safety monitors.}
+\paragraph{Finite transition systems and safety monitors.}
 A labeled transition system (LTS) $\mathcal L=(S,\Sigma_{\mathcal L},\delta,s^0)$ has nondeterministic transitions $\delta:S\times\Sigma_{\mathcal L}\to2^S$. Partition events as $\Sigma=\Sigmauc\uplus\Sigmac$: controllers may disable controllables but cannot select outcomes or suppress uncontrollable (UC) events. A synchronous-product event requires a transition in every component whose alphabet contains it; other components retain their state~\cite{MageeKramer2006}.
 A monitor is an automaton that checks a requirement as events occur. Requirement $r$ has a total deterministic monitor $t_r=(M_r,\Sigma,\eta_r,m_r^0,F_r)$ with absorbing errors for violating prefixes~\cite{AlpernSchneider1985,KupfermanVardi2001}. The empty monitor product has one non-error state. Monitors observe labels; policies also observe successor component states.
 

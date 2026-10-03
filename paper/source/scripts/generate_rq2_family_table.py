@@ -249,7 +249,7 @@ def render_table(families, reference, domains):
         "Rolling": "Readiness during startup",
         "Canary": "Failure reports and recovery",
         "Policy": "Audit overlap; role exclusion",
-        "DB-Rolling": "Role-gated replacement",
+        "DB-Rolling": "Database (DB) role-gated replacement",
         "Rolling+Audit": "Readiness and audit overlap",
         "Threads": "Backpressure or persistent arrival",
         "PC2-Rolling": "Availability during calibration",
@@ -261,7 +261,7 @@ def render_table(families, reference, domains):
         r"\caption{Granularity mechanisms, parameter sweeps and controls. Each pair compares fine and merged contracts of one model: Policy merges boundaries, other rows merge transfers. Counts are comparisons, not independent applications. The main total excludes Cell.}",
         r"\label{tab:rq2-family-counts}",
         r"\centering\small",
-        r"\begin{tabular}{@{}lp{.30\linewidth}rrrrr@{}}\toprule",
+        r"\begin{tabular}{@{}lp{.33\linewidth}rrrrr@{}}\toprule",
         r"Family / control & Mechanism and parameters & Pairs & \shortstack{WIN /\\LOSS} & \shortstack{LOSS /\\LOSS} & \shortstack{WIN /\\WIN} & Inc.\\\midrule",
         r"\multicolumn{7}{@{}l}{\emph{Constructed families and parameter sweeps}}\\",
     ]
@@ -278,7 +278,7 @@ def render_table(families, reference, domains):
         r"\midrule",
         " & ".join([LABELS["Cell_n"], mechanisms["Cell_n"] + r".\newline " + domains["Cell_n"]["tex"], *[str(reference[key]) for key in ("pairs", *CLASSES)]]) + r"\\\bottomrule",
         r"\end{tabular}",
-        r"\par\smallskip\raggedright\small Outcomes read fine / merged; Inc. is unresolved. PC2's merged solver remains TO, not LOSS. Rolling and Canary share a capacity obstruction: their sweeps supply "
+        r"\par\smallskip\raggedright\small Outcomes read fine / merged; Inc. is unresolved. PC2's merged solver remains a timeout (TO), not LOSS. Rolling and Canary share a capacity obstruction: their sweeps supply "
         + str(families["Rolling"]["witness"] + families["Canary"]["witness"])
         + r" of the \VThreeESixWitness{} WIN/LOSS pairs.",
         r"$n$ counts replicas/workers/stations. Canary bounds reported failures by $n-m$; otherwise $m$ is an availability floor. Threads varies queue capacity 1,2 under both arrival regimes. Rolling+Audit's boundary merge remains WIN and adds no pair here.",

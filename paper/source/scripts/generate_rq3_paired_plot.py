@@ -120,7 +120,7 @@ def render():
 \node[anchor=west] at (4.32,-16) {Direct-Full};
 \node[anchor=west] at (6.6,-16) {All axes logarithmic; lower is better.};
 \end{tikzpicture}
-\caption{All \FixedDirectFullPairs{} completed WIN/WIN pairs. Solver time includes checking but excludes frontend, endpoint preparation and JVM startup. Resident set size (RSS) is sampled over the whole JVM run; it is neither solver-only nor heap usage. The other 13 Direct-Full contracts time out (Figure~\ref{fig:rq3-outcomes}~\cite{FGDUCSAnonymousArtifact}) and are omitted. This compares whole procedures.}
+\caption{All \FixedDirectFullPairs{} completed WIN/WIN pairs. Solver time includes checks and excludes frontend, endpoint preparation and JVM startup. Resident set size (RSS) is sampled over whole JVM runs and does not measure heap use. The other 13 Direct-Full contracts time out and are omitted (Figure~\ref{fig:rq3-outcomes}~\cite{FGDUCSAnonymousArtifact}). This compares whole procedures.}
 \label{fig:rq3-paired-absolute}
 \Description{Paired plots show game-state counts, solver seconds and sampled peak JVM resident memory in MiB for all 14 contracts completed by both Lazy and Direct-Full. Lazy has a lower state count and lower solver-time and RSS medians for every row; ranges can overlap. Direct-Full timeouts, and contracts with no paired result, are shown in the separate all-outcome grid.}
 \end{figure}

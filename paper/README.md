@@ -2,7 +2,7 @@
 
 [Main paper](main.pdf) · [Integrated supplementary material](supplementary_material.pdf) · [TeX and generated evidence](source/).
 
-These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c110-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c110-20261003): 18 body pages and 21 pages total, plus 81 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
+These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c111-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c111-20261003): 18 body pages and 21 pages total, plus 81 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
 
 The main paper proceeds from motivating Cell and Policy examples to the local contract, its generated game and guarantees, granularity, synthesis and evaluation. Table 1 compares the supplied inputs, generated results, progress and continuation of DUCS, GR(1) updating and FG-DUCS. Proposition 5.3 states the serial-transfer sufficient condition in the main paper; Technical Appendix O.13 contains its proof, counterexamples, finite checks and source-inspection table for all nine inherited inputs. Section 2.3 also distinguishes earlier O-DUCS analysis from the archived fork examined in S4.8. Broader primary-source comparisons appear in Related Work and S5.
 
@@ -21,7 +21,7 @@ Page numbers below are **continuous PDF pages in [supplementary_material.pdf](su
 | Label | Section | PDF page |
 |---|---|---:|
 | A | Source Histories and Synthesis Correctness | [3](supplementary_material.pdf#page=3) |
-| B | Complete Cell Contract and Its Two Completing Paths | [6](supplementary_material.pdf#page=6) |
+| B | Complete Cell Contract and Its Two Completing Paths | [7](supplementary_material.pdf#page=7) |
 | C | Policy Requirement-Boundary Argument | [8](supplementary_material.pdf#page=8) |
 | D | NEW and UPD History-Scope Derivations | [10](supplementary_material.pdf#page=10) |
 | E | Activation-Scoped Initialization | [10](supplementary_material.pdf#page=10) |
@@ -38,10 +38,10 @@ Page numbers below are **continuous PDF pages in [supplementary_material.pdf](su
 | O.13 | A local condition for serializing transfer batches | [32](supplementary_material.pdf#page=32) |
 | P | Implementation and AI-Assisted Research Details | [35](supplementary_material.pdf#page=35) |
 | S1 | Granularity and observation witnesses | [36](supplementary_material.pdf#page=36) |
-| S2 | Finite games, search invariants, and certificates | [38](supplementary_material.pdf#page=38) |
-| S3 | Monitor intervals and conditional trace lifting | [41](supplementary_material.pdf#page=41) |
+| S2 | Finite games, search invariants, and certificates | [39](supplementary_material.pdf#page=39) |
+| S3 | Monitor intervals and conditional trace lifting | [42](supplementary_material.pdf#page=42) |
 | S4 | Supplementary validation and cost tables | [47](supplementary_material.pdf#page=47) |
-| S5 | Expanded related-work comparison | [80](supplementary_material.pdf#page=80) |
+| S5 | Expanded related-work comparison | [81](supplementary_material.pdf#page=81) |
 
 For Figure 2, inspect [the complete fixed-budget CSV](source/build/generated/rq3-cells.csv), including all five-trial time and peak-RSS ranges. Its third panel uses raw process bytes divided by 1,048,576 to obtain MiB. The generator retains every completed Lazy/Direct-Full pair; Table 5 and Appendix O retain the unresolved cases. See the [claim map](../docs/CLAIMS.md) for validation commands and scope limits.
 

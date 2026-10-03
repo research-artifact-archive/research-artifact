@@ -221,8 +221,8 @@ def verify_pairs(source, expected):
     for phrase in ('Discovered game states', 'Solver time (seconds)', 'exact first-trial count',
                    'five-run median [min--max]', 'Peak JVM RSS (MiB)',
                    'All axes logarithmic; lower is better.',
-                   'Resident set size (RSS) is sampled over the whole JVM run',
-                   'neither solver-only nor heap usage'):
+                   'Resident set size (RSS) is sampled over whole JVM runs',
+                   'does not measure heap use'):
         require(phrase in source, 'plot_units', phrase)
     for phrase in (r'\fill[pairlazy] (3.1,-16) circle (2pt);',
                    r'\node[anchor=west] at (3.22,-16) {Lazy};',

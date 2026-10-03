@@ -1,7 +1,7 @@
 \begin{proof}
 \emph{Coverage.} Every new safe non-goal enters $\mathsf{Open}$ and leaves only after expansion queries all UC candidates. At quiescence, finite control cursors retain unfinished nonwinners in $\mathsf{Retry}$; promotion removes only winners. Thus expanded states have complete UC outcomes, unfinished nonwinners remain retryable, and unexpanded safe non-goals remain open.
 
-\emph{Termination.} Each state is expanded/promoted once and each candidate queried once. Reverse incidences are processed on promotion, so the finite search terminates.
+\emph{Termination.} Each state is expanded and promoted at most once and each candidate queried once. Reverse incidences are processed on promotion, so the finite search terminates.
 
 \emph{Soundness.} Goals start at rank zero with compatible handover states. By induction, each promotion adds a safe state above a complete nonempty proving set of previously ranked winners: every UC successor, or every outcome of one control event. Queried buckets are immutable. Extraction retains all UC events, chooses one such control bucket at quiescence, and disables other controls. Every reached non-goal is safe, has a successor, and every successor has strictly smaller natural-number rank. Consequently no maximal run is an infinite run or a non-goal deadlock, and every run reaches a matching quiescent goal. The monitor rules advance exactly the memories active over each event; induction from entry establishes every declared safety interval. Handover retains the matching new memories.
 

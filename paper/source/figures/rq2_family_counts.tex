@@ -3,13 +3,13 @@
 \caption{Granularity mechanisms, parameter sweeps and controls. Each pair compares fine and merged contracts of one model: Policy merges boundaries, other rows merge transfers. Counts are comparisons, not independent applications. The main total excludes Cell.}
 \label{tab:rq2-family-counts}
 \centering\small
-\begin{tabular}{@{}lp{.30\linewidth}rrrrr@{}}\toprule
+\begin{tabular}{@{}lp{.33\linewidth}rrrrr@{}}\toprule
 Family / control & Mechanism and parameters & Pairs & \shortstack{WIN /\\LOSS} & \shortstack{LOSS /\\LOSS} & \shortstack{WIN /\\WIN} & Inc.\\\midrule
 \multicolumn{7}{@{}l}{\emph{Constructed families and parameter sweeps}}\\
 Rolling & Readiness during startup.\newline $n=2\ldots6,\ 1\le m<n$ & 15 & 15 & 0 & 0 & 0\\
 Canary & Failure reports and recovery.\newline $n=2\ldots6,\ 1\le m<n$ & 15 & 15 & 0 & 0 & 0\\
 Policy & Audit overlap; role exclusion.\newline 2 rule pairs & 1 & 1 & 0 & 0 & 0\\
-DB-Rolling & Role-gated replacement.\newline $n=3,\ m=2,3$ & 2 & 1 & 1 & 0 & 0\\
+DB-Rolling & Database (DB) role-gated replacement.\newline $n=3,\ m=2,3$ & 2 & 1 & 1 & 0 & 0\\
 Rolling+Audit & Readiness and audit overlap.\newline $n=2,\ m=1$; 1 audit pair & 1 & 1 & 0 & 0 & 0\\
 \midrule
 \multicolumn{7}{@{}l}{\emph{Quiescence control}}\\
@@ -22,6 +22,6 @@ Main total &  & \VThreeESixMainPairs{} & \VThreeESixWitness{} & \VThreeESixBothL
 \midrule
 Cell$_n$ (reference) & Empty-station transfer guards.\newline $n=2\ldots10$ & 9 & 9 & 0 & 0 & 0\\\bottomrule
 \end{tabular}
-\par\smallskip\raggedright\small Outcomes read fine / merged; Inc. is unresolved. PC2's merged solver remains TO, not LOSS. Rolling and Canary share a capacity obstruction: their sweeps supply 30 of the \VThreeESixWitness{} WIN/LOSS pairs.
+\par\smallskip\raggedright\small Outcomes read fine / merged; Inc. is unresolved. PC2's merged solver remains a timeout (TO), not LOSS. Rolling and Canary share a capacity obstruction: their sweeps supply 30 of the \VThreeESixWitness{} WIN/LOSS pairs.
 $n$ counts replicas/workers/stations. Canary bounds reported failures by $n-m$; otherwise $m$ is an availability floor. Threads varies queue capacity 1,2 under both arrival regimes. Rolling+Audit's boundary merge remains WIN and adds no pair here.
 \end{table}
