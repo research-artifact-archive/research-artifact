@@ -1,0 +1,582 @@
+C102 bounded source inspection of the existing inherited inputs
+Method: source_inspection. The two UC conditions were assessed from the explicit local FSP declarations, finite constants and transfer pairs. This is not an executed general FSP parser/checker and is not a new synthesis or performance experiment.
+Python was used to read existing CSV/JSON, copy exact source lines, and save this record. The existing generate_contract_sizes.py --check was separately executed and passed for the declared transfer counts and saved frontend contract correspondence; that checker does not test the UC predicate.
+Ordinary controllability is the union of old/new controllable declarations (tool/source/mtsa/src/main/java/ltsa/lts/UpdatingControllersDefinition.java:74-85). The local tests below concern the declared physical components, before observer augmentation.
+The adapter augments its first component with common observers, preserves observer states on transfer, and retains the raw old/new environment alphabets (tool/source/mtsa/src/main/java/ltsa/updatingControllers/otf/MtsaRevisedOtfDucsAdapter.java:1418-1494,1540-1593). The positive source cases retain identical UC participation and do not add UC enabledness through this augmentation.
+Saved denominator: results/ablation/tables/e1_comparison.csv has 54 rows = 9 inputs x Base/R1 x transfers/boundaries/both. Only 18 transfer-only rows are in scope. The 36 boundary/both rows are excluded. R2 is not present in this grid and has not been assessed for full theorem applicability here.
+Full sufficient premises hold by this source analysis for 12/18 transfer-only comparisons: GSM, Industry, MetaSocket, PowerPlant, Surveillance and Workflow, each Base/R1. Eleven are WIN/WIN; Industry/R1 is LOSS/LOSS, so the merged-WIN antecedent is false. PC Arms=1, PC Arms=2 and Railcab contribute the six excluded transfer-only comparisons, all observed WIN/WIN.
+Direction: the serial transfer preservation proposition is merged WIN => fine WIN. It does not establish fine WIN => merged WIN and therefore does not explain the absence of fine WIN / merged LOSS in the 54 saved comparisons.
+Monitor premise: all 138 saved NEW/UPD monitor occurrences for Base/R1 have no reconfigure label in their alphabet. OLD safety declarations and their referenced fluents in all nine source files mention ordinary labels only. SafetyTester.java:70-78 implements alphabet-external stuttering at every state, hence transfer effects are identity and commute. OLD compiled tester tables are not contained in these saved monitor exports; the OLD conclusion is source inspection, supplemented by the retained E1 preprocessor behavior described below.
+Precedence premise: all 18 saved Base/R1 contract exports report explicit_precedence_edges=0. UpdateProtocolSpec.java:76-97 only registers boundary commands and adds no default precedence; MtsaRevisedOtfDucsAdapter.java:1399-1414 imports declared precedence.
+Other comparison premises: reproduce/solver-variants/e1.patch:16-62 preserves ordinary actions, component graphs/transfers, entries and targets; lines 99-113 preserve activation tables. Transfer mode groups only reconfigure labels, leaving start/stop singleton. Cartesian outcomes are constructed at lines 200-215. Lines 65-93 check commutation on every tester state, and lines 99-109 check residual states; the 18 retained transfer runs complete without validation errors. This establishes the transformation premises without rerunning synthesis.
+No new independent export of the compiled 18 games or runtime conformance test was produced. Applicability is to the declared and retained E1 model transformation, not a deployment claim.
+
+INPUT gsm
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+All ordinary environment actions are in the union of the old/new controllable sets; every local UC set is empty.
+Failure witness: none
+Pairs: 8; relations: R_ENV_FG:51
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/gsm.json; Base/R1 NEW+UPD occurrences=3; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/GSM_FG.lts:66-97.
+Contract declarations: tool/models/GSM_FG.lts:201-212 (UpdCont_OTF_FG); tool/models/GSM_FG.lts:215-227 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/GSM_FG.lts:13: set OldControllableActions = {shiftX, shiftY, shiftZ, encode, send, receive, decode[2..3], output}
+tool/models/GSM_FG.lts:14: set NewControllableActions = {shiftX, shiftY, shiftZ, shiftT, encode, send, receive, decode[2..3], output}
+tool/models/GSM_FG.lts:15: set AlphabetOld = {OldControllableActions}
+tool/models/GSM_FG.lts:16: set AlphabetNew = {NewControllableActions}
+tool/models/GSM_FG.lts:18: OLD_ENV = SENDER,
+tool/models/GSM_FG.lts:19: SENDER = (shiftX -> X),
+tool/models/GSM_FG.lts:20: X = (shiftY -> Y),
+tool/models/GSM_FG.lts:21: Y = (shiftZ -> Z),
+tool/models/GSM_FG.lts:22: Z = (encode -> ENCODED),
+tool/models/GSM_FG.lts:23: ENCODED = (send -> SENT),
+tool/models/GSM_FG.lts:24: SENT = (receive -> RECEIVED),
+tool/models/GSM_FG.lts:25: RECEIVED = (decode[2..3] -> DECODED),
+tool/models/GSM_FG.lts:26: DECODED = (output -> SENDER).
+tool/models/GSM_FG.lts:28: NEW_ENV = SENDER,
+tool/models/GSM_FG.lts:29: SENDER = (shiftX -> X),
+tool/models/GSM_FG.lts:30: X = (shiftY -> Y),
+tool/models/GSM_FG.lts:31: Y = (shiftZ -> Z),
+tool/models/GSM_FG.lts:32: Z = (shiftT -> T),
+tool/models/GSM_FG.lts:33: T = (encode -> ENCODED),
+tool/models/GSM_FG.lts:34: ENCODED = (send -> SENT),
+tool/models/GSM_FG.lts:35: SENT = (receive -> RECEIVED),
+tool/models/GSM_FG.lts:36: RECEIVED = (decode[2..3] -> DECODED),
+tool/models/GSM_FG.lts:37: DECODED = (output -> SENDER).
+tool/models/GSM_FG.lts:39: ||OldEnvironment = (OLD_ENV).
+tool/models/GSM_FG.lts:40: ||NewEnvironment = (NEW_ENV).
+tool/models/GSM_FG.lts:42: relation R_ENV = {SENDER@OLD_ENV = reconfigure -> SENDER@NEW_ENV,
+tool/models/GSM_FG.lts:43: 					X@OLD_ENV = reconfigure -> X@NEW_ENV,
+tool/models/GSM_FG.lts:44: 					Y@OLD_ENV = reconfigure -> Y@NEW_ENV,
+tool/models/GSM_FG.lts:45: 					Z@OLD_ENV = reconfigure -> Z@NEW_ENV,
+tool/models/GSM_FG.lts:46: 					ENCODED@OLD_ENV = reconfigure -> ENCODED@NEW_ENV,
+tool/models/GSM_FG.lts:47: 					SENT@OLD_ENV = reconfigure -> SENT@NEW_ENV,
+tool/models/GSM_FG.lts:48: 					RECEIVED@OLD_ENV = reconfigure -> RECEIVED@NEW_ENV,
+tool/models/GSM_FG.lts:49: 					DECODED@OLD_ENV = reconfigure -> DECODED@NEW_ENV}
+tool/models/GSM_FG.lts:51: relation R_ENV_FG = {SENDER@OLD_ENV = reconfigure_ENV -> SENDER@NEW_ENV,
+tool/models/GSM_FG.lts:52: 					X@OLD_ENV = reconfigure_ENV -> X@NEW_ENV,
+tool/models/GSM_FG.lts:53: 					Y@OLD_ENV = reconfigure_ENV -> Y@NEW_ENV,
+tool/models/GSM_FG.lts:54: 					Z@OLD_ENV = reconfigure_ENV -> Z@NEW_ENV,
+tool/models/GSM_FG.lts:55: 					ENCODED@OLD_ENV = reconfigure_ENV -> ENCODED@NEW_ENV,
+tool/models/GSM_FG.lts:56: 					SENT@OLD_ENV = reconfigure_ENV -> SENT@NEW_ENV,
+tool/models/GSM_FG.lts:57: 					RECEIVED@OLD_ENV = reconfigure_ENV -> RECEIVED@NEW_ENV,
+tool/models/GSM_FG.lts:58: 					DECODED@OLD_ENV = reconfigure_ENV -> DECODED@NEW_ENV}
+tool/models/GSM_FG.lts:60: map MAPPING_ENV = {OLD_ENV, NEW_ENV, R_ENV}.
+tool/models/GSM_FG.lts:62: ||MapEnv = (MAPPING_ENV).
+
+INPUT industry
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+TOR, DSD1 and GATEFORM1 old/new graphs coincide up to the versioned root names; all 16 declared transfer pairs preserve the corresponding local state.
+Failure witness: none
+Pairs: 16; relations: R_TOR_FG:67;R_DSD1_FG:82;R_GATEFORM1_FG:95
+Saved transfer outcomes: Base WIN/WIN; R1 LOSS/LOSS (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/industry.json; Base/R1 NEW+UPD occurrences=9; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/Industry_FG.lts:110-175.
+Contract declarations: tool/models/Industry_FG.lts:302-313 (UpdCont_OTF_FG); tool/models/Industry_FG.lts:316-330 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/Industry_FG.lts:13: set ControllableActions = {validateTOR, validateDSD1, validateQA, validateGF1, reviewTOR, reviewDSD1, readyTOR,  readyDSD1}
+tool/models/Industry_FG.lts:14: set A = {ControllableActions, receiveTOR, receiveDSD1, receiveGF1, torOk[0..1], dsd1Ok[0..1], qaOk[0..1], adjustGF1, approveGF1, cancelGF1}
+tool/models/Industry_FG.lts:16: TOR_OLD = (receiveTOR -> RECEIVED),
+tool/models/Industry_FG.lts:17: RECEIVED = (validateTOR -> RESPONSE),
+tool/models/Industry_FG.lts:18: RESPONSE = (torOk[0] -> TOROK0|
+tool/models/Industry_FG.lts:19: torOk[1] -> TOROK1),
+tool/models/Industry_FG.lts:20: TOROK0 = (reviewTOR -> TOR_OLD),
+tool/models/Industry_FG.lts:21: TOROK1 = (readyTOR -> TOR_OLD).
+tool/models/Industry_FG.lts:23: DSD1_OLD = (receiveDSD1 -> RECEIVED),
+tool/models/Industry_FG.lts:24: RECEIVED = (validateDSD1 -> DSD1RESPONSE),
+tool/models/Industry_FG.lts:25: DSD1RESPONSE = (dsd1Ok[0] -> DSD1OK0 |
+tool/models/Industry_FG.lts:26: dsd1Ok[1] -> DSD1OK1),
+tool/models/Industry_FG.lts:27: DSD1OK0 = (reviewDSD1 -> DSD1_OLD),
+tool/models/Industry_FG.lts:28: DSD1OK1 = (validateQA -> QARESPONSE),
+tool/models/Industry_FG.lts:29: QARESPONSE = (qaOk[0] -> QAOK0|
+tool/models/Industry_FG.lts:30: qaOk[1] -> QAOK1),
+tool/models/Industry_FG.lts:31: QAOK0 = (reviewDSD1 -> DSD1_OLD),
+tool/models/Industry_FG.lts:32: QAOK1 = (readyDSD1 -> DSD1_OLD).
+tool/models/Industry_FG.lts:34: GATEFORM1_OLD = (receiveGF1 -> RECEIVED),
+tool/models/Industry_FG.lts:35: RECEIVED = (validateGF1 -> GF1RESPONSE),
+tool/models/Industry_FG.lts:36: GF1RESPONSE = ({adjustGF1,approveGF1,cancelGF1} -> GATEFORM1_OLD).
+tool/models/Industry_FG.lts:39: TOR_NEW = (receiveTOR -> RECEIVED),
+tool/models/Industry_FG.lts:40: RECEIVED = (validateTOR -> RESPONSE),
+tool/models/Industry_FG.lts:41: RESPONSE = (torOk[0] -> TOROK0|
+tool/models/Industry_FG.lts:42: torOk[1] -> TOROK1),
+tool/models/Industry_FG.lts:43: TOROK0 = (reviewTOR -> TOR_NEW),
+tool/models/Industry_FG.lts:44: TOROK1 = (readyTOR -> TOR_NEW).
+tool/models/Industry_FG.lts:46: DSD1_NEW = (receiveDSD1 -> RECEIVED),
+tool/models/Industry_FG.lts:47: RECEIVED = (validateDSD1 -> DSD1RESPONSE),
+tool/models/Industry_FG.lts:48: DSD1RESPONSE = (dsd1Ok[0] -> DSD1OK0 |
+tool/models/Industry_FG.lts:49: dsd1Ok[1] -> DSD1OK1),
+tool/models/Industry_FG.lts:50: DSD1OK0 = (reviewDSD1 -> DSD1_NEW),
+tool/models/Industry_FG.lts:51: DSD1OK1 = (validateQA -> QARESPONSE),
+tool/models/Industry_FG.lts:52: QARESPONSE = (qaOk[0] -> QAOK0|
+tool/models/Industry_FG.lts:53: qaOk[1] -> QAOK1),
+tool/models/Industry_FG.lts:54: QAOK0 = (reviewDSD1 -> DSD1_NEW),
+tool/models/Industry_FG.lts:55: QAOK1 = (readyDSD1 -> DSD1_NEW).
+tool/models/Industry_FG.lts:57: GATEFORM1_NEW = (receiveGF1 -> RECEIVED),
+tool/models/Industry_FG.lts:58: RECEIVED = (validateGF1 -> GF1RESPONSE),
+tool/models/Industry_FG.lts:59: GF1RESPONSE = ({adjustGF1,approveGF1,cancelGF1} -> GATEFORM1_NEW).
+tool/models/Industry_FG.lts:61: relation R_TOR = {TOR_OLD@TOR_OLD = reconfigure -> TOR_NEW@TOR_NEW,
+tool/models/Industry_FG.lts:62: RECEIVED@TOR_OLD = reconfigure -> RECEIVED@TOR_NEW,
+tool/models/Industry_FG.lts:63: RESPONSE@TOR_OLD = reconfigure -> RESPONSE@TOR_NEW,
+tool/models/Industry_FG.lts:64: TOROK0@TOR_OLD = reconfigure -> TOROK0@TOR_NEW,
+tool/models/Industry_FG.lts:65: TOROK1@TOR_OLD = reconfigure -> TOROK1@TOR_NEW}
+tool/models/Industry_FG.lts:67: relation R_TOR_FG = {TOR_OLD@TOR_OLD = reconfigure_TOR -> TOR_NEW@TOR_NEW,
+tool/models/Industry_FG.lts:68: RECEIVED@TOR_OLD = reconfigure_TOR -> RECEIVED@TOR_NEW,
+tool/models/Industry_FG.lts:69: RESPONSE@TOR_OLD = reconfigure_TOR -> RESPONSE@TOR_NEW,
+tool/models/Industry_FG.lts:70: TOROK0@TOR_OLD = reconfigure_TOR -> TOROK0@TOR_NEW,
+tool/models/Industry_FG.lts:71: TOROK1@TOR_OLD = reconfigure_TOR -> TOROK1@TOR_NEW}
+tool/models/Industry_FG.lts:73: relation R_DSD1 = {DSD1_OLD@DSD1_OLD = reconfigure -> DSD1_NEW@DSD1_NEW,
+tool/models/Industry_FG.lts:74: RECEIVED@DSD1_OLD = reconfigure -> RECEIVED@DSD1_NEW,
+tool/models/Industry_FG.lts:75: DSD1RESPONSE@DSD1_OLD = reconfigure -> DSD1RESPONSE@DSD1_NEW,
+tool/models/Industry_FG.lts:76: DSD1OK0@DSD1_OLD = reconfigure -> DSD1OK0@DSD1_NEW,
+tool/models/Industry_FG.lts:77: DSD1OK1@DSD1_OLD = reconfigure -> DSD1OK1@DSD1_NEW,
+tool/models/Industry_FG.lts:78: QARESPONSE@DSD1_OLD = reconfigure -> QARESPONSE@DSD1_NEW,
+tool/models/Industry_FG.lts:79: QAOK0@DSD1_OLD = reconfigure -> QAOK0@DSD1_NEW,
+tool/models/Industry_FG.lts:80: QAOK1@DSD1_OLD = reconfigure -> QAOK1@DSD1_NEW}
+tool/models/Industry_FG.lts:82: relation R_DSD1_FG = {DSD1_OLD@DSD1_OLD = reconfigure_DSD1 -> DSD1_NEW@DSD1_NEW,
+tool/models/Industry_FG.lts:83: RECEIVED@DSD1_OLD = reconfigure_DSD1 -> RECEIVED@DSD1_NEW,
+tool/models/Industry_FG.lts:84: DSD1RESPONSE@DSD1_OLD = reconfigure_DSD1 -> DSD1RESPONSE@DSD1_NEW,
+tool/models/Industry_FG.lts:85: DSD1OK0@DSD1_OLD = reconfigure_DSD1 -> DSD1OK0@DSD1_NEW,
+tool/models/Industry_FG.lts:86: DSD1OK1@DSD1_OLD = reconfigure_DSD1 -> DSD1OK1@DSD1_NEW,
+tool/models/Industry_FG.lts:87: QARESPONSE@DSD1_OLD = reconfigure_DSD1 -> QARESPONSE@DSD1_NEW,
+tool/models/Industry_FG.lts:88: QAOK0@DSD1_OLD = reconfigure_DSD1 -> QAOK0@DSD1_NEW,
+tool/models/Industry_FG.lts:89: QAOK1@DSD1_OLD = reconfigure_DSD1 -> QAOK1@DSD1_NEW}
+tool/models/Industry_FG.lts:91: relation R_GATEFORM1 = {GATEFORM1_OLD@GATEFORM1_OLD = reconfigure -> GATEFORM1_NEW@GATEFORM1_NEW,
+tool/models/Industry_FG.lts:92: RECEIVED@GATEFORM1_OLD = reconfigure -> RECEIVED@GATEFORM1_NEW,
+tool/models/Industry_FG.lts:93: GF1RESPONSE@GATEFORM1_OLD = reconfigure -> GF1RESPONSE@GATEFORM1_NEW}
+tool/models/Industry_FG.lts:95: relation R_GATEFORM1_FG = {GATEFORM1_OLD@GATEFORM1_OLD = reconfigure_GATEFORM1 -> GATEFORM1_NEW@GATEFORM1_NEW,
+tool/models/Industry_FG.lts:96: RECEIVED@GATEFORM1_OLD = reconfigure_GATEFORM1 -> RECEIVED@GATEFORM1_NEW,
+tool/models/Industry_FG.lts:97: GF1RESPONSE@GATEFORM1_OLD = reconfigure_GATEFORM1 -> GF1RESPONSE@GATEFORM1_NEW}
+tool/models/Industry_FG.lts:99: map MAP_TOR = {TOR_OLD, TOR_NEW, R_TOR}.
+tool/models/Industry_FG.lts:100: map MAP_DSD1 = {DSD1_OLD, DSD1_NEW, R_DSD1}.
+tool/models/Industry_FG.lts:101: map MAP_GATEFORM1 = {GATEFORM1_OLD, GATEFORM1_NEW, R_GATEFORM1}.
+tool/models/Industry_FG.lts:103: ||OldEnvironment = (TOR_OLD || DSD1_OLD || GATEFORM1_OLD).
+tool/models/Industry_FG.lts:104: ||NewEnvironment = (TOR_NEW || DSD1_NEW || GATEFORM1_NEW).
+tool/models/Industry_FG.lts:105: ||MapEnv = (MAP_TOR || MAP_DSD1 || MAP_GATEFORM1).
+
+INPUT metasocket
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+IO retains UC input at the idle state and no UC action at PROCESS. DES64 and DES128 have only controllable encryption loops; both encryption UC alphabets are empty.
+Failure witness: none
+Pairs: 3; relations: R_IO_FG:36;R_64_128_FG:41
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/metasocket.json; Base/R1 NEW+UPD occurrences=3; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/MetaSocket_FG.lts:50-76.
+Contract declarations: tool/models/MetaSocket_FG.lts:181-192 (UpdCont_OTF_FG); tool/models/MetaSocket_FG.lts:195-207 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/MetaSocket_FG.lts:13: set Controllable64 = {des64, output}
+tool/models/MetaSocket_FG.lts:14: set Controllable128 = {des128, output}
+tool/models/MetaSocket_FG.lts:15: set Alphabet64 = {Controllable64, input}
+tool/models/MetaSocket_FG.lts:16: set Alphabet128 = {Controllable128, input}
+tool/models/MetaSocket_FG.lts:17: set Alphabet = {des64, des128, output, input}
+tool/models/MetaSocket_FG.lts:19: IO = (input -> output -> IO).
+tool/models/MetaSocket_FG.lts:20: DES64 = (des64 -> DES64).
+tool/models/MetaSocket_FG.lts:21: DES128 = (des128 -> DES128).
+tool/models/MetaSocket_FG.lts:23: ||ENV_DES64 = (DES64 || IO).
+tool/models/MetaSocket_FG.lts:24: ||ENV_DES128 = (DES128 || IO).
+tool/models/MetaSocket_FG.lts:27: IO_OLD = (input -> PROCESS),
+tool/models/MetaSocket_FG.lts:28: PROCESS = (output -> IO_OLD).
+tool/models/MetaSocket_FG.lts:30: IO_NEW = (input -> PROCESS),
+tool/models/MetaSocket_FG.lts:31: PROCESS = (output -> IO_NEW).
+tool/models/MetaSocket_FG.lts:33: relation R_IO = {IO_OLD@IO_OLD = reconfigure -> IO_NEW@IO_NEW,
+tool/models/MetaSocket_FG.lts:34: PROCESS@IO_OLD = reconfigure -> PROCESS@IO_NEW}
+tool/models/MetaSocket_FG.lts:36: relation R_IO_FG = {IO_OLD@IO_OLD = reconfigure_IO -> IO_NEW@IO_NEW,
+tool/models/MetaSocket_FG.lts:37: PROCESS@IO_OLD = reconfigure_IO -> PROCESS@IO_NEW}
+tool/models/MetaSocket_FG.lts:39: relation R_64_128 = {DES64@DES64 = reconfigure -> DES128@DES128}
+tool/models/MetaSocket_FG.lts:41: relation R_64_128_FG = {DES64@DES64 = reconfigure_64_128 -> DES128@DES128}
+tool/models/MetaSocket_FG.lts:43: map MAPPING_IO = {IO_OLD, IO_NEW, R_IO}.
+tool/models/MetaSocket_FG.lts:44: map MAPPING_64_128 = {DES64, DES128, R_64_128}.
+tool/models/MetaSocket_FG.lts:46: ||MapEnv_64_128 = (MAPPING_IO || MAPPING_64_128).
+
+INPUT powerplant
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+MAINTENANCE and ENV old/new graphs coincide up to root names; the four transfer pairs preserve states. request is UC and is enabled only in the corresponding maintenance idle states.
+Failure witness: none
+Pairs: 4; relations: R_MAINTENANCE_FG:47;R_ENV_FG:50
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/powerplant.json; Base/R1 NEW+UPD occurrences=9; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/PowerPlant_FG.lts:62-103.
+Contract declarations: tool/models/PowerPlant_FG.lts:236-247 (UpdCont_OTF_FG); tool/models/PowerPlant_FG.lts:250-264 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/PowerPlant_FG.lts:13: set ControllableActions = {stopPump, startPump, procedure, endProcedure}
+tool/models/PowerPlant_FG.lts:14: set A = {ControllableActions, request}
+tool/models/PowerPlant_FG.lts:17: MAINTENANCE_OLD = (request -> REQUESTED),
+tool/models/PowerPlant_FG.lts:18: REQUESTED = (endProcedure -> MAINTENANCE_OLD).
+tool/models/PowerPlant_FG.lts:20: ENV_OLD = STARTED,
+tool/models/PowerPlant_FG.lts:21: STARTED =	(stopPump -> STOPPED |
+tool/models/PowerPlant_FG.lts:22: procedure -> STARTED |
+tool/models/PowerPlant_FG.lts:23: endProcedure -> STARTED),
+tool/models/PowerPlant_FG.lts:24: STOPPED =	(startPump -> STARTED |
+tool/models/PowerPlant_FG.lts:25: procedure -> STOPPED |
+tool/models/PowerPlant_FG.lts:26: endProcedure -> STOPPED).
+tool/models/PowerPlant_FG.lts:29: MAINTENANCE_NEW = (request -> REQUESTED),
+tool/models/PowerPlant_FG.lts:30: REQUESTED = (endProcedure -> MAINTENANCE_NEW).
+tool/models/PowerPlant_FG.lts:32: ENV_NEW = STARTED,
+tool/models/PowerPlant_FG.lts:33: STARTED =	(stopPump -> STOPPED |
+tool/models/PowerPlant_FG.lts:34: procedure -> STARTED |
+tool/models/PowerPlant_FG.lts:35: endProcedure -> STARTED),
+tool/models/PowerPlant_FG.lts:36: STOPPED =	(startPump -> STARTED |
+tool/models/PowerPlant_FG.lts:37: procedure -> STOPPED |
+tool/models/PowerPlant_FG.lts:38: endProcedure -> STOPPED).
+tool/models/PowerPlant_FG.lts:40: relation R_MAINTENANCE = {MAINTENANCE_OLD@MAINTENANCE_OLD = reconfigure -> MAINTENANCE_NEW@MAINTENANCE_NEW,
+tool/models/PowerPlant_FG.lts:41: REQUESTED@MAINTENANCE_OLD = reconfigure -> REQUESTED@MAINTENANCE_NEW}
+tool/models/PowerPlant_FG.lts:43: relation R_ENV = {//ENV_OLD@ENV_OLD = reconfigure -> ENV_NEW@ENV_NEW,
+tool/models/PowerPlant_FG.lts:44: STARTED@ENV_OLD = reconfigure -> STARTED@ENV_NEW,
+tool/models/PowerPlant_FG.lts:45: STOPPED@ENV_OLD = reconfigure -> STOPPED@ENV_NEW}
+tool/models/PowerPlant_FG.lts:47: relation R_MAINTENANCE_FG = {MAINTENANCE_OLD@MAINTENANCE_OLD = reconfigure_MAINTENANCE -> MAINTENANCE_NEW@MAINTENANCE_NEW,
+tool/models/PowerPlant_FG.lts:48: REQUESTED@MAINTENANCE_OLD = reconfigure_MAINTENANCE -> REQUESTED@MAINTENANCE_NEW}
+tool/models/PowerPlant_FG.lts:50: relation R_ENV_FG = {//ENV_OLD@ENV_OLD = reconfigure_ENV -> ENV_NEW@ENV_NEW,
+tool/models/PowerPlant_FG.lts:51: STARTED@ENV_OLD = reconfigure_ENV -> STARTED@ENV_NEW,
+tool/models/PowerPlant_FG.lts:52: STOPPED@ENV_OLD = reconfigure_ENV -> STOPPED@ENV_NEW}
+tool/models/PowerPlant_FG.lts:54: map MAP_MAINTENANCE = {MAINTENANCE_OLD, MAINTENANCE_NEW, R_MAINTENANCE}.
+tool/models/PowerPlant_FG.lts:55: map MAP_ENV = {ENV_OLD, ENV_NEW, R_ENV}.
+tool/models/PowerPlant_FG.lts:57: ||OldEnvironment = (MAINTENANCE_OLD || ENV_OLD).
+tool/models/PowerPlant_FG.lts:58: ||NewEnvironment = (MAINTENANCE_NEW || ENV_NEW).
+tool/models/PowerPlant_FG.lts:59: ||MapEnv = (MAP_MAINTENANCE || MAP_ENV).
+
+INPUT productioncell_arms1
+Local alphabet stability: FAIL; post-transfer UC subset: PASS.
+At K=1 the seven transfer pairs preserve the enabled UC set except POLISHED[1] to ARM, which removes the polish result events; new ARM enables only controllable actions.
+Failure witness: Alphabet witness: polishOk.1 occurs in the old component and not the new component; paintOk.1 occurs in the new component and not the old component. These are concrete witnesses, not an exhaustive alphabet-difference list.
+Pairs: 7; relations: R_PRODUCTION_CELL_1_FG:63
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/productioncell_arms1.json; Base/R1 NEW+UPD occurrences=18; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/ProductionCell_Arms=1_FG.lts:77-155.
+Contract declarations: tool/models/ProductionCell_Arms=1_FG.lts:319-330 (UpdCont_OTF_FG); tool/models/ProductionCell_Arms=1_FG.lts:333-350 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/ProductionCell_Arms=1_FG.lts:13: const N = 1
+tool/models/ProductionCell_Arms=1_FG.lts:14: const K = 1
+tool/models/ProductionCell_Arms=1_FG.lts:15: range Arms = 1..N
+tool/models/ProductionCell_Arms=1_FG.lts:16: range Stages = 1..K
+tool/models/ProductionCell_Arms=1_FG.lts:18: set ToolActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], paint[Arms], out[Arms]}
+tool/models/ProductionCell_Arms=1_FG.lts:19: set ToolResults = {drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], paintOk[Arms], paintNOk[Arms]}
+tool/models/ProductionCell_Arms=1_FG.lts:20: set ToolDelays = {wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages], wait_paint[Arms][Stages]}
+tool/models/ProductionCell_Arms=1_FG.lts:21: set OldControllableActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]*/}
+tool/models/ProductionCell_Arms=1_FG.lts:22: set OldAlphabet = {OldControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]}
+tool/models/ProductionCell_Arms=1_FG.lts:23: set NewControllableActions = {drill[Arms], paint[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]*/}
+tool/models/ProductionCell_Arms=1_FG.lts:24: set NewAlphabet = {NewControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]}
+tool/models/ProductionCell_Arms=1_FG.lts:27: PRODUCTION_CELL_OLD(I=1) = (in[I] -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:28: ARM = ( polish[I] -> POLISHED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:29: | drill[I] -> DRILLED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:30: | clean[I] -> CLEANED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:31: | stamp[I] -> TRASHED
+tool/models/ProductionCell_Arms=1_FG.lts:32: | out[I] -> OUT),
+tool/models/ProductionCell_Arms=1_FG.lts:33: OUT = (reset[I] -> PRODUCTION_CELL_OLD),
+tool/models/ProductionCell_Arms=1_FG.lts:34: DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:35: POLISHED[k:Stages] = (when(k<K) wait_polish[I][k] -> POLISHED[k+1] | when(k==K) {polishOk[I],polishNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:36: CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:37: TRASHED = (stampOk[I] -> ARM).
+tool/models/ProductionCell_Arms=1_FG.lts:40: PRODUCTION_CELL_NEW(I=1) = (in[I] -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:41: ARM = ( paint[I] -> PAINTED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:42: | drill[I] -> DRILLED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:43: | clean[I] -> CLEANED[1]
+tool/models/ProductionCell_Arms=1_FG.lts:44: | stamp[I] -> TRASHED
+tool/models/ProductionCell_Arms=1_FG.lts:45: | out[I] -> OUT),
+tool/models/ProductionCell_Arms=1_FG.lts:46: OUT = (reset[I] -> PRODUCTION_CELL_NEW),
+tool/models/ProductionCell_Arms=1_FG.lts:47: DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:48: PAINTED[k:Stages] = (when(k<K) wait_paint[I][k] -> PAINTED[k+1] | when(k==K) {paintOk[I],paintNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:49: CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=1_FG.lts:50: TRASHED = (stampOk[I] -> ARM).
+tool/models/ProductionCell_Arms=1_FG.lts:52: ||OLD_ENV = (forall[i:Arms] PRODUCTION_CELL_OLD(i)).
+tool/models/ProductionCell_Arms=1_FG.lts:53: ||NEW_ENV = (forall[i:Arms] PRODUCTION_CELL_NEW(i)).
+tool/models/ProductionCell_Arms=1_FG.lts:55: relation R_PRODUCTION_CELL(I) = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(I) = reconfigure -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:56: ARM@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:57: OUT@PRODUCTION_CELL_OLD(I) = reconfigure -> OUT@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:58: TRASHED@PRODUCTION_CELL_OLD(I) = reconfigure -> TRASHED@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:59: forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> DRILLED[k]@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:60: forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=1_FG.lts:61: forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> CLEANED[k]@PRODUCTION_CELL_NEW(I)}
+tool/models/ProductionCell_Arms=1_FG.lts:63: relation R_PRODUCTION_CELL_1_FG = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:64: ARM@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:65: OUT@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> OUT@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:66: TRASHED@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> TRASHED@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:67: forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> DRILLED[k]@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:68: forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=1_FG.lts:69: forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> CLEANED[k]@PRODUCTION_CELL_NEW(1)}
+tool/models/ProductionCell_Arms=1_FG.lts:71: map MAP_PRODUCTION_CELL_1 = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_NEW(1), R_PRODUCTION_CELL(1)}
+tool/models/ProductionCell_Arms=1_FG.lts:73: ||MAP_ENV = (MAP_PRODUCTION_CELL_1).
+
+INPUT productioncell_arms2
+Local alphabet stability: FAIL; post-transfer UC subset: PASS.
+For each I in {1,2}, K=1 and the seven per-arm transfer pairs preserve enabled UC actions except POLISHED[1] to ARM, which removes polish result events; all 14 declared pairs satisfy subset.
+Failure witness: Alphabet witnesses for each I in {1,2}: polishOk.I is old-only and paintOk.I is new-only. These are concrete witnesses, not an exhaustive alphabet-difference list.
+Pairs: 14; relations: R_PRODUCTION_CELL_1_FG:63;R_PRODUCTION_CELL_2_FG:71
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/productioncell_arms2.json; Base/R1 NEW+UPD occurrences=36; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/ProductionCell_Arms=2_FG.lts:86-188.
+Contract declarations: tool/models/ProductionCell_Arms=2_FG.lts:425-436 (UpdCont_OTF_FG); tool/models/ProductionCell_Arms=2_FG.lts:439-462 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/ProductionCell_Arms=2_FG.lts:13: const N = 2
+tool/models/ProductionCell_Arms=2_FG.lts:14: const K = 1
+tool/models/ProductionCell_Arms=2_FG.lts:15: range Arms = 1..N
+tool/models/ProductionCell_Arms=2_FG.lts:16: range Stages = 1..K
+tool/models/ProductionCell_Arms=2_FG.lts:18: set ToolActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], paint[Arms], out[Arms]}
+tool/models/ProductionCell_Arms=2_FG.lts:19: set ToolResults = {drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], paintOk[Arms], paintNOk[Arms]}
+tool/models/ProductionCell_Arms=2_FG.lts:20: set ToolDelays = {wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages], wait_paint[Arms][Stages]}
+tool/models/ProductionCell_Arms=2_FG.lts:21: set OldControllableActions = {drill[Arms], polish[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]*/}
+tool/models/ProductionCell_Arms=2_FG.lts:22: set OldAlphabet = {OldControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], polishOk[Arms], polishNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_polish[Arms][Stages], wait_clean[Arms][Stages]}
+tool/models/ProductionCell_Arms=2_FG.lts:23: set NewControllableActions = {drill[Arms], paint[Arms], clean[Arms], stamp[Arms], out[Arms]/*, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]*/}
+tool/models/ProductionCell_Arms=2_FG.lts:24: set NewAlphabet = {NewControllableActions, in[Arms], reset[Arms], drillOk[Arms], drillNOk[Arms], paintOk[Arms], paintNOk[Arms], cleanOk[Arms], cleanNOk[Arms], stampOk[Arms], wait_drill[Arms][Stages], wait_paint[Arms][Stages], wait_clean[Arms][Stages]}
+tool/models/ProductionCell_Arms=2_FG.lts:27: PRODUCTION_CELL_OLD(I=1) = (in[I] -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:28: ARM = ( polish[I] -> POLISHED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:29: | drill[I] -> DRILLED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:30: | clean[I] -> CLEANED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:31: | stamp[I] -> TRASHED
+tool/models/ProductionCell_Arms=2_FG.lts:32: | out[I] -> OUT),
+tool/models/ProductionCell_Arms=2_FG.lts:33: OUT = (reset[I] -> PRODUCTION_CELL_OLD),
+tool/models/ProductionCell_Arms=2_FG.lts:34: DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:35: POLISHED[k:Stages] = (when(k<K) wait_polish[I][k] -> POLISHED[k+1] | when(k==K) {polishOk[I],polishNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:36: CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:37: TRASHED = (stampOk[I] -> ARM).
+tool/models/ProductionCell_Arms=2_FG.lts:40: PRODUCTION_CELL_NEW(I=1) = (in[I] -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:41: ARM = ( paint[I] -> PAINTED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:42: | drill[I] -> DRILLED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:43: | clean[I] -> CLEANED[1]
+tool/models/ProductionCell_Arms=2_FG.lts:44: | stamp[I] -> TRASHED
+tool/models/ProductionCell_Arms=2_FG.lts:45: | out[I] -> OUT),
+tool/models/ProductionCell_Arms=2_FG.lts:46: OUT = (reset[I] -> PRODUCTION_CELL_NEW),
+tool/models/ProductionCell_Arms=2_FG.lts:47: DRILLED[k:Stages] = (when(k<K) wait_drill[I][k] -> DRILLED[k+1] | when(k==K) {drillOk[I],drillNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:48: PAINTED[k:Stages] = (when(k<K) wait_paint[I][k] -> PAINTED[k+1] | when(k==K) {paintOk[I],paintNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:49: CLEANED[k:Stages] = (when(k<K) wait_clean[I][k] -> CLEANED[k+1] | when(k==K) {cleanOk[I],cleanNOk[I]} -> ARM),
+tool/models/ProductionCell_Arms=2_FG.lts:50: TRASHED = (stampOk[I] -> ARM).
+tool/models/ProductionCell_Arms=2_FG.lts:52: ||OLD_ENV = (forall[i:Arms] PRODUCTION_CELL_OLD(i)).
+tool/models/ProductionCell_Arms=2_FG.lts:53: ||NEW_ENV = (forall[i:Arms] PRODUCTION_CELL_NEW(i)).
+tool/models/ProductionCell_Arms=2_FG.lts:55: relation R_PRODUCTION_CELL(I) = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(I) = reconfigure -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:56: ARM@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:57: OUT@PRODUCTION_CELL_OLD(I) = reconfigure -> OUT@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:58: TRASHED@PRODUCTION_CELL_OLD(I) = reconfigure -> TRASHED@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:59: forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> DRILLED[k]@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:60: forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> ARM@PRODUCTION_CELL_NEW(I),
+tool/models/ProductionCell_Arms=2_FG.lts:61: forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(I) = reconfigure -> CLEANED[k]@PRODUCTION_CELL_NEW(I)}
+tool/models/ProductionCell_Arms=2_FG.lts:63: relation R_PRODUCTION_CELL_1_FG = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:64: ARM@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:65: OUT@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> OUT@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:66: TRASHED@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> TRASHED@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:67: forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> DRILLED[k]@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:68: forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> ARM@PRODUCTION_CELL_NEW(1),
+tool/models/ProductionCell_Arms=2_FG.lts:69: forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(1) = reconfigure_PRODUCTION_CELL_1 -> CLEANED[k]@PRODUCTION_CELL_NEW(1)}
+tool/models/ProductionCell_Arms=2_FG.lts:71: relation R_PRODUCTION_CELL_2_FG = {PRODUCTION_CELL_OLD@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> PRODUCTION_CELL_NEW@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:72: ARM@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> ARM@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:73: OUT@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> OUT@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:74: TRASHED@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> TRASHED@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:75: forall [k:1..K] DRILLED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> DRILLED[k]@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:76: forall [k:1..K] POLISHED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> ARM@PRODUCTION_CELL_NEW(2),
+tool/models/ProductionCell_Arms=2_FG.lts:77: forall [k:1..K] CLEANED[k]@PRODUCTION_CELL_OLD(2) = reconfigure_PRODUCTION_CELL_2 -> CLEANED[k]@PRODUCTION_CELL_NEW(2)}
+tool/models/ProductionCell_Arms=2_FG.lts:79: map MAP_PRODUCTION_CELL_1 = {PRODUCTION_CELL_OLD(1), PRODUCTION_CELL_NEW(1), R_PRODUCTION_CELL(1)}
+tool/models/ProductionCell_Arms=2_FG.lts:80: map MAP_PRODUCTION_CELL_2 = {PRODUCTION_CELL_OLD(2), PRODUCTION_CELL_NEW(2), R_PRODUCTION_CELL(2)}
+tool/models/ProductionCell_Arms=2_FG.lts:82: ||MAP_ENV = (MAP_PRODUCTION_CELL_1 || MAP_PRODUCTION_CELL_2).
+
+INPUT railcab
+Local alphabet stability: FAIL; post-transfer UC subset: FAIL.
+MILESTONES_NEW adds the ordinary UC action approachingCrossing; the declared transfer includes old ENDOFTS to new ENDOFTS.
+Failure witness: Alphabet witness: approachingCrossing is absent from MILESTONES_OLD and present in MILESTONES_NEW. Enabledness witness: ENDOFTS@MILESTONES_OLD --reconfigure_MILESTONES--> ENDOFTS@MILESTONES_NEW; old enabled UC={lastBrake}, new enabled UC={approachingCrossing}; approachingCrossing is newly enabled.
+Pairs: 11; relations: R_MILESTONES_FG:63;R_REQUEST_ATOMIC_FG:73;R_TURNS_FG:79;R_ANOTHER_REQUEST_FG:84
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/railcab.json; Base/R1 NEW+UPD occurrences=21; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/Railcab_FG.lts:97-152.
+Contract declarations: tool/models/Railcab_FG.lts:323-334 (UpdCont_OTF_FG); tool/models/Railcab_FG.lts:337-355 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/Railcab_FG.lts:13: set ControllableActionsOld = {requestEnter, brake, emergencyBrake, idle_c}
+tool/models/Railcab_FG.lts:14: set ControllableActionsNew = {requestEnter, brake, emergencyBrake, idle_c, checkCrossingStatus}
+tool/models/Railcab_FG.lts:15: set AlphabetOld = {ControllableActionsOld, endOfTS, lastBrake, lastEmergencyBrake, noReturn,enterCrossing, enterAllowed[0..1]}
+tool/models/Railcab_FG.lts:16: set AlphabetNew = {ControllableActionsNew, endOfTS, lastBrake, lastEmergencyBrake, noReturn,enterCrossing, enterAllowed[0..1], working, notWorking, approachingCrossing}
+tool/models/Railcab_FG.lts:19: MILESTONES_OLD = (endOfTS -> ENDOFTS),
+tool/models/Railcab_FG.lts:20: ENDOFTS = (lastBrake -> LB | {brake,emergencyBrake} -> MILESTONES_OLD),
+tool/models/Railcab_FG.lts:21: LB = (lastEmergencyBrake -> LEB | {brake, emergencyBrake} -> MILESTONES_OLD),
+tool/models/Railcab_FG.lts:22: LEB = (noReturn -> NR | {brake, emergencyBrake} -> MILESTONES_OLD),
+tool/models/Railcab_FG.lts:23: NR = (enterCrossing -> MILESTONES_OLD).
+tool/models/Railcab_FG.lts:25: REQUEST_ATOMIC_OLD = (requestEnter -> RESPONSE | {AlphabetOld\ControllableActionsOld}\{enterAllowed[0..1]} -> REQUEST_ATOMIC_OLD),
+tool/models/Railcab_FG.lts:26: RESPONSE = (enterAllowed[0..1] -> REQUEST_ATOMIC_OLD).
+tool/models/Railcab_FG.lts:28: TURNS_OLD = ({AlphabetOld\ControllableActionsOld}\{enterAllowed[0..1],enterCrossing} -> TURNS2 | enterCrossing -> TURNS_OLD),
+tool/models/Railcab_FG.lts:29: TURNS2 = (ControllableActionsOld -> TURNS_OLD).
+tool/models/Railcab_FG.lts:31: ANOTHER_REQUEST_OLD = (AlphabetOld -> ANOTHER_REQUEST_OLD).
+tool/models/Railcab_FG.lts:34: MILESTONES_NEW = (endOfTS -> ENDOFTS),
+tool/models/Railcab_FG.lts:35: ENDOFTS = (approachingCrossing -> AC | {brake,emergencyBrake} -> MILESTONES_NEW),
+tool/models/Railcab_FG.lts:36: AC = (lastBrake -> LB| {brake,emergencyBrake} -> MILESTONES_NEW),
+tool/models/Railcab_FG.lts:39: LB = (lastEmergencyBrake -> LEB | {brake, emergencyBrake} -> MILESTONES_NEW),
+tool/models/Railcab_FG.lts:40: LEB = (noReturn -> NR | {brake, emergencyBrake} -> MILESTONES_NEW),
+tool/models/Railcab_FG.lts:41: NR = (enterCrossing -> MILESTONES_NEW).
+tool/models/Railcab_FG.lts:43: REQUEST_ATOMIC_NEW = (requestEnter -> RESPONSE | {AlphabetNew\ControllableActionsNew}\{enterAllowed[0..1]} -> REQUEST_ATOMIC_NEW),
+tool/models/Railcab_FG.lts:44: RESPONSE = (enterAllowed[0..1] -> REQUEST_ATOMIC_NEW).
+tool/models/Railcab_FG.lts:46: TURNS_NEW = ({AlphabetNew\ControllableActionsNew}\{working, notWorking, enterAllowed[0..1],enterCrossing} -> TURNS2 | enterCrossing -> TURNS_NEW),
+tool/models/Railcab_FG.lts:47: TURNS2 = (ControllableActionsNew -> TURNS_NEW).
+tool/models/Railcab_FG.lts:49: ANOTHER_REQUEST = (checkCrossingStatus -> ANSWER | AlphabetNew\{checkCrossingStatus,working,notWorking}-> ANOTHER_REQUEST),
+tool/models/Railcab_FG.lts:50: ANSWER 		    = ({working,notWorking} -> ANOTHER_REQUEST).
+tool/models/Railcab_FG.lts:53: ||OldEnvironment = (MILESTONES_OLD || REQUEST_ATOMIC_OLD || TURNS_OLD).
+tool/models/Railcab_FG.lts:54: ||NewEnvironment = (MILESTONES_NEW || REQUEST_ATOMIC_NEW || TURNS_NEW || ANOTHER_REQUEST).
+tool/models/Railcab_FG.lts:56: relation R_MILESTONES = {MILESTONES_OLD@MILESTONES_OLD = reconfigure -> MILESTONES_NEW@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:57: ENDOFTS@MILESTONES_OLD = reconfigure -> ENDOFTS@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:58: ENDOFTS@MILESTONES_OLD = reconfigure -> AC@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:59: LB@MILESTONES_OLD = reconfigure -> LB@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:60: LEB@MILESTONES_OLD = reconfigure -> approachingCrossing -> LEB@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:61: NR@MILESTONES_OLD = reconfigure -> approachingCrossing -> NR@MILESTONES_NEW}
+tool/models/Railcab_FG.lts:63: relation R_MILESTONES_FG = {MILESTONES_OLD@MILESTONES_OLD = reconfigure_MILESTONES -> MILESTONES_NEW@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:64: ENDOFTS@MILESTONES_OLD = reconfigure_MILESTONES -> ENDOFTS@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:65: ENDOFTS@MILESTONES_OLD = reconfigure_MILESTONES -> AC@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:66: LB@MILESTONES_OLD = reconfigure_MILESTONES -> LB@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:67: LEB@MILESTONES_OLD = reconfigure_MILESTONES -> LEB@MILESTONES_NEW,
+tool/models/Railcab_FG.lts:68: NR@MILESTONES_OLD = reconfigure_MILESTONES -> NR@MILESTONES_NEW}
+tool/models/Railcab_FG.lts:70: relation R_REQUEST_ATOMIC = {REQUEST_ATOMIC_OLD@REQUEST_ATOMIC_OLD = reconfigure -> REQUEST_ATOMIC_NEW@REQUEST_ATOMIC_NEW,
+tool/models/Railcab_FG.lts:71: RESPONSE@REQUEST_ATOMIC_OLD = reconfigure -> RESPONSE@REQUEST_ATOMIC_NEW}
+tool/models/Railcab_FG.lts:73: relation R_REQUEST_ATOMIC_FG = {REQUEST_ATOMIC_OLD@REQUEST_ATOMIC_OLD = reconfigure_REQUEST_ATOMIC -> REQUEST_ATOMIC_NEW@REQUEST_ATOMIC_NEW,
+tool/models/Railcab_FG.lts:74: RESPONSE@REQUEST_ATOMIC_OLD = reconfigure_REQUEST_ATOMIC -> RESPONSE@REQUEST_ATOMIC_NEW}
+tool/models/Railcab_FG.lts:76: relation R_TURNS = {TURNS_OLD@TURNS_OLD = reconfigure -> TURNS_NEW@TURNS_NEW,
+tool/models/Railcab_FG.lts:77: TURNS2@TURNS_OLD = reconfigure -> TURNS2@TURNS_NEW}
+tool/models/Railcab_FG.lts:79: relation R_TURNS_FG = {TURNS_OLD@TURNS_OLD = reconfigure_TURNS -> TURNS_NEW@TURNS_NEW,
+tool/models/Railcab_FG.lts:80: TURNS2@TURNS_OLD = reconfigure_TURNS -> TURNS2@TURNS_NEW}
+tool/models/Railcab_FG.lts:82: relation R_ANOTHER_REQUEST = {ANOTHER_REQUEST_OLD@ANOTHER_REQUEST_OLD = reconfigure -> ANOTHER_REQUEST@ANOTHER_REQUEST}
+tool/models/Railcab_FG.lts:84: relation R_ANOTHER_REQUEST_FG = {ANOTHER_REQUEST_OLD@ANOTHER_REQUEST_OLD = reconfigure_ANOTHER_REQUEST -> ANOTHER_REQUEST@ANOTHER_REQUEST}
+tool/models/Railcab_FG.lts:86: map MAP_MILESTONES = {MILESTONES_OLD, MILESTONES_NEW, R_MILESTONES}.
+tool/models/Railcab_FG.lts:87: map MAP_REQUEST_ATOMIC = {REQUEST_ATOMIC_OLD, REQUEST_ATOMIC_NEW, R_REQUEST_ATOMIC}.
+tool/models/Railcab_FG.lts:88: map MAP_TURNS = {TURNS_OLD, TURNS_NEW, R_TURNS}.
+tool/models/Railcab_FG.lts:89: map MAP_ANOTHER_REQUEST = {ANOTHER_REQUEST_OLD, ANOTHER_REQUEST, R_ANOTHER_REQUEST}.
+tool/models/Railcab_FG.lts:91: ||OldEnv = (MILESTONES_OLD || REQUEST_ATOMIC_OLD || TURNS_OLD || ANOTHER_REQUEST_OLD).
+tool/models/Railcab_FG.lts:92: ||NewEnv = (MILESTONES_NEW || REQUEST_ATOMIC_NEW || TURNS_NEW || ANOTHER_REQUEST).
+tool/models/Railcab_FG.lts:93: ||MapEnv = (MAP_MILESTONES || MAP_REQUEST_ATOMIC || MAP_TURNS || MAP_ANOTHER_REQUEST).
+
+INPUT surveillance
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+Mission changes add only controllable follow; old/new UC pictureOk.0/.1 and scan.val.0/.1 occur at matching states. Battery transfers preserve BAT[i] for i=0..10; lowBattery is enabled exactly at BAT[1] in both versions.
+Failure witness: none
+Pairs: 16; relations: R_MISSION_FG:63;R_BATTERY_COUNTER_FG:71
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/surveillance.json; Base/R1 NEW+UPD occurrences=21; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/Surveillance_FG.lts:84-156.
+Contract declarations: tool/models/Surveillance_FG.lts:337-348 (UpdCont_OTF_FG); tool/models/Surveillance_FG.lts:351-369 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/Surveillance_FG.lts:13: const LOWBAT = 1
+tool/models/Surveillance_FG.lts:14: const MAXBAT = 10
+tool/models/Surveillance_FG.lts:15: const MAXWEATHER = 2
+tool/models/Surveillance_FG.lts:17: set ControllableActions = {return2base, move, low, mid, high, scan, picture, takeoff}
+tool/models/Surveillance_FG.lts:18: set NewControllableActions = {ControllableActions, follow}
+tool/models/Surveillance_FG.lts:19: set AlphabetOld = {return2base, move, low, mid, high, scan, picture, takeoff,
+tool/models/Surveillance_FG.lts:20: scan.val[0..1], pictureOk[0..1], lowBattery}
+tool/models/Surveillance_FG.lts:21: set AlphabetNew = {return2base, move, low, mid, high, scan, picture, follow, takeoff,
+tool/models/Surveillance_FG.lts:22: scan.val[0..1], pictureOk[0..1], lowBattery}
+tool/models/Surveillance_FG.lts:23: set EnergyConsumingActionsOld = {move, high, mid, low, scan, picture}
+tool/models/Surveillance_FG.lts:24: set EnergyConsumingActionsNew = {move, high, mid, low, scan, picture, follow}
+tool/models/Surveillance_FG.lts:25: set AnyActionSet = {return2base, move, low, mid, high, scan, picture, follow, lowBattery, pictureOk[0..1], scan.val[0..1]}
+tool/models/Surveillance_FG.lts:28: MISSION			= (takeoff -> HEIGHT),
+tool/models/Surveillance_FG.lts:29: HEIGHT			= ({low,mid,high} -> UAV),
+tool/models/Surveillance_FG.lts:30: UAV				= ({move,low,mid,high} -> UAV
+tool/models/Surveillance_FG.lts:31: | return2base -> MISSION
+tool/models/Surveillance_FG.lts:32: | picture -> TAKING_PICTURE
+tool/models/Surveillance_FG.lts:33: | scan -> SCANING),
+tool/models/Surveillance_FG.lts:34: TAKING_PICTURE	= (pictureOk[0..1] -> UAV),
+tool/models/Surveillance_FG.lts:35: SCANING		= (scan.val[0..1] -> UAV).
+tool/models/Surveillance_FG.lts:36: BATTERY_COUNTER(N=MAXBAT)	= BAT[N],
+tool/models/Surveillance_FG.lts:37: BAT[i:0..N]					= (when (i==LOWBAT) lowBattery -> BAT[i-1]
+tool/models/Surveillance_FG.lts:38: |  when (i>LOWBAT) {move,high,mid,low, scan, picture} -> BAT[i-1]
+tool/models/Surveillance_FG.lts:39: |  when (i == 0) {move,high,mid,low, scan, picture} -> BAT[0]
+tool/models/Surveillance_FG.lts:40: |  return2base -> BAT[N]).
+tool/models/Surveillance_FG.lts:43: NEW_MISSION     = (takeoff -> HEIGHT),
+tool/models/Surveillance_FG.lts:44: HEIGHT			= ({high,mid,low} -> UAV),
+tool/models/Surveillance_FG.lts:45: UAV             = ({follow,move,high,mid,low} -> UAV
+tool/models/Surveillance_FG.lts:46: | return2base -> NEW_MISSION
+tool/models/Surveillance_FG.lts:47: | picture -> TAKING_PICTURE
+tool/models/Surveillance_FG.lts:48: | scan -> SCANING),
+tool/models/Surveillance_FG.lts:49: TAKING_PICTURE	= (pictureOk[0..1] -> UAV),
+tool/models/Surveillance_FG.lts:50: SCANING		= (scan.val[0..1] -> UAV).
+tool/models/Surveillance_FG.lts:51: NEW_BATTERY_COUNTER(N=MAXBAT)	= BAT[N],
+tool/models/Surveillance_FG.lts:52: BAT[i:0..N]						= (when (i==LOWBAT) lowBattery -> BAT[i-1]
+tool/models/Surveillance_FG.lts:53: |  when (i>LOWBAT) {move,high,mid,low, scan, picture, follow} -> BAT[i-1]
+tool/models/Surveillance_FG.lts:54: |  when (i == 0) {move,high,mid,low, scan, picture, follow} -> BAT[0]
+tool/models/Surveillance_FG.lts:55: |  return2base -> BAT[N]).
+tool/models/Surveillance_FG.lts:58: relation R_MISSION = {MISSION@MISSION		 = reconfigure -> NEW_MISSION@NEW_MISSION,
+tool/models/Surveillance_FG.lts:59: HEIGHT@MISSION		 = reconfigure -> HEIGHT@NEW_MISSION,
+tool/models/Surveillance_FG.lts:60: UAV@MISSION			 = reconfigure -> UAV@NEW_MISSION,
+tool/models/Surveillance_FG.lts:61: TAKING_PICTURE@MISSION = reconfigure -> TAKING_PICTURE@NEW_MISSION,
+tool/models/Surveillance_FG.lts:62: SCANING@MISSION		 = reconfigure -> SCANING@NEW_MISSION}
+tool/models/Surveillance_FG.lts:63: relation R_MISSION_FG = {MISSION@MISSION	    = reconfigure_MISSION -> NEW_MISSION@NEW_MISSION,
+tool/models/Surveillance_FG.lts:64: HEIGHT@MISSION		    = reconfigure_MISSION -> HEIGHT@NEW_MISSION,
+tool/models/Surveillance_FG.lts:65: UAV@MISSION			= reconfigure_MISSION -> UAV@NEW_MISSION,
+tool/models/Surveillance_FG.lts:66: TAKING_PICTURE@MISSION = reconfigure_MISSION -> TAKING_PICTURE@NEW_MISSION,
+tool/models/Surveillance_FG.lts:67: SCANING@MISSION		= reconfigure_MISSION -> SCANING@NEW_MISSION}
+tool/models/Surveillance_FG.lts:69: relation R_BATTERY_COUNTER = {forall [i:0..MAXBAT] BAT[i]@BATTERY_COUNTER= reconfigure -> BAT[i]@NEW_BATTERY_COUNTER}
+tool/models/Surveillance_FG.lts:71: relation R_BATTERY_COUNTER_FG = {forall [i:0..MAXBAT] BAT[i]@BATTERY_COUNTER= reconfigure_BATTERY_COUNTER -> BAT[i]@NEW_BATTERY_COUNTER}
+tool/models/Surveillance_FG.lts:73: map MAP_MISSION = {MISSION, NEW_MISSION, R_MISSION}.
+tool/models/Surveillance_FG.lts:75: map MAP_BATTERY_COUNTER = {BATTERY_COUNTER, NEW_BATTERY_COUNTER, R_BATTERY_COUNTER}.
+tool/models/Surveillance_FG.lts:77: ||OldEnvironment = (MISSION || BATTERY_COUNTER).
+tool/models/Surveillance_FG.lts:78: ||NewEnvironment = (NEW_MISSION || NEW_BATTERY_COUNTER).
+tool/models/Surveillance_FG.lts:79: ||MapEnvironment = (MAP_MISSION || MAP_BATTERY_COUNTER).
+
+INPUT workflow
+Local alphabet stability: PASS; post-transfer UC subset: PASS.
+ENTRY, INVENTORY, CREDIT, SHIPPING and BILLING old/new graphs coincide up to versioned roots; all 12 declared transfer pairs preserve the corresponding local state and UC enabled set.
+Failure witness: none
+Pairs: 12; relations: R_ENTRY_FG:59;R_INVENTORY_FG:67;R_CREDIT_FG:73;R_SHIPPING_FG:79;R_BILLING_FG:85
+Saved transfer outcomes: Base WIN/WIN; R1 WIN/WIN (fine/merged).
+Monitor export: results/initialization/raw/expanded-predicates/workflow.json; Base/R1 NEW+UPD occurrences=18; reconfigure alphabet members=0; explicit precedence edges=0 for each target.
+OLD/NEW source requirements: tool/models/Workflow_FG.lts:99-157.
+Contract declarations: tool/models/Workflow_FG.lts:324-335 (UpdCont_OTF_FG); tool/models/Workflow_FG.lts:338-355 (UpdCont_OTF_FG_R1)
+Exact local source excerpts (comments and blank-only lines omitted; original line numbers retained):
+tool/models/Workflow_FG.lts:13: set ControllableActions = {initInventory, initCredit, eval, initShipping, initBilling, archive, rollback}
+tool/models/Workflow_FG.lts:14: set FirstStep = {initInventory,endInventory,initCredit,endCredit}
+tool/models/Workflow_FG.lts:15: set SecondStep = {initShipping, endShipping, initBilling, endBilling}
+tool/models/Workflow_FG.lts:16: set All = {ControllableActions, orderEntry, approve, reject, endInventory, endCredit, endShipping, endBilling}
+tool/models/Workflow_FG.lts:19: ENTRY_OLD = (orderEntry -> PROCESSING1),
+tool/models/Workflow_FG.lts:20: PROCESSING1 = (FirstStep -> PROCESSING1 | eval -> EVAL_RESPONSE | rollback -> ENTRY_OLD),
+tool/models/Workflow_FG.lts:21: EVAL_RESPONSE = (approve -> PROCESSING2 | reject -> ENTRY_OLD),
+tool/models/Workflow_FG.lts:22: PROCESSING2 = (SecondStep -> PROCESSING2 | {archive,rollback} -> ENTRY_OLD).
+tool/models/Workflow_FG.lts:24: INVENTORY_OLD = (initInventory -> AT_INVENTORY),
+tool/models/Workflow_FG.lts:25: AT_INVENTORY = (endInventory -> INVENTORY_OLD).
+tool/models/Workflow_FG.lts:27: CREDIT_OLD = (initCredit-> AT_CREDIT),
+tool/models/Workflow_FG.lts:28: AT_CREDIT = (endCredit-> CREDIT_OLD).
+tool/models/Workflow_FG.lts:30: SHIPPING_OLD = (initShipping -> AT_SHIPPING),
+tool/models/Workflow_FG.lts:31: AT_SHIPPING = (endShipping -> SHIPPING_OLD).
+tool/models/Workflow_FG.lts:33: BILLING_OLD = (initBilling -> AT_BILLING),
+tool/models/Workflow_FG.lts:34: AT_BILLING = (endBilling -> BILLING_OLD).
+tool/models/Workflow_FG.lts:37: ENTRY_NEW = (orderEntry -> PROCESSING1),
+tool/models/Workflow_FG.lts:38: PROCESSING1 = (FirstStep -> PROCESSING1 | eval -> EVAL_RESPONSE | rollback -> ENTRY_NEW),
+tool/models/Workflow_FG.lts:39: EVAL_RESPONSE = (approve -> PROCESSING2 | reject -> ENTRY_NEW),
+tool/models/Workflow_FG.lts:40: PROCESSING2 = (SecondStep -> PROCESSING2 | {archive,rollback} -> ENTRY_NEW).
+tool/models/Workflow_FG.lts:42: INVENTORY_NEW = (initInventory -> AT_INVENTORY),
+tool/models/Workflow_FG.lts:43: AT_INVENTORY = (endInventory -> INVENTORY_NEW).
+tool/models/Workflow_FG.lts:45: CREDIT_NEW = (initCredit-> AT_CREDIT),
+tool/models/Workflow_FG.lts:46: AT_CREDIT = (endCredit-> CREDIT_NEW).
+tool/models/Workflow_FG.lts:48: SHIPPING_NEW = (initShipping -> AT_SHIPPING),
+tool/models/Workflow_FG.lts:49: AT_SHIPPING = (endShipping -> SHIPPING_NEW).
+tool/models/Workflow_FG.lts:51: BILLING_NEW = (initBilling -> AT_BILLING),
+tool/models/Workflow_FG.lts:52: AT_BILLING = (endBilling -> BILLING_NEW).
+tool/models/Workflow_FG.lts:54: relation R_ENTRY = {ENTRY_OLD@ENTRY_OLD = reconfigure -> ENTRY_NEW@ENTRY_NEW,
+tool/models/Workflow_FG.lts:55: PROCESSING1@ENTRY_OLD = reconfigure -> PROCESSING1@ENTRY_NEW,
+tool/models/Workflow_FG.lts:56: EVAL_RESPONSE@ENTRY_OLD = reconfigure -> EVAL_RESPONSE@ENTRY_NEW,
+tool/models/Workflow_FG.lts:57: PROCESSING2@ENTRY_OLD = reconfigure -> PROCESSING2@ENTRY_NEW}
+tool/models/Workflow_FG.lts:59: relation R_ENTRY_FG = {ENTRY_OLD@ENTRY_OLD = reconfigure_ENTRY -> ENTRY_NEW@ENTRY_NEW,
+tool/models/Workflow_FG.lts:60: PROCESSING1@ENTRY_OLD = reconfigure_ENTRY -> PROCESSING1@ENTRY_NEW,
+tool/models/Workflow_FG.lts:61: EVAL_RESPONSE@ENTRY_OLD = reconfigure_ENTRY -> EVAL_RESPONSE@ENTRY_NEW,
+tool/models/Workflow_FG.lts:62: PROCESSING2@ENTRY_OLD = reconfigure_ENTRY -> PROCESSING2@ENTRY_NEW}
+tool/models/Workflow_FG.lts:64: relation R_INVENTORY = {INVENTORY_OLD@INVENTORY_OLD = reconfigure -> INVENTORY_NEW@INVENTORY_NEW,
+tool/models/Workflow_FG.lts:65: AT_INVENTORY@INVENTORY_OLD = reconfigure -> AT_INVENTORY@INVENTORY_NEW}
+tool/models/Workflow_FG.lts:67: relation R_INVENTORY_FG = {INVENTORY_OLD@INVENTORY_OLD = reconfigure_INVENTORY -> INVENTORY_NEW@INVENTORY_NEW,
+tool/models/Workflow_FG.lts:68: AT_INVENTORY@INVENTORY_OLD = reconfigure_INVENTORY -> AT_INVENTORY@INVENTORY_NEW}
+tool/models/Workflow_FG.lts:70: relation R_CREDIT = {CREDIT_OLD@CREDIT_OLD = reconfigure -> CREDIT_NEW@CREDIT_NEW,
+tool/models/Workflow_FG.lts:71: AT_CREDIT@CREDIT_OLD = reconfigure -> AT_CREDIT@CREDIT_NEW}
+tool/models/Workflow_FG.lts:73: relation R_CREDIT_FG = {CREDIT_OLD@CREDIT_OLD = reconfigure_CREDIT -> CREDIT_NEW@CREDIT_NEW,
+tool/models/Workflow_FG.lts:74: AT_CREDIT@CREDIT_OLD = reconfigure_CREDIT -> AT_CREDIT@CREDIT_NEW}
+tool/models/Workflow_FG.lts:76: relation R_SHIPPING = {SHIPPING_OLD@SHIPPING_OLD = reconfigure -> SHIPPING_NEW@SHIPPING_NEW,
+tool/models/Workflow_FG.lts:77: AT_SHIPPING@SHIPPING_OLD = reconfigure -> AT_SHIPPING@SHIPPING_NEW}
+tool/models/Workflow_FG.lts:79: relation R_SHIPPING_FG = {SHIPPING_OLD@SHIPPING_OLD = reconfigure_SHIPPING -> SHIPPING_NEW@SHIPPING_NEW,
+tool/models/Workflow_FG.lts:80: AT_SHIPPING@SHIPPING_OLD = reconfigure_SHIPPING -> AT_SHIPPING@SHIPPING_NEW}
+tool/models/Workflow_FG.lts:82: relation R_BILLING = {BILLING_OLD@BILLING_OLD = reconfigure -> BILLING_NEW@BILLING_NEW,
+tool/models/Workflow_FG.lts:83: AT_BILLING@BILLING_OLD = reconfigure -> AT_BILLING@BILLING_NEW}
+tool/models/Workflow_FG.lts:85: relation R_BILLING_FG = {BILLING_OLD@BILLING_OLD = reconfigure_BILLING -> BILLING_NEW@BILLING_NEW,
+tool/models/Workflow_FG.lts:86: AT_BILLING@BILLING_OLD = reconfigure_BILLING -> AT_BILLING@BILLING_NEW}
+tool/models/Workflow_FG.lts:88: map MAP_ENTRY = {ENTRY_OLD, ENTRY_NEW, R_ENTRY}.
+tool/models/Workflow_FG.lts:89: map MAP_INVENTORY = {INVENTORY_OLD, INVENTORY_NEW, R_INVENTORY}.
+tool/models/Workflow_FG.lts:90: map MAP_CREDIT = {CREDIT_OLD, CREDIT_NEW, R_CREDIT}.
+tool/models/Workflow_FG.lts:91: map MAP_SHIPPING = {SHIPPING_OLD, SHIPPING_NEW, R_SHIPPING}.
+tool/models/Workflow_FG.lts:92: map MAP_BILLING = {BILLING_OLD, BILLING_NEW, R_BILLING}.
+tool/models/Workflow_FG.lts:94: ||OldEnv = (ENTRY_OLD || INVENTORY_OLD || CREDIT_OLD || SHIPPING_OLD || BILLING_OLD).
+tool/models/Workflow_FG.lts:95: ||NewEnv = (ENTRY_NEW || INVENTORY_NEW || CREDIT_NEW || SHIPPING_NEW || BILLING_NEW).
+tool/models/Workflow_FG.lts:96: ||MapEnv = (MAP_ENTRY || MAP_INVENTORY || MAP_CREDIT || MAP_SHIPPING || MAP_BILLING).
+
+
+Executed source-record consistency check (no synthesis; local classifications remain source inspection):
+python3 -B check_source_observations.py --artifact-root <public-artifact-root>
+PASS: nine source-inspection rows match saved counts and all 18 transfer-only outcomes.
+PASS: 138 Base/R1 NEW/UPD monitor occurrences omit transfer labels; all 18 precedence counts are zero.
+PASS: 461 exact local-source lines match the public inputs.
+SCOPE: local UC judgments remain source inspection, not an independently executed FSP semantics check.
+SCOPE: serial transfer preservation proposition is merged WIN => fine WIN; 12/18 satisfy its source-inspected premises (11 WIN/WIN, Industry/R1 LOSS/LOSS).
+SCOPE: six transfer-only comparisons fail a local UC premise; 36 boundary/both comparisons and R2 full applicability are excluded.

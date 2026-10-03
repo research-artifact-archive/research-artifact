@@ -40,9 +40,8 @@ Call its transfer \emph{UC-nonenabling} when $A_i^{\mathrm{old}}=A_i^{\mathrm{ne
 \]
 Alphabet equality preserves synchronization participation; equality of enabled sets is not required. This predicate concerns ordinary UC labels, not the controllable transfer command. Monitors are passive and do not change UC enabledness.
 
-\begin{proposition}[Serial transfer preservation]\label{prop:serial-transfer}
+\paragraph{Restatement of Proposition~\ref{prop:serial-transfer}.}
 Let a fine contract and a transfer-only merged contract satisfy the comparison rules of Section~\ref{sec:granularity-analysis}: entries, endpoints, targets, initializers and ordinary behavior are unchanged; transfer outcomes are Cartesian products; active-monitor member effects commute on all monitor states; mapped precedence is irreflexive and acyclic. If every transfer is UC-nonenabling, a winning policy for the merged contract implies a winning policy for the fine contract, covering the same old entries and preserving the same selected endpoint continuations.
-\end{proposition}
 \begin{proof}
 At a checkpoint, associate the two representations by equal component and monitor states, with every pending coarse block corresponding to all of its pending fine members. Consider a block $B$ enabled by a coarse winner at checkpoint $q$. The state is UC-quiescent. Execute its members in any fixed order, disabling ordinary controllables between members.
 
@@ -56,7 +55,25 @@ Follow the coarse policy between checkpoints. Ordinary events and singleton boun
 \end{proof}
 
 \paragraph{What the condition does and does not cover.}
-The condition provides a local way to justify replacing an available atomic transfer batch by individual commands. Threads gives an application: its old/new graphs coincide and its idle transfers preserve all local states, including the queue, so both the alphabet and enabledness conditions hold. Its finite-arrival winners can be serialized; the permanent-arrival losing controls remain losing. It is not necessary for a fine winner: Rolling introduces UC readiness events and violates the condition, but its capacity argument separately supplies a winning sequence. The 27 application contracts have not been classified by this predicate. It does not justify splitting requirement-start or requirement-stop blocks: those splits change which monitors observe later member labels and can change their initialized obligations. Safe adaptation sequences and individual/simultaneous reconfiguration are established topics~\cite{BoyerGruberPous2013,ThuijsmanReniers2024DynamicFeature}; the proposition supplies a sufficient condition for this contract's all-outcome finite-completion and fixed-endpoint requirements.
+The condition provides a local way to justify replacing an available atomic transfer batch by individual commands. Threads gives an application: its old/new graphs coincide and its idle transfers preserve all local states, including the queue, so both the alphabet and enabledness conditions hold. Its finite-arrival winners can be serialized; the permanent-arrival losing controls remain losing. It is not necessary for a fine winner: Rolling introduces UC readiness events and violates the condition, but its capacity argument separately supplies a winning sequence. It does not justify splitting requirement-start or requirement-stop blocks: those splits change which monitors observe later member labels and can change their initialized obligations. Safe adaptation sequences and individual/simultaneous reconfiguration are established topics~\cite{BoyerGruberPous2013,ThuijsmanReniers2024DynamicFeature}; the proposition supplies a sufficient condition for this contract's all-outcome finite-completion and fixed-endpoint requirements.
+
+
+\paragraph{Applicability to inherited transfer comparisons.}
+We inspected all nine saved FSP inputs and their Base/R1 transfer comparisons. Table~\ref{tab:serial-inputs} records both local conditions, including failures. This is source inspection, not an independently executed FSP semantic checker or new synthesis experiment. The artifact archives source excerpts and a record-consistency checker in its serial-transfer-inputs result directory.
+\begin{table}[!htbp]\centering\small
+\caption{Local transfer-condition inspection for every inherited input.}\label{tab:serial-inputs}
+\begin{tabular}{@{}lcc@{}}\toprule
+Input & Same UC alphabet & No newly enabled UC\\\midrule
+GSM, Industry, MetaSocket & yes & yes\\
+PowerPlant, Surveillance, Workflow & yes & yes\\
+PC1, PC2 & no & yes\\
+Railcab & no & no\\\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+The six positive inputs have empty UC sets, unchanged local graphs with state-preserving transfers, or changes confined to controllable behavior. PC1/PC2 replace UC polishing-result labels with painting-result labels, violating alphabet equality. Railcab adds UC \texttt{approachingCrossing} and enables it through a declared transfer from old to new \texttt{ENDOFTS}; both conditions fail.
+
+All 138 Base/R1 NEW/UPD monitor occurrences omit transfer labels; OLD source requirements mention ordinary labels only. Alphabet-external labels stutter, so these transfer effects commute. All 18 saved contracts have no explicit precedence. The retained merge transformation preserves the other comparison premises and validates commutation. This supports applicability to 12/18 transfer-only comparisons: 11 observed WIN/WIN pairs and Industry/R1's LOSS/LOSS pair, where the antecedent is false. The other six pairs are WIN/WIN despite failing the sufficient condition. The 36 boundary/both comparisons and R2 applicability are excluded. The implication is merged WIN $\Rightarrow$ fine WIN; it does not explain the absence of fine WIN/merged LOSS in the 54 comparisons. Compiled OLD testers were not separately exported; this analysis establishes source/model premises, not runtime conformance.
 
 \paragraph{Finite UC phases alone are insufficient.}
 A variant of the preceding reverse example removes UC cycles while retaining fine LOSS/merged WIN. Give both versions of each component states $0,1$, shared alphabet $\{x,y,tick\}$ and a controllable $tick$ loop at each state. The only UC edges are $x:0\to1$ in new component~1 and old component~2, and $y:0\to1$ in old component~1 and new component~2. Every transfer maps old $j$ to new $j$ for $j\in\{0,1\}$, so the relations are total. Both fixed endpoint controllers have one state and loops on all three labels. From their initial $(0,0)$ tuples, no UC label synchronizes, making $(0,0)$ the only reachable tuple and the only loadable target. After either first fine transfer, one UC event is forced and changes both coordinates to $1$. UC then terminates, but the remaining transfer can only reach the incompatible new tuple $(1,1)$; no ordinary event restores $0$. The joint transfer reaches new $(0,0)$ directly. These are analytical examples, outside all measured populations. They show why finite UC activity and total transfer relations alone do not establish safe serialization; matching the fixed endpoint also matters.
