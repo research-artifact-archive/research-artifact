@@ -107,7 +107,7 @@ The policy must cover different old states and every environment outcome while r
 DUCS~\cite{Nahabedian2016SEAMS,Nahabedian2020} and GR(1) updating~\cite{Amram2022GR1DynamicUpdate} already generate update or bridge control. FG-DUCS instead fixes both controllers and generates the intervening game from local transfers, independent requirement boundaries and initializers (Section~\ref{sec:ducs-cell-construction}). Its contribution is this construction and its guarantees, not greater general expressiveness or a new reachability algorithm.
 
 \Needspace{4\baselineskip}
-Our contributions are:
+We develop and assess this construction as follows:
 \par\noindent\textbf{C1: A local contract and its meaning.} We define the generated game, prove local-history correspondence and selected-endpoint preservation, and give an invariant-initialization criterion (Sections~\ref{sec:formalization} and~\ref{sec:monitor-meaning}).
 \par\noindent\textbf{C2: Boundaries of update granularity.} FG-DUCS examples and merging obstructions explain when separate choices are necessary and when they prevent completion (Sections~\ref{sec:example} and~\ref{sec:granularity-analysis}).
 \par\noindent\textbf{C3: A policy with checkable evidence.} Sound and complete lazy synthesis returns a completing policy and rank or a losing-region certificate (Section~\ref{sec:algorithm}).
@@ -350,6 +350,8 @@ All \RSNewOccurrences{} NEW occurrences also satisfy residual inclusion for safe
 \paragraph{What application WIN and LOSS mean.}\label{sec:railcab-policy}\label{sec:contract-case}
 Railcab's 22-entry Base policy permits 1--4 ordinary gap events; R1 has none and retains seven interval guards. Both pass certificate/Link. Duties needed between old-stop and new-start require interval requirements; WIN alone does not supply them (Technical Appendix~\ref{ta:saved-gaps}).
 
+One Base milestone transfer has two outcomes. Both must complete, loading new-controller states 3 and 1; S4.4.3 expands the full branching fragment.
+
 Industry/R1 loses at \FixedIndustryLosingEntries{}/\FixedIndustryEntries{} entries: GF1/TOR validation violates new monitors; DSD1 permits endless rejection, or quiescent deadlock if its only safe validation is withheld. Exhaustive closure excludes every order. Native DUCS wins its different subsequent-control problem (Technical Appendix~\ref{ta:additional_populations}; S4).
 
 Lazy's winning certificates have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{} update states and maximum ranks \FixedRankMin{}--\FixedRankMax{}, consistent across five repeats. Linked controllers have 15--1,260 states (S4). Ranks bound events, not downtime or optimal length (Technical Appendix~\ref{ta:memory_policies}).
@@ -361,7 +363,7 @@ Lazy's winning certificates have \FixedPolicyStatesMin{}--\FixedPolicyStatesMax{
 \label{sec:rq3}
 
 
-\textbf{Answer.} Lazy avoids states and queries in all \FixedDirectFullPairs{} completed Direct-Full pairs. Within the fixed budget it decides \FixedLazyDecisions{} contracts, Eager \FixedEagerDecisions{} and Direct-Full \FixedDirectFullDecisions{}; all paired decisions agree (Table~\ref{tab:xeon-rq3}). Update-first is faster on \FixedUpdateFirstFaster{}/\FixedUpdateFirstPairs{} paired solver medians but adds \FixedUpdateFirstAdditionalTOWord{} timeouts. Lazy returns LOSS for Industry/R1 and times out on PC2/R2 at 1,200~s/64~GiB (fixed), 3,600~s/64~GiB (sensitivity) and 7,200~s/200~GiB (S4, earlier series); the limiting resource is unknown.
+\textbf{Answer.} With the same UC pruning, Lazy decides \FixedLazyDecisions{} contracts to Eager's \FixedEagerDecisions{}. Direct-Full additionally changes pruning and decides \FixedDirectFullDecisions{}; Lazy reduces states and queries in all \FixedDirectFullPairs{} completed pairs. All paired decisions agree (Table~\ref{tab:xeon-rq3}). Update-first is faster on \FixedUpdateFirstFaster{}/\FixedUpdateFirstPairs{} paired solver medians but adds \FixedUpdateFirstAdditionalTOWord{} timeouts. Lazy returns LOSS for Industry/R1 and times out on PC2/R2 at 1,200~s/64~GiB (fixed), 3,600~s/64~GiB (sensitivity) and 7,200~s/200~GiB (S4, earlier series); the limiting resource is unknown.
 
 Legacy yields \LegacyNativeWins{} WIN, \LegacyNativeOOM{} OOM and \LegacyCaptureNM{} unmeasured snapshot-cap cases. Its differing subsequent-control objective precludes same-game ratios or impossibility inferences (Technical Appendix~\ref{ta:additional_populations}).
 
@@ -390,14 +392,14 @@ Preparation remains substantial: Lazy's adapter medians reach 14.221~s (PC2/R1; 
 % FGDUCS_RELOCATED: workload_rows
 
 \paragraph{Separating construction choices.}
-Lazy versus Eager isolates deferred controllable-bucket generation under the same UC pruning, input, host and budget: \FixedLazyDecisions{} versus \FixedEagerDecisions{} decisions. Direct-Full additionally changes pruning. Auxiliary Full+UC timings cannot isolate that effect across differing builds, hosts and repetitions; no unpruned OTF is implemented (Technical Appendix~\ref{ta:performance_scope_details}).
+Auxiliary Full+UC timings span different builds, hosts and repetitions and cannot isolate pruning; no unpruned OTF is implemented (Technical Appendix~\ref{ta:performance_scope_details}).
 
 \paragraph{Scaling limits.}
 \label{sec:rq4} All methods finish the independent family for $n=\FixedIndependentNMin{},\ldots,\FixedIndependentNMax{}$. At $n=\FixedIndependentNMax{}$, Lazy and Update-first discover \FixedIndependentLazyStates{} states each, Eager \FixedIndependentEagerStates{}, and Direct-Full $\FixedIndependentFullStatesMath{}$ (S4).
 
 Travel reaches timeouts and out-of-memory failures under all methods, including expanded-budget timeouts. These separate trials never enter medians; Technical Appendix~\ref{ta:performance_scope_details} retains all populations and adverse outcomes.
 
-\Needspace{8\baselineskip}
+\Needspace{4\baselineskip}
 \section{Related Work}
 \label{sec:related}
 \label{sec:expressiveness}
@@ -424,7 +426,7 @@ Local updating~\cite{PanzicaLaManna2012LocalUpdate}, PROTEOS~\cite{Giuffrida2013
 
 \section{Threats to Validity}
 \label{sec:threats}
-Permanently enabled UC arrivals or polling block even local commands. Threads contrasts finite UC phases with perpetual activity. Fairness-dependent waiting is outside the contract; inherited-adaptation effects on feasibility are not isolated. Decoding, history completeness and A1--A4 remain unvalidated; repair is excluded. Constructed cases assume finite startup, reporting, recovery and election; selection may favor separations, and deployed prevalence is unestablished.
+Perpetual UC arrivals or polling block local commands; Threads contrasts finite UC phases with perpetual activity. Fairness-dependent waiting is outside the contract; inherited-adaptation effects on feasibility are not isolated. Decoding, history completeness and A1--A4 remain unvalidated; repair is excluded. Constructed cases assume finite startup, reporting, recovery and election; selection may favor separations, and deployed prevalence is unestablished.
 
 Shared authorship, AI and code risk correlated faults; independent parsing covers restricted FSP. Direct-Full is in-house; Legacy's objective differs. Pruning isolation, external solvers and randomized orders remain untested. Ratios omit unresolved costs; extended trials lack medians. Sampling can miss peaks; RSS identifies neither heap occupancy nor bottlenecks. S4 retains interruptions.
 
@@ -436,7 +438,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c86-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c87-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
