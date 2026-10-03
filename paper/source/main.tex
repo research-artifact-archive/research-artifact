@@ -271,7 +271,7 @@ With indexed predicates and constant-time bookkeeping, search is linear in disco
 
 RQ1 tests granularity mechanisms; RQ2 checks games, certificates and source monitors; RQ3 compares exploration and cost on \ApplicationContracts{} adapted contracts. Auxiliary trials remain outside fixed-budget medians.
 
-The \ApplicationModels{} inherited inputs each have three variants. Base has no interval requirement; R1 and R2 are alternatives. GSM/R1 blocks communication and decoding while a flag is set by old-stop and cleared by new-start. GSM/R2 requires both decode-rule boundaries before the environment transfer, without ordering the boundaries. Restricted actions and boundary/transfer pairs vary by model. PC2-Rolling is a separate source-derived availability case. Legacy also synthesizes subsequent control, a different objective.
+Each of the \ApplicationModels{} inherited inputs has Base (no interval requirement) and alternative R1/R2 contracts. R1 blocks designated operational actions while flags set by any old-stop and cleared by their designated new-start are true. R2 requires selected old-stop/new-start events before their associated transfers. For GSM, R1 blocks communication and decoding; R2 requires both decode-rule boundaries before the environment transfer, without ordering the boundaries. Actions and event pairs vary by model. PC2-Rolling is a separate availability case. Legacy also synthesizes subsequent control, a different objective.
 
 \paragraph{Implementation.}
 Our Modal Transition System Analyser (MTSA) extension~\cite{paper:MTSA2008} checks certificates~\cite{McConnellEtAl2011Certifying}; Link checks old--update--new composition, entries and targets. An independent oracle parses restricted Finite State Processes (FSP). Finite-JSON runs save losing membership; FSP benchmarks report only its statistics.
@@ -306,9 +306,9 @@ On nine inherited inputs, merging transfers, boundaries or both changes \VThreeE
 \paragraph{Constructed mechanisms.}
 The families isolate local choices, retaining both-WIN and both-LOSS controls.
 
-Table~\ref{tab:rq2-family-counts} gives each mechanism and all outcomes. The 15 Rolling separations compare $k=1$ with $k=n$; the \VThreeESixRollingThresholdCells{} threshold cells are separate. Of the 33 separations, 30 are Rolling/Canary parameter points, not independent mechanisms. Threads tests both-WIN/both-LOSS quiescence controls. Technical Appendix~\ref{ta:constructed_contracts} gives all definitions and assumption controls.
+Table~\ref{tab:rq2-family-counts} records \VThreeESixWitness{}/\VThreeESixMainPairs{} fine-WIN/merged-LOSS comparisons across five constructed families. Of the 33 separations, 30 are Rolling/Canary parameter points, not independent mechanisms. Rolling compares $k=1$ with $k=n$; its \VThreeESixRollingThresholdCells{} threshold cells are separate. Threads tests both-WIN/both-LOSS quiescence controls. Technical Appendix~\ref{ta:constructed_contracts} gives all definitions and assumption controls.
 
-\textbf{Answer.} Capacity loss, skipped intermediate stages and incompatible boundary orders yield \VThreeESixWitness{}/\VThreeESixMainPairs{} fine-WIN/merged-LOSS comparisons across five constructed families. Inherited decisions do not change. PC2's source proof establishes merged impossibility, but its merged timeout leaves the solver comparison incomplete.
+\textbf{Answer.} Separate commands can preserve capacity, necessary intermediate stages and compatible requirement lifetimes. Merging can instead bypass a harmful mixed state (Section~\ref{sec:granularity-analysis}); finer is not uniformly better. Inherited decisions do not change. PC2's source proof establishes merged impossibility, but its merged timeout leaves the solver comparison incomplete.
 
 \input{figures/rq2_family_counts.tex}
 
@@ -435,7 +435,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c88-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c89-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
