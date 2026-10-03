@@ -537,8 +537,8 @@ The separate $enterAllowed.1$ branch completes from the same old entry without b
 This section retains older sufficient-condition diagnostics, the auxiliary requirement-boundary fixtures, construction/contract variants, and controlled scaling families. They supplement the current RQs without replacing fixed-budget failures or increasing the main constructed-pair denominator.
 
 \subsubsection{Historical initialization coverage}
-\paragraph{Historical RS coverage.}
-The following generated table preserves the earlier H/A/E$'$ checks. Its 46 unverified R1 entries describe that older sufficient condition; they are not the classification of the additional guarded-invariant check in Lemma~\ref{lem:r1-entry}.
+\paragraph{Archived H/A/E$'$ sufficient-condition results.}
+The table preserves the earlier H/A/E$'$ checks. Its ``current E column'' is the archived E$'$ test, which leaves 46 R1 occurrences unverified. Lemma~\ref{lem:r1-entry} establishes their exact E initialization using a different sufficient condition. The old result is retained.
 \input{build/generated/rs-model-table.tex}
 
 \subsubsection{Auxiliary requirement-boundary inputs}
@@ -706,7 +706,7 @@ For supplied Railcab, both logs report 1,763 states before safety pruning and 1,
 
 \clearpage
 \subsection*{Artifact reproduction status}
-The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the submitted PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean HTTPS clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the paper-matched PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
 
 \clearpage
 \section{Expanded related-work comparison}
@@ -730,7 +730,7 @@ Environment partitioning (2020)
 & Pre/post environment LTSs and global state-preservation edges labeled \texttt{reconfigure} ($T_{upd}$)
 & The environment construction joins supplied pre/post states; subsequent control uses the existing update-synthesis method
 & Generated $E_{upd}$ from $E_{bef}$, $E_{aft}$ and $T_{upd}$ (Sec.~V, Algorithm~1)\\
-GR(1) bridge (2022)
+GR(1) updating (2022)
 & Two specifications and switching assertion; old safety guarantees before switch, new specification afterward
 & All prefixes meeting new environment safety; uniformly bounded switch (Def.~3.1); subsequent GR(1) liveness assumes justice
 & New controller $C_2$ and symbolic reachability bridge; switching bookkeeping; winning set $W$ or current-state early stop (Sec.~4)\\

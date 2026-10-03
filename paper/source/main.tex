@@ -76,7 +76,7 @@
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Verified old and new controllers do not supply a safe transition when component replacement and requirement activation require different schedules. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) compiles local transfers, requirement lifetimes and initial obligations into a policy between supplied controllers. Winning means safe completion from every reachable old entry under every permitted outcome, enforcing declared lifetimes and preserving the selected new controller's continuation. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Complete examples show merging commands can prevent or enable completion. Within 1,200~s, our MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Constructed families exhibit granularity effects; inherited inputs exhibit none. Commands and handover require uncontrollable quiescence; continuous service and elapsed-time bounds are not guaranteed.
+Verified old and new controllers do not supply a safe transition when component replacement and requirement activation require different schedules. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) compiles local transfers, requirement lifetimes and initial obligations into a policy between supplied controllers. In the model, winning means safe completion from every reachable old entry under every permitted outcome, enforcing declared lifetimes and preserving the selected new controller's continuation. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Complete examples show merging commands can prevent or enable completion. Within 1,200~s, our MTSA implementation decides \LazyDecisions{}/\ApplicationContracts{} adapted contracts, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Constructed families exhibit granularity effects; inherited inputs exhibit none. Commands and handover require uncontrollable quiescence; continuous service and elapsed-time bounds are not guaranteed.
 \end{abstract}
 
 \begin{CCSXML}
@@ -339,7 +339,7 @@ Restricted-transfer comparisons retain both-LOSS and incomplete cases separately
 For the \FixedRQOneJobs{}-job suite, Python reconstructs explicit successors; frontend and endpoint/goal code are shared. All WIN jobs pass Link; invalid cases omit events, deadlock or suppress UC. \FixedTargetQuiescenceFixturesWord{} separate monitor-free fixtures independently reconstruct FSP endpoints, games and goals (S4.2).
 
 \paragraph{From source invariants to initialized monitors.}
-Initial truth, observer updates and monitor steps establish invariant fidelity by induction; safe lookup reachability supplies Proposition~\ref{prop:lookup-act}'s premise. These are static checks: actual decoding, post-start keys, subsequent observations and absence of fallback remain unvalidated. Technical Appendix~\ref{ta:lookup-act} retains every entry, ERROR case and one-step count; arbitrary FSP compilation is unvalidated.
+Initial truth and step checks establish monitor fidelity by induction; safe lookup reachability supplies Proposition~\ref{prop:lookup-act}'s premise (full checks in Technical Appendix~\ref{ta:lookup-act}). Actual decoding, post-start keys, observations and absence of fallback remain unchecked. The adapter preserves physical observers across commands, whereas reference action predicates can reset; conservativeness is unproved. These checks validate neither arbitrary FSP compilation nor source semantics for all WIN policies.
 
 \paragraph{Which history is meant.}
 All \RSNewOccurrences{} NEW occurrences also satisfy residual inclusion for safe prior histories; actual scope nonemptiness remains unverified except one PC2 tuple. UPD monitors instead begin their reference at update entry (Technical Appendix~\ref{ta:history_checks}).
@@ -387,12 +387,9 @@ Figure~\ref{fig:rq3-paired-absolute} plots all 14 completed pairs (full rows in 
 
 \input{figures/rq3_paired_absolute.tex}
 
-Preparation remains substantial: Lazy's adapter medians reach 14.221~s (PC2/R1; S4). Capped Direct-Full attempts give total-JVM lower bounds, not solver ratios or medians (Technical Appendix~\ref{ta:performance_scope_details}).
+Preparation remains substantial: Lazy's adapter medians reach 14.221~s (PC2/R1; S4). Capped Direct-Full attempts give total-JVM lower bounds, not solver ratios or medians. Auxiliary Full+UC timings span different builds, hosts and repetitions and cannot isolate pruning; no unpruned OTF is implemented (Technical Appendix~\ref{ta:performance_scope_details}).
 
 % FGDUCS_RELOCATED: workload_rows
-
-\paragraph{Separating construction choices.}
-Auxiliary Full+UC timings span different builds, hosts and repetitions and cannot isolate pruning; no unpruned OTF is implemented (Technical Appendix~\ref{ta:performance_scope_details}).
 
 \paragraph{Scaling limits.}
 \label{sec:rq4} All methods finish the independent family for $n=\FixedIndependentNMin{},\ldots,\FixedIndependentNMax{}$. At $n=\FixedIndependentNMax{}$, Lazy and Update-first discover \FixedIndependentLazyStates{} states each, Eager \FixedIndependentEagerStates{}, and Direct-Full $\FixedIndependentFullStatesMath{}$ (S4).
@@ -438,7 +435,7 @@ FG-DUCS compiles local contracts into certified finite updates between verified 
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c87-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c88-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
