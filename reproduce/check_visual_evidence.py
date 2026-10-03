@@ -221,8 +221,8 @@ def verify_pairs(source, expected):
     for phrase in ('Discovered game states', 'Solver time (seconds)', 'exact first-trial count',
                    'five-run median [min--max]', 'Peak JVM RSS (MiB)',
                    'All axes logarithmic; lower is better.',
-                   'sampled resident memory over the whole JVM run',
-                   'not solver-only or heap usage'):
+                   'Resident set size (RSS) is sampled over the whole JVM run',
+                   'neither solver-only nor heap usage'):
         require(phrase in source, 'plot_units', phrase)
     for phrase in (r'\fill[pairlazy] (3.1,-16) circle (2pt);',
                    r'\node[anchor=west] at (3.22,-16) {Lazy};',
@@ -275,7 +275,7 @@ def verify_placements(main, technical, secondary, promotion, policy):
         'figures/contract_interfaces_full.tex': {'technical':1},
         'figures/policy_lifetimes.tex': {'technical':1},
         'technical_fragments/ducs_cell_correspondence.tex': {'main':1},
-        'technical_fragments/endpoint_interface.tex': {},
+        'technical_fragments/endpoint_interface.tex': {'main':1},
         'technical_fragments/endpoint_interface_proof.tex': {'technical':1},
         'technical_fragments/gr1_cell_interface.tex': {'technical':1},
     }

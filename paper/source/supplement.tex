@@ -7,6 +7,7 @@
 \providecommand{\Description}[1]{}
 \usepackage{xr-hyper}
 \externaldocument[taDoc-]{build/technical_appendix}[technical_appendix.pdf]
+\externaldocument[mainDoc-][nocite]{build/main}[main.pdf]
 \usepackage[hidelinks]{hyperref}
 \setlength{\emergencystretch}{2em}
 \hypersetup{pdftitle={FG-DUCS: Supplementary Proofs and Tables},pdfauthor={Anonymous Authors}}
@@ -438,7 +439,7 @@ $P$ includes endpoint products, the closure, global-tuple initializer constructi
 \normalsize
 
 \paragraph{Reading the cost claims.}
-Lazy defers update-game states and successor buckets after this preparation. For example, its $P$ medians are 13.872/14.221~s for PC2 Base/R1 and 5.507--5.730~s for Workflow. Thus reduced search does not remove global preparation. Main-paper Table~6 separately reports total JVM ratios. The public \path{scripts/generate_rq3_preparation.py} regenerates these tables and \path{build/generated/rq3-preparation.csv} directly from the archived campaign metrics, without executing synthesis.
+Lazy defers update-game states and successor buckets after this preparation. For example, its $P$ medians are 13.872/14.221~s for PC2 Base/R1 and 5.507--5.730~s for Workflow. Thus reduced search does not remove global preparation. Main-paper Table~\ref{mainDoc-tab:xeon-rq3} separately reports total JVM ratios. The public \path{scripts/generate_rq3_preparation.py} regenerates these tables and \path{build/generated/rq3-preparation.csv} directly from the archived campaign metrics, without executing synthesis.
 
 \clearpage
 \subsection{Detailed fixed-budget measurements and policy diagnoses}
@@ -725,7 +726,7 @@ The public anonymous repository contains the full derived source tree, saved RQ1
 
 \clearpage
 \section{Expanded related-work comparison}
-Main-paper Table~2 summarizes three update interfaces. The tables here expand their coverage and progress conditions, then compare synthesis and switching foundations. Publication details appear in the main bibliography. Section and definition numbers identify the inspected native contracts; differences do not establish an inability to encode one approach in another.
+Main-paper Table~\ref{mainDoc-tab:contract-workflow} summarizes three update interfaces. The tables here expand their coverage and progress conditions, then compare synthesis and switching foundations. Publication details appear in the main bibliography. Section and definition numbers identify the inspected native contracts; differences do not establish an inability to encode one approach in another.
 
 \subsection{Update and adaptation interfaces}
 \begin{table}[!htbp]

@@ -18,3 +18,6 @@ Workflow & \ContractWorkflowComponents{} & \FixedWorkflowEntries{} & \ContractWo
 \par\smallskip\footnotesize $T$ counts declared transfer pairs before fluent observers; $U$ counts transfer, stop and start commands. Entries agree across completed variants; PC Arms=2/R2 times out and its requirement counts come from its input log. Only Railcab has branching transfers. These nine inputs declare no explicit precedence; the separate cell witness requires $\mathsf{start}\prec\mathsf{stop}$; R2 uses interval monitors.
 \end{table}
 
+
+\paragraph{Requirement configurations.}
+Each inherited input has three named requirement configurations: Base has no interval requirement; R1 protects selected actions during a requirement gap; R2 imposes selected ordering constraints. R1 blocks each designated action while its flag is true: any old-stop sets it, its designated new-start clears it. R2 requires selected boundaries before their transfers. In the GSM mobile-communication model, R1 blocks communication and decoding; R2 puts both decode-rule boundaries before transfer without ordering them. Event choices vary by model. PC2-Rolling, a production-cell calibration example, separately tests availability. The archived O-DUCS implementation (Legacy) also synthesizes subsequent control, a different objective.
