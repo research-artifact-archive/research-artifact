@@ -39,6 +39,8 @@ The [original `fgducs-invariants-20261002` evidence snapshot](https://github.com
 
 A running system can need several changes while continuing to satisfy safety conditions. Updating everything together can create a transient violation; keeping every old requirement active until the end can also prevent a valid update. FG-DUCS makes component transfers and old/new requirement boundaries separate controllable events. A transfer can have multiple possible outcomes. The synthesized policy must work from **every admitted old entry**, retain **every adversarial outcome** of each chosen event, respect uncontrollable priority, and finish at an admitted state of the **fixed new controller**.
 
+Meeting the new safety goals alone can discard continuations allowed by the supplied replacement. The handover condition therefore preserves the replacement's behavior from the selected admissible state.
+
 The inputs are finite old/new component models, fixed endpoint controllers and projections, local state-transfer relations, safety testers with explicit activation initializers, requirement lifetimes, precedence constraints and loadable new states. A **WIN** supplies a policy, completion ranks and handover targets. For finite JSON inputs, a **LOSS** saves the checked losing-region membership in `certificate.json`. The FSP/application benchmark driver checks that region internally but saves only its size and phase-mask statistics; its full-game export supports independent reconstruction, without comparing the solver's membership list. **INVALID** means the declared contract failed validation; it is not a losing game. A timeout or OOM establishes neither WIN nor LOSS.
 
 Update commands and handover require global modeled uncontrollable quiescence; permanently enabled uncontrollable behavior can prevent completion. No fairness assumption is made.
@@ -118,7 +120,7 @@ Five constructed families expose different update constraints, including both di
 |---|---|---|
 | **Rolling** | 70 startup-availability threshold cells agree with `k ≤ n − m`, where `k` is the group starting together and `m` the required ready capacity | The spare capacity limits safe update granularity; reports and the readiness model are assumptions |
 | **Canary** | 15/15 local-versus-merged pairs separate when all transfer outcomes, uncontrollable reports and recovery are modeled | A successful branch alone is insufficient; recovery behavior is supplied in the model |
-| **Policy v2** | Audit overlap and role nonoverlap require opposite requirement-boundary orders | A single global boundary does not express this contract directly; this is a boundary-order result, not a service-continuity guarantee |
+| **Policy v2** | Audit overlap and role nonoverlap require opposite requirement-boundary orders | Merging the individual boundaries in the specified FG contract loses; this is an internal boundary-order comparison, not an impossibility claim about alternative DUCS encodings or a service-continuity guarantee |
 | **DB-Rolling v2** | Secondary-first maintenance separates; no-slack controls are both LOSS | Granularity helps only when the contract provides a safe intermediate state |
 | **Rolling+Audit** | Transfer merging can lose under the startup-capacity constraint, while requirement-boundary merging wins in the same family | Finer granularity is not uniformly beneficial: the result depends on which commands are merged and on the declared requirement scopes |
 
@@ -157,7 +159,7 @@ Figure 2 adds the saved **sampled peak JVM resident memory (RSS, MiB)** for the 
 
 The result supports completion of more fixed-budget cases by Lazy. It does **not** say Lazy is always fastest: **Update-first has a smaller solver-time median in 8/24 completed comparisons**. In the Travel scaling grid the three on-the-fly methods each finish **20/48** conditions and Direct-Full finishes **18/48**. Other scaling grids, states, queries, RSS and timings are included in the [generated tables](paper/source/build/generated/) and [scaling analyses](results/performance/analysis/).
 
-**Separate legacy reference:** the saved DUCS implementation fork gives **9 WIN, 13 OOM, and 5 author-instrumentation capture stops (N/M)**. It solves a different GR objective and does not enforce this fixed-new-controller handover. Do not interpret that row as a same-objective speed comparison. Existing DUCS can encode intermediate update stages; no objective-preserving translation, encoding-effort comparison or external-solver study is supplied here.
+**Separate legacy reference:** the measured traditional paths in the saved DUCS implementation fork give **9 WIN, 13 OOM, and 5 author-instrumentation capture stops (N/M)**. They solve a different subsequent-control objective; preservation of the fixed new controller's continuations was not compared. Do not interpret that row as a same-objective speed comparison. Published DUCS permits staged reconfiguration inside its new environment. The analytical Cell encodings establish neither a general objective-preserving translation nor an encoding-effort advantage, and were not evaluated through native DUCS/GR(1) solvers.
 
 <details><summary><b>All 27 fixed-budget contracts (solver medians in seconds; expand)</b></summary>
 
