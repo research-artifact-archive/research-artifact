@@ -76,7 +76,7 @@
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 
 \begin{abstract}
-Verified controllers for old and new software versions leave an open problem: how to complete the transition while component states and active requirements change. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) takes local transfers, requirement lifetimes and initial obligations as a contract and synthesizes a staged update policy. In the model, a winning policy safely completes after finitely many events from every reachable old state under every permitted outcome, then hands control to the supplied new controller without changing its continuation. Commands and handover require states with no enabled uncontrollable event. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Merging commands enables or prevents completion in constructed examples, but changes no decision in 54 comparisons derived from existing models. On the same \ApplicationContracts{} adapted contract games, our MTSA implementation decides \LazyDecisions{} within 1,200~s with lazy exploration, versus \FixedEagerDecisions{} for eager successors, \FixedUpdateFirstDecisions{} for update-first exploration and \DirectFullDecisions{} for full construction. Update-first is sometimes faster. Continuous service and elapsed-time bounds are not guaranteed.
+Verified old and new controllers do not specify how to complete their transition while components and active requirements change. Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) takes local transfers, requirement lifetimes and initial obligations as a contract and synthesizes a staged update policy. In the model, a winning policy safely completes after finitely many events from every reachable old state under every permitted outcome, then hands control to the supplied new controller without changing its continuation. Commands and handover require states with no enabled uncontrollable event. We prove contract/game correspondence and specialize established lazy reachability to return a policy and progress rank or a losing-region certificate. Merging commands enables or prevents completion in constructed examples, but changes no decision in 54 comparisons derived from existing models. On \ApplicationContracts{} adapted contract games, our MTSA implementation decides \LazyDecisions{} within 1,200~s using Lazy exploration. On the same games, Eager decides \FixedEagerDecisions{}, Update-first \FixedUpdateFirstDecisions{} and Direct-Full \DirectFullDecisions{}; Update-first is sometimes faster. Continuous service and elapsed-time bounds are not guaranteed.
 \end{abstract}
 
 \begin{CCSXML}
@@ -98,11 +98,11 @@ Verified controllers for old and new software versions leave an open problem: ho
 \label{sec:introduction}
 Verifying an old controller and its replacement does not specify a safe transition between them. An update policy must coordinate changing component states and active requirements~\cite{Cheng2009SASRoadmap,Andersson2013SEAMSProcesses,Giuffrida2013SafeLiveUpdate,Sokolowski2022DynamicWorkflowUpdates}. We also retain the replacement's behavior at the selected handover state: satisfying new safety goals alone can discard allowed continuations (Section~\ref{sec:formalization}).
 
-During a finite maintenance interval, update control replaces old control and enforces active requirements. Work may pause; commands and handover need global uncontrollable quiescence. Interval requirements cover old-stop/new-start gaps. Neither continuous service nor elapsed-time bounds follow; an environment that forever avoids quiescence prevents completion.
-
-Components and requirements create different scheduling choices. In a workcell, moving a workpiece may be necessary to empty a station for replacement. Audit rules may require overlapping coverage, whereas incompatible access rules must not overlap. The policy must retain duties such as inspection and cover every reachable old state and environment outcome. A fixed sequence can fail under branching, and a safe update can remain unfinished forever.
+Components and requirements create different scheduling choices. In a workcell, moving a workpiece may empty a station for replacement. Audit rules may require overlapping coverage, whereas incompatible access rules must not overlap. The policy must retain duties such as inspection and cover every reachable old state and environment outcome. Branching can defeat a fixed sequence; safety alone permits endless updates.
 
 \emph{FG-DUCS compiles local choices into a policy for safe finite handover.} The contract fixes permitted transfers, requirement lifetimes and endpoint obligations; synthesis chooses how to complete the update (Table~\ref{tab:contract-workflow}). Modeling and transfer code remain the modeler's responsibility; effort reduction is unmeasured.
+
+Update control temporarily replaces old control and enforces active requirements. Work may pause; commands and handover require no enabled uncontrollable event. Interval requirements cover old-stop/new-start gaps. An environment that forever prevents this quiescence blocks completion. Neither continuous service nor elapsed-time bounds follow.
 
 DUCS~\cite{Nahabedian2016SEAMS,Nahabedian2020} and GR(1) updating~\cite{Amram2022GR1DynamicUpdate} already generate update or bridge control. FG-DUCS instead fixes both controllers and generates the intervening game from local transfers, independent requirement boundaries and initializers (Section~\ref{sec:ducs-cell-construction}). Its contribution is this construction and its guarantees, not greater general expressiveness or a new reachability algorithm.
 
@@ -127,12 +127,12 @@ Consider a constructed two-station cell with exactly one workpiece~\cite{Leweren
 Table~\ref{tab:cell-finite-main} specifies every component, endpoint and monitor. The interval requires exactly one workpiece, which plant transitions preserve. All labels are controllable; new-start before old-stop is the only dependency. Transfers are $g_A=g_B=\{(e,e)\}$, where $e$ means empty.
 \input{figures/cell_finite_main.tex}
 
-Endpoint tuples list $A,B$, controller and its requirement monitor. The old initial tuple is $x_A=(h,e,c_o,k)$ and its other reachable tuple is $x_B=(e,h,c_o,k)$; both are entries. The new initial tuple is $z_A=(h,e,c_0,c)$; its other reachable tuples are $y_B=(e,h,c_1,d)$ and $z_B=(e,h,c_0,c)$. Only $\{z_A,z_B\}$ are loadable targets: inspection must be clear at handover. The interval initializer records the holder in either all-old tuple. The new initializer admits all eight version-tagged one-workpiece tuples, installing $d$ if $B$ holds and $c$ otherwise. These data specify the contract without an update sequence.
+Endpoint tuples list $A,B$, controller and its requirement monitor. The old initial tuple is $x_A=(h,e,c_o,k)$ and its other reachable tuple is $x_B=(e,h,c_o,k)$; both are entries. The new initial tuple is $z_A=(h,e,c_0,c)$; its other reachable tuples are $y_B=(e,h,c_1,d)$ and $z_B=(e,h,c_0,c)$. We choose $\{z_A,z_B\}$ as the loadable targets, requiring inspection to be clear at handover. The interval initializer records the holder in either all-old tuple. The new initializer admits all eight version-tagged one-workpiece tuples, installing $d$ if $B$ holds and $c$ otherwise. These data specify the contract without an update sequence.
 
 \input{figures/cell_story_visual.tex}
 
 \paragraph{The generated policy.}
-Figure~\ref{fig:cell-story}'s 13 states and 11 edges cover both entries and targets. Each displayed event has one outcome; other controls are disabled. Both paths move the workpiece to enable empty-station replacements. The first also clears inspection debt before handover. Every arrow decreases rank from six or five to zero, excluding safe but endless inspection. A joint transfer always requires both stations empty and is impossible. Technical Appendix~\ref{ta:cell} and S1 give the paths and closure. Section~\ref{sec:ducs-cell-construction} compares the supplied and generated structures through existing update interfaces.
+Figure~\ref{fig:cell-story}'s 13 states and 11 edges cover both entries and targets. Each displayed event has one outcome; other controls are disabled. Both paths empty stations before replacement; the first also clears inspection debt. Every arrow decreases rank from six or five to zero, excluding endless inspection. A joint transfer requires both stations empty and is impossible. Technical Appendix~\ref{ta:cell} and S1 give the paths and closure; Section~\ref{sec:ducs-cell-construction} compares existing update interfaces.
 
 \Needspace{7\baselineskip}
 \subsection{Audit and Role Lifetimes}
@@ -163,7 +163,7 @@ On-the-fly DUCS (O-DUCS) separates update and post-update analysis~\cite[Sec.~3]
 \input{technical_fragments/contract_adequacy_statement.tex}
 \input{technical_fragments/endpoint_continuation.tex}
 \paragraph{Why matching and reconnection both matter.}
-Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ finishes every command with inspection pending. Physical matching alone admits clear target $z_B$, whose $m_A$ violates that duty; monitor matching excludes the reset. Conversely, disabling controllable loop $b$ in a one-state endpoint with loops $a,b$ and goal $\mathit{true}$ preserves legality, deadlock freedom and safety~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but loses $b$-continuations. FG's fixed-endpoint contract requires preserving those continuations.
+Cell's prefix $\rho_B,m_B,\mathsf{start},\mathsf{stop},\rho_A$ completes all commands with inspection pending. Physical matching admits clear target $z_B$, whose $m_A$ violates that duty; monitor matching excludes the reset. Conversely, disabling controllable loop $b$ in a one-state endpoint with loops $a,b$ and goal $\mathit{true}$ preserves legality, deadlock freedom and safety~\cite[Defs.~3.9--3.10, 4.3]{Nahabedian2020}, but removes $b$-continuations. FG's fixed-endpoint contract preserves them.
 
 \input{technical_fragments/endpoint_interface.tex}
 
@@ -297,6 +297,7 @@ All methods share entries, successors, goals, checks and terminals. On-the-fly (
 \paragraph{Design and measures.}
 RQ3 uses one Windows/Xeon host, 64~GiB heap and 1,200~s JVM cap: $27\times4$ same-game cells plus 27 Legacy references. Medians require five completions; censored cells retain their capped trial. Solver time includes checking; total JVM adds frontend, startup, output and endpoints. We also report exploration, policy size and peak working set. Legacy uses its native timer; Mac pilots are excluded. Full settings and interruptions remain in Technical Appendices~\ref{ta:implementation_details} and~\ref{ta:memory_policies} and S4.
 
+\input{figures/rq2_family_counts.tex}
 \subsection{RQ1: Can Local Choices Change Feasibility?}
 \label{sec:claim-granularity}
 \label{sec:rq2}
@@ -311,8 +312,6 @@ The families isolate local choices, retaining both-WIN and both-LOSS controls.
 Table~\ref{tab:rq2-family-counts} records \VThreeESixWitness{}/\VThreeESixMainPairs{} fine-WIN/merged-LOSS comparisons across five constructed families. Of the 33 separations, 30 are Rolling/Canary parameter points, not independent mechanisms. Rolling compares $k=1$ with $k=n$; its \VThreeESixRollingThresholdCells{} threshold cells are separate. Threads tests both-WIN/both-LOSS quiescence controls. Technical Appendix~\ref{ta:constructed_contracts} gives all definitions and assumption controls.
 
 \textbf{Answer.} Separate commands can preserve capacity, necessary intermediate stages and compatible requirement lifetimes. Merging can instead bypass a harmful mixed state (Section~\ref{sec:granularity-analysis}); finer is not uniformly better. Inherited decisions do not change. PC2's source proof establishes merged impossibility, but its merged timeout leaves the solver comparison incomplete.
-
-\input{figures/rq2_family_counts.tex}
 
 \Needspace{4\baselineskip}
 \subsubsection{A Source-Derived Calibration Case}\label{sec:pc2-case}
@@ -340,9 +339,9 @@ Restricted-transfer comparisons also retain both-LOSS and incomplete cases (Tech
 For the \FixedRQOneJobs{}-job suite, Python reconstructs explicit successors; frontend and endpoint/goal code are shared. All WIN jobs pass Link; invalid cases omit events, deadlock or suppress UC. \FixedTargetQuiescenceFixturesWord{} separate monitor-free fixtures independently reconstruct FSP endpoints, games and goals (S4.2).
 
 \paragraph{From source invariants to initialized monitors.}
-Initial truth and step checks establish monitor fidelity by induction; safe lookup reachability supplies Proposition~\ref{prop:lookup-act}'s premise (full checks in Technical Appendix~\ref{ta:lookup-act}). Actual decoding, post-start keys, observations and absence of fallback remain unchecked. The adapter preserves physical observers across commands, whereas reference action predicates can reset; conservativeness is unproved. These checks validate neither arbitrary FSP compilation nor source semantics for all WIN policies.
+Initial truth and step checks establish monitor fidelity by induction; safe lookup reachability supplies Proposition~\ref{prop:lookup-act}'s premise (Technical Appendix~\ref{ta:lookup-act}). These static checks do not establish actual activation conformance (Section~\ref{sec:activation-scoped-main}), arbitrary FSP compilation or source semantics for all WIN policies.
 
-\paragraph{Which history is meant.}
+\paragraph{What the history checks cover.}
 All \RSNewOccurrences{} NEW occurrences also satisfy residual inclusion for safe prior histories; actual scope nonemptiness remains unverified except one PC2 tuple. UPD monitors instead begin their reference at update entry (Technical Appendix~\ref{ta:history_checks}).
 \input{technical_fragments/gsm_entry_derivation.tex}
 
@@ -440,7 +439,7 @@ FG-DUCS compiles local transfers, requirement lifetimes and initializers into sa
 
 \clearpage
 \section*{Data Availability}
-We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c98-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
+We created and publicly released the anonymous FG-DUCS replication package for this paper~\cite{FGDUCSAnonymousArtifact}. The retained evidence snapshot is available at \url{https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002}. The paper-matched release cited in~\cite{FGDUCSAnonymousArtifact}, \texttt{fgducs-c99-20261003}, contains this revised main paper and \texttt{paper/supplementary\_material.pdf}: Part I is Technical Appendix A--P; Part II is Supplement S1--S5. Its reading guide, bookmarks and continuous page numbers locate the proofs, full models and experimental records cited throughout the main text. The repository README links directly to both parts and maps paper sections to evidence. The package also provides source code, all 27 application contracts, scripts and saved results; saved-evidence checks require no new performance experiments. Dependencies come from official upstream sources.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
