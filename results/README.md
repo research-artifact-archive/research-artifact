@@ -1,6 +1,6 @@
 # Evidence by question
 
-Start with the question or figure from C145, then open a small result table before the raw data. [Detailed outcomes and metric definitions](../docs/RESULTS.md) · [Claim-to-evidence map](../docs/CLAIMS.md) · [Paper and supplement](../paper/README.md).
+Start with the question or figure from the paper, then open a small result table before the raw data. [Detailed outcomes and metric definitions](../docs/RESULTS.md) · [Claim-to-evidence map](../docs/CLAIMS.md) · [Paper and supplement](../paper/README.md).
 
 ## Main-paper evidence
 
@@ -17,7 +17,7 @@ Start with the question or figure from C145, then open a small result table befo
 | **Extended budgets:** what remained unresolved? | [Condition-level ext1–5 table](../paper/source/build/generated/ext-budget.csv) | [ext1–7 raw results](performance/raw/) · [S4.6–S4.9](../paper/supplementary_material.pdf#page=76) |
 | **Model sizes:** what are the 27 supplied contracts? | [Contract sizes](contract-sizes/) | [TA M](../paper/supplementary_material.pdf#page=38); input counts differ from reachable-game counts |
 
-## Three added saved-evidence analyses in C145
+## Three saved-evidence analyses
 
 These directories are the **same files included in the manuscript source ZIP**, rather than a second maintained copy.
 
@@ -30,7 +30,7 @@ These directories are the **same files included in the manuscript source ZIP**, 
 Recompute all three with Python's standard library, from the repository root and into a fresh directory:
 
 ```sh
-python3 -B reproduce/check_added_analyses.py --output work/added-c145
+python3 -B reproduce/check_added_analyses.py --output work/added-analyses
 ```
 
 These are analyses of saved objects, not new solver timings or runtime deployments. [Individual commands](../paper/source/evidence/README.txt) and [guarantee boundaries](../docs/CLAIMS.md#rq2-initialization-and-saved-policies) are available.

@@ -47,7 +47,7 @@ Lazy materializes controllable buckets on demand; Eager queries them at expansio
 
 The supplementary cost records retain **sampled peak JVM resident memory (RSS, MiB)** for all 14 completed Lazy/Direct-Full pairs. All 14 Lazy medians are lower: Direct-Full/Lazy ratios range from **1.01 to 36.94**, with median **1.95**. Each range spans the five trial peaks. These are Windows JVM-process working-set samples taken every 0.1 seconds over the whole run, including frontend and endpoint preparation, not heap occupancy or solver-only memory. Some ranges overlap, so this is not a claim of statistically significant separation in every pair. Other methods can use less memory: Eager does so in 1/17 completed pairs and Update-first in 12/24. The 13 Direct-Full timeouts are excluded from completed-pair medians and remain in the all-contract results.
 
-The C145 main Figure 3 compares Lazy and Eager states and solver time for all 27 contracts, keeping unresolved Eager and Lazy outcomes visible. Both variants use the same UC pruning. Direct-Full pairs and RSS remain in the supplement.
+Main Figure 3 compares Lazy and Eager states and solver time for all 27 contracts, keeping unresolved Eager and Lazy outcomes visible. Both variants use the same UC pruning. Direct-Full pairs and RSS remain in the supplement.
 
 The result supports completion of more fixed-budget cases by Lazy. It does **not** say Lazy is always fastest: **Update-first has a smaller solver-time median in 8/24 completed comparisons**. In the Travel scaling grid the three on-the-fly methods each finish **20/48** conditions and Direct-Full finishes **18/48**. Other scaling grids, states, queries, RSS and timings are included in the [generated tables](../paper/source/build/generated/) and [scaling analyses](../results/performance/analysis/).
 
@@ -118,7 +118,7 @@ The core finite E6 independent checker reconstructs endpoint products and whole 
 
 [All-contract preparation data](../paper/source/build/generated/rq3-preparation.csv) retain the definition and adapter intervals, activation-closure counts, five-run ranges and missing cells from 405 completed runs. For example, Lazy PC2 Base/R1 adapter medians are 13.872/14.221 s, compared with solver medians 2.609/2.602 s. The adapter interval includes more than closure construction. Workflow has 52,608 activation-closure tuples; these are not discovered update-game states. S4.3 distinguishes these global preparation costs from lazy game exploration.
 
-## C145 saved-evidence analyses
+## Saved-evidence analyses
 
 [The claim map](CLAIMS.md#rq2-initialization-and-saved-policies) separates accepted lookup cells, actual saved activation keys, and completeness of the accepted activation domain. [Threads expansion](../paper/source/evidence/threads_saved_serialization/) covers ten saved policies; [Railcab](../paper/source/evidence/railcab_saved_activation/) covers two saved policies; [command observation](../paper/source/evidence/command_observation/) retains both its analysis and negative controls. These additions analyze preserved inputs and policies and do not add performance measurements.
 

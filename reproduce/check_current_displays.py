@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the C143 family table and all-contract Lazy/Eager cost figure."""
+"""Check the paper’s family table and all-contract Lazy/Eager cost figure."""
 import argparse
 import csv
 import importlib.util
@@ -26,7 +26,7 @@ def verify(root):
     family = importlib.util.module_from_spec(spec); spec.loader.exec_module(family)
     table, family_report = family.collect(root)
     require(table == (paper/'figures/rq2_family_counts.tex').read_text(), 'Family table differs from saved comparisons')
-    # The C143 source ZIP omits build/table_source_check.json. Recompute its
+    # The manuscript source ZIP omits build/table_source_check.json. Recompute its
     # full population checks instead of requiring that incidental build output.
     primary = list(csv.DictReader(io.StringIO(read_source(root,
         'FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/raw/rq3/summary.csv').decode())))

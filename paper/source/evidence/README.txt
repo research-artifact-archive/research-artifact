@@ -42,7 +42,7 @@ checks all 21 NEW starts, and checks their shared reachable post graph of 70
 states and 116 edges. These are not two independent post graphs. Neither
 analysis validates general activation/fallback calls or platform execution.
 
-Technical Appendix R adds the separate saved Threads policy expansion in
+Technical Appendix R presents the separate saved Threads policy expansion in
 threads_saved_serialization/. Its README describes the ten-case cohort,
 independently implemented standard-library checker, all 50 negative controls
 and limits. Run from the manuscript source directory:
@@ -50,5 +50,4 @@ and limits. Run from the manuscript source directory:
   python3 evidence/threads_saved_serialization/check_saved_serialization.py \
     --output /tmp/fgducs-threads-recheck
 
-No solver or performance measurement is invoked. The new script and expanded
-policies are not in the earlier public release.
+No solver or performance measurement is invoked.

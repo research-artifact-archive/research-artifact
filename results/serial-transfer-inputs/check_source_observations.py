@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the saved C102 source-inspection record against public saved evidence.
+"""Check the saved source-inspection record against public saved evidence.
 
 This is a record-consistency checker, NOT a general FSP parser or an independent
 implementation of the serial transfer preservation proposition's UC predicates. The two local classifications

@@ -1,6 +1,6 @@
 # Saved Threads merged-policy serialization
 
-This is a new static analysis of ten previously saved merged winning policies: all Threads backpressure instances with n=2–6 and queue capacity B=1,2. No synthesis, winning-policy search, performance measurement, Java execution, or source-file modification is performed. The saturated-offer cases are outside this prespecified cohort; their earlier LOSS results remain unchanged.
+This is a static analysis of ten previously saved merged winning policies: all Threads backpressure instances with n=2–6 and queue capacity B=1,2. No synthesis, winning-policy search, performance measurement, Java execution, or source-file modification is performed. The saturated-offer cases are outside this prespecified cohort; their earlier LOSS results remain unchanged.
 
 ## Reproduce
 
@@ -16,7 +16,7 @@ The default output directory is `output/`. A fresh output path makes the new res
 
 `provenance.json` maps the 40 byte-for-byte copied JSON files to their repository-relative original paths. Each case has `fine.json`, `merged.json`, `certificate.json`, and `saved_result.json`. The policies were saved by the earlier 2026-09-29 Threads campaign under `FSE2027_SUBMISSION_20260914/experiments/witness_20260929/e6/threads/v1/`. The manifest also records the original invocation date and relative job specification. The saved result files contain historical solver timings; this analysis neither measures nor compares performance.
 
-All 40 copied source files were also compared directly with the Git objects at public-release tag `fgducs-c115-20261003`: all 40 are present and byte-identical. Their public-relative paths and individual comparison outcomes are recorded in `provenance.json`, under `results/granularity/e6/threads/v1/`. This script and its derived outputs are new and were not part of that earlier public release. The public input/policy provenance therefore does not imply that this new transformation was checked or published in C115.
+All 40 copied source files are present and byte-identical to their published repository counterparts under `results/granularity/e6/threads/v1/`. Their public-relative paths and individual comparison outcomes are recorded in `provenance.json`. The public-root `reproduce/check_added_analyses.py` checks these copied inputs against the complete archive, then independently reruns the transformation and its controls.
 
 ## Transformation and checks
 

@@ -1,6 +1,6 @@
-# C145 claims, evidence and reproduction
+# Claims, evidence and reproduction
 
-This authors’ replication package accompanies [C145](../paper/main.pdf) at tag [`fgducs-c145-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c145-20261004). Follow a question below to the matching proof, saved evidence or executable check. **TA** means Technical Appendix A–R. All PDF page links use the continuous pages of the [87-page integrated supplement](../paper/supplementary_material.pdf); the [complete section index](../paper/README.md#appendix-section-index) lists every section.
+This replication package was prepared by the authors for [the paper](../paper/main.pdf). Follow a question below to the matching proof, saved evidence or executable check. **TA** means Technical Appendix A–R. All PDF page links use the continuous pages of the [87-page integrated supplement](../paper/supplementary_material.pdf); the [complete section index](../paper/README.md#appendix-section-index) lists every section.
 
 Commands run from the repository root. Choose a fresh output directory. Proofs, static analyses, observed synthesis results and assumed runtime behavior are different kinds of support; the boundaries below are part of each claim.
 
@@ -24,7 +24,7 @@ Commands run from the repository root. Choose a fresh output directory. Proofs, 
 | Under the additional comparison premises, a batch winner can be expanded into individual commands with the same endpoints | Main §5; [TA D.3–D.4, pp.14–17](../paper/supplementary_material.pdf#page=14) | Same [proof source](../paper/source/technical_fragments/granularity_theory.tex): Cartesian outcomes, commuting active-monitor effects, valid mapped precedence and extra boundary conditions | A sufficient condition. Exact added event counts concern the constructed serial policy; no optimal-rank or elapsed-time claim |
 | The retained finite check supports the equal-alphabet specialization | [TA D.3](../paper/supplementary_material.pdf#page=14); [check and records](../results/serial-transfer/) | `python3 -B results/serial-transfer/check_transfer_refinement.py`; 4,352 games and 16,640 starts, including 6,599 excluded random candidates and failed-condition counterexamples | A sanity check, not the proof of the generalized criterion. No monitors, precedence or reconstructed endpoint controllers |
 | Source inspection supports the specialization for six of nine inherited inputs | [TA D.3](../paper/supplementary_material.pdf#page=14); [inspection records](../results/serial-transfer-inputs/) | `python3 -B results/serial-transfer-inputs/check_source_observations.py --artifact-root .`; 12/18 Base/R1 transfer-only comparisons: 11 WIN/WIN and 1 LOSS/LOSS | PC1/PC2 also fail the generalized blocker condition; Railcab fails both inspection tests. Boundary/both and R2 are excluded. This implication does not explain the null result across 54 comparisons |
-| The serial expansion is checked on all ten saved Threads backpressure policies | [TA R, p.45](../paper/supplementary_material.pdf#page=45); [inputs, checker and all outputs](../paper/source/evidence/threads_saved_serialization/README.md) | `python3 -B reproduce/check_added_analyses.py --output work/added-c145`; 620 entry occurrences and all 50 negative controls | Identical old/new graphs, deterministic identity transfers, no monitors or precedence. Not a general converter or a new performance result; saturated-offer LOSS controls remain unchanged |
+| The serial expansion is checked on all ten saved Threads backpressure policies | [TA R, p.45](../paper/supplementary_material.pdf#page=45); [inputs, checker and all outputs](../paper/source/evidence/threads_saved_serialization/README.md) | `python3 -B reproduce/check_added_analyses.py --output work/added-analyses`; 620 entry occurrences and all 50 negative controls | Identical old/new graphs, deterministic identity transfers, no monitors or precedence. Not a general converter or a new performance result; saturated-offer LOSS controls remain unchanged |
 
 ## RQ2: initialization and saved policies
 
@@ -40,7 +40,7 @@ Commands run from the repository root. Choose a fresh output directory. Proofs, 
 | Do all thirteen new PC2 source invariants hold during their own active lifetimes? | [TA K.1, p.36](../paper/supplementary_material.pdf#page=36); [all-obligation report](../results/pc2-all-active-obligations.json) | `python3 -B reproduce/check_pc2_all_act_saved.py`; 348 old and 522 policy observer edges, 126 entry bindings and thirteen mandatory starts | One saved policy; active suffix contains only starts. Post-handover assumes the supplied verified endpoint. No general initializer/compiler/runtime proof |
 | What are the negative PC2 full-prefix results? | [All 126 rows](../results/pc2-activation-histories.json), TA K | `python3 -B reproduce/check_pc2_histories.py`; retains the 39/21/66 partition | Concerns one requirement. Negative prior histories are retained and are distinct from active-lifetime safety |
 
-The [additional-analysis index](../results/additional-analyses/README.md) links directly to the three C145 analyses and their controls. The shared command shown above uses only the Python standard library and compares the rederived results with the saved outputs.
+The [additional-analysis index](../results/additional-analyses/README.md) links directly to the three saved-evidence analyses and their controls. The shared command shown above uses only the Python standard library and compares the rederived results with the saved outputs.
 
 ## Evaluation results and costs
 
@@ -65,8 +65,8 @@ The complete chosen native DUCS Cell construction is in [TA I, pp.30–31](../pa
 
 ```sh
 python3 -m pip install -r reproduce/requirements.txt
-python3 -B reproduce/check.py --output work/check-c145
-python3 -B reproduce/build_paper.py --output work/paper-c145
+python3 -B reproduce/check.py --output work/check
+python3 -B reproduce/build_paper.py --output work/paper
 ```
 
 The last command additionally needs XeLaTeX and latexmk. It builds the main paper, integrated supplement and two component PDFs in a fresh copy. [Reproduction instructions](REPRODUCTION.md) separate saved-evidence checking, manuscript building, source builds and expensive benchmark reruns.

@@ -11,8 +11,8 @@
 | Run saved-evidence checks or repeat experiments | [Reproduction guide](REPRODUCTION.md) |
 | Build and try the synthesis tool | [Tool walkthrough](../tool/README.md) |
 | Understand the required model inputs and assumptions | [Modeling an update](INPUTS.md) |
-| Understand versions, distribution copies and omitted material | [Packaging and provenance](PACKAGING.md) |
+| Understand distribution copies and omitted material | [Packaging and provenance](PACKAGING.md) |
 
-These guides match **C145**. The [main README](../README.md) identifies the matching release and distinguishes retained historical evidence tags.
+The [main README](../README.md) links the paper, integrated supplement, manuscript source and experimental evidence.
 
-`technical/` contains retained detailed protocols and provenance notes used by the compatibility workspace. Their original dates and pre-run statuses are historical. Use the current guides and final results above for the status reported by C145.
+`technical/` contains retained detailed protocols and provenance notes used by the compatibility workspace. Their original dates and pre-run statuses are historical. Use these guides and the saved result indexes for the observations reported in the paper.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the three C143 saved-evidence analyses and compare every output."""
+"""Reproduce the three saved-evidence analyses and compare every output."""
 import argparse
 import hashlib
 import json

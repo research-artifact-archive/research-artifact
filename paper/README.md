@@ -1,8 +1,8 @@
-# C145 paper and supplementary material
+# Paper and supplementary material
 
-**Selected manuscript: C145, 4 October 2026.** [Read the main paper](main.pdf) · [Read the integrated supplement](supplementary_material.pdf) · [Download both PDFs](reading_bundle.zip) · [Download manuscript source](manuscript_source.zip).
+[Read the main paper](main.pdf) · [Read the integrated supplement](supplementary_material.pdf) · [Download both PDFs](reading_bundle.zip) · [Download manuscript source](manuscript_source.zip).
 
-The main paper has **18 pages of body text, 21 pages in total**. The integrated supplement has **87 pages**: a two-page guide and contents, **Technical Appendix A–R (43 pages)**, and **Supplement S1–S5 (42 pages)**. The PDFs and source ZIP contain the selected manuscript with only artifact-location and reference updates for this publication. The scientific body is unchanged.
+The main paper has **18 pages of body text, 21 pages in total**. The integrated supplement has **87 pages**: a two-page guide and contents, **Technical Appendix A–R (43 pages)**, and **Supplement S1–S5 (42 pages)**. The source ZIP supplies the manuscript sources, copied analysis inputs and build instructions.
 
 ## Start from the paper
 
@@ -17,9 +17,9 @@ The main paper has **18 pages of body text, 21 pages in total**. The integrated 
 | [RQ3, Table 4, Figure 3, pp.16–17](main.pdf#page=16) | How do same-game search variants compare under the recorded budgets? | [S4.3, p.56](supplementary_material.pdf#page=56); [complete metrics, S4.4, p.60](supplementary_material.pdf#page=60) |
 | [Table 1, p.4](main.pdf#page=4), [§7, p.18](main.pdf#page=18) | What differs from existing update interfaces? | [DUCS and GR(1) Cell constructions, TA I–J, pp.30–33](supplementary_material.pdf#page=30); [expanded comparison, S5, pp.86–87](supplementary_material.pdf#page=86) |
 | [§6.1, pp.12–13](main.pdf#page=12) | What was implemented, and how was AI used? | [Implementation and AI assistance, TA Q, p.44](supplementary_material.pdf#page=44) |
-| [Data Availability, Table 5, p.19](main.pdf#page=19) | Which publication contains which materials? | [Version correspondence](#version-correspondence) |
+| [Data Availability, Table 5, p.19](main.pdf#page=19) | Where are the documents, source and evidence? | [Source, data and checks](#find-source-data-and-checks) |
 
-**Figure 2 is the Railcab saved-policy illustration. Figure 3 is the 27-contract Lazy/Eager cost comparison.** The earlier 14-pair Lazy/Direct-Full cost and memory records remain in the supplement and saved data. Use this index for C145; earlier tags use different section labels and page numbers.
+**Figure 2 is the Railcab saved-policy illustration. Figure 3 is the 27-contract Lazy/Eager cost comparison.** The 14-pair Lazy/Direct-Full cost and memory records are in Technical Appendix N and the saved data.
 
 ## Appendix section index
 
@@ -77,7 +77,7 @@ The [separate technical appendix](technical_appendix.pdf) and [separate S1–S5 
 | [source/technical_fragments/](source/technical_fragments/) | Definitions, statements, complete proofs and interpretation analyses; see the [claim map](../docs/CLAIMS.md) for exact files |
 | [source/figures/](source/figures/) | Current and retained figure sources; the entry-point TeX files determine which are used |
 | [source/build/generated/](source/build/generated/) | Saved tables, CSVs and macros, including [all fixed-budget cells](source/build/generated/rq3-cells.csv) and [preparation costs](source/build/generated/rq3-preparation.csv) |
-| [source/evidence/](source/evidence/) | Self-contained copied inputs and C145's three saved-evidence analyses; [overview and direct commands](source/evidence/README.txt) |
+| [source/evidence/](source/evidence/) | Self-contained copied inputs and the three saved-evidence analyses; [overview and direct commands](source/evidence/README.txt) |
 | [source/scripts/](source/scripts/), [source/build_support/](source/build_support/) | Table/figure generators and standalone source-bundle build support |
 | [../results/](../results/README.md) | Full scientific records outside the manuscript source bundle |
 | [../reproduce/](../reproduce/README.md) | Public-root entry points for checking, rebuilding and restoring the original layout |
@@ -90,15 +90,7 @@ With XeLaTeX, latexmk and the Python requirements installed, run from the reposi
 
 ```sh
 python3 -m pip install -r reproduce/requirements.txt
-python3 -B reproduce/build_paper.py --output work/paper-c145
+python3 -B reproduce/build_paper.py --output work/paper
 ```
 
 The builder uses a fresh source copy, stabilizes cross-document references and creates the four PDFs. It preserves distributed sources. The standalone ZIP also contains [its own build instructions](source/build_support/README.txt). PDF assembly preserves the text, named destinations and cross-document links.
-
-## Version correspondence
-
-The matching document release is [`fgducs-c145-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c145-20261004). It preserves the selected C145 main PDF and 361-file source ZIP exactly, together with the matching supplement and component PDFs. C145 adds only a 94-word opening Introduction paragraph to C143; the remaining research text and evidence are unchanged.
-
-The manuscript's existing Data Availability, Table 5 and reference [4] continue to cite [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004). That tag retains the same supporting supplement, proofs and scientific evidence; its main PDF is the earlier C143 manuscript. The supplement's text and page contents are identical across C143 and C145. This C145 release does not rewrite links inside the selected PDFs. Historical input-provenance references to C115 still identify the earlier unchanged input bytes.
-
-Earlier tags remain unchanged. Their main PDFs are earlier manuscripts. C143 shares the supplementary section labels and pagination with C145; earlier releases may differ. No new synthesis or performance measurement is introduced by this publication. [Packaging scope](../docs/PACKAGING.md) and the [claim map](../docs/CLAIMS.md) distinguish proofs, static checks, saved observations and unvalidated execution premises.

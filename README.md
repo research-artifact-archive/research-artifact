@@ -1,6 +1,6 @@
 # Synthesizing Staged Updates between Verified Controllers
 
-This anonymous replication package was prepared by the paper's authors for **FG-DUCS**. The selected manuscript is **C145 (4 October 2026)**: 18 pages of main text, 21 pages including references, and an 87-page integrated supplement.
+This anonymous replication package was prepared by the paper's authors for **FG-DUCS**. The main paper has 18 pages of body text and 21 pages including references, accompanied by an 87-page integrated supplement. The package also provides the implementation and saved experimental evidence.
 
 FG-DUCS generates an update game from local component transfers and individual requirement lifetimes between fixed, verified endpoint controllers. Its second contribution identifies when a winning batch policy can be expanded into individual commands while preserving completion and the selected endpoint.
 
@@ -8,16 +8,16 @@ FG-DUCS generates an update game from local component transfers and individual r
 
 | Document | Read | Download |
 |---|---|---|
-| **Main paper** | [Main PDF](paper/main.pdf) | [Download PDF](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/fgducs-c145-20261004/paper/main.pdf) |
-| **Proofs and experimental detail** | [Integrated supplement: Technical Appendix A–R and S1–S5](paper/supplementary_material.pdf) | [Download PDF](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/fgducs-c145-20261004/paper/supplementary_material.pdf) |
-| **Both PDFs together** | Includes matching files with working relative document links | [Download reading bundle](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/fgducs-c145-20261004/paper/reading_bundle.zip) |
-| **Manuscript and added analyses** | [Browse source](paper/source/) | [Download manuscript source ZIP](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/fgducs-c145-20261004/paper/manuscript_source.zip) |
+| **Main paper** | [Main PDF](paper/main.pdf) | [Download PDF](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/main/paper/main.pdf) |
+| **Proofs and experimental detail** | [Integrated supplement: Technical Appendix A–R and S1–S5](paper/supplementary_material.pdf) | [Download PDF](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/main/paper/supplementary_material.pdf) |
+| **Both PDFs together** | Includes matching files with working relative document links | [Download reading bundle](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/main/paper/reading_bundle.zip) |
+| **Manuscript and added analyses** | [Browse source](paper/source/) | [Download manuscript source ZIP](https://raw.githubusercontent.com/research-artifact-archive/research-artifact/main/paper/manuscript_source.zip) |
 
 **Start with the paper and integrated supplement.** No installation is needed to read the proofs, inspect the tables or browse the saved results. The supplement opens with linked reading routes and a complete contents list. Its PDF bookmarks and continuous page numbers cover both parts.
 
 ## Find the evidence for a claim
 
-The page numbers below refer to the **C145 PDFs**. For every appendix section, use the [complete document index](paper/README.md#appendix-section-index). For exact files, commands and limitations, use the [claim-to-evidence map](docs/CLAIMS.md).
+The page numbers below refer to the **paper and integrated supplement**. For every appendix section, use the [complete document index](paper/README.md#appendix-section-index). For exact files, commands and limitations, use the [claim-to-evidence map](docs/CLAIMS.md).
 
 | Question | Main paper | Supplement and evidence |
 |---|---|---|
@@ -48,17 +48,17 @@ The guarantees concern the supplied finite game: every admitted old entry, every
 
 ## Reproduce the study
 
-For a **small Python-only check of the three saved-evidence analyses retained from C143**, run from the repository root:
+For a **small Python-only check of the three saved-evidence analyses**, run from the repository root:
 
 ```sh
-python3 -B reproduce/check_added_analyses.py --output work/added-c145
+python3 -B reproduce/check_added_analyses.py --output work/added-analyses
 ```
 
 For the **complete saved-evidence check**, install the listed Python dependencies and choose a fresh output directory:
 
 ```sh
 python3 -m pip install -r reproduce/requirements.txt
-python3 -B reproduce/check.py --output work/check-c145
+python3 -B reproduce/check.py --output work/check
 ```
 
 These commands inspect and recompute saved evidence; they do not rerun Java performance experiments. The complete check restores the archived workspace, checks tables and figures, and preserves negative and unresolved results. See [reproduction instructions](docs/REPRODUCTION.md) for dependencies, output reports, individual commands, and the more expensive synthesis and measurement reruns.
@@ -81,12 +81,4 @@ The [input guide](docs/INPUTS.md) explains the fixed endpoints, transfer outcome
 | [tool/](tool/README.md) | Implementation, inherited models, source build and finite-example runner |
 | [docs/](docs/README.md) | Claim map, input guide, detailed results, reproduction and packaging scope |
 
-## Version correspondence
-
-This release is [`fgducs-c145-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c145-20261004). Its main PDF and 361-file source ZIP preserve the selected C145 files exactly; the accompanying supplement and component PDFs are the matching C145 files. Relative to C143, C145 adds only a 94-word opening Introduction paragraph explaining the software-evolution context. The remaining research text, mathematical results and experimental evidence are unchanged.
-
-**Links already printed in the manuscript are preserved.** C145's Data Availability, Table 5 and reference [4] cite [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004), the preceding supporting-material release. That immutable tag remains available. Its supplementary text, proofs, tables, implementation and saved evidence are the same as those supporting C145; its main PDF is C143 and lacks the new opening paragraph. Use the C145 PDF links above for the selected manuscript.
-
-The implementation and original experimental observations are retained from the earlier archive. The three saved-evidence analyses accompanying C145 are directly available in [paper/source/evidence](paper/source/evidence/). Earlier tags, including [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004), [`fgducs-c115-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c115-20261003) and [`fgducs-invariants-20261002`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002), retain their own PDFs and page numbers; their URLs identify historical evidence, not the current manuscript.
-
-[Packaging and provenance](docs/PACKAGING.md) describe retained historical records, anonymous distribution copies and omitted binaries. Generative-AI assistance is disclosed in main §6.1 and TA Q. Private author notes, review conversations and submission records are not part of this package. This is a manuscript release; it does not claim that conference submission has been completed.
+[Packaging and provenance](docs/PACKAGING.md) describe the scientific records, anonymous distribution copies and omitted binaries. Generative-AI assistance is disclosed in main §6.1 and TA Q.

@@ -1,6 +1,6 @@
 # Detailed reproduction commands and historical verification
 
-The public C115 layout is described in the [current reproduction guide](../REPRODUCTION.md). From the public repository root, run `python3 reproduce/check.py --output work/check` for complete saved-evidence validation, or `python3 reproduce/materialize.py --output work/full` to restore the research workspace. The detailed commands below use that **restored workspace root** unless stated otherwise. Use fresh output directories. Recorded build times and earlier validation counts below describe their original checks, not a new C115 benchmark run.
+The public layout is described in the [current reproduction guide](../REPRODUCTION.md). From the public repository root, run `python3 reproduce/check.py --output work/check` for complete saved-evidence validation, or `python3 reproduce/materialize.py --output work/full` to restore the research workspace. The detailed commands below use that **restored workspace root** unless stated otherwise. Use fresh output directories. Recorded build times and earlier validation counts below describe their original checks, not a benchmark rerun.
 
 ## Inspect the saved results
 
@@ -75,7 +75,7 @@ These commands use the original cases, method properties, heap limits and per-jo
 
 ## Publication and historical independent-clone validation
 
-The publication location is the [anonymous repository](https://github.com/research-artifact-archive/research-artifact). The C115 manuscript snapshot is tagged `fgducs-c115-20261003`; subsequent documentation and checker maintenance on `main` preserves those manuscript files. The current public layout includes all three raw-results archive parts directly under `results/archives/`. No separate preview Release download is required. `reproduce/materialize.py` verifies the parts and archived files against `reproduce/layout.json` and restores them with the mapped source files.
+The publication location is the [anonymous repository](https://github.com/research-artifact-archive/research-artifact). The current public layout includes all three raw-results archive parts directly under `results/archives/`. No separate preview Release download is required. `reproduce/materialize.py` verifies the parts and archived files against `reproduce/layout.json` and restores them with the mapped source files.
 
 The earlier public preview was independently cloned over HTTPS and verified on macOS arm64 with OpenJDK 17.0.19 and Maven 3.9.16. From a new empty Maven cache, the source build succeeded in **643.205 seconds**; this includes a slow FreeHEP dependency transfer. Upstream dependency acquisition and digest verification took **89.486 seconds** separately. Tests were compiled but execution was skipped. Saved-package checks passed for all **92 RQ1 and 14 RQ2 jobs**. The `--derive-only` smoke runs succeeded and matched all derived fields of the **46 RQ1 oracle rows and 14 RQ2 expectation rows**, after normalizing clone paths. These derive runs do not rerun synthesis or regenerate the saved RQ2 prose annotations. Logs and timings are in `validation/clean-clone/` in the restored workspace; the earlier 198.503-second local build remains separate evidence. To use the current public layout:
 
@@ -93,7 +93,7 @@ python reproduce_validation.py rq1 --derive-only --output replication/clean-rq1
 python reproduce_validation.py rq2 --derive-only --output replication/clean-rq2
 ```
 
-The earlier two-part preview-Release plan is superseded by the self-contained public layout. Historical restoration logs below still describe the original packaging checks. Source models and original raw measurements remain unchanged; the measured shaded JAR is not distributed.
+The restoration checks below concern the self-contained package. The measured shaded JAR is not distributed.
 
 ## Source extent and local package checks
 
