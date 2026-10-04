@@ -1,11 +1,11 @@
-# Additional saved-evidence analyses in C143
+# Additional saved-evidence analyses in C145
 
 The canonical scripts, copied inputs and recorded outputs accompany the manuscript in [`paper/source/evidence/`](../../paper/source/evidence/README.txt). They extend the analysis of existing measurements; no synthesis or performance experiment is rerun. All original unfavorable results remain in their existing result directories.
 
 From the repository root:
 
 ```sh
-python3 -B reproduce/check_added_analyses.py --output work/added-c143
+python3 -B reproduce/check_added_analyses.py --output work/added-c145
 ```
 
 Python 3 standard library only. Choose a new output directory. The command checks the copied inputs against this archive, recomputes the three analyses, replays their controls, compares all output fields (except temporary directory names), and checks that distributed evidence remains unchanged. It is also included in `reproduce/check.py`.

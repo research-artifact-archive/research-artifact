@@ -1,12 +1,14 @@
 # Packaging, provenance and scope
 
-## C143 document correspondence
+## C145 document correspondence
 
-Tag [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004) contains the selected C143 manuscript with artifact-location and reference updates only. Main Data Availability, Table 5 and its artifact bibliography entry point to that release. The main paper has 18 body pages / 21 total pages; the integrated supplement has 87 pages (TA A–R and S1–S5). The [document index](../paper/README.md) gives direct section links.
+Tag [`fgducs-c145-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c145-20261004) preserves the selected C145 main PDF and 361-file manuscript source ZIP exactly, with the matching supplement and component PDFs. C145 adds a 94-word opening Introduction paragraph to C143; the remaining research text, supplementary page contents and scientific evidence are unchanged. The main paper has 18 body pages / 21 total pages; the integrated supplement has 87 pages (TA A–R and S1–S5). The [document index](../paper/README.md) gives direct section links.
+
+The links already printed in C145 are not rewritten: Data Availability, Table 5 and reference [4] still identify [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004), which remains an unchanged supporting-material release. Its main PDF is C143; use this release's main PDF for C145.
 
 `paper/reading_bundle.zip` contains the matching main and integrated PDFs with relative cross-document links. `paper/manuscript_source.zip` contains the same 361 files as the distributed manuscript source directory. Both bundles can be read or rebuilt without guessing which earlier tag matches the paper. Earlier tags remain unchanged and are used only when a historical evidence or input-provenance reference calls for them.
 
-The three C143 saved-evidence analyses are available under `paper/source/evidence/` with copied inputs, scripts, outputs and negative controls. A public-root checker binds the copied inputs back to the full archive and recomputes the analyses. They add no synthesis or performance measurements. The [analysis index](../results/additional-analyses/README.md) describes their scope.
+The three C145 saved-evidence analyses are available under `paper/source/evidence/` with copied inputs, scripts, outputs and negative controls. A public-root checker binds the copied inputs back to the full archive and recomputes the analyses. They add no synthesis or performance measurements. The [analysis index](../results/additional-analyses/README.md) describes their scope.
 
 ## Retained scientific records
 
@@ -26,4 +28,4 @@ Older scientific design/protocol notes are retained as historical context where 
 
 Screenshots in `docs/images/` are browser captures of the local result viewer, fed by actual fresh Rolling runs of the public E1 source build. They show the resulting policy or losing evidence, not simulated measurements. The screenshot runs are functional checks and are not included in any paper aggregate.
 
-The 2026-10-01 publication correction removes five generated LaTeX cache files from the table-layout smoke-check directory. The small TeX check input remains available. These caches are not experiment logs or evidence; no scientific raw observation, negative outcome or certificate is removed. That earlier cleanup did not alter scientific observations. The current C143 publication changes document references and reader navigation, adds the accompanying saved-evidence analyses and updates their reproduction entry points. It does not assert conference-submission status.
+The 2026-10-01 publication correction removes five generated LaTeX cache files from the table-layout smoke-check directory. The small TeX check input remains available. These caches are not experiment logs or evidence; no scientific raw observation, negative outcome or certificate is removed. That earlier cleanup did not alter scientific observations. The current C145 publication preserves the selected C145 documents and updates the reader guides to identify their correspondence with C143. It retains the C143 reader navigation, saved-evidence analyses and reproduction entry points. It does not assert conference-submission status.

@@ -1,13 +1,13 @@
 # Reproduction guide
 
-Start with `python3 reproduce/check.py --output work/check` from the public root, using Python 3.10+ and the packages in `reproduce/requirements.txt`. This is a saved-evidence check, not a benchmark rerun. The public source contains no JARs. The expected full result is PASS with no skipped checks. Logs are separated into core, supplement, extensions and current C143 checks; the restored compatibility workspace is under the chosen output directory.
+Start with `python3 reproduce/check.py --output work/check` from the public root, using Python 3.10+ and the packages in `reproduce/requirements.txt`. This is a saved-evidence check, not a benchmark rerun. The public source contains no JARs. The expected full result is PASS with no skipped checks. Logs are separated into core, supplement, extensions and current C145 checks; the restored compatibility workspace is under the chosen output directory.
 
-## Short C143 checks and manuscript build
+## Short C145 checks and manuscript build
 
 For the three additional saved-evidence analyses, Python’s standard library suffices:
 
 ```sh
-python3 -B reproduce/check_added_analyses.py --output work/added-c143
+python3 -B reproduce/check_added_analyses.py --output work/added-c145
 ```
 
 This checks the copied inputs against the full archive, recomputes command observations, both Railcab policy analyses and all ten Threads expansions, then replays their controls. It compares saved outputs without overwriting them; only temporary-directory names in control reports may differ. See [inputs, outputs and limitations](../results/additional-analyses/README.md). The full `check.py` includes this check plus current source-placement and figure checks.
@@ -23,7 +23,7 @@ Its fifteen checks cover the current Figure 1/2/3 placements and all 27 Lazy/Eag
 To rebuild all four PDFs, install XeLaTeX, latexmk and the listed Python dependencies, then run:
 
 ```sh
-python3 -B reproduce/build_paper.py --output work/paper-c143
+python3 -B reproduce/build_paper.py --output work/paper-c145
 ```
 
 The builder stabilizes cross-document references in a fresh source copy and checks the packaged documents’ destinations and links. [Paper instructions](../paper/README.md#rebuild) also cover the standalone source ZIP. Use the [reading bundle](../paper/reading_bundle.zip) if you only need the PDFs.

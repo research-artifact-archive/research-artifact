@@ -13,6 +13,6 @@
 | Understand the required model inputs and assumptions | [Modeling an update](INPUTS.md) |
 | Understand versions, distribution copies and omitted material | [Packaging and provenance](PACKAGING.md) |
 
-These guides match **C143**. The [main README](../README.md) identifies the matching release and distinguishes retained historical evidence tags.
+These guides match **C145**. The [main README](../README.md) identifies the matching release and distinguishes retained historical evidence tags.
 
-`technical/` contains retained detailed protocols and provenance notes used by the compatibility workspace. Their original dates and pre-run statuses are historical. Use the current guides and final results above for the status reported by C143.
+`technical/` contains retained detailed protocols and provenance notes used by the compatibility workspace. Their original dates and pre-run statuses are historical. Use the current guides and final results above for the status reported by C145.
