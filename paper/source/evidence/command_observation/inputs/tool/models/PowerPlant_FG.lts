@@ -1,0 +1,333 @@
+// —————————–COMMENTS—————————––
+
+// - To execute revised OTF-DUCS, select “UPDATE_CONTROLLER_OTF_FG” in the
+// dropdown menu, and then press the compose button (||).
+// - In the section of UPDATING CONTROLLER SPEC, in this file, you can spec
+// different transition requeriments presented in the paper.
+// - You can animate the controller obtained pressing the blue A in the top bar
+// - After composing, you can validate that the controller obtained satisfy
+// each updating controller goal formula by modelchecking.
+
+// —————————ENVIRONMENTS—————————–
+
+set ControllableActions = {stopPump, startPump, procedure, endProcedure}
+set A = {ControllableActions, request}
+
+//OldEnvironment
+MAINTENANCE_OLD = (request -> REQUESTED),
+REQUESTED = (endProcedure -> MAINTENANCE_OLD).
+
+ENV_OLD = STARTED,
+STARTED =	(stopPump -> STOPPED |
+procedure -> STARTED |
+endProcedure -> STARTED),
+STOPPED =	(startPump -> STARTED |
+procedure -> STOPPED |
+endProcedure -> STOPPED).
+
+//NewEnvironment
+MAINTENANCE_NEW = (request -> REQUESTED),
+REQUESTED = (endProcedure -> MAINTENANCE_NEW).
+
+ENV_NEW = STARTED,
+STARTED =	(stopPump -> STOPPED |
+procedure -> STARTED |
+endProcedure -> STARTED),
+STOPPED =	(startPump -> STARTED |
+procedure -> STOPPED |
+endProcedure -> STOPPED).
+
+relation R_MAINTENANCE = {MAINTENANCE_OLD@MAINTENANCE_OLD = reconfigure -> MAINTENANCE_NEW@MAINTENANCE_NEW,
+REQUESTED@MAINTENANCE_OLD = reconfigure -> REQUESTED@MAINTENANCE_NEW}
+
+relation R_ENV = {//ENV_OLD@ENV_OLD = reconfigure -> ENV_NEW@ENV_NEW,
+STARTED@ENV_OLD = reconfigure -> STARTED@ENV_NEW,
+STOPPED@ENV_OLD = reconfigure -> STOPPED@ENV_NEW}
+
+relation R_MAINTENANCE_FG = {MAINTENANCE_OLD@MAINTENANCE_OLD = reconfigure_MAINTENANCE -> MAINTENANCE_NEW@MAINTENANCE_NEW,
+REQUESTED@MAINTENANCE_OLD = reconfigure_MAINTENANCE -> REQUESTED@MAINTENANCE_NEW}
+
+relation R_ENV_FG = {//ENV_OLD@ENV_OLD = reconfigure_ENV -> ENV_NEW@ENV_NEW,
+STARTED@ENV_OLD = reconfigure_ENV -> STARTED@ENV_NEW,
+STOPPED@ENV_OLD = reconfigure_ENV -> STOPPED@ENV_NEW}
+
+map MAP_MAINTENANCE = {MAINTENANCE_OLD, MAINTENANCE_NEW, R_MAINTENANCE}.
+map MAP_ENV = {ENV_OLD, ENV_NEW, R_ENV}.
+
+||OldEnvironment = (MAINTENANCE_OLD || ENV_OLD).
+||NewEnvironment = (MAINTENANCE_NEW || ENV_NEW).
+||MapEnv = (MAP_MAINTENANCE || MAP_ENV).
+
+//Fluents declaration
+fluent PumpOff = <{stopPump},{startPump}>
+fluent PumpOn = <{startPump},{stopPump}> initially 1
+fluent RequestPending = <{request},{endProcedure}>
+fluent MainteinanceFinished = <{procedure}, {request}>
+fluent PendingOk = <procedure, endProcedure>
+
+// —————————OLD CONTROLLER SPEC—————————–
+
+assert PROCEDURE_WHILE_STOPPED = (procedure -> PumpOff)
+assert MAINTEINANCE_GUARANTEED = (endProcedure -> (MainteinanceFinished && !PumpOff))
+assert PROCEDURE_IF_REQUEST = (procedure -> RequestPending)
+assert PUMP_OFF_ONLY_OK_NOT_PENDING = (stopPump -> !PendingOk)
+
+ltl_property P_PROCEDURE_WHILE_STOPPED = []PROCEDURE_WHILE_STOPPED
+ltl_property P_MAINTEINANCE_GUARANTEED = []MAINTEINANCE_GUARANTEED
+ltl_property P_PROCEDURE_IF_REQUEST = []PROCEDURE_IF_REQUEST
+ltl_property P_PUMP_OFF_ONLY_OK_NOT_PENDING = []PUMP_OFF_ONLY_OK_NOT_PENDING
+
+controller ||OldController = OldEnvironment~{OldSpec}.
+minimal ||EnvironmentAndController = (OldEnvironment || OldController).
+
+controllerSpec OldSpec = {
+safety = {P_PROCEDURE_WHILE_STOPPED, P_MAINTEINANCE_GUARANTEED,
+P_PROCEDURE_IF_REQUEST, P_PUMP_OFF_ONLY_OK_NOT_PENDING}
+controllable = {ControllableActions}
+}
+
+// —————————NEW CONTROLLER SPEC—————————–
+
+assert MAINTEINANCE_GUARANTEED_NEW = (endProcedure -> MainteinanceFinished)
+assert NEVER_STOP = (!stopPump)
+ltl_property P_MAINTEINANCE_GUARANTEED_NEW = []MAINTEINANCE_GUARANTEED_NEW
+ltl_property P_NEVER_STOP = []NEVER_STOP
+
+controller ||NewController = NewEnvironment~{NewSpec}.
+controllerSpec NewSpec= {
+safety = {P_NEVER_STOP, P_MAINTEINANCE_GUARANTEED_NEW, P_PROCEDURE_IF_REQUEST}
+controllable = {ControllableActions}
+}
+
+// —————————UPDATING CONTROLLER SPEC—————————–
+
+set StopOldSpecActions = {stopOldSpec_P_PROCEDURE_WHILE_STOPPED, stopOldSpec_P_MAINTEINANCE_GUARANTEED, stopOldSpec_P_PROCEDURE_IF_REQUEST, stopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING}
+set StartNewSpecActions = {startNewSpec_P_NEVER_STOP, startNewSpec_P_MAINTEINANCE_GUARANTEED_NEW, startNewSpec_P_PROCEDURE_IF_REQUEST}
+set ReconfigureActions = {reconfigure_MAINTENANCE, reconfigure_ENV}
+
+fluent AfterStopBeforeStart_P_NEVER_STOP = <StopOldSpecActions, startNewSpec_P_NEVER_STOP>
+fluent AfterStopBeforeStart_P_MAINTEINANCE_GUARANTEED_NEW = <StopOldSpecActions, startNewSpec_P_MAINTEINANCE_GUARANTEED_NEW>
+fluent AfterStopBeforeStart_P_PROCEDURE_IF_REQUEST = <StopOldSpecActions, startNewSpec_P_PROCEDURE_IF_REQUEST>
+fluent AfterStopBeforeStart = <stopOldSpec, startNewSpec>
+fluent Pending_StopOldSpec_P_PROCEDURE_WHILE_STOPPED = <hotSwapIn, stopOldSpec_P_PROCEDURE_WHILE_STOPPED>
+fluent Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED = <hotSwapIn, stopOldSpec_P_MAINTEINANCE_GUARANTEED>
+fluent Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST = <hotSwapIn, stopOldSpec_P_PROCEDURE_IF_REQUEST>
+fluent Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING = <hotSwapIn, stopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING>
+fluent Pending_StartNewSpec_P_NEVER_STOP = <hotSwapIn, startNewSpec_P_NEVER_STOP>
+fluent Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW = <hotSwapIn, startNewSpec_P_MAINTEINANCE_GUARANTEED_NEW>
+fluent Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST = <hotSwapIn, startNewSpec_P_PROCEDURE_IF_REQUEST>
+fluent Pending_Reconfigure_ENV = <hotSwapIn, reconfigure_ENV>
+fluent Pending_Reconfigure_MAINTENANCE = <hotSwapIn, reconfigure_MAINTENANCE>
+
+// T1: 更新中であるならば，更新先制御器の制御可能事象を実行しない
+ltl_property R1_TRD_P_NEVER_STOP = [](AfterStopBeforeStart_P_NEVER_STOP -> !(stopPump || startPump || procedure || endProcedure))
+ltl_property R1_TRD_P_MAINTEINANCE_GUARANTEED_NEW = [](AfterStopBeforeStart_P_MAINTEINANCE_GUARANTEED_NEW -> !(stopPump || startPump || procedure || endProcedure))
+ltl_property R1_TRD_P_PROCEDURE_IF_REQUEST = [](AfterStopBeforeStart_P_PROCEDURE_IF_REQUEST -> !(stopPump || startPump || procedure || endProcedure))
+ltl_property R1_TRD_SFG = [](AfterStopBeforeStart -> !(stopPump || startPump || procedure || endProcedure))
+
+ltl_property R1_OTF_P_NEVER_STOP = [](AfterStopBeforeStart_P_NEVER_STOP -> !{stopPump, startPump, procedure, endProcedure})
+ltl_property R1_OTF_P_MAINTEINANCE_GUARANTEED_NEW = [](AfterStopBeforeStart_P_MAINTEINANCE_GUARANTEED_NEW -> !{stopPump, startPump, procedure, endProcedure})
+ltl_property R1_OTF_P_PROCEDURE_IF_REQUEST = [](AfterStopBeforeStart_P_PROCEDURE_IF_REQUEST -> !{stopPump, startPump, procedure, endProcedure})
+ltl_property R1_OTF_SFG = [](AfterStopBeforeStart -> !{stopPump, startPump, procedure, endProcedure})
+
+// T2: 各環境モデルを更新（reconfigure）する前に，必ず該当のstopOldSpecとstartNewSpecを実施する
+ltl_property R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED = [](Pending_StopOldSpec_P_MAINTEINANCE_GUARANTEED -> (Pending_Reconfigure_MAINTENANCE && Pending_Reconfigure_ENV))
+ltl_property R2_StopOldSpec_P_PROCEDURE_IF_REQUEST = [](Pending_StopOldSpec_P_PROCEDURE_IF_REQUEST -> (Pending_Reconfigure_MAINTENANCE && Pending_Reconfigure_ENV))
+ltl_property R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED = [](Pending_StopOldSpec_P_PROCEDURE_WHILE_STOPPED -> Pending_Reconfigure_ENV)
+ltl_property R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING = [](Pending_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING -> (Pending_Reconfigure_MAINTENANCE && Pending_Reconfigure_ENV))
+ltl_property R2_StartNewSpec_P_NEVER_STOP = [](Pending_StartNewSpec_P_NEVER_STOP -> Pending_Reconfigure_ENV)
+ltl_property R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW = [](Pending_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW -> (Pending_Reconfigure_MAINTENANCE && Pending_Reconfigure_ENV))
+ltl_property R2_StartNewSpec_P_PROCEDURE_IF_REQUEST = [](Pending_StartNewSpec_P_PROCEDURE_IF_REQUEST -> (Pending_Reconfigure_MAINTENANCE && Pending_Reconfigure_ENV))
+
+// ————————— NOT On-The-Fly —————————–
+
+updatingController UpdCont_FG = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG = UpdCont_FG.
+
+updatingController UpdCont_FG_R1 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R1_TRD_P_NEVER_STOP,
+transition = R1_TRD_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R1_TRD_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R1 = UpdCont_FG_R1.
+
+updatingController UpdCont_FG_R2 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED,
+transition = R2_StopOldSpec_P_PROCEDURE_IF_REQUEST,
+transition = R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED,
+transition = R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING,
+transition = R2_StartNewSpec_P_NEVER_STOP,
+transition = R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R2_StartNewSpec_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+fine_grained
+}
+||UPDATE_CONTROLLER_FG_R2 = UpdCont_FG_R2.
+
+updatingController UpdCont_SFG = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG = UpdCont_SFG.
+
+updatingController UpdCont_SFG_R1 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R1_TRD_SFG,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R1 = UpdCont_SFG_R1.
+
+updatingController UpdCont_SFG_R2 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED,
+transition = R2_StopOldSpec_P_PROCEDURE_IF_REQUEST,
+transition = R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED,
+transition = R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING,
+transition = R2_StartNewSpec_P_NEVER_STOP,
+transition = R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R2_StartNewSpec_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_SFG_R2 = UpdCont_SFG_R2.
+
+// ————————— Apply On-The-Fly —————————–
+
+updatingController UpdCont_OTF_FG = {
+oldController = OldController,
+newController = NewController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG = UpdCont_OTF_FG.
+
+updatingController UpdCont_OTF_FG_R1 = {
+oldController = OldController,
+newController = NewController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R1_OTF_P_NEVER_STOP,
+transition = R1_OTF_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R1_OTF_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R1 = UpdCont_OTF_FG_R1.
+
+updatingController UpdCont_OTF_FG_R2 = {
+oldController = OldController,
+newController = NewController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED,
+transition = R2_StopOldSpec_P_PROCEDURE_IF_REQUEST,
+transition = R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED,
+transition = R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING,
+transition = R2_StartNewSpec_P_NEVER_STOP,
+transition = R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R2_StartNewSpec_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+revised_on_the_fly,
+fine_grained
+}
+||UPDATE_CONTROLLER_OTF_FG_R2 = UpdCont_OTF_FG_R2.
+
+updatingController UpdCont_OTF_SFG = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG = UpdCont_OTF_SFG.
+
+updatingController UpdCont_OTF_SFG_R1 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R1_OTF_SFG,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R1 = UpdCont_OTF_SFG_R1.
+
+updatingController UpdCont_OTF_SFG_R2 = {
+oldController = EnvironmentAndController,
+oldEnvironment = {MAINTENANCE_OLD, ENV_OLD},
+newEnvironment = {MAINTENANCE_NEW, ENV_NEW},
+mapRelation = {R_MAINTENANCE_FG, R_ENV_FG},
+oldGoal = OldSpec,
+newGoal = NewSpec,
+transition = R2_StopOldSpec_P_MAINTEINANCE_GUARANTEED,
+transition = R2_StopOldSpec_P_PROCEDURE_IF_REQUEST,
+transition = R2_StopOldSpec_P_PROCEDURE_WHILE_STOPPED,
+transition = R2_StopOldSpec_P_PUMP_OFF_ONLY_OK_NOT_PENDING,
+transition = R2_StartNewSpec_P_NEVER_STOP,
+transition = R2_StartNewSpec_P_MAINTEINANCE_GUARANTEED_NEW,
+transition = R2_StartNewSpec_P_PROCEDURE_IF_REQUEST,
+nonblocking,
+on_the_fly,
+selective_fine_grained
+}
+||UPDATE_CONTROLLER_OTF_SFG_R2 = UpdCont_OTF_SFG_R2.

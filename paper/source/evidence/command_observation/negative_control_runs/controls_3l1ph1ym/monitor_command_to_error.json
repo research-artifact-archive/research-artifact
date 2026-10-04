@@ -1,0 +1,52 @@
+{
+  "target": "base",
+  "kind": "new",
+  "requirement": "P_NEW_DECODE",
+  "monitor_nonerror_states": 1,
+  "monitor_initial": 0,
+  "error_state": -1,
+  "alphabet": [
+    "tau",
+    "decode.2",
+    "reconfigure_ENV"
+  ],
+  "transitions": [
+    [
+      0,
+      "decode.2",
+      -1
+    ],
+    [
+      0,
+      "reconfigure_ENV",
+      -1
+    ]
+  ],
+  "frontend_lookup_fluents": [
+    {
+      "name": "decode.2_a",
+      "initial_value": false,
+      "initiating": [
+        "decode.2"
+      ],
+      "terminating": [
+        "*"
+      ]
+    }
+  ],
+  "referenced_fluents": [
+    {
+      "name": "decode[2]",
+      "initial_value": false,
+      "initiating": [
+        "decode.2"
+      ],
+      "terminating": [
+        "*"
+      ],
+      "kind": "event_predicate"
+    }
+  ],
+  "initializer_mode": "fluent_lookup_nonerror_entries",
+  "boundary_state_after_hotSwapIn": 0
+}

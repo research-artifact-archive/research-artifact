@@ -1,0 +1,34 @@
+A \emph{bucket} is $\Post(q,a)$; empty means disabled. Disabling controls at a UC-enabled state removes runs without creating deadlock, preserving winning (\emph{UC priority}, Lemma~\ref{lem:uc-priority}). With quiescent goals and no fairness or controller priority, permitting commands while UC is enabled therefore adds no winning entries. Changing fairness or priority changes the game. The proof establishes memoryless sufficiency.
+
+\subsection{Lazy Successor Generation}\label{ta:lazy_algorithm}
+Algorithm~\ref{alg:otf} constructs a reachability attractor~\cite{CassezEtAl2005TimedGames}. $V$ contains discovered states, $X$ those with all UC candidates queried, and $W$ proved winners. \emph{Promote} adds an unproved safe state in $X$ to $W$ when its nonempty UC successor set lies in $W$ or, at quiescence, one complete nonempty control bucket lies in $W$. It retains that proving set and assigns rank one above its maximum successor rank. Predecessors are then reconsidered. Lazy queries controls incrementally, keeping unfinished cursors in $\mathsf{Retry}$. Failure requires exhausted candidates and no further promotion. Extraction retains lower-rank controls and matching endpoint targets.
+
+\SetAlgoNlRelativeSize{-1}
+\SetAlgoRefRelativeSize{-1}
+\begin{algorithm}[!htbp]
+\caption{Lazy}
+\label{alg:otf}
+\footnotesize
+\KwIn{Typed update contract (Section~\ref{sec:formalization})}
+\KwOut{$(\sigma,\rank,\kappa)$ or $(\textnormal{no solution},L)$}
+$V\leftarrow Q_0$; $X,\mathsf{Retry}\leftarrow\emptyset$; $W\leftarrow V\cap\Goal$\;
+$\mathsf{Open}\leftarrow\{q\in Q_0\mid\Safe(q)\land q\notin\Goal\}$; set $\rank(q)\leftarrow0$ for $q\in W$\;
+\While{true}{
+  Add queued goals to $W$ once with rank zero; exhaust \emph{Promote}, retaining witnesses/ranks, removing winners from Retry and propagating predecessors\;
+  \lIf{$Q_0\subseteq W$}{\Return $(\sigma,\rank|_{\Reach_\sigma(Q_0)},\kappa)$ constructed from the goal witnesses and retained lower-rank choices}
+  \eIf{$\mathsf{Open}\neq\emptyset$}{
+    Remove $q$ from $\mathsf{Open}$, add it to $X$, and query all uncontrollable candidates\;
+    Close the control cursor if UC-enabled; otherwise initialize it and query to the next nonempty bucket or exhaustion\;
+    Insert $q$ into $\mathsf{Retry}$ iff $q\notin W$ and its cursor has remaining candidates\;
+  }{
+    \lIf{$\mathsf{Retry}=\emptyset$}{\Return $(\textnormal{no solution},L\leftarrow V\setminus W)$}
+    Remove $q$ from $\mathsf{Retry}$; query to the next nonempty bucket or exhaustion; reinsert iff $q\notin W$ and its cursor has remaining candidates\;
+  }
+  Add every queried successor to $V$; queue newly discovered goals for rank zero and safe non-goals for $\mathsf{Open}$ (unsafe states stay outside $W$ and $\mathsf{Open}$)\;
+}
+\end{algorithm}
+\SetAlgoNlRelativeSize{-2}
+\SetAlgoRefRelativeSize{-2}
+
+
+

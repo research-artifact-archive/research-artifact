@@ -28,7 +28,7 @@ Both components have one state per version and the shared ordinary alphabet $\{x
 With separate transfers, either first transfer reaches a mixed state with an enabled UC self-loop. The remaining transfer is then permanently blocked by the quiescence rule; the environment can repeat the loop forever, so every fine policy loses. Merging both transfers into their single Cartesian-product command instead moves directly from the quiescent entry to the quiescent all-new target, with rank one. Thus fine LOSS/merged WIN is possible. Atomic merging can remove a harmful mixed state, whereas Cell and Rolling show that it can remove a necessary intermediate state. The reported obstructions establish when a specified merge loses, not a universal refinement order between granularities.
 
 \subsection{A local condition for serializing transfer batches}\label{ta:serial-transfer}
-The reverse separation does not imply that each coarse winner needs a joint implementation. The following condition can be checked on component alphabets and transfer pairs. It concerns transfer-only merging: every requirement start and stop remains a singleton. No runtime atomic capability or reduction in synthesis cost is inferred from the condition.
+The reverse separation does not imply that each coarse winner needs a joint implementation. The following condition uses local alphabets, enabled UC labels and transfer pairs. It concerns transfer-only merging: every requirement start and stop remains a singleton. No runtime atomic capability or reduction in synthesis cost is inferred from the condition.
 
 For component $i$, let $A_i^v=\Sigma_{e_i^v}\cap\Sigmauc$ and let
 \[

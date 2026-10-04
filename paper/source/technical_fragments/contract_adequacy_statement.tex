@@ -1,14 +1,11 @@
 \subsection{Why the Generated State Represents the Contract}
 \label{sec:contract-adequacy}
-A \emph{local update history} $\ell=z(a_1,o_1)\cdots(a_n,o_n)$ records the old entry, events and realized local successors. Components follow their active-version transitions and transfers; monitors fold their declared active intervals. Commands obey precedence, guards and UC quiescence. A source policy selects controllable labels, retains every UC and permitted outcome, and safely completes every maximal history at a matching quiescent target. Technical Appendix~\ref{ta:source_synthesis}~\cite{FGDUCSAnonymousArtifact} defines these contract operations on histories.
+A \emph{local update history} records an old entry and event/outcome sequence of the supplied operations (TA~\ref{ta:source_synthesis}); the proposition establishes state sufficiency, and Section~\ref{sec:monitor-meaning} addresses requirement interpretation.
 
 \begin{proposition}[Contract/game correspondence]
 \label{prop:contract-adequacy}
-For an eligible contract, map each local update history to its current component tuple, active monitor memories and unexecuted commands. Histories with the same image admit the same next events and all the same local outcomes, agree on safety, and have the same handover targets. This map gives a label- and outcome-preserving correspondence between local update histories and paths of the generated game. A history-dependent policy satisfying the source obligations exists exactly when a winning policy exists in that game.
+For an eligible contract, histories with the same component tuple, active monitor memories and unexecuted commands admit the same next events and outcomes, safety status and handover targets. Folding histories into these states gives a label- and outcome-preserving correspondence with game paths. A history-dependent policy satisfying the source obligations exists exactly when a winning game policy exists.
 \end{proposition}
-\begin{proof}
-Fold a source history into its current tuple $F(h)$. At entry this is $\Init(z)$. Each ordinary step uses the same participating component edges and full Cartesian product of outcomes; each transfer uses the same quiescence/order tests and $g_i$, advances active monitors and consumes its command. Stop removes its own monitor before observation; start installs its initializer after observation by existing monitors. Thus every label and outcome has exactly the same successor image, and safety and matching targets agree.
-
-Induction maps source histories to game paths. Conversely, choose an old tuple witnessing the entry and lift each edge by this one-step correspondence, also for infinite paths. A game policy lifts through $F$; applying a source policy to consistently lifted game histories gives a history-dependent game policy. Both directions preserve UC events, all selected-label outcomes, unsafe prefixes, deadlocks and infinite avoiding runs. Finite reachability attractor layers yield a state-based winner exactly when any history-dependent winner exists (the independent memoryless-policy lemma in Technical Appendix~\ref{ta:source_synthesis}~\cite{FGDUCSAnonymousArtifact}), completing the equivalence.
+\begin{proof}[Proof outline]
+Every source operation folds to exactly its game successors, preserving labels, outcomes and safety. Induction lifts paths and policies both ways; the finite reachability attractor supplies a state-based winner (full proof: TA~\ref{ta:source_synthesis}).
 \end{proof}
-This proves correspondence for the supplied contract; requirement meaning and Java frontend correctness remain separate obligations.

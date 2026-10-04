@@ -14,4 +14,6 @@ extra=Path(__file__).resolve().parent/'check_extensions.py'
 if extra.exists():subprocess.run([sys.executable,str(extra),'--workspace',str(w),'--output',str(out/'extensions.json')],check=True)
 displays=Path(__file__).resolve().parent/'check_paper_displays.py'
 if displays.exists():subprocess.run([sys.executable,str(displays),'--output',str(out/'paper-displays.json')],check=True)
+added=Path(__file__).resolve().parent/'check_added_analyses.py'
+subprocess.run([sys.executable, '-B', str(added), '--output', str(out/'added-analyses')], check=True)
 print('PASS: saved-evidence reproduction completed. No benchmark rerun was performed.')

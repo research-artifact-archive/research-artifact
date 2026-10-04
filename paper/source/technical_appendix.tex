@@ -9,6 +9,7 @@
 \providecommand{\Description}[1]{}
 \usepackage[numbers]{natbib}
 \usepackage{xr-hyper}
+\externaldocument[suppDoc-][nocite]{build/supplement}[supplement.pdf]
 \usepackage[hidelinks]{hyperref}
 \externaldocument{build/main}[main.pdf]
 \hypersetup{pdftitle={Technical Appendix: Synthesizing Staged Updates between Verified Controllers},pdfauthor={Anonymous Authors}}
@@ -65,7 +66,9 @@ Uncontrollable (UC) events cannot be disabled by a controller. Residual soundnes
 The Java Virtual Machine (JVM) runs a Java archive (JAR). JavaScript Object Notation (JSON) and comma-separated values (CSV) are data formats. Last-in, first-out (LIFO) and first-in, first-out (FIFO) describe queue orders. Resident set size (RSS) measures process-resident memory; garbage collection (GC) concerns managed memory. Artificial intelligence (AI) use is disclosed separately. GiB and MiB denote gibibytes and mebibytes.
 
 
-This technical appendix follows the paper's argument: contract and policy proofs (A--C), requirement meaning and execution (D--G), comparisons with existing interfaces (H--I), the PC2 case (J), then exploration and evaluation records (K--P). The main paper explains the Cell and Policy mechanisms, specifies the update game, and proves contract correspondence, continuation preservation and synthesis correctness. Appendix B gives the complete Cell contract. This document supplies the complete Policy contract, source-history recurrences, expanded proofs and auxiliary lemmas, residual-soundness formalization, complete tables, and further interpretation, execution and endpoint-interface results. References to the main paper use its section and algorithm numbers. The submission's supplementary volume also contains S1--S5 with experimental details. For the granularity argument, read the complete constructions in Appendix~\ref{ta:constructed_contracts}, the reverse counterexample in Appendix~\ref{ta:granularity-reverse}, and the serialization proof in Appendix~\ref{ta:serial-transfer}. The current validation summary appears at the start of S4; older initialization diagnostics are explicitly marked historical.
+All appendix and S-section references point to the accompanying Supplementary Material for this revision. The public release~\cite{FGDUCSAnonymousArtifact} supplies the matching manuscript, supplement and source alongside the unchanged implementation and saved experiment outputs (main-paper Data Availability).
+
+Read A--C for the contract, synthesis and complete Cell/Policy examples; D for the complete granularity models, counterexamples and serialization proof; E--H for requirement meanings, execution and endpoint interfaces; I--J for existing update interfaces; and K--Q for case, exploration and evaluation details. The full lazy procedure is in A; cross-references connect its theorem to the main paper. The current validation summary appears at the start of S4, with historical initialization diagnostics clearly separated. The ordering brings the granularity argument next to the examples rather than placing it among auxiliary evaluation records.
 \FloatBarrier
 \appendix
 \section{Source Histories and Synthesis Correctness}\label{ta:source_synthesis}
@@ -74,9 +77,15 @@ The main paper states Proposition~\ref{prop:contract-adequacy} for these source 
 \paragraph{Proof of Proposition~\ref{prop:contract-adequacy}.}
 \input{technical_fragments/contract_adequacy_proof.tex}
 \input{technical_fragments/state_lemmas.tex}
+\input{technical_fragments/maximal_ranks_full.tex}
+\input{technical_fragments/lazy_algorithm_full.tex}
 \input{technical_fragments/search_lemmas.tex}
+\input{technical_fragments/search_invariants_full.tex}
+\input{technical_fragments/retained_ranks_full.tex}
 \paragraph{Proof of Theorem~\ref{thm:correctness}.}
 \input{technical_fragments/correctness_proof.tex}
+\subsection{Checking Returned Certificates}\label{ta:certificate_checks}
+\input{technical_fragments/certificate_checks.tex}
 \paragraph{Promotion cases.}\label{ta:promotion_cases}
 \input{figures/lazy_choices.tex}
 \input{technical_fragments/promotion_cases.tex}
@@ -106,6 +115,12 @@ Table~\ref{tab:policy-finite-c13} above gives the complete finite input. Figure~
 \FloatBarrier
 
 \FloatBarrier
+\section{Granularity and Safe Serialization}\label{ta:granularity_theory}
+This section supplies the complete finite inputs and proofs for Section~\ref{sec:granularity-analysis}. The source-inspection results and auxiliary finite checks are reported with the evaluation records in Appendix~\ref{ta:additional_populations}.
+\input{technical_fragments/granularity_models.tex}
+\input{technical_fragments/granularity_theory.tex}
+\FloatBarrier
+
 \section{NEW and UPD History-Scope Derivations}\label{ta:history_checks}
 \input{technical_fragments/history_checks.tex}
 \FloatBarrier
@@ -114,6 +129,8 @@ Table~\ref{tab:policy-finite-c13} above gives the complete finite input. Figure~
 \Needspace{6\baselineskip}
 \section{Activation-Scoped Initialization}\label{ta:activation_scope}
 \input{technical_fragments/activation_scoped.tex}
+\input{technical_fragments/command_observation.tex}
+\input{technical_fragments/railcab_activation.tex}
 \input{technical_fragments/gsm_active_policy.tex}
 \FloatBarrier
 \section{Proof of Conditional Trace Lifting}\label{ta:execution_proof}
@@ -125,9 +142,7 @@ Table~\ref{tab:policy-finite-c13} above gives the complete finite input. Figure~
 \FloatBarrier
 \section{Complete Native DUCS Construction for Cell}
 \label{ta:ducs_cell_complete}\label{ta:ducs_interface}
-Table~\ref{tab:main-generation} specializes main-paper Table~\ref{tab:contract-workflow} to the analytical Cell inputs. This section gives the DUCS construction; Appendix~\ref{ta:gr1-cell} gives the GR(1) construction. Table~\ref{tab:ducs-interface} below maps each Cell obligation to its encoding.
-
-\input{figures/contract_interfaces_full.tex}
+This section specializes main-paper Table~\ref{tab:contract-workflow} to a complete native DUCS encoding of Cell; Appendix~\ref{ta:gr1-cell} gives the GR(1) encoding. Table~\ref{tab:ducs-interface} maps each Cell obligation to its encoding. These chosen constructions require justified input meanings and establish neither a general translation nor minimum-size, effort or performance results.
 
 \input{technical_fragments/ducs_cell_complete.tex}
 
@@ -161,6 +176,7 @@ Table~\ref{tab:main-generation} specializes main-paper Table~\ref{tab:contract-w
 The all-contract outcome summary is Table~\ref{tab:xeon-rq3} in the main paper. The table below reports every completed pair.
 
 \input{technical_fragments/workload_rows.tex}
+\input{figures/rq3_direct_full_absolute.tex}
 \FloatBarrier
 
 \FloatBarrier
@@ -173,16 +189,23 @@ The all-contract outcome summary is Table~\ref{tab:xeon-rq3} in the main paper. 
 \Needspace{6\baselineskip}
 \section{Separate Evaluation Populations and All-Contract Grid}
 \label{ta:additional_populations}
+\subsection{Validation populations and guarantee scopes}\label{ta:validation_scope}
+Table~\ref{tab:validation-populations} details the populations in main-paper Table~\ref{tab:guarantee-routes}. Source-monitor interpretation does not establish actual activation conformance.
+\input{figures/validation_populations.tex}
+\FloatBarrier
 \input{technical_fragments/additional_populations.tex}
 \input{technical_fragments/performance_scope_details.tex}
-\input{technical_fragments/constructed_contracts.tex}
+\input{technical_fragments/serial_transfer_evidence.tex}
 
-\clearpage
+\Needspace{6\baselineskip}
 \section{Implementation and AI-Assisted Research Details}\label{ta:implementation_details}
 Algorithm~\ref{alg:otf} returns and internally checks the losing region $L$. The finite-JSON runner serializes its members in \path{certificate.json}; an independent checker reconstructs successors from the input and checks closure. The FSP/application benchmark driver instead records LOSS, region size and phase-mask statistics, without serializing solver membership. Its saved full-game exports support independent region reconstruction, but do not compare the solver's member list. These output interfaces therefore provide different saved certificate evidence.
 The fixed RQ3 runs use Windows~10, an Intel Xeon W-2265, 256~GB RAM and Temurin~17.0.20.1. The main paper states the heap, time cap and repetition policy; separate Mac structural checks and extended trials retain their own provenance.
 
 Codex and Claude assisted the research in the following roles. For design and theory, these tools proposed contract definitions, examples, counterexamples and proof drafts, which were checked by explicit derivations and finite-model checks where provided. For implementation, they edited the Java frontend, successor generation, solver, certificate checks and Python reconstruction tools; regression fixtures, exhaustive comparisons and certificate checks supplied validation. For experiments, they helped build and run drivers and aggregate saved outputs; the tables retain capped, failed and adverse outcomes, and reproduction scripts check their correspondence to saved results. For analysis, they compared source formulas, monitor automata, initializer tables and saved policies within each stated check's scope. For writing, they drafted and edited text, diagrams and references; cited claims were checked against primary sources. These checks are evidence about their specified objects, not independent proof of all AI-produced code or reasoning.
 
+
+\clearpage
+\input{technical_fragments/saved_serial_expansion.tex}
 
 \end{document}

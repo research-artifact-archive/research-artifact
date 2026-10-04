@@ -1,0 +1,1314 @@
+{
+  "analysis_kind": "Finite analysis of two saved Railcab policy exports; no synthesis or performance experiment",
+  "ordering_basis": "Experiment JAR compileObservers sorts Observer.name; confirmed by static javap disassembly including bootstrap 54 and lambda target",
+  "source_parser": "Reuses archived restricted source-invariant parser and Boolean evaluator",
+  "scope": "Every saved NEW start edge and every source-observer continuation in the saved update policies and their selected exported new-controller graphs",
+  "premise": "Saved observer columns decoded in the JAR name order and seeded from the exported old entry vectors",
+  "not_checked": [
+    "source reconstruction of old-entry histories",
+    "runtime execution",
+    "historic lookup call arguments or fallback branch",
+    "unselected policies",
+    "other application contracts",
+    "general compiler correctness"
+  ],
+  "population_limits": [
+    "Both variants connect to the same exported post graph; the two traversals are not independent applications.",
+    "In these saved policies no ordinary update action occurs after the first NEW start and before handover."
+  ],
+  "reports": [
+    {
+      "variant": "base",
+      "roots": 22,
+      "saved_policy_states": 115,
+      "saved_outcome_edges": 118,
+      "all_saved_start_edges": 14,
+      "start_rows": [
+        {
+          "source": "M8",
+          "event": "startNewSpec_P_NEW_NOT_CRASH",
+          "target": "M7",
+          "requirement": "P_NEW_NOT_CRASH",
+          "columns": [
+            "AskedWorkingOnce",
+            "CantEnter",
+            "NoReturn",
+            "NotWorking",
+            "RequestedOnce"
+          ],
+          "global_indices": [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 138
+        },
+        {
+          "source": "M9",
+          "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+          "target": "M8",
+          "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 137
+        },
+        {
+          "source": "M10",
+          "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+          "target": "M9",
+          "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+          "columns": [
+            "NoReturn",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            4,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 113
+        },
+        {
+          "source": "M11",
+          "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "target": "M10",
+          "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 140
+        },
+        {
+          "source": "M12",
+          "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "target": "M11",
+          "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "columns": [
+            "ApproachingCrossingHappen",
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            0,
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 139
+        },
+        {
+          "source": "M13",
+          "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+          "target": "M12",
+          "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "brake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 136
+        },
+        {
+          "source": "M14",
+          "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+          "target": "M13",
+          "requirement": "P_BRAKE_DURING_LASTBRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "brake_a"
+          ],
+          "global_indices": [
+            3,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 112
+        },
+        {
+          "source": "M21",
+          "event": "startNewSpec_P_NEW_NOT_CRASH",
+          "target": "M20",
+          "requirement": "P_NEW_NOT_CRASH",
+          "columns": [
+            "AskedWorkingOnce",
+            "CantEnter",
+            "NoReturn",
+            "NotWorking",
+            "RequestedOnce"
+          ],
+          "global_indices": [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 138
+        },
+        {
+          "source": "M22",
+          "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+          "target": "M21",
+          "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 137
+        },
+        {
+          "source": "M23",
+          "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+          "target": "M22",
+          "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+          "columns": [
+            "NoReturn",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            4,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 113
+        },
+        {
+          "source": "M24",
+          "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "target": "M23",
+          "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 140
+        },
+        {
+          "source": "M25",
+          "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "target": "M24",
+          "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "columns": [
+            "ApproachingCrossingHappen",
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            0,
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            1,
+            0,
+            0
+          ],
+          "table_value": 1,
+          "installed_state": 1,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 139
+        },
+        {
+          "source": "M26",
+          "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+          "target": "M25",
+          "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "brake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 136
+        },
+        {
+          "source": "M27",
+          "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+          "target": "M26",
+          "requirement": "P_BRAKE_DURING_LASTBRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "brake_a"
+          ],
+          "global_indices": [
+            3,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 112
+        }
+      ],
+      "source_replay": {
+        "states": {
+          "update": 115,
+          "post": 70
+        },
+        "steps": {
+          "update": 118,
+          "handover": 2,
+          "post": 116
+        },
+        "active_invariant_checks": {
+          "update": 56,
+          "post": 490
+        },
+        "reached_post_states": 70,
+        "activation_checks": [
+          {
+            "source": "M27",
+            "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+            "target": "M26",
+            "requirement": "P_BRAKE_DURING_LASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS"
+            ]
+          },
+          {
+            "source": "M26",
+            "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+            "target": "M25",
+            "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE"
+            ]
+          },
+          {
+            "source": "M14",
+            "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+            "target": "M13",
+            "requirement": "P_BRAKE_DURING_LASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS"
+            ]
+          },
+          {
+            "source": "M25",
+            "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "target": "M24",
+            "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "reference_post_start_key": [
+              1,
+              0,
+              0
+            ],
+            "table_value": 1,
+            "installed_state": 1,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD"
+            ]
+          },
+          {
+            "source": "M13",
+            "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+            "target": "M12",
+            "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE"
+            ]
+          },
+          {
+            "source": "M24",
+            "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "target": "M23",
+            "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING"
+            ]
+          },
+          {
+            "source": "M12",
+            "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "target": "M11",
+            "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD"
+            ]
+          },
+          {
+            "source": "M23",
+            "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "target": "M22",
+            "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE"
+            ]
+          },
+          {
+            "source": "M11",
+            "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "target": "M10",
+            "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING"
+            ]
+          },
+          {
+            "source": "M22",
+            "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+            "target": "M21",
+            "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE"
+            ]
+          },
+          {
+            "source": "M10",
+            "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "target": "M9",
+            "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE"
+            ]
+          },
+          {
+            "source": "M21",
+            "event": "startNewSpec_P_NEW_NOT_CRASH",
+            "target": "M20",
+            "requirement": "P_NEW_NOT_CRASH",
+            "reference_post_start_key": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "approachingCrossing",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD"
+            ]
+          },
+          {
+            "source": "M9",
+            "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+            "target": "M8",
+            "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE"
+            ]
+          },
+          {
+            "source": "M8",
+            "event": "startNewSpec_P_NEW_NOT_CRASH",
+            "target": "M7",
+            "requirement": "P_NEW_NOT_CRASH",
+            "reference_post_start_key": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_MILESTONES",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "brake",
+              "endOfTS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD"
+            ]
+          }
+        ],
+        "physical_reference_differences": []
+      },
+      "issues": [],
+      "status": "PASS",
+      "observer_order": [
+        "ApproachingCrossingHappen",
+        "AskedWorkingOnce",
+        "CantEnter",
+        "LastEmergencyBrake",
+        "NoReturn",
+        "NotWorking",
+        "RequestedOnce",
+        "brake_a",
+        "checkCrossingStatus_a",
+        "emergencyBrake_a"
+      ],
+      "source_observer_names": [
+        "ApproachingCrossingHappen",
+        "AskedWorkingOnce",
+        "CantEnter",
+        "LastEmergencyBrake",
+        "NoReturn",
+        "NotWorking",
+        "RequestedOnce",
+        "brake",
+        "checkCrossingStatus",
+        "emergencyBrake"
+      ]
+    },
+    {
+      "variant": "r1",
+      "roots": 22,
+      "saved_policy_states": 44,
+      "saved_outcome_edges": 46,
+      "all_saved_start_edges": 7,
+      "start_rows": [
+        {
+          "source": "M4",
+          "event": "startNewSpec_P_NEW_NOT_CRASH",
+          "target": "M3",
+          "requirement": "P_NEW_NOT_CRASH",
+          "columns": [
+            "AskedWorkingOnce",
+            "CantEnter",
+            "NoReturn",
+            "NotWorking",
+            "RequestedOnce"
+          ],
+          "global_indices": [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 138
+        },
+        {
+          "source": "M5",
+          "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+          "target": "M4",
+          "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 137
+        },
+        {
+          "source": "M6",
+          "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+          "target": "M5",
+          "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+          "columns": [
+            "NoReturn",
+            "emergencyBrake_a"
+          ],
+          "global_indices": [
+            4,
+            9
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 113
+        },
+        {
+          "source": "M7",
+          "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "target": "M6",
+          "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 140
+        },
+        {
+          "source": "M8",
+          "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "target": "M7",
+          "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "columns": [
+            "ApproachingCrossingHappen",
+            "LastEmergencyBrake",
+            "checkCrossingStatus_a"
+          ],
+          "global_indices": [
+            0,
+            3,
+            8
+          ],
+          "saved_physical_key": [
+            1,
+            0,
+            0
+          ],
+          "table_value": 1,
+          "installed_state": 1,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 139
+        },
+        {
+          "source": "M9",
+          "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+          "target": "M8",
+          "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+          "columns": [
+            "CantEnter",
+            "NotWorking",
+            "brake_a"
+          ],
+          "global_indices": [
+            2,
+            5,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 136
+        },
+        {
+          "source": "M10",
+          "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+          "target": "M9",
+          "requirement": "P_BRAKE_DURING_LASTBRAKE",
+          "columns": [
+            "LastEmergencyBrake",
+            "brake_a"
+          ],
+          "global_indices": [
+            3,
+            7
+          ],
+          "saved_physical_key": [
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 0,
+          "table_match": true,
+          "physical_vector_unchanged": true,
+          "source_property_line": 112
+        }
+      ],
+      "source_replay": {
+        "states": {
+          "update": 44,
+          "post": 70
+        },
+        "steps": {
+          "update": 46,
+          "handover": 1,
+          "post": 116
+        },
+        "active_invariant_checks": {
+          "update": 28,
+          "post": 490
+        },
+        "reached_post_states": 70,
+        "activation_checks": [
+          {
+            "source": "M10",
+            "event": "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+            "target": "M9",
+            "requirement": "P_BRAKE_DURING_LASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS"
+            ]
+          },
+          {
+            "source": "M9",
+            "event": "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+            "target": "M8",
+            "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE"
+            ]
+          },
+          {
+            "source": "M8",
+            "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "target": "M7",
+            "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "reference_post_start_key": [
+              1,
+              0,
+              0
+            ],
+            "table_value": 1,
+            "installed_state": 1,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD"
+            ]
+          },
+          {
+            "source": "M7",
+            "event": "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "target": "M6",
+            "requirement": "P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING"
+            ]
+          },
+          {
+            "source": "M6",
+            "event": "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "target": "M5",
+            "requirement": "P_EBRAKE_DURING_ELASTBRAKE",
+            "reference_post_start_key": [
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE"
+            ]
+          },
+          {
+            "source": "M5",
+            "event": "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+            "target": "M4",
+            "requirement": "P_EBRAKE_IF_SOMETHING_BAD",
+            "reference_post_start_key": [
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE"
+            ]
+          },
+          {
+            "source": "M4",
+            "event": "startNewSpec_P_NEW_NOT_CRASH",
+            "target": "M3",
+            "requirement": "P_NEW_NOT_CRASH",
+            "reference_post_start_key": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "table_value": 0,
+            "installed_state": 0,
+            "invariant_at_start": true,
+            "matches_stored_key": true,
+            "prefix": [
+              "reconfigure_MILESTONES",
+              "brake",
+              "endOfTS",
+              "approachingCrossing",
+              "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+              "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+              "stopOldSpec_P_NOT_CRASH",
+              "reconfigure_ANOTHER_REQUEST",
+              "reconfigure_REQUEST_ATOMIC",
+              "reconfigure_TURNS",
+              "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+              "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+              "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+              "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+              "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+              "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD"
+            ]
+          }
+        ],
+        "physical_reference_differences": []
+      },
+      "issues": [],
+      "status": "PASS",
+      "observer_order": [
+        "ApproachingCrossingHappen",
+        "AskedWorkingOnce",
+        "CantEnter",
+        "LastEmergencyBrake",
+        "NoReturn",
+        "NotWorking",
+        "RequestedOnce",
+        "brake_a",
+        "checkCrossingStatus_a",
+        "emergencyBrake_a"
+      ],
+      "source_observer_names": [
+        "ApproachingCrossingHappen",
+        "AskedWorkingOnce",
+        "CantEnter",
+        "LastEmergencyBrake",
+        "NoReturn",
+        "NotWorking",
+        "RequestedOnce",
+        "brake",
+        "checkCrossingStatus",
+        "emergencyBrake"
+      ]
+    }
+  ]
+}

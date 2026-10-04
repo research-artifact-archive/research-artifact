@@ -1,0 +1,29 @@
+\section{Static Expansion of Saved Threads Policies}\label{ta:saved-serial-expansion}
+This analysis transforms previously saved winning policies; it performs no synthesis or timing measurement. The cohort is all ten saved Threads backpressure instances with $n=2,\ldots,6$ and queue capacity $B\in\{1,2\}$. Saturated-offer cases retain their earlier LOSS results (Table~\ref{tab:rq2-family-counts}). The forty copied input, policy and result files are byte-identical to their counterparts in the cited archive's tag \texttt{fgducs-c115-20261003}. The new script and outputs accompany this manuscript's source bundle, not that earlier release.
+
+\paragraph{Construction and verification.}
+The transformer copies every ordinary edge and replaces the saved policy's single simultaneous transfer edge by $\rho_1,\ldots,\rho_n$. Its $n-1$ added states record the saved checkpoint, target and remaining block members. Non-goal saved ranks increase by $n-1$; the added phases have ranks $n-1,\ldots,1$, followed by the saved rank-zero goal. Separate verification functions reconstruct the synchronous successor relation from the copied local LTSs and check all old-endpoint entries, every enabled UC action, every selected action's complete outcomes, decreasing ranks, reachability and non-goal continuation. They also reconstruct the reachable old/new plant--controller products and compare their full projected transition relations with the declared endpoints. Each transformed goal must match the same saved endpoint and loadable target.
+
+Contracting each forced serial chain recovers the saved ordinary graph. No UC action is enabled at any inserted phase. Consequently corresponding complete paths have exactly $n-1$ additional update events. A separate acyclic-graph pass checks complete-path length bounds and transfer counts from every entry. This is an event-count statement, not a time or optimality result.
+
+\begin{table}[!htbp]
+\caption{All saved-policy expansions. $S/E$ denotes states/edges; ranks are maximum entry ranks. Every row passes all checks.}\label{tab:saved-serial-expansion}
+\centering\small
+\begin{tabular}{@{}rrrrrrrr@{}}\toprule
+$n$ & $B$ & Entries & Saved $S/E$ & Expanded $S/E$ & Saved rank & New rank & Extra events\\\midrule
+2 & 1 & 8 & 9/13 & 10/14 & 4 & 5 & 1\\
+2 & 2 & 12 & 13/21 & 14/22 & 5 & 6 & 1\\
+3 & 1 & 16 & 17/33 & 19/35 & 5 & 7 & 2\\
+3 & 2 & 24 & 25/53 & 27/55 & 6 & 8 & 2\\
+4 & 1 & 32 & 33/81 & 36/84 & 6 & 9 & 3\\
+4 & 2 & 48 & 49/129 & 52/132 & 7 & 10 & 3\\
+5 & 1 & 64 & 65/193 & 69/197 & 7 & 11 & 4\\
+5 & 2 & 96 & 97/305 & 101/309 & 8 & 12 & 4\\
+6 & 1 & 128 & 129/449 & 134/454 & 8 & 13 & 5\\
+6 & 2 & 192 & 193/705 & 198/710 & 9 & 14 & 5\\
+\bottomrule\end{tabular}\end{table}
+\FloatBarrier
+All ten cases pass, with no failed case. Across related instances, 630 saved states and 1,982 edges become 660 states and 2,012 edges. The checks cover 620 entry occurrences, 1,972 UC action buckets/outcomes and 2,012 selected buckets/outcomes. Every bucket in this cohort has one outcome. Five corruptions per case---omitting a UC outcome or entry, corrupting a rank or transfer outcome, and removing a loadable endpoint---are all rejected (50/50). A rerun produces byte-identical outputs.
+
+\paragraph{Scope and reproduction.}
+These are related finite abstractions, not independent applications. OLD and NEW local LTSs are identical; transfers are deterministic identities at idle states; requirement and precedence sets are empty. Thus the check does not exercise nondeterministic transfer outcomes, changing local behavior, monitors, initializer boundaries or nontrivial UC interleavings during serialization. It does not convert the twelve inherited input pairs or change any earlier WIN/LOSS result. The Python checker is separate from the Java solver and earlier checker, but has the same authors and AI assistance; correlated mistakes remain possible. The source bundle includes reproduction instructions and all inputs/results in \path{evidence/threads_saved_serialization/}.

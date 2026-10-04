@@ -1,9 +1,8 @@
 \subsection{Supplied Choices}
-The contract states what may change and what must be preserved. Its inputs are component models and transfers, requirements and their initializers, and fixed endpoint controllers. Synthesis supplies the coordination among them.
 
 \paragraph{Finite transition systems and safety monitors.}
 A labeled transition system (LTS) $\mathcal L=(S,\Sigma_{\mathcal L},\delta,s^0)$ has nondeterministic transitions $\delta:S\times\Sigma_{\mathcal L}\to2^S$. Partition events as $\Sigma=\Sigmauc\uplus\Sigmac$: controllers may disable controllables but cannot select outcomes or suppress uncontrollable (UC) events. A synchronous-product event requires a transition in every component whose alphabet contains it; other components retain their state~\cite{MageeKramer2006}.
-A monitor is an automaton that checks a requirement as events occur. Requirement $r$ has a total deterministic monitor $t_r=(M_r,\Sigma,\eta_r,m_r^0,F_r)$ with absorbing errors for violating prefixes~\cite{AlpernSchneider1985,KupfermanVardi2001}. The empty monitor product has one non-error state. Monitors observe labels; policies also observe successor component states.
+A monitor is an automaton that checks a requirement as events occur. Requirement $r$ has a total deterministic monitor $t_r=(M_r,\Sigma,\eta_r,m_r^0,F_r)$ with absorbing error states $F_r$ for violating prefixes~\cite{AlpernSchneider1985,KupfermanVardi2001}. The empty monitor product has one non-error state. Monitors observe labels; policies also observe successor component states.
 
 \label{def:fg-inputs}
 \label{def:update_plan}
@@ -39,9 +38,8 @@ $\Sigma=\SigmaN\uplus\SigmaU$ and $\SigmaU\subseteq\Sigmac$. Each transfer event
 An optional strict partial order $\prec\ \subseteq\SigmaU\times\SigmaU$ expresses precedence among update operations. For a pending-event set $P$, event $a$ is order-enabled exactly when $a\in P$ and every $a'\prec a$ has left $P$.
 Monitors self-loop on update events that they do not specify.
 \paragraph{Eligible contracts.}
-An eligible contract satisfies the finiteness, typing, totality and non-error conditions above; dependencies form a strict partial order, and endpoint controller alphabets cover environment labels. Eligibility is structural; Section~\ref{sec:monitor-meaning} justifies initializer meanings.
+An eligible contract satisfies the finiteness, typing, totality and non-error conditions above; dependencies form a strict partial order, and endpoint controller alphabets cover environment labels. Eligibility is structural.
 
-\Needspace{4\baselineskip}
 \subsection{States, Transitions, and Completion}
 \label{sec:game-rules}
 
@@ -51,7 +49,7 @@ An eligible contract satisfies the finiteness, typing, totality and non-error co
 An update state $q=(\xi,\mu,P)$ records each component's version/state $\xi(i)=(v,s)$ with $s\in S_{e_i^v}$, each monitor's state $\mu(t_r)\in M_r\cup\{\bot\}$ ($\bot$ means inactive), and pending commands $P\subseteq\SigmaU$.
 Here $\rho_i\in P$ exactly when component $i$ is old. Old monitors remain active until their stop leaves $P$; new monitors become active when their start leaves $P$; update monitors are always active. 
 
-Admission $\Init(z)$ copies $z$'s component and old-monitor states, installs interval initializers, leaves new monitors inactive and sets $P=\SigmaU$. The update policy replaces $C^{\mathrm{old}}$ and its scheduling restrictions. Declared old monitors remain until their stops; undeclared objectives, including old liveness, are not preserved. Duties needed throughout belong in interval monitors. The entry set is
+Admission $\Init(z)$ copies $z$'s component and old-monitor states, installs interval initializers, leaves new monitors inactive and sets $P=\SigmaU$. The update policy replaces $C^{\mathrm{old}}$ and its scheduling restrictions. Declared old monitors remain until their stops; undeclared objectives, including old liveness, are not preserved. The entry set is
 \begin{equation}
  Q_0=\{\Init(z)\mid
  z\in\Reach(\mathsf{CL}^{\mathrm{old}})\}.
@@ -65,7 +63,9 @@ For $\xi(i)=(v,s)$, component $i$ uses $e_i^v$. The active-component product det
  U(q)\ne\emptyset\quad\Longrightarrow\quad\Post(q,a)=\emptyset.
  \label{eq:nonpreemption}
 \end{equation}
-Thus even a local command waits until the active-component product has no enabled uncontrollable event. A finite operation may drain to such a point; perpetual polling may prevent it. This global \emph{uncontrollable quiescence} differs from transaction quiescence~\cite{KramerMagee1990Quiescence} and tranquility~\cite{VandewoudeEtAl2007Tranquility}. Ordinary controls may coexist with UC. The following rules define $\Post$; unmentioned coordinates stay unchanged. ``Advance'' means $\mu'(t_r)=\eta_r(\mu(t_r),a)$ for the specified active monitors.
+Thus every command waits for global \emph{uncontrollable quiescence}; fine-grained refers to the units of transfer and requirement change, not to the region that must become quiescent. Removing optional controls at UC-enabled states preserves winning; allowing commands alongside UC therefore adds no winners while handover remains quiescent (Lemma~\ref{lem:uc-priority}). Command priority or fairness would define a different problem.
+
+Ordinary controls may coexist with UC. The following rules define $\Post$; unmentioned coordinates stay unchanged. ``Advance'' means $\mu'(t_r)=\eta_r(\mu(t_r),a)$ for the specified active monitors.
 
 \begin{description}
   \item[Ordinary event $a\in\SigmaN$.]
@@ -113,7 +113,7 @@ Let $\Reach_\sigma(Q_0)$ be the policy closure from $Q_0$, stopping at goals.
 A run follows the policy successors and stops at a goal. It is \emph{maximal} if infinite or ending at a goal or a state without successors. A single policy $\sigma$ is winning for an FG-DUCS instance if, from every $q_0\in Q_0$,
 (i) every reachable update state is safe, (ii) every reachable non-goal state has a successor, and
 (iii) every maximal update run reaches $\Goal$ after finitely many events.
-This \emph{finite completion} counts events and assumes no fairness. Winning policies exclude controllable self-loops during update; a reached UC self-loop makes a state losing. Ordinary actions can progress, as Cell's moves and inspection do. Handover restores the supplied controller's full matched behavior.
+This \emph{finite completion} counts events and assumes no fairness. Winning policies exclude controllable self-loops during update; a reached UC self-loop makes a state losing. Ordinary actions can progress, as Cell's moves and inspection do.
 
 A \emph{progress-ranking function} for a winning policy is $\rank:\Reach_\sigma(Q_0)\to\mathbb N$, with value 0 at goal states and satisfying $\rank(q')<\rank(q)$ for every non-goal state $q$ and every
 $q'\in \SuccSet_\sigma(q)$.

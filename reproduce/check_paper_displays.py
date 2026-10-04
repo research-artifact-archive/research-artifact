@@ -10,7 +10,6 @@ import sys
 GENERATORS = (
     'generate_pc2_case_macros.py',
     'generate_pc2_trace_macros.py',
-    'generate_rq2_family_table.py',
     'generate_rq3_outcome_grid.py',
     'generate_rq3_paired_plot.py',
     'generate_rq3_preparation.py',
@@ -25,6 +24,14 @@ DISPLAY_FILES = (
     'figures/rq2_family_counts.tex',
     'figures/rq3_outcome_grid.tex',
     'figures/rq3_paired_absolute.tex',
+    'figures/rq3_direct_full_absolute.tex',
+    'figures/railcab_policy_main.tex',
+    'figures/guarantee_routes_main.tex',
+    'technical_fragments/granularity_models.tex',
+    'technical_fragments/granularity_theory.tex',
+    'technical_fragments/command_observation.tex',
+    'technical_fragments/railcab_activation.tex',
+    'technical_fragments/saved_serial_expansion.tex',
     'figures/cell_story_visual.tex',
     'figures/cell_policy_paths.tex',
     'figures/policy_lifetimes.tex',
@@ -83,6 +90,8 @@ def main():
     commands = [(name, [sys.executable, '-B', str(paper/'scripts'/name), '--check'])
                 for name in GENERATORS]
     commands.extend([
+        ('current_family_and_matched_costs', [sys.executable, '-B', str(root/'reproduce/check_current_displays.py'),
+                                             '--artifact-root', str(root)]),
         ('visual_evidence', [sys.executable, '-B', str(root/'reproduce/check_visual_evidence.py'),
                              '--artifact-root', str(root)]),
         ('outcome_grid', [sys.executable, '-B', str(root/'reproduce/check_outcome_grid.py'),

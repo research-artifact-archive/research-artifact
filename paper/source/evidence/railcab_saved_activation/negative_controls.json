@@ -1,0 +1,274 @@
+{
+  "scope": "Checker controls on copied saved data; no synthesis, application execution, or performance experiment",
+  "path_reporting": "Only portable input and temporary directory names are recorded; command_template names the checker and per-control copy.",
+  "input_root_argument": "inputs",
+  "temporary_run_name": "run_j4reuql6",
+  "copied_input_files": [
+    "results/supplement-checks/railcab_policy_demo/handoff-bundle.json",
+    "results/supplement-checks/railcab_r1_policy_demo/handoff-bundle.json",
+    "results/supplement-checks/frontend_lookup_demo/runs/railcab__base/lookup.json",
+    "results/supplement-checks/frontend_lookup_demo/runs/railcab__r1/lookup.json",
+    "results/initialization/raw/expanded-predicates/railcab.json",
+    "results/supplement-checks/source_invariant_lookup/analyze_new_invariants.py",
+    "tool/models/Railcab_FG.lts"
+  ],
+  "originals_unchanged": true,
+  "main_checker_unchanged": true,
+  "controls": [
+    {
+      "control": "positive_unchanged",
+      "control_passed": true,
+      "command_template": [
+        "python3",
+        "-B",
+        "analyze_saved_railcab.py",
+        "--artifact-root",
+        "positive_unchanged",
+        "--output",
+        "positive_unchanged_analysis.json"
+      ],
+      "checker_exit_code": 0,
+      "checker_status": {
+        "base": "PASS",
+        "r1": "PASS"
+      },
+      "issue_counts": {},
+      "observer_difference_count": 0,
+      "bad_table_match_count": 0,
+      "expected_detection": [],
+      "analysis_file": "positive_unchanged_analysis.json",
+      "stdout": "{\"variant\": \"base\", \"status\": \"PASS\", \"roots\": 22, \"saved_policy_states\": 115, \"all_saved_start_edges\": 14}\n{\"states\": {\"update\": 115, \"post\": 70}, \"steps\": {\"update\": 118, \"handover\": 2, \"post\": 116}, \"active_invariant_checks\": {\"update\": 56, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 0\n[]\n{\"variant\": \"r1\", \"status\": \"PASS\", \"roots\": 22, \"saved_policy_states\": 44, \"all_saved_start_edges\": 7}\n{\"states\": {\"update\": 44, \"post\": 70}, \"steps\": {\"update\": 46, \"handover\": 1, \"post\": 116}, \"active_invariant_checks\": {\"update\": 28, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 0\n[]\n",
+      "stderr": "",
+      "mutation": {
+        "kind": "none"
+      }
+    },
+    {
+      "control": "wrong_installed_monitor",
+      "control_passed": true,
+      "command_template": [
+        "python3",
+        "-B",
+        "analyze_saved_railcab.py",
+        "--artifact-root",
+        "wrong_installed_monitor",
+        "--output",
+        "wrong_installed_monitor_analysis.json"
+      ],
+      "checker_exit_code": 1,
+      "checker_status": {
+        "base": "MISMATCH",
+        "r1": "PASS"
+      },
+      "issue_counts": {
+        "reference_activation_mismatch": 1
+      },
+      "observer_difference_count": 0,
+      "bad_table_match_count": 1,
+      "expected_detection": [
+        {
+          "kind": "reference_activation_mismatch",
+          "source": "M12",
+          "event": "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "target": "M11",
+          "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+          "reference_post_start_key": [
+            0,
+            0,
+            0
+          ],
+          "table_value": 0,
+          "installed_state": 1,
+          "invariant_at_start": true,
+          "matches_stored_key": true,
+          "prefix": [
+            "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+            "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_NOT_CRASH",
+            "reconfigure_MILESTONES",
+            "reconfigure_ANOTHER_REQUEST",
+            "reconfigure_REQUEST_ATOMIC",
+            "reconfigure_TURNS",
+            "brake",
+            "endOfTS",
+            "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+            "startNewSpec_P_BRAKE_IF_SOMETHING_BAD"
+          ]
+        }
+      ],
+      "analysis_file": "wrong_installed_monitor_analysis.json",
+      "stdout": "{\"variant\": \"base\", \"status\": \"MISMATCH\", \"roots\": 22, \"saved_policy_states\": 115, \"all_saved_start_edges\": 14}\n{\"states\": {\"update\": 115, \"post\": 70}, \"steps\": {\"update\": 118, \"handover\": 2, \"post\": 116}, \"active_invariant_checks\": {\"update\": 56, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 1\n[\n  {\n    \"kind\": \"reference_activation_mismatch\",\n    \"source\": \"M12\",\n    \"event\": \"startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING\",\n    \"target\": \"M11\",\n    \"requirement\": \"P_CHECK_STATUS_AFTER_APPROACHING_CROSSING\",\n    \"reference_post_start_key\": [\n      0,\n      0,\n      0\n    ],\n    \"table_value\": 0,\n    \"installed_state\": 1,\n    \"invariant_at_start\": true,\n    \"matches_stored_key\": true,\n    \"prefix\": [\n      \"stopOldSpec_P_BRAKE_DURING_LASTBRAKE\",\n      \"stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED\",\n      \"stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE\",\n      \"stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED\",\n      \"stopOldSpec_P_NOT_CRASH\",\n      \"reconfigure_MILESTONES\",\n      \"reconfigure_ANOTHER_REQUEST\",\n      \"reconfigure_REQUEST_ATOMIC\",\n      \"reconfigure_TURNS\",\n      \"brake\",\n      \"endOfTS\",\n      \"startNewSpec_P_BRAKE_DURING_LASTBRAKE\",\n      \"startNewSpec_P_BRAKE_IF_SOMETHING_BAD\"\n    ]\n  }\n]\n{\"variant\": \"r1\", \"status\": \"PASS\", \"roots\": 22, \"saved_policy_states\": 44, \"all_saved_start_edges\": 7}\n{\"states\": {\"update\": 44, \"post\": 70}, \"steps\": {\"update\": 46, \"handover\": 1, \"post\": 116}, \"active_invariant_checks\": {\"update\": 28, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 0\n[]\n",
+      "stderr": "",
+      "mutation": {
+        "kind": "wrong_installed_monitor",
+        "state": "M11",
+        "field": "active_monitor_states.new:P_CHECK_STATUS_AFTER_APPROACHING_CROSSING:2",
+        "before": 0,
+        "after": 1,
+        "requirement": "P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+        "reason": "Wrong but valid non-error monitor state for the saved start tuple"
+      }
+    },
+    {
+      "control": "wrong_nonentry_observer",
+      "control_passed": true,
+      "command_template": [
+        "python3",
+        "-B",
+        "analyze_saved_railcab.py",
+        "--artifact-root",
+        "wrong_nonentry_observer",
+        "--output",
+        "wrong_nonentry_observer_analysis.json"
+      ],
+      "checker_exit_code": 1,
+      "checker_status": {
+        "base": "MISMATCH",
+        "r1": "PASS"
+      },
+      "issue_counts": {},
+      "observer_difference_count": 1,
+      "bad_table_match_count": 0,
+      "expected_detection": [
+        {
+          "phase": "update",
+          "state": "M0",
+          "reference": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "stored": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "columns": [
+            "ApproachingCrossingHappen"
+          ],
+          "prefix": [
+            "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+            "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_NOT_CRASH",
+            "reconfigure_MILESTONES",
+            "reconfigure_ANOTHER_REQUEST",
+            "reconfigure_REQUEST_ATOMIC",
+            "reconfigure_TURNS",
+            "brake"
+          ]
+        }
+      ],
+      "analysis_file": "wrong_nonentry_observer_analysis.json",
+      "stdout": "{\"variant\": \"base\", \"status\": \"MISMATCH\", \"roots\": 22, \"saved_policy_states\": 115, \"all_saved_start_edges\": 14}\n{\"states\": {\"update\": 115, \"post\": 70}, \"steps\": {\"update\": 118, \"handover\": 2, \"post\": 116}, \"active_invariant_checks\": {\"update\": 56, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 1 issues 0\n[]\n{\"variant\": \"r1\", \"status\": \"PASS\", \"roots\": 22, \"saved_policy_states\": 44, \"all_saved_start_edges\": 7}\n{\"states\": {\"update\": 44, \"post\": 70}, \"steps\": {\"update\": 46, \"handover\": 1, \"post\": 116}, \"active_invariant_checks\": {\"update\": 28, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 0\n[]\n",
+      "stderr": "",
+      "mutation": {
+        "kind": "wrong_nonentry_observer",
+        "state": "M0",
+        "field": "physical_state",
+        "observer": "ApproachingCrossingHappen",
+        "index": 0,
+        "before": "[NEW(0@[0, 0, 0, 0, 0, 0, 0, 1, 0, 0]), NEW(0), NEW(0), NEW(0)]",
+        "after": "[NEW(0@[1, 0, 0, 0, 0, 0, 0, 1, 0, 0]), NEW(0), NEW(0), NEW(0)]",
+        "reason": "One nonentry saved observer bit disagrees with source propagation"
+      }
+    },
+    {
+      "control": "unsafe_post_observation",
+      "control_passed": true,
+      "command_template": [
+        "python3",
+        "-B",
+        "analyze_saved_railcab.py",
+        "--artifact-root",
+        "unsafe_post_observation",
+        "--output",
+        "unsafe_post_observation_analysis.json"
+      ],
+      "checker_exit_code": 1,
+      "checker_status": {
+        "base": "MISMATCH",
+        "r1": "PASS"
+      },
+      "issue_counts": {
+        "active_source_invariant_false": 1
+      },
+      "observer_difference_count": 1,
+      "bad_table_match_count": 0,
+      "expected_detection": [
+        {
+          "kind": "active_source_invariant_false",
+          "phase": "post",
+          "state": "N2",
+          "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+          "reference": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "monitor": 0,
+          "prefix": [
+            "stopOldSpec_P_BRAKE_DURING_LASTBRAKE",
+            "stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED",
+            "stopOldSpec_P_NOT_CRASH",
+            "reconfigure_MILESTONES",
+            "reconfigure_ANOTHER_REQUEST",
+            "reconfigure_REQUEST_ATOMIC",
+            "reconfigure_TURNS",
+            "brake",
+            "endOfTS",
+            "startNewSpec_P_BRAKE_DURING_LASTBRAKE",
+            "startNewSpec_P_BRAKE_IF_SOMETHING_BAD",
+            "startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING",
+            "startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE",
+            "startNewSpec_P_EBRAKE_DURING_ELASTBRAKE",
+            "startNewSpec_P_EBRAKE_IF_SOMETHING_BAD",
+            "startNewSpec_P_NEW_NOT_CRASH",
+            "<handover>",
+            "brake"
+          ]
+        }
+      ],
+      "analysis_file": "unsafe_post_observation_analysis.json",
+      "stdout": "{\"variant\": \"base\", \"status\": \"MISMATCH\", \"roots\": 22, \"saved_policy_states\": 115, \"all_saved_start_edges\": 14}\n{\"states\": {\"update\": 115, \"post\": 70}, \"steps\": {\"update\": 118, \"handover\": 2, \"post\": 116}, \"active_invariant_checks\": {\"update\": 56, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 1 issues 1\n[\n  {\n    \"kind\": \"active_source_invariant_false\",\n    \"phase\": \"post\",\n    \"state\": \"N2\",\n    \"requirement\": \"P_BRAKE_IF_SOMETHING_BAD\",\n    \"reference\": [\n      0,\n      0,\n      0,\n      0,\n      0,\n      0,\n      0,\n      1,\n      0,\n      0\n    ],\n    \"monitor\": 0,\n    \"prefix\": [\n      \"stopOldSpec_P_BRAKE_DURING_LASTBRAKE\",\n      \"stopOldSpec_P_BRAKE_ONLY_IF_IM_NOT_ALLOWED\",\n      \"stopOldSpec_P_EBRAKE_DURING_ELASTBRAKE\",\n      \"stopOldSpec_P_EBRAKE_ONLY_IF_IM_NOT_ALLOWED\",\n      \"stopOldSpec_P_NOT_CRASH\",\n      \"reconfigure_MILESTONES\",\n      \"reconfigure_ANOTHER_REQUEST\",\n      \"reconfigure_REQUEST_ATOMIC\",\n      \"reconfigure_TURNS\",\n      \"brake\",\n      \"endOfTS\",\n      \"startNewSpec_P_BRAKE_DURING_LASTBRAKE\",\n      \"startNewSpec_P_BRAKE_IF_SOMETHING_BAD\",\n      \"startNewSpec_P_CHECK_STATUS_AFTER_APPROACHING_CROSSING\",\n      \"startNewSpec_P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE\",\n      \"startNewSpec_P_EBRAKE_DURING_ELASTBRAKE\",\n      \"startNewSpec_P_EBRAKE_IF_SOMETHING_BAD\",\n      \"startNewSpec_P_NEW_NOT_CRASH\",\n      \"<handover>\",\n      \"brake\"\n    ]\n  }\n]\n{\"variant\": \"r1\", \"status\": \"PASS\", \"roots\": 22, \"saved_policy_states\": 44, \"all_saved_start_edges\": 7}\n{\"states\": {\"update\": 44, \"post\": 70}, \"steps\": {\"update\": 46, \"handover\": 1, \"post\": 116}, \"active_invariant_checks\": {\"update\": 28, \"post\": 490}, \"reached_post_states\": 70}\nphysical_reference_differences 0 issues 0\n[]\n",
+      "stderr": "",
+      "mutation": {
+        "kind": "unsafe_post_observation",
+        "state": "N1",
+        "target": "N2",
+        "field": "transitions.action",
+        "before": "idle_c",
+        "after": "brake",
+        "requirement": "P_BRAKE_IF_SOMETHING_BAD",
+        "reason": "Braking with CantEnter=false and NotWorking=false violates the source invariant"
+      }
+    }
+  ],
+  "status": "PASS"
+}

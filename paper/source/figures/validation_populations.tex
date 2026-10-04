@@ -1,11 +1,12 @@
 \begin{table}[!htbp]
-\caption{RQ2 validation populations, keyed to the scopes in Table~\ref{tab:guarantee-evidence}.}
+\caption{RQ2 validation populations, keyed to the scopes in main-paper Table~\ref{tab:guarantee-routes}.}
 \label{tab:validation-populations}
 \centering\small
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.21\linewidth}>{\raggedright\arraybackslash}p{.30\linewidth}>{\raggedright\arraybackslash}p{.43\linewidth}@{}}\toprule
 Scope and check & Population & Established result and boundary\\\midrule
 Game:\newline independent games & \FixedRQOneFixtures{} fixtures, two solvers: \FixedRQOneJobs{} jobs & \FixedRQOneWin{} WIN, \FixedRQOneLoss{} LOSS, \FixedRQOneInvalid{} invalid; all \FixedRQOneEligible{} eligible jobs pass certificate/exhaustive checks.\\\addlinespace
-Invariant from start:\newline New-requirement lookup tables & 46 source positions, 138 occurrences; 900 non-error cells & Exact start-scoped languages under reference observations (Proposition~\ref{prop:lookup-act}); actual activation conformance unchecked.\\\addlinespace
+Invariant from start:\newline New-requirement lookup tables & 46 source positions, 138 occurrences; 900 non-error cells & Exact start-scoped languages under reference observations (Proposition~\ref{prop:lookup-act}); general activation conformance remains a premise.\\\addlinespace
+Invariant from start:\newline Saved Railcab policies & Base/R1: 22 entries each, 21 start edges; shared post graph & Source-observer replay and truth checks on all saved continuations; accepts exported entry vectors, excludes runtime/fallback (Appendix~\ref{ta:railcab-activation}).\\\addlinespace
 From update entry:\newline Interval initialization & \VThreeRSUpdExact{} occurrences: 46 R1, 89 R2 & Exact entry-scoped initialization under reference observations; adapter conformance unchecked.\\\addlinespace
 Game:\newline application policies & \FixedPolicies{} Lazy WIN contracts; 125 runs & Certificates check the shared Java game. Runs save summaries; complete PC2-Rolling/Railcab exports are separate.\\\bottomrule
 \end{tabular}

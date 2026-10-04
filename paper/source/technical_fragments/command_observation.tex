@@ -1,0 +1,35 @@
+\Needspace{21\baselineskip}
+\subsection{Preserved Observers Across Update Commands}
+\label{ta:command-observation}
+The physical observer component preserves its values across update commands. Under the source interpretation, declared fluents can stutter while an implicit action predicate, which records the last event, becomes false. Unequal vectors alone do not establish unequal requirement meanings: the relevant object is the continuation language at the selected lookup cell.
+
+\begin{lemma}[Command stuttering at a safe lookup cell]\label{lem:command-observation}
+Let $M$ be faithful for $\Box\varphi$ under deterministic observation rule $d$, as in Proposition~\ref{prop:lookup-act}. Let $c$ preserve every non-error state of $M$. If $(m,v)$ is safely reachable in the unrestricted monitor--observer product, then
+\[
+ L_M(m)=\operatorname{ACT}_\varphi(v)
+       =\operatorname{ACT}_\varphi(d(v,c)).
+\]
+The equality also holds for an initializer language-equivalent to $m$.
+\end{lemma}
+\begin{proof}
+Let $h$ be a safe witness reaching $(m,v)$. Since $c$ preserves $m$, $hc$ is safe and reaches $(m,d(v,c))$. Applying Proposition~\ref{prop:lookup-act} to the two witnesses gives both equalities. Language equivalence transfers them to the selected initializer. Repeating this argument handles a finite sequence of such commands.
+\end{proof}
+
+\paragraph{Application to last-event predicates.}
+Partition a requirement's vector into declared fluent values $f$ and implicit action predicates $p$. Suppose no update command initiates or terminates a declared fluent, and no action predicate denotes an update command. A command then has reference effect $R(f,p)=(f,0)$, while the physical observer preserves $(f,p)$. An ordinary event updates both observers identically, and its action-predicate values depend only on that event; in particular, $d(R(v),a)=d(v,a)$ for an ordinary $a$. With initially matching vectors and correct ordinary-event updates, induction over the event sequence shows that the reference vector equals the physical vector after an ordinary event and its $R$-image after one or more commands. Because activation itself is a start command, the latter is the relevant case at a NEW activation.
+
+If the raw physical vector $v$ selects a non-error cell covered by Proposition~\ref{prop:lookup-act}, Lemma~\ref{lem:command-observation} therefore gives the exact ACT language for the reference post-start vector $R(v)$. Subsequent monitor transitions must still consume each modeled event once. The result permits this specific difference in observer storage; it does not infer correct decoding, column projection or lookup use from the table alone. Rejected or missing raw cells and fallback initializers require separate consideration.
+
+\paragraph{Complete saved-input check.}
+We identify the actual stop, start and transfer commands from each source's declared command sets, the selected old/new safety goals, and every entry of its used transfer relations. These agree with the saved Base/R1/R2 contract declarations; static inspection of the experiment JAR confirms the command-construction rules. Across all nine inputs there are 112 commands, counted separately per input. None occurs in a NEW declared fluent's initiating/terminating sets or denotes a NEW action predicate. All 138 saved NEW monitors exclude these commands from their alphabets and preserve every non-error state on them under the exported monitor decoder. Entry/finish markers are checked separately and are also outside those monitor alphabets. All three variants have the same monitor for each of the 46 source positions.
+
+As an additional source-only check, we enumerate every Boolean assignment to each position's atoms, including unreachable assignments. All 896 assignments satisfy $\varphi(v)\Rightarrow\varphi(R(v))$; there are no counterexamples. Thirty-nine positions contain action predicates; for the remaining seven, $R$ is the identity. This truth-preservation check is weaker than residual-language equality; the latter follows from the safe-witness argument and monitor faithfulness above.
+
+We also project all 1,587 saved lookup cells through $R$, decoding each observer's Boolean values from its initial truth and complete saved transitions. All 900 non-error cells map to existing non-error cells with the same selected monitor state; 273 keys change. Of the 687 error cells, 357 map to non-error and 330 remain error. No projected key is missing. This is a transformation of table cells, with three occurrences per source position, not a count of observed or physically reachable activations.
+
+\paragraph{A remaining restriction on activation.}
+For GSM's invariant $\Box\neg\mathit{decode.2}$, the action-predicate key 1 maps to error, while its reset key 0 selects safe monitor state 0. Thus a raw observation can be rejected even though its post-start reference value admits safe continuations. The 357 error-to-non-error projections expose this possible extra restriction; they do not establish that these keys occur at actual starts. Exact continuation languages at accepted cells do not imply that the initializer admits every ACT-valid activation. Synthesis remains complete for its supplied initializer domain. We retain that domain and all measured outcomes.
+
+Four copied-input fault injections are detected: a fluent observing a command, a monitor entering error on a command, a positive event predicate broken by reset, and a changed lookup selection with a different continuation language. The last yields distinguishing suffix \texttt{checkCrossingStatus} at a Railcab cell. Original inputs remain unchanged.
+
+The scripts reuse the archived restricted source parser, Boolean evaluator and monitor-language checker. They inspect saved sources and exports without new synthesis or performance measurements. Their inputs, complete outcomes, bytecode excerpts and negative controls accompany the manuscript source in \path{evidence/command_observation/}. These finite checks establish the stated command conditions for the inspected inputs. General initial-observation and activation decoding, ordinary-event conformance, actual lookup/fallback calls and runtime behavior remain outside the analysis; Appendix~\ref{ta:railcab-activation} separately checks the two saved Railcab policies.

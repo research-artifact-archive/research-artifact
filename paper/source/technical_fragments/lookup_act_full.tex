@@ -1,0 +1,16 @@
+An invariant that begins at activation must hold immediately after start and after every later event. We call this the activation-scoped interpretation, written $\operatorname{ACT}$. For a pure invariant $\Box\varphi$, its truth depends on the current values of event-tracked properties (fluents). Deterministic observers update these values through $d:V\times\Sigma\to V$. From the actual post-start vector $v$, the permitted continuations are
+\[
+ \operatorname{ACT}_\varphi(v)=\{w\mid\forall u\preceq w:\varphi(d^*(v,u))\},
+\]
+where prefixes include the empty word. A faithful safety monitor $M$ has non-error language $S_\varphi=\operatorname{ACT}_\varphi(v_0)$ from its initial state. Let $L_M(m)$ denote its continuations from state $m$.
+\begin{proposition}[Safe lookup cells for pure invariants]\label{prop:lookup-act}
+If a lookup at $v$ selects a non-error state $m$ reached together with $v$ by a safe word in the unrestricted monitor--observer product, or a state with the same continuation language, then $\varphi(v)$ holds and $L_M(m)=\operatorname{ACT}_\varphi(v)$.
+\end{proposition}
+\begin{proof}
+Let $h$ reach the pair $(m_h,v)$. Faithfulness and non-error reachability give $h\in S_\varphi$, hence $\varphi(v)$. For every suffix $w$,
+\[
+ w\in L_M(m_h)\ \Longleftrightarrow\ hw\in S_\varphi
+ \ \Longleftrightarrow\ w\in\operatorname{ACT}_\varphi(v).
+\]
+The second equivalence uses safety of the prefix $h$ and deterministic observers: future valuations depend only on $v$ and $w$. Language equivalence transfers the equality to $m$.
+\end{proof}

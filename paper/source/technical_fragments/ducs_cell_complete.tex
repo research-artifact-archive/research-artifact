@@ -38,15 +38,21 @@ Old $j$ is disabled until $t$. On safe active prefixes the correspondence is: th
 
 The native encoding explicitly supplies stages, guards, holder refinement, history fluents, target gate and post-handover graph. FG-DUCS generates the update-game counterparts from local transfers, lifecycle rules, initializers and fixed targets, returning rank and handover certificates. This deterministic, fully controllable example establishes one-direction witness preservation, not a general translation, solution-set equivalence, measured effort saving or performance advantage.
 
+\paragraph{Comparing the supplied structure.}
+We count the same semantic objects in the three displayed Cell constructions (Appendices~\ref{ta:cell}, \ref{ta:ducs_cell_complete}, \ref{ta:gr1-cell}). Their shared reference endpoint graphs have two states/two edges (old) and three states/four edges (new), with two load targets. Table~\ref{tab:cell-input-responsibilities} tracks how the same Cell objects are encoded. Its rows are not additive input-size or effort measures.
+
 \begin{table}[!htbp]
-\centering\small
-\caption{The same Cell obligations through the two interfaces. Native entries refer to this explicit construction; they are not lower bounds on other encodings. FG-DUCS supplies the generated structure in addition to the modeler's inputs.}
+\centering\small\setlength{\tabcolsep}{4pt}
+\caption{The same Cell objects through three explicit input constructions. Counts describe these constructions, not minimum encodings.}
 \label{tab:cell-input-responsibilities}\label{tab:contract-responsibility}\label{tab:ducs-interface}
-\begin{tabular}{@{}p{.16\linewidth}p{.39\linewidth}p{.39\linewidth}@{}}\toprule
-Obligation & Explicit native Cell modeling & FG-DUCS input and generated structure\\\midrule
-Empty-station replacement & Eight mixed stages in $E'$, holder moves and version/empty-station guards for $\rho_A,\rho_B$. & Old/new models for $A,B$ and $g_A=g_B=\{(e,e)\}$ generate mixed versions and transfer edges with lifecycle/quiescence guards.\\
-Inspection lifetime & Holder-refined old control; $B,P,\dot a,S_a$ fluents and $G,G',T$ encode memory and boundaries. & Typed monitors, initializers and declared precedence generate boundary events, active-memory updates and initialization under the type-defined lifetimes.\\
-Fixed continuation & Post-handover graph in $E'$, a guarded $h$ and eventual-$h$ in $T$. & Fixed controllers and load targets generate matching/goal conditions; synthesis selects a load state and handover map.\\\bottomrule
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.17\linewidth}>{\raggedright\arraybackslash}p{.26\linewidth}>{\raggedright\arraybackslash}p{.26\linewidth}>{\raggedright\arraybackslash}p{.25\linewidth}@{}}\toprule
+Common object & FG-DUCS & Chosen DUCS input & Chosen GR(1) input\\\midrule
+8 version/holder configurations & Generated one-workpiece physical projection of the local component product. & 8 mixed stages supplied in $E'$. & 8 valuations of supplied coordinates $h,v_A,v_B$.\\[3pt]
+2 empty-station transfers & Two supplied singleton relations $g_A,g_B$; guarded commands generated. & Two transfer labels with version/empty-station guards in $E'$. & Two guarded-assignment rows in $R_B$.\\[3pt]
+2 requirement boundaries and 1 order & OLD/NEW types and supplied $s\prec t$ generate boundary guards and active lifetimes. & Native $s,t$, with their ordering clause in $T$. & Supplied bits $s,t$ and the stop row's ordering guard.\\[3pt]
+Inspection duty at start & Supplied holder-dependent initializer installs pending iff $B$ holds. & Supplied history fluents $B,P$ and $G'$ retain the corresponding duty. & Supplied start assignment $p'=[h=B]$.\\\bottomrule
 \end{tabular}
-\par\smallskip{\footnotesize Native DUCS also constructs its standard protocol $O$ and interrupt composition; these are not additional modeler inputs. The native witness retains every fixed-endpoint edge after $h$.}
+\par\smallskip{\footnotesize DUCS generates its standard protocol $O$ and interrupt composition; GR(1) generates its bridge and switch bookkeeping. These are not extra modeler inputs.}
 \end{table}
+
+The modeler still supplies FG-DUCS with three monitors: eight states and eight explicitly listed nondefault edges in Table~\ref{tab:cell-finite-main}, before adding default self-loops and absorbing-error edges. The other constructions encode the one-workpiece invariant directly in the holder coordinate. Thus local generation does not remove all modeling obligations or show fewer supplied objects. The DUCS target gate and post-handover graph retain all four endpoint edges; the GR(1) post relation permits them, but its synthesized $C_2$ may retain fewer. FG-DUCS instead takes the fixed controllers and targets as inputs and generates their matching tests. The demonstrated difference is the generation of mixed stages and lifetime operations from the local contract, not a measured effort or size advantage.

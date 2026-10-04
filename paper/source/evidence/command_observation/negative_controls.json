@@ -1,0 +1,161 @@
+{
+  "scope": "Four semantic-layer negative controls on copied inputs; no metadata tampering, synthesis, controller execution or performance trial",
+  "status": "PASS",
+  "originals_unchanged": true,
+  "original_inputs_checked": [
+    "results/initialization/raw/expanded-predicates/railcab.json",
+    "tool/models/Railcab_FG.lts",
+    "results/supplement-checks/frontend_lookup_demo/runs/railcab__base/lookup.json",
+    "results/initialization/raw/expanded-predicates/gsm.json",
+    "tool/models/GSM_FG.lts",
+    "results/supplement-checks/frontend_lookup_demo/runs/gsm__base/lookup.json"
+  ],
+  "temporary_inputs": "controls_3l1ph1ym",
+  "controls": [
+    {
+      "control": "declared_fluent_command_intersection",
+      "passed": true,
+      "mutation": "Add verified command reconfigure_MILESTONES to the initiating set of ApproachingCrossingHappen",
+      "mutated_input": "declared_fluent_observes_command.lts",
+      "expected_detection": [
+        {
+          "atom": "ApproachingCrossingHappen",
+          "kind": "declared_fluent",
+          "source_line": 101,
+          "initiating": [
+            "approachingCrossing",
+            "reconfigure_MILESTONES"
+          ],
+          "terminating": [
+            "endOfTS"
+          ],
+          "progress_initiating": [
+            "reconfigure_MILESTONES"
+          ],
+          "progress_terminating": [],
+          "boundary_initiating": [],
+          "boundary_terminating": [],
+          "terminating_wildcard": false
+        }
+      ]
+    },
+    {
+      "control": "monitor_command_not_stuttering",
+      "passed": true,
+      "mutation": "Add the real command reconfigure_ENV to the saved GSM monitor with transition 0 -> ERROR",
+      "mutated_input": "monitor_command_to_error.json",
+      "expected_detection": {
+        "command": {
+          "command": "reconfigure_ENV",
+          "category": "progress",
+          "in_saved_monitor_alphabet": true,
+          "decoding": "explicit alphabet transition",
+          "state_effects": [
+            {
+              "source": 0,
+              "target": -1
+            }
+          ],
+          "all_nonerror_states_self_loop": false
+        },
+        "nonloops": [
+          {
+            "command": "reconfigure_ENV",
+            "source": 0,
+            "target": -1
+          }
+        ]
+      }
+    },
+    {
+      "control": "source_reset_not_truth_preserving",
+      "passed": true,
+      "mutation": "Replace the GSM NEW invariant by the positive actual event predicate decode[2]",
+      "mutated_input": "positive_event_requirement.lts",
+      "expected_detection": {
+        "atom_order": [
+          "decode.2"
+        ],
+        "atom_count": 1,
+        "event_predicates": [
+          "decode.2"
+        ],
+        "declared_fluents": [],
+        "assignment_count": 2,
+        "reset_is_identity": false,
+        "all_assignments": [
+          {
+            "bits": [
+              0
+            ],
+            "phi": false,
+            "reset_bits": [
+              0
+            ],
+            "phi_after_reset": false,
+            "implication_holds": true
+          },
+          {
+            "bits": [
+              1
+            ],
+            "phi": true,
+            "reset_bits": [
+              0
+            ],
+            "phi_after_reset": false,
+            "implication_holds": false
+          }
+        ],
+        "safe_assignment_count": 1,
+        "counterexamples": [
+          {
+            "valuation": {
+              "decode.2": true
+            },
+            "reset_valuation": {
+              "decode.2": false
+            }
+          }
+        ],
+        "status": "COUNTEREXAMPLE"
+      }
+    },
+    {
+      "control": "reset_lookup_residual_language_mismatch",
+      "passed": true,
+      "mutation": "Change the selected state at Railcab key (1,0,0) from 1 to 0; the (1,0,1) cell still selects 1",
+      "mutated_input": "reset_lookup_language_mismatch.json",
+      "expected_detection": [
+        {
+          "key": [
+            1,
+            0,
+            1
+          ],
+          "decoded_truth": [
+            true,
+            false,
+            true
+          ],
+          "selected_state": 1,
+          "original_class": "NONERROR",
+          "reset_key": [
+            1,
+            0,
+            0
+          ],
+          "key_changed": true,
+          "reset_key_present": true,
+          "reset_selected_state": 0,
+          "same_state_id": false,
+          "error_continuation_language_equivalent": false,
+          "distinguishing_suffix": [
+            "checkCrossingStatus"
+          ],
+          "outcome": "NONERROR_LANGUAGE_MISMATCH"
+        }
+      ]
+    }
+  ]
+}

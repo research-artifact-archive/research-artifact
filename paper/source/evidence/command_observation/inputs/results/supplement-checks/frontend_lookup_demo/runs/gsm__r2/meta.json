@@ -1,0 +1,45 @@
+{
+  "case": "gsm__r2",
+  "model": "gsm",
+  "target": "r2",
+  "attempt": 1,
+  "status": "EXPORTED",
+  "input": "Implementation/Experiment/Models/GSM_FG.lts",
+  "input_sha256": "5f4af5b4eafda24516f0653b194f7296799036fc9fe873ac0ce100e0009ae7f4",
+  "jar": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+  "java_version": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)",
+  "exporter_sha256": "979556a698754c468553072f588bad96bea715295b6b00c29355f4147577a3a2",
+  "command": [
+    "/opt/homebrew/opt/openjdk@17/bin/java",
+    "-Xmx2g",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.evaluation.enabled=false",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/frontend_lookup_demo/classes:FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.lts.FrontendLookupExport",
+    "Implementation/Experiment/Models/GSM_FG.lts",
+    "UpdCont_OTF_FG_R2",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/frontend_lookup_demo/runs/gsm__r2/lookup.json"
+  ],
+  "timeout_seconds": 120,
+  "aggregate_deadline_utc": "2026-09-22T09:25:00+00:00",
+  "started_at_utc": "2026-09-22T08:44:20.457164+00:00",
+  "exit_code": 0,
+  "elapsed_context_only_not_performance_data": 0.7315799999923911,
+  "finished_at_utc": "2026-09-22T08:44:21.189224+00:00",
+  "saved_files": {
+    "lookup.json": {
+      "bytes": 1713,
+      "sha256": "04babaafc8be55e608a7496577d639d021767c83e6158e9cd36e01ee8289246a"
+    },
+    "stderr.txt": {
+      "bytes": 79,
+      "sha256": "4a5d71ec1869c4f67287506ff4ba69677c75b96c224fa5f0dca4b6ead65daf3a"
+    },
+    "stdout.txt": {
+      "bytes": 4543,
+      "sha256": "bcdfe000c3cbbadc535da24a8e14e88bca542942f7fc8a950052057a16e69767"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+\subsection{Granularity need not preserve feasibility}\label{ta:granularity-reverse}
+The comparisons above do not assert that finer commands always retain every merged solution. The following analytical contract gives the reverse separation; it is not an additional measured instance or part of the 55-pair population.
+
+Both components have one state per version and the shared ordinary alphabet $\{x,y,tick\}$, with $x,y$ UC and $tick$ controllable. Every version has a $tick$ self-loop. The only other loops are: $y$ in old component~1, $x$ in new component~1, $x$ in old component~2, and $y$ in new component~2. All other transitions are absent. Shared labels synchronize, so neither $x$ nor $y$ is enabled in the all-old or all-new product; $x$ loops in new/old and $y$ loops in old/new. Each local transfer maps its unique old state to its unique new state. There are no requirements, initializers or precedence edges. The one-state old and new controllers loop on all ordinary labels. Their closed loops each have one reachable state and a $tick$ loop, hence are safe and deadlock-free; these states supply the entry and target.
+
+With separate transfers, either first transfer reaches a mixed state with an enabled UC self-loop. The remaining transfer is then permanently blocked by the quiescence rule; the environment can repeat the loop forever, so every fine policy loses. Merging both transfers into their single Cartesian-product command instead moves directly from the quiescent entry to the quiescent all-new target, with rank one. Thus fine LOSS/merged WIN is possible. Atomic merging can remove a harmful mixed state, whereas Cell and Rolling show that it can remove a necessary intermediate state. The reported obstructions establish when a specified merge loses, not a universal refinement order between granularities.
+
+\subsection{A local condition for serializing transfer batches}\label{ta:serial-transfer}
+The reverse separation does not imply that each coarse winner needs a joint implementation. The following condition uses local alphabets, enabled UC labels and transfer pairs. It concerns transfer-only merging: every requirement start and stop remains a singleton. No runtime atomic capability or reduction in synthesis cost is inferred from the condition.
+
+For component $i$, let $A_i^v=\Sigma_{e_i^v}\cap\Sigmauc$ and define its enabled and blocked UC labels at state $s$ by
+\[
+ E_i^v(s)=\{a\in A_i^v\mid\delta_i^v(s,a)\ne\emptyset\},\qquad
+ B_i^v(s)=A_i^v\setminus E_i^v(s).
+\]
+An absent label differs from a blocked label: an absent component does not participate, whereas a blocked participant prevents synchronization. Call a transfer \emph{UC-nonenabling} when every $(s,s')\in g_i$ satisfies
+\begin{equation}\label{eq:local-uc-criterion}
+ E_i^{\mathrm{new}}(s')\subseteq E_i^{\mathrm{old}}(s),\qquad
+ B_i^{\mathrm{old}}(s)\subseteq B_i^{\mathrm{new}}(s').
+\end{equation}
+Thus it offers no new UC label and retains every local UC blocker. The condition allows alphabet changes: an enabled label may disappear, and a blocked label may be added. With equal old/new UC alphabets, both inclusions reduce to enabledness inclusion. Monitors are passive and do not affect enabledness.
+
+\begin{proposition}[Context-independent UC criterion]\label{prop:contextual-uc}
+Fix one local transfer pair $(s,s')$. Equation~\eqref{eq:local-uc-criterion} holds iff replacing this local state preserves UC quiescence in every finite synchronous context whose other component states stay fixed. It also holds iff no such context can gain a globally enabled UC label through that replacement.
+\end{proposition}
+\begin{proof}
+Suppose both inclusions hold and a UC label $a$ is enabled after replacement. All other participating components enable $a$. If the new component participates, $a\in E_i^{\mathrm{new}}(s')$, hence $a\in E_i^{\mathrm{old}}(s)$: the old component also participates and enables it. If the new component is absent from $a$, the blocker inclusion implies $a\notin B_i^{\mathrm{old}}(s)$; the old component therefore either enables $a$ or is also absent. In this case some other component participates, because a product event requires at least one participant. In both cases $a$ was globally enabled before replacement. This proves nonincrease of the global UC set and therefore preservation of quiescence.
+
+For necessity, the finite ordinary UC alphabet lets a one-state context block every UC label other than a chosen $a$: include those labels in its alphabet but give them no outgoing transitions. If $a\in E_i^{\mathrm{new}}(s')\setminus E_i^{\mathrm{old}}(s)$, omit $a$ from the context alphabet. Initially $a$ is absent or blocked in the component, so the product is quiescent. After replacement, $a$ is enabled. If instead $a\in B_i^{\mathrm{old}}(s)\setminus B_i^{\mathrm{new}}(s')$, and the first inclusion has not already failed, then $a$ must be absent from the new component. Give the context an $a$ self-loop. The old component blocks it, but the new one no longer participates; again a quiescent product gains $a$. These witnesses establish both converses.
+\end{proof}
+For example, removing a locally enabled UC label satisfies the criterion if all other local UC statuses stay unchanged, although alphabet equality fails. Removing a blocked label does not: another component may offer it. The quantifier over all contexts is essential. Failing the criterion need not enable UC in the supplied global contract, and need not preclude a fine winner. The result characterizes local preservation of quiescence; it does not characterize every safely serializable contract.
+
+\paragraph{Restatement of Proposition~\ref{prop:serial-transfer}.}
+Let a fine contract and a transfer-only merged contract satisfy the comparison rules of Section~\ref{sec:granularity-analysis}: entries, endpoints, targets, initializers and ordinary behavior are unchanged; transfer outcomes are Cartesian products; active-monitor member effects commute on all monitor states; mapped precedence is irreflexive and acyclic. If every transfer is UC-nonenabling, a winning policy for the merged contract implies a winning policy for the fine contract covering the same old entries. A finite-memory serial expansion preserves the merged policy's selected endpoint continuations.
+\begin{proof}
+At a checkpoint, associate the two representations by equal component and monitor states, with every pending coarse block corresponding to all of its pending fine members. Consider a block $B$ enabled by a coarse winner at checkpoint $q$. The state is UC-quiescent. Execute its members in any fixed order, disabling ordinary controllables between members.
+
+No such member enables an ordinary UC event, by Proposition~\ref{prop:contextual-uc}, with the other components as its synchronous context. Induction gives quiescence at every partial prefix, so the next fine command is not blocked by UC.
+
+Each remaining member retains its old source coordinate and its transfer image. The coarse block's enabledness makes each of these images nonempty. Valid mapped precedence has no edge within a block; all external predecessors required by that block have already completed. Thus every next member remains enabled. All of its outcomes are retained. After the last member, the set of component outcomes is exactly the coarse Cartesian product, and the pending commands correspond again.
+
+The set of active monitors is constant throughout this transfer sequence. For each monitor, pairwise commutation makes the composite effect of the fine member order equal to the coarse block effect. Every partial outcome extends to a full product outcome. If an active monitor entered error in a partial prefix, its absorbing error would persist to that completed outcome, contradicting safety of every coarse outcome. Therefore every partial state is safe, and completed states have exactly the coarse successor's monitor values as well as its component coordinates.
+
+Follow the coarse policy between checkpoints. Ordinary events and singleton boundaries have identical outcomes in the two representations. At a fine expansion of a block, the preceding argument covers every environment-chosen transfer outcome and excludes intervening UC events. This constructs a finite-memory fine policy: it stores the coarse checkpoint and the unexecuted members of the selected block. A coarse ranking bounds the number of checkpoint transitions; every expansion has at most $\max(1,\max_B|B|)$ events. Hence all its maximal runs safely reach a corresponding coarse goal in finitely many events. Goals have the same component and new-monitor coordinates and the same loadable endpoint states, so the same endpoint choice is valid and its continuation is unchanged. Memoryless sufficiency for the finite update game (Technical Appendix~\ref{ta:source_synthesis}) gives a memoryless fine winner, but does not require that winner to retain the serial expansion's endpoint choices.
+\end{proof}
+
+\paragraph{Exact event overhead of the serial expansion.}
+Let $n=|I|$ and let $b$ be the number of blocks in the transfer partition, including singleton blocks. Contract entries have every transfer pending; a goal has none. Every completed merged run therefore executes each block exactly once. Its serial expansion replaces the single event for block $B$ by exactly $|B|$ consecutive member events. It inserts no ordinary event or requirement boundary between members, and leaves all other events unchanged. Every expanded run projects to a merged run with the same completed block outcomes and selected endpoint, by the proof above. Consequently, a merged run of length $\ell$ expands to length
+\[
+ \ell+\sum_{B}(|B|-1)=\ell+n-b.
+\]
+If the merged policy's entry rank is $r$, its runs have length at most $r$, giving a bound of $r+n-b$ for the constructed finite-memory serial policy. The count stops at the handover-ready goal; it excludes handover installation and post-handover behavior, as does the original rank. This is an exact event overhead for that expansion, not an equality between optimal fine and merged ranks, a bound for every fine winner, or a time/downtime guarantee.
+
+\paragraph{What the condition does and does not cover.}
+The condition provides a local way to justify replacing an available atomic transfer batch by individual commands. Threads gives an application: its old/new graphs coincide and its idle transfers preserve all local states, including the queue, so both enabled and blocked sets are unchanged. Its finite-arrival winners can be serialized; the permanent-arrival losing controls remain losing. It is not necessary for a fine winner: Rolling introduces UC readiness events and violates the condition, but its capacity argument separately supplies a winning sequence. The transfer condition alone does not justify splitting requirement-start or requirement-stop blocks: those splits change which monitors observe later member labels. Section~\ref{ta:serial-boundary} gives the additional conditions. Safe adaptation sequences and individual/simultaneous reconfiguration are established topics~\cite{BoyerGruberPous2013,ThuijsmanReniers2024DynamicFeature}; the proposition supplies a sufficient condition for this contract's all-outcome finite-completion and fixed-endpoint requirements.
+
+
+\paragraph{Finite UC phases alone are insufficient.}
+A variant of the preceding reverse example removes UC cycles while retaining fine LOSS/merged WIN. Give both versions of each component states $0,1$, shared alphabet $\{x,y,tick\}$ and a controllable $tick$ loop at each state. The only UC edges are $x:0\to1$ in new component~1 and old component~2, and $y:0\to1$ in old component~1 and new component~2. Every transfer maps old $j$ to new $j$ for $j\in\{0,1\}$, so the relations are total. Both fixed endpoint controllers have one state and loops on all three labels. From their initial $(0,0)$ tuples, no UC label synchronizes, making $(0,0)$ the only reachable tuple and the only loadable target. After either first fine transfer, one UC event is forced and changes both coordinates to $1$. UC then terminates, but the remaining transfer can only reach the incompatible new tuple $(1,1)$; no ordinary event restores $0$. The joint transfer reaches new $(0,0)$ directly. These are analytical examples, outside all measured populations. They show why finite UC activity and total transfer relations alone do not establish safe serialization; matching the fixed endpoint also matters.
+
+
+
+\subsection{Serializing requirement-boundary batches}\label{ta:serial-boundary}
+Transfer and boundary batches have different intermediate-state risks. A boundary leaves components unchanged, but splitting it makes a newly started monitor observe later starts, or a monitor awaiting removal observe earlier stops. The following sufficient conditions account for precisely these additional observations.
+
+Let $\mathcal B$ partition all update commands into type-homogeneous blocks, as in Section~\ref{sec:granularity-analysis}. For a start block, write $B$ for its new requirements; for a stop block, write $B$ for its old requirements. Impose:
+\begin{enumerate}
+\item Every component in a transfer block of size greater than one is UC-nonenabling as defined in Section~\ref{ta:serial-transfer}.
+\item For each start block $B$, distinct $r,s\in B$, and tuple $\xi\in\bigcap_{u\in B}\operatorname{dom}\iota_u$,
+\[
+ \eta_r(\iota_r(\xi),\ustart{s})=\iota_r(\xi).
+\]
+\item For each stop block $B$, distinct $r,s\in B$, and $m\in M_r\setminus F_r$,
+\[
+ \eta_r(m,\ustop{s})\notin F_r.
+\]
+\end{enumerate}
+The conditions on singleton blocks are vacuous. The start condition concerns initialized states, whereas the stop condition concerns every safe state but need not preserve the state itself: that monitor will be removed before the checkpoint. The existing comparison rules still require commuting member effects on every monitor that remains active throughout a block, valid mapped precedence, and unchanged entries, endpoints, initializers, targets and ordinary behavior.
+
+\paragraph{Combined serialization result.}
+Under these conditions, a merged winner has a finite-memory serial expansion that wins the fine contract from the same entries and preserves its selected endpoint continuations. Each completed run gains exactly $|\SigmaU|-|\mathcal B|$ events. Thus a merged entry rank $r$ gives the serial policy a bound of $r+|\SigmaU|-|\mathcal B|$ events to a handover-ready goal.
+\begin{proof}
+Use the checkpoint construction of Proposition~\ref{prop:serial-transfer}. Singleton blocks already agree. A nonsingleton transfer block is covered by its proof; the local transfer condition is needed only for such blocks.
+
+For a boundary block, fix any member order and disable other controllable events until the block completes. No member changes $\xi$, so the coarse command's UC-quiescence persists throughout. Valid mapped precedence introduces no internal dependency, and all external predecessors have completed. In a start block every remaining initializer stays defined at the unchanged tuple. Newly initialized monitor $t_r$ begins at $\iota_r(\xi)$; each subsequent member start leaves it there by condition 2. It is therefore safe at every prefix and matches the coarse initialization afterward. In a stop block, each not-yet-removed member starts safe and remains safe under earlier stops by condition 3. Its own stop removes it without observation, exactly as in the coarse block; its intermediate state need not match a coarse state.
+
+Monitors outside the boundary block that are active at the checkpoint remain active. Their commuting member effects give the coarse final value. An error in a proper prefix would persist by absorption to that final value, contradicting safety of the coarse successor. Monitors inactive throughout stay inactive. Hence each boundary sequence is enabled and safe, with exactly the coarse successor's component, monitor and pending-command coordinates at completion.
+
+The checkpoint argument therefore applies to every block. Every serial run projects to a merged run with the same completed outcomes and selected endpoint. Each command is pending at admission and executed once before a goal, so every completed merged run uses each block once. Replacing block $B$ by its $|B|$ members adds $\sum_{B\in\mathcal B}(|B|-1)=|\SigmaU|-|\mathcal B|$ events and no others. The merged rank bounds the projected run, giving finite completion and the stated event bound. As before, memoryless sufficiency yields a fine winner, while endpoint-selection preservation and the exact overhead are claims about the constructed serial policy.
+\end{proof}
+
+\Needspace{9\baselineskip}
+\paragraph{Why the extra boundary conditions matter.}
+Omitting either boundary condition admits a reverse separation. For both examples, take one component with one state per version, a controllable $tick$ loop, and an identity transfer. Both endpoint controllers have one state and admit $tick$. There are no interval requirements or precedence edges. Every monitor has safe state 0 and absorbing error 1; unspecified labels stutter.
+
+For starts, use no old requirements and two new requirements $r,s$, each initialized to 0 on every tuple. From 0, $t_r$ enters error on $\ustart{s}$ and $t_s$ on $\ustart{r}$. The all-new target has both monitors at 0. Joint start installs both safely; any split order makes the first monitor error on the second start. For stops, instead use two old requirements with initial state 0 and no new requirements. Monitor $t_r$ errors on $\ustop{s}$, and $t_s$ on $\ustop{r}$. Joint stop removes both safely; either first individual stop errors the other monitor before its removal. The new target is the sole new component/controller state.
+
+Each merged contract wins in two events (one transfer and one boundary batch), while every fine policy loses. Endpoints are safe and deadlock-free, transfer is UC-nonenabling, and member effects commute: for each monitor they consist of an identity and an error-setting map. Thus these examples isolate the additional boundary observations. They show that the conditions cannot simply be dropped, not that they are necessary for every serializable contract. Both are analytical contracts outside the measured populations.
+
+This result gives a sufficient coarse-to-fine implication, not equivalence or a guarantee for arbitrary scheduling between members. The measured boundary comparisons are unchanged; no new synthesis is used to establish the result. A source declaration that omits boundary labels can support these conditions, but applying them to a compiled game additionally requires the corresponding monitor transitions and comparison rules. We do not count unexported OLD testers as checked automata. The event bound excludes handover installation and post-handover behavior and is not an elapsed-time bound.

@@ -1,6 +1,32 @@
 # Reproduction guide
 
-Start with `python3 reproduce/check.py --output work/check` from the public root, using Python 3.10+ and the packages in `reproduce/requirements.txt`. This is a saved-evidence check, not a benchmark rerun. The public source contains no JARs. The expected full result is PASS with no skipped checks. Logs are separated into core, supplement and extensions; the restored compatibility workspace is under the chosen output directory.
+Start with `python3 reproduce/check.py --output work/check` from the public root, using Python 3.10+ and the packages in `reproduce/requirements.txt`. This is a saved-evidence check, not a benchmark rerun. The public source contains no JARs. The expected full result is PASS with no skipped checks. Logs are separated into core, supplement, extensions and current C143 checks; the restored compatibility workspace is under the chosen output directory.
+
+## Short C143 checks and manuscript build
+
+For the three additional saved-evidence analyses, Python’s standard library suffices:
+
+```sh
+python3 -B reproduce/check_added_analyses.py --output work/added-c143
+```
+
+This checks the copied inputs against the full archive, recomputes command observations, both Railcab policy analyses and all ten Threads expansions, then replays their controls. It compares saved outputs without overwriting them; only temporary-directory names in control reports may differ. See [inputs, outputs and limitations](../results/additional-analyses/README.md). The full `check.py` includes this check plus current source-placement and figure checks.
+
+To inspect the current diagrams and saved numerical values separately:
+
+```sh
+python3 -B reproduce/check_paper_displays.py
+```
+
+Its fifteen checks cover the current Figure 1/2/3 placements and all 27 Lazy/Eager contracts, while preserving the fourteen-pair Direct-Full/RSS check in the appendix. These commands run no Java synthesis or measurement.
+
+To rebuild all four PDFs, install XeLaTeX, latexmk and the listed Python dependencies, then run:
+
+```sh
+python3 -B reproduce/build_paper.py --output work/paper-c143
+```
+
+The builder stabilizes cross-document references in a fresh source copy and checks the packaged documents’ destinations and links. [Paper instructions](../paper/README.md#rebuild) also cover the standalone source ZIP. Use the [reading bundle](../paper/reading_bundle.zip) if you only need the PDFs.
 
 ## Why a compatibility workspace exists
 
@@ -54,6 +80,14 @@ The main E6 canonical inputs are Rolling v1, Canary v1, Policy v2, DB-Rolling v2
 - Link checks apply to WINs. LOSS provides a checked discovered losing region, not necessarily the maximum losing region. Viewer output is an inspection aid, not a new independent semantic proof.
 
 ## Observed package validation
+
+### C143 publication checks
+
+The added-analysis command rederives all three C143 analyses and rejects all 57 negative controls (plus one passing Railcab control). Threads produces fourteen byte-identical output files. All 138 copied analysis input files match their full-archive counterparts. The fifteen current display checks pass. These checks concern saved evidence and manuscript placement, not new benchmark observations.
+
+The full C143 `check.py` run passed using an environment containing the published Python requirements: 28,801 files restored; core 11/11 PASS with no SKIP; all supplement tasks and all five extension groups PASS; current display checks 15/15 PASS; and all three added analyses and controls PASS. The run left 16,035 core, 204 supplement and 3,996 extension input files unchanged. These are overlapping checker inventories, not research sample sizes. The paper builder also passed with 21 main-paper and 87 integrated-supplement pages and working cross-document destinations.
+
+### Earlier source and package validation
 
 The October 2026 reorganization was checked after restoring the public layout: all 11 core checks passed with no SKIP, all supplement tasks passed, and E-series/ext1–7 checks passed. The core check regenerated the complete 135-cell table and scaling figures and preserved 16,027 inspected files. The extension check preserved 3,996 inspected files and independently reconstructed 22 small finite jobs. A comparison with the prior anonymous E6 export found 3,070 raw/input/result/certificate files unchanged and none missing. These are artifact-validation observations; they are not additions to research sample sizes.
 

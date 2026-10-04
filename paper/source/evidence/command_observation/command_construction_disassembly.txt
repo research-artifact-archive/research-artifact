@@ -1,0 +1,186 @@
+Static bytecode excerpts from the JAR identified by all saved source and lookup metadata.
+JAR SHA-256: fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07
+
+Read-only extraction: javap -classpath "$EXPERIMENT_JAR" -c -p CLASS
+The verbose UpdateProtocolSpec output additionally exposes the string-concatenation bootstrap arguments. The binary is not redistributed here; these excerpts do not claim that a source rebuild has identical bytes.
+
+CLASS ltsa.updatingControllers.structures.UpdateProtocolSpec
+  public static ltsa.updatingControllers.structures.UpdateProtocolSpec forFineGrained(ltsa.control.ControllerGoalDefinition, ltsa.control.ControllerGoalDefinition);
+    Code:
+       0: new           #2                  // class ltsa/updatingControllers/structures/UpdateProtocolSpec
+       3: dup
+       4: invokespecial #66                 // Method "<init>":()V
+       7: astore_2
+       8: aload_0
+       9: ifnull        74
+      12: aload_0
+      13: invokevirtual #67                 // Method ltsa/control/ControllerGoalDefinition.getSafetyDefinitions:()Ljava/util/List;
+      16: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      21: astore_3
+      22: aload_3
+      23: invokeinterface #79,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      28: ifeq          74
+      31: aload_3
+      32: invokeinterface #85,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      37: checkcast     #89                 // class ltsa/lts/Symbol
+      40: astore        4
+      42: aload         4
+      44: invokevirtual #91                 // Method ltsa/lts/Symbol.getName:()Ljava/lang/String;
+      47: astore        5
+      49: aload         5
+      51: ldc           #95                 // String old safety
+      53: invokestatic  #97                 // Method validateActionSuffix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      56: invokedynamic #100,  0            // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      61: astore        6
+      63: aload_2
+      64: aload         5
+      66: aload         6
+      68: invokevirtual #104                // Method registerStopOldSpec:(Ljava/lang/String;Ljava/lang/String;)V
+      71: goto          22
+      74: aload_1
+      75: ifnull        140
+      78: aload_1
+      79: invokevirtual #67                 // Method ltsa/control/ControllerGoalDefinition.getSafetyDefinitions:()Ljava/util/List;
+      82: invokeinterface #73,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      87: astore_3
+      88: aload_3
+      89: invokeinterface #79,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      94: ifeq          140
+      97: aload_3
+      98: invokeinterface #85,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     103: checkcast     #89                 // class ltsa/lts/Symbol
+     106: astore        4
+     108: aload         4
+     110: invokevirtual #91                 // Method ltsa/lts/Symbol.getName:()Ljava/lang/String;
+     113: astore        5
+     115: aload         5
+     117: ldc           #108                // String new safety
+     119: invokestatic  #97                 // Method validateActionSuffix:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     122: invokedynamic #110,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     127: astore        6
+     129: aload_2
+     130: aload         5
+     132: aload         6
+     134: invokevirtual #111                // Method registerStartNewSpec:(Ljava/lang/String;Ljava/lang/String;)V
+     137: goto          88
+     140: aload_2
+     141: areturn
+
+  public static ltsa.updatingControllers.structures.UpdateProtocolSpec forSelective(ltsa.updatingControllers.structures.UpdateProtocolSpec, java.util.Set<java.lang.String>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #114                // Method ltsa/updatingControllers/structures/SelectiveUpdateProtocolSpecBuilder.build:(Lltsa/updatingControllers/structures/UpdateProtocolSpec;Ljava/util/Set;)Lltsa/updatingControllers/structures/UpdateProtocolSpec;
+       5: areturn
+
+Bootstrap arguments for the first two concatenations:
+BootstrapMethods:
+  0: #425 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #431 stopOldSpec_\u0001
+  1: #425 REF_invokeStatic java/lang/invoke/StringConcatFactory.makeConcatWithConstants:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #433 startNewSpec_\u0001
+
+CLASS ltsa.lts.MappingEnvironmentGenerator
+     275: aload_0
+     276: aload         21
+     278: getfield      #169                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.reconfigureAction:Ljava/lang/String;
+     281: aload         10
+     283: aload         5
+     285: ifnull        292
+     288: iconst_1
+     289: goto          293
+     292: iconst_0
+     293: invokespecial #173                // Method normalizeReconfigureAction:(Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
+     296: putfield      #169                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.reconfigureAction:Ljava/lang/String;
+     299: aload         14
+     301: ifnonnull     314
+     304: aload         21
+     306: getfield      #169                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.reconfigureAction:Ljava/lang/String;
+     309: astore        14
+     311: goto          344
+     314: aload         14
+     316: aload         21
+     318: getfield      #169                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.reconfigureAction:Ljava/lang/String;
+     321: invokevirtual #177                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     324: ifne          344
+     327: aload         14
+     329: aload         21
+     331: getfield      #169                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.reconfigureAction:Ljava/lang/String;
+     334: aload         10
+     336: invokedynamic #183,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+     341: invokestatic  #186                // Method ltsa/lts/Diagnostics.fatal:(Ljava/lang/String;)V
+     344: aload         21
+     346: getfield      #160                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.preActions:Ljava/util/Vector;
+     349: invokevirtual #191                // Method java/util/Vector.size:()I
+     352: iconst_1
+     353: iadd
+     354: aload         21
+     356: getfield      #166                // Field ltsa/lts/MappingEnvironmentGenerator$FlattenedRule.postActions:Ljava/util/Vector;
+     359: invokevirtual #191                // Method java/util/Vector.size:()I
+     362: iadd
+     363: istore        22
+     365: iload         22
+     367: iconst_1
+     368: if_icmple     380
+     371: iload         16
+     373: iload         22
+     375: iconst_1
+     376: isub
+     377: iadd
+     378: istore        16
+     380: goto          201
+     383: goto          153
+     386: aload         5
+     388: ifnull        414
+     391: aload         14
+     393: ifnonnull     405
+     396: aload         10
+     398: invokedynamic #195,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+     403: astore        14
+     405: aload         5
+     407: iload         6
+     409: aload         14
+     411: invokevirtual #196                // Method ltsa/updatingControllers/structures/UpdateProtocolSpec.registerReconfigure:(ILjava/lang/String;)V
+     414: aload         11
+
+  private java.lang.String normalizeReconfigureAction(java.lang.String, java.lang.String, boolean);
+    Code:
+       0: iload_3
+       1: ifne          25
+       4: ldc_w         #387                // String reconfigure
+       7: aload_1
+       8: invokevirtual #177                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      11: ifne          23
+      14: aload_1
+      15: invokedynamic #389,  0            // InvokeDynamic #4:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      20: invokestatic  #186                // Method ltsa/lts/Diagnostics.fatal:(Ljava/lang/String;)V
+      23: aload_1
+      24: areturn
+      25: ldc_w         #387                // String reconfigure
+      28: aload_1
+      29: invokevirtual #177                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      32: ifeq          42
+      35: aload_2
+      36: invokedynamic #195,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      41: areturn
+      42: ldc_w         #390                // String reconfigure_others
+      45: aload_1
+      46: invokevirtual #177                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      49: ifeq          61
+      52: aload_1
+      53: invokedynamic #392,  0            // InvokeDynamic #5:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+      58: invokestatic  #186                // Method ltsa/lts/Diagnostics.fatal:(Ljava/lang/String;)V
+      61: aload_1
+      62: invokestatic  #393                // Method ltsa/updatingControllers/structures/UpdateProtocolSpec.validateReconfigureAction:(Ljava/lang/String;)V
+      65: aload_1
+      66: areturn
+
+  private java.util.Vector<java.lang.String> expandActionList(java.util.Vector<ltsa.lts.ActionLabels>, java.util.Hashtable<java.lang.String, ltsa.lts.Value>, java.util.Hashtable<java.lang.String, ltsa.lts.Value>);
+    Code:
+       0: new           #140                // class java/util/Vector
+       3: dup
+       4: invokespecial #142                // Method java/util/Vector."<init>":()V
+       7: astore        4
+       9: aload_1

@@ -45,17 +45,9 @@
 % Reproducible exploration order.
 
 \maketitle
-\paragraph{Method and model names.}
-Fine-Grained Dynamic Update Controller Synthesis (FG-DUCS) is compared with Dynamic Update Controller Synthesis (DUCS), generalized reactivity of rank 1 (GR(1)) updating, and directed controller synthesis (DCS), including its on-the-fly variant (OTF-DCS). On-the-fly is abbreviated OTF. The Modal Transition System Analyser (MTSA) processes Finite State Processes (FSP). Labeled transition systems (LTSs), modal transition systems (MTSs) and deterministic finite automata (DFAs) represent behavior. PC1 and PC2 name the one-arm and two-arm production-cell inputs; GSM names the communication input. DB-Rolling is the database-inspired rolling-update family.
+Terminology follows the main paper and the glossary at the beginning of the Technical Appendix. OLD, NEW and UPD denote old, new and interval requirements; WIN/LOSS are synthesis decisions, while TO/OOM denote unresolved runs. Saved input names and campaign labels are preserved for reproducibility.
 
-\paragraph{Requirement and result labels.}
-Uncontrollable (UC) events cannot be disabled by a controller. Residual soundness (RS) concerns declared prior histories; activation-scoped interpretation (ACT) starts an invariant at activation. OLD, NEW and UPD label old, new and update-interval requirements. WIN means a completing policy exists; LOSS means no policy covers every entry. TO denotes timeout, OOM an out-of-memory failure, and N/M a case not measured. Research questions are labeled RQ1--RQ3. Other uppercase model states and event names are identifiers retained from the supplied inputs.
-
-\paragraph{Implementation and measurement terms.}
-The Java Virtual Machine (JVM) runs a Java archive (JAR). JavaScript Object Notation (JSON) and comma-separated values (CSV) are data formats. Last-in, first-out (LIFO) and first-in, first-out (FIFO) describe queue orders. Resident set size (RSS) measures process-resident memory; garbage collection (GC) concerns managed memory. Artificial intelligence (AI) use is disclosed separately. GiB and MiB denote gibibytes and mebibytes.
-
-
-Read S1 for additional granularity and observation witnesses, S2 for search invariants and certificates, S3 for requirement interpretation, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 follows RQ1--RQ3: constructed mechanisms, independent validation, then the fixed 27-contract comparison. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
+Read S1 for additional granularity and observation witnesses, S2 for eligibility, game encodings and exploration constructions, S3 for frontend initialization and lifecycle checks, S4 for the current evaluation and separately identified auxiliary records, and S5 for the expanded comparison. The Technical Appendix supplies the primary formal definitions and case constructions; this part supplies their detailed validation and experimental evidence. Complete Cell definitions and the full synthesis proof are in Technical Appendix~\ref{taDoc-ta:cell} and~\ref{taDoc-ta:source_synthesis}, respectively. Its proofs use the confirmed non-preemptive rule: update events have no successor whenever a modeled uncontrollable event is enabled. Goals are safe, uncontrollable-quiescent states with all update events completed and a compatible supplied endpoint. No fairness assumption is added. Section~S4 follows RQ1--RQ3: constructed mechanisms, independent validation, then the fixed 27-contract comparison. Diagnostic, historical and extended-budget records follow in separate subsections; unresolved outcomes and trial provenance are retained.
 
 \section{Granularity and observation witnesses}
 \label{supp:witnesses}
@@ -135,9 +127,9 @@ The executable separation fixture is a related test input, not the same transiti
 
 Both executable inputs retain the interval requirement that persistent alignment hold when new requirement starts. Neutral is not removal of this requirement. Both actual separation endpoints have one state and only $idle$ loops. In the actual neutral model, the old endpoint has one $idle$ state; the new endpoint has two states, $NEW\_WAIT\xrightarrow{align}NEW\_READY$, with $idle$ at both. Its OLD/NEW monitors forbid $bad$, and NEW activation requires $bad_a=false$. It therefore permits transfer and alignment before the requirement block. The neutral full/block certificates have maximum ranks five/four; the full policy's extra step is not identified from the summary. The executable block forbids transfer as well as ordinary events between requirement operations. Its separation obstruction still follows because old requirement prevents alignment before stop and the interval requirement prevents starting before alignment. No trace equivalence or monitor-state isomorphism between the abstract and executable encodings is claimed.
 
-\section{Finite games, search invariants, and certificates}
+\section{Additional Game Encodings and Exploration Constructions}
 \label{supp:search}
-Technical Appendix~\ref{taDoc-ta:source_synthesis} gives the complete synthesis proof and its UC-priority, memorylessness and search-coverage lemmas. Here we expand eligibility, invariants, checking, costs and implementation order. Let $R=\Reach_\sigma(Q_0)$, computed without expanding goals. A maximal run is either infinite, or finite and ending at a goal or at a state with no policy successor. All statements below concern reachable states; a cycle outside $R$ is irrelevant to a particular policy.
+Technical Appendix~\ref{taDoc-ta:source_synthesis} collects the complete synthesis proof, maximal-run/rank argument, exploration invariants and certificate checks. Here we give input eligibility, additional game encodings, containment and the independent-family construction. These arguments concern reachable policy states; cycles outside them do not affect that policy.
 
 \subsection{Complete eligibility checks}
 Before synthesis, we check
@@ -147,31 +139,6 @@ that $\prec$ is a strict partial order; requirement satisfaction and deadlock fr
 non-suppression of uncontrollable events by the pre-update and post-update controllers; and
 reachability of $Z_{\mathrm{load}}$. RS remains external evidence. Synthesis checks $\iota_r$'s type, domain and non-error property; completeness of its activation histories is supplied, rather than inferred.
 
-\subsection{Maximal runs and ranks}
-Assume $R$ is finite, all its states are safe, goals are terminal, and every non-goal has a successor. If the reachable non-goal subgraph has a cycle, first follow a path from a root to that cycle and then repeat it. Every edge is policy-permitted, including its selected nondeterministic outcome, so this is an infinite maximal run avoiding goals. Universal finite completion excludes it without invoking fairness.
-
-Conversely, if that subgraph is acyclic, no path can visit a non-goal twice. Every path therefore has at most $|R\setminus\Goal|$ non-goal edges before ending. A non-goal endpoint is impossible by the successor premise. Thus every maximal run ends at a goal. Define $\rank(q)$ as the maximum length of a goal-ending path from $q$, and set goal ranks to zero. Such a path exists because the graph is finite, acyclic off goals, and has no non-goal sinks. For each edge $q\to q'$ from a non-goal, prefixing a longest path from $q'$ proves $\rank(q)\geq1+\rank(q')$. This gives a positive natural-number rank at non-goals. Finally, a strict decrease around a cycle would give $\rank(q)>\rank(q)$, a contradiction. These implications establish all three equivalences. Without the successor premise, a non-goal sink is an acyclic counterexample.
-
-\subsection{The four exploration invariants}
-For the partial table $\mathcal D$, queried-empty buckets are recorded by candidate consumption even though they are absent from $\operatorname{dom}\mathcal D$. Each stored nonempty bucket is exact and contains all modeled outcomes. We state invariants at loop boundaries, after discovery queues and the finite reverse-edge worklist have been updated.
-\begin{enumerate}
-\item \textbf{Uncontrollable completeness.} On first expansion of $q$, all uncontrollable candidates are consumed before promotion can use the state. No candidate is added later: the finite event set is determined by $q$. Therefore every $q\in X$ has its complete uncontrollable successor set known. The transient insertion into $X$ inside the expansion block is not a return point.
-\item \textbf{Controllable exhaustion at failure.} A safe non-goal state with no uncontrollable has a cursor over all controllable candidates. Expansion consumes it to the next nonempty bucket or exhaustion. If a nonwinner has candidates remaining, it is in $\mathsf{Retry}$. Each retry consumes further candidates. The failure return is reached only after both queues and the propagation worklist are empty. Hence every such state in $V\setminus W$ has exhausted its cursor. Removing an entry when its state becomes winning cannot remove a losing candidate from this argument.
-\item \textbf{Monotone winning evidence.} A promoted state either has all uncontrollable outcomes at smaller retained ranks, or has a complete selected controllable bucket at smaller ranks and no uncontrollable. All those buckets are exact; growing $\mathcal D$ adds other controllable choices rather than new outcomes to an already stored choice. The policy disables those additional controllables. Existing rank-decreasing witness edges consequently remain a valid certificate. Goals are recognized using modeled uncontrollable enabledness before terminalization, so an unqueried uncontrollable cannot invalidate rank zero.
-\item \textbf{Open-state coverage.} Each newly discovered safe non-goal is inserted once in $\mathsf{Open}$. It is removed only for first expansion, when it enters $X$. Thus $V\cap\Safe\setminus(X\cup\Goal)\subseteq Open$. Unsafe states and goals are discovered terminals and are handled separately.
-\end{enumerate}
-The initial root insertion establishes these properties. Expansion, successor discovery, candidate consumption, and promotion preserve them as shown above; no other operation changes their relevant sets.
-
-\subsection{Attractor, termination, soundness, and completeness}
-Let $W_0=V\cap\Goal$. At the next layer a safe expanded state joins if its nonempty uncontrollable union is contained in the preceding layers, or if it has no uncontrollable and one complete nonempty controllable bucket contained there. Induction on these layers proves the existence of a winning policy for the current table. These minimum layer indices are analytical, not the implementation's retained certificate ranks. On first promotion the implementation assigns one plus the largest rank of the complete chosen successor set (all uncontrollable outcomes, or one winning controllable choice); goals have rank zero. It never lowers that assigned rank. Every stored choice used for promotion remains complete and rank-decreasing. Extraction may choose another stored controllable set only if all its successors also have smaller retained ranks. Goals satisfy the target and quiescence checks. Invariant I3 therefore preserves a valid certificate as exploration continues without claiming rank minimality.
-
-The complete termination, soundness and completeness proof is in Technical Appendix~\ref{taDoc-ta:source_synthesis}. The invariants above give its search-coverage and rank premises for the supplied successor and goal rules. A winning policy can be normalized by removing controls at UC-enabled states and retaining one winning control elsewhere; all UC outcomes and non-goal successors remain.
-
-\subsection{Checking the returned evidence}
-A WIN checker reconstructs the reachable policy domain from all roots and complete $\Post$ buckets. It verifies safety, enabledness of every retained action, nonempty successors outside goals, closure in the rank domain, and strict rank decrease for every outcome. At each goal it checks rank zero, physical uncontrollable quiescence, membership of $\kappa(q)$ in $Z_{load}$, and component/new-monitor equality. Omitted policy entries mean the empty set. The maximal-run lemma then proves the model-level claim without reproducing the synthesizer's exploration order.
-
-A LOSS checker verifies a nonempty intersection with the roots, no goal in $L$, and the obstruction conditions of that proof. Unsafe states are terminal losses. At a safe uncontrollable-free deadlock the universal condition on enabled controllables is vacuous, correctly certifying a loss. A safe uncontrollable-free state with choices requires inspecting every enabled candidate, so checking LOSS may cost as much as the corresponding exhaustive search. These checks trust the shared parser, successor, monitor, transfer, and endpoint/goal semantics; the separately implemented explicit and raw-LTS checks in the fixed correctness campaign (main-paper RQ2) provide additional, scoped cross-checks.
-
 \subsection{Work bound and static encoding}
 Technical Appendix~\ref{taDoc-ta:exploration_order} gives the complete counter-based $O(d+c+o)$ work and storage argument, where $d$ counts discovered states, $c$ candidate queries and $o$ returned outcome incidences. The bound assumes indexed predicates and constant-time bookkeeping; preprocessing and Java sorting/scans are additional costs.
 
@@ -180,6 +147,7 @@ For the following full-game encoding, let $N$ count states, $A$ candidate labels
 For any root/safety/goal/controllability-preserving isomorphism preserving all buckets, including empty ones, the strong-predecessor operation commutes with the state bijection. Induction preserves every attractor layer and its rank; complementing gives corresponding losing sets. Selected actions transport through the event bijection. Transport of load targets and $\kappa$ additionally requires matching typed endpoint projections; an untyped graph isomorphism alone supplies no such map.
 
 \subsection{Full-expansion containment and the independent family}
+\label{supp:independent-family}
 Direct-Full and OTF start from identical roots and use identical terminal tests, candidates, and successor rules. Induct on discovery by OTF. A non-root discovered state is an outcome queried at a previously discovered safe non-goal predecessor. Full expansion also discovers that predecessor by induction; since its terminal test is identical it expands the predecessor and queries the candidate, discovering every outcome. An unsafe or goal successor is recorded by both but expanded by neither. Applying this to the source of each queried bucket proves query containment as well as state containment. This reasoning covers arbitrary order and nondeterminism.
 
 For the exact $n+1$ versus $2^n$ family, component $i$ has one old and one new state, each with a controllable $tick$ loop, and its singleton transfer maps old to new. Both endpoint controllers have one state admitting $tick$; there are no requirements, uncontrollables, or dependencies. The new endpoint is the unique load target. The sole root has every transfer pending. Each update state is determined by a transferred subset $S\subseteq\{1,\ldots,n\}$. It has its $tick$ self-loop and, for each $i\notin S$, the transition $S\xrightarrow{\rho_i}S\cup\{i\}$. The full subset is the unique goal.
@@ -190,20 +158,9 @@ Every subset is reached by performing exactly its transfers in some order. Full 
 \label{supp:ordering}
 Technical Appendix~\ref{taDoc-ta:exploration_order} gives the complete measured order: disabled preliminary guided search, conditional event classes, endpoint mismatch and state ties, LIFO discovery, FIFO retries and promotion timing. It also derives the indexed work bound. The rules order queries, not policy execution; Eager and Update-first provide the reported materialization and order checks.
 
-\section{Monitor intervals and conditional trace lifting}
+\section{Frontend Initialization and Lifecycle Checks}
 \label{supp:runtime}
-The main paper proves the activation-invariant criterion, supported by the source checks in Technical Appendix~\ref{taDoc-ta:lookup-act}. Here we develop residual-history meanings and frontend premises. Technical Appendix~\ref{taDoc-ta:execution_proof} proves conditional trace lifting under A1--A4 and history completeness: runtime conformance, eventual observation, atomic boundaries and initializer meaning remain premises, while the linked-LTS checker verifies abstract composition.
-\subsection{Activation histories and residual meanings}
-For prefix-closed requirement language $\mathsf{SafePref}_r$, let $\mathsf H_r(\xi)$ be the declared activation histories projected by $\mathsf{obs}_r$. NEW checks use safe prior histories (A); UPD checks begin their reference at entry (E). Whole-history meaning H is a separate diagnostic.
-
-NEW activation histories include start once: initialization supplies the post-start residual and online monitoring consumes later events. Game admission initializes monitors without an update-game event; the FSP boundary interpretation below accounts for \texttt{hotSwapIn} once in the supplied UPD boundary state. Define $\mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}\{w:hw\in\mathsf{SafePref}_r\}$ and $\mathcal L_r(m)=\{w:\eta_r^*(m,w)\notin F_r\}$. Residual-sound initialization requires
-  \[
-    \mathcal L_r(\iota_r(\xi))\subseteq\mathcal C_r(\xi)
-    \quad(\xi\in\operatorname{dom}\iota_r)
-    \tag{RS}
-  \]
-with equality for an exact residual and strict inclusion for a conservative one. Distinct activation histories may require finite history bits in components and transfers. RS is supplied external interpretation evidence relative to the given requirement and observation meanings. For $r\in R^{\mathrm{upd}}$, $\operatorname{dom}\iota_r$ includes every reachable old component state.
-
+Technical Appendix~\ref{taDoc-ta:history_checks} defines the history families, residual languages and RS premises and gives their complete proofs. Appendix~\ref{taDoc-ta:lookup-act} treats activation-scoped invariants; Appendix~\ref{taDoc-ta:execution_proof} proves conditional trace lifting under A1--A4. Here we record how the measured frontend initializes monitors and how the game operations preserve their declared lifetimes. Runtime conformance, eventual observation, atomic boundaries and initializer meaning remain premises.
 
 \subsection{What the frontend initializes}
 Cell is an explicit finite contract. The Cell$_n$ measurements load its parameterized JSON representation through \texttt{CellRingDriver}, supplying the holder-dependent UPD initializer directly. The inherited FSP benchmarks use the distinct formula-compilation path below; its constant UPD initializer is not a restriction of the abstract contract.
@@ -213,90 +170,9 @@ The measured frontend has two distinct paths. For each NEW safety formula, it co
 
 \path{MtsaRevisedOtfDucsAdapter.newActivation} selects the observer indices belonging to that NEW formula (identity first, then a unique-name match), extracts their states from the augmented component tuple, and looks up the signature. A missing signature, an unknown monitor state or an error excludes the tuple. If observer indices are empty or the mapping is absent, it falls back to the monitor's initial state. Candidate tuples are the physical closure of all old endpoint roots under ordinary events and component transfers, allowing mixed versions. $\operatorname{dom}\iota_r$ retains exactly the non-error lookup entries; this does not prove past-history safety. The observer vector is stored with component zero, follows ordinary events in either version even while the NEW monitor is inactive, and is preserved by component transfers. At start, existing active monitors advance and the NEW monitor is installed from the lookup; it does not consume that start again.
 
-For UPD, \texttt{compileTesters} instead computes a constant boundary state by taking the raw monitor from state zero through \texttt{hotSwapIn}, or stuttering if that label is absent. \texttt{updateActivation} assigns this same non-error state to every reachable old physical tuple; an error boundary is rejected. UPD has no fluent-based activation lookup. The symbolic contract allows both forms as supplied $\iota_r$ maps, but the fluent-determination lemma below applies to an actual initializer only after its state agrees with the history-derived state. Our coverage CSV records the initializer mode separately. Source locations (including \path{UpdatingControllersDefinition}, which builds the table) and extraction commands are in the artifact's \path{experiments/rs_coverage/README.md}.
+For UPD, \texttt{compileTesters} instead computes a constant boundary state by taking the raw monitor from state zero through \texttt{hotSwapIn}, or stuttering if that label is absent. \texttt{updateActivation} assigns this same non-error state to every reachable old physical tuple; an error boundary is rejected. UPD has no fluent-based activation lookup. The symbolic contract allows both forms as supplied $\iota_r$ maps, but the applicable history-scope criterion in Technical Appendix~\ref{taDoc-ta:history_checks} must be justified for the supplied initializer. Our coverage CSV records the initializer mode separately. Source locations (including \path{UpdatingControllersDefinition}, which builds the table) and extraction commands are in the artifact's \path{experiments/rs_coverage/README.md}.
 
 A lookup initializer uses only the current referenced fluent-observer vector $f(\xi)$, writing $\iota_r(\xi)=\sigma_r(f(\xi))$. It can forget prior violations or pending obligations. The actual new- and update-requirement frontend paths are distinguished above.
-
-\subsection{Safe prior histories for NEW requirements (A)}
-A new requirement becomes effective at its own activation. Its supplied meaning retains the progress or obligations represented by the current fluent vector, while excluding prior violating histories from the reference intersection. With at most one occurrence of each update event, define
-\[
- \mathsf H_r^{\rm safe}(\xi)=\{h\in\mathsf H_r(\xi):
-    \eta_r^*(m_r^0,h)\notin F_r\},\qquad
- \mathcal C_r^{\rm safe}(\xi)=\bigcap_{h\in\mathsf H_r^{\rm safe}(\xi)}
-    \mathcal L_r(\eta_r^*(m_r^0,h)).
-\]
-Then $\mathsf{RS}_A$ is $\mathcal L_r(\iota_r(\xi))\subseteq\mathcal C_r^{\rm safe}(\xi)$.
-This is a choice of requirement meaning, not a proof that a past violating trace satisfied the original invariant. In particular, conditioning on safe histories does not validate application intent. If $\mathsf H_r^{\rm safe}(\xi)$ is empty, the intersection is the universal continuation language: inclusion is immediate, but equality generally fails. Exactness below is therefore explicitly restricted to nonempty safe-history domains.
-
-\begin{lemma}[A: language-determined safe-prefix initialization]
-\label{lem:rs-a}
-Explore the freely reachable monitor/observer product over one-shot update histories, recording but not expanding ERROR pairs. Suppose all non-error monitor states reached at the same fluent vector have equal continuation languages. On the activation domain, let the actual non-error lookup $\sigma_r(v)$ have that common language. Then $\iota_r(\xi)=\sigma_r(f(\xi))$ satisfies $\mathsf{RS}_A$, with equality whenever $\mathsf H_r^{\rm safe}(\xi)\ne\varnothing$.
-\end{lemma}
-\begin{proof}
-Every admissible safe history reaches a non-error product pair with observer vector $f(\xi)$. By language equivalence and lookup compatibility, its residual language equals $\mathcal L_r(\iota_r(\xi))$. A nonempty intersection of these equal languages is that language. For an empty history set, the universal intersection contains the initialized language, proving the stated inclusion.
-\end{proof}
-Language equivalence, rather than equality of state identifiers, is also the frontend's acceptance condition for multiple non-error states at a lookup vector. Our independent checker compares deterministic state pairs until an ERROR/non-error distinction or pair closure, and separately reconstructs the frontend's error-priority, equivalent-state/minimum-identifier rule. This checks the earlier saved monitor/observer exports against the source rule; those exports do not contain a materialized lookup table. A separate fresh frontend export directly checks all 138 tables (S4), while leaving physical-state decoding and actual activation histories unverified. The check establishes $\mathsf{RS}_A$ inclusion for all \RSAExactNew/\RSNewOccurrences{} NEW initializers without a nonemptiness premise. Equality additionally requires nonempty safe histories at the actual activation; their plant-level nonemptiness remains unverified.
-
-\subsection{From update entry: UPD requirements (E)}
-An update-interval requirement becomes effective at entry. Its reference monitor starts afresh with the actual entry fluent vector $v$, consumes \texttt{hotSwapIn} once, and observes the subsequent update interval. Let $\mathcal L_r^E(v)$ denote the resulting continuation language and $b_r$ the frontend's constant post-entry monitor state. For the entry vectors $V_r(\xi)$ compatible with $\xi$, define
-\[
- \mathcal C_r^E(\xi)=\bigcap_{v\in V_r(\xi)}\mathcal L_r^E(v),
- \qquad \mathsf{RS}_E:\quad
- \mathcal L_r(b_r)\subseteq\mathcal C_r^E(\xi).
-\]
-The reference language must account for the effect of $v$ on monitor initialization; simply attaching an unused observer vector to the fixed compiled DFA does not establish that relation. Before and after the one entry occurrence, each other update label is permitted at most once in the sufficient-condition overapproximation. This overapproximation may admit update labels before entry that the actual game excludes.
-
-\begin{lemma}[E: entry-value-independent boundary language]
-\label{lem:rs-e}
-Let $V_r$ overapproximate all reachable entry observer vectors under the one-shot event constraint. If $\mathcal L_r^E(v)=\mathcal L_r(b_r)$ for every $v\in V_r$, then the constant initializer satisfies $\mathsf{RS}_E$ exactly at every actual entry with nonempty $V_r(\xi)\subseteq V_r$.
-\end{lemma}
-\begin{proof}
-Every actual entry vector belongs to $V_r$, so its reference post-entry language equals the boundary language by hypothesis. Thus the nonempty intersection over $V_r(\xi)$ consists of copies of $\mathcal L_r(b_r)$ and equals that language. Constant initialization uses $b_r$, giving equality in $\mathsf{RS}_E$.
-\end{proof}
-\begin{samepage}
-\begin{lemma}[E$'$: update-stage fluents suffice]
-\label{lem:rs-e-prime}
-Suppose an UPD monitor references only declared fluents whose initiating and terminating labels are update commands: \texttt{stopOldSpec}, \texttt{startNewSpec}, \texttt{reconfigure} (including their indexed forms), or \texttt{hotSwapIn}. No such label occurs before actual entry. If the constant initializer is the non-error boundary state $b_r$ obtained from compiled state zero by consuming \texttt{hotSwapIn} once, then it satisfies $\mathsf{RS}_E$ with equality at every actual entry.
-\end{lemma}
-\begin{proof}
-Before entry, no defining update label occurs, so all referenced fluents retain their declared initial values.
-The fresh E monitor therefore starts at state zero and consumes \texttt{hotSwapIn} once, reaching $b_r$.
-Every actual entry has reference language $\mathcal L_r(b_r)$, so the reference intersection equals that language.
-\end{proof}
-\end{samepage}
-The E$'$ check reads the expanded initiating/terminating sets of each referenced fluent from the saved model exports, checks the constant initializer and its non-error boundary, and certifies \RSEExactUpd/\RSUpdOccurrences{} UPD occurrences. It uses the actual game's exclusion of pre-entry update commands; the older free-history diagnostic admits such commands and is retained unchanged. A name such as \texttt{stopPump} is an ordinary plant event, not an update command.
-
-The historical E$'$ condition leaves \RSEUnverifiedUpd{} R1 occurrences unverified because they reference ordinary-action predicates. Attaching different observer vectors to a fixed DFA does not establish their reference languages. The additional source-specific check below proves their entry interpretation without changing those historical records.
-
-\begin{lemma}[E: guarded-invariant entry initialization]
-\label{lem:r1-entry}
-For a fresh entry-scoped requirement $\Box(G\Rightarrow\neg A)$, suppose $G$ is initially false, changes only on actual update commands excluded from old-endpoint histories, and is unchanged by entry. Let $A$ be a disjunction of ordinary-event predicates, each reset by entry. If the saved DFA has the two-state invariant transitions described below and its constant initializer is the non-error false-guard state obtained by consuming entry once from its default initial state, then the initializer satisfies $\mathsf{RS}_E$ with equality at every actual entry.
-\end{lemma}
-\begin{proof}
-No update command occurs before entry, so $G$ is false there. Every possible value of the action predicates satisfies the initial implication. Entry leaves $G$ false and resets all action predicates; the fresh pure invariant has no pending obligation from an earlier position. The resulting continuation language is thus identical for every entry valuation and equals that of the supplied boundary state. The compatible entry set is nonempty at an actual modeled entry, so intersecting these equal languages establishes exactness.
-\end{proof}
-
-The added checker reads the original source formulas, expands action aliases, and checks their correspondence to saved monitor/observer exports. For each R1 occurrence, it requires one default-false declared guard, nonempty disjoint initiating/terminating sets consisting only of actual update commands, and ordinary-event predicates reset by entry. It checks source/export equality of these sets, a constant non-error boundary initializer, and all DFA transitions against the two-state invariant: initiating commands set the guard, terminating commands clear it, a forbidden ordinary event when the guard holds enters ERROR, and other events stutter. ERROR absorbs all labels; absent local-alphabet edges become ERROR and labels outside that alphabet stutter, matching the adapter. All 46 monitors omit the entry label from their local alphabets, so consuming entry stutters at the false-guard state.
-
-Inspection of namespace validation and endpoint construction, together with the saved successful input-validation results, establishes that old histories contain only ordinary events. The adapter computes the boundary value once and installs it directly at every old root; initialization does not consume entry a second time. Seven negative mutations test rejection of a wrong guard value, non-update guard event, guard-changing entry, missing declared edge/label, non-rejecting forbidden event and missing entry reset. The checker verifies all 46 occurrences across 4,722 state--label pairs and 854 possible action-predicate entry valuations. These are static validation counts, not extra synthesis trials or enumerated physical histories. S4 preserves the older free-history and E$'$ results, and the new CSV labels its distinct sufficient condition. The new proof uses the existing E meaning; it does not establish the history-inclusive H interpretation or application-level conformance.
-
-\subsection{Whole-history obligations: a stronger diagnostic}\label{supp:history-diagnostic}
-For this coverage audit, $\mathsf{obs}_r$ retains the events defining the referenced fluents, independently of the active component version. Run the requirement monitor from $m_r^0$ on the whole projected history before activation and its continuation. With absorbing error states this gives
-\[
- \mathcal C_r(\xi)=\bigcap_{h\in\mathsf H_r(\xi)}
- \mathcal L_r\bigl(\eta_r^*(m_r^0,h)\bigr).
-\]
-H counts violations before activation. If an admitted history reaches ERROR, its continuation language is empty; a non-error initializer accepts the empty suffix and cannot satisfy RS at that activation. We retain the H check as a diagnostic and assert no benchmark RS guarantee under H. The A and E interpretations above have different scopes; none changes the compiled game or any saved synthesis decision.
-
-\begin{lemma}[Fluent-determined exact initialization]
-\label{lem:fluent-determined}
-Let the freely reachable product of the deterministic requirement monitor (including absorbing errors) and all its referenced fluent observers start at their specified initial states. Suppose equal fluent vectors in that product imply equal monitor states. Let $\sigma_r(v)$ return that unique monitor state for each reachable vector $v$. For any activation state with $\mathsf H_r(\xi)\ne\varnothing$ whose histories are represented in this product and whose supplied initializer is $\iota_r(\xi)=\sigma_r(f(\xi))$, initialization is an exact residual for the history-inclusive interpretation.
-\end{lemma}
-\begin{proof}
-Each projected activation history reaches a product pair $(\eta_r^*(m_r^0,h),f(\xi))$. Fluent determination makes its first coordinate equal to $\sigma_r(f(\xi))$, independently of $h$. Thus every language in the intersection defining $\mathcal C_r(\xi)$ is the same language $\mathcal L_r(\iota_r(\xi))$. Because the history family is nonempty, its intersection is that language, proving equality in RS. For an empty history family, the intersection is $\Sigma^*$ and this argument gives inclusion only, not equality in general.
-\end{proof}
-
-A single non-error state is insufficient for this lemma. For $[]p$ with $p$ initially true, let $a$ make $p$ false and $b$ restore it. The empty history and $ab$ have the same current fluent value but reach the safe and absorbing-error monitor states, respectively. A check that discards errors verifies only safe-prefix determination, a weaker condition that needs a separate safe-history premise. We use the full product, including errors. Failure of this plant-independent sufficient condition leaves RS unverified for the actual activation histories; it is not by itself a counterexample to the supplied plant's RS.
 
 \subsection{Lifecycle induction and residual meanings}
 At entry, each component is old, all update operations are pending, old monitor states are inherited from the reachable monitored endpoint, new monitors are inactive, and update-interval monitors receive the supplied $\iota_r$. This establishes the version/pending equivalence and $t\in\ActT(P)\iff\mu(t)\ne\bot$.
@@ -321,7 +197,7 @@ To follow the main paper, use Section~\ref{supp:vthree-mechanisms} for granulari
 In saved filenames, historical RQ1 (correctness) and RQ2 (capability) both support current RQ2; historical RQ4 (scaling) supports current RQ3. Current RQ1 draws on the E1/E6 granularity campaigns.
 
 \paragraph{Current validation status.}
-The current reference-meaning results are exact activation-scoped languages for 900 non-error new-requirement lookup cells and exact entry-scoped initialization for 135 interval-requirement occurrences (46 R1 and 89 R2). These statements concern the declared reference observations. They do not establish actual activation decoding, future observer conformance or absence of fallback for every application policy. The historical H/A/E$'$ table later in this section records earlier sufficient-condition checks; its 46 unverified E$'$ entries do not replace the current R1 entry argument. Technical Appendix~\ref{taDoc-ta:lookup-act} and S3 give the derivations and remaining premises.
+The current reference-meaning results are exact activation-scoped languages for 900 non-error new-requirement lookup cells and exact entry-scoped initialization for 135 interval-requirement occurrences (46 R1 and 89 R2). Appendix~\ref{taDoc-ta:command-observation} proves when command-preserved physical observers give the same ACT language, with finite checks for all 46 NEW positions. Correct activation decoding, ordinary-event updates and actual lookup/fallback behavior remain separate premises. The saved Railcab analysis checks its 21 starts and selected continuations (Appendix~\ref{taDoc-ta:railcab-activation}). The historical H/A/E$'$ table later in this section records earlier sufficient-condition checks; its 46 unverified E$'$ entries do not replace the current R1 entry argument. Technical Appendix~\ref{taDoc-ta:lookup-act} and~\ref{taDoc-ta:history_checks} give the derivations.
 
 
 \subsection{Constructed operational mechanisms and controls}
@@ -365,18 +241,18 @@ The archived correctness campaign, labeled RQ1 in the saved files, contains 92 j
 
 Ten original semantic models have 31 variants that rename or reorder elements, add unreachable states, or permute components. The code passes 41 focused tests, including five boundary tests; the broader run passes 99 tests with one opt-in integration test unexecuted.
 
-\paragraph{Current interpretation evidence.}
-The current results are NEW: \RSNewOccurrences{} A inclusions (nonempty safe-history domains unverified except the stated PC2 tuple), and UPD: \VThreeRSUpdExact{} E justifications (46 R1 and 89 R2). Direct ACT policy arguments cover PC2 and GSM. Separately, all 900 non-error lookup cells have the exact source-invariant continuation language under their reference observers; actual activation key/observation/fallback conformance remains a premise (Technical Appendix~\ref{taDoc-ta:lookup-act}). The additional R1 evidence below strengthens its earlier sufficient condition; no historical failures are removed.
+\paragraph{How these records support the current guarantees.}
+Main-paper Table~\ref{mainDoc-tab:guarantee-routes} pairs each current guarantee with its premises and checked population; Technical Appendix~\ref{taDoc-ta:validation_scope} gives the full map. The records below describe lookup reconstruction and entry checks. Direct ACT arguments for PC2/GSM and the two saved Railcab policies are in Technical Appendices~\ref{taDoc-ta:pc2_history_boundary} and~\ref{taDoc-ta:activation_scope}. Historical failures remain in Section~\ref{supp:historical-init}.
 
 \paragraph{Direct frontend lookup validation.}
 We materialized the normal frontend's NEW lookup objects for all 27 application inputs using the same frozen JAR and byte-identical inputs. Each separate JVM ran once with a 2~GiB heap and 120~s limit; all 27 completed, with no retry or omitted target. Frontend compilation constructs the endpoint controllers, but the exporter neither runs FG synthesis nor expands physical closure or the activation domain. These are functional checks, not performance samples or recovered historical JVM objects.
 
 The independent Python checker matches every exported table's keys and values and verifies observer order, alphabets and transitions against the saved definitions; Technical Appendix~\ref{taDoc-ta:lookup-act} gives the complete counts and their relation to source-invariant exactness. It reconstructs the full monitor/observer table over repeatable update events, includes the first ERROR frontier, applies ERROR priority and compares every key and value. A second reconstruction uses the earlier check's alphabet and order: all 138 alphabet differences and 114 column permutations are reconciled explicitly. The resulting non-error values and ERROR counts match the earlier CSV.
 
-Five mutations of copies of real exports are detected: a safe value changed to ERROR, the converse, a deleted key with adjusted count, an omitted observer transition, and permuted columns without matching key permutation. Two separate Python unit cases cover initially-true normalization and ERROR priority. Actual data contain no initially-true columns, safe/ERROR key collisions or multiple safe states needing nontrivial language-equivalence checks, so these Java branches are not validated by the 27 exports. Physical-state decoding, full activation-domain construction and actual safe-history nonemptiness remain unverified. The complete inputs, commands, tables, comparison and negative checks are in \path{evidence/frontend_lookup_demo/}; these files are included in the public artifact.
+Five mutations of copies of real exports are detected: a safe value changed to ERROR, the converse, a deleted key with adjusted count, an omitted observer transition, and permuted columns without matching key permutation. Two separate Python unit cases cover initially-true normalization and ERROR priority. Actual data contain no initially-true columns, safe/ERROR key collisions or multiple safe states needing nontrivial language-equivalence checks, so these Java branches are not validated by the 27 exports. Physical-state decoding, full activation-domain construction and actual safe-history nonemptiness remain unverified. The complete inputs, commands, tables, comparison and negative checks are archived at \path{results/supplement-checks/frontend_lookup_demo/}. Reproduction places these files under \path{evidence/frontend_lookup_demo/}.
 
 \paragraph{Additional entry-invariant evidence.}
-The separate static checker \path{verify_r1_entry_invariant.py} verifies the guarded-invariant condition for R1 in GSM (1 occurrence), Industry (3), MetaSocket (1), PowerPlant (3), PC Arms=1 (6), PC Arms=2 (12), Railcab (7), Surveillance (7), and Workflow (6): 46/46 in total. Its CSV records each source formula and guard line, saved export selector, original run's input validation and update labels, and the old E$'$ flags without altering them. The seven negative mutations are separate checker tests. No synthesis decision, input formula, measurement or historical diagnostic was replaced. These check files are included in the public artifact.
+The separate static checker \path{verify_r1_entry_invariant.py} verifies the guarded-invariant condition for R1 in GSM (1 occurrence), Industry (3), MetaSocket (1), PowerPlant (3), PC Arms=1 (6), PC Arms=2 (12), Railcab (7), Surveillance (7), and Workflow (6): 46/46 in total. Its CSV records each source formula and guard line, saved export selector, original run's input validation and update labels, and the old E$'$ flags without altering them. The seven negative mutations are separate checker tests. No synthesis decision, input formula, measurement or historical diagnostic was replaced. They are archived as \path{results/supplement-checks/verify_r1_entry_invariant.py} and \path{results/supplement-checks/r1-entry-invariant-verification.csv}.
 
 \subsubsection{Quiescent-goal functional checks}
 Three separate one-run fixtures test a safe target match with an enabled uncontrollable event. One old state has a controllable idle loop and a transfer to new state $n_0$. There are no monitors or dependencies. All new states have controllable idle loops. The three cases are:
@@ -461,6 +337,7 @@ Lazy defers update-game states and successor buckets after this preparation. For
 The metric panels complete the fixed-budget record from Section~\ref{supp:fixed-budget}. The Industry and Railcab blocks then explain particular outcomes using separate saved diagnostic runs. Their measurement scopes remain distinct.
 
 \subsubsection{Complete metric panels and completion ranks}
+\label{supp:metric-panels}
 \begingroup
 % Keep the first panel with its introduction. Pair queries/outcomes and
 % linked states/transitions at the original font size; retain all table data.
@@ -485,6 +362,7 @@ All 25 winning Lazy contracts have five saved worst-completion-rank values, for 
 
 \clearpage
 \subsubsection{Industry/R1 losing region and a separate contract variant}
+\label{supp:industry-diagnostic}
 \paragraph{Industry/R1 diagnostic.}
 One Mac run of the frozen JAR enables the separate exhaustive checker and confirms UNREALIZABLE by its reachable-state fixed point (110,992 states, 873,132 successor queries, 211,940 outcomes). Its exported game stops at goals, giving 110,825 states; a Python fixed point on this export identifies 89 winning and 42 losing entries among 131 roots and checks every losing-region closure condition. These counts concern correctness, not performance.
 
@@ -515,6 +393,7 @@ At the illustrative losing root's counterpart, a winning path reconfigures the t
 
 \clearpage
 \subsubsection{Qualitative Railcab policy exports}
+\label{supp:railcab-exports}
 \paragraph{Export scope.}
 The two qualitative illustrations are separate, single executions on macOS/ARM64 with OpenJDK 17.0.19, using the saved RQ3 campaign JAR, input model, solver properties and 64~GiB heap limit. Only the output options change: \texttt{--transition-output full} and \path{--deployment-output handoff-bundle.json} retain complete policy bodies. The scripts, exact commands, outputs and extraction checks are in \path{evidence/railcab_policy_demo} and \path{evidence/railcab_r1_policy_demo}. Their times are excluded from every performance table. Each was executed once; both return WIN with certificate and Link checks. No independent full-game enumeration or actual runtime experiment was added.
 
@@ -523,8 +402,7 @@ Both exports have 22 old entries and 71 new endpoint states. Their structural fi
 \paragraph{Base: both outcomes of one transfer.}
 Base exports 115 certificate states, 117 buckets, 118 outcomes, two reached goals and maximum rank 21.
 
-Figure~\ref{fig:railcab-policy} shows the entire descendant fragment of Base state M69 (rank 13), reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. Both outcomes of one transfer and their distinct endpoint continuations are retained. AC,T and AC,F have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values; they must not be merged. The fragment has 26 states and 25 edges, with state identifiers and every expanded edge in \path{policy-fragment-edges.csv}. M69's outcomes are M15 (rank 11) and M19 (rank 12); their suffixes end at M20 and M7, loading controller states 3 and 1.
-\input{figures/railcab_policy_fragment.tex}
+Main-paper Figure~\ref{mainDoc-fig:railcab-main} shows the entire descendant fragment of Base state M69 (rank 13), reached from old entry O1 after five old stops. All four components are old; every old monitor is inactive, every new monitor is unstarted and Base has no interval monitor. Both outcomes of one transfer and their distinct endpoint continuations are retained. AC,T and AC,F have the same milestone location but different \texttt{ApproachingCrossingHappen} observer values; they must not be merged. The fragment has 26 states and 25 edges, with state identifiers and every expanded edge in \path{policy-fragment-edges.csv}. M69's outcomes are M15 (rank 11) and M19 (rank 12); their suffixes end at M20 and M7, loading controller states 3 and 1.
 
 Each contracted transfer block uses \texttt{ANOTHER\_REQUEST}, \texttt{REQUEST\_ATOMIC}, then \texttt{TURNS}. Each start block activates, in order, \texttt{P\_BRAKE\_DURING\_LASTBRAKE}, \path{P_BRAKE_IF_SOMETHING_BAD}, \path{P_CHECK_STATUS_AFTER_APPROACHING_CROSSING}, \path{P_CHECK_STATUS_BEFORE_LAST_EMERGENCY_BRAKE}, \path{P_EBRAKE_DURING_ELASTBRAKE}, \path{P_EBRAKE_IF_SOMETHING_BAD}, and \texttt{P\_NEW\_NOT\_CRASH}. Every internal contracted state has exactly one bucket and one outcome. Extraction verifies all 118 rank decreases and both component/new-monitor matches with the fixed endpoint.
 
@@ -557,14 +435,14 @@ The separate $enterAllowed.1$ branch completes from the same old entry without b
 \label{supp:auxiliary-campaigns}
 This section retains older sufficient-condition diagnostics, the auxiliary requirement-boundary fixtures, construction/contract variants, and controlled scaling families. They supplement the current RQs without replacing fixed-budget failures or increasing the main constructed-pair denominator.
 
-\subsubsection{Historical initialization coverage}
+\subsubsection{Historical initialization coverage}\label{supp:historical-init}
 \paragraph{Archived H/A/E$'$ sufficient-condition results.}
 The historical table below is retained unchanged and is not a summary of current validation status. For UPD, the current entry-scoped conclusion combines two sufficient conditions:
 \begin{center}\small
 \begin{tabular}{@{}p{.33\linewidth}p{.25\linewidth}p{.34\linewidth}@{}}\toprule
 UPD population & Archived E$'$ check & Current E justification\\\midrule
-89 stage-fluent occurrences & Exact & Lemma~\ref{lem:rs-e-prime}\\
-46 guarded R1 occurrences & Unverified & Exact by Lemma~\ref{lem:r1-entry}\\\bottomrule
+89 stage-fluent occurrences & Exact & Lemma~\ref{taDoc-lem:rs-e-prime}\\
+46 guarded R1 occurrences & Unverified & Exact by Lemma~\ref{taDoc-lem:r1-entry}\\\bottomrule
 \end{tabular}
 \end{center}
 Together they establish exact entry initialization for 135 UPD occurrences; application-level execution conformance remains unchecked.
@@ -572,6 +450,7 @@ Together they establish exact entry initialization for 135 UPD occurrences; appl
 \input{build/generated/rs-model-table.tex}
 
 \subsubsection{Auxiliary requirement-boundary inputs}
+\label{supp:boundary-inputs}
 The capability campaign contains 14 decisions. Its requirement-boundary comparison follows.
 \input{figures/rq2_boundary.tex}
 Each input has one old entry. Endpoints allow only $idle$, with $align$ additionally permitted at neutral's new endpoint. OLD/NEW testers have one safe state and an error sink; NEW activation requires a false forbidden-event observer. Entry sets $Aligned$ false. In separation, $align$ sets persistent $Aligned$ and a separate observer of the last ordinary event. $idle$ clears only the observer; update events preserve both.
@@ -606,6 +485,7 @@ Railcab/R2 & \VThreeETwoRailcabRTwoStatesLazy{} & \VThreeETwoRailcabRTwoStatesEa
 
 \clearpage
 \subsubsection{Controlled families, Travel, and hub scaling}
+\label{supp:scaling}
 These are additional scaling populations for current RQ3; RQ4 in generated captions is the archived campaign name. Their first-trial structure, completion eligibility, censored outcomes, and complete plotted ranges are retained below.
 
 \begingroup
@@ -625,7 +505,7 @@ These are additional scaling populations for current RQ3; RQ4 in generated capti
 \begin{figure}[p]
 \centering
 \includegraphics[width=\linewidth]{build/generated/rq4-states-vs-k-full.pdf}
-\caption{Full scaling-state panels, retaining every tested Travel concurrency level and every hub profile. RQ4 is the archived campaign name; these results appear under RQ3 (Scaling limits) in the main paper. The saved plots label the independent component count as $K$; it is $n$ in the main paper and S2, distinct from Travel's choice count $K$. Censored outcomes have status marks and no numeric ordinate.}
+\caption{Full scaling-state panels, retaining every tested Travel concurrency level and every hub profile. RQ4 is the archived campaign name; these results appear under RQ3 in the main paper. The saved plots label the independent component count as $K$; it is $n$ in the main paper and S2, distinct from Travel's choice count $K$. Censored outcomes have status marks and no numeric ordinate.}
 \end{figure}
 \begin{figure}[p]
 \centering
@@ -736,11 +616,11 @@ For supplied Railcab, both logs report 1,763 states before safety pruning and 1,
 
 \clearpage
 \subsection*{Artifact reproduction status}
-The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean Hypertext Transfer Protocol Secure (HTTPS) clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}; the paper-matched PDFs contain the current formal statements and presentation. Its primary reading pair is the main paper and integrated supplementary material, with complete sources and both component PDFs retained for rebuilding and compatibility. The mathematical arguments and presentation use the unchanged experimental observations.
+The public anonymous repository contains the full derived source tree, saved RQ1/RQ2 evidence, compiled-monitor exports and Python RS checker, and generated tables/figures. The earlier clean Hypertext Transfer Protocol Secure (HTTPS) clone, empty-cache source build and RQ1/RQ2 derive-only smoke checks passed; rederived fields matched the saved expectations after path normalization. Tests were compiled but not executed. Their logs are now under \path{reproduce/previous-validation/clean-clone/}. Third-party dependencies are fetched from official upstream sources; no shaded JAR is distributed. The expanded raw-output package is included in three lossless archive parts within the repository. The current \path{reproduce/check.py} verifies and restores these files, then checks saved correctness/supplement evidence and E-series/ext1--7 results without rerunning benchmarks. The README documents this command and its scope. The retained implementation and experimental evidence snapshot is identified by tag \texttt{fgducs-invariants-20261002}. The matching main paper, integrated supplement and source with the three added saved-evidence analyses are published at tag \texttt{fgducs-c143-20261004}, as linked in main-paper Data Availability. Earlier tags retain their preceding manuscript versions. The mathematical arguments and presentation use the unchanged experimental observations.
 
 \clearpage
 \section{Expanded related-work comparison}
-Main-paper Table~\ref{mainDoc-tab:contract-workflow} summarizes three update interfaces. The tables here expand their coverage and progress conditions, then compare synthesis and switching foundations. Publication details appear in the main bibliography. Section and definition numbers identify the inspected native contracts; differences do not establish an inability to encode one approach in another.
+Main-paper Table~\ref{mainDoc-tab:contract-workflow} summarizes four update interfaces. The tables here expand their coverage and progress conditions, then compare synthesis and switching foundations. Publication details appear in the main bibliography. Section and definition numbers identify the inspected native contracts; differences do not establish an inability to encode one approach in another.
 
 \paragraph{Comparison terminology.}
 Linear temporal logic (LTL) and fluent linear temporal logic (FLTL) express temporal requirements. Binary decision diagrams (BDDs), including ordered BDDs (OBDDs), represent Boolean functions. Depth-first search (DFS) explores one branch before backtracking. Discrete-event systems (DES) change state through events. CIF is the language and toolset for supervisory-controller synthesis used by the dynamic-feature approach (its Section~2.2).
@@ -755,7 +635,7 @@ Linear temporal logic (LTL) and fluent linear temporal logic (FLTL) express temp
 \toprule
 Work & Inputs and change mechanism & Coverage and progress & Constructed result and scope\\
 \midrule
-DUCS (2016, 2020)
+DUCS (TSE 2020)
 & One global old-stop/new-start pair, with distinct events; partial, set-valued global $R$; optional stages in $E'$; $T$ constrains order (Secs.~4.2--4.3)
 & All old states via total $H$; all outcomes; eventual update events after hotSwap; legal and deadlock-free (Defs.~4.1--4.3)
 & Update controller; FLTL control reduction and MTSA synthesis\\
@@ -771,7 +651,7 @@ Live Synthesis (2022)
 & Old/new LTL and trace or transition system; residual $\Psi(\eta,\varphi)$; old obligations finitely satisfied
 & Universal variant: all old finite traces and new traces; reduction assumes one eventual update (Thm.~6.4)
 & Obligation monitor and LTL synthesis; LiveLTL language inclusion\\
-Jiao et al. (2013)
+\href{main.pdf#cite.JiaoGanXiao2013Reconfiguration}{Jiao et al. (2013)}
 & Existing workcell supervisor and added machine; event relabeling and communication transitions produce coordinated supervisors (Sec.~III.B)
 & Old states map to new supervisor-state pairs; instant switching is assumed faster than UC events (Sec.~III.C)
 & Reuses and transforms the controller; the example checks equivalence to monolithic synthesis; no staged all-outcome handover search\\
@@ -779,14 +659,14 @@ Dynamic Feature (2024)
 & Feature come/go, component reinitialization, simultaneous changes; behavioral/configuration constraints
 & Mixed controllability; UC preserved; every reachable controlled state has a jointly marked continuation (Sec.~7)
 & CIF BDD synthesis; maximal safe controllable nonblocking supervisor\\
-Zhang et al. (2005)
+\href{main.pdf#cite.Zhang2005SafeAdaptation}{Zhang et al. (2005)}
 & Configurations, dependency invariants, adaptive actions, implementations and costs; generated safe adaptation graph (Secs.~3.1, 4.1--4.2)
 & Supplied source/target request; minimum-cost path; failed steps may roll back or await intervention (Sec.~4.4)
 & Dijkstra path and manager/agent protocol; action-specific safe states, atomic isolated adaptation (Secs.~3.1, 4.3)\\
 Network updates (2015)
-& Per-switch replacement; searched update order; packet-flush waits
+& Switch or rule replacement; searched order; packet-flush waits (Sec.~3.1)
 & All single-packet traces satisfy LTL; failure freedom, fair forwarding, bounded processing (Sec.~3.1)
-& Sequence; DFS and incremental checking; simple/careful completeness\\
+& Sequence; final packet-trace equivalence (Def.~4); simple/careful completeness (Sec.~4.3)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -827,12 +707,15 @@ Switched supervisory control (2020)
 & One plant and two safe/live supervisors; switching and state-reinitialization functions (Sec.~3.3, Defs.~4--6)
 & Safe, deadlock-free switching; every finite trace has an extension reaching a switching opportunity (Problem~1); repeated switching
 & Also synthesizes the supervisor pair; supplied-pair construction retains compatible plant/supervisor states, not a one-time finite completion objective\\
-Switched DES invariants (2017)
+\href{main.pdf#cite.ReveliotisFei2017SwitchedDES}{Switched DES invariants (2017)}
 & Given operational modes and transitions, uncontrollable mode switches and a safety predicate per mode (Sec.~II)
 & Invariants under every permitted transition; all mode switches retained; finite convergence concerns computation, not handover time
 & Maximally permissive supervisor; distributed modal computation reaches the same solution (Thms.~1--2)\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\paragraph{Atomicity and interleavings.}
+Lipton's reduction uses left/right movers and nonblocking suffixes to preserve final states when a sequence is replaced by an atomic block (Section~3, Theorem~2 and Equation~(5)). Its existence of a halting calculation differs from finite completion of every maximal run. Godefroid's partial-order method identifies traces through adjacent independent-action exchanges and explores representative interleavings (Sections~4--5). Our serialization propositions address the supplied update contract: expanding a winning batch must preserve quiescence at intermediate states, all transfer outcomes, requirement observations and the selected endpoint, with bounded extra events. We do not claim a new general atomicity principle or an impossibility of reduction to these frameworks.
 
 \end{document}

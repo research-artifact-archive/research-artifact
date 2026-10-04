@@ -11,4 +11,4 @@ The quickest executable input is the two-replica [Rolling model](../results/gran
 
 WIN gives a finite-completion policy relative to this model, not a runtime integration implementation. LOSS means some admitted entry cannot guarantee the specified safe completion. Timeout and OOM are unresolved observations. In the viewer, inspect requirement states and pending actions alongside the physical states; a path through physical states alone does not show requirement lifetime correctness.
 
-For reusable family generators, start with `results/granularity/e6/rolling/`, `canary/`, `policy/`, and `db_rolling/`. Use their canonical versions documented in the main README. Do not overwrite the distributed inputs or count a modified example as an unchanged reproduction.
+For reusable family generators, start with `results/granularity/e6/rolling/`, `canary/`, `policy/`, and `db_rolling/`. Use their canonical versions documented in the [results guide](RESULTS.md). Do not overwrite the distributed inputs or count a modified example as an unchanged reproduction.

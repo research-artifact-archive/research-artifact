@@ -1,0 +1,19 @@
+\paragraph{Applicability to inherited transfer comparisons.}
+We inspected all nine saved FSP inputs and their Base/R1 transfer comparisons. Table~\ref{tab:serial-inputs} records the equal-alphabet specialization of the transfer condition, including failures. This is source inspection, not an independently executed FSP semantic checker or new synthesis experiment. The artifact archives source excerpts and a record-consistency checker in its serial-transfer-inputs result directory.
+\begin{table}[!htbp]\centering\small
+\caption{Equal-alphabet transfer-condition inspection for every inherited input.}\label{tab:serial-inputs}
+\begin{tabular}{@{}lcc@{}}\toprule
+Input & Same UC alphabet & No newly enabled UC\\\midrule
+GSM, Industry, MetaSocket & yes & yes\\
+PowerPlant, Surveillance, Workflow & yes & yes\\
+PC1, PC2 & no & yes\\
+Railcab & no & no\\\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+The six positive inputs have empty UC sets, unchanged local graphs with state-preserving transfers, or changes confined to controllable behavior. PC1/PC2 replace UC polishing-result labels with painting-result labels, violating alphabet equality. Their ARM-to-ARM transfer pairs also fail the generalized condition: both sides enable no UC event, but removing the blocked \texttt{polishOk} and \texttt{polishNOk} labels violates $B_i^{\mathrm{old}}(s)\subseteq B_i^{\mathrm{new}}(s')$. Railcab adds UC \texttt{approachingCrossing} and enables it through a declared transfer from old to new \texttt{ENDOFTS}; both conditions fail.
+
+All 138 Base/R1 NEW/UPD monitor occurrences omit transfer labels; OLD source requirements mention ordinary labels only. Alphabet-external labels stutter, so these transfer effects commute. All 18 saved contracts have no explicit precedence. The retained merge transformation preserves the other comparison premises and validates commutation. This supports applicability to 12/18 transfer-only comparisons: 11 observed WIN/WIN pairs and Industry/R1's LOSS/LOSS pair, where the antecedent is false. The other six pairs are WIN/WIN despite failing this equal-alphabet specialization. The 36 boundary/both comparisons and R2 applicability are excluded. The implication is merged WIN $\Rightarrow$ fine WIN; it does not explain the absence of fine WIN/merged LOSS in the 54 comparisons. Compiled OLD testers were not separately exported; this analysis establishes source/model premises, not runtime conformance.
+
+\paragraph{Finite checks of the transfer condition.}
+A saved auxiliary check of the equal-alphabet specialization considers 4,352 two-component games and 16,640 all-old starting tuples: 256 exhaustive one-state cases and 4,096 seeded two-state cases. The latter are the first 4,096 of 10,695 generated candidates having a nonempty quiescent all-new target set; 6,599 outside that domain are retained as excluded counts. The check uses ordinary controls, UC events, nondeterministic outcomes, partial transfers and arbitrary nonempty target subsets. It finds 1,910 both-WIN starts, 63 fine-only WIN starts and 14,667 both-LOSS starts, with no coarse-only WIN. It also checks 6,541 partial-prefix quiescence obligations and 5,124 Cartesian outcome comparisons. Monitors and precedence are absent and endpoint controllers are not reconstructed, so this does not test the commuting-monitor, precedence or frontend premises. Seed 20261003 and both failed-condition counterexamples are retained with the checker. This is a finite sanity check of the stated implication, not its proof, an application benchmark or a performance result.

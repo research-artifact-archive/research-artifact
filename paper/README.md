@@ -1,59 +1,102 @@
-# FG-DUCS manuscript and supplementary material
+# C143 paper and supplementary material
 
-[Main paper](main.pdf) · [Integrated supplementary material](supplementary_material.pdf) · [TeX and generated evidence](source/).
+**Selected manuscript: C143, 4 October 2026.** [Read the main paper](main.pdf) · [Read the integrated supplement](supplementary_material.pdf) · [Download both PDFs](reading_bundle.zip) · [Download manuscript source](manuscript_source.zip).
 
-These materials were prepared by the authors for *Synthesizing Staged Updates between Verified Controllers*, whose reference **[4], FG-DUCS Evaluation Artifact**, identifies this package. The PDFs match [`fgducs-c115-20261003`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c115-20261003): 18 body pages and 21 pages total, plus 82 pages of integrated supplementary material. This records a manuscript release, not a completed conference submission.
+The main paper has **18 pages of body text, 21 pages in total**. The integrated supplement has **87 pages**: a two-page guide and contents, **Technical Appendix A–R (43 pages)**, and **Supplement S1–S5 (42 pages)**. The PDFs and source ZIP contain the selected manuscript with only artifact-location and reference updates for this publication. The scientific body is unchanged.
 
-The main paper proceeds from motivating Cell and Policy examples to the local contract, its generated game and guarantees, granularity, synthesis and evaluation. Table 1 compares the supplied inputs, generated results, progress and continuation of DUCS, GR(1) updating and FG-DUCS. Proposition 5.3 states the serial-transfer sufficient condition in the main paper; Technical Appendix O.13 contains its proof, counterexamples, finite checks and source-inspection table for all nine inherited inputs. Section 2.3 also distinguishes earlier O-DUCS analysis from the archived fork examined in S4.8. Broader primary-source comparisons appear in Related Work and S5.
+## Start from the paper
 
-Table 2 states the properties and premises; Table 4 identifies the corresponding validation populations and boundaries: 46 source positions reused in 138 contract occurrences, 900 non-error lookup cells, and 25 winning application contracts across 125 repeated runs. The paper distinguishes correctness of the supplied contract game, the meaning of requirements at activation, and faithful execution. Saved lookup exactness does not establish actual activation conformance: decoding, post-start keys, observer behavior and absence of fallback remain unchecked. Technical Appendix E, S3 and S4.2 give the detailed evidence; S4.5.1 connects the archived entry-initialization diagnostic to the current results without replacing the historical values.
+| Main-paper item | Question answered | Read next |
+|---|---|---|
+| [§2, Figure 1, pp.2–4](main.pdf#page=2) | Why separate component transfers and requirement boundaries? | [Complete Cell and Policy contracts, TA B–C, pp.9–11](supplementary_material.pdf#page=9) |
+| [§3, pp.4–8](main.pdf#page=4) | Which inputs determine the game, entries, outcomes and handover? | [Correspondence proof, TA A, p.3](supplementary_material.pdf#page=3); [endpoint reuse, TA H, p.28](supplementary_material.pdf#page=28) |
+| [§4, Table 2, pp.8–10](main.pdf#page=8) | What is proved for the game, and what needs interpretation or execution premises? | [Initialization, TA E–F, pp.17–25](supplementary_material.pdf#page=17); [execution theorem, TA G, p.26](supplementary_material.pdf#page=26) |
+| [§5, pp.10–12](main.pdf#page=10) | Which granularity changes preserve a winning policy? | [Full proofs and counterexamples, TA D, pp.12–17](supplementary_material.pdf#page=12) |
+| [RQ1, Table 3, pp.13–15](main.pdf#page=13) | Where does granularity change feasibility, and where does it not? | [S4.1, pp.52–53](supplementary_material.pdf#page=52); [saved Threads expansion, TA R, p.45](supplementary_material.pdf#page=45) |
+| [RQ2, Figure 2, pp.15–16](main.pdf#page=15) | What is checked in the generated game and saved application policies? | [Railcab activation, TA F.3, p.24](supplementary_material.pdf#page=24); [population map, TA P.1, p.40](supplementary_material.pdf#page=40); [S4.2, p.54](supplementary_material.pdf#page=54) |
+| [RQ3, Table 4, Figure 3, pp.16–17](main.pdf#page=16) | How do same-game search variants compare under the recorded budgets? | [S4.3, p.56](supplementary_material.pdf#page=56); [complete metrics, S4.4, p.60](supplementary_material.pdf#page=60) |
+| [Table 1, p.4](main.pdf#page=4), [§7, p.18](main.pdf#page=18) | What differs from existing update interfaces? | [DUCS and GR(1) Cell constructions, TA I–J, pp.30–33](supplementary_material.pdf#page=30); [expanded comparison, S5, pp.86–87](supplementary_material.pdf#page=86) |
+| [§6.1, pp.12–13](main.pdf#page=12) | What was implemented, and how was AI used? | [Implementation and AI assistance, TA Q, p.44](supplementary_material.pdf#page=44) |
+| [Data Availability, Table 5, p.19](main.pdf#page=19) | Which publication contains which materials? | [Version correspondence](#version-correspondence) |
 
-The integrated supplement contains two linked guide pages, **Part I: Technical Appendix A–P (33 pages)** and **Part II: Supplement S1–S5 (47 pages)**. Six reading routes, a complete contents list, continuous page numbers and bookmarks lead to the proofs, full examples, checks, results and comparisons. S4 follows the main RQ order before presenting diagnostic, historical and extended-budget records separately. All positive, negative, invalid, timeout, OOM and unmeasured outcomes remain available.
-
-Keep **main.pdf** and **supplementary_material.pdf** together for relative document links. The separate [technical appendix](technical_appendix.pdf) and [experimental supplement](supplement.pdf) are also retained as build components; the appendix's citation links point to the main bibliography.
-
-The [claim-to-evidence map](../docs/CLAIMS.md) gives reproduction commands and scope limits. Saved preparation measurements for all contracts and methods are available in [the preparation CSV](source/build/generated/rq3-preparation.csv), with [its generator](source/scripts/generate_rq3_preparation.py). Full settings and unresolved costs remain in S4.3. The manuscript revisions add no benchmark measurements. Private author notes, review conversations and submission instructions are excluded.
+**Figure 2 is the Railcab saved-policy illustration. Figure 3 is the 27-contract Lazy/Eager cost comparison.** The earlier 14-pair Lazy/Direct-Full cost and memory records remain in the supplement and saved data. Use this index for C143; earlier tags use different section labels and page numbers.
 
 ## Appendix section index
 
-Page numbers below are **continuous PDF pages in [supplementary_material.pdf](supplementary_material.pdf)**, including its two-page reading guide and contents. The main paper's Technical Appendix A–P references identify Part I; S1–S5 identify Part II. The PDF bookmarks use the same section titles.
+Every number below is a **continuous page of [supplementary_material.pdf](supplementary_material.pdf)**, including the two opening guide pages. The PDF bookmarks use the section titles below.
 
-| Label | Section | PDF page |
+| Label | Section | Open page |
 |---|---|---:|
 | A | Source Histories and Synthesis Correctness | [3](supplementary_material.pdf#page=3) |
-| B | Complete Cell Contract and Its Two Completing Paths | [7](supplementary_material.pdf#page=7) |
-| C | Policy Requirement-Boundary Argument | [8](supplementary_material.pdf#page=8) |
-| D | NEW and UPD History-Scope Derivations | [10](supplementary_material.pdf#page=10) |
-| E | Activation-Scoped Initialization | [10](supplementary_material.pdf#page=10) |
-| F | Proof of Conditional Trace Lifting | [13](supplementary_material.pdf#page=13) |
-| G | Endpoint Interfaces and Certificate Reuse | [14](supplementary_material.pdf#page=14) |
-| H | Complete Native DUCS Construction for Cell | [17](supplementary_material.pdf#page=17) |
-| I | Cell through a GR(1) Bridge Interface | [19](supplementary_material.pdf#page=19) |
-| J | Saved PC2 Activation Histories and Their Boundary | [20](supplementary_material.pdf#page=20) |
-| K | Exploration Order and Work Bound | [23](supplementary_material.pdf#page=23) |
-| L | Complete Benchmark Input Counts | [25](supplementary_material.pdf#page=25) |
-| M | All Completed Direct-Full Exploration Pairs | [26](supplementary_material.pdf#page=26) |
-| N | Separate Extended-Budget Trials | [26](supplementary_material.pdf#page=26) |
-| O | Separate Evaluation Populations and All-Contract Grid | [26](supplementary_material.pdf#page=26) |
-| O.13 | A local condition for serializing transfer batches | [32](supplementary_material.pdf#page=32) |
-| P | Implementation and AI-Assisted Research Details | [35](supplementary_material.pdf#page=35) |
-| S1 | Granularity and observation witnesses | [36](supplementary_material.pdf#page=36) |
-| S2 | Finite games, search invariants, and certificates | [39](supplementary_material.pdf#page=39) |
-| S3 | Monitor intervals and conditional trace lifting | [42](supplementary_material.pdf#page=42) |
-| S4 | Supplementary validation and cost tables | [47](supplementary_material.pdf#page=47) |
-| S5 | Expanded related-work comparison | [81](supplementary_material.pdf#page=81) |
+| B | Complete Cell Contract and Its Two Completing Paths | [9](supplementary_material.pdf#page=9) |
+| C | Policy Requirement-Boundary Argument | [10](supplementary_material.pdf#page=10) |
+| D | Granularity and Safe Serialization | [12](supplementary_material.pdf#page=12) |
+| D.2 | Granularity need not preserve feasibility | [13](supplementary_material.pdf#page=13) |
+| D.3 | A local condition for serializing transfer batches | [14](supplementary_material.pdf#page=14) |
+| D.4 | Serializing requirement-boundary batches | [16](supplementary_material.pdf#page=16) |
+| E | NEW and UPD History-Scope Derivations | [17](supplementary_material.pdf#page=17) |
+| F | Activation-Scoped Initialization | [21](supplementary_material.pdf#page=21) |
+| F.2 | Preserved Observers Across Update Commands | [23](supplementary_material.pdf#page=23) |
+| F.3 | Source-Observer Analysis of the Saved Railcab Policies | [24](supplementary_material.pdf#page=24) |
+| G | Proof of Conditional Trace Lifting | [26](supplementary_material.pdf#page=26) |
+| H | Endpoint Interfaces and Certificate Reuse | [28](supplementary_material.pdf#page=28) |
+| I | Complete Native DUCS Construction for Cell | [30](supplementary_material.pdf#page=30) |
+| J | Cell through a GR(1) Bridge Interface | [32](supplementary_material.pdf#page=32) |
+| K | Saved PC2 Activation Histories and Their Boundary | [33](supplementary_material.pdf#page=33) |
+| K.1 | All New Requirements of the Saved PC2 Policy | [36](supplementary_material.pdf#page=36) |
+| L | Exploration Order and Work Bound | [36](supplementary_material.pdf#page=36) |
+| M | Complete Benchmark Input Counts | [38](supplementary_material.pdf#page=38) |
+| N | All Completed Direct-Full Exploration Pairs | [39](supplementary_material.pdf#page=39) |
+| O | Separate Extended-Budget Trials | [39](supplementary_material.pdf#page=39) |
+| P | Separate Evaluation Populations and All-Contract Grid | [40](supplementary_material.pdf#page=40) |
+| P.5 | Lifetime gaps in two saved policies | [42](supplementary_material.pdf#page=42) |
+| Q | Implementation and AI-Assisted Research Details | [44](supplementary_material.pdf#page=44) |
+| R | Static Expansion of Saved Threads Policies | [45](supplementary_material.pdf#page=45) |
+| S1 | Granularity and observation witnesses | [46](supplementary_material.pdf#page=46) |
+| S2 | Additional Game Encodings and Exploration Constructions | [49](supplementary_material.pdf#page=49) |
+| S3 | Frontend Initialization and Lifecycle Checks | [50](supplementary_material.pdf#page=50) |
+| S4 | Supplementary validation and cost tables | [52](supplementary_material.pdf#page=52) |
+| S4.1 | Constructed operational mechanisms and controls | [52](supplementary_material.pdf#page=52) |
+| S4.2 | Independent checks for the contract and returned policies | [54](supplementary_material.pdf#page=54) |
+| S4.3 | Fixed-budget comparison on the 27 adapted contracts | [56](supplementary_material.pdf#page=56) |
+| S4.4 | Detailed fixed-budget measurements and policy diagnoses | [60](supplementary_material.pdf#page=60) |
+| S4.5 | Archived auxiliary campaigns and historical checks | [70](supplementary_material.pdf#page=70) |
+| S4.6 | Extended-budget trials | [76](supplementary_material.pdf#page=76) |
+| S4.7 | Separate Eager enlarged-heap trials | [78](supplementary_material.pdf#page=78) |
+| S4.8 | Legacy reference, archived OTF path and fidelity checks | [79](supplementary_material.pdf#page=79) |
+| S4.9 | Separate Legacy enlarged-heap reference | [84](supplementary_material.pdf#page=84) |
+| S5 | Expanded related-work comparison | [86](supplementary_material.pdf#page=86) |
 
-For Figure 2, inspect [the complete fixed-budget CSV](source/build/generated/rq3-cells.csv), including all five-trial time and peak-RSS ranges. Its third panel uses raw process bytes divided by 1,048,576 to obtain MiB. The generator retains every completed Lazy/Direct-Full pair; Table 5 and Appendix O retain the unresolved cases. See the [claim map](../docs/CLAIMS.md) for validation commands and scope limits.
+The [separate technical appendix](technical_appendix.pdf) and [separate S1–S5 supplement](supplement.pdf) are also available. Their local page numbers differ from the integrated PDF. Keep the two primary PDFs together when downloading; the reading bundle does this automatically.
 
-The [original evidence snapshot](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-invariants-20261002) is preserved with its earlier manuscript PDFs. This section index applies to the current paper-matched release, not to that earlier pagination.
+## Find source, data and checks
+
+| Folder or file | Purpose |
+|---|---|
+| [source/main.tex](source/main.tex), [technical_appendix.tex](source/technical_appendix.tex), [supplement.tex](source/supplement.tex) | The three document entry points |
+| [source/technical_fragments/](source/technical_fragments/) | Definitions, statements, complete proofs and interpretation analyses; see the [claim map](../docs/CLAIMS.md) for exact files |
+| [source/figures/](source/figures/) | Current and retained figure sources; the entry-point TeX files determine which are used |
+| [source/build/generated/](source/build/generated/) | Saved tables, CSVs and macros, including [all fixed-budget cells](source/build/generated/rq3-cells.csv) and [preparation costs](source/build/generated/rq3-preparation.csv) |
+| [source/evidence/](source/evidence/) | Self-contained copied inputs and C143's three saved-evidence analyses; [overview and direct commands](source/evidence/README.txt) |
+| [source/scripts/](source/scripts/), [source/build_support/](source/build_support/) | Table/figure generators and standalone source-bundle build support |
+| [../results/](../results/README.md) | Full scientific records outside the manuscript source bundle |
+| [../reproduce/](../reproduce/README.md) | Public-root entry points for checking, rebuilding and restoring the original layout |
+
+The source ZIP contains the exact manuscript source bundle, including copied inputs and analysis outputs; it is not a substitute for the complete tool and raw experiment archive. Use the full repository for full reproduction.
 
 ## Rebuild
 
-Install XeLaTeX and latexmk, then run from the repository root:
+With XeLaTeX, latexmk and the Python requirements installed, run from the repository root:
 
 ```sh
 python3 -m pip install -r reproduce/requirements.txt
-python3 -B reproduce/build_paper.py --output work/paper
+python3 -B reproduce/build_paper.py --output work/paper-c143
 ```
 
-The build uses a new source copy and stabilizes main/technical cross-references. It writes the primary pair and both component PDFs under `work/paper/`, preserving distributed sources. PDF assembly checks text preservation, anonymous metadata, named destinations and cross-document links. The source PDFs remain in `work/paper/source/build/`. See `source/latexmkrc` for engine configuration.
+The builder uses a fresh source copy, stabilizes cross-document references and creates the four PDFs. It preserves distributed sources. The standalone ZIP also contains [its own build instructions](source/build_support/README.txt). PDF assembly preserves the text, named destinations and cross-document links.
+
+## Version correspondence
+
+The matching release is [`fgducs-c143-20261004`](https://github.com/research-artifact-archive/research-artifact/tree/fgducs-c143-20261004), cited by main-paper Data Availability, Table 5 and reference [4]. It contains all four matching PDFs, the source ZIP and all three added saved-evidence analyses. C143’s scientific body remains unchanged; only artifact locations and references were updated for publication. Historical input-provenance references to C115 remain valid and identify the earlier unchanged input bytes.
+
+Earlier tags remain unchanged. Their paper PDFs are earlier manuscripts, so their appendix labels and pagination must not be used with this index. No new synthesis or performance measurement is introduced by this publication. [Packaging scope](../docs/PACKAGING.md) and the [claim map](../docs/CLAIMS.md) distinguish proofs, static checks, saved observations and unvalidated execution premises.

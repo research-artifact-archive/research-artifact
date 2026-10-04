@@ -30,14 +30,13 @@
 \draw[fill=orange!15,draw=orange!60!black] (9.35,-2.39) rectangle (10.4,-2.11);
 \draw[black!65,dashed] (2.55,-.71)--(2.55,-1.57);
 \draw[black!65,dashed] (4.25,-.71)--(4.25,-1.57);
-\node[font=\footnotesize,anchor=west] at (4.48,-1.65) {Audit coverage continues; the overlap is required.};
 \draw[<->,black!65] (6.00,-2.17)--(9.30,-2.17);
-\node[font=\footnotesize,anchor=south] at (7.65,-2.17) {Both roles inactive: allowed};
+\node[font=\footnotesize,anchor=south] at (7.65,-2.72) {Both roles inactive: allowed};
 \node[draw,fill=black!3,rounded corners=2pt,text width=11.45cm,inner sep=4pt,
-  font=\footnotesize,align=left,anchor=north west] at (-1.2,-2.70)
+  font=\footnotesize,align=left,anchor=north west] at (-1.2,-3.05)
   {\textbf{Grouped starts/stops:} the first start leaves both roles active; the first stop leaves no audit. Both violate the interval rule. Ordinary events and identity transfer preserve active bits.};
 \end{tikzpicture}
-\caption{A saved Policy certificate with no supplied precedence; ranks need not be shortest. Logged/unlogged mark both entries; bars mark active requirements. New-audit start resets to unlogged; handover reaches new audit unlogged and new role valid. Arrows have one action and outcome. The role gap is allowed; ordinary events may be withheld, with no service-continuity guarantee.}
+\caption{A saved Policy certificate with no supplied precedence; ranks need not be shortest. Logged/unlogged mark both entries; bars mark active requirements. New-audit start resets to unlogged; handover reaches new audit unlogged and new role valid. Arrows have one action and outcome. The audit overlap is required and the role gap is allowed; ordinary events may be withheld, with no service-continuity guarantee.}
 \label{fig:policy-lifetimes}
 \Description{A seven-state path covers logged and unlogged old entries and decreases rank from six or five to zero. Old and new audits overlap between new-audit start and old-audit stop. Old role stops before new role starts, leaving a permitted interval with neither role active. Grouping both old stops and both new starts makes the first boundary unsafe.}
 \end{figure}

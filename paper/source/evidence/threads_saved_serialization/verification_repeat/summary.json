@@ -1,0 +1,28 @@
+{
+  "cases": 10,
+  "failed": 0,
+  "limitations": [
+    "Ten related finite Threads backpressure abstractions, not ten independent applications.",
+    "OLD and NEW local LTSs are identical; each idle transfer is deterministic identity and requirements/precedence are empty.",
+    "No UC action is enabled at any inserted phase; this checks no nontrivial transfer/UC interleaving.",
+    "All checked action buckets have one outcome; full outcomes are checked but no nondeterministic transfer outcome is present.",
+    "The finite-memory controller stores the saved checkpoint and remaining block members; it is an explicit model policy, not a runtime deployment.",
+    "Event overhead is exactly n-1 before reaching the preserved endpoint; it is not execution time or a synthesis speedup.",
+    "No claim about E1 industrial policies, boundary merging, monitors/initializers, saturated-offer LOSS cases, or deployed behavior."
+  ],
+  "negative_controls": 50,
+  "negative_controls_passed": 50,
+  "passed": 10,
+  "status": "PASS",
+  "totals": {
+    "entries": 620,
+    "expanded_edges": 2012,
+    "expanded_states": 660,
+    "saved_edges": 1982,
+    "saved_states": 630,
+    "selected_buckets": 2012,
+    "selected_outcomes": 2012,
+    "uc_buckets": 1972,
+    "uc_outcomes": 1972
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "purpose": "single qualitative model-policy illustration; excluded from all timing/performance summaries",
+  "attempt": 1,
+  "source_meta": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/raw/rq3/runs/railcab__base__rep01__fg_ducs_otf/meta.json",
+  "jar": "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+  "jar_sha256": "fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+  "input": "Implementation/Experiment/Models/Railcab_FG.lts",
+  "input_sha256": "4494c9fb0f7fdf0ee00c1dfdd3a8204fa080cff4ed0bb5d0e8f87c4607b70e7a",
+  "java_version": "openjdk version \"17.0.19\" 2026-04-21\nOpenJDK Runtime Environment Homebrew (build 17.0.19+0)\nOpenJDK 64-Bit Server VM Homebrew (build 17.0.19+0, mixed mode, sharing)",
+  "platform": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "arm64"
+  },
+  "command": [
+    "/opt/homebrew/opt/openjdk@17/bin/java",
+    "-Djava.awt.headless=true",
+    "-Dmtsa.build.commit=jar-sha256-fbdc25f58d5441ed906d408a94b7414c9d9c3ed35e2ebce22d9751729967ba07",
+    "-Dmtsa.evaluation.enabled=true",
+    "-Dmtsa.otf.controllableActionOrder=endpoint_guided",
+    "-Dmtsa.otf.guidedQueryLimit=0",
+    "-Dmtsa.otf.guidedStateLimit=0",
+    "-Dmtsa.otf.lazyControllableBuckets=true",
+    "-Dmtsa.revised.otf.independentVerification=false",
+    "-Dmtsa.revised.otf.solver=otf",
+    "-Xmx64g",
+    "-cp",
+    "FSE2027_SUBMISSION_20260914/experiments/rq3_xeon/bundle/Implementation/Source Code/maven-root/mtsa/target/mtsa-1.0-SNAPSHOT.jar",
+    "ltsa.updatingControllers.cli.SingleCompositionRunner",
+    "--lts",
+    "Implementation/Experiment/Models/Railcab_FG.lts",
+    "--target",
+    "UPDATE_CONTROLLER_OTF_FG",
+    "--output",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/railcab_policy_demo/output.txt",
+    "--transitions",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/railcab_policy_demo/transitions.txt",
+    "--transition-output",
+    "full",
+    "--deployment-output",
+    "FSE2027_SUBMISSION_20260914/paper/materials/expression_20260922/evidence/railcab_policy_demo/handoff-bundle.json"
+  ],
+  "timeout_seconds": 1200,
+  "started_at_utc": "2026-09-22T04:19:44.324712+00:00",
+  "status": "completed",
+  "semantic_and_solver_properties_equal_to_source": true,
+  "output_difference": "Full FSP plus complete typed winning-certificate/handoff bundle; no complete-game export.",
+  "scope": "Model-level evidence only; does not establish actual runtime or physical-system assumptions.",
+  "exit_code": 0,
+  "elapsed_seconds_context_only_not_performance_data": 1.809510416991543,
+  "finished_at_utc": "2026-09-22T04:19:46.135956+00:00",
+  "saved_files": {
+    "handoff-bundle.json": {
+      "bytes": 126854,
+      "sha256": "317e5a02e4fada98422a6a15bf186d9ea42228c792912529882f71619334ecbb"
+    },
+    "output.txt": {
+      "bytes": 118467,
+      "sha256": "22af9866b76e4492b956a3262d5666adcafa17f43d3e0440e3742f5c1a828f82"
+    },
+    "run_demo_once.py": {
+      "bytes": 4818,
+      "sha256": "d00371bf0f18b5866296a6b76455b1e5ce1240eff89f438ef76458d250467803"
+    },
+    "stderr.txt": {
+      "bytes": 82,
+      "sha256": "b8429687cbfc7e6fec27847407ec56e9c0590483592c876ad393498c2c7b8bc2"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "transitions.txt": {
+      "bytes": 9653,
+      "sha256": "376de6a8b46a8b0810b7557d11cd317717708bc51e61f8e6bcd3899bc25286cc"
+    }
+  }
+}

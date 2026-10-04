@@ -1,0 +1,33 @@
+\subsection{Source-Observer Analysis of the Saved Railcab Policies}
+\label{ta:railcab-activation}
+This analysis uses the complete, previously saved Base and R1 policy exports from S4.4.3 and the independently exported frontend lookup tables. It performs no new synthesis or performance trial. Both exports cover 22 old entries; they share the same exported new-controller graph. We accept the observer values at the saved old entries as the starting values, rather than reconstructing their preceding old-system histories.
+
+\paragraph{Decoding and provenance.}
+The saved policy and lookup metadata identify the same input and experiment JAR. Static inspection of that JAR confirms that the adapter orders global observers by name, preserves that order in local-state arrays, and prints those arrays in the saved physical-state strings. All ten Railcab observers start false; the fluent-to-LTS conversion represents false by 0 and true by 1 in this case. The convention reverses for initially true fluents and is not assumed generally. The saved observer transitions also agree with this decoding. The analysis matches each observer to its source fluent or event predicate by its initial value and initiating/terminating sets, then projects the global vector into the actual per-requirement lookup column order.
+
+\paragraph{Finite checks and why they cover the saved continuations.}
+For each exported old entry, we traverse the saved policy with an independently updated source-observer vector. Each edge consumes its label once, including transfer, stop and start commands; handover connects to the selected post state without a further source event. At every reached pair, we compare the source vector with the decoded saved vector and evaluate each active NEW invariant directly from its source formula. At a start edge, we additionally project the post-start vector into the exported lookup table and compare its value with the newly installed monitor state.
+
+The traversal closes over all saved outcomes and all transitions reachable from the selected post states. Induction on a path prefix shows that the traversed vector is exactly the source observer valuation from the accepted entry vector. A passing truth check at every reached active pair therefore establishes each invariant from its start along every saved continuation, including every finite prefix of an infinite post-handover execution. This direct truth argument does not infer source validity merely from the absence of a monitor error. The lookup comparison separately connects the reached initializations to the reference-language result of Proposition~\ref{prop:lookup-act}.
+
+\begin{table}[!htbp]
+\centering\small
+\caption{Complete saved Railcab policy coverage. Each policy has 22 entries. The final column refers to the same shared post graph, not two independent applications.}
+\label{tab:railcab-activation}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Policy & Update states / edges & NEW start edges & Handover targets & Post states / edges\\\midrule
+Base & 115 / 118 & 14 & 2 & 70 / 116\\
+R1 & 44 / 46 & 7 & 1 & 70 / 116\\\bottomrule
+\end{tabular}
+\end{table}
+
+All 21 start edges select the installed non-error state, all reached decoded vectors match the source replay, and all seven source invariants hold whenever active. All saved update states are reached. The selected post closure contains 70 of the 71 exported post states. After the first NEW start, both saved update policies contain only further starts before handover: no ordinary update edge occurs in that suffix. The nontrivial ordinary continuation check is in the shared post graph. Counts of repeated requirement checks are not independent instances or applications.
+
+\paragraph{A nontrivial initial state in the branching policy.}
+Let $a$ mean that \texttt{approachingCrossing} has occurred since \texttt{endOfTS}, let $e$ mean that the last emergency-brake point has occurred since that event, and let $c$ be the \texttt{checkCrossingStatus} event predicate. The source requirement is $\Box(c\Rightarrow(a\land\neg e))$. The upper branch of main-paper Figure~\ref{fig:railcab-main} starts this requirement with key $(a,e,c)=(1,0,0)$ and monitor state 1; the lower branch starts at $(0,0,0)$ and state 0. R1 uses the former key. The saved monitor permits \texttt{checkCrossingStatus} from state 1 and rejects it from state 0. Thus always resetting to the initial state 0 would erase the already observed approach; equality of initial-state identifiers is not an adequate handover test.
+
+\paragraph{Rechecking and boundaries.}
+The accompanying manuscript source includes \path{evidence/railcab_saved_activation/}: the analysis script, an unchanged input subset, per-edge results and three negative controls. Run \path{analyze_saved_railcab.py} with \texttt{--artifact-root inputs --output} followed by a new result filename. The analysis reuses the restricted source parser and Boolean evaluator from the earlier source-invariant checks; it is not a second independent parser. The controls change an installed monitor state, a non-entry observer bit, and a post-graph event, respectively. Each is rejected, including the bit change whose only failure is observer inconsistency.
+
+The checks rely on the exported policy edges, active-requirement masks and handover targets. They do not rederive the old-entry vectors, recover historical lookup calls or establish which fallback branch executed. They do not validate physical execution, unselected policies, other applications or a general FSP compiler. The separate command-observation argument in Appendix~\ref{ta:command-observation} addresses safe lookup cells under its explicit observation premises; matching on these saved paths does not establish those premises for every policy.
+\FloatBarrier
